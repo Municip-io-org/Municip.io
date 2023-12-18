@@ -3,7 +3,7 @@ const PROXY_CONFIG = [
     context: [
       "/weatherforecast",
     ],
-    target: "https://localhost:7094",
+    target: "https://localhost:7282",
     secure: false
   }
 ]
