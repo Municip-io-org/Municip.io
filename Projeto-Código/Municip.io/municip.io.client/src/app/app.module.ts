@@ -11,6 +11,7 @@ import { LandingComponent } from './landingpage/landing/landing.component';
 import { BtnMunicipBlueComponent } from './utils/buttons/btn-municip-blue/btn-municip-blue.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { CardTeamComponent } from './aboutus/card-team/card-team.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FooterComponent } from './layout/footer/footer.component';
     LandingComponent,
     BtnMunicipBlueComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CardTeamComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
