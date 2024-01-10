@@ -6,12 +6,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BannerComponent } from './landingpage/banner/banner.component';
 import { AboutusComponent } from './aboutus/aboutus/aboutus.component';
+import { CardComponent } from './landingpage/card/card.component';
+import { LandingComponent } from './landingpage/landing/landing.component';
+import { BtnMunicipBlueComponent } from './utils/buttons/btn-municip-blue/btn-municip-blue.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BannerComponent,
-    AboutusComponent
+    AboutusComponent,
+    CardComponent,
+    LandingComponent,
+    BtnMunicipBlueComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
