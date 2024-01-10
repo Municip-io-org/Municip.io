@@ -12,6 +12,8 @@ import { BtnMunicipBlueComponent } from './utils/buttons/btn-municip-blue/btn-mu
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { CardTeamComponent } from './aboutus/card-team/card-team.component';
+import { LoginComponent } from './login/login.component';
+import { ShowHidePasswordComponent } from './utils/show-hide-password/show-hide-password.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { CardTeamComponent } from './aboutus/card-team/card-team.component';
     BtnMunicipBlueComponent,
     HeaderComponent,
     FooterComponent,
-    CardTeamComponent
+    CardTeamComponent,
+    LoginComponent,
+    ShowHidePasswordComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
