@@ -15,6 +15,7 @@ import { CardTeamComponent } from './aboutus/card-team/card-team.component';
 import { LoginComponent } from './login/login.component';
 import { ShowHidePasswordComponent } from './utils/show-hide-password/show-hide-password.component';
 import { TermsconditionsComponent } from './termsconditions/termsconditions.component';
+import { SelectAccountTypeComponent } from './signUp/select-account-type/select-account-type.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,10 @@ import { TermsconditionsComponent } from './termsconditions/termsconditions.comp
     FooterComponent,
     CardTeamComponent,
     LoginComponent,
+    SelectAccountTypeComponent,
     ShowHidePasswordComponent,
-    TermsconditionsComponent
+    TermsconditionsComponent,
+    SelectAccountTypeComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

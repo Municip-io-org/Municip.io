@@ -653,16 +653,32 @@ video {
   margin-left: 0.25rem;
 }
 
+.ml-14{
+  margin-left: 3.5rem;
+}
+
 .ml-2{
   margin-left: 0.5rem;
+}
+
+.mr-14{
+  margin-right: 3.5rem;
 }
 
 .mr-4{
   margin-right: 1rem;
 }
 
+.mt-5{
+  margin-top: 1.25rem;
+}
+
 .mt-8{
   margin-top: 2rem;
+}
+
+.box-border{
+  box-sizing: border-box;
 }
 
 .inline-block{
@@ -702,6 +718,66 @@ video {
 .size-8\/12{
   width: 66.666667%;
   height: 66.666667%;
+}
+
+.size-2{
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.size-2\.5{
+  width: 0.625rem;
+  height: 0.625rem;
+}
+
+.size-16{
+  width: 4rem;
+  height: 4rem;
+}
+
+.size-12{
+  width: 3rem;
+  height: 3rem;
+}
+
+.size-10{
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.size-14{
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.size-\[3rem\]{
+  width: 3rem;
+  height: 3rem;
+}
+
+.size-\[3\.5rem\]{
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.size-\[3\.4rem\]{
+  width: 3.4rem;
+  height: 3.4rem;
+}
+
+.size-\[3\.2rem\]{
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.size-\[4rem\]{
+  width: 4rem;
+  height: 4rem;
+}
+
+.size-\[3\.3rem\]{
+  width: 3.3rem;
+  height: 3.3rem;
 }
 
 .h-1{
@@ -784,12 +860,61 @@ video {
   width: 2rem;
 }
 
+.w-\[12rem\]{
+  width: 12rem;
+}
+
 .w-\[20rem\]{
   width: 20rem;
 }
 
 .w-full{
   width: 100%;
+}
+
+.w-fit{
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.w-\[1vw\]{
+  width: 1vw;
+}
+
+.w-\[2vw\]{
+  width: 2vw;
+}
+
+.w-\[3vw\]{
+  width: 3vw;
+}
+
+.w-20{
+  width: 5rem;
+}
+
+.w-\[30rem\]{
+  width: 30rem;
+}
+
+.w-\[25rem\]{
+  width: 25rem;
+}
+
+.w-1\/4{
+  width: 25%;
+}
+
+.w-1\/5{
+  width: 20%;
+}
+
+.w-4\/5{
+  width: 80%;
+}
+
+.w-\[28rem\]{
+  width: 28rem;
 }
 
 .flex-1{
@@ -820,12 +945,20 @@ video {
   cursor: pointer;
 }
 
+.list-disc{
+  list-style-type: disc;
+}
+
 .flex-col{
   flex-direction: column;
 }
 
 .flex-wrap{
   flex-wrap: wrap;
+}
+
+.content-center{
+  align-content: center;
 }
 
 .items-center{
@@ -842,6 +975,10 @@ video {
 
 .justify-between{
   justify-content: space-between;
+}
+
+.justify-items-center{
+  justify-items: center;
 }
 
 .space-x-10 > :not([hidden]) ~ :not([hidden]){
@@ -904,8 +1041,41 @@ video {
   margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 
+.space-x-1 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-1\.5 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.375rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.375rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-32 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(8rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(8rem * var(--tw-space-y-reverse));
+}
+
+.space-y-3 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+}
+
 .self-center{
   align-self: center;
+}
+
+.break-normal{
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.break-words{
+  overflow-wrap: break-word;
 }
 
 .rounded{
@@ -928,6 +1098,10 @@ video {
   border-radius: 0.375rem;
 }
 
+.rounded-\[10px\]{
+  border-radius: 10px;
+}
+
 .border{
   border-width: 1px;
 }
@@ -940,8 +1114,16 @@ video {
   border-width: 2px;
 }
 
+.border-\[1px\]{
+  border-width: 1px;
+}
+
 .border-t{
   border-top-width: 1px;
+}
+
+.border-solid{
+  border-style: solid;
 }
 
 .border-black{
@@ -954,9 +1136,24 @@ video {
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
+.border-municip-black{
+  --tw-border-opacity: 1;
+  border-color: rgb(24 25 31 / var(--tw-border-opacity));
+}
+
+.border-blue-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+
 .border-t-\[\#ECECF0\]{
   --tw-border-opacity: 1;
   border-top-color: rgb(236 236 240 / var(--tw-border-opacity));
+}
+
+.border-b-blue-700{
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(29 78 216 / var(--tw-border-opacity));
 }
 
 .bg-black{
@@ -1033,6 +1230,14 @@ video {
 
 .p-4{
   padding: 1rem;
+}
+
+.p-\[1rem\]{
+  padding: 1rem;
+}
+
+.p-\[2rem\]{
+  padding: 2rem;
 }
 
 .px-2{
@@ -1114,16 +1319,40 @@ video {
   padding-bottom: 2.5rem;
 }
 
+.pb-2{
+  padding-bottom: 0.5rem;
+}
+
 .pb-6{
   padding-bottom: 1.5rem;
+}
+
+.pl-14{
+  padding-left: 3.5rem;
+}
+
+.pl-20{
+  padding-left: 5rem;
 }
 
 .pl-\[2rem\]{
   padding-left: 2rem;
 }
 
+.pr-14{
+  padding-right: 3.5rem;
+}
+
 .pt-5{
   padding-top: 1.25rem;
+}
+
+.pt-6{
+  padding-top: 1.5rem;
+}
+
+.text-left{
+  text-align: left;
 }
 
 .text-center{
@@ -1186,6 +1415,26 @@ video {
 .text-xl{
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-\[28vw\]{
+  font-size: 28vw;
+}
+
+.text-\[10vw\]{
+  font-size: 10vw;
+}
+
+.text-\[1vw\]{
+  font-size: 1vw;
+}
+
+.text-\[2vw\]{
+  font-size: 2vw;
+}
+
+.text-\[30px\]{
+  font-size: 30px;
 }
 
 .font-black{
@@ -1261,6 +1510,11 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-municip-black{
+  --tw-text-opacity: 1;
+  color: rgb(24 25 31 / var(--tw-text-opacity));
+}
+
 .decoration-sky-500{
   text-decoration-color: #0ea5e9;
 }
@@ -1269,6 +1523,21 @@ video {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-\[0px_2px_14px_1px_rgba\(0\2c 0\2c 0\2c 0\.3\)\]{
+  --tw-shadow: 0px 2px 14px 1px rgba(0,0,0,0.3);
+  --tw-shadow-colored: 0px 2px 14px 1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.outline-1{
+  outline-width: 1px;
+}
+
+.ring-amber-300{
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(252 211 77 / var(--tw-ring-opacity));
 }
 
 .drop-shadow-\[0_4px_4px_rgba\(0\2c 0\2c 0\2c 0\.25\)\]{
@@ -1364,6 +1633,11 @@ video {
   .sm\:text-3xl{
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .sm\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 
