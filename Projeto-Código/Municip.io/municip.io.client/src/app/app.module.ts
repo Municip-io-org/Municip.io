@@ -14,6 +14,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { CardTeamComponent } from './aboutus/card-team/card-team.component';
 import { LoginComponent } from './login/login.component';
 import { ShowHidePasswordComponent } from './utils/show-hide-password/show-hide-password.component';
+import { TermsconditionsComponent } from './termsconditions/termsconditions.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ShowHidePasswordComponent } from './utils/show-hide-password/show-hide-
     FooterComponent,
     CardTeamComponent,
     LoginComponent,
-    ShowHidePasswordComponent
+    ShowHidePasswordComponent,
+    TermsconditionsComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
