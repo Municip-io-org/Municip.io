@@ -5,11 +5,13 @@ import { AboutusComponent } from './aboutus/aboutus/aboutus.component';
 import { LoginComponent } from './login/login.component';
 import { TermsconditionsComponent } from './termsconditions/termsconditions.component';
 import { SelectAccountTypeComponent } from './signUp/select-account-type/select-account-type.component';
+import { SignUpCitizenAccountComponent } from './signUp/sign-up-citizen-account/sign-up-citizen-account.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, data: {} },
   { path: 'login', component: LoginComponent, data: {} },
-  { path: 'signUp-SelectAccountType', component: SelectAccountTypeComponent , data: {} },
+  { path: 'signUp-SelectAccountType', component: SelectAccountTypeComponent, data: {} },
+  { path: 'signUp-Citizen', component: SignUpCitizenAccountComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} }];
 

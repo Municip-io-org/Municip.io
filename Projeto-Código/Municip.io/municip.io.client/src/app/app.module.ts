@@ -16,6 +16,8 @@ import { LoginComponent } from './login/login.component';
 import { ShowHidePasswordComponent } from './utils/show-hide-password/show-hide-password.component';
 import { TermsconditionsComponent } from './termsconditions/termsconditions.component';
 import { SelectAccountTypeComponent } from './signUp/select-account-type/select-account-type.component';
+import { SignUpCitizenAccountComponent } from './signUp/sign-up-citizen-account/sign-up-citizen-account.component';
+import { InputTitleComponent } from './utils/input/input-title/input-title.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { SelectAccountTypeComponent } from './signUp/select-account-type/select-
     SelectAccountTypeComponent,
     ShowHidePasswordComponent,
     TermsconditionsComponent,
-    SelectAccountTypeComponent
+    SelectAccountTypeComponent,
+    SignUpCitizenAccountComponent,
+    InputTitleComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

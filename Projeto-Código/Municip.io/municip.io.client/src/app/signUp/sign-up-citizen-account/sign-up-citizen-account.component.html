@@ -1,0 +1,117 @@
+
+
+<div class="flex text-municip-black text-[16px] font-poppins">
+  <div class="h-screen w-1/3 bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center">
+    <div class=" flex justify-center text-white">
+      <img alt="logo" src="/assets/images/logos/logo-white-right.png" class="size-8/12 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
+    </div>
+  </div>
+  <div class="h-screen w-2/3 flex items-center justify-center ">
+    <div class="flex flex-col">
+      <h1 class="font-black text-[30px] text-left text-black  my-2">Registo de Munícipe</h1>
+      <h3 class="font-medium text-left text-xl text-municip-normal-black mb-2">Insira os seus dados</h3>
+      <form class="py-[1rem] flex flex-row w-[60rem]">
+        <section class="w-1/2 flex flex-col text-left space-y-2 bg-red-600">
+          
+            <div>
+              <app-input-title class="text-[28px]">Primeiro Nome</app-input-title>
+              <input placeholder="Introduza o seu primeiro nome" type="text" id="firstName" name="firstName" class="input w-[20rem]
+       focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+       transition-all duration-700 ease-in-out  decoration-sky-500" />
+            </div>
+            <div>
+              <app-input-title class="text-[28px]">Email</app-input-title>
+              <input placeholder="Introduza o seu email" type="email" id="email" name="email" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+            </div>
+            <div>
+              <app-input-title class="text-[28px]">NIF</app-input-title>
+              <input placeholder="Introduza o seu NIF" type="number" id="nif" name="nif" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+            </div>
+            <div>
+              <app-input-title class="text-[28px]">Género</app-input-title>
+              <select name="gender" id="gender" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+                <option value="">Escolha o seu género</option>
+                <option value="m">Masculino</option>
+                <option value="f">Feminino</option>
+                <option value="o">Outro</option>
+              </select>
+            </div>
+            <div>
+              <app-input-title class="text-[28px]">Rua, Nºde Porta e Andar</app-input-title>
+              <input placeholder="Introduza a sua morada" type="text" id="address" name="address" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+            </div>
+            <div>
+              <app-input-title class="text-[28px]">Município</app-input-title>
+              <select name="county" id="county" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+                <option value="">Escolha o seu munícipio</option>
+                <option value="m">Setúbal</option>
+                <option value="f">Montijo</option>
+                <option value="o">Outro</option>
+              </select>
+            </div>
+         
+        </section>
+        <section class="w-1/2 flex flex-col text-left space-y-2 bg-green-600">
+          <div>
+            <app-input-title class="text-[28px]">Apelido</app-input-title>
+            <input placeholder="Introduza o seu apelido" type="text" id="lastName" name="lastName" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+          </div>
+          <div class="flex flex-col">
+            <app-input-title class="text-[28px]">Palavra-Passe</app-input-title>
+            <input placeholder="Introduza a sua palavra-passe" type="password" id="password" name="password" class="input w-[20rem]
+          focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+          transition-all duration-700 ease-in-out  decoration-sky-500">
+          </div>
+          <div class="flex flex-col">
+            <app-input-title class="text-[28px]">Data de Nascimento</app-input-title>
+            <input placeholder="Introduza a sua data de nascimento" type="date" id="birthDate" name="birthDate" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+          </div>
+          <div class="flex flex-col">
+            <app-input-title class="text-[28px]">Fotografia de Utilizador</app-input-title>
+            <input type="file" id="profilePic" name="profilePic" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+          </div>
+          <div>
+            <app-input-title class="text-[28px]">Código Postal</app-input-title>
+            <div >
+              <input placeholder="0000" type="number" id="firstPostalCode" name="firstPostalCode" class="input w-[10rem] text-center
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+              <span>-</span>
+              <input placeholder="000" type="number" id="secondPostalCode" name="seconndPostalCode" class="input w-[8rem] text-center
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+            </div>
+          </div>
+          
+            <button class="ml-24 h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
+        border-0 py-4 focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+              Registar
+              <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+            </button>
+         
+        </section>
+      </form>
+      <hr class="rounded-3xl border-t-[#ECECF0] my-4" />
+      <div class="text-right font-medium text-municip-normal-black ">Já tem conta? <a class="cursor-pointer font-bold text-black ml-2">Faça login</a></div>
+    </div>
+  </div>
+</div>
+
+
+
