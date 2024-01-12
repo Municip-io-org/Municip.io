@@ -8,8 +8,8 @@ import { SelectAccountTypeComponent } from './signUp/select-account-type/select-
 import { SignUpCitizenAccountComponent } from './signUp/sign-up-citizen-account/sign-up-citizen-account.component';
 
 const routes: Routes = [
-  { path: '', component: LandingComponent, data: {} },
-  { path: 'login', component: LoginComponent, data: {} },
+  { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
+  { path: 'login', component: LoginComponent, data: { animation: 'Login' } },
   { path: 'signUp-SelectAccountType', component: SelectAccountTypeComponent, data: {} },
   { path: 'signUp-Citizen', component: SignUpCitizenAccountComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },

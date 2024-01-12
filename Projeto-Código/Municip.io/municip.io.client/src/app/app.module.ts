@@ -18,6 +18,8 @@ import { TermsconditionsComponent } from './termsconditions/termsconditions.comp
 import { SelectAccountTypeComponent } from './signUp/select-account-type/select-account-type.component';
 import { SignUpCitizenAccountComponent } from './signUp/sign-up-citizen-account/sign-up-citizen-account.component';
 import { InputTitleComponent } from './utils/input/input-title/input-title.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,7 @@ import { InputTitleComponent } from './utils/input/input-title/input-title.compo
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule, BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
