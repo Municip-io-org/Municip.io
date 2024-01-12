@@ -1,5 +1,6 @@
 ﻿public class InformacoesMunicipio
 {
+    public Guid Guid { get; set; }
     public string codigo { get; set; }
     public string nif { get; set; }
     public string rua { get; set; }
