@@ -36,20 +36,21 @@ namespace Municip.io.Server.Controllers
         // register a new user account
 
         [HttpPost("registerCitizen")]
-        public async Task<IActionResult> RegisterCitizen(string email , string password)
+        public async Task<IActionResult> RegisterCitizen(Citizen citizen)
+
         {
             if (ModelState.IsValid)
             {
                 // Copy data from RegisterViewModel to IdentityUser
                 var user = new IdentityUser
                 {
-                    UserName = email,
-                    Email = email
+                    UserName = citizen.Email,
+                    Email = citizen.Email
                 };
 
 
                 // Store user data in AspNetUsers database table
-                var result = await _userManager.CreateAsync(user, password);
+                var result = await _userManager.CreateAsync(user, citizen.Password);
 
                 // If user is successfully created, sign-in the user using
                 // SignInManager and redirect to index action of HomeController
@@ -58,16 +59,16 @@ namespace Municip.io.Server.Controllers
 
                     //create citizen object
 
-                    Citizen citizen = new Citizen();
-                    //put the guid of the user in the citizen object
-                    citizen.Id = new Guid(user.Id); 
-                    citizen.Name = "name";
-                    citizen.Surname = "surname";
-                    citizen.Address = "address";
-                    citizen.Gender = "female";
-                    citizen.Municipality = "municipality";
-                    citizen.Nif = "nif";
-                    citizen.PostalCode = "postalCode";
+                    
+                    ////put the guid of the user in the citizen object
+                    //citizen.Id = new Guid(user.Id); 
+                    //citizen.Name = "name";
+                    //citizen.Surname = "surname";
+                    //citizen.Address = "address";
+                    //citizen.Gender = "female";
+                    //citizen.Municipality = "municipality";
+                    //citizen.Nif = "nif";
+                    //citizen.PostalCode = "postalCode";
 
 
                     //add citizen to database

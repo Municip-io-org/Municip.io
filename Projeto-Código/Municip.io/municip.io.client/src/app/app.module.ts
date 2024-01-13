@@ -19,6 +19,8 @@ import { SelectAccountTypeComponent } from './signUp/select-account-type/select-
 import { SignUpCitizenAccountComponent } from './signUp/sign-up-citizen-account/sign-up-citizen-account.component';
 import { InputTitleComponent } from './utils/input/input-title/input-title.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -39,10 +41,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SelectAccountTypeComponent,
     SignUpCitizenAccountComponent,
     InputTitleComponent
+    
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule, BrowserAnimationsModule
+    AppRoutingModule, BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

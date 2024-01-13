@@ -10,9 +10,12 @@
     <div class="flex flex-col">
       <h1 class="font-black text-[30px] text-left text-black  my-2">Registo de Munícipe</h1>
       <h3 class="font-medium text-left text-xl text-municip-normal-black mb-2">Insira os seus dados</h3>
-      <form class="py-[1rem] flex flex-row w-[60rem]">
-        <section class="w-1/2 flex flex-col text-left space-y-2 bg-red-600">
-          
+      <form #citizenForm="ngForm" (ngSubmit)="onSubmit(citizenForm)">
+        <div class="py-[1rem] flex flex-row w-[60rem]">
+
+          <section class="w-1/2 flex flex-col text-left space-y-2 bg-red-600">
+
+
             <div>
               <app-input-title class="text-[28px]">Primeiro Nome</app-input-title>
               <input placeholder="Introduza o seu primeiro nome" type="text" id="firstName" name="firstName" class="input w-[20rem]
@@ -59,54 +62,56 @@ transition-all duration-700 ease-in-out  decoration-sky-500">
                 <option value="o">Outro</option>
               </select>
             </div>
-         
-        </section>
-        <section class="w-1/2 flex flex-col text-left space-y-2 bg-green-600">
-          <div>
-            <app-input-title class="text-[28px]">Apelido</app-input-title>
-            <input placeholder="Introduza o seu apelido" type="text" id="lastName" name="lastName" class="input w-[20rem]
-focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-transition-all duration-700 ease-in-out  decoration-sky-500" />
-          </div>
-          <div class="flex flex-col">
-            <app-input-title class="text-[28px]">Palavra-Passe</app-input-title>
-            <input placeholder="Introduza a sua palavra-passe" type="password" id="password" name="password" class="input w-[20rem]
-          focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-          transition-all duration-700 ease-in-out  decoration-sky-500">
-          </div>
-          <div class="flex flex-col">
-            <app-input-title class="text-[28px]">Data de Nascimento</app-input-title>
-            <input placeholder="Introduza a sua data de nascimento" type="date" id="birthDate" name="birthDate" class="input w-[20rem]
-focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-transition-all duration-700 ease-in-out  decoration-sky-500">
-          </div>
-          <div class="flex flex-col">
-            <app-input-title class="text-[28px]">Fotografia de Utilizador</app-input-title>
-            <input type="file" id="profilePic" name="profilePic" class="input w-[20rem]
-focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-transition-all duration-700 ease-in-out  decoration-sky-500">
-          </div>
-          <div>
-            <app-input-title class="text-[28px]">Código Postal</app-input-title>
-            <div >
-              <input placeholder="0000" type="number" id="firstPostalCode" name="firstPostalCode" class="input w-[10rem] text-center
-focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-transition-all duration-700 ease-in-out  decoration-sky-500" />
-              <span>-</span>
-              <input placeholder="000" type="number" id="secondPostalCode" name="seconndPostalCode" class="input w-[8rem] text-center
+
+          </section>
+          <section class="w-1/2 flex flex-col text-left space-y-2 bg-green-600">
+            <div>
+              <app-input-title class="text-[28px]">Apelido</app-input-title>
+              <input placeholder="Introduza o seu apelido" type="text" id="lastName" name="lastName" class="input w-[20rem]
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500" />
             </div>
-          </div>
-          
-            <button class="ml-24 h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
-        border-0 py-4 focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
-              Registar
-              <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-            </button>
-         
-        </section>
+            <div class="flex flex-col">
+              <app-input-title class="text-[28px]">Palavra-Passe</app-input-title>
+              <input placeholder="Introduza a sua palavra-passe" type="password" id="password" name="password" class="input w-[20rem]
+          focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+          transition-all duration-700 ease-in-out  decoration-sky-500">
+            </div>
+            <div class="flex flex-col">
+              <app-input-title class="text-[28px]">Data de Nascimento</app-input-title>
+              <input placeholder="Introduza a sua data de nascimento" type="date" id="birthDate" name="birthDate" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+            </div>
+            <div class="flex flex-col">
+              <app-input-title class="text-[28px]">Fotografia de Utilizador</app-input-title>
+              <input type="file" id="profilePic" name="profilePic" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+            </div>
+            <div>
+              <app-input-title class="text-[28px]">Código Postal</app-input-title>
+              <div>
+                <input placeholder="0000" type="number" id="firstPostalCode" name="firstPostalCode" class="input w-[10rem] text-center
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+                <span>-</span>
+                <input placeholder="000" type="number" id="secondPostalCode" name="secondPostalCode" class="input w-[8rem] text-center
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+              </div>
+            </div>
+
+            <!--<button type="submit" class="ml-24 h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
+      border-0 py-4 focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+          Registar
+          <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+        </button>-->
+            <button type="submit" class="btn btn-primary spaced-button">Create</button>
+          </section>
+        </div>
       </form>
+      
       <hr class="rounded-3xl border-t-[#ECECF0] my-4" />
       <div class="text-right font-medium text-municip-normal-black ">Já tem conta? <a class="cursor-pointer font-bold text-black ml-2">Faça login</a></div>
     </div>
