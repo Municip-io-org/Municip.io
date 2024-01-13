@@ -71,25 +71,31 @@ namespace Municip.io.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new MunicipUser
+
+                var user = new MunicipUser { UserName = name, Email = email,  Role = role };
+                var result = await _userManager.CreateAsync(user, password);
+                
+
+                if (result.Succeeded)
                 {
-                    
-                    Email = email,                    
-                    Role = role
-                };
+                    //TODO : add the other roles
+                    if (MunicipRole.MUNICIP.ToNameString() == user.Role)
+                    {
+                        //add the user to the role
+                        //await _userManager.AddToRoleAsync(user, MunicipRole.MUNICIP.ToNameString());
+                        //get the current user identity and get the data from the database
+                        return Json(user);
 
-
-
-                //send to /register endpoint the user data to be registered, do not create the user 
-
-                var registerApiUrl = "/register"; // Replace with your actual API URL
-
-                var registerApiJson = JsonConvert.SerializeObject(user);
-
-                var registerApiContent = new StringContent(registerApiJson, Encoding.UTF8, "application/json");
-
-                var registerApiResponse = await _httpClient.PostAsync(registerApiUrl, registerApiContent);
-
+                    }
+                    //TODO : add the other roles
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
 
 
 
