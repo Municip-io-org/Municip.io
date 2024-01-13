@@ -16,7 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddIdentityApiEndpoints<MunicipUser>()
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
@@ -29,7 +29,7 @@ builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
-app.MapIdentityApi<MunicipUser>();
+app.MapIdentityApi<IdentityUser>();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

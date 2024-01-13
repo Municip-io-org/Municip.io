@@ -6,11 +6,17 @@ using Municip.io.Server.Models;
 namespace Municip.io.Server.Data
 {
    
-        public class ApplicationDbContext : IdentityDbContext<MunicipUser>
+        public class ApplicationDbContext : IdentityDbContext<IdentityUser>
         {
+
+            
+        public DbSet<Citizen> Citizens { get; set; }
+
             public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
                 base(options)
             { }
         }
+
+
     
 }
