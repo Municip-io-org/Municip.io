@@ -6,16 +6,13 @@
       <img alt="logo" src="/assets/images/logos/logo-white-right.png" class="size-8/12 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
     </div>
   </div>
-  <div class="h-screen w-2/3 flex items-center justify-center ">
-    <div class="flex flex-col">
+  <div class="h-screen mx-10 w-2/3 flex items-center justify-center ">
+    <div class="flex grow flex-col">
       <h1 class="font-black text-[30px] text-left text-black  my-2">Registo de Munícipe</h1>
       <h3 class="font-medium text-left text-xl text-municip-normal-black mb-2">Insira os seus dados</h3>
       <form [formGroup]="signUpCitizenForm" (ngSubmit)="onSubmit()">
-        <div class="py-[1rem] flex flex-row w-[60rem]">
-
-          <section class="w-1/2 flex flex-col text-left space-y-2 bg-red-600">
-
-
+        <div class="py-[1rem] flex justify-around">
+          <section class=" flex flex-col text-left space-y-2 ">
             <div>
               <app-input-title class="text-[28px]">Primeiro Nome</app-input-title>
               <input placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="citizen.firstName" class="input w-[20rem]
@@ -64,7 +61,7 @@ transition-all duration-700 ease-in-out  decoration-sky-500">
             </div>
 
           </section>
-          <section class="w-1/2 flex flex-col text-left space-y-2 bg-green-600">
+          <section class="flex flex-col text-left space-y-2 ">
             <div>
               <app-input-title class="text-[28px]">Apelido</app-input-title>
               <input placeholder="Introduza o seu apelido" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="citizen.surname" class="input w-[20rem]

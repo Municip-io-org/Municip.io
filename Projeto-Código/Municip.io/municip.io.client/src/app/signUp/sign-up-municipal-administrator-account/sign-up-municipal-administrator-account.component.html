@@ -1,0 +1,82 @@
+
+
+<div class="flex text-municip-black text-[16px] font-poppins">
+  <div class="h-screen w-3/4 bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center">
+    <div class=" flex justify-center text-white">
+      <img alt="logo" src="/assets/images/logos/logo-white-right.png" class="size-8/12 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
+    </div>
+  </div>
+  <div class="h-screen mx-10 grow flex items-center justify-center ">
+    <div class="flex flex-col">
+      <h1 class="font-black text-[30px] text-left text-black  my-2">Registo de Administrador Municipal</h1>
+      <h3 class="font-medium text-left text-xl text-municip-normal-black mb-2">Insira os seus dados</h3>
+      <form [formGroup]="signUpCitizenForm" (ngSubmit)="onSubmit()">
+        <div class="py-[1rem] flex flex-row">
+          <section class=" flex flex-col text-left space-y-2">
+            <div>
+              <app-input-title class="text-[28px]">Primeiro Nome</app-input-title>
+              <input placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="citizen.firstName" class="input w-[20rem]
+       focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+       transition-all duration-700 ease-in-out  decoration-sky-500" />
+            </div>
+            <div>
+              <app-input-title class="text-[28px]">Apelido</app-input-title>
+              <input placeholder="Introduza o seu apelido" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="citizen.surname" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+            </div>
+            <div>
+              <app-input-title class="text-[28px]">Email</app-input-title>
+              <input placeholder="Introduza o seu email" type="email" id="email" formControlName="email" name="email" [(ngModel)]="citizen.email" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+            </div>
+            <div class="flex flex-col">
+              <app-input-title class="text-[28px]">Palavra-Passe</app-input-title>
+              <input placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="citizen.password" class="input w-[20rem]
+          focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+          transition-all duration-700 ease-in-out  decoration-sky-500">
+            </div>
+            <div>
+              <app-input-title class="text-[28px]">Município</app-input-title>
+              <select id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="citizen.municipality" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+                <option value="">Escolha o seu munícipio</option>
+                <option value="m">Setúbal</option>
+                <option value="f">Montijo</option>
+                <option value="o">Outro</option>
+              </select>
+            </div>
+            <button class="btn-primary btn spaced-button" type="submit" [disabled]="!signUpCitizenForm.valid">Create</button>
+          </section>
+         
+            
+            
+            <!--<div class="flex flex-col">
+                          <app-input-title class="text-[28px]">Fotografia de Utilizador</app-input-title>
+                          <input type="hidden" id="profilePic" name="profilePic" class="input w-[20rem]
+            focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+            transition-all duration-700 ease-in-out  decoration-sky-500">
+                        </div>-->
+           
+
+            <!--<button type="submit" class="ml-24 h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
+            border-0 py-4 focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+                Registar
+                <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+              </button>-->
+            
+
+          
+        </div>
+      </form>
+
+      <hr class="rounded-3xl border-t-[#ECECF0] my-4" />
+      <div class="text-right font-medium text-municip-normal-black ">Já tem conta? <a class="cursor-pointer font-bold text-black ml-2">Faça login</a></div>
+    </div>
+  </div>
+</div>
+
+
+

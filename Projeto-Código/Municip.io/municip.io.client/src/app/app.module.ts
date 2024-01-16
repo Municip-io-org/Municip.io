@@ -20,6 +20,7 @@ import { SignUpCitizenAccountComponent } from './signUp/sign-up-citizen-account/
 import { InputTitleComponent } from './utils/input/input-title/input-title.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SignUpMunicipalAdministratorAccountComponent } from './signUp/sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component';
 
 
 
@@ -40,7 +41,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TermsconditionsComponent,
     SelectAccountTypeComponent,
     SignUpCitizenAccountComponent,
-    InputTitleComponent
+    InputTitleComponent,
+    SignUpMunicipalAdministratorAccountComponent
     
   ],
   imports: [

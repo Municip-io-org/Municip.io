@@ -6,12 +6,14 @@ import { LoginComponent } from './login/login.component';
 import { TermsconditionsComponent } from './termsconditions/termsconditions.component';
 import { SelectAccountTypeComponent } from './signUp/select-account-type/select-account-type.component';
 import { SignUpCitizenAccountComponent } from './signUp/sign-up-citizen-account/sign-up-citizen-account.component';
+import { SignUpMunicipalAdministratorAccountComponent } from './signUp/sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
   { path: 'login', component: LoginComponent, data: { animation: 'Login' } },
   { path: 'signUp-SelectAccountType', component: SelectAccountTypeComponent, data: {} },
   { path: 'signUp-Citizen', component: SignUpCitizenAccountComponent, data: {} },
+  { path: 'signUp-MunicipalAdministrator', component: SignUpMunicipalAdministratorAccountComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} }];
 
