@@ -12,22 +12,24 @@ export class CitizenAuthService {
 
 
   registerCitizen(citizen: Citizen): Observable<Citizen> {
-    return this.http.post<Citizen>('api/registerCitizen', citizen);
+    return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
+
   }
 
 }
 
 export interface Citizen {
-  Email: string;
-Password: string;
-  Name: string;
-  Surname: string;
-  Nif: string;
-  Gender: string;
-  Municipality: string;
-  Address: string;
-  PostalCode: string;
-
+  firstName: string;
+  surname: string;
+  email: string;
+  password: string;
+  nif: string;
+  gender: string;
+  municipality: string;
+  address: string;
+  postalCode1: string;
+  postalCode2: string;
+  birthDate: Date
 
 }
 
