@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 using System.Text;
@@ -134,7 +135,7 @@ namespace Municip.io.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if not exists already in municipalities table
+               
                 if (!_context.Municipalities.Any(m => m.Name == municipality.Name))
                 {
                     _context.Municipalities.Add(municipality);
@@ -148,6 +149,17 @@ namespace Municip.io.Server.Controllers
             return BadRequest();
         }
 
+        [HttpGet("Exists")]
+        public async Task<IActionResult> municipalityExists(String municipality)
+        {
+            if(await _context.Municipalities.AnyAsync(m => m.Name == municipality))
+            {
+                return Json(true);
+            }
+            return Json(false);
+
+
+        }
 
 
 }
