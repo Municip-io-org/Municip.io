@@ -1,0 +1,46 @@
+<div class="flex text-municip-black text-[16px] font-poppins">
+  <div class="h-screen grow bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center">
+    <div class="flex justify-center text-white">
+      <img alt="logo" src="/assets/images/logos/logo-white-right.png" class="size-8/12 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
+    </div>
+  </div>
+  <div class="h-screen w-[70rem] flex items-center justify-center ">
+    <div class="flex flex-col">
+      <h1 class="font-black text-[30px] text-left text-black my-2">Registo de Município</h1>
+      <h3 class="font-medium text-left text-xl text-municip-normal-black mb-2">Insira os seus dados</h3>
+      <form [formGroup]="signUpCitizenForm" (ngSubmit)="onSubmit()">
+        <div class="py-[1rem] flex flex-col">
+          <section class="flex text-left justify-around mb-4">
+            <div class="w-[24rem]" >
+              <app-input-title class="text-[24px]">Primeiro Nome</app-input-title>
+              <input required placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="citizen.firstName"
+                     class="input w-[18rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+            </div>
+            <div class="w-[20rem]" >
+              <app-input-title class="text-[24px]">Contacto</app-input-title>
+              <input required placeholder="Introduza o seu contacto" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="citizen.surname"
+                     class="input w-[20rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+            </div>
+          </section>
+          <div class="flex flex-col text-left w-full mt-6 mb-4">
+            <app-input-title class="text-[24px]">Texto Informativo</app-input-title>
+            <textarea required placeholder="Introduza uma descrição da câmara para aparecer no perfil da Câmara Municipal" id="address" formControlName="address" name="address" [(ngModel)]="citizen.address"
+                      class="input box-border h-[20rem] resize-none grow focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500"></textarea>
+
+          </div>
+
+          <button type="submit" [disabled]="!signUpCitizenForm.valid"
+                  class="relative top-[1rem] self-end h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+            Finalizar
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          </button>
+        </div>
+      </form>
+
+      <div class="relative top-[2rem]">
+        <hr class="rounded-3xl border-t-[#ECECF0] my-4" />
+        <div class="text-right font-medium text-municip-normal-black ">Já tem conta? <a routerLink="/login" class="cursor-pointer font-bold  text-black ml-2 hover:underline">Faça login</a></div>
+      </div>
+    </div>
+  </div>
+</div>
