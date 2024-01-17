@@ -614,6 +614,51 @@ video {
   top: 1.4rem;
 }
 
+.top-8{
+  top: 2rem;
+}
+
+.top-10{
+  top: 2.5rem;
+}
+
+.top-\[5rem\]{
+  top: 5rem;
+}
+
+.bottom-\[5rem\]{
+  bottom: 5rem;
+}
+
+.top-\[5\.5rem\]{
+  top: 5.5rem;
+}
+
+.top-\[9\.5rem\]{
+  top: 9.5rem;
+}
+
+.top-\[10\.5rem\]{
+  top: 10.5rem;
+}
+
+.top-\[11rem\]{
+  top: 11rem;
+}
+
+.top-\[11\.1rem\]{
+  top: 11.1rem;
+}
+
+.top-\[11\.2rem\]{
+  top: 11.2rem;
+}
+
+.mx-10{
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
 .mx-auto{
   margin-left: auto;
   margin-right: auto;
@@ -627,11 +672,6 @@ video {
 .my-4{
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-
-.mx-10{
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
 }
 
 .mb-10{
@@ -690,12 +730,48 @@ video {
   margin-top: 2rem;
 }
 
-.ml-12{
-  margin-left: 3rem;
+.mt-64{
+  margin-top: 16rem;
 }
 
-.ml-20{
-  margin-left: 5rem;
+.mt-\[10rem\]{
+  margin-top: 10rem;
+}
+
+.ml-28{
+  margin-left: 7rem;
+}
+
+.mr-24{
+  margin-right: 6rem;
+}
+
+.mr-20{
+  margin-right: 5rem;
+}
+
+.mr-10{
+  margin-right: 2.5rem;
+}
+
+.ml-\[7rem\]{
+  margin-left: 7rem;
+}
+
+.ml-\[8rem\]{
+  margin-left: 8rem;
+}
+
+.ml-\[9rem\]{
+  margin-left: 9rem;
+}
+
+.ml-\[10rem\]{
+  margin-left: 10rem;
+}
+
+.ml-\[9\.8rem\]{
+  margin-left: 9.8rem;
 }
 
 .inline-block{
@@ -745,16 +821,6 @@ video {
 .size-\[3rem\]{
   width: 3rem;
   height: 3rem;
-}
-
-.size-52{
-  width: 13rem;
-  height: 13rem;
-}
-
-.size-\[100rem\]{
-  width: 100rem;
-  height: 100rem;
 }
 
 .h-1{
@@ -821,6 +887,10 @@ video {
   width: 40%;
 }
 
+.w-3\/4{
+  width: 75%;
+}
+
 .w-3\/5{
   width: 60%;
 }
@@ -865,10 +935,6 @@ video {
   width: 28rem;
 }
 
-.w-\[60rem\]{
-  width: 60rem;
-}
-
 .w-\[8rem\]{
   width: 8rem;
 }
@@ -877,48 +943,8 @@ video {
   width: 100%;
 }
 
-.w-1\/4{
-  width: 25%;
-}
-
-.w-3\/4{
-  width: 75%;
-}
-
-.w-10\/12{
-  width: 83.333333%;
-}
-
-.w-2\/6{
-  width: 33.333333%;
-}
-
-.w-\[150rem\]{
-  width: 150rem;
-}
-
-.w-\[170rem\]{
-  width: 170rem;
-}
-
-.w-\[100rem\]{
-  width: 100rem;
-}
-
-.w-\[50rem\]{
-  width: 50rem;
-}
-
 .flex-1{
   flex: 1 1 0%;
-}
-
-.flex-\[3\]{
-  flex: 3;
-}
-
-.flex-\[1\]{
-  flex: 1;
 }
 
 .flex-shrink-0{
@@ -931,22 +957,6 @@ video {
 
 .grow{
   flex-grow: 1;
-}
-
-.basis-3\/4{
-  flex-basis: 75%;
-}
-
-.basis-1\/4{
-  flex-basis: 25%;
-}
-
-.basis-14{
-  flex-basis: 3.5rem;
-}
-
-.basis-8\/12{
-  flex-basis: 66.666667%;
 }
 
 .scale-\[1\.5\]{
@@ -997,14 +1007,6 @@ video {
 
 .justify-around{
   justify-content: space-around;
-}
-
-.justify-evenly{
-  justify-content: space-evenly;
-}
-
-.justify-stretch{
-  justify-content: stretch;
 }
 
 .space-x-10 > :not([hidden]) ~ :not([hidden]){
@@ -1073,10 +1075,8 @@ video {
   margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 
-.space-y-20 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-y-reverse: 0;
-  margin-top: calc(5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(5rem * var(--tw-space-y-reverse));
+.self-end{
+  align-self: flex-end;
 }
 
 .self-center{
@@ -1158,11 +1158,6 @@ video {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
-.bg-green-600{
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
-}
-
 .bg-indigo-500{
   --tw-bg-opacity: 1;
   background-color: rgb(99 102 241 / var(--tw-bg-opacity));
@@ -1176,11 +1171,6 @@ video {
 .bg-municip-highlight-black{
   --tw-bg-opacity: 1;
   background-color: rgb(40 49 56 / var(--tw-bg-opacity));
-}
-
-.bg-red-600{
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
 }
 
 .bg-white{
@@ -1313,16 +1303,6 @@ video {
   padding-bottom: 1rem;
 }
 
-.px-10{
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-
-.px-\[1rem\]{
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 .pb-10{
   padding-bottom: 2.5rem;
 }
@@ -1357,10 +1337,6 @@ video {
 
 .pt-6{
   padding-top: 1.5rem;
-}
-
-.pl-10{
-  padding-left: 2.5rem;
 }
 
 .text-left{
@@ -1564,6 +1540,10 @@ video {
 
 .hover\:animate-pulse:hover{
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.hover\:cursor-pointer:hover{
+  cursor: pointer;
 }
 
 .hover\:border-sky-500:hover{
