@@ -50,13 +50,13 @@ transition-all duration-700 ease-in-out  decoration-sky-500" />
             </div>
             <div>
               <app-input-title class="text-[28px]">Município</app-input-title>
-              <select id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="citizen.municipality"  class="input w-[20rem]
+              <select id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="citizen.municipality"
+                      class="input w-[20rem]
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500">
                 <option value="">Escolha o seu munícipio</option>
-                <option value="m">Setúbal</option>
-                <option value="f">Montijo</option>
-                <option value="o">Outro</option>
+                <option [value]="value" *ngFor="let value of getValues()">{{ value }}</option>
+
               </select>
             </div>
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CitizenAuthService, Citizen } from '../../services/citizen-auth.service';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Municipalities } from '../../municipalities.enum';
 
 @Component({
   selector: 'app-sign-up-citizen-account',
@@ -23,6 +24,11 @@ export class SignUpCitizenAccountComponent {
     postalCode2: '',
     birthDate:  new Date() };
 
+  municipalities = Municipalities;
+
+  getValues() {
+    return Object.values(this.municipalities)
+  }
   constructor(private citizenAuthService: CitizenAuthService, private router: Router) { }
 
   signUpCitizenForm = new FormGroup({
