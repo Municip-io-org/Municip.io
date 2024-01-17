@@ -90,6 +90,66 @@ namespace Municip.io.Server.Controllers
             return BadRequest();
         }
 
+        [HttpPost("registerMunicipalAdministrator")]
+        public async Task<IActionResult> RegisterMunicipalAdministrator(MunicipalAdministrator municipalAdministrator)
+
+        {
+            if (ModelState.IsValid)
+            {
+                
+                var user = new IdentityUser
+                {
+                    UserName = municipalAdministrator.Email,
+                    Email = municipalAdministrator.Email
+                };
+
+            // Store user data in AspNetUsers database table
+            var result = await _userManager.CreateAsync(user, municipalAdministrator.Password);
+
+            // If user is successfully created, sign-in the user using
+            // SignInManager and redirect to index action of HomeController
+            if (result.Succeeded)
+            {
+                //add citizen to database
+                _context.MunicipalAdministrators.Add(municipalAdministrator);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+
+         
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return BadRequest();
+        }
+
+            return BadRequest();
     }
+
+        [HttpPost("registerMunicipality")]
+        public async Task<IActionResult> RegisterMunicipality(Municipality municipality)
+
+        {
+            if (ModelState.IsValid)
+            {
+                //if not exists already in municipalities table
+                if (!_context.Municipalities.Any(m => m.Name == municipality.Name))
+                {
+                    _context.Municipalities.Add(municipality);
+                    await _context.SaveChangesAsync();
+                    return Ok();
+                }
+
+
+            }
+
+            return BadRequest();
+        }
+
+
+
+}
 
 }

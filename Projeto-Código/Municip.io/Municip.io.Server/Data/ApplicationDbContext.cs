@@ -12,7 +12,11 @@ namespace Municip.io.Server.Data
             
         public DbSet<Citizen> Citizens { get; set; }
 
-            public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
+        public DbSet<MunicipalAdministrator> MunicipalAdministrators { get; set; }
+
+        public DbSet<Municipality> Municipalities { get; set; }
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
                 base(options)
             { }
         }
