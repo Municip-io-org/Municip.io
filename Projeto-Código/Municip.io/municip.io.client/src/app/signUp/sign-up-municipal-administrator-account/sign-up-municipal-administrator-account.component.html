@@ -43,9 +43,8 @@ transition-all duration-700 ease-in-out  decoration-sky-500" />
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500">
                 <option value="">Escolha o seu munícipio</option>
-                <option value="m">Setúbal</option>
-                <option value="f">Montijo</option>
-                <option value="o">Outro</option>
+                <option [value]="value" *ngFor="let value of getValues()">{{ value }}</option>
+
               </select>
             </div>
             <button class="btn-primary btn spaced-button" type="submit" [disabled]="!signUpCitizenForm.valid">Create</button>
