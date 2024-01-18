@@ -61,16 +61,7 @@ namespace Municip.io.Server.Controllers
                     //create citizen object
 
                     
-                    ////put the guid of the user in the citizen object
-                    //citizen.Id = new Guid(user.Id); 
-                    //citizen.Name = "name";
-                    //citizen.Surname = "surname";
-                    //citizen.Address = "address";
-                    //citizen.Gender = "female";
-                    //citizen.Municipality = "municipality";
-                    //citizen.Nif = "nif";
-                    //citizen.PostalCode = "postalCode";
-
+                   
 
                     //add citizen to database
                     _context.Citizens.Add(citizen);
@@ -84,11 +75,11 @@ namespace Municip.io.Server.Controllers
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+                return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
 
-                return BadRequest();
             }
+            return BadRequest(new { Message = "O modelo do cidadão é inválido.", ModelState = ModelState });
 
-            return BadRequest();
         }
 
         [HttpPost("registerMunicipalAdministrator")]
@@ -123,32 +114,38 @@ namespace Municip.io.Server.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
 
-            return BadRequest();
-        }
+                  return BadRequest(new { Message = "Falha no registro do administrador municipal.", ModelState = ModelState });
+            }
 
-            return BadRequest();
+                return BadRequest(new { Message = "O modelo do administrador municipal é inválido.", ModelState = ModelState });
+
     }
 
         [HttpPost("registerMunicipality")]
         public async Task<IActionResult> RegisterMunicipality(Municipality municipality)
-
         {
             if (ModelState.IsValid)
             {
-               
                 if (!_context.Municipalities.Any(m => m.Name == municipality.Name))
                 {
                     _context.Municipalities.Add(municipality);
                     await _context.SaveChangesAsync();
                     return Ok();
                 }
-
-
+                else
+                {
+                    // Se o município já existe, retorne um erro BadRequest com uma mensagem específica.
+                    return BadRequest(new { Message = "Já existe um município com o mesmo nome." });
+                }
             }
 
-            return BadRequest();
+            // Se o modelo não for válido, retorne um erro BadRequest com detalhes do modelo.
+            return BadRequest(new { Message = "O modelo do município é inválido.", ModelState = ModelState });
         }
 
+
+
+        // ISTO JA ESTAVA FEITO DENTRO DO CORPO DO REGISTERMUNICIPALADMINISTRATOR
         [HttpGet("Exists")]
         public async Task<IActionResult> municipalityExists(String municipality)
         {
@@ -157,7 +154,6 @@ namespace Municip.io.Server.Controllers
                 return Json(true);
             }
             return Json(false);
-
 
         }
 

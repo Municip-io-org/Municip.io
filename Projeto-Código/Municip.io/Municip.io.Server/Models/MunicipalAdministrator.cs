@@ -2,10 +2,17 @@
 {
     public class MunicipalAdministrator
     {
+
+
+        public Guid Id { get; set; }
+
         public String firstName { get; set; }
         public String Surname { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
+
+        
+
         public String municipality { get; set; }
 
         public MunicipalAdministrator(string firstName, string surname, string email, string password, string municipality)
