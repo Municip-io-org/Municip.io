@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Citizen, CitizenAuthService } from '../../services/citizen-auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Municipality } from '../../services/municipal-admin-auth.service';
 
 @Component({
   selector: 'app-sign-up-municipality',
@@ -9,18 +10,10 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrl: './sign-up-municipality.component.css'
 })
 export class SignUpMunicipalityComponent {
-  citizen: Citizen = {
-    firstName: '',
-    surname: '',
-    email: '',
-    password: '',
-    nif: '',
-    gender: '',
-    municipality: 'test',
-    address: '',
-    postalCode1: '',
-    postalCode2: '',
-    birthDate: new Date()
+  municipality: Municipality= {
+    president: '',
+    contact: '',
+description: ''
   };
 
   
@@ -28,24 +21,16 @@ export class SignUpMunicipalityComponent {
  
   constructor(private citizenAuthService: CitizenAuthService, private router: Router) { }
 
-  signUpCitizenForm = new FormGroup({
-    firstName: new FormControl(),
-    surname: new FormControl(),
-    email: new FormControl(),
-    password: new FormControl(),
-    nif: new FormControl(),
-    gender: new FormControl(),
-    municipality: new FormControl(),
-    address: new FormControl(),
-    postalCode1: new FormControl(),
-    postalCode2: new FormControl(),
-    birthDate: new FormControl()
+  signUpMunicipalityForm = new FormGroup({
+    president: new FormControl(),
+    contact: new FormControl(),
+    description: new FormControl()
   });
 
   onSubmit() {
-    console.log(this.signUpCitizenForm.value);
+    console.log(this.signUpMunicipalityForm.value);
 
-    this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen).subscribe(res => {
+    this.registerCitizen(this.signUpMunicipalityForm.value as Citizen).subscribe(res => {
       console.log('Citizen registed successfully!');
       this.router.navigateByUrl('');
     });

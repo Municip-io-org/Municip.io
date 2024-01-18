@@ -107,7 +107,7 @@ namespace Municip.io.Server.Controllers
                 //add citizen to database
                 _context.MunicipalAdministrators.Add(municipalAdministrator);
                 await _context.SaveChangesAsync();
-                    if (_context.Municipalities.All(m => m.Name == municipalAdministrator.municipality))
+                    if (_context.Municipalities.All(m => m.name == municipalAdministrator.municipality))
                     {
                         // municipio existe
                         //return Ok(new { Message = "NEXISTE" });
@@ -140,7 +140,7 @@ namespace Municip.io.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!_context.Municipalities.Any(m => m.Name == municipality.Name))
+                if (!_context.Municipalities.Any(m => m.name == municipality.name))
                 {
                     _context.Municipalities.Add(municipality);
                     await _context.SaveChangesAsync();
@@ -163,7 +163,7 @@ namespace Municip.io.Server.Controllers
         [HttpGet("Exists")]
         public async Task<IActionResult> municipalityExists(string municipality)
         {
-            if(await _context.Municipalities.AnyAsync(m => m.Name == municipality))
+            if(await _context.Municipalities.AnyAsync(m => m.name == municipality))
             {
                 return Json(true);
             }

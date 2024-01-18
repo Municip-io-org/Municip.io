@@ -17,8 +17,13 @@ export class MunicipalAdminAuthService {
 
     return this.http.post<boolean>('api/accounts/registerMunicipalAdministrator', municipalAdministrator);
   }
-}
 
+
+  registerMunicipality(municipality: Municipality): Observable<Municipality> {
+    return this.http.post<Municipality>('api/accounts/registerMunicipality', municipality);
+  }
+
+}
 
 
 
@@ -31,6 +36,13 @@ export interface MunicipalAdministrator {
   email: string;
   password: string;
   municipality: string;
+}
+
+
+export interface Municipality {
+  president: string;
+  contact: string;
+description: string;
 }
 
 
