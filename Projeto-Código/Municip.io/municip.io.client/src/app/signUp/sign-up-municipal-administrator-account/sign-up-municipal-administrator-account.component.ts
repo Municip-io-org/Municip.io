@@ -21,7 +21,8 @@ export class SignUpMunicipalAdministratorAccountComponent {
 
   };
 
-  List <string> erros = new List<string>();
+
+  errors: string[] | null = null;
 
   municipalities = Municipalities;
 
@@ -51,9 +52,9 @@ export class SignUpMunicipalAdministratorAccountComponent {
         }
       },
       (error) => {
-        console.log(error.erros)
-        //send array in error.erros to a variavle in to html
-      this.erros.AddAll(error.erros)
+        console.log(error.error.errors)
+
+        this.errors = error.error.errors;
 
       }
 

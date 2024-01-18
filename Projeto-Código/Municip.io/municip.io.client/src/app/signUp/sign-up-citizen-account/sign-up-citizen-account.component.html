@@ -11,6 +11,11 @@
       <h1 class="font-black text-[30px] text-left text-black  my-2">Registo de Munícipe</h1>
       <h3 class="font-medium text-left text-xl text-municip-normal-black mb-2">Insira os seus dados</h3>
       <form [formGroup]="signUpCitizenForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="errors" class="text-red-500 text-sm font-bold space-y-2 text-start">
+          <div *ngFor="let error of errors">
+            <p>{{error}}</p>
+          </div>
+        </div>
         <div class="py-[1rem] flex justify-around">
           <section class=" flex flex-col text-left space-y-2 ">
             <div>
@@ -27,7 +32,7 @@ transition-all duration-700 ease-in-out  decoration-sky-500" />
             </div>
             <div>
               <app-input-title class="text-[28px]">NIF</app-input-title>
-              <input required placeholder="Introduza o seu NIF" type="text" id="nif" formControlName="nif" name="nif" [(ngModel)]="citizen.nif"  class="input w-[20rem]
+              <input required placeholder="Introduza o seu NIF" type="text" id="nif" formControlName="nif" name="nif" [(ngModel)]="citizen.nif" class="input w-[20rem]
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500" />
             </div>
@@ -44,7 +49,7 @@ transition-all duration-700 ease-in-out  decoration-sky-500">
             </div>
             <div>
               <app-input-title class="text-[28px]">Rua, Nºde Porta e Andar</app-input-title>
-              <input required placeholder="Introduza a sua morada" type="text" id="address" formControlName="address" name="address" [(ngModel)]="citizen.address"  class="input w-[20rem]
+              <input required placeholder="Introduza a sua morada" type="text" id="address" formControlName="address" name="address" [(ngModel)]="citizen.address" class="input w-[20rem]
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500" />
             </div>
@@ -81,11 +86,11 @@ focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500">
             </div>
             <!--<div class="flex flex-col">
-                <app-input-title class="text-[28px]">Fotografia de Utilizador</app-input-title>
-                <input type="hidden" id="profilePic" name="profilePic" class="input w-[20rem]
-  focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-  transition-all duration-700 ease-in-out  decoration-sky-500">
-              </div>-->
+                    <app-input-title class="text-[28px]">Fotografia de Utilizador</app-input-title>
+                    <input type="hidden" id="profilePic" name="profilePic" class="input w-[20rem]
+      focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+      transition-all duration-700 ease-in-out  decoration-sky-500">
+                  </div>-->
             <div>
               <app-input-title class="text-[28px]">Código Postal</app-input-title>
               <div>
@@ -101,9 +106,9 @@ transition-all duration-700 ease-in-out  decoration-sky-500" />
 
             <button type="submit" [disabled]="!signUpCitizenForm.valid" class="self-end relative top-[11.1rem] h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
   border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
-      Registar
-      <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-    </button>
+              Registar
+              <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+            </button>
             <!--<button class="btn-primary btn spaced-button" type="submit" [disabled]="!signUpCitizenForm.valid">Create</button>-->
 
           </section>

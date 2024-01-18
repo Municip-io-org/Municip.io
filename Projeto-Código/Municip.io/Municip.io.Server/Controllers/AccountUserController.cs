@@ -65,18 +65,21 @@ namespace Municip.io.Server.Controllers
                     return Ok();
                 }
 
+
+                List<string> errors = new List<string>();
                 // If there are any errors, add them to the ModelState object
                 // which will be displayed by the validation summary tag helper
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
-                    Console.WriteLine(error.Description);
+                    
+                    errors.Add(error.Description);
                 }
-                   return BadRequest(new { Message = "Falha no registo do cidadão.", ModelState = ModelState });
-                return BadRequest();
+                   return BadRequest(new { Message = "Falha no registo do cidadão.", ModelState = ModelState, errors });
+                
             }
             return BadRequest(new { Message = "O modelo do cidadão é inválido.", ModelState = ModelState });
-            return BadRequest();
+
         }
 
         [HttpPost("registerMunicipalAdministrator")]
@@ -115,16 +118,15 @@ namespace Municip.io.Server.Controllers
             }
 
 
-            List<string> erros = new List<string>();
+            List<string> errors = new List<string>();
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
                     // add errors to array
-                    erros.Add(error.Description);
-                   
+                    errors.Add(error.Description);        
             }
 
-                return BadRequest(new { Message = "Falha no registo do administrador municipal.", ModelState = ModelState, erros = erros });
+                return BadRequest(new { Message = "Falha no registo do administrador municipal.", ModelState = ModelState, errors = errors });
                 // em vez disto devia enviar num array de string os 
             }
 

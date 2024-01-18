@@ -24,6 +24,9 @@ export class SignUpCitizenAccountComponent {
     postalCode2: '',
     birthDate:  new Date() };
 
+
+  errors: string[] | null = null;
+
   municipalities = Municipalities;
 
   getValues() {
@@ -46,10 +49,17 @@ export class SignUpCitizenAccountComponent {
   });
 
   onSubmit() {
-    this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen).subscribe(res => {
-      console.log('Citizen registed successfully!');
-      this.router.navigateByUrl('');
-    });
+    this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen).subscribe(
+
+      result => {
+        this.router.navigateByUrl('');
+      },
+
+      (error) => {
+        console.log(error.error.errors)
+        this.errors = error.error.errors;
+    }
+    );
   }
 
 }
