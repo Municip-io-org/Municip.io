@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Municip.io.Server.Controllers
 {
@@ -91,6 +92,9 @@ namespace Municip.io.Server.Controllers
                     Email = municipalAdministrator.Email
                 };
 
+              
+
+
             // Store user data in AspNetUsers database table
             var result = await _userManager.CreateAsync(user, municipalAdministrator.Password);
 
@@ -110,14 +114,20 @@ namespace Municip.io.Server.Controllers
                     return Ok(false);
             }
 
-         
+
+            List<string> erros = new List<string>();
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
+                    // add errors to array
+                    erros.Add(error.Description);
+                   
             }
 
-                  return BadRequest(new { Message = "Falha no registo do administrador municipal.", ModelState = ModelState });
+                return BadRequest(new { Message = "Falha no registo do administrador municipal.", ModelState = ModelState, erros = erros });
+                // em vez disto devia enviar num array de string os 
             }
+
 
                 return BadRequest(new { Message = "O modelo do administrador municipal é inválido.", ModelState = ModelState });
 
@@ -149,7 +159,7 @@ namespace Municip.io.Server.Controllers
 
         // ISTO JA ESTAVA FEITO DENTRO DO CORPO DO REGISTERMUNICIPALADMINISTRATOR
         [HttpGet("Exists")]
-        public async Task<IActionResult> municipalityExists(String municipality)
+        public async Task<IActionResult> municipalityExists(string municipality)
         {
             if(await _context.Municipalities.AnyAsync(m => m.Name == municipality))
             {

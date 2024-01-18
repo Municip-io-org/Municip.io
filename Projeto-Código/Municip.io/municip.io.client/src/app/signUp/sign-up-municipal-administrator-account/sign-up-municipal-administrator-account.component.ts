@@ -21,6 +21,8 @@ export class SignUpMunicipalAdministratorAccountComponent {
 
   };
 
+  List <string> erros = new List<string>();
+
   municipalities = Municipalities;
 
   getValues() {
@@ -49,7 +51,10 @@ export class SignUpMunicipalAdministratorAccountComponent {
         }
       },
       (error) => {
-       console.log(error)
+        console.log(error.erros)
+        //send array in error.erros to a variavle in to html
+      this.erros.AddAll(error.erros)
+
       }
 
 

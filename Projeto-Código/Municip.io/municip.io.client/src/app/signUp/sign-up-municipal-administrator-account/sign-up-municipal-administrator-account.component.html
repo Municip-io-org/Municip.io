@@ -11,6 +11,12 @@
       <h1 class="font-black text-[30px] text-left text-black  my-2">Registo de Administrador Municipal</h1>
       <h3 class="font-medium text-left text-xl text-municip-normal-black mb-2">Insira os seus dados</h3>
       <form [formGroup]="signUpMunicipalAdminForm" (ngSubmit)="onSubmit()">
+        
+<div *ngIf="erros" class="text-red-500 text-sm font-bold">{{ erros }}</div>
+        
+
+
+
         <div class="py-[1rem] flex flex-row">
           <section class="w-full flex flex-col text-left space-y-2">
             <div>
