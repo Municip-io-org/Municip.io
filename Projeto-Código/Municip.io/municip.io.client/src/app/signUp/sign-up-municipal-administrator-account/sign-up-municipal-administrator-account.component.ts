@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Citizen, CitizenAuthService } from '../../services/citizen-auth.service';
+import { MunicipalAdministrator, MunicipalAdminAuthService } from '../../services/municipal-admin-auth.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Municipalities } from '../../municipalities.enum';
@@ -12,18 +12,12 @@ import { Municipalities } from '../../municipalities.enum';
 
 
 export class SignUpMunicipalAdministratorAccountComponent {
-  citizen: Citizen = {
+  municipalAdministrator: MunicipalAdministrator = {
     firstName: '',
     surname: '',
     email: '',
     password: '',
-    nif: '',
-    gender: '',
-    municipality: 'test',
-    address: '',
-    postalCode1: '',
-    postalCode2: '',
-    birthDate: new Date()
+    municipality: ''
   };
 
   municipalities = Municipalities;
@@ -31,28 +25,39 @@ export class SignUpMunicipalAdministratorAccountComponent {
   getValues() {
     return Object.values(this.municipalities)
   }
-  constructor(private citizenAuthService: CitizenAuthService, private router: Router) { }
+  constructor(private municipalAdminAuthService: MunicipalAdminAuthService, private router: Router) { }
 
-  signUpCitizenForm = new FormGroup({
+  signUpMunicipalAdminForm = new FormGroup({
     firstName: new FormControl(),
     surname: new FormControl(),
     email: new FormControl(),
     password: new FormControl(),
-    nif: new FormControl(),
-    gender: new FormControl(),
-    municipality: new FormControl(),
-    address: new FormControl(),
-    postalCode1: new FormControl(),
-    postalCode2: new FormControl(),
-    birthDate: new FormControl()
+    municipality: new FormControl()
   });
 
   onSubmit() {
-    console.log(this.signUpCitizenForm.value);
 
-    this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen).subscribe(res => {
-      console.log('Citizen registed successfully!');
-      this.router.navigateByUrl('');
-    });
+    this.municipalAdminAuthService.registerMunicipalAdmin(this.signUpMunicipalAdminForm.value as MunicipalAdministrator).subscribe(
+
+
+      (result) => {
+
+
+        if (result) {
+          this.router.navigateByUrl('');
+         
+        }
+      },
+      (error) => {
+        console.log(error.status)
+ 
+      }
+
+
+
+    );
+      }
+
+    
   }
-}
+

@@ -10,36 +10,36 @@
     <div class="flex flex-col">
       <h1 class="font-black text-[30px] text-left text-black  my-2">Registo de Administrador Municipal</h1>
       <h3 class="font-medium text-left text-xl text-municip-normal-black mb-2">Insira os seus dados</h3>
-      <form [formGroup]="signUpCitizenForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="signUpMunicipalAdminForm" (ngSubmit)="onSubmit()">
         <div class="py-[1rem] flex flex-row">
           <section class="w-full flex flex-col text-left space-y-2">
             <div>
               <app-input-title class="text-[24px]">Primeiro Nome</app-input-title>
-              <input required placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="citizen.firstName" class="input w-[20rem]
+              <input required placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="municipalAdministrator.firstName" class="input w-[20rem]
        focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
        transition-all duration-700 ease-in-out  decoration-sky-500" />
             </div>
             <div>
               <app-input-title class="text-[24px]">Apelido</app-input-title>
-              <input required placeholder="Introduza o seu apelido" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="citizen.surname" class="input w-[20rem]
+              <input required placeholder="Introduza o seu apelido" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="municipalAdministrator.surname" class="input w-[20rem]
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500" />
             </div>
             <div>
               <app-input-title class="text-[24px]">Email</app-input-title>
-              <input required placeholder="Introduza o seu email" type="email" id="email" formControlName="email" name="email" [(ngModel)]="citizen.email" class="input w-[20rem]
+              <input required placeholder="Introduza o seu email" type="email" id="email" formControlName="email" name="email" [(ngModel)]="municipalAdministrator.email" class="input w-[20rem]
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500" />
             </div>
             <div class="flex flex-col">
               <app-input-title class="text-[24px]">Palavra-Passe</app-input-title>
-              <input required placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="citizen.password" class="input w-[20rem]
+              <input required placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="municipalAdministrator.password" class="input w-[20rem]
           focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
           transition-all duration-700 ease-in-out  decoration-sky-500">
             </div>
             <div>
               <app-input-title class="text-[24px]">Município</app-input-title>
-              <select required id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="citizen.municipality" class="input w-[20rem]
+              <select required id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="municipalAdministrator.municipality" class="input w-[20rem]
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500">
                 <option value="">Escolha o seu munícipio</option>
@@ -47,7 +47,7 @@ transition-all duration-700 ease-in-out  decoration-sky-500">
 
               </select>
             </div>
-            <button type="submit" [disabled]="!signUpCitizenForm.valid" class="relative top-[1rem] self-end h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
+            <button type="submit" [disabled]="!signUpMunicipalAdminForm.valid" class="relative top-[1rem] self-end h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
 border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
               Continuar
               <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />

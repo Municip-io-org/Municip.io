@@ -42,7 +42,6 @@ namespace Municip.io.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Copy data from RegisterViewModel to IdentityUser
                 var user = new IdentityUser
                 {
                     UserName = citizen.Email,
@@ -58,10 +57,6 @@ namespace Municip.io.Server.Controllers
                 if (result.Succeeded)
                 {
 
-                    //create citizen object
-
-                    
-                   
 
                     //add citizen to database
                     _context.Citizens.Add(citizen);
@@ -74,12 +69,13 @@ namespace Municip.io.Server.Controllers
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
+                    Console.WriteLine(error.Description);
                 }
-                return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
-
+                   return BadRequest(new { Message = "Falha no registo do cidadão.", ModelState = ModelState });
+                return BadRequest();
             }
             return BadRequest(new { Message = "O modelo do cidadão é inválido.", ModelState = ModelState });
-
+            return BadRequest();
         }
 
         [HttpPost("registerMunicipalAdministrator")]
@@ -98,14 +94,18 @@ namespace Municip.io.Server.Controllers
             // Store user data in AspNetUsers database table
             var result = await _userManager.CreateAsync(user, municipalAdministrator.Password);
 
-            // If user is successfully created, sign-in the user using
-            // SignInManager and redirect to index action of HomeController
+         
             if (result.Succeeded)
             {
                 //add citizen to database
                 _context.MunicipalAdministrators.Add(municipalAdministrator);
                 await _context.SaveChangesAsync();
-                return Ok();
+                    if (_context.Municipalities.All(m => m.Name == municipalAdministrator.municipality))
+                    {
+                        return Ok(new { Message = "NEXISTE" });
+                }
+
+                    return Ok(new { Message = "EXISTE" });
             }
 
          
@@ -114,7 +114,7 @@ namespace Municip.io.Server.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
 
-                  return BadRequest(new { Message = "Falha no registro do administrador municipal.", ModelState = ModelState });
+                  return BadRequest(new { Message = "Falha no registo do administrador municipal.", ModelState = ModelState });
             }
 
                 return BadRequest(new { Message = "O modelo do administrador municipal é inválido.", ModelState = ModelState });

@@ -46,8 +46,6 @@ export class SignUpCitizenAccountComponent {
   });
 
   onSubmit() {
-    console.log(this.signUpCitizenForm.value);
-
     this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen).subscribe(res => {
       console.log('Citizen registed successfully!');
       this.router.navigateByUrl('');
