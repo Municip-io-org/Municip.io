@@ -21,9 +21,10 @@ export class SignUpMunicipalAdministratorAccountComponent {
 
   };
 
-
+  
   errors: string[] | null = null;
 
+  
   municipalities = Municipalities;
 
   getValues() {
@@ -48,7 +49,12 @@ export class SignUpMunicipalAdministratorAccountComponent {
         if (result) {
           this.router.navigateByUrl('');
         } else {
-          this.router.navigateByUrl('/signUp-Municipality');
+          var municipal, municipalname;
+          municipal = this.signUpMunicipalAdminForm.value as MunicipalAdministrator
+          municipalname = municipal.municipality
+
+     
+          this.router.navigateByUrl('/signUp-Municipality/'+municipalname);
         }
       },
       (error) => {

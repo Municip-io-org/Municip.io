@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Municip.io.Server.Data;
 
@@ -11,9 +12,11 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240118211405_nooova")]
+    partial class nooova
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -311,64 +314,20 @@ namespace Municip.io.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("areaha")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("codigo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("codigoine")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("codigopostal")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("contact")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("descrpostal")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("distrito")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("eleitores")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("fax")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("localidade")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("nif")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("nome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("populacao")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("president")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("rua")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("sitio")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("telefone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

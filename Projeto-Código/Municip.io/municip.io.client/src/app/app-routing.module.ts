@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'signUp-SelectAccountType', component: SelectAccountTypeComponent, data: {} },
   { path: 'signUp-Citizen', component: SignUpCitizenAccountComponent, data: {} },
   { path: 'signUp-MunicipalAdministrator', component: SignUpMunicipalAdministratorAccountComponent, data: {} },
-  { path: 'signUp-Municipality', component: SignUpMunicipalityComponent, data: {} },
+  { path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} }];
 

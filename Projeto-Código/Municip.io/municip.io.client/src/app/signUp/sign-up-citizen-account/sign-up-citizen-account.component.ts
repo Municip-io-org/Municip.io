@@ -1,3 +1,4 @@
+/// <reference path="../sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component.ts" />
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CitizenAuthService, Citizen } from '../../services/citizen-auth.service';

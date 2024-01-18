@@ -40,6 +40,7 @@ export interface MunicipalAdministrator {
 
 
 export interface Municipality {
+  name: string;
   president: string;
   contact: string;
 description: string;

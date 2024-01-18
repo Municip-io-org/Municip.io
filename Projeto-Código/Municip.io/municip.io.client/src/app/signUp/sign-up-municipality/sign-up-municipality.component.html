@@ -13,12 +13,12 @@
           <section class="flex text-left justify-around mb-4">
             <div class="w-[24rem]" >
               <app-input-title class="text-[24px]">Presidente</app-input-title>
-              <input required placeholder="Introduza o presidente em funções no município" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="citizen.firstName"
+              <input required placeholder="Introduza o presidente em funções no município" type="text" id="president" formControlName="president" name="v" [(ngModel)]="municipality.president"
                      class="input w-[18rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
             </div>
             <div class="w-[20rem]" >
               <app-input-title class="text-[24px]">Contacto Telefónico</app-input-title>
-              <input required placeholder="Introduza o seu contacto" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="citizen.surname"
+              <input required placeholder="Introduza o seu contacto" type="text" id="contact" formControlName="contact" name="contact" [(ngModel)]="municipality.contact"
                      class="input w-[20rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
             </div>
           </section>
@@ -26,7 +26,7 @@
             <app-input-title class="text-[24px]">Texto Informativo</app-input-title>
             <textarea required placeholder="Introduza uma descrição da Câmara.
 
-Sugestão: Esta irá aparecer no perfil do município. Pode fornecer informações úteis da história da localidade, horários relevantes, e outros." id="address" formControlName="address" name="address" [(ngModel)]="citizen.address"
+Sugestão: Esta irá aparecer no perfil do município. Pode fornecer informações úteis da história da localidade, horários relevantes, e outros." id="description" formControlName="description" name="description" [(ngModel)]="municipality.description"
                       class="input box-border h-[20rem] resize-none grow focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500"></textarea>
 
           </div>

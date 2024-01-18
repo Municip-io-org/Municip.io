@@ -136,12 +136,34 @@ namespace Municip.io.Server.Controllers
     }
 
         [HttpPost("registerMunicipality")]
-        public async Task<IActionResult> RegisterMunicipality(Municipality municipality)
+        public async Task<IActionResult> RegisterMunicipality(Municipality? municipality)
         {
             if (ModelState.IsValid)
             {
                 if (!_context.Municipalities.Any(m => m.name == municipality.name))
                 {
+                    GeoAPI geoAPI = new GeoAPI();
+                    InformacoesMunicipio informacoesMunicipio = await geoAPI.ObterInformacoesMunicipio(municipality.name);
+                    municipality.codigo = informacoesMunicipio.codigo;
+                    municipality.nif = informacoesMunicipio.nif;
+                    municipality.rua = informacoesMunicipio.rua;
+                    municipality.localidade = informacoesMunicipio.localidade;
+                    municipality.codigopostal = informacoesMunicipio.codigopostal;
+                    municipality.descrpostal = informacoesMunicipio.descrpostal;
+                    municipality.email = informacoesMunicipio.email;
+                    municipality.telefone = informacoesMunicipio.telefone;
+                    municipality.fax = informacoesMunicipio.fax;
+                    municipality.sitio = informacoesMunicipio.sitio;
+                    municipality.areaha = informacoesMunicipio.areaha;
+                    municipality.populacao = informacoesMunicipio.populacao;
+                    municipality.eleitores = informacoesMunicipio.eleitores;
+                    municipality.codigoine = informacoesMunicipio.codigoine;
+                   
+                    municipality.distrito = informacoesMunicipio.distrito;
+
+                    
+
+
                     _context.Municipalities.Add(municipality);
                     await _context.SaveChangesAsync();
                     return Ok();

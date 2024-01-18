@@ -1,8 +1,9 @@
+/// <reference path="../sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component.ts" />
 import { Component } from '@angular/core';
-import { Citizen, CitizenAuthService } from '../../services/citizen-auth.service';
-import { Router } from '@angular/router';
+
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Municipality } from '../../services/municipal-admin-auth.service';
+import { Municipality, MunicipalAdminAuthService } from '../../services/municipal-admin-auth.service';
 
 @Component({
   selector: 'app-sign-up-municipality',
@@ -10,16 +11,16 @@ import { Municipality } from '../../services/municipal-admin-auth.service';
   styleUrl: './sign-up-municipality.component.css'
 })
 export class SignUpMunicipalityComponent {
-  municipality: Municipality= {
+  municipality: Municipality = {
+name: '',
     president: '',
     contact: '',
 description: ''
   };
 
   
-
- 
-  constructor(private citizenAuthService: CitizenAuthService, private router: Router) { }
+  
+  constructor(private municipalAdminAuthService: MunicipalAdminAuthService, private router: Router, private route: ActivatedRoute) { }
 
   signUpMunicipalityForm = new FormGroup({
     president: new FormControl(),
@@ -28,11 +29,24 @@ description: ''
   });
 
   onSubmit() {
-    console.log(this.signUpMunicipalityForm.value);
+    var municipalName = this.route.snapshot.params['municipalName'];
 
-    this.registerCitizen(this.signUpMunicipalityForm.value as Citizen).subscribe(res => {
-      console.log('Citizen registed successfully!');
-      this.router.navigateByUrl('');
-    });
+
+    var municipality = this.signUpMunicipalityForm.value as Municipality
+    municipality.name = municipalName
+    this.municipalAdminAuthService.registerMunicipality(municipality as Municipality).subscribe(
+
+
+      (result) => {
+     
+          this.router.navigateByUrl('');
+  
+
+
+
+
+      });
+
   }
 }
+
