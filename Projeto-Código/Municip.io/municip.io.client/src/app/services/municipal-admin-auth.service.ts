@@ -12,12 +12,16 @@ export class MunicipalAdminAuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
-  registerMunicipalAdmin(municipalAdministrator: MunicipalAdministrator): Observable<MunicipalAdministrator> {
+  registerMunicipalAdmin(municipalAdministrator: MunicipalAdministrator): Observable<boolean> {
 
 
-    return this.http.post<MunicipalAdministrator>('api/accounts/registerMunicipalAdministrator', municipalAdministrator);
+    return this.http.post<boolean>('api/accounts/registerMunicipalAdministrator', municipalAdministrator);
   }
 }
+
+
+
+
 
 
 

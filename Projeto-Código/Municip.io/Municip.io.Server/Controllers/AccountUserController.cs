@@ -102,10 +102,12 @@ namespace Municip.io.Server.Controllers
                 await _context.SaveChangesAsync();
                     if (_context.Municipalities.All(m => m.Name == municipalAdministrator.municipality))
                     {
-                        return Ok(new { Message = "NEXISTE" });
+                        // municipio existe
+                        //return Ok(new { Message = "NEXISTE" });
+                        return Ok(true);
                 }
-
-                    return Ok(new { Message = "EXISTE" });
+                    // município nao existe
+                    return Ok(false);
             }
 
          

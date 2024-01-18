@@ -17,7 +17,8 @@ export class SignUpMunicipalAdministratorAccountComponent {
     surname: '',
     email: '',
     password: '',
-    municipality: ''
+    municipality: '',
+
   };
 
   municipalities = Municipalities;
@@ -41,16 +42,14 @@ export class SignUpMunicipalAdministratorAccountComponent {
 
 
       (result) => {
-
-
         if (result) {
           this.router.navigateByUrl('');
-         
+        } else {
+          this.router.navigateByUrl('/signUp-Municipality');
         }
       },
       (error) => {
-        console.log(error.status)
- 
+       console.log(error)
       }
 
 
