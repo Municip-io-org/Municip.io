@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +17,9 @@ export class CitizenAuthService {
     return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
 
   }
-
+  loginCitizen(citizen: Citizen): Observable<Citizen> {
+    return this.http.get<Citizen>('https://localhost:7008/login');
+  }
 }
 
 export interface Citizen {
