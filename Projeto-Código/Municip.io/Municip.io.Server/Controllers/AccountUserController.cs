@@ -107,7 +107,7 @@ namespace Municip.io.Server.Controllers
                 //add citizen to database
                 _context.MunicipalAdministrators.Add(municipalAdministrator);
                 await _context.SaveChangesAsync();
-                    if (_context.Municipalities.All(m => m.name == municipalAdministrator.municipality))
+                    if (_context.Municipalities.Any(m => m.name == municipalAdministrator.municipality))
                     {
                         // municipio existe
                         //return Ok(new { Message = "NEXISTE" });
