@@ -1,12 +1,17 @@
-<app-header />
+
+<app-header></app-header>
+
 <div *ngIf="user">
   <h2>User Information</h2>
-  <p>Name: {{ user.name }}</p>
-  <p>Email: {{ user.email }}</p>
-  
+  <ul>
+    <li *ngFor="let keyValuePair of getUserAttributes()">
+      <strong>{{ keyValuePair.key }}:</strong> {{ keyValuePair.value }}
+    </li>
+  </ul>
 </div>
+
 <div *ngIf="!user">
   <p>No user information available.</p>
 </div>
 
-<app-footer/>
+<app-footer></app-footer>

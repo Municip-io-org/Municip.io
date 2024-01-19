@@ -30,6 +30,14 @@ export class CitizenAuthService {
   getUserData() {
     return this.http.get<any>('/api/accounts/UserData');
   }
+
+  getInfoByEmail(email: string) {
+    let params = new HttpParams().set('email', email);
+    console.log("params", params);
+    return this.http.get<string>('/api/accounts/InfoByEmail/', {params});
+  }
+
+  
 }
 
 export interface Citizen {

@@ -179,7 +179,29 @@ namespace Municip.io.Server.Controllers
             return BadRequest(new { Message = "O modelo do município é inválido.", ModelState = ModelState });
         }
 
+        [HttpGet("InfoByEmail")]
+        public async Task<IActionResult> InfoByEmail(string email)
+        {
+            if (_context.Citizens.Any(c => c.Email == email))
+            {
+                return Json(await _context.Citizens.Where(c => c.Email == email).FirstOrDefaultAsync());
+            }
+            else if (_context.MunicipalAdministrators.Any(m => m.Email == email))
+            {
+                return Json(await _context.MunicipalAdministrators.Where(m => m.Email == email).FirstOrDefaultAsync());
+            }
+            return BadRequest(new { Message = "Não existe nenhum utilizador com esse email." });
+        }
 
+        [HttpGet("InfoMunicipality")]
+        public async Task<IActionResult> InfoMunicipality(string name)
+        {
+            if (_context.Municipalities.Any(m => m.name == name))
+            {
+                return Json(await _context.Municipalities.Where(m => m.name == name).FirstOrDefaultAsync());
+            }
+            return BadRequest(new { Message = "Não existe nenhum município com esse nome." });
+        }
 
         // ISTO JA ESTAVA FEITO DENTRO DO CORPO DO REGISTERMUNICIPALADMINISTRATOR
         [HttpGet("Exists")]

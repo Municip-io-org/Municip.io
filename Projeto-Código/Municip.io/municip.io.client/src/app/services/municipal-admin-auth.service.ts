@@ -19,6 +19,8 @@ export class MunicipalAdminAuthService {
   }
 
 
+
+
   registerMunicipality(municipality: Municipality): Observable<Municipality> {
     return this.http.post<Municipality>('api/accounts/registerMunicipality', municipality);
   }
