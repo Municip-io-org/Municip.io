@@ -93,9 +93,26 @@ namespace Municip.io.Server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    District = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    president = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    codigo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    nif = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    rua = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    localidade = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    codigopostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    descrpostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    telefone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    fax = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    sitio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    areaha = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    populacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    eleitores = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    codigoine = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    distrito = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Query } from '@angular/core';
 import { CitizenAuthService } from '../services/citizen-auth.service';
 
 @Component({
@@ -7,7 +7,8 @@ import { CitizenAuthService } from '../services/citizen-auth.service';
   styleUrl: './userpage.component.css'
 })
 export class UserpageComponent {
-  user: any; 
+  user: any;
+  newUser: any;
 
   constructor(private citizenAuthService: CitizenAuthService) { }
 
@@ -15,11 +16,24 @@ export class UserpageComponent {
     this.citizenAuthService.getUserData().subscribe(
       res => {
         this.user = res;
-        console.log("user", this.user);
-      },
+        this.citizenAuthService.getInfoByEmail(this.user.email).subscribe(
+          res => {
+            this.newUser = res;
+
+            console.log("user", this.newUser);
+          });
+          },
       error => {
         console.error(error);
       }
     );
+  }
+  getUserAttributes(): { key: string, value: any }[] {
+    if (!this.newUser) {
+      return [];
+    }
+
+    // Extract key-value pairs from user object
+    return Object.keys(this.newUser).map(key => ({ key, value: this.newUser[key] }));
   }
 }
