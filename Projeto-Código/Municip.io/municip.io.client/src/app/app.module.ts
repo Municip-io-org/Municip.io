@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignUpMunicipalAdministratorAccountComponent } from './signUp/sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component';
 import { SignUpMunicipalityComponent } from './signUp/sign-up-municipality/sign-up-municipality.component';
+import { UserpageComponent } from './userpage/userpage.component';
 
 
 
@@ -44,7 +45,8 @@ import { SignUpMunicipalityComponent } from './signUp/sign-up-municipality/sign-
     SignUpCitizenAccountComponent,
     InputTitleComponent,
     SignUpMunicipalAdministratorAccountComponent,
-    SignUpMunicipalityComponent
+    SignUpMunicipalityComponent,
+    UserpageComponent
     
   ],
   imports: [

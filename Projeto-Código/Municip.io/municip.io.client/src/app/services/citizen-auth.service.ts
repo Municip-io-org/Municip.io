@@ -1,6 +1,6 @@
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable, Query } from '@angular/core';
 import { Observable } from 'rxjs';
 
 
@@ -18,8 +18,17 @@ export class CitizenAuthService {
 
   }
 
-  loginCitizen(login: Login): Observable<Login> {
-    return this.http.post<Login>('/login/', login);
+  loginCitizen(login: Login, useCookies: boolean, useSessionCookies: boolean): Observable<Login> {
+    
+    let params = new HttpParams()
+      .set('useCookies', useCookies.toString())
+      .set('useSessionCookies', useSessionCookies.toString());
+      console.log("params", params);
+    return this.http.post<Login>('/login/', login, { params });
+  }
+
+  getUserData() {
+    return this.http.get<any>('/api/accounts/UserData');
   }
 }
 

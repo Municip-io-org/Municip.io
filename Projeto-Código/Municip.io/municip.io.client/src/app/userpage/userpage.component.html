@@ -1,0 +1,12 @@
+<app-header />
+<div *ngIf="user">
+  <h2>User Information</h2>
+  <p>Name: {{ user.name }}</p>
+  <p>Email: {{ user.email }}</p>
+  
+</div>
+<div *ngIf="!user">
+  <p>No user information available.</p>
+</div>
+
+<app-footer/>

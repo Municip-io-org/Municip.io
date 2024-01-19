@@ -32,10 +32,10 @@ export class LoginComponent {
     console.log(this.loginForm.value);
     
     //nao esta a ter o user e pass (null) e falta fazer a navigation apenas quando for autenticado
-    this.citizenAuthService.loginCitizen(this.loginForm.value as Login).subscribe(
+    this.citizenAuthService.loginCitizen(this.loginForm.value as Login,true,true).subscribe(
       res => {
         console.log("User logado", res);
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('/userpage');
       },
       error => { 
         console.error("erro login,", error);
