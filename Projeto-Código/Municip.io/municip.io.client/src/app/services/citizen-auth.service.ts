@@ -17,8 +17,9 @@ export class CitizenAuthService {
     return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
 
   }
-  loginCitizen(citizen: Citizen): Observable<Citizen> {
-    return this.http.get<Citizen>('https://localhost:7008/login');
+
+  loginCitizen(login: Login): Observable<Login> {
+    return this.http.post<Login>('/login/', login);
   }
 }
 
@@ -34,6 +35,13 @@ export interface Citizen {
   postalCode1: string;
   postalCode2: string;
   birthDate: Date
-
 }
+
+export interface Login {
+  password: string,
+  email: string,
+  twoFactorCode: string,
+  twoFactorRecoveryCode: string
+
+} 
 

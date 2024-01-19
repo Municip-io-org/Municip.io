@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Citizen, CitizenAuthService } from '../services/citizen-auth.service';
+import { CitizenAuthService, Login } from '../services/citizen-auth.service';
 import { Router } from '@angular/router';
 
 
@@ -12,18 +12,12 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  user: Citizen = {
-    firstName: '',
-    surname: '',
+  user: Login = {
+    
     email: '',
     password: '',
-    nif: '',
-    gender: '',
-    municipality: 'test',
-    address: '',
-    postalCode1: '',
-    postalCode2: '',
-    birthDate: new Date()
+    twoFactorCode: "",
+    twoFactorRecoveryCode :""
   };
   constructor(private citizenAuthService: CitizenAuthService, private router: Router) { }
 
@@ -34,16 +28,16 @@ export class LoginComponent {
   });
 
 
-  onSubmit() {
+   onSubmit() {
     console.log(this.loginForm.value);
-
+    
     //nao esta a ter o user e pass (null) e falta fazer a navigation apenas quando for autenticado
-    this.citizenAuthService.loginCitizen(this.loginForm.value as Citizen).subscribe(
+    this.citizenAuthService.loginCitizen(this.loginForm.value as Login).subscribe(
       res => {
         console.log("User logado", res);
         this.router.navigateByUrl('');
       },
-      error => {
+      error => { 
         console.error("erro login,", error);
       }
     );

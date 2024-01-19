@@ -11,16 +11,16 @@
       <h1 class="font-black text-[30px] text-black  my-2">Login</h1>
       <h2 class="font-medium text-xl text-municip-normal-black mb-2">Insira os seus dados</h2>
       <div class="py-[1rem]">
-        <form class="flex flex-col  space-y-4 items-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form class="flex flex-col space-y-4 items-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <input placeholder="Email" type="email" id="email" formControlName="email" name="email" class="input w-[20rem]
                  focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
                  transition-all duration-700 ease-in-out  decoration-sky-500">
-          <!--<input placeholder="Palavra-Passe" type="password" id="password" name="password" class="input w-[20rem]
-          focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-          transition-all duration-700 ease-in-out  decoration-sky-500">-->
-          <app-show-hide-password formControlName="password"></app-show-hide-password>
-
-          <button  routerLink="/login" class="h-auto w-[20rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
+          <div class="flex flex-col">
+            <app-input-title class="text-[2.4vh]"></app-input-title>
+            <input required placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="user.password" class="input w-[20rem]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out  decoration-sky-500">        <!--ngmodel pode sair-->
+          </div>
+          <button type="submit" class="h-auto w-[20rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
                   border-0 py-3 focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
             Entrar
             <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />

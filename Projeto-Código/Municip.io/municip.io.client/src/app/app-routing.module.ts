@@ -11,7 +11,10 @@ import { SignUpMunicipalityComponent } from './signUp/sign-up-municipality/sign-
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
-  { path: 'login', component: LoginComponent, data: { animation: 'Login' } },
+  {
+    path: 'login-component', component:
+      LoginComponent, data: { animation: 'Login' }
+  },
   { path: 'signUp-SelectAccountType', component: SelectAccountTypeComponent, data: {} },
   { path: 'signUp-Citizen', component: SignUpCitizenAccountComponent, data: {} },
   { path: 'signUp-MunicipalAdministrator', component: SignUpMunicipalAdministratorAccountComponent, data: {} },
