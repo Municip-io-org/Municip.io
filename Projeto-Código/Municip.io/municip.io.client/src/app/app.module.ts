@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignUpMunicipalAdministratorAccountComponent } from './signUp/sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component';
 import { SignUpMunicipalityComponent } from './signUp/sign-up-municipality/sign-up-municipality.component';
 import { UserpageComponent } from './userpage/userpage.component';
+import { TooltipComponent } from './utils/tooltip/tooltip.component';
 
 
 
@@ -46,7 +47,8 @@ import { UserpageComponent } from './userpage/userpage.component';
     InputTitleComponent,
     SignUpMunicipalAdministratorAccountComponent,
     SignUpMunicipalityComponent,
-    UserpageComponent
+    UserpageComponent,
+    TooltipComponent
     
   ],
   imports: [
