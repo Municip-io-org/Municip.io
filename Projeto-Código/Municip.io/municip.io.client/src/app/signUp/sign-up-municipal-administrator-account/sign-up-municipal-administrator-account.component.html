@@ -20,15 +20,21 @@
           <section class="w-full flex flex-col text-left space-y-2">
             <div>
               <app-input-title class="text-[2.4vh]">Primeiro Nome</app-input-title>
-              <input required placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="municipalAdministrator.firstName" class="input w-[20rem]
+              <div class="flex items-center">
+                <input required placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="municipalAdministrator.firstName" class="input w-[20rem]
        focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
        transition-all duration-700 ease-in-out  decoration-sky-500" />
+                <app-tooltip [tooltipText]="'De acordo com o Documento de Identificação.'"></app-tooltip>
+              </div>
             </div>
             <div>
               <app-input-title class="text-[2.4vh]">Apelido</app-input-title>
-              <input required placeholder="Introduza o seu apelido" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="municipalAdministrator.surname" class="input w-[20rem]
+              <div class="flex items-center">
+                <input required placeholder="Introduza o seu apelido" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="municipalAdministrator.surname" class="input w-[20rem]
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500" />
+                <app-tooltip [tooltipText]="'De acordo com o Documento de Identificação.'"></app-tooltip>
+              </div>
             </div>
             <div>
               <app-input-title class="text-[2.4vh]">Email</app-input-title>
@@ -38,19 +44,25 @@ transition-all duration-700 ease-in-out  decoration-sky-500" />
             </div>
             <div class="flex flex-col">
               <app-input-title class="text-[2.4vh]">Palavra-Passe</app-input-title>
-              <input required placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="municipalAdministrator.password" class="input w-[20rem]
+              <div class="flex items-center">
+                <input required placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="municipalAdministrator.password" class="input w-[20rem]
           focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
           transition-all duration-700 ease-in-out  decoration-sky-500">
+                <app-tooltip [tooltipText]="'A password deverá ter letras maiúsculas, minúsculas, números e símbolos'"></app-tooltip>
+              </div>
             </div>
             <div>
               <app-input-title class="text-[2.4vh]">Município</app-input-title>
-              <select required id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="municipalAdministrator.municipality" class="input w-[20rem]
+              <div class="flex items-center">
+                <select required id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="municipalAdministrator.municipality" class="input w-[20rem]
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500">
-                <option value="">Escolha o seu munícipio</option>
-                <option [value]="value" *ngFor="let value of getValues()">{{ value }}</option>
+                  <option value="">Escolha o seu munícipio</option>
+                  <option [value]="value" *ngFor="let value of getValues()">{{ value }}</option>
 
-              </select>
+                </select>
+                <app-tooltip [tooltipText]="'Selecione o seu município de residência'"></app-tooltip>
+              </div>
             </div>
             <button type="submit" [disabled]="!signUpMunicipalAdminForm.valid" class="relative top-[1rem] self-end h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
 border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">

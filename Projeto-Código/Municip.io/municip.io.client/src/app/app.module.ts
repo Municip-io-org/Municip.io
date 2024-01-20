@@ -24,6 +24,7 @@ import { SignUpMunicipalAdministratorAccountComponent } from './signUp/sign-up-m
 import { SignUpMunicipalityComponent } from './signUp/sign-up-municipality/sign-up-municipality.component';
 import { UserpageComponent } from './userpage/userpage.component';
 import { TooltipComponent } from './utils/tooltip/tooltip.component';
+import { SignUpSuccessComponent } from './signUp/sign-up-success/sign-up-success.component';
 
 
 
@@ -48,7 +49,8 @@ import { TooltipComponent } from './utils/tooltip/tooltip.component';
     SignUpMunicipalAdministratorAccountComponent,
     SignUpMunicipalityComponent,
     UserpageComponent,
-    TooltipComponent
+    TooltipComponent,
+    SignUpSuccessComponent
     
   ],
   imports: [

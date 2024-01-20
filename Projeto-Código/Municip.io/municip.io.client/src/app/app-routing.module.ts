@@ -9,11 +9,12 @@ import { SignUpCitizenAccountComponent } from './signUp/sign-up-citizen-account/
 import { SignUpMunicipalAdministratorAccountComponent } from './signUp/sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component';
 import { SignUpMunicipalityComponent } from './signUp/sign-up-municipality/sign-up-municipality.component';
 import { UserpageComponent } from './userpage/userpage.component';
+import { SignUpSuccessComponent } from './signUp/sign-up-success/sign-up-success.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
   {
-    path: 'login-component', component:
+    path: 'login', component:
       LoginComponent, data: { animation: 'Login' }
   },
   { path: 'signUp-SelectAccountType', component: SelectAccountTypeComponent, data: {} },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'signUp-Citizen', component: SignUpCitizenAccountComponent, data: {} },
   { path: 'signUp-MunicipalAdministrator', component: SignUpMunicipalAdministratorAccountComponent, data: {} },
   { path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {} },
+  { path: 'signUp-Success', component: SignUpSuccessComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} }];
 

@@ -53,7 +53,7 @@ export class SignUpCitizenAccountComponent {
     this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen).subscribe(
 
       result => {
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('/signUp-Success');
       },
 
       (error) => {

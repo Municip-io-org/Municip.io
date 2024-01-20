@@ -47,7 +47,7 @@ export class SignUpMunicipalAdministratorAccountComponent {
 
       (result) => {
         if (result) {
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('/signUp-Success');
         } else {
           var municipal, municipalname;
           municipal = this.signUpMunicipalAdminForm.value as MunicipalAdministrator

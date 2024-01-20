@@ -39,7 +39,7 @@ description: ''
 
       (result) => {
      
-          this.router.navigateByUrl('');
+        this.router.navigateByUrl('/signUp-Success');
   
 
 
