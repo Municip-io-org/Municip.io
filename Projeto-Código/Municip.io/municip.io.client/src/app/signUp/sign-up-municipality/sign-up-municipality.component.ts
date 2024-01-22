@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Municipality, MunicipalAdminAuthService } from '../../services/municipal-admin-auth.service';
 
 @Component({
@@ -23,10 +23,24 @@ description: ''
   constructor(private municipalAdminAuthService: MunicipalAdminAuthService, private router: Router, private route: ActivatedRoute) { }
 
   signUpMunicipalityForm = new FormGroup({
-    president: new FormControl(),
-    contact: new FormControl(),
-    description: new FormControl()
+    president: new FormControl("", [Validators.required]),
+    contact: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
+    description: new FormControl("",[Validators.required])
   });
+
+
+  get president() {
+    return this.signUpMunicipalityForm.get('president');
+  }
+
+  get contact() {
+    return this.signUpMunicipalityForm.get('contact');
+  }
+
+  get description() {
+    return this.signUpMunicipalityForm.get('description');
+  }
+
 
   onSubmit() {
     var municipalName = this.route.snapshot.params['municipalName'];
@@ -47,6 +61,9 @@ description: ''
 
       });
 
+
   }
+
+  
 }
 

@@ -26,6 +26,9 @@
        transition-all duration-700 ease-in-out  decoration-sky-500" />
                 <app-tooltip [tooltipText]="'De acordo com o Documento de Identificação.'"></app-tooltip>
               </div>
+              <div class="text-red-500 font-bold py-2" *ngIf="firstName?.touched && firstName?.invalid ">
+                <div *ngIf="firstName?.errors?.['required'] ">Primeiro Nome Obrigatório</div>
+              </div>
             </div>
             <div>
               <app-input-title class="text-[2.4vh]">Apelido</app-input-title>
@@ -35,12 +38,19 @@ focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500" />
                 <app-tooltip [tooltipText]="'De acordo com o Documento de Identificação.'"></app-tooltip>
               </div>
+              <div class="text-red-500 font-bold py-2" *ngIf="surname?.touched && surname?.invalid ">
+                <div *ngIf="surname?.errors?.['required'] ">Apelido Obrigatório</div>
+              </div>
             </div>
             <div>
               <app-input-title class="text-[2.4vh]">Email</app-input-title>
               <input required placeholder="Introduza o seu email" type="email" id="email" formControlName="email" name="email" [(ngModel)]="municipalAdministrator.email" class="input w-[20rem]
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500" />
+              <div class="text-red-500 font-bold py-2" *ngIf="email?.touched && email?.invalid ">
+                <div *ngIf="email?.errors?.['required'] ">Email Obrigatório</div>
+                <div *ngIf="email?.errors?.['email'] ">Email Inválido</div>
+              </div>
             </div>
             <div class="flex flex-col">
               <app-input-title class="text-[2.4vh]">Palavra-Passe</app-input-title>
@@ -49,6 +59,9 @@ transition-all duration-700 ease-in-out  decoration-sky-500" />
           focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
           transition-all duration-700 ease-in-out  decoration-sky-500">
                 <app-tooltip [tooltipText]="'A password deverá ter letras maiúsculas, minúsculas, números e símbolos'"></app-tooltip>
+              </div>
+              <div class="text-red-500 font-bold py-2" *ngIf="password?.touched && password?.invalid ">
+                <div *ngIf="password?.errors?.['required'] ">Password Obrigatório</div>
               </div>
             </div>
             <div>
@@ -62,6 +75,9 @@ transition-all duration-700 ease-in-out  decoration-sky-500">
 
                 </select>
                 <app-tooltip [tooltipText]="'Selecione o seu município de residência'"></app-tooltip>
+              </div>
+              <div class="text-red-500 font-bold py-2" *ngIf="municipality?.touched && municipality?.invalid ">
+                <div *ngIf="municipality?.errors?.['required'] ">Município Obrigatório</div>
               </div>
             </div>
             <button type="submit" [disabled]="!signUpMunicipalAdminForm.valid" class="relative top-[1rem] self-end h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue

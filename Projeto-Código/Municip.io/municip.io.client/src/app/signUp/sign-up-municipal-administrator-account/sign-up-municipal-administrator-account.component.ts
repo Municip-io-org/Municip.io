@@ -33,11 +33,11 @@ export class SignUpMunicipalAdministratorAccountComponent {
   constructor(private municipalAdminAuthService: MunicipalAdminAuthService, private router: Router) { }
 
   signUpMunicipalAdminForm = new FormGroup({
-    firstName: new FormControl(Validators.required),
-    surname: new FormControl(Validators.required),
-    email: new FormControl(Validators.required, Validators.email),
-    password: new FormControl(Validators.required),
-    municipality: new FormControl(Validators.required)
+    firstName: new FormControl("", [Validators.required]),
+    surname: new FormControl("",[Validators.required]),
+    email: new FormControl("", [Validators.required, Validators.email]),
+    password: new FormControl("",[Validators.required]),
+    municipality: new FormControl("", [Validators.required])
   });
 
   onSubmit() {
@@ -67,7 +67,33 @@ export class SignUpMunicipalAdministratorAccountComponent {
 
 
     );
-      }
+  }
+
+// Getter for firstName form control
+  get firstName() {
+    return this.signUpMunicipalAdminForm.get('firstName');
+  }
+
+  // Getter for surname form control
+  get surname() {
+    return this.signUpMunicipalAdminForm.get('surname');
+  }
+
+  // Getter for email form control
+  get email() {
+    return this.signUpMunicipalAdminForm.get('email');
+  }
+
+  // Getter for password form control
+  get password() {
+    return this.signUpMunicipalAdminForm.get('password');
+  }
+
+  // Getter for municipality form control
+  get municipality() {
+    return this.signUpMunicipalAdminForm.get('municipality');
+  }
+
 
     
   }
