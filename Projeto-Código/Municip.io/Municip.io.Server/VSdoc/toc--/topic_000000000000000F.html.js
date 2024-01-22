@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"Municip.io.Server Reference","topic_0000000000000069.html"],['34',"Municip.io.Server.Controllers Namespace","topic_0000000000000000.html"],['49',"WeatherForecastController Class","topic_000000000000000D.html"],['51',"Methods","topic_000000000000000D_methods--.html"],['52',"Get Method","topic_000000000000000F.html"]];

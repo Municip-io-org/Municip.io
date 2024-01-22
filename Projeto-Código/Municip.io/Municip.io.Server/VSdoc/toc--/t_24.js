@@ -1,0 +1,1 @@
+c['24']=[['25',"GeoAPI Constructor","topic_0000000000000062.html",0],['26',"Methods","topic_0000000000000061_methods--.html",1]];
