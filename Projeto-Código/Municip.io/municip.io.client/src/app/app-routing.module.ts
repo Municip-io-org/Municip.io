@@ -10,6 +10,7 @@ import { SignUpMunicipalAdministratorAccountComponent } from './signUp/sign-up-m
 import { SignUpMunicipalityComponent } from './signUp/sign-up-municipality/sign-up-municipality.component';
 import { UserpageComponent } from './userpage/userpage.component';
 import { SignUpSuccessComponent } from './signUp/sign-up-success/sign-up-success.component';
+import { MunicipalityGuard } from './utils/municipality.guard';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'userpage', component: UserpageComponent, data: {} },
   { path: 'signUp-Citizen', component: SignUpCitizenAccountComponent, data: {} },
   { path: 'signUp-MunicipalAdministrator', component: SignUpMunicipalAdministratorAccountComponent, data: {} },
-  { path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {} },
+  { path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {}, canActivate: [MunicipalityGuard] },
   { path: 'signUp-Success', component: SignUpSuccessComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} }];
