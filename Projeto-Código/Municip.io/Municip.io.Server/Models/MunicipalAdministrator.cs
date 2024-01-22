@@ -1,5 +1,8 @@
 ﻿namespace Municip.io.Server.Models
 {
+    /// <summary>
+    /// Classe que representa o administrador municipal
+    /// </summary>
     public class MunicipalAdministrator
     {
 

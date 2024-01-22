@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -25,6 +25,9 @@ import { SignUpMunicipalityComponent } from './signUp/sign-up-municipality/sign-
 import { UserpageComponent } from './userpage/userpage.component';
 import { TooltipComponent } from './utils/tooltip/tooltip.component';
 import { SignUpSuccessComponent } from './signUp/sign-up-success/sign-up-success.component';
+import { SpinnerComponent } from './utils/spinner/spinner.component';
+import { LoadingInterceptor } from './utils/loading.interceptor';
+import { MunicipalityGuard } from './utils/municipality.guard';
 
 
 
@@ -50,7 +53,8 @@ import { SignUpSuccessComponent } from './signUp/sign-up-success/sign-up-success
     SignUpMunicipalityComponent,
     UserpageComponent,
     TooltipComponent,
-    SignUpSuccessComponent
+    SignUpSuccessComponent,
+    SpinnerComponent
     
   ],
   imports: [
@@ -59,7 +63,13 @@ import { SignUpSuccessComponent } from './signUp/sign-up-success/sign-up-success
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    MunicipalityGuard,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+      
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
