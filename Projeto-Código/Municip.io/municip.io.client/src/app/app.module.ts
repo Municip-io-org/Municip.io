@@ -27,6 +27,7 @@ import { TooltipComponent } from './utils/tooltip/tooltip.component';
 import { SignUpSuccessComponent } from './signUp/sign-up-success/sign-up-success.component';
 import { SpinnerComponent } from './utils/spinner/spinner.component';
 import { LoadingInterceptor } from './utils/loading.interceptor';
+import { MunicipalityGuard } from './utils/municipality.guard';
 
 
 
@@ -63,8 +64,10 @@ import { LoadingInterceptor } from './utils/loading.interceptor';
     ReactiveFormsModule
   ],
   providers: [
+    MunicipalityGuard,
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+      
     }
   ],
   bootstrap: [AppComponent]
