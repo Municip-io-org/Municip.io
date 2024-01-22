@@ -1,1 +1,1 @@
-search_result['17']=["topic_000000000000000A_events--.html","GeoAPIController Events",""];
+search_result['17']=["topic_000000000000000A.html","GeoAPIController Class","Controlador para interação com a API"];

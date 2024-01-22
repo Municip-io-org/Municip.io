@@ -1,1 +1,1 @@
-search_result['62']=["topic_0000000000000020.html","Citizen.Email Property",""];
+search_result['62']=["topic_0000000000000019.html","Citizen Class","Classe que representa o cidadão"];

@@ -1,1 +1,0 @@
-c['66']=[['67',"Citizen Class","topic_000000000000001C.html",1],['81',"MunicipUser Class","topic_000000000000005C.html",1],['84',"MunicipUtils Class","topic_000000000000005E.html",1],['87',"MunicipalAdministrator Class","topic_000000000000003A.html",1],['96',"Municipality Class","topic_0000000000000042.html",1],['119',"MunicipRole Enumeration","topic_0000000000000058.html",0]];

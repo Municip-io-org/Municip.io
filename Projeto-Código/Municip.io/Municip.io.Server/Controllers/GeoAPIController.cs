@@ -3,6 +3,9 @@ using System.Text.Json;
 
 namespace Municip.io.Server.Controllers
 {
+    /// <summary>
+    /// Controlador para interação com a API
+    /// </summary>
     [ApiController]
     [Route("api/municipio")]
     public class GeoAPIController : Controller

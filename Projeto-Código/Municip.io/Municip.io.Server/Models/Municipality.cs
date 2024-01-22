@@ -2,6 +2,9 @@
 
 namespace Municip.io.Server.Models
 {
+    /// <summary>
+    /// Classe que representa o município
+    /// </summary>
     public class Municipality
     {
         public Guid Id { get; set; }

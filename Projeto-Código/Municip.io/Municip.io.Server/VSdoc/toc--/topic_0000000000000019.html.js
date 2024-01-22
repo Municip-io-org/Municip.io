@@ -1,1 +1,1 @@
-var breadcrumbs=[['-1',"",""],['2',"Municip.io.Server Reference","topic_0000000000000069.html"],['60',"Municip.io.Server.Migrations Namespace","topic_0000000000000016.html"],['61',"initial Class","topic_0000000000000017.html"],['62',"Methods","topic_0000000000000017_methods--.html"],['64',"Down Method","topic_0000000000000019.html"]];
+var breadcrumbs=[['-1',"",""],['2',"Municip.io.Server Reference","topic_0000000000000059.html"],['56',"Municip.io.Server.Models Namespace","topic_0000000000000018.html"],['57',"Citizen Class","topic_0000000000000019.html"]];
