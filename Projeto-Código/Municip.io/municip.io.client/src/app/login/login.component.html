@@ -12,11 +12,6 @@
       <h2 class="font-medium text-xl text-municip-normal-black mb-2">Insira os seus dados</h2>
       <div class="py-[1rem]">
         <form class="flex flex-col space-y-4 items-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div *ngIf="errors" class="text-red-500 text-sm font-bold space-y-2 text-start">
-            <div *ngFor="let error of errors">
-              <p>{{error}}</p>
-            </div>
-          </div>
           <input placeholder="Email" type="email" id="email" formControlName="email" name="email" class="input w-[20rem]
                  focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
                  transition-all duration-700 ease-in-out  decoration-sky-500">

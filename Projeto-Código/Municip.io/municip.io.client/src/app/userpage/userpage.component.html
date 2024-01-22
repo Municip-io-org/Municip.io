@@ -7,14 +7,6 @@
     <li *ngFor="let keyValuePair of getUserAttributes()">
       <strong>{{ keyValuePair.key }}:</strong> {{ keyValuePair.value }}
     </li>
-    <div *ngIf="isMunicipalAdministrator">
-      <h3 class="text-xl font-bold">Informação Municipio</h3>
-      <li *ngFor="let value of getMunicipalityAttributes()">
-        <strong>{{ value.key }}:</strong> {{ value.value }}
-      </li>
-    </div>
-    
-
   </ul>
 </div>
 

@@ -12,10 +12,6 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-
-  errors: string[] | null = null;
-
-
   user: Login = {
     
     email: '',
@@ -37,12 +33,12 @@ export class LoginComponent {
     
     //nao esta a ter o user e pass (null) e falta fazer a navigation apenas quando for autenticado
     this.citizenAuthService.loginCitizen(this.loginForm.value as Login,true,true).subscribe(
-      result => {
+      res => {
+        console.log("User logado", res);
         this.router.navigateByUrl('/userpage');
       },
-      (error) => {
-
-        this.errors = ["Login Error"];
+      error => { 
+        console.error("erro login,", error);
       }
     );
   }

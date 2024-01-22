@@ -37,12 +37,6 @@ export class CitizenAuthService {
     return this.http.get<string>('/api/accounts/InfoByEmail/', {params});
   }
 
-
-  getInfoMunicipality(municipality: string) {
-    let params = new HttpParams().set('name', municipality);
-    return this.http.get<string>('/api/accounts/InfoMunicipality/', {params});
-  }
-
   
 }
 
