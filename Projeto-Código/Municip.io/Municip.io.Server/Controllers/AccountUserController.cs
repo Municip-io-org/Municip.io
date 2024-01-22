@@ -35,7 +35,14 @@ namespace Municip.io.Server.Controllers
         {
             Console.WriteLine("User: " + await _userManager.GetUserAsync(User)
              );
-            return Json(await _userManager.GetUserAsync(User));
+            //if user is logged in return user data else return error
+            if (User.Identity.IsAuthenticated)
+            {
+                return Json(await _userManager.GetUserAsync(User));
+            
+            }
+
+            return BadRequest();
         }
 
 
@@ -214,6 +221,7 @@ namespace Municip.io.Server.Controllers
             else if (_context.MunicipalAdministrators.Any(m => m.Email == email))
             {
                 return Json(await _context.MunicipalAdministrators.Where(m => m.Email == email).FirstOrDefaultAsync());
+
             }
             return BadRequest(new { Message = "Não existe nenhum utilizador com esse email." });
         }

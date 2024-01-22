@@ -15,7 +15,7 @@ import { MunicipalityGuard } from './utils/municipality.guard';
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
   {
-    path: 'login', component:
+    path: 'loginpage', component:
       LoginComponent, data: { animation: 'Login' }
   },
   { path: 'signUp-SelectAccountType', component: SelectAccountTypeComponent, data: {} },
