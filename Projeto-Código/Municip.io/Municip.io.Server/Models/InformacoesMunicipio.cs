@@ -1,4 +1,7 @@
-﻿public class InformacoesMunicipio
+﻿/// <summary>
+/// Classe que representa a info do município para GET da API
+/// </summary>
+public class InformacoesMunicipio
 {
 
     public string codigo { get; set; }

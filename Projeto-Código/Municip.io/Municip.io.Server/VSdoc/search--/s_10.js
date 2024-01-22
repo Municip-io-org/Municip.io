@@ -1,0 +1,1 @@
+search_result['10']=["topic_0000000000000003.html","AccountUserController.UserData Method","Obtém os dados do utilizador autenticado."];

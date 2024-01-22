@@ -1,5 +1,9 @@
 ﻿namespace Municip.io.Server.Models
 {
+ 
+    /// <summary>
+    /// Classe que representa o cidadão
+    /// </summary>
     public class Citizen
     {
         

@@ -8,7 +8,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Municip.io.Server.Controllers
 {
-
+    /// <summary>
+    /// Controlador de contas de utilizador. Permite registar novos utilizadores e obter informações sobre os mesmos.
+    /// </summary>
     [ApiController]
     [Route("api/accounts")]
     public class AccountUserController : Controller
@@ -24,6 +26,10 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Obtém os dados do utilizador autenticado.
+        /// </summary>
+        /// <returns>JSON</returns>
         [HttpGet("UserData", Name = "Dados")]
         public async Task<IActionResult> UserData()
         {
@@ -35,8 +41,11 @@ namespace Municip.io.Server.Controllers
 
 
 
-        // register a new user account
-
+       /// <summary>
+       /// Registo de um cidadão (conta + base dados de cidadão)
+       /// </summary>
+       /// <param name="citizen"></param>
+       /// <returns>StatusCode</returns>
         [HttpPost("registerCitizen")]
         public async Task<IActionResult> RegisterCitizen(Citizen citizen)
 
@@ -81,6 +90,11 @@ namespace Municip.io.Server.Controllers
             return BadRequest(new { Message = "O modelo do cidadão é inválido.", ModelState = ModelState });
 
         }
+        /// <summary>
+        ///Registo de um administrador municipal (conta + base de dados) 
+        /// </summary>
+        /// <param name="municipalAdministrator"></param>
+        /// <returns>StatusCode</returns>
 
         [HttpPost("registerMunicipalAdministrator")]
         public async Task<IActionResult> RegisterMunicipalAdministrator(MunicipalAdministrator municipalAdministrator)
@@ -135,6 +149,11 @@ namespace Municip.io.Server.Controllers
 
     }
 
+        /// <summary>
+        /// Registo de município na base de dados. Executado aquando da criação do adminsitrador municipal na primeira vez
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <returns>StatusCode</returns>
         [HttpPost("registerMunicipality")]
         public async Task<IActionResult> RegisterMunicipality(Municipality? municipality)
         {
@@ -179,6 +198,12 @@ namespace Municip.io.Server.Controllers
             return BadRequest(new { Message = "O modelo do município é inválido.", ModelState = ModelState });
         }
 
+
+        /// <summary>
+        /// Info do utilizador após inserção de email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>JSON</returns>
         [HttpGet("InfoByEmail")]
         public async Task<IActionResult> InfoByEmail(string email)
         {
@@ -203,7 +228,11 @@ namespace Municip.io.Server.Controllers
             return BadRequest(new { Message = "Não existe nenhum município com esse nome." });
         }
 
-        // ISTO JA ESTAVA FEITO DENTRO DO CORPO DO REGISTERMUNICIPALADMINISTRATOR
+        /// <summary>
+        /// Verifica se município existe retornando booleano
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <returns>Bool</returns>
         [HttpGet("Exists")]
         public async Task<IActionResult> municipalityExists(string municipality)
         {
