@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MunicipalAdministrator, MunicipalAdminAuthService } from '../../services/municipal-admin-auth.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Municipalities } from '../../municipalities.enum';
 
@@ -33,11 +33,11 @@ export class SignUpMunicipalAdministratorAccountComponent {
   constructor(private municipalAdminAuthService: MunicipalAdminAuthService, private router: Router) { }
 
   signUpMunicipalAdminForm = new FormGroup({
-    firstName: new FormControl(),
-    surname: new FormControl(),
-    email: new FormControl(),
-    password: new FormControl(),
-    municipality: new FormControl()
+    firstName: new FormControl(Validators.required),
+    surname: new FormControl(Validators.required),
+    email: new FormControl(Validators.required, Validators.email),
+    password: new FormControl(Validators.required),
+    municipality: new FormControl(Validators.required)
   });
 
   onSubmit() {

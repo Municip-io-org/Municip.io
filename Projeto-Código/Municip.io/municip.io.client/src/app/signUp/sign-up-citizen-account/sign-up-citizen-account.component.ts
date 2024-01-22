@@ -36,17 +36,17 @@ export class SignUpCitizenAccountComponent {
   constructor(private citizenAuthService: CitizenAuthService, private router: Router) { }
 
   signUpCitizenForm = new FormGroup({
-    firstName: new FormControl(),
-    surname: new FormControl(),
-    email: new FormControl(),
-    password: new FormControl(),
-    nif: new FormControl(),
-    gender: new FormControl(),
-    municipality: new FormControl(),
-    address: new FormControl(),
-    postalCode1: new FormControl(),
-    postalCode2: new FormControl(),
-    birthDate: new FormControl()
+    firstName: new FormControl(Validators.required),
+    surname: new FormControl(Validators.required),
+    email: new FormControl(Validators.email, Validators.required),
+    password: new FormControl(Validators.required),
+    nif: new FormControl(Validators.required, Validators.pattern(/^\d{9}$/)),
+    gender: new FormControl(Validators.required),
+    municipality: new FormControl(Validators.required),
+    address: new FormControl(Validators.required),
+    postalCode1: new FormControl(Validators.required, Validators.pattern(/^\d{4}$/)),
+    postalCode2: new FormControl(Validators.required, Validators.pattern(/^\d{3}$/)),
+    birthDate: new FormControl(Validators.required)
   });
 
   onSubmit() {
