@@ -13,10 +13,29 @@ export class CitizenAuthService {
   constructor(private http: HttpClient) { }
 
 
-  registerCitizen(citizen: Citizen): Observable<Citizen> {
-    return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
+  registerCitizen(citizen: Citizen, image: File): Observable<Citizen> {
+    var headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    let imgurl = "https://api.imgur.com/3/image";
 
+    //upload to imgur
+    const formData = new FormData();
+    formData.append('image', image);
+    this.http.post(imgurl, formData, { headers }).subscribe(
+      (response : any) => {
+        console.log(response);
+        citizen.photo = response['data']['link'];
+        console.log(citizen);
+        console.log(citizen.photo);
+        return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
+      },
+      (error) => console.log(error)
+    );
+  
+    return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
   }
+
+
+
 
   loginCitizen(login: Login, useCookies: boolean, useSessionCookies: boolean): Observable<Login> {
     
@@ -52,6 +71,7 @@ export interface Citizen {
   postalCode1: string;
   postalCode2: string;
   birthDate: Date
+  photo?: string;
 }
 
 export interface Login {

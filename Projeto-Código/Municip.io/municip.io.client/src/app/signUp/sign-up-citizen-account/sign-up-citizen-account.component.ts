@@ -23,17 +23,25 @@ export class SignUpCitizenAccountComponent {
     address: '',
     postalCode1: '',
     postalCode2: '',
-    birthDate:  new Date() };
+    birthDate: new Date(),
+photo: ''
+  };
 
 
   errors: string[] | null = null;
 
   municipalities = Municipalities;
+  //declare file image
+  image!: File;
+
 
   getValues() {
     return Object.values(this.municipalities)
   }
-  constructor(private citizenAuthService: CitizenAuthService, private router: Router) { }
+
+  constructor(private citizenAuthService: CitizenAuthService, private router: Router) {
+ 
+  }
 
   signUpCitizenForm = new FormGroup({
     firstName: new FormControl("",[Validators.required]),
@@ -46,7 +54,8 @@ export class SignUpCitizenAccountComponent {
     address: new FormControl("",[Validators.required]),
     postalCode1: new FormControl("",[Validators.required, Validators.pattern(/^\d{4}$/)]),
     postalCode2: new FormControl("",[Validators.required, Validators.pattern(/^\d{3}$/)]),
-    birthDate: new FormControl(new Date(),[Validators.required])
+    birthDate: new FormControl(new Date(), [Validators.required]),
+photo: new FormControl(null,[Validators.required])
   });
 
 
@@ -95,11 +104,33 @@ export class SignUpCitizenAccountComponent {
     return this.signUpCitizenForm.get('birthDate');
   }
 
+get photo() {
 
+  return this.signUpCitizenForm.get('photo');
+
+
+  }
+
+  onImagePicked(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    const file = fileInput?.files?.[0]; // Use optional chaining here
+
+    if (file) {
+      this.image = file;
+
+
+    } else {
+      console.error('No file selected');
+    }
+  }
 
 
   onSubmit() {
-    this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen).subscribe(
+
+ 
+
+
+    this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen, this.image).subscribe(
 
       result => {
         this.router.navigateByUrl('/signUp-Success');

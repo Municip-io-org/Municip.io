@@ -99,7 +99,7 @@ transition-all duration-700 ease-in-out  decoration-sky-500">
               </div>
             </div>
 
-</section>
+          </section>
           <section class="flex flex-col text-left space-y-2 ">
             <div>
               <app-input-title class="text-[2.6vh]">Apelido</app-input-title>
@@ -141,12 +141,12 @@ transition-all duration-700 ease-in-out  decoration-sky-500">
                 <div *ngIf="birthDate?.errors?.['required'] ">Data de Nascimento Obrigatório</div>
               </div>
             </div>
-              <!--<div class="flex flex-col">
-                <app-input-title class="text-[2.8vh]">Fotografia de Utilizador</app-input-title>
-                <input type="hidden" id="profilePic" name="profilePic" class="input w-[20rem]
-  focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-  transition-all duration-700 ease-in-out  decoration-sky-500">
-              </div>-->
+            <!--<div class="flex flex-col">
+                    <app-input-title class="text-[2.8vh]">Fotografia de Utilizador</app-input-title>
+                    <input type="hidden" id="profilePic" name="profilePic" class="input w-[20rem]
+      focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+      transition-all duration-700 ease-in-out  decoration-sky-500">
+                  </div>-->
             <div>
               <app-input-title class="text-[2.6vh]">Código Postal</app-input-title>
               <div>
@@ -166,15 +166,23 @@ transition-all duration-700 ease-in-out  decoration-sky-500" />
               </div>
             </div>
 
-              <button type="submit" [disabled]="!signUpCitizenForm.valid" class="self-end relative top-[16.7vh] h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
+            <app-input-title class="text-[2.6vh]">Foto</app-input-title>
+            <div class="flex items-center">
+              <input type="file" #filePicker id="photo" formControlName="photo" name="photo" [(ngModel)]="citizen.photo" (change)="onImagePicked($event)" 
+                     class="input w-[35.2vh]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+              <app-tooltip [tooltipText]="'Utilize o seletor para encontrar a sua foto'"></app-tooltip>
+            </div>
+       
+        <button type="submit" [disabled]="!signUpCitizenForm.valid" class="self-end relative top-[16.7vh] h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
   border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
-                Registar
-                <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-              </button>
-              <!--<button class="btn-primary btn spaced-button" type="submit" [disabled]="!signUpCitizenForm.valid">Create</button>-->
-
-</section>
-        </div>
+          Registar
+          <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+        </button>
+        <!--<button class="btn-primary btn spaced-button" type="submit" [disabled]="!signUpCitizenForm.valid">Create</button>-->
+        </section>
+</div>
       </form>
       
       <hr class="rounded-3xl border-t-[#ECECF0] my-4" />

@@ -261,6 +261,10 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("photo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("postalCode1")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

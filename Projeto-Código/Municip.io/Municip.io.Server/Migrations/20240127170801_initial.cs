@@ -65,7 +65,8 @@ namespace Municip.io.Server.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     postalCode1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     postalCode2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    birthDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    birthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    photo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

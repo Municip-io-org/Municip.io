@@ -12,7 +12,7 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240119155215_initial")]
+    [Migration("20240127170801_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -261,6 +261,10 @@ namespace Municip.io.Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("firstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("photo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -24,5 +24,7 @@
         public string postalCode2 { get; set; }
 
         public DateTime birthDate { get; set; }
+
+        public string photo { get; set; }
     }
 }
