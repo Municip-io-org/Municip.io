@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { CitizenAuthService, Login } from '../services/citizen-auth.service';
+import { CitizenAuthService} from '../services/citizen-auth.service';
 import { Router } from '@angular/router';
+import { Login, UserAuthService } from '../services/user-auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -19,7 +21,8 @@ export class LoginComponent {
     twoFactorCode: "",
     twoFactorRecoveryCode :""
   };
-  constructor(private citizenAuthService: CitizenAuthService, private router: Router) { }
+  constructor(private citizenAuthService: CitizenAuthService, private userAuthService: UserAuthService,
+      private router: Router) { }
 
 
   loginForm = new FormGroup({
@@ -27,18 +30,19 @@ export class LoginComponent {
     password : new FormControl('')
   });
 
+  error: string = "";
 
    onSubmit() {
     console.log(this.loginForm.value);
     
-    //nao esta a ter o user e pass (null) e falta fazer a navigation apenas quando for autenticado
-    this.citizenAuthService.loginCitizen(this.loginForm.value as Login,true,true).subscribe(
-      res => {
-        console.log("User logado", res);
+     //nao esta a ter o user e pass (null) e falta fazer a navigation apenas quando for autenticado
+     this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
+       res => {
+         this.error = "";
         this.router.navigateByUrl('/userpage');
       },
-      error => { 
-        console.error("erro login,", error);
+       error => {
+         this.error = "Erro de autenticação";
       }
     );
   }
