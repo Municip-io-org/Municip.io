@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Municip.io.Server.Data;
@@ -30,22 +32,53 @@ namespace Municip.io.Server.Controllers
         /// Obtém os dados do utilizador autenticado.
         /// </summary>
         /// <returns>JSON</returns>
-        [HttpGet("UserData", Name = "Dados")]
-        public async Task<IActionResult> UserData()
+        [HttpGet("UserInfo", Name = "Dados")]
+        public async Task<IActionResult> UserInfo()
         {
-            Console.WriteLine("User: " + await _userManager.GetUserAsync(User)
-             );
-            return Json(await _userManager.GetUserAsync(User));
+       
+            // if there is a user logged in send his info, else send bad request
+            if (User.Identity.IsAuthenticated)
+            {
+                return Json(await _userManager.GetUserAsync(User));
+            }
+            return BadRequest(new { Message = "Utilizador não autenticado." });
+        }
+
+
+        //function to get the role who the user belongs to
+        [HttpGet("UserRole")]
+        public async Task<IActionResult> UserRole()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var role = await _userManager.GetRolesAsync(user);
+                return Json(
+                 new { role = role[0] } );
+            }
+            return BadRequest(new { Message = "Utilizador não autenticado." });
         }
 
 
 
 
-       /// <summary>
-       /// Registo de um cidadão (conta + base dados de cidadão)
-       /// </summary>
-       /// <param name="citizen"></param>
-       /// <returns>StatusCode</returns>
+        [HttpPost("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+
+            // Retorna uma resposta apropriada, como um status 200 OK
+            return Ok(new { message = "Logout successful" });
+        }
+
+
+
+
+        /// <summary>
+        /// Registo de um cidadão (conta + base dados de cidadão)
+        /// </summary>
+        /// <param name="citizen"></param>
+        /// <returns>StatusCode</returns>
         [HttpPost("registerCitizen")]
         public async Task<IActionResult> RegisterCitizen(Citizen citizen)
 
@@ -68,6 +101,7 @@ namespace Municip.io.Server.Controllers
                 {
 
 
+                    await _userManager.AddToRoleAsync(user, "Citizen");
                     //add citizen to database
                     _context.Citizens.Add(citizen);
                     await _context.SaveChangesAsync();
@@ -118,8 +152,11 @@ namespace Municip.io.Server.Controllers
          
             if (result.Succeeded)
             {
-                //add citizen to database
-                _context.MunicipalAdministrators.Add(municipalAdministrator);
+
+
+                    await _userManager.AddToRoleAsync(user, "Municipal");
+                    //add citizen to database
+                    _context.MunicipalAdministrators.Add(municipalAdministrator);
                 await _context.SaveChangesAsync();
                     if (_context.Municipalities.Any(m => m.name == municipalAdministrator.municipality))
                     {

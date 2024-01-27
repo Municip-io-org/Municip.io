@@ -1,5 +1,6 @@
 import { Component, Query } from '@angular/core';
-import { CitizenAuthService } from '../services/citizen-auth.service';
+
+import {Roles, UserAuthService } from '../services/user-auth.service';
 
 @Component({
   selector: 'app-userpage',
@@ -10,19 +11,33 @@ export class UserpageComponent {
   user: any;
   newUser: any;
 
-  constructor(private citizenAuthService: CitizenAuthService) { }
+  constructor(private userAuthService: UserAuthService ) { }
+
+  role: string = "";
 
   ngOnInit(): void {
-    this.citizenAuthService.getUserData().subscribe(
+    this.userAuthService.getUserData().subscribe(
       res => {
         this.user = res;
-        this.citizenAuthService.getInfoByEmail(this.user.email).subscribe(
+        this.userAuthService.getInfoByEmail(this.user.email).subscribe(
           res => {
             this.newUser = res;
 
             console.log("user", this.newUser);
           });
           },
+      error => {
+        console.error(error);
+      }
+    );
+
+
+    this.userAuthService.getUserRole().subscribe(
+      res => {
+        if (res.role == Roles.Citizen) {
+          this.role = res.role;
+        }
+      },
       error => {
         console.error(error);
       }

@@ -11,14 +11,14 @@ export class TermsconditionsComponent {
   constructor(private citizenAuthService: CitizenAuthService) { }
 
   ngOnInit(): void {
-    this.citizenAuthService.getUserData().subscribe(
-      res => {
-        this.user = res;
-        console.log("user", this.user);
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    //this.citizenAuthService.getUserData().subscribe(
+    //  res => {
+    //    this.user = res;
+    //    console.log("user", this.user);
+    //  },
+    //  error => {
+    //    console.error(error);
+    //  }
+    //);
   }
 }

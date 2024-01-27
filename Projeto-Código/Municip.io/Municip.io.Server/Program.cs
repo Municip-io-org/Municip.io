@@ -1,5 +1,7 @@
+using ESTEvents.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 
@@ -16,8 +18,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+
+
+
+
+
+builder.Services.AddIdentityApiEndpoints<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+   .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+   .AddDefaultTokenProviders();
+
+
 
 
 
@@ -49,5 +62,16 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    await DataSeeder.SeedData(userManager, roleManager);
+
+}
+
 
 app.Run();

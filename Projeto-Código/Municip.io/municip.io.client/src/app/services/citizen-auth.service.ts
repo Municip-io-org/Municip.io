@@ -73,12 +73,3 @@ export interface Citizen {
   birthDate: Date
   photo?: string;
 }
-
-export interface Login {
-  password: string,
-  email: string,
-  twoFactorCode: string,
-  twoFactorRecoveryCode: string
-
-} 
-
