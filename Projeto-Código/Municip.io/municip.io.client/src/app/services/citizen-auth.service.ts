@@ -1,7 +1,7 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, Query } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { Login } from './user-auth.service';
 
 
@@ -13,7 +13,6 @@ export class CitizenAuthService {
 
   constructor(private http: HttpClient) { }
 
-
   registerCitizen(citizen: Citizen, image: File): Observable<Citizen> {
     var headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
     let imgurl = "https://api.imgur.com/3/image";
@@ -21,19 +20,16 @@ export class CitizenAuthService {
     //upload to imgur
     const formData = new FormData();
     formData.append('image', image);
-    this.http.post(imgurl, formData, { headers }).subscribe(
-      (response : any) => {
+    return this.http.post(imgurl, formData, { headers })
+      .pipe(switchMap((response: any) => {
         console.log(response);
         citizen.photo = response['data']['link'];
         console.log(citizen);
         console.log(citizen.photo);
         return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
-      },
-      (error) => console.log(error)
-    );
-  
-    return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
+      }));
   }
+
 
   
 
