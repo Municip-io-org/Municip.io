@@ -18,7 +18,7 @@ export class SignUpMunicipalAdministratorAccountComponent {
     email: '',
     password: '',
     municipality: '',
-
+    photo : ''
   };
 
   
@@ -26,6 +26,8 @@ export class SignUpMunicipalAdministratorAccountComponent {
 
   
   municipalities = Municipalities;
+
+  image!: File;
 
   getValues() {
     return Object.values(this.municipalities)
@@ -37,12 +39,13 @@ export class SignUpMunicipalAdministratorAccountComponent {
     surname: new FormControl("",[Validators.required]),
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("",[Validators.required]),
-    municipality: new FormControl("", [Validators.required])
+    municipality: new FormControl("", [Validators.required]),
+    photo: new FormControl(null, [Validators.required])
   });
 
   onSubmit() {
 
-    this.municipalAdminAuthService.registerMunicipalAdmin(this.signUpMunicipalAdminForm.value as MunicipalAdministrator).subscribe(
+    this.municipalAdminAuthService.registerMunicipalAdmin(this.signUpMunicipalAdminForm.value as MunicipalAdministrator, this.image).subscribe(
 
 
       (result) => {
@@ -93,6 +96,28 @@ export class SignUpMunicipalAdministratorAccountComponent {
   get municipality() {
     return this.signUpMunicipalAdminForm.get('municipality');
   }
+
+
+  get photo() {
+
+    return this.signUpMunicipalAdminForm.get('photo');
+
+
+  }
+
+  onImagePicked(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    const file = fileInput?.files?.[0]; // Use optional chaining here
+
+    if (file) {
+      this.image = file;
+
+
+    } else {
+      console.error('No file selected');
+    }
+  }
+
 
 
     

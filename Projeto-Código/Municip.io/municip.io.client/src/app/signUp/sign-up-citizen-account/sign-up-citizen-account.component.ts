@@ -24,7 +24,7 @@ export class SignUpCitizenAccountComponent {
     postalCode1: '',
     postalCode2: '',
     birthDate: new Date(),
-photo: ''
+    photo: ''
   };
 
 
@@ -55,7 +55,7 @@ photo: ''
     postalCode1: new FormControl("",[Validators.required, Validators.pattern(/^\d{4}$/)]),
     postalCode2: new FormControl("",[Validators.required, Validators.pattern(/^\d{3}$/)]),
     birthDate: new FormControl(new Date(), [Validators.required]),
-photo: new FormControl(null,[Validators.required])
+    photo: new FormControl(null,[Validators.required])
   });
 
 

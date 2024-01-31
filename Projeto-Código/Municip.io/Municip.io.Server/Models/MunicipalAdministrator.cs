@@ -18,6 +18,9 @@
 
         public String municipality { get; set; }
 
+
+        public string photo { get; set; }
+
         public MunicipalAdministrator(string firstName, string surname, string email, string password, string municipality)
         {
             this.firstName = firstName;

@@ -87,7 +87,7 @@ namespace Municip.io.Server.Controllers
             {
                 var user = new IdentityUser
                 {
-                    UserName = citizen.Email,
+                    UserName = citizen.firstName,
                     Email = citizen.Email
                 };
 
@@ -139,7 +139,7 @@ namespace Municip.io.Server.Controllers
                 
                 var user = new IdentityUser
                 {
-                    UserName = municipalAdministrator.Email,
+                    UserName = municipalAdministrator.municipality,
                     Email = municipalAdministrator.Email
                 };
 

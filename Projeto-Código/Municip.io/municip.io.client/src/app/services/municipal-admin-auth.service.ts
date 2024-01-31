@@ -1,8 +1,8 @@
 
-import { HttpClient, JsonpClientBackend } from '@angular/common/http';
+import { HttpClient, HttpHeaders, JsonpClientBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,27 @@ export class MunicipalAdminAuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
-  registerMunicipalAdmin(municipalAdministrator: MunicipalAdministrator): Observable<boolean> {
+  registerMunicipalAdmin(municipalAdministrator: MunicipalAdministrator, image: File): Observable<boolean> {
 
 
-    return this.http.post<boolean>('api/accounts/registerMunicipalAdministrator', municipalAdministrator);
+
+
+
+
+    var headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    let imgurl = "https://api.imgur.com/3/image";
+
+    //upload to imgur
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post(imgurl, formData, { headers })
+      .pipe(switchMap((response: any) => {
+        municipalAdministrator.photo = response['data']['link'];
+        return this.http.post<boolean>('api/accounts/registerMunicipalAdministrator', municipalAdministrator);
+      }));
+
+
+
   }
 
 
@@ -38,6 +55,7 @@ export interface MunicipalAdministrator {
   email: string;
   password: string;
   municipality: string;
+  photo?: string;
 }
 
 
@@ -45,7 +63,7 @@ export interface Municipality {
   name: string;
   president: string;
   contact: string;
-description: string;
+  description: string;
 }
 
 

@@ -42,6 +42,7 @@ export class LoginComponent {
         this.router.navigateByUrl('/userpage');
       },
        error => {
+         
          this.error = "Erro de autenticação";
       }
     );

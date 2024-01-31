@@ -80,11 +80,20 @@ transition-all duration-700 ease-in-out  decoration-sky-500">
                 <div *ngIf="municipality?.errors?.['required'] ">Município Obrigatório</div>
               </div>
             </div>
+            <app-input-title class="text-[2.6vh]">Foto</app-input-title>
+            <div class="flex items-center">
+              <input type="file" #filePicker id="photo" formControlName="photo" name="photo" [(ngModel)]="municipalAdministrator.photo" (change)="onImagePicked($event)"
+                     class="input w-[35.2vh]
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+              <app-tooltip [tooltipText]="'Utilize o seletor para encontrar a sua foto'"></app-tooltip>
+            </div>
+
             <button type="submit" [disabled]="!signUpMunicipalAdminForm.valid" class="relative top-[1rem] self-end h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
 border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
               Continuar
               <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-            </button>            
+            </button>
           </section>
         </div>
       </form>

@@ -27,7 +27,8 @@ import { TooltipComponent } from './utils/tooltip/tooltip.component';
 import { SignUpSuccessComponent } from './signUp/sign-up-success/sign-up-success.component';
 import { SpinnerComponent } from './utils/spinner/spinner.component';
 import { LoadingInterceptor } from './utils/loading.interceptor';
-import { MunicipalityGuard } from './utils/municipality.guard';
+import { MunicipalityGuard } from './utils/guard/municipality.guard';
+import { AuthGuardService } from './utils/guard/auth.guard';
 
 
 
@@ -65,6 +66,7 @@ import { MunicipalityGuard } from './utils/municipality.guard';
   ],
   providers: [
     MunicipalityGuard,
+    AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
       
