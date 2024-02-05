@@ -33,6 +33,7 @@ import { AdmindashboardComponent } from './administrator/admindashboard/admindas
 import { TransportsMainComponent } from './transports/transports-main/transports-main.component';
 import { VerticalCardComponent } from './utils/vertical-card/vertical-card.component';
 import { BigBannerComponent } from './utils/big-banner/big-banner.component';
+import { SmallerBannerComponent } from './utils/smaller-banner/smaller-banner.component';
 
 
 
@@ -63,7 +64,8 @@ import { BigBannerComponent } from './utils/big-banner/big-banner.component';
     AdmindashboardComponent,
     TransportsMainComponent,
     VerticalCardComponent,
-    BigBannerComponent
+    BigBannerComponent,
+    SmallerBannerComponent
     
   ],
   imports: [
