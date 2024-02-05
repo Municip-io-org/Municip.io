@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, catchError, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, map, of, switchMap } from 'rxjs';
+import { Citizen } from './citizen-auth.service';
+import { MunicipalAdministrator } from './municipal-admin-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -45,13 +47,32 @@ export class UserAuthService {
 
   getInfoByEmail(email: string) {
     let params = new HttpParams().set('email', email);
-    console.log("params", params);
-    return this.http.get<string>('/api/accounts/InfoByEmail/', { params });
+    return this.http.get<MunicipalAdministrator | Citizen>('/api/accounts/InfoByEmail/', { params });
   }
 
   getUserRole() {
     return this.http.get<Role>('/api/accounts/UserRole');
   }
+
+  getMunicipality() {
+    return this.getUserData().pipe(
+      switchMap((userInfo) =>
+        this.getInfoByEmail(userInfo.email).pipe(
+          map((user) => {
+            if (user.municipality) {
+              return user.municipality;
+            }
+            return null;
+          }),
+          catchError((_) => {
+            return of(null);
+          })
+        )
+      )
+    );
+  }
+
+
 
 
 

@@ -31,6 +31,8 @@ import { MunicipalityGuard } from './utils/guard/municipality.guard';
 import { AuthGuardService } from './utils/guard/auth.guard';
 import { AdmindashboardComponent } from './administrator/admindashboard/admindashboard.component';
 import { TransportsMainComponent } from './transports/transports-main/transports-main.component';
+import { VerticalCardComponent } from './utils/vertical-card/vertical-card.component';
+import { BigBannerComponent } from './utils/big-banner/big-banner.component';
 
 
 
@@ -59,7 +61,9 @@ import { TransportsMainComponent } from './transports/transports-main/transports
     SignUpSuccessComponent,
     SpinnerComponent,
     AdmindashboardComponent,
-    TransportsMainComponent
+    TransportsMainComponent,
+    VerticalCardComponent,
+    BigBannerComponent
     
   ],
   imports: [
