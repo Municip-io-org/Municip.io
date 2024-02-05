@@ -1,0 +1,84 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, catchError, map, throwError } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TransportsService {
+
+  constructor(private http: HttpClient) { }
+
+
+  apiLink: string = "https://api.carrismetropolitana.pt/";
+
+
+  getLines(): Observable<line[]>{
+    return this.http.get<line[]>(this.apiLink + "lines");
+  }
+
+
+
+
+
+  getMunicipalities(): Observable<municipalityTransport[]>{
+    return this.http.get<municipalityTransport[]>(this.apiLink + "municipalities");
+  }
+
+
+  
+
+
+getMunicipalityByName(name: string): Observable < municipalityTransport | null > {
+  return this.getMunicipalities().pipe(
+    map(municipalities => {
+      const municipality = municipalities.find(municipality => municipality.name === name);
+      if (municipality) {
+        return municipality;
+      } else {
+        return null;
+      }
+    })
+  );
+  }
+
+
+
+  getLinesByMunicipalityId(id: string): Observable<line[] | null>{
+    return this.getLines().pipe(
+    map(lines => {
+        const linesByMunicipality = lines.filter(line => line.municipalities.includes(id));
+        if (linesByMunicipality) {
+          return linesByMunicipality;
+        } else {
+          return null;
+        }
+      })
+    )
+
+  }
+
+
+
+}
+
+
+
+export interface line {
+  "id": string,
+  "short_name": string,
+  "long_name":string ,
+  "color": string
+  "text_color": string
+  "routes": string[],
+  "patterns": string[],
+  "municipalities": string[],
+  "localities": string[],
+  "facilities": string[]
+}
+
+export interface municipalityTransport {
+  id: string,
+  name: string,
+  prefix: string,
+}

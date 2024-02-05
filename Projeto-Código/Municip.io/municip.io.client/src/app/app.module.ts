@@ -34,6 +34,7 @@ import { TransportsMainComponent } from './transports/transports-main/transports
 import { VerticalCardComponent } from './utils/vertical-card/vertical-card.component';
 import { BigBannerComponent } from './utils/big-banner/big-banner.component';
 import { SmallerBannerComponent } from './utils/smaller-banner/smaller-banner.component';
+import { SchedulesComponent } from './transports/schedules/schedules.component';
 
 
 
@@ -65,7 +66,8 @@ import { SmallerBannerComponent } from './utils/smaller-banner/smaller-banner.co
     TransportsMainComponent,
     VerticalCardComponent,
     BigBannerComponent,
-    SmallerBannerComponent
+    SmallerBannerComponent,
+    SchedulesComponent
     
   ],
   imports: [
