@@ -13,9 +13,9 @@ export class AdmindashboardComponent {
     
     
     municipalities = [
-      { id: 1, name: 'Trofa', numberOfUsers: 570, date: new Date(10 - 10 - 2021), status: 'Aprovado' },
-      { id: 2, name: 'Setúbal', numberOfUsers: 230, date: new Date(6 - 5 - 2021), status: 'Por Aprovar' },
-      { id: 3, name: 'Montijo', numberOfUsers: 675, date: new Date(10 - 10 - 2021), status: 'Aprovado' },
+      { id: 1, name: 'Trofa', numberOfUsers: 570, date: new Date('10-10-2021'), status: 'Aprovado' },
+      { id: 2, name: 'Setúbal', numberOfUsers: 230, date: new Date('6-5-2021'), status: 'Por Aprovar' },
+      { id: 3, name: 'Montijo', numberOfUsers: 675, date: new Date('10-10-2021'), status: 'Aprovado' },
     ];
 
   sortTable(column: string): void {
