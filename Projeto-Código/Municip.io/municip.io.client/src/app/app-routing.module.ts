@@ -12,6 +12,7 @@ import { UserpageComponent } from './userpage/userpage.component';
 import { SignUpSuccessComponent } from './signUp/sign-up-success/sign-up-success.component';
 import { MunicipalityGuard } from './utils/guard/municipality.guard';
 import { AuthGuardService } from './utils/guard/auth.guard';
+import { AdmindashboardComponent } from './administrator/admindashboard/admindashboard.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {}, canActivate: [MunicipalityGuard] },
   { path: 'signUp-Success', component: SignUpSuccessComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
+  { path: 'admindashboard', component: AdmindashboardComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} }];
 
 @NgModule({
