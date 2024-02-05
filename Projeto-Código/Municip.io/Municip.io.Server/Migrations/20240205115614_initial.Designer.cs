@@ -12,8 +12,8 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240130122810_intialfx")]
-    partial class intialfx
+    [Migration("20240205115614_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -304,6 +304,10 @@ namespace Municip.io.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("municipality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("photo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
