@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Municip.io.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class intialfx : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -82,7 +82,8 @@ namespace Municip.io.Server.Migrations
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    municipality = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    photo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

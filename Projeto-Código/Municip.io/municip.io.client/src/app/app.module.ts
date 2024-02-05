@@ -29,6 +29,7 @@ import { SpinnerComponent } from './utils/spinner/spinner.component';
 import { LoadingInterceptor } from './utils/loading.interceptor';
 import { MunicipalityGuard } from './utils/guard/municipality.guard';
 import { AuthGuardService } from './utils/guard/auth.guard';
+import { AdmindashboardComponent } from './administrator/admindashboard/admindashboard.component';
 
 
 
@@ -55,7 +56,8 @@ import { AuthGuardService } from './utils/guard/auth.guard';
     UserpageComponent,
     TooltipComponent,
     SignUpSuccessComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AdmindashboardComponent
     
   ],
   imports: [
