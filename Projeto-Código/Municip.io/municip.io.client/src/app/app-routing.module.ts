@@ -12,7 +12,11 @@ import { UserpageComponent } from './userpage/userpage.component';
 import { SignUpSuccessComponent } from './signUp/sign-up-success/sign-up-success.component';
 import { MunicipalityGuard } from './utils/guard/municipality.guard';
 import { AuthGuardService } from './utils/guard/auth.guard';
+<<<<<<< Updated upstream
 import { AdmindashboardComponent } from './administrator/admindashboard/admindashboard.component';
+=======
+import { TransportsMainComponent } from './transports/transports-main/transports-main.component';
+>>>>>>> Stashed changes
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -27,8 +31,15 @@ const routes: Routes = [
   { path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {}, canActivate: [MunicipalityGuard] },
   { path: 'signUp-Success', component: SignUpSuccessComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
+<<<<<<< Updated upstream
   { path: 'admindashboard', component: AdmindashboardComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} }];
+=======
+  { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
+  { path: 'transports', component: TransportsMainComponent, data: {} }
+
+];
+>>>>>>> Stashed changes
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

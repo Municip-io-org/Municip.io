@@ -657,6 +657,11 @@ video {
   margin-bottom: 1rem;
 }
 
+.-mx-4{
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
 .-mt-2{
   margin-top: -0.5rem;
 }
@@ -675,6 +680,10 @@ video {
 
 .mb-4{
   margin-bottom: 1rem;
+}
+
+.mb-40{
+  margin-bottom: 10rem;
 }
 
 .mb-6{
@@ -815,6 +824,10 @@ video {
   height: 2rem;
 }
 
+.h-96{
+  height: 24rem;
+}
+
 .h-\[20rem\]{
   height: 20rem;
 }
@@ -941,6 +954,10 @@ video {
 
 .w-screen{
   width: 100vw;
+}
+
+.min-w-full{
+  min-width: 100%;
 }
 
 .flex-1{
@@ -1092,6 +1109,14 @@ video {
   align-self: center;
 }
 
+.overflow-hidden{
+  overflow: hidden;
+}
+
+.overflow-x-auto{
+  overflow-x: auto;
+}
+
 .rounded{
   border-radius: 0.25rem;
 }
@@ -1134,6 +1159,14 @@ video {
 
 .border-t{
   border-top-width: 1px;
+}
+
+.border-b{
+  border-bottom-width: 1px;
+}
+
+.border-b-2{
+  border-bottom-width: 2px;
 }
 
 .border-black{
@@ -1194,6 +1227,10 @@ video {
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-opacity-70{
+  --tw-bg-opacity: 0.7;
 }
 
 .bg-gradient-to-l{
@@ -1326,6 +1363,11 @@ video {
   padding-bottom: 1vh;
 }
 
+.px-4{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .pb-10{
   padding-bottom: 2.5rem;
 }
@@ -1406,6 +1448,11 @@ video {
 .text-3xl{
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-4xl{
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 
 .text-\[1\.7rem\]{
@@ -1497,12 +1544,24 @@ video {
   font-weight: 600;
 }
 
+.uppercase{
+  text-transform: uppercase;
+}
+
 .leading-none{
   line-height: 1;
 }
 
 .leading-relaxed{
   line-height: 1.625;
+}
+
+.leading-normal{
+  line-height: 1.5;
+}
+
+.leading-tight{
+  line-height: 1.25;
 }
 
 .tracking-wider{
@@ -1512,6 +1571,11 @@ video {
 .text-black{
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.text-gray-200{
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 
 .text-gray-400{
@@ -1570,6 +1634,10 @@ video {
 
 .decoration-sky-500{
   text-decoration-color: #0ea5e9;
+}
+
+.opacity-100{
+  opacity: 1;
 }
 
 .shadow-lg{
@@ -1687,6 +1755,16 @@ video {
 }
 
 @media (min-width: 640px){
+  .sm\:-mx-8{
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+
+  .sm\:px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
   .sm\:text-3xl{
     font-size: 1.875rem;
     line-height: 2.25rem;

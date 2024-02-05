@@ -29,7 +29,11 @@ import { SpinnerComponent } from './utils/spinner/spinner.component';
 import { LoadingInterceptor } from './utils/loading.interceptor';
 import { MunicipalityGuard } from './utils/guard/municipality.guard';
 import { AuthGuardService } from './utils/guard/auth.guard';
+<<<<<<< Updated upstream
 import { AdmindashboardComponent } from './administrator/admindashboard/admindashboard.component';
+=======
+import { TransportsMainComponent } from './transports/transports-main/transports-main.component';
+>>>>>>> Stashed changes
 
 
 
@@ -57,7 +61,11 @@ import { AdmindashboardComponent } from './administrator/admindashboard/admindas
     TooltipComponent,
     SignUpSuccessComponent,
     SpinnerComponent,
+<<<<<<< Updated upstream
     AdmindashboardComponent
+=======
+    TransportsMainComponent
+>>>>>>> Stashed changes
     
   ],
   imports: [
