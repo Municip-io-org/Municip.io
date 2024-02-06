@@ -38,6 +38,7 @@ import { CitizenHomePageComponent } from './homePage/citizen-home-page/citizen-h
 import { CardOutlineThemeComponent } from './utils/card-outline-theme/card-outline-theme.component';
 import { MyMunicipalityCardComponent } from './utils/my-municipality-card/my-municipality-card.component';
 import { FormatNumber3By3Pipe } from './pipes/format-number3-by3.pipe';
+import { NewsSmallComponent } from './utils/news-small/news-small.component';
 
 
 
@@ -73,7 +74,8 @@ import { FormatNumber3By3Pipe } from './pipes/format-number3-by3.pipe';
     CitizenHomePageComponent,
     CardOutlineThemeComponent,
     MyMunicipalityCardComponent,
-    FormatNumber3By3Pipe
+    FormatNumber3By3Pipe,
+    NewsSmallComponent
     
   ],
   imports: [

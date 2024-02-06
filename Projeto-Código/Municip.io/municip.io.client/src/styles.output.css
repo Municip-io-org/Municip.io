@@ -707,6 +707,31 @@ video {
   margin-right: 9rem;
 }
 
+.mx-\[1vw\]{
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.mx-\[2vw\]{
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+.mx-\[3vw\]{
+  margin-left: 3vw;
+  margin-right: 3vw;
+}
+
+.mx-\[4vw\]{
+  margin-left: 4vw;
+  margin-right: 4vw;
+}
+
+.mx-\[5vw\]{
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
 .-mt-2{
   margin-top: -0.5rem;
 }
@@ -799,8 +824,26 @@ video {
   margin-left: 9rem;
 }
 
+.mr-5{
+  margin-right: 1.25rem;
+}
+
 .box-border{
   box-sizing: border-box;
+}
+
+.line-clamp-5{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+
+.line-clamp-4{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 }
 
 .inline-block{
@@ -927,6 +970,38 @@ video {
   height: 100vh;
 }
 
+.h-\[10rem\]{
+  height: 10rem;
+}
+
+.h-\[5rem\]{
+  height: 5rem;
+}
+
+.h-\[7rem\]{
+  height: 7rem;
+}
+
+.max-h-\[10rem\]{
+  max-height: 10rem;
+}
+
+.max-h-\[5rem\]{
+  max-height: 5rem;
+}
+
+.max-h-\[7rem\]{
+  max-height: 7rem;
+}
+
+.max-h-\[8rem\]{
+  max-height: 8rem;
+}
+
+.max-h-\[9rem\]{
+  max-height: 9rem;
+}
+
 .w-1{
   width: 0.25rem;
 }
@@ -1047,12 +1122,49 @@ video {
   width: 100vw;
 }
 
+.w-\[15rem\]{
+  width: 15rem;
+}
+
+.w-fit{
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.w-8\/12{
+  width: 66.666667%;
+}
+
+.w-\[140rem\]{
+  width: 140rem;
+}
+
+.w-\[60\%\]{
+  width: 60%;
+}
+
+.w-\[40\%\]{
+  width: 40%;
+}
+
+.w-\[100\%\]{
+  width: 100%;
+}
+
+.w-\[120\%\]{
+  width: 120%;
+}
+
 .min-w-full{
   min-width: 100%;
 }
 
 .max-w-\[50rem\]{
   max-width: 50rem;
+}
+
+.max-w-\[12rem\]{
+  max-width: 12rem;
 }
 
 .flex-1{
@@ -1065,6 +1177,10 @@ video {
 
 .flex-grow{
   flex-grow: 1;
+}
+
+.flex-grow-0{
+  flex-grow: 0;
 }
 
 .grow{
@@ -1208,6 +1324,30 @@ video {
   margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 
+.space-x-7 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-\[1vh\] > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1vh * var(--tw-space-x-reverse));
+  margin-left: calc(1vh * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-\[0\.4vh\] > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.4vh * var(--tw-space-x-reverse));
+  margin-left: calc(0.4vh * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-7 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.75rem * var(--tw-space-y-reverse));
+}
+
 .divide-x-8 > :not([hidden]) ~ :not([hidden]){
   --tw-divide-x-reverse: 0;
   border-right-width: calc(8px * var(--tw-divide-x-reverse));
@@ -1227,12 +1367,62 @@ video {
   align-self: center;
 }
 
+.overflow-auto{
+  overflow: auto;
+}
+
 .overflow-hidden{
   overflow: hidden;
 }
 
 .overflow-x-auto{
   overflow-x: auto;
+}
+
+.overflow-x-hidden{
+  overflow-x: hidden;
+}
+
+.overflow-y-hidden{
+  overflow-y: hidden;
+}
+
+.truncate{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.overflow-ellipsis{
+  text-overflow: ellipsis;
+}
+
+.text-ellipsis{
+  text-overflow: ellipsis;
+}
+
+.whitespace-normal{
+  white-space: normal;
+}
+
+.whitespace-nowrap{
+  white-space: nowrap;
+}
+
+.whitespace-pre{
+  white-space: pre;
+}
+
+.whitespace-pre-line{
+  white-space: pre-line;
+}
+
+.whitespace-pre-wrap{
+  white-space: pre-wrap;
+}
+
+.whitespace-break-spaces{
+  white-space: break-spaces;
 }
 
 .rounded{
@@ -1614,6 +1804,10 @@ video {
   font-family: Varela Round;
 }
 
+.font-open-sans{
+  font-family: Open Sans;
+}
+
 .text-2xl{
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1723,6 +1917,34 @@ video {
   font-size: 2rem;
 }
 
+.text-\[1\.125rem\]{
+  font-size: 1.125rem;
+}
+
+.text-\[0\.875rem\]{
+  font-size: 0.875rem;
+}
+
+.text-\[1\.063rem\]{
+  font-size: 1.063rem;
+}
+
+.text-\[0\.9rem\]{
+  font-size: 0.9rem;
+}
+
+.text-\[0\.95rem\]{
+  font-size: 0.95rem;
+}
+
+.text-\[0\.98rem\]{
+  font-size: 0.98rem;
+}
+
+.text-\[0\.96rem\]{
+  font-size: 0.96rem;
+}
+
 .font-black{
   font-weight: 900;
 }
@@ -1741,6 +1963,10 @@ video {
 
 .font-semibold{
   font-weight: 600;
+}
+
+.font-extrabold{
+  font-weight: 800;
 }
 
 .uppercase{
