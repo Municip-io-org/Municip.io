@@ -67,20 +67,21 @@
               <td class="px-5 py-5 text-left">{{ m.numberOfUsers }}</td>
               <td class="px-5 py-5 text-left">{{ m.date | date: 'dd MMM yy' }}</td>
               <td class="px-5 py-5 text-left">
-                <span *ngIf="m.status === 'Aprovado'" class="inline-block p-1.5 bg-green-500 text-white rounded-full text-xs">
+                <span *ngIf="m.status === 'Approved'" class="inline-block p-1.5 bg-green-500 text-white rounded-full text-xs">
                   {{ m.status }}
                 </span>
-                <span *ngIf="m.status === 'Por Aprovar'" class="inline-block p-1.5 bg-yellow-500 text-white rounded-full text-xs">
+                <span *ngIf="m.status === 'Pending'" class="inline-block p-1.5 bg-yellow-500 text-white rounded-full text-xs">
                   {{ m.status }}
                 </span>
               </td>
 
               <td class="px-5 py-5 ">
-                <!-- Conditional rendering based on 'status' -->
-                <button *ngIf="m.status === 'Por Aprovar'" class="bg-green-500 text-white px-3 py-1 rounded-md mr-2">
+       
+<button *ngIf="m.status === 'Pending'" (click)="approveMunicipality(m.name)" class="bg-green-500 text-white px-3 py-1 rounded-md mr-2"> 
+
                   <i class="fas fa-check"></i>
                 </button>
-                <button class="bg-red-500 text-white px-3 py-1 rounded-md">
+                <button (click)="deleteMunicipality(m.name)" class="bg-red-500 text-white px-3 py-1 rounded-md">
                   <i class="fas fa-trash-alt"></i>
                 </button>
               </td>

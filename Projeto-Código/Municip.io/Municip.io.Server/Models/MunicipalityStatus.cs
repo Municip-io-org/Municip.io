@@ -17,8 +17,7 @@
                     return "Aprovado";
                 case MunicipalityStatus.Pending:
                     return "Por Aprovar";
-                case MunicipalityStatus.Blocked:
-                    return "Bloqueado";
+
                 default:
                     return "Desconhecido";
             }
