@@ -4,7 +4,23 @@
                 é um tesouro situado na região da Península de Setúbal. Com uma rica história que remonta à antiguidade,
                 a cidade combina o charme de seu patrimônio histórico com a beleza natural que a rodeia.
 "></app-big-banner>
-<section class="mt-[2rem]">
-  <app-my-municipality-card county="Setúbal" nPopulation="127000000" email="camara.setubal@cm-setubal.pt"
-                            phoneNumber="265456789" emblem="/assets/images/brasaoSetubal.jpg"></app-my-municipality-card>
-</section>
+<div class="my-[4rem] mx-32">
+  <div class="flex">
+    <section class="flex flex-col space-y-20 ">
+      <app-my-municipality-card county="Setúbal" nPopulation="127000000" email="camara.setubal@cm-setubal.pt"
+                                phoneNumber="265456789" emblem="/assets/images/brasaoSetubal.jpg"
+                                class="max-w-[50rem]"></app-my-municipality-card>
+      <app-my-municipality-card county="Setúbal" nPopulation="127000000" email="camara.setubal@cm-setubal.pt"
+                                phoneNumber="265456789" emblem="/assets/images/brasaoSetubal.jpg"
+                                class="max-w-[50rem]"></app-my-municipality-card>
+    </section>
+    <div class="w-1 bg-gradient-to-tl from-municip-light-blue to-municip-blue rounded mx-36 "></div>
+    <section>
+      <div>
+        <img src="/assets/images/icons/newspaper-folded.png" alt="Notícias" class="size-10 " />
+        Notícias de Setúbal
+      </div>
+    </section>
+  </div>
+</div>
+<app-footer></app-footer>
