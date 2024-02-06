@@ -33,6 +33,12 @@ namespace Municip.io.Server.Models
         public string? nome { get; set; }
         public string? distrito { get; set; }
 
+        public DateOnly? registo { get; set; }
+
+        public int? munregistados { get; set; }
+
+        public MunicipalityStatus status { get; set; } 
+
 
 
 

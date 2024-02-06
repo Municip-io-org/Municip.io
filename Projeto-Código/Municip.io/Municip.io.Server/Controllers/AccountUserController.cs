@@ -214,8 +214,10 @@ namespace Municip.io.Server.Controllers
                     municipality.populacao = informacoesMunicipio.populacao;
                     municipality.eleitores = informacoesMunicipio.eleitores;
                     municipality.codigoine = informacoesMunicipio.codigoine;
-                   
                     municipality.distrito = informacoesMunicipio.distrito;
+                    municipality.registo = DateOnly.FromDateTime(DateTime.Now);
+                    municipality.munregistados = 0;
+                    municipality.status = MunicipalityStatus.Pending;
 
                     
 
