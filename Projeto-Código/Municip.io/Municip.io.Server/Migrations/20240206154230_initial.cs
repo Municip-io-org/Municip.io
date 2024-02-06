@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Municip.io.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class nova : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -66,7 +66,9 @@ namespace Municip.io.Server.Migrations
                     postalCode1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     postalCode2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     birthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    photo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    status = table.Column<int>(type: "int", nullable: false),
+                    date = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {

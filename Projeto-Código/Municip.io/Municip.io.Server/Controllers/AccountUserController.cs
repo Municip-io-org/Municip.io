@@ -103,6 +103,8 @@ namespace Municip.io.Server.Controllers
 
                     await _userManager.AddToRoleAsync(user, "Citizen");
                     //add citizen to database
+                    citizen.date = DateOnly.FromDateTime(DateTime.Now);
+                    citizen.status = CitizenStatus.Pending;
                     _context.Citizens.Add(citizen);
                     await _context.SaveChangesAsync();
                     return Ok();

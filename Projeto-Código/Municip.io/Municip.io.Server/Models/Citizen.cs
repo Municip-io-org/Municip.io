@@ -1,4 +1,6 @@
-﻿namespace Municip.io.Server.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Municip.io.Server.Models
 {
  
     /// <summary>
@@ -26,5 +28,10 @@
         public DateTime birthDate { get; set; }
 
         public string photo { get; set; }
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public CitizenStatus status { get; set; }
+
+        public DateOnly date { get; set; }
     }
 }

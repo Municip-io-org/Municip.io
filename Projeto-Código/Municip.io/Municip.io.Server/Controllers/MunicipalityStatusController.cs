@@ -19,7 +19,6 @@ namespace Municip.io.Server.Controllers
         }
 
         [HttpGet("municipalities")]
-        //create a function to get all the municipalities as json. call it getMunicipalities
         public IActionResult getMunicipalities()
         {
             _context.Municipalities.ToList();

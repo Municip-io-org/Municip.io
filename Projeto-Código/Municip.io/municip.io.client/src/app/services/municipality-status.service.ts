@@ -24,6 +24,6 @@ export class MunicipalityStatusService {
 
   deleteMunicipality(name: string) {
     return this.http.post<any>(`/api/municipalitystatus/deleteMunicipality?name=${name}`, {});  }
-
-
 }
+
+
