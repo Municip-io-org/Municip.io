@@ -16,6 +16,7 @@ import { AuthGuardService } from './utils/guard/auth.guard';
 import { AdmindashboardComponent } from './administrator/admindashboard/admindashboard.component';
 
 import { TransportsMainComponent } from './transports/transports-main/transports-main.component';
+import { CitizenHomePageComponent } from './homePage/citizen-home-page/citizen-home-page.component';
 
 
 const routes: Routes = [
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: 'aboutus', component: AboutusComponent, data: {} },
   { path: 'admindashboard', component: AdmindashboardComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
-  { path: 'transports', component: TransportsMainComponent, data: {} }
+  { path: 'transports', component: TransportsMainComponent, data: {} },
+  { path: 'citizenHomePage', component: CitizenHomePageComponent, data: {} }
 ];
 
 @NgModule({

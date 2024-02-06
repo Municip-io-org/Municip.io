@@ -34,6 +34,8 @@ import { TransportsMainComponent } from './transports/transports-main/transports
 import { VerticalCardComponent } from './utils/vertical-card/vertical-card.component';
 import { BigBannerComponent } from './utils/big-banner/big-banner.component';
 import { SmallerBannerComponent } from './utils/smaller-banner/smaller-banner.component';
+import { CitizenHomePageComponent } from './homePage/citizen-home-page/citizen-home-page.component';
+import { CardOutlineThemeComponent } from './utils/card-outline-theme/card-outline-theme.component';
 
 
 
@@ -65,7 +67,9 @@ import { SmallerBannerComponent } from './utils/smaller-banner/smaller-banner.co
     TransportsMainComponent,
     VerticalCardComponent,
     BigBannerComponent,
-    SmallerBannerComponent
+    SmallerBannerComponent,
+    CitizenHomePageComponent,
+    CardOutlineThemeComponent
     
   ],
   imports: [
