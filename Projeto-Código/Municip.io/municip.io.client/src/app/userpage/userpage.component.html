@@ -1,7 +1,91 @@
 
 <app-header></app-header>
 
-<div *ngIf="user">
+<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
+                    [title]="'Dados de ' + user.firstName"
+                    [text]="'Consulte e altere os seus dados pessoais'"
+                    [profileimg]="'/assets/images/admin/banner.jpg'">
+</app-smaller-banner>
+<div class="container mt-10 w-[85%] pb-7">
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="profileEdit" (ngSubmit)="OnSubmit()">
+        <div *ngIf="errors" class="text-red-500 text-sm font-bold space-y-2 text-start">
+          <div *ngFor="let error of errors">
+            <p>{{error}}</p>
+          </div>
+        </div>
+        <div class="py-[1vh] w-full">
+          <section class="flex flex-col text-left space-y-7 pl-[25rem] "> 
+            <div class="flex items-center justify-between">
+              <div class="w-full lg:w-5/12 mb-4 ml-1/3">
+                <app-input-title class="text-[2.6vh] ml-1/4">Nome</app-input-title>
+                <div class="flex items-center">
+                  <input required placeholder="{{user.email}}" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="user.firstName"
+                         class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+                </div>
+              </div>
+              <div class="w-full lg:w-5/12 mb-4">
+                <app-input-title class="text-[2.6vh]">Apelido</app-input-title>
+                <div class="flex items-center">
+                  <input required placeholder="{{user.email}}" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="user.surname"
+                         class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center justify-center mb-4">
+              <div class="w-full pr-5 ml-1/3">
+                <app-input-title class="text-[2.6vh]">Email</app-input-title>
+                <div class="flex items-center">
+                  <input required placeholder="{{user.email}}" type="text" id="email" formControlName="email" name="email" [(ngModel)]="user.surname"
+                         class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+                </div>
+              </div>
+            </div>  
+            <div class="flex flex-wrap items-center justify-center mb-4">
+              <div class="w-full pr-5 ml-1/3">
+                <app-input-title class="text-[2.6vh]">Morada</app-input-title>
+                <div class="flex items-center">
+                  <input required placeholder="Morada" type="text" id="address" formControlName="address" name="address" [(ngModel)]="user.address"
+                         class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-start justify-between mb-8">
+              <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
+                <app-input-title class="text-[2.6vh]">NIF</app-input-title>
+                <div class="flex items-center">
+                  <input required placeholder="NIF" type="text" id="nif" formControlName="nif" name="nif"
+                         class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" style="width: 100%;" /> <!-- Adjusted width here -->
+                </div>
+              </div>
+              <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4">
+                <app-input-title class="text-[2.6vh]">Data de Nascimento</app-input-title>
+                <div class="flex items-center">
+                  <input required placeholder="Introduza a sua data de nascimento" type="date" id="birthDate" formControlName="birthDate" name="birthDate" [(ngModel)]="user.birthDate"
+                         class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" style="width: calc(100% - 10px);" /> <!-- Adjusted width here -->
+                </div>
+                <div class="text-red-500 font-bold py-2" *ngIf="user.birthDate?.touched && user.birthDate?.invalid">
+                  <div *ngIf="user.birthDate?.errors?.['required'] ">Data de Nascimento Obrigatório</div>
+                </div>
+              </div>
+            </div>        
+            <button type="submit" [disabled]="!profileEdit.valid" class="self-end relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+              Atualizar Dados
+              <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+            </button>   
+          </section>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<app-footer />
+
+
+<!--<div *ngIf="user">
   <h2>User Information</h2>
   <ul>
     <li *ngFor="let keyValuePair of getUserAttributes()">
@@ -15,6 +99,4 @@
 
 <div *ngIf="!user">
   <p>No user information available.</p>
-</div>
-
-<app-footer></app-footer>
+</div>-->

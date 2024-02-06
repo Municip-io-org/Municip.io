@@ -103,6 +103,10 @@ export class UserAuthService {
         return of(false);
       }));
   }
+    
+updateUser(user: Citizen) {
+    return this.http.put('/api/accounts/update', user);
+  }
 
 }
 
