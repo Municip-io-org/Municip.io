@@ -1,9 +1,37 @@
-
+<app-header />
+<app-smaller-banner [title]="'Transportes - Hórario'" [image]="'assets/images/transports/transports.png'" />
 <div *ngIf="municipality">
-{{municipality.id }}
+  {{municipality.id }} {{municipality.name}}
 </div>
 
+<form [formGroup]="scheduleForm">
+  <div>
+    <app-input-title class="text-[2.4vh]">Linha</app-input-title>
+    <div class="flex items-center">
+      <select required id="line" formControlName="line" name="line"
+              class="input w-52
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+        <option value="">Selecionar a linha</option>
+        <option [value]="value.id" *ngFor="let value of lines">{{value.id}} {{ value.long_name}}</option>
+      </select>
+      <app-tooltip [tooltipText]="'Selecione a linha'"></app-tooltip>
+    </div>
+    <div class="text-red-500 font-bold py-2" *ngIf="line?.touched && line?.invalid">
+      <div *ngIf="line?.errors?.['required'] ">Linha Obrigatório</div>
+    </div>
+  </div>
 
-<div *ngFor="let line of lines">
-  {{line.long_name}}
-</div>
+
+  <div *ngIf="routes.length > 1">
+    <div>
+      <app-input-title class="text-[2.4vh]">Rotas</app-input-title>
+      <div class="flex items-center flex-col ">
+        <div *ngFor="let route of routes ; ">
+            <input type="radio" id="route" [value]="route.id" formControlName="route" name="route"  />
+            <label for={{route.id}}>{{ route.long_name }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

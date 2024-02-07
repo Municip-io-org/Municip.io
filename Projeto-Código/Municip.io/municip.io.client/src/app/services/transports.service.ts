@@ -58,6 +58,11 @@ getMunicipalityByName(name: string): Observable < municipalityTransport | null >
 
   }
 
+    
+  getRoute(id: string) : Observable<route>{
+    return this.http.get<route>(this.apiLink + "routes/" + id);
+  }
+
 
 
 }
@@ -81,4 +86,18 @@ export interface municipalityTransport {
   id: string,
   name: string,
   prefix: string,
+}
+
+
+export interface route {
+  id: string,
+  line_id: string,
+  short_name: string,
+  long_name: string,
+  color: string,
+  text_color: string,
+  patterns: string[],
+  municipalities: string[],
+  localities: string [],
+  facilities: string[]
 }
