@@ -9,7 +9,7 @@ export class MyDataCardComponent {
   @Input() firstName: string = "";
   @Input() lastName: string = "";
   @Input() email: string = "";
-  @Input() birthDate: string = "";
+  @Input() birthDate: Date | undefined;
   @Input() address: string = "";
   @Input() nif: string = "";
   @Input() profilePicture: string = "";

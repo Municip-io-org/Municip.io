@@ -11,9 +11,9 @@
                                 phoneNumber="265456789" emblem="/assets/images/brasaoSetubal.jpg"
                                 class="max-w-[50rem]"></app-my-municipality-card>
       <app-my-data-card firstName="Maria" lastName="Albertina dos Anjos" email="maria.albertina@gamail.com"
-                                birthDate="13 de Dezembro de 2000" address="Ruas das Flores Nº5" nif="265456789"
-                                profilePicture="/assets/images/maria.jpg"
-                                class="max-w-[50rem]"></app-my-data-card>
+                        [birthDate]="date1" address="Ruas das Flores Nº5" nif="265456789"
+                        profilePicture="/assets/images/maria.jpg"
+                        class="max-w-[50rem]"></app-my-data-card>
     </section>
     <div class="w-1 bg-gradient-to-tl from-municip-light-blue to-municip-blue rounded mx-[5vw] "></div>
     <section class="flex flex-col grow space-y-7 justify-center items-center">
@@ -43,14 +43,26 @@
       </ul>
     </section>
   </div>
-  <section class="flex flex-col grow space-y-7 justify-center">
-    <div class="flex items-center font-open-sans text-[1.5rem] font-extrabold text-left">
+  <section class="flex flex-col space-y-7 justify-center items-center">
+    <div class="flex items-center font-open-sans text-[1.5rem] font-extrabold">
       <img src="/assets/images/icons/event.png" alt="Notícias" class="size-10 mr-5 " />
-      Eventos de Setúbal
+      PRÓXIMOS EVENTOS DE SETÚBAL
     </div>
-    <ul class="space-y-7">
-
-    </ul>
+    <div class="flex justify-center items-center space-x-7">
+      <button class="flex justify-center items-center bg-black rounded-full size-12" (click)="moveLeft()">
+        <img src="/assets/images/arrows/right-arrow.png" class="size-6 rotate-180" />
+      </button>
+      <ul class="flex space-x-7 justify-center">
+        <ng-container *ngFor="let event of events.slice(startIndex, startIndex + 4)">
+          <li *ngIf="event">
+            <app-events-small [image]="event.image" [title]="event.title" [date]="event.date"></app-events-small>
+          </li>
+        </ng-container>
+      </ul>
+      <button class="flex justify-center items-center bg-black rounded-full size-12" (click)="moveRight()">
+        <img src="/assets/images/arrows/right-arrow.png" class="size-6" />
+      </button>
+    </div>
   </section>
 </div>
 <app-footer></app-footer>

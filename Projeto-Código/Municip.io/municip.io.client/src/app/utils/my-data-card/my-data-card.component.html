@@ -6,14 +6,14 @@
         <div class="flex flex-col text-[1rem] space-y-4 mt-5">
           <p class="font-bold">Nome: <span class="font-normal">{{firstName}} {{lastName}}</span></p>
           <p class="font-bold">Email: <span class="font-normal">{{email}}</span></p>
-          <p class="font-bold">Data de Nascimento: <span class="font-normal">{{birthDate}}</span></p>
+          <p class="font-bold">Data de Nascimento: <span class="font-normal">{{birthDate | date: "dd/MM/yyyy"}}</span></p>
           <p class="font-bold">Morada: <span class="font-normal">{{address}}</span></p>
           <p class="font-bold">NIF: <span class="font-normal">{{nif | formatNumber3By3Pipe}}</span></p>
         </div>
       </div>
     </section>
     <section class="flex flex-col justify-center items-center">
-      <img src={{profilePicture}} alt="Foto de perfil" class="size-32 rounded-2xl" />
+      <img src={{profilePicture}} alt="Foto de perfil" class="object-cover size-32 rounded-2xl" />
       <app-btn-municip-blue class="relative top-10">
         Perfil Completo
         <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
