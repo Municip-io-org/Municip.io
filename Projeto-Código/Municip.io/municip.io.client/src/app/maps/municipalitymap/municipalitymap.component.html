@@ -1,9 +1,12 @@
 <div class="mb-40">
-  <google-map height="500px"
-              width="100%"
-              [zoom]="zoom"
-              [center]="center"
-              [options]="options"
-              #mapInstance="googleMap"></google-map>
 
+
+  <ng-container *ngIf="showMap">
+    <google-map height="500px"
+                width="100%"
+                [zoom]="zoom"
+                [center]="center"
+                [options]="options"
+                #mapInstance="googleMap"></google-map>
+  </ng-container>
 </div>

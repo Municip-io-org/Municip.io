@@ -23,18 +23,18 @@ export class MunicipalitymapComponent implements AfterViewInit {
     draggable: true,
     restriction: null,
     minZoom: 10,
-    fullscreenControl: false, 
-    scaleControl: false, 
-    mapTypeControl: false, 
-    rotateControl: false, 
-
-
+    fullscreenControl: false,
+    scaleControl: false,
+    mapTypeControl: false,
+    rotateControl: false
   };
+
+  showMap: boolean = true;
 
   ngAfterViewInit() {
     if (this.googleMap) {
       console.log("ENTROU");
-      this.setBoundsAndCenterForMunicipality('Lisboa');
+      this.setBoundsAndCenterForMunicipality('Montijo');
     }
   }
 
@@ -51,7 +51,7 @@ export class MunicipalitymapComponent implements AfterViewInit {
           },
           strictBounds: true
         };
-        
+
         this.options = { ...this.options, restriction: newRestriction };
 
         const centerLat = (bounds.north + bounds.south) / 2;
@@ -63,8 +63,12 @@ export class MunicipalitymapComponent implements AfterViewInit {
           this.googleMap.center = this.center;
         }
       } else {
+        this.showMap = false;
         console.error('DEU ERRO:', municipalityName);
       }
+    }, error => {
+      this.showMap = false;
+      console.error('Erro ao obter os limites do município:', error);
     });
   }
 }

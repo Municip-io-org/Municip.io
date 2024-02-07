@@ -13,8 +13,14 @@ export class BoundsService {
   getMunicipalityBounds(municipalityName: string): Observable<any> {
     const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${municipalityName}&key=AIzaSyDNwbIjZzCxVDfVZBvwpJ8WyX-DUb--44s`;
 
+    
+
     return this.http.get(apiUrl).pipe(
       map((data: any) => {
+
+if (data.status === 'ZERO_RESULTS') {
+          throw new Error('ERRO');
+        }
         if (data.results && data.results.length > 0) {
           const geometry = data.results[0].geometry;
           if (geometry && geometry.bounds) {
@@ -31,4 +37,10 @@ export class BoundsService {
       })
     );
   }
+
+  getFromAPI(municipalityName: string): Observable<any> {
+const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${municipalityName}&key=AIzaSyDNwbIjZzCxVDfVZBvwpJ8WyX-DUb--44s`;
+    return this.http.get(apiUrl);
+  }
+
 }
