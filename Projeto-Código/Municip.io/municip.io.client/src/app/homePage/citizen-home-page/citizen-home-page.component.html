@@ -4,7 +4,7 @@
                 é um tesouro situado na região da Península de Setúbal. Com uma rica história que remonta à antiguidade,
                 a cidade combina o charme de seu patrimônio histórico com a beleza natural que a rodeia.
 "></app-big-banner>
-<div class="my-[4rem] mx-32">
+<div class="my-[4rem] mx-32 space-y-20">
   <div class="flex">
     <section class="flex flex-col space-y-20 w-[140rem]">
       <app-my-municipality-card county="Setúbal" nPopulation="127000000" email="camara.setubal@cm-setubal.pt"
@@ -21,19 +21,36 @@
         <img src="/assets/images/icons/newspaper-folded.png" alt="Notícias" class="size-10 mr-5 " />
         NOTÍCIAS DE SETÚBAL
       </div>
-      <app-news-small image="/assets/images/carnaval.jpg" title="Setúbal sai à rua para brincar ao Carnaval"
-                      text="Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de
+      <ul class="space-y-7">
+        <li>
+          <app-news-small image="/assets/images/carnaval.jpg" title="Setúbal sai à rua para brincar ao Carnaval"
+                          text="Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de
                       atividades associadas aos festejos, de que se destacam duas tardes de animação no centro
                       da cidade, a 11 e 13 de fevereiro."></app-news-small>
-      <app-news-small image="/assets/images/carnaval.jpg" title="Setúbal sai à rua para brincar ao Carnaval"
-                      text="Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de
+        </li>
+        <li>
+          <app-news-small image="/assets/images/carnaval.jpg" title="Setúbal sai à rua para brincar ao Carnaval"
+                          text="Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de
                 atividades associadas aos festejos, de que se destacam duas tardes de animação no centro
                 da cidade, a 11 e 13 de fevereiro."></app-news-small>
-      <app-news-small image="/assets/images/carnaval.jpg" title="Setúbal sai à rua para brincar ao Carnaval"
-                      text="Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de
+        </li>
+        <li>
+          <app-news-small image="/assets/images/carnaval.jpg" title="Setúbal sai à rua para brincar ao Carnaval"
+                          text="Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de
                 atividades associadas aos festejos, de que se destacam duas tardes de animação no centro
                 da cidade, a 11 e 13 de fevereiro."></app-news-small>
+        </li>
+      </ul>
     </section>
   </div>
+  <section class="flex flex-col grow space-y-7 justify-center">
+    <div class="flex items-center font-open-sans text-[1.5rem] font-extrabold text-left">
+      <img src="/assets/images/icons/event.png" alt="Notícias" class="size-10 mr-5 " />
+      Eventos de Setúbal
+    </div>
+    <ul class="space-y-7">
+
+    </ul>
+  </section>
 </div>
 <app-footer></app-footer>

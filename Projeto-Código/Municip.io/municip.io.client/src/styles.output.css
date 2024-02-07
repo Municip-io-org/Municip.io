@@ -1224,6 +1224,12 @@ video {
   margin-bottom: calc(1.75rem * var(--tw-space-y-reverse));
 }
 
+.space-y-14 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(3.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(3.5rem * var(--tw-space-y-reverse));
+}
+
 .divide-x-8 > :not([hidden]) ~ :not([hidden]){
   --tw-divide-x-reverse: 0;
   border-right-width: calc(8px * var(--tw-divide-x-reverse));
@@ -1460,6 +1466,26 @@ video {
   padding: 2rem;
 }
 
+.p-\[0\.25rem\]{
+  padding: 0.25rem;
+}
+
+.p-\[0\.20rem\]{
+  padding: 0.20rem;
+}
+
+.p-\[0\.18rem\]{
+  padding: 0.18rem;
+}
+
+.p-\[0\.17rem\]{
+  padding: 0.17rem;
+}
+
+.p-\[0\.16rem\]{
+  padding: 0.16rem;
+}
+
 .px-2{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -1670,8 +1696,8 @@ video {
   font-size: 1.063rem;
 }
 
-.text-\[1\.125rem\]{
-  font-size: 1.125rem;
+.text-\[1\.5rem\]{
+  font-size: 1.5rem;
 }
 
 .text-\[1\.7rem\]{
@@ -1753,10 +1779,6 @@ video {
 .text-xs{
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-\[1\.5rem\]{
-  font-size: 1.5rem;
 }
 
 .font-black{
@@ -1918,6 +1940,21 @@ video {
 
 .drop-shadow-\[0_4px_4px_rgba\(0\2c 0\2c 0\2c 0\.25\)\]{
   --tw-drop-shadow: drop-shadow(0 4px 4px rgba(0,0,0,0.25));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.drop-shadow-\[0_4px_4px_rgba\(0\2c 0\2c 0\2c 0\.35\)\]{
+  --tw-drop-shadow: drop-shadow(0 4px 4px rgba(0,0,0,0.35));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.drop-shadow-\[0_4px_4px_rgba\(0\2c 0\2c 0\2c 0\.45\)\]{
+  --tw-drop-shadow: drop-shadow(0 4px 4px rgba(0,0,0,0.45));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.drop-shadow-\[0_4px_4px_rgba\(0\2c 0\2c 0\2c 0\.55\)\]{
+  --tw-drop-shadow: drop-shadow(0 4px 4px rgba(0,0,0,0.55));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
