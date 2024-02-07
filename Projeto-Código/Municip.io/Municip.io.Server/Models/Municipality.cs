@@ -1,4 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
 
 namespace Municip.io.Server.Models
 {
@@ -32,6 +37,15 @@ namespace Municip.io.Server.Models
         public string? codigoine { get; set; }
         public string? nome { get; set; }
         public string? distrito { get; set; }
+
+        public DateOnly? date { get; set; }
+
+        public int? numberOfUsers { get; set; }
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+
+        public MunicipalityStatus status { get; set;}
+        
 
 
 

@@ -17,6 +17,8 @@ import { AdmindashboardComponent } from './administrator/admindashboard/admindas
 
 import { TransportsMainComponent } from './transports/transports-main/transports-main.component';
 import { SchedulesComponent } from './transports/schedules/schedules.component';
+import { MunAdmindashboardComponent } from './munadministrator/mun-admindashboard/mun-admindashboard.component';
+import { MunicipalitymapComponent } from './maps/municipalitymap/municipalitymap.component';
 
 
 const routes: Routes = [
@@ -35,7 +37,9 @@ const routes: Routes = [
   { path: 'admindashboard', component: AdmindashboardComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
   { path: 'transports', component: TransportsMainComponent, data: {} },
-  {path : 'schedules', component: SchedulesComponent, data: {}}
+  {path : 'schedules', component: SchedulesComponent, data: {}},
+  { path: 'munadmin-dashboard/:municipalName', component: MunAdmindashboardComponent, data: {} },
+  { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} }
 ];
 
 @NgModule({

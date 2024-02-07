@@ -1,0 +1,16 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white rounded-lg p-6 shadow-xl flex flex-col items-center">
+    <img src="{{ user.photo }}" alt="{{ user.firstName }} {{ user.surname }}" class="rounded-full w-24 h-24 mb-4">
+    <h2 class="text-xl font-bold mb-4">{{ user.firstName }} {{ user.surname }}</h2>
+    <p class="mb-2"><strong>ID:</strong> {{ user.id }}</p>
+    <p class="mb-2"><strong>Email:</strong> {{ user.email }}</p>
+    <p class="mb-2"><strong>Data de Registo:</strong> {{ user.date | date: 'dd/MM/yyyy' }}</p>
+    <p class="mb-2"><strong>Estado:</strong> {{ user.status }}</p>
+    <p class="mb-2"><strong>Município:</strong> {{ user.municipality}}</p>
+    <p class="mb-2"><strong>Código Postal:</strong> {{ user.postalCode1}}-{{user.postalCode2}}</p>
+    <p class="mb-2"><strong>NIF:</strong> {{ user.nif}}</p>
+    <div class="mt-auto">
+      <button class="bg-red-500 text-white px-4 py-2 my-4 rounded-md" (click)="onClose()">Fechar</button>
+    </div>
+  </div>
+</div>
