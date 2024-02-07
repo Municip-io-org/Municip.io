@@ -39,6 +39,7 @@ import { CardOutlineThemeComponent } from './utils/card-outline-theme/card-outli
 import { MyMunicipalityCardComponent } from './utils/my-municipality-card/my-municipality-card.component';
 import { FormatNumber3By3Pipe } from './pipes/format-number3-by3.pipe';
 import { NewsSmallComponent } from './utils/news-small/news-small.component';
+import { MyDataCardComponent } from './utils/my-data-card/my-data-card.component';
 
 
 
@@ -75,7 +76,8 @@ import { NewsSmallComponent } from './utils/news-small/news-small.component';
     CardOutlineThemeComponent,
     MyMunicipalityCardComponent,
     FormatNumber3By3Pipe,
-    NewsSmallComponent
+    NewsSmallComponent,
+    MyDataCardComponent
     
   ],
   imports: [
