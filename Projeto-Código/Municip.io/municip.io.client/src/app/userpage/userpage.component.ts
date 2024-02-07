@@ -16,18 +16,22 @@ export class UserpageComponent {
   errors: string[] | null = null;
 
   constructor(private userAuthService: UserAuthService ) { }
- user: any;
+  user: any;
   role: string = "";
 
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
       res => {
+        //console.log(res);
         this.user = res;
-        console.log("DADOOODOODDODO : ", this.user.firstName);
-        this.userAuthService.getInfoByEmail(this.user.email).subscribe(
+        //console.log("DADOOODOODDODO : ", this.user.firstName);
+        var emailToParse = this.user.email;
+        console.log("emailToParse", emailToParse);
+        var emailParsed = emailToParse.replace('@', '%40');
+console.log("emailParsed", emailParsed);  
+        this.userAuthService.getInfoByEmail(emailParsed).subscribe(
           res => {
             this.newUser = res;
-
             console.log("user", this.newUser);
           });
           },
@@ -52,8 +56,9 @@ export class UserpageComponent {
   profileEdit = new FormGroup({
     firstName: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.email, Validators.required]),
+    surname: new FormControl("", [Validators.required]),
     birthDate: new FormControl(new Date(), [Validators.required]),
-    morada: new FormControl("", [Validators.required]),
+    address: new FormControl("", [Validators.required]),
     nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
     profileimg: new FormControl(null, [Validators.required])
   });

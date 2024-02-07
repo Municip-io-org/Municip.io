@@ -8,7 +8,7 @@
 
 <div class="w-full relative">
   <img src="{{image}}" alt="Main photo" class="object-cover w-full h-52 brightness-75" />
-  <div class="absolute bottom-0 pl-8 py-20 bg-municip-highlight-black w-full text-municip-blank bg-opacity-0 text-left">
+  <div class="absolute bottom-0 pl-40 py-20 bg-municip-highlight-black w-full text-municip-blank bg-opacity-0 text-left">
     <h1 class="text-white font-bold text-5xl font-inter leading-tight text-shadow">{{title}}</h1>
     <p class="text-gray-200 font-inter text-shadow">
       {{text}}
@@ -16,7 +16,7 @@
   </div>
   <div *ngIf="profileimg" class="absolute right-24 transform translate-x-1/2 -translate-y-1/2 ">
     <div class="rounded-full overflow-hidden bg-white">
-      <img [src]="profileimg" alt="Profile Picture" class="w-24 h-24 object-cover">
+      <img src="{{profileimg}}" alt="Profile Picture" class="w-24 h-24 object-cover">
     </div>
   </div>
 </div>

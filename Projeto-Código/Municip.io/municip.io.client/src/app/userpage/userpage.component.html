@@ -2,7 +2,7 @@
 <app-header></app-header>
 
 <app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
-                    [title]="'Dados de ' + user.firstName"
+                    [title]="'Dados de ' + newUser.firstName "
                     [text]="'Consulte e altere os seus dados pessoais'"
                     [profileimg]="'/assets/images/admin/banner.jpg'">
 </app-smaller-banner>
@@ -21,14 +21,14 @@
               <div class="w-full lg:w-5/12 mb-4 ml-1/3">
                 <app-input-title class="text-[2.6vh] ml-1/4">Nome</app-input-title>
                 <div class="flex items-center">
-                  <input required placeholder="{{user.email}}" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="user.firstName"
+                  <input required placeholder="{{newUser.firstName}}" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="newUser.firstName"
                          class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
                 </div>
               </div>
               <div class="w-full lg:w-5/12 mb-4">
                 <app-input-title class="text-[2.6vh]">Apelido</app-input-title>
                 <div class="flex items-center">
-                  <input required placeholder="{{user.email}}" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="user.surname"
+                  <input required placeholder="{{newUser.surname}}" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="newUser.surname"
                          class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
                 </div>
               </div>
@@ -37,7 +37,7 @@
               <div class="w-full pr-5 ml-1/3">
                 <app-input-title class="text-[2.6vh]">Email</app-input-title>
                 <div class="flex items-center">
-                  <input required placeholder="{{user.email}}" type="text" id="email" formControlName="email" name="email" [(ngModel)]="user.surname"
+                  <input required placeholder="{{newUser.email}}" type="text" id="email" formControlName="email" name="email" [(ngModel)]="newUser.email"
                          class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
                 </div>
               </div>
@@ -46,7 +46,7 @@
               <div class="w-full pr-5 ml-1/3">
                 <app-input-title class="text-[2.6vh]">Morada</app-input-title>
                 <div class="flex items-center">
-                  <input required placeholder="Morada" type="text" id="address" formControlName="address" name="address" [(ngModel)]="user.address"
+                  <input required placeholder="{{newUser.address}}" type="text" id="address" formControlName="address" name="address" [(ngModel)]="newUser.address"
                          class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
                 </div>
               </div>
@@ -55,14 +55,14 @@
               <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
                 <app-input-title class="text-[2.6vh]">NIF</app-input-title>
                 <div class="flex items-center">
-                  <input required placeholder="NIF" type="text" id="nif" formControlName="nif" name="nif"
+                  <input required placeholder="{{newUser.nif}}" type="text" id="nif" formControlName="nif" name="nif" [(ngModel)]="newUser.nif"
                          class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" style="width: 100%;" /> <!-- Adjusted width here -->
                 </div>
               </div>
               <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4">
                 <app-input-title class="text-[2.6vh]">Data de Nascimento</app-input-title>
                 <div class="flex items-center">
-                  <input required placeholder="Introduza a sua data de nascimento" type="date" id="birthDate" formControlName="birthDate" name="birthDate" [(ngModel)]="user.birthDate"
+                  <input required placeholder="{{newUser.birthDate}}" type="date" id="birthDate" formControlName="birthDate" name="birthDate" [(ngModel)]="newUser.birthDate"
                          class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" style="width: calc(100% - 10px);" /> <!-- Adjusted width here -->
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="user.birthDate?.touched && user.birthDate?.invalid">

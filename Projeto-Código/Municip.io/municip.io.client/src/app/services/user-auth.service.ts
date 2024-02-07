@@ -47,7 +47,7 @@ export class UserAuthService {
 
   getInfoByEmail(email: string) {
     let params = new HttpParams().set('email', email);
-    return this.http.get<MunicipalAdministrator | Citizen>('/api/accounts/InfoByEmail/', { params });
+    return this.http.get<MunicipalAdministrator | Citizen>(`/api/accounts/InfoByEmail/?email=${email}`, {});
   }
 
   getUserRole() {
