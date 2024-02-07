@@ -13,6 +13,7 @@ export class MunicipalitymapComponent implements AfterViewInit {
 
   @ViewChild(GoogleMap, { static: false }) googleMap: GoogleMap | undefined;
 
+  municipalityName: string = '';
   zoom = 10;
   center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   options: google.maps.MapOptions = {
@@ -32,9 +33,10 @@ export class MunicipalitymapComponent implements AfterViewInit {
   showMap: boolean = true;
 
   ngAfterViewInit() {
+    this.municipalityName = 'kjfdnskfsnk';
     if (this.googleMap) {
       console.log("ENTROU");
-      this.setBoundsAndCenterForMunicipality('Montijo');
+      this.setBoundsAndCenterForMunicipality(this.municipalityName);
     }
   }
 
@@ -69,6 +71,7 @@ export class MunicipalitymapComponent implements AfterViewInit {
     }, error => {
       this.showMap = false;
       console.error('Erro ao obter os limites do município:', error);
+
     });
   }
 }
