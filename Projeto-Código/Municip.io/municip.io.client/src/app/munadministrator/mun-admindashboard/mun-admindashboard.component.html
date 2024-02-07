@@ -63,7 +63,7 @@
             <tr *ngFor="let m of filteredCitizens" [class]="(filteredCitizens.indexOf(m) % 2 === 0 ? 'bg-white' : 'bg-gray-100')" (click)="openDialog(m)">
               <td class="px-5 py-5 text-left">{{ m.id }}</td>
               <td class="px-5 py-5 text-left">{{ m.firstName }} {{ m.surname }}</td>
-              <td class="px-5 py-5 text-left">{{ m.date | date: 'dd MMM yy' }}</td>
+              <td class="px-5 py-5 text-left">{{ m.date | date: 'dd/MM/yyyy' }}</td>
               <td class="px-5 py-5 text-left">
                 <span *ngIf="m.status === 'Approved'" class="inline-block p-1.5 bg-green-500 text-white rounded-full text-xs">
                   {{ m.status }}
