@@ -35,6 +35,8 @@ import { VerticalCardComponent } from './utils/vertical-card/vertical-card.compo
 import { BigBannerComponent } from './utils/big-banner/big-banner.component';
 import { SmallerBannerComponent } from './utils/smaller-banner/smaller-banner.component';
 import { MunAdmindashboardComponent } from './munadministrator/mun-admindashboard/mun-admindashboard.component';
+import { MunicipalitymapComponent } from './maps/municipalitymap/municipalitymap.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 
@@ -67,14 +69,15 @@ import { MunAdmindashboardComponent } from './munadministrator/mun-admindashboar
     VerticalCardComponent,
     BigBannerComponent,
     SmallerBannerComponent,
-    MunAdmindashboardComponent
+    MunAdmindashboardComponent,
+    MunicipalitymapComponent
     
   ],
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule, BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, GoogleMapsModule
   ],
   providers: [
     MunicipalityGuard,
