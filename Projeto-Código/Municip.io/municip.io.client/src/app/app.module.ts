@@ -37,6 +37,7 @@ import { SmallerBannerComponent } from './utils/smaller-banner/smaller-banner.co
 import { MunAdmindashboardComponent } from './munadministrator/mun-admindashboard/mun-admindashboard.component';
 import { MunicipalitymapComponent } from './maps/municipalitymap/municipalitymap.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { UserinfodialogComponent } from './utils/userinfodialog/userinfodialog.component';
 
 
 
@@ -70,7 +71,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     BigBannerComponent,
     SmallerBannerComponent,
     MunAdmindashboardComponent,
-    MunicipalitymapComponent
+    MunicipalitymapComponent,
+    UserinfodialogComponent
     
   ],
   imports: [
