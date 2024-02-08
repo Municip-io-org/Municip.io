@@ -17,7 +17,7 @@ export class StopsMapComponent {
 
   @Input() municipalityName: string = ''; 
 
-
+  selectedStop: string = '';
   showNextBuses: boolean = false;
   nextBuses: any[] = [];
   lines: any[] = [];
@@ -107,6 +107,7 @@ export class StopsMapComponent {
       shouldFocus: false
     });
 
+    this.selectedStop = stop.name;
     this.getLines();
     this.getNextBuses(stop.id);
 
@@ -147,6 +148,8 @@ export class StopsMapComponent {
           return scheduledArrivalTime > tenMinutesBeforeNow;
         });
 
+
+        
 this.nextBuses.forEach(bus => {
           const line = this.lines.find(line => line.id === bus.line_id);
           bus.color = line?.color || '#000000';
@@ -162,5 +165,17 @@ this.nextBuses.forEach(bus => {
       }
     );
   }
+
+  isBusPassed(bus: any): boolean {
+    const now = new Date();
+    const scheduledArrivalTime = new Date();
+    const scheduledArrivalParts = bus.scheduled_arrival.split(":");
+    scheduledArrivalTime.setHours(parseInt(scheduledArrivalParts[0]));
+    scheduledArrivalTime.setMinutes(parseInt(scheduledArrivalParts[1]));
+    scheduledArrivalTime.setSeconds(parseInt(scheduledArrivalParts[2]));
+
+    return scheduledArrivalTime < now;
+  }
+
 
 }
