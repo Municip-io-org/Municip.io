@@ -326,7 +326,15 @@ namespace Municip.io.Server.Controllers
                     existingCitizen.Nif = updatedCitizen.Nif;
                 }
 
-               
+                if (existingCitizen.postalCode1 != updatedCitizen.postalCode1)
+                {
+                    existingCitizen.postalCode1 = updatedCitizen.postalCode1;
+                }
+                if (existingCitizen.postalCode2 != updatedCitizen.postalCode2)
+                {
+                    existingCitizen.postalCode2 = updatedCitizen.postalCode2;
+                }
+
                 if (_context.ChangeTracker.HasChanges())
                 {
                     await _context.SaveChangesAsync();
