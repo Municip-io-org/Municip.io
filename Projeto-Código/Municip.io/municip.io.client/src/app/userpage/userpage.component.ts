@@ -65,7 +65,13 @@ export class UserpageComponent {
 
   OnSubmit() {
     console.log(this.profileEdit.value);
-    this.userAuthService.updateUser(this.profileEdit.value as Citizen).subscribe(
+    this.newUser.name = this.profileEdit.value.firstName;
+    this.newUser.surname = this.profileEdit.value.surname;
+    this.newUser.email = this.profileEdit.value.email;
+    this.newUser.birthDate = this.profileEdit.value.birthDate;
+    this.newUser.address = this.profileEdit.value.address;
+    this.newUser.nif = this.profileEdit.value.nif;
+    this.userAuthService.updateUser(this.newUser).subscribe(
       res => {
         console.log(res);
       },
