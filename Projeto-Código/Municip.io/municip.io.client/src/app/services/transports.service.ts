@@ -64,6 +64,10 @@ getMunicipalityByName(name: string): Observable < municipalityTransport | null >
   }
 
 
+  getPattern(id :string ) : Observable<pattern>{
+    return this.http.get<pattern>(this.apiLink + "patterns/" + id);
+  }
+
 
 }
 
@@ -100,4 +104,67 @@ export interface route {
   municipalities: string[],
   localities: string [],
   facilities: string[]
+}
+
+export interface pattern {
+
+  id: string,
+  line_id: string,
+  route_id: string,
+  short_name: string,
+  direction: string,
+  headsign: string,
+  color: string,
+  text_color: string,
+  valid_on: string[],
+  municipalities: string[],
+  localities: string[],
+  facilities: string[],
+  shape_id: string,
+  path: stop[],
+  trips: trip[]
+
+}
+
+export interface stop {
+  id: string;
+  name: string;
+  short_name: string | null;
+  tts_name: string;
+  lat: string;
+  lon: string;
+  locality: string;
+  parish_id: string | null;
+  parish_name: string | null;
+  municipality_id: string;
+  municipality_name: string;
+  district_id: string;
+  district_name: string;
+  region_id: string;
+  region_name: string;
+  wheelchair_boarding: boolean | null;
+  facilities: string[];
+  lines: string[];
+  routes: string[];
+  patterns: string[];
+  stop_sequence: number;
+  allow_pickup: boolean;
+  allow_drop_off: boolean;
+  distance_delta: number;
+}
+
+export interface trip {
+  id: string,
+  calendar_id: string,
+  calendar_description: string,
+  dates: string[],
+  schedule: stopTime[]
+}
+
+export interface stopTime {
+  stop_id: string,
+  stop_sequence: number,
+  arrival_time: string,
+  arrival_time_operation: string,
+  travel_time: number
 }

@@ -28,10 +28,28 @@ transition-all duration-700 ease-in-out  decoration-sky-500">
       <app-input-title class="text-[2.4vh]">Rotas</app-input-title>
       <div class="flex items-center flex-col ">
         <div *ngFor="let route of routes ; ">
-            <input type="radio" id="route" [value]="route.id" formControlName="route" name="route"  />
-            <label for={{route.id}}>{{ route.long_name }}</label>
+          <input type="radio" id="route" [value]="route.id" formControlName="route" name="route" />
+          <label for={{route.id}}>{{ route.long_name }}</label>
         </div>
       </div>
     </div>
   </div>
+  <div>
+    <app-input-title class="text-[2.4vh]">Paragem</app-input-title>
+    <div class="flex items-center">
+      <select required id="pattern" formControlName="pattern" name="pattern"
+              class="input w-52
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+        <option value="">Selecionar a paragem</option>
+        <option [value]="value.id" *ngFor="let value of patterns">{{ value.headsign}}</option>
+      </select>
+      <app-tooltip [tooltipText]="'Selecione a paragem de destino'"></app-tooltip>
+    </div>
+    <div class="text-red-500 font-bold py-2" *ngIf="pattern?.touched && pattern?.invalid">
+      <div *ngIf="pattern?.errors?.['required'] ">Paragem Obrigatório</div>
+    </div>
+  </div>
+
+
 </form>
