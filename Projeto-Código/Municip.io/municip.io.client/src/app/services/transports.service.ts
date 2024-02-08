@@ -64,6 +64,15 @@ getMunicipalityByName(name: string): Observable < municipalityTransport | null >
   }
 
 
+  getStopsFromMunicipality(municipalityName: string): Observable<any[]> {
+    return this.http.get<any[]>(this.apiLink + "stops").pipe(
+      map(stops => stops.filter(stop => stop.municipality_name === municipalityName))
+    );
+  }
+
+
+
+
 
 }
 

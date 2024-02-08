@@ -39,6 +39,7 @@ import { MunAdmindashboardComponent } from './munadministrator/mun-admindashboar
 import { MunicipalitymapComponent } from './maps/municipalitymap/municipalitymap.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { UserinfodialogComponent } from './utils/userinfodialog/userinfodialog.component';
+import { StopsMapComponent } from './transports/stops-map/stops-map.component';
 
 
 
@@ -74,7 +75,8 @@ import { UserinfodialogComponent } from './utils/userinfodialog/userinfodialog.c
     SchedulesComponent,
     MunAdmindashboardComponent,
     MunicipalitymapComponent,
-    UserinfodialogComponent
+    UserinfodialogComponent,
+    StopsMapComponent
     
   ],
   imports: [

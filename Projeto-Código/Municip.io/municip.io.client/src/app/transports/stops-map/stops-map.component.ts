@@ -1,16 +1,15 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
-import { GoogleMap, MapMarker } from '@angular/google-maps';
-import { BoundsService } from '../bounds.service';
-import { TransportsService } from '../../services/transports.service';
+import { Component, ViewChild } from '@angular/core';
+import { BoundsService } from '../../maps/bounds.service';
+import { GoogleMap } from '@angular/google-maps';
 
 @Component({
-  selector: 'app-municipalitymap',
-  templateUrl: './municipalitymap.component.html',
-  styleUrls: ['./municipalitymap.component.css']
+  selector: 'app-stops-map',
+  templateUrl: './stops-map.component.html',
+  styleUrl: './stops-map.component.css'
 })
-export class MunicipalitymapComponent implements AfterViewInit {
+export class StopsMapComponent {
 
-  constructor(private boundsService: BoundsService, private transportsService: TransportsService) { }
+  constructor(private boundsService: BoundsService) { }
 
   @ViewChild(GoogleMap, { static: false }) googleMap: GoogleMap | undefined;
 
@@ -34,15 +33,17 @@ export class MunicipalitymapComponent implements AfterViewInit {
   showMap: boolean = true;
 
   ngAfterViewInit() {
-    this.municipalityName = 'Setúbal';
+    this.municipalityName = 'kjfdnskfsnk';
     if (this.googleMap) {
+      console.log("ENTROU");
       this.setBoundsAndCenterForMunicipality(this.municipalityName);
     }
   }
 
   setBoundsAndCenterForMunicipality(municipalityName: string) {
     this.boundsService.getMunicipalityBounds(municipalityName).subscribe(bounds => {
-      if (bounds && this.googleMap) {
+      if (bounds) {
+        console.log("Entra no if do setBoundsAndCenterForMunicipality");
         const newRestriction: google.maps.MapRestriction = {
           latLngBounds: {
             north: bounds.north,
@@ -59,19 +60,10 @@ export class MunicipalitymapComponent implements AfterViewInit {
         const centerLng = (bounds.east + bounds.west) / 2;
         this.center = { lat: centerLat, lng: centerLng };
 
-        this.googleMap.options = this.options;
-        this.googleMap.center = this.center;
-
-        // Adicionar marcadores
-        this.transportsService.getStopsFromMunicipality(this.municipalityName).subscribe(stops => {
-          stops.forEach(stop => {
-            const marker = new google.maps.Marker({
-              position: { lat: parseFloat(stop.lat), lng: parseFloat(stop.lon) },
-              map: this.googleMap?.googleMap,
-              title: stop.name
-            });
-          });
-        });
+        if (this.googleMap) {
+          this.googleMap.options = this.options;
+          this.googleMap.center = this.center;
+        }
       } else {
         this.showMap = false;
         console.error('DEU ERRO:', municipalityName);
@@ -79,6 +71,9 @@ export class MunicipalitymapComponent implements AfterViewInit {
     }, error => {
       this.showMap = false;
       console.error('Erro ao obter os limites do município:', error);
+
     });
   }
+
+
 }

@@ -39,7 +39,8 @@ const routes: Routes = [
   { path: 'transports', component: TransportsMainComponent, data: {} },
   {path : 'schedules', component: SchedulesComponent, data: {}},
   { path: 'munadmin-dashboard/:municipalName', component: MunAdmindashboardComponent, data: {} },
-  { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} }
+  { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} },
+  { path: 'stopsmap', component: MunicipalitymapComponent, data: {} }
 ];
 
 @NgModule({
