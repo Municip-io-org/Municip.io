@@ -40,6 +40,7 @@ import { MunicipalitymapComponent } from './maps/municipalitymap/municipalitymap
 import { GoogleMapsModule } from '@angular/google-maps';
 import { UserinfodialogComponent } from './utils/userinfodialog/userinfodialog.component';
 import { StopsMapComponent } from './transports/stops-map/stops-map.component';
+import { StopsPageComponent } from './transports/stops-page/stops-page.component';
 
 
 
@@ -76,7 +77,8 @@ import { StopsMapComponent } from './transports/stops-map/stops-map.component';
     MunAdmindashboardComponent,
     MunicipalitymapComponent,
     UserinfodialogComponent,
-    StopsMapComponent
+    StopsMapComponent,
+    StopsPageComponent
     
   ],
   imports: [

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { BoundsService } from '../../maps/bounds.service';
 import { GoogleMap } from '@angular/google-maps';
 import { TransportsService } from '../../services/transports.service';
@@ -15,16 +15,19 @@ export class StopsMapComponent {
 
   @ViewChild(GoogleMap, { static: false }) googleMap: GoogleMap | undefined;
 
+  @Input() municipalityName: string = ''; 
+
+
   showNextBuses: boolean = false;
   nextBuses: any[] = [];
-  municipalityName: string = '';
+  lines: any[] = [];
   zoom = 10;
   center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   options: google.maps.MapOptions = {
     mapTypeId: 'hybrid',
     zoomControl: true,
     scrollwheel: false,
-    disableDoubleClickZoom: true,
+    disableDoubleClickZoom: false,
     draggable: true,
     restriction: null,
     minZoom: 10,
@@ -38,7 +41,7 @@ export class StopsMapComponent {
   showMap: boolean = true;
 
   ngAfterViewInit() {
-    this.municipalityName = 'Almada';
+    this.municipalityName 
     if (this.googleMap) {
       this.setBoundsAndCenterForMunicipality(this.municipalityName);
     }
@@ -104,8 +107,30 @@ export class StopsMapComponent {
       shouldFocus: false
     });
 
+    this.getLines();
     this.getNextBuses(stop.id);
+
   }
+
+  getLines() {
+    this.transportsService.getLines().subscribe(
+      lines => {
+        const lineData = lines.map(line => {
+          return {
+            id: line.id,
+            textColor: line.text_color,
+            color: line.color
+          };
+        });
+        this.lines = lineData; 
+      },
+      error => {
+        console.error('Erro ao buscar as linhas:', error);
+      }
+    );
+  }
+
+
   getNextBuses(stopId: string) {
     this.transportsService.getRealtimeBuses(stopId).subscribe(
       buses => {
@@ -121,6 +146,12 @@ export class StopsMapComponent {
 
           return scheduledArrivalTime > tenMinutesBeforeNow;
         });
+
+this.nextBuses.forEach(bus => {
+          const line = this.lines.find(line => line.id === bus.line_id);
+          bus.color = line?.color || '#000000';
+          bus.textColor = line?.textColor || '#FFFFFF';
+});
 
         this.showNextBuses = true;
         this.cdr.detectChanges();
