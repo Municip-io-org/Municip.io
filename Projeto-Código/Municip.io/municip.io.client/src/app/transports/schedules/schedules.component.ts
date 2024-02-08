@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TransportsService, line, municipalityTransport, pattern, route } from '../../services/transports.service';
+import { TransportsService, line, municipalityTransport, pattern, route, trip } from '../../services/transports.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -22,18 +22,16 @@ export class SchedulesComponent {
   lines: line[] = [];
   routes: route[] = [];
   patterns: pattern[] = [];
+  trips: trip[] = [];
 
 
-  schedule: formSchedule = {
-    line: "",
-    route: "",
-    pattern: ""
-  }
 
   scheduleForm = new FormGroup({
     line: new FormControl("", [Validators.required]),
     route: new FormControl("", [Validators.required]),
-    pattern: new FormControl("", [Validators.required])
+    pattern: new FormControl("", [Validators.required]),
+    trip: new FormControl("", [Validators.required]),
+    date: new FormControl("", [Validators.required])
   });
 
 
@@ -49,12 +47,22 @@ get route() {
 return this.scheduleForm.get('pattern');
   }
 
+  get trip () {
+    return this.scheduleForm.get('trip');
+  }
+
+  get date() {
+return this.scheduleForm.get('date');
+  }
+
 
   bindQueryParamsManager = this.factory
     .create<formSchedule>([
       { queryKey: 'line' },
       { queryKey: 'route' },
-      { queryKey: 'pattern' }
+      { queryKey: 'pattern' },
+      { queryKey: 'trip' },
+      { queryKey: 'date' }
     ]).connect(this.scheduleForm);
 
 
@@ -65,10 +73,19 @@ return this.scheduleForm.get('pattern');
 
   async ngOnInit() {
 
+    if (!this.scheduleForm.get('date')?.value) {
+      const currentDate = new Date().toISOString().substring(0, 10);
+      this.scheduleForm.get('date')?.setValue(currentDate);
+    }
+
+
+
+
+
    await this.getLines();
 
     this.scheduleForm.get('line')?.valueChanges.subscribe(async (value) => {
-      await this.getCurrentRoutesAndPatterns();
+      await this.getCurrentRoutesAndPatternsAndTrips();
 
 
       if (value === "") {
@@ -92,16 +109,31 @@ return this.scheduleForm.get('pattern');
     });
 
 
+    this.scheduleForm.get("pattern")?.valueChanges.subscribe(async (value) => {
+      this.getCurrentTrips(this.scheduleForm.get('pattern')?.value || null);
+
+      if (value === "") {
+        this.scheduleForm.get("trip")?.setValue(this.trips[0].id);
+      } else if (!this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value)) {
+        this.scheduleForm.get('trip')?.setValue(this.trips[0].id);
+      }
+
+    });
+
+
+
+
 
     if (!this.lines.find(line => line.id === this.scheduleForm.get('line')?.value)) {
       this.scheduleForm.get('line')?.setValue("");
       this.scheduleForm.get('route')?.setValue("");
       this.scheduleForm.get('pattern')?.setValue("");
+      this.scheduleForm.get('trip')?.setValue("");
       return;
     } 
 
 
-    await this.getCurrentRoutesAndPatterns();
+    await this.getCurrentRoutesAndPatternsAndTrips();
 
     if (!this.scheduleForm.get('route')?.value) {
       this.scheduleForm.get('route')?.setValue(this.routes[0].id);
@@ -122,6 +154,18 @@ if (!this.scheduleForm.get('pattern')?.value) {
     }
 
 
+    if (!this.scheduleForm.get('trip')?.value) {
+      this.scheduleForm.get('trip')?.setValue(this.trips[0].id);
+    } else {
+      if(!this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value)) {
+        this.scheduleForm.get('trip')?.setValue(this.trips[0].id);
+      }
+    }
+
+
+
+
+
   }
 
 
@@ -134,9 +178,10 @@ if (!this.scheduleForm.get('pattern')?.value) {
 
 
   //function to get current routes and patterns
-  async getCurrentRoutesAndPatterns() {
+  async getCurrentRoutesAndPatternsAndTrips() {
     await this.getCurrentRoutes(this.scheduleForm.get('line')?.value || null);
     await this.getCurrentPatterns(this.scheduleForm.get('route')?.value || null);
+    this.getCurrentTrips(this.scheduleForm.get('pattern')?.value || null);
   }
 
 
@@ -194,10 +239,27 @@ this.patterns = [];
   }
 
 
+  getCurrentTrips(pattern: string | null) {
+    this.trips = [];
+    if (pattern) {
+      const selectedPattern = this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value);
+      if (selectedPattern) {
+        for (let trip of selectedPattern.trips) {
+          if (trip) {
+            this.trips.push(trip);
+          }
+        }
+      }
+    }
+  }
+
+
 }
 
 interface formSchedule {
   line: string;
   route: string;
   pattern: string;
+  trip: string;
+  date: string;
 }
