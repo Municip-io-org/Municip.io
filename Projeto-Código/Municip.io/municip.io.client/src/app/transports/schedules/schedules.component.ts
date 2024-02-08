@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TransportsService, line, municipalityTransport, pattern, route, trip } from '../../services/transports.service';
+import { TransportsService, line, municipalityTransport, pattern, route, stop, stopTime, trip } from '../../services/transports.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -23,7 +23,8 @@ export class SchedulesComponent {
   routes: route[] = [];
   patterns: pattern[] = [];
   trips: trip[] = [];
-
+  path: stop[] | null = [];
+  schedule: stopTime[] | null = [];
 
 
   scheduleForm = new FormGroup({
@@ -79,9 +80,6 @@ return this.scheduleForm.get('date');
     }
 
 
-
-
-
    await this.getLines();
 
     this.scheduleForm.get('line')?.valueChanges.subscribe(async (value) => {
@@ -100,9 +98,9 @@ return this.scheduleForm.get('date');
       await this.getCurrentPatterns(this.scheduleForm.get('route')?.value || null);
 
       if (value === "") {
-        this.scheduleForm.get("pattern")?.setValue(this.patterns[0].id);
+        this.scheduleForm.get("pattern")?.setValue(this.patterns[0].id || "");
       } else if (!this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value)) {
-        this.scheduleForm.get('pattern')?.setValue(this.patterns[0].id);
+        this.scheduleForm.get('pattern')?.setValue(this.patterns[0].id || "");
       }
 
 
@@ -113,10 +111,27 @@ return this.scheduleForm.get('date');
       this.getCurrentTrips(this.scheduleForm.get('pattern')?.value || null);
 
       if (value === "") {
-        this.scheduleForm.get("trip")?.setValue(this.trips[0].id);
+        this.scheduleForm.get("trip")?.setValue(this.trips[0].id || "");
       } else if (!this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value)) {
-        this.scheduleForm.get('trip')?.setValue(this.trips[0].id);
+        this.scheduleForm.get('trip')?.setValue(this.trips[0].id|| "");
       }
+
+      let patternSelected = this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value);
+      this.path = patternSelected ? patternSelected.path : null;
+
+
+
+
+    });
+
+
+    this.scheduleForm.get("date")?.valueChanges.subscribe(async (value) => {
+        await this.getCurrentRoutesAndPatternsAndTrips();
+    });
+
+    this.scheduleForm.get("trip")?.valueChanges.subscribe( (value) => {
+      let tripSelected = this.trips.find(trip => trip.id === value);
+      this.schedule = tripSelected ? tripSelected.schedule : null;
 
     });
 
@@ -136,33 +151,37 @@ return this.scheduleForm.get('date');
     await this.getCurrentRoutesAndPatternsAndTrips();
 
     if (!this.scheduleForm.get('route')?.value) {
-      this.scheduleForm.get('route')?.setValue(this.routes[0].id);
+      this.scheduleForm.get('route')?.setValue(this.routes[0].id || "");
     } else {
       if (!this.isRouteFromLine(this.scheduleForm.get('route')?.value || "")) {
-        this.scheduleForm.get('route')?.setValue(this.routes[0].id);
+        this.scheduleForm.get('route')?.setValue(this.routes[0].id || "");
       }
     }
 
 
 
 if (!this.scheduleForm.get('pattern')?.value) {
-      this.scheduleForm.get('pattern')?.setValue(this.patterns[0].id);
+      this.scheduleForm.get('pattern')?.setValue(this.patterns[0].id || "");
     } else {
       if (!this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value)) {
-        this.scheduleForm.get('pattern')?.setValue(this.patterns[0].id);
+        this.scheduleForm.get('pattern')?.setValue(this.patterns[0].id || "");
       }
     }
 
 
     if (!this.scheduleForm.get('trip')?.value) {
-      this.scheduleForm.get('trip')?.setValue(this.trips[0].id);
+      this.scheduleForm.get('trip')?.setValue(this.trips[0].id || "");
     } else {
       if(!this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value)) {
-        this.scheduleForm.get('trip')?.setValue(this.trips[0].id);
+        this.scheduleForm.get('trip')?.setValue(this.trips[0].id || "");
       }
     }
 
 
+    let patternSelected = this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value);
+    this.path = patternSelected ? patternSelected.path : null;
+    let tripSelected = this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value);
+    this.schedule = tripSelected ? tripSelected.schedule : null;
 
 
 
@@ -245,7 +264,7 @@ this.patterns = [];
       const selectedPattern = this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value);
       if (selectedPattern) {
         for (let trip of selectedPattern.trips) {
-          if (trip) {
+          if (trip && trip.dates.includes(this.scheduleForm.get('date')?.value?.replace(/-/g, '') || "")) {
             this.trips.push(trip);
           }
         }
@@ -253,6 +272,21 @@ this.patterns = [];
     }
   }
 
+
+  formatTime(time: string): string {
+    return time.substring(0, 5);
+  }
+
+
+  getNameStopById(id: string): string {
+    if (this.path) {
+      let stop = this.path.find(stop => stop.stop.id === id);
+      
+      return stop ? stop.stop.name : "";
+    }
+    return "";
+
+  }
 
 }
 

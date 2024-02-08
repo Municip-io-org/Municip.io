@@ -132,6 +132,14 @@ export interface pattern {
 }
 
 export interface stop {
+  stop: stopInfo;
+  stop_sequence: number;
+  allow_pickup: boolean;
+  allow_drop_off: boolean;
+  distance_delta: number;
+}
+
+export interface stopInfo {
   id: string;
   name: string;
   short_name: string | null;
@@ -152,11 +160,8 @@ export interface stop {
   lines: string[];
   routes: string[];
   patterns: string[];
-  stop_sequence: number;
-  allow_pickup: boolean;
-  allow_drop_off: boolean;
-  distance_delta: number;
 }
+
 
 export interface trip {
   id: string,
@@ -166,7 +171,7 @@ export interface trip {
   schedule: stopTime[]
 }
 
-export interface stopTime {
+export interface stopTime   {
   stop_id: string,
   stop_sequence: number,
   arrival_time: string,
