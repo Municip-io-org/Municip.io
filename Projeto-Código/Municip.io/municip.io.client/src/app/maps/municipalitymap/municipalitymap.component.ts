@@ -31,10 +31,11 @@ export class MunicipalitymapComponent implements AfterViewInit {
     rotateControl: false
   };
 
+  infoWindow = new google.maps.InfoWindow();
   showMap: boolean = true;
 
   ngAfterViewInit() {
-    this.municipalityName = 'Setúbal';
+    this.municipalityName = 'Montijo';
     if (this.googleMap) {
       this.setBoundsAndCenterForMunicipality(this.municipalityName);
     }
@@ -70,6 +71,10 @@ export class MunicipalitymapComponent implements AfterViewInit {
               map: this.googleMap?.googleMap,
               title: stop.name
             });
+
+            marker.addListener('click', () => {
+              this.showInfoWindow(stop, marker);
+            });
           });
         });
       } else {
@@ -79,6 +84,16 @@ export class MunicipalitymapComponent implements AfterViewInit {
     }, error => {
       this.showMap = false;
       console.error('Erro ao obter os limites do município:', error);
+    });
+  }
+
+  showInfoWindow(stop: any, marker: google.maps.Marker) {
+    const content = `<div><b>${stop.name}</b><br/>Linhas: ${stop.lines.join(', ')}</div>`;
+    this.infoWindow.setContent(content);
+    this.infoWindow.open({
+      anchor: marker,
+      map: this.googleMap?.googleMap,
+      shouldFocus: false
     });
   }
 }
