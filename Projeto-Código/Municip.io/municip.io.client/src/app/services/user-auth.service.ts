@@ -105,7 +105,7 @@ export class UserAuthService {
   }
     
 updateUser(user: Citizen) {
-    return this.http.put('/api/accounts/update', user);
+    return this.http.put('/api/accounts/UpdateUserInfo', user);
   }
 
 }

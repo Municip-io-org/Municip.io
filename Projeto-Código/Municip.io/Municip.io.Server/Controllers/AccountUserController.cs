@@ -285,16 +285,59 @@ namespace Municip.io.Server.Controllers
 
         }
 
-        [HttpPost("UpdateUserInfo")]
-        public async Task<IActionResult> UpdateUserInfo(Citizen citizen)
+        [HttpPut("UpdateUserInfo")]
+        public async Task<IActionResult> UpdateUserInfo(Citizen updatedCitizen)
         {
             if (ModelState.IsValid)
             {
-                _context.Citizens.Update(citizen);
-                await _context.SaveChangesAsync();
-                return Ok();
+                var existingCitizen = await _context.Citizens.FindAsync(updatedCitizen.Id);
+
+                if (existingCitizen == null)
+                {
+                    return NotFound();
+                }
+
+                if (existingCitizen.firstName != updatedCitizen.firstName)
+                {
+                    existingCitizen.firstName = updatedCitizen.firstName;
+                }
+
+                if (existingCitizen.Surname != updatedCitizen.Surname)
+                {
+                    existingCitizen.Surname = updatedCitizen.Surname;
+                }
+
+                if (existingCitizen.Email != updatedCitizen.Email)
+                {
+                    existingCitizen.Email = updatedCitizen.Email;
+                }
+
+                if (existingCitizen.birthDate != updatedCitizen.birthDate)
+                {
+                    existingCitizen.birthDate = updatedCitizen.birthDate;
+                }
+
+                if (existingCitizen.Address != updatedCitizen.Address)
+                {
+                    existingCitizen.Address = updatedCitizen.Address;
+                }
+                if (existingCitizen.Nif != updatedCitizen.Nif)
+                {
+                    existingCitizen.Nif = updatedCitizen.Nif;
+                }
+
+               
+                if (_context.ChangeTracker.HasChanges())
+                {
+                    await _context.SaveChangesAsync();
+                    return Ok(); 
+                }
+
+                return NoContent(); 
             }
+
             return BadRequest(new { Message = "Os dados não possuem um formato válido", ModelState = ModelState });
         }
+
     }
 }

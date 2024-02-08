@@ -19,20 +19,20 @@ export class UserpageComponent {
   user: any;
   role: string = "";
 
-  ngOnInit(): void {
+  ngOnInit() {
+
+   
     this.userAuthService.getUserData().subscribe(
-      res => {
-        //console.log(res);
+      res => {    
         this.user = res;
-        //console.log("DADOOODOODDODO : ", this.user.firstName);
-        var emailToParse = this.user.email;
-        console.log("emailToParse", emailToParse);
+        var emailToParse = this.user.email;       
         var emailParsed = emailToParse.replace('@', '%40');
-console.log("emailParsed", emailParsed);  
+ 
         this.userAuthService.getInfoByEmail(emailParsed).subscribe(
           res => {
             this.newUser = res;
-            console.log("user", this.newUser);
+            this.formatBirthDate();
+          console.log(this.newUser);
           });
           },
       error => {
@@ -80,8 +80,18 @@ console.log("emailParsed", emailParsed);
     if (!this.newUser) {
       return [];
     }
-
-    // Extract key-value pairs from user object
+    
     return Object.keys(this.newUser).map(key => ({ key, value: this.newUser[key] }));
+  }
+  
+  formatBirthDate() {
+
+    const dateString = this.newUser.birthDate; 
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2); 
+    const day = ('0' + date.getDate()).slice(-2);
+    const formattedDate = `${year}-${month}-${day}`; 
+    this.newUser.birthDate = formattedDate; 
   }
 }

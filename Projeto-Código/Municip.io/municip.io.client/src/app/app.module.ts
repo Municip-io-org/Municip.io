@@ -35,6 +35,7 @@ import { VerticalCardComponent } from './utils/vertical-card/vertical-card.compo
 import { BigBannerComponent } from './utils/big-banner/big-banner.component';
 import { SmallerBannerComponent } from './utils/smaller-banner/smaller-banner.component';
 import { MunAdmindashboardComponent } from './munadministrator/mun-admindashboard/mun-admindashboard.component';
+import { ProfileBannerComponent } from './utils/profile-banner/profile-banner.component';
 
 
 
@@ -67,7 +68,8 @@ import { MunAdmindashboardComponent } from './munadministrator/mun-admindashboar
     VerticalCardComponent,
     BigBannerComponent,
     SmallerBannerComponent,
-    MunAdmindashboardComponent
+    MunAdmindashboardComponent,
+    ProfileBannerComponent
     
   ],
   imports: [
