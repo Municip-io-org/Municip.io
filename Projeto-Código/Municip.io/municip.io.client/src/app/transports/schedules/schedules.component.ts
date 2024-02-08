@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
+import { BindQueryParamsFactory } from '@ngneat/bind-query-params';
 
 @Component({
   selector: 'app-schedules',
@@ -13,7 +14,7 @@ import { HttpParams } from '@angular/common/http';
 export class SchedulesComponent {
 
   constructor(private service: TransportsService, private authService: UserAuthService, private router: Router,
-    private routeParams: ActivatedRoute) { }
+    private routeParams: ActivatedRoute, private factory: BindQueryParamsFactory) { }
 
 
   //a variavle called lines to store the lines in json format array
@@ -42,45 +43,55 @@ get route() {
   }
 
 
+  bindQueryParamsManager = this.factory
+    .create<formSchedule>([
+      { queryKey: 'line' },
+      { queryKey: 'route' }
+    ]).connect(this.scheduleForm);
+
+
+
+  ngOnDestroy() {
+    this.bindQueryParamsManager.destroy();
+  }
 
   async ngOnInit() {
 
    await this.getLines();
 
+    this.scheduleForm.get('line')?.valueChanges.subscribe(async (value) => {
+      await this.getCurrentRoutes(value || null);
 
 
-    this.scheduleForm.valueChanges
-      .subscribe( async (value) => {
+      if (value === "") {
+        this.scheduleForm.get("route")?.setValue("");
+      } else if (!this.isRouteFromLine(this.scheduleForm.get('route')?.value || "")) {
+        this.scheduleForm.get('route')?.setValue(this.routes[0].id);
+      }
+
+    });
+
+    if (!this.lines.find(line => line.id === this.scheduleForm.get('line')?.value)) {
+      this.scheduleForm.get('line')?.setValue("");
+      this.scheduleForm.get('route')?.setValue("");
+      return;
+    } 
 
 
-        //this.schedule.line = value.line || "";
-        //this.schedule.route = value.route || "";
+    await this.getCurrentRoutes(this.scheduleForm.get('line')?.value || null);
+
+
+    if (!this.scheduleForm.get('route')?.value) {
+      this.scheduleForm.get('route')?.setValue(this.routes[0].id);
+    } else {
+      if (!this.isRouteFromLine(this.scheduleForm.get('route')?.value || "")) {
+        this.scheduleForm.get('route')?.setValue(this.routes[0].id);
+      }
+    }
 
 
 
-
-        this.router.navigate(['/schedules'], {
-          queryParams:
-          {
-            line: value.line,
-            route: value.route
-          }
-        }).then(() => {
-
-
-          this.readParams();
-
-        })
-
-
-
-      });
-
-
-    await this.readParams();
-      
-
-
+    
 
   }
 
@@ -92,64 +103,7 @@ get route() {
     return false;
   }
 
-
-  async readParams() {
-
-    const params = this.routeParams.snapshot.queryParams;
-    if (params['line'] && this.schedule.line !== params['line']) {
-
-
-      //checck if the line is in the lines array
-      if (!this.lines.find(line => line.id === params['line'])) {
-        await this.cleanQueryString();
-        return;
-      }
-
-
-      this.schedule.line = params['line'];
-      this.scheduleForm.get('line')?.setValue(params['line']);
-        await this.getCurrentRoutes(params['line'] || null);
-
-      if (params['route'] && this.schedule.route !== params['route']) {
-        let routeParams = params['route'];
-          //if is a route from the line, set the route value to the routeParams
-        if (this.isRouteFromLine(routeParams)) {
-          this.schedule.route = routeParams;
-            this.scheduleForm.get('route')?.setValue(routeParams);
-          } else {
-          //if is not a route from the line, set the route value to the first route in the routes array
-          this.schedule.route = this.routes[0].id;
-            this.scheduleForm.get('route')?.setValue(this.routes[0].id);
-          }
-
-      } else {
-
-        this.schedule.route = this.routes[0].id;
-         this.scheduleForm.get('route')?.setValue(this.routes[0].id);
-
-        }
-
-      }
-   
-
-
-    
-  }
-
-  //function to clean the form and the query params
-  async cleanQueryString() {
-
-    this.router.navigate(['/schedules'], {
-      queryParams:
-      {
-        line: null,
-        route: null
-      }
-    })
-  }
-
-
-
+  
   async getLines() {
 
     const municipality = await this.authService.getMunicipality().toPromise();
@@ -159,8 +113,7 @@ get route() {
             this.municipality = municip;
             const newLines = await this.service.getLinesByMunicipalityId(municip.id).toPromise();
             if (newLines) {
-                this.lines = newLines;
-               
+                this.lines = newLines;         
               }
             }
           }
@@ -172,13 +125,14 @@ get route() {
   async getCurrentRoutes(line: string | null) {
     this.routes = [];
     if (line) {
-      const selectedLine = this.lines.find(line => line.id === this.schedule.line);
+      const selectedLine = this.lines.find(line => line.id === this.scheduleForm.get('line')?.value);
       if (selectedLine) {
         //for each route in the selected line, get the route and push it to the routes array
-      for(let routeId of selectedLine.routes) {
-              let route = await this.service.getRoute(routeId).toPromise();
+        for (let routeId of selectedLine.routes) {
+        let route = await this.service.getRoute(routeId).toPromise();
         if (route && !this.routes.find(r => r.id === route!.id)) {
           this.routes.push(route);
+
               }
           }
       }
