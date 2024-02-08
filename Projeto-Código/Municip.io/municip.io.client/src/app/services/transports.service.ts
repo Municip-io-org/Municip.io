@@ -26,7 +26,9 @@ export class TransportsService {
   }
 
 
-  
+  getRealtimeBuses(stopId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiLink}stops/${stopId}/realtime`);
+  }
 
 
 getMunicipalityByName(name: string): Observable < municipalityTransport | null > {

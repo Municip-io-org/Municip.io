@@ -1,20 +1,48 @@
-<div class="mb-40">
+<ng-container *ngIf="showMap">
+  <google-map height="37.5rem" width="100%" [zoom]="zoom" [center]="center" [options]="options" #mapInstance="googleMap"></google-map>
+  <br />
 
+  <div class="flex justify-center">
 
-  <ng-container *ngIf="showMap">
-    <google-map height="500px"
-                width="100%"
-                [zoom]="zoom"
-                [center]="center"
-                [options]="options"
-                #mapInstance="googleMap"></google-map>
-  </ng-container>
+    <div class="overflow-x-auto">
+      <p class="font-roboto font-bold text-2xl text-municip-black">Próximos Autocarros na Paragem Selecionada</p>
+      <br />
 
-  <ng-container *ngIf="!showMap">
-    <div class="mb-40 flex flex-col items-center justify-center">
-      <p class="text-xl font-semibold mb-4">Não foi possível mostrar o mapa para o município de {{ municipalityName }}</p>
-      <p class="text-gray-600">Lamentamos, mas não conseguimos exibir o mapa. Por favor, tente novamente mais tarde.</p>
+      <table class="table-auto border-collapse border border-gray-400 w-[60rem] rounded-xl ">
+        <thead>
+          <tr class="bg-[#91D1E3] text-black">
+            <th class="px-4 py-2 border border-gray-400 w-1/12">Linha</th>
+            <th class="px-4 py-2 border border-gray-400 w-4/12">Destino</th>
+            <th class="px-4 py-2 border border-gray-400 w-3/12">Chegada Programada</th>
+            <th class="px-4 py-2 border border-gray-400 w-3/12">Chegada Estimada</th>
+            <th class="px-4 py-2 border border-gray-400 w-1/12">Veículo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="nextBuses.length > 0; else noData">
+            <tr *ngFor="let bus of nextBuses">
+              <td class="px-4 py-2 border border-gray-400"><strong>{{ bus.line_id || '---' }}</strong></td>
+              <td class="px-4 py-2 border border-gray-400">{{ bus.headsign || '---' }}</td>
+              <td class="px-4 py-2 border border-gray-400">{{ bus.scheduled_arrival || '---' }}</td>
+              <td class="px-4 py-2 border border-gray-400">{{ bus.estimated_arrival || '---' }}</td>
+              <td class="px-4 py-2 border border-gray-400">{{ bus.vehicle_id || '---' }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
     </div>
-  </ng-container>
+  </div>
+</ng-container>
 
-</div>
+<ng-container *ngIf="!showMap">
+  <div class="mb-40 flex flex-col items-center justify-center">
+    <p class="text-xl font-semibold mb-4">Não foi possível mostrar o mapa para o município de {{ municipalityName }}</p>
+    <p class="text-gray-600">Lamentamos, mas não conseguimos exibir o mapa. Por favor, tente novamente mais tarde.</p>
+  </div>
+</ng-container>
+
+<ng-template #noData>
+  <tr>
+    <td colspan="5" class="px-4 py-2 border border-gray-400 text-center">Selecione uma paragem para visualizar os próximos autocarros</td>
+  </tr>
+</ng-template>
