@@ -17,7 +17,6 @@ export class SchedulesComponent {
     private routeParams: ActivatedRoute, private factory: BindQueryParamsFactory) { }
 
 
-  //a variavle called lines to store the lines in json format array
   municipality: municipalityTransport | null = null;
   lines: line[] = [];
   routes: route[] = [];
@@ -28,11 +27,11 @@ export class SchedulesComponent {
 
 
   scheduleForm = new FormGroup({
-    line: new FormControl("", [Validators.required]),
-    route: new FormControl("", [Validators.required]),
-    pattern: new FormControl("", [Validators.required]),
-    trip: new FormControl("", [Validators.required]),
-    date: new FormControl("", [Validators.required])
+    line: new FormControl(""),
+    route: new FormControl(""),
+    pattern: new FormControl(""),
+    trip: new FormControl("" ),
+    date: new FormControl("")
   });
 
 
@@ -74,50 +73,33 @@ return this.scheduleForm.get('date');
 
   async ngOnInit() {
 
-    if (!this.scheduleForm.get('date')?.value) {
-      const currentDate = new Date().toISOString().substring(0, 10);
-      this.scheduleForm.get('date')?.setValue(currentDate);
-    }
-
-
-   await this.getLines();
-
+   
     this.scheduleForm.get('line')?.valueChanges.subscribe(async (value) => {
+
       await this.getCurrentRoutesAndPatternsAndTrips();
-
-
-      if (value === "") {
-        this.scheduleForm.get("route")?.setValue("");
-      } else if (!this.isRouteFromLine(this.scheduleForm.get('route')?.value || "")) {
-        this.scheduleForm.get('route')?.setValue(this.routes[0].id);
-      }
-
+      await this.handleLineChange(value || "");
     });
 
     this.scheduleForm.get("route")?.valueChanges.subscribe(async (value) => {
-      await this.getCurrentPatterns(this.scheduleForm.get('route')?.value || null);
 
-      if (value === "") {
-        this.scheduleForm.get("pattern")?.setValue(this.patterns[0].id || "");
-      } else if (!this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value)) {
-        this.scheduleForm.get('pattern')?.setValue(this.patterns[0].id || "");
-      }
 
+      await this.getCurrentRoutesAndPatternsAndTrips();
+
+     await this.handleRouteChange(value || "")
 
     });
 
 
     this.scheduleForm.get("pattern")?.valueChanges.subscribe(async (value) => {
-      this.getCurrentTrips(this.scheduleForm.get('pattern')?.value || null);
 
-      if (value === "") {
-        this.scheduleForm.get("trip")?.setValue(this.trips[0].id || "");
-      } else if (!this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value)) {
-        this.scheduleForm.get('trip')?.setValue(this.trips[0].id|| "");
-      }
 
-      let patternSelected = this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value);
-      this.path = patternSelected ? patternSelected.path : null;
+      await this.getCurrentRoutesAndPatternsAndTrips();
+
+
+      await this.handlePatternChange(value || "");
+
+
+      this.getCurrentPath(value);
 
 
 
@@ -126,17 +108,25 @@ return this.scheduleForm.get('date');
 
 
     this.scheduleForm.get("date")?.valueChanges.subscribe(async (value) => {
-        await this.getCurrentRoutesAndPatternsAndTrips();
+      await this.getCurrentRoutesAndPatternsAndTrips();
+
+      await this.handleDateChange(value || "");
+
+      
     });
 
-    this.scheduleForm.get("trip")?.valueChanges.subscribe( (value) => {
-      let tripSelected = this.trips.find(trip => trip.id === value);
-      this.schedule = tripSelected ? tripSelected.schedule : null;
+    this.scheduleForm.get("trip")?.valueChanges.subscribe( async (value) => {
+      this.getCurrentSchedule(value || "");
 
     });
 
 
 
+
+    this.handleDateChange(this.scheduleForm.get('date')?.value || "");
+
+    
+    await this.getLines();
 
 
     if (!this.lines.find(line => line.id === this.scheduleForm.get('line')?.value)) {
@@ -150,42 +140,71 @@ return this.scheduleForm.get('date');
 
     await this.getCurrentRoutesAndPatternsAndTrips();
 
-    if (!this.scheduleForm.get('route')?.value) {
-      this.scheduleForm.get('route')?.setValue(this.routes[0].id || "");
-    } else {
-      if (!this.isRouteFromLine(this.scheduleForm.get('route')?.value || "")) {
-        this.scheduleForm.get('route')?.setValue(this.routes[0].id || "");
-      }
+
+    this.handleLineChange(this.scheduleForm.get('line')?.value || "");
+    
+
+    this.handleRouteChange(this.scheduleForm.get('route')?.value || "");
+    
+
+    this.handlePatternChange(this.scheduleForm.get('pattern')?.value || "");
+
+  }
+
+
+
+
+  async handleLineChange(value: string) {
+
+
+    if (value === "") {
+      this.scheduleForm.get("route")?.setValue("");
+    } else if (!this.isRouteFromLine(this.scheduleForm.get('route')?.value || "")) {
+      this.scheduleForm.get('route')?.setValue(this.routes[0].id);
     }
+  }
 
+  async handleRouteChange(value: string) {
 
-
-if (!this.scheduleForm.get('pattern')?.value) {
+    if (value === "") {
+      this.scheduleForm.get("pattern")?.setValue(this.patterns[0].id || "");
+    } else if (!this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value)) {
       this.scheduleForm.get('pattern')?.setValue(this.patterns[0].id || "");
-    } else {
-      if (!this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value)) {
-        this.scheduleForm.get('pattern')?.setValue(this.patterns[0].id || "");
-      }
     }
-
-
-    if (!this.scheduleForm.get('trip')?.value) {
-      this.scheduleForm.get('trip')?.setValue(this.trips[0].id || "");
-    } else {
-      if(!this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value)) {
-        this.scheduleForm.get('trip')?.setValue(this.trips[0].id || "");
-      }
-    }
-
-
-    let patternSelected = this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value);
-    this.path = patternSelected ? patternSelected.path : null;
-    let tripSelected = this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value);
-    this.schedule = tripSelected ? tripSelected.schedule : null;
 
 
 
   }
+
+  async handlePatternChange(value: string) {
+
+    if (value === "") {
+      this.scheduleForm.get("trip")?.setValue(this.trips[0].id || "");
+    } else if (!this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value)) {
+      this.scheduleForm.get('trip')?.setValue(this.trips[0].id || "");
+    }
+
+
+
+  }
+
+  async handleDateChange(value: string) {
+   
+
+    if (!value) {
+      console.log("qwndja")
+      const currentDate = new Date().toISOString().substring(0, 10);
+      this.scheduleForm.get('date')?.setValue(currentDate);
+    }
+
+
+    this.scheduleForm.get('trip')?.setValue(this.trips[0].id || "");
+  }
+
+
+
+
+
 
 
   isRouteFromLine(id: string): boolean{
@@ -196,18 +215,18 @@ if (!this.scheduleForm.get('pattern')?.value) {
   }
 
 
-  //function to get current routes and patterns
   async getCurrentRoutesAndPatternsAndTrips() {
     await this.getCurrentRoutes(this.scheduleForm.get('line')?.value || null);
     await this.getCurrentPatterns(this.scheduleForm.get('route')?.value || null);
     this.getCurrentTrips(this.scheduleForm.get('pattern')?.value || null);
+    this.getCurrentPath(this.scheduleForm.get('pattern')?.value || null);
+    this.getCurrentSchedule(this.scheduleForm.get('trip')?.value || null);
   }
 
 
 
   
   async getLines() {
-
     const municipality = await this.authService.getMunicipality().toPromise();
     if (municipality) {
       const municip = await this.service.getMunicipalityByName(municipality).toPromise();
@@ -229,7 +248,6 @@ if (!this.scheduleForm.get('pattern')?.value) {
     if (line) {
       const selectedLine = this.lines.find(line => line.id === this.scheduleForm.get('line')?.value);
       if (selectedLine) {
-        //for each route in the selected line, get the route and push it to the routes array
         for (let routeId of selectedLine.routes) {
         let route = await this.service.getRoute(routeId).toPromise();
         if (route && !this.routes.find(r => r.id === route!.id)) {
@@ -264,12 +282,28 @@ this.patterns = [];
       const selectedPattern = this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value);
       if (selectedPattern) {
         for (let trip of selectedPattern.trips) {
-          if (trip && trip.dates.includes(this.scheduleForm.get('date')?.value?.replace(/-/g, '') || "")) {
+          if (trip && trip.dates.includes(this.scheduleForm.get('date')?.value?.replace(/-/g, '') || "") && trip.schedule.length > 0) {
             this.trips.push(trip);
           }
         }
+        this.trips.sort((a, b) => {
+          const arrivalTimeA = a.schedule[0].arrival_time;
+          const arrivalTimeB = b.schedule[0].arrival_time;
+          return arrivalTimeA.localeCompare(arrivalTimeB);
+        });
       }
     }
+  }
+
+  getCurrentPath(pattern: string | null) {
+    let patternSelected = this.patterns.find(p => p.id === pattern);
+    this.path = patternSelected ? patternSelected.path : null;
+  }
+
+  getCurrentSchedule(trip : string | null) {
+    let tripSelected = this.trips.find(t=> t.id ===  trip);
+    this.schedule = tripSelected ? tripSelected.schedule : null;
+
   }
 
 
@@ -281,7 +315,6 @@ this.patterns = [];
   getNameStopById(id: string): string {
     if (this.path) {
       let stop = this.path.find(stop => stop.stop.id === id);
-      
       return stop ? stop.stop.name : "";
     }
     return "";

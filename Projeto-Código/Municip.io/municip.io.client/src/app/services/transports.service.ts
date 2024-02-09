@@ -59,7 +59,7 @@ getMunicipalityByName(name: string): Observable < municipalityTransport | null >
   }
 
     
-  getRoute(id: string) : Observable<route>{
+  getRoute(id: string): Observable<route>{
     return this.http.get<route>(this.apiLink + "routes/" + id);
   }
 

@@ -65,24 +65,24 @@ transition-all duration-700 ease-in-out  decoration-sky-500">
     </div>
   </div>
   <div>
-    <app-input-title class="text-[2.4vh]">Horário</app-input-title>
-    <div class="flex items-center">
-      <select required id="trip" formControlName="trip" name="trip"
-              class="input w-52
-      focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-      transition-all duration-700 ease-in-out  decoration-sky-500">
-        <option value="">Selecionar o Horário</option>
-        <option [value]="value.id" *ngFor="let value of trips">{{ formatTime(value.schedule[0].arrival_time) }}</option>
-      </select>
-      <app-tooltip [tooltipText]="'Selecione a paragem de destino'"></app-tooltip>
+
+    <div *ngIf="!(trips.length === 0)">
+      <app-input-title class="text-[2.4vh]">Horário</app-input-title>
+      <div class="flex items-center">
+        <select required id="trip" formControlName="trip" name="trip"
+                class="input w-52
+        focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+        transition-all duration-700 ease-in-out  decoration-sky-500">
+          <option [value]="value.id" *ngFor="let value of trips ">{{ formatTime(value.schedule[0].arrival_time) }}</option>
+        </select>
+        <app-tooltip [tooltipText]="'Selecione a paragem de destino'"></app-tooltip>
+      </div>
+      <div class="text-red-500 font-bold py-2" *ngIf="trip?.touched && trip?.invalid">
+        <div *ngIf="trip?.errors?.['required'] ">Paragem Obrigatório</div>
+      </div>
     </div>
-    <div class="text-red-500 font-bold py-2" *ngIf="trip?.touched && trip?.invalid">
-      <div *ngIf="trip?.errors?.['required'] ">Paragem Obrigatório</div>
-    </div>
-  </div>
 
 
-  <div *ngIf="!(trips.length === 0)">
     <div *ngFor="let value of schedule">
       <h1>{{value.arrival_time}} {{ getNameStopById(value.stop_id)}} </h1>
     </div>
