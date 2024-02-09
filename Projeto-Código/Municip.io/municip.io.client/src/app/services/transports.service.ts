@@ -19,8 +19,6 @@ export class TransportsService {
 
 
 
-
-
   getMunicipalities(): Observable<municipalityTransport[]>{
     return this.http.get<municipalityTransport[]>(this.apiLink + "municipalities");
   }

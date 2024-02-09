@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { BoundsService } from '../../maps/bounds.service';
 import { GoogleMap } from '@angular/google-maps';
 import { TransportsService } from '../../services/transports.service';
@@ -40,10 +40,9 @@ export class StopsMapComponent {
   infoWindow = new google.maps.InfoWindow();
   showMap: boolean = true;
 
-  ngAfterViewInit() {
-    this.municipalityName 
-    if (this.googleMap) {
-      this.setBoundsAndCenterForMunicipality(this.municipalityName);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['municipalityName'] && changes['municipalityName'].currentValue) {
+      this.setBoundsAndCenterForMunicipality(changes['municipalityName'].currentValue);
     }
   }
 
