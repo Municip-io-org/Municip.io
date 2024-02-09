@@ -257,12 +257,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<DateTime>("birthDate")
                         .HasColumnType("datetime2");
 
-<<<<<<< HEAD
                     b.Property<DateOnly>("date")
                         .HasColumnType("date");
 
-=======
->>>>>>> citizenHomePage-andre
                     b.Property<string>("firstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -279,12 +276,9 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
                     b.Property<int>("status")
                         .HasColumnType("int");
 
-=======
->>>>>>> citizenHomePage-andre
                     b.HasKey("Id");
 
                     b.ToTable("Citizens");
@@ -346,12 +340,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("contact")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
                     b.Property<DateOnly?>("date")
                         .HasColumnType("date");
 
-=======
->>>>>>> citizenHomePage-andre
                     b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
@@ -367,21 +358,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
                     b.Property<string>("fax")
                         .HasColumnType("nvarchar(max)");
 
-=======
-                    b.Property<string>("emblemPhoto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("fax")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("landscapePhoto")
-                        .HasColumnType("nvarchar(max)");
-
->>>>>>> citizenHomePage-andre
                     b.Property<string>("localidade")
                         .HasColumnType("nvarchar(max)");
 
@@ -394,12 +373,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("nome")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
                     b.Property<int?>("numberOfUsers")
                         .HasColumnType("int");
 
-=======
->>>>>>> citizenHomePage-andre
                     b.Property<string>("populacao")
                         .HasColumnType("nvarchar(max)");
 
@@ -412,12 +388,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("sitio")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
                     b.Property<int>("status")
                         .HasColumnType("int");
 
-=======
->>>>>>> citizenHomePage-andre
                     b.Property<string>("telefone")
                         .HasColumnType("nvarchar(max)");
 

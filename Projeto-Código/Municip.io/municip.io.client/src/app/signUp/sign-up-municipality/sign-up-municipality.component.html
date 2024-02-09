@@ -28,24 +28,7 @@
                 <div *ngIf="contact?.errors?.['pattern'] ">Contacto Inválido</div>
               </div>
             </div>
-
-          </section>
-          <section class="flex text-left justify-around mb-4">
-            <div class="w-[24rem]">
-              <app-input-title class="text-[2.4vh]">Foto do Brasão</app-input-title>
-              <input type="file" #emblemPicker id="emblemPhoto" formControlName="emblemPhoto" name="emblemPhoto" (change)="onEmblemImagePicked($event)"
-                     [(ngModel)]="municipality.emblemPhoto"
-                     class="input w-[35.2vh] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500">
-              <div *ngIf="emblemPhoto?.errors?.['required'] ">Foto do Brasão Obrigatória</div>
-            </div>
-
-            <div class="w-[20rem]">
-              <app-input-title class="text-[2.4vh]">Foto da Paisagem</app-input-title>
-              <input type="file" #landscapePicker id="landscapePhoto" formControlName="landscapePhoto" name="landscapePhoto" (change)="onLandscapeImagePicked($event)"
-                     [(ngModel)]="municipality.landscapePhoto"
-                     class="input w-[35.2vh] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500">
-              <div *ngIf="contact?.errors?.['required'] ">Foto da Paisagem Obrigatóri</div>
-            </div>
+           
           </section>
           <div class="flex flex-col text-left w-full mt-6 mb-4">
             <app-input-title class="text-[2.4vh]">Texto Informativo</app-input-title>

@@ -14,11 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Municip.io.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e00f4c6976c0e0a52498fb3fa92509e3ff893e8e")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f03aeeeb4db8ff14af49ebe092a86d07ee145797")]
->>>>>>> citizenHomePage-andre
 [assembly: System.Reflection.AssemblyProductAttribute("Municip.io.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Municip.io.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

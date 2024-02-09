@@ -1,6 +1,6 @@
 import { Component, Query } from '@angular/core';
 
-import { Roles, UserAuthService } from '../services/user-auth.service';
+import {Roles, UserAuthService } from '../services/user-auth.service';
 
 @Component({
   selector: 'app-userpage',
@@ -11,7 +11,7 @@ export class UserpageComponent {
   user: any;
   newUser: any;
 
-  constructor(private userAuthService: UserAuthService) { }
+  constructor(private userAuthService: UserAuthService ) { }
 
   role: string = "";
 
@@ -25,7 +25,7 @@ export class UserpageComponent {
 
             console.log("user", this.newUser);
           });
-      },
+          },
       error => {
         console.error(error);
       }
