@@ -1,70 +1,76 @@
 <app-header />
 <app-smaller-banner [title]="'Transportes - Hórario'" [image]="'assets/images/transports/transports.png'" />
-<div *ngIf="municipality">
-  {{municipality.id }} {{municipality.name}}
-</div>
 
-<form [formGroup]="scheduleForm">
-  <div>
-    <app-input-title class="text-[2.4vh]">Linha</app-input-title>
-    <div class="flex items-center">
-      <select required id="line" formControlName="line" name="line"
-              class="input w-52
+
+<form [formGroup]="scheduleForm" class="shadow-lg m-10 rounded-lg p-5">
+  <div class="flex justify-center space-x-10 bg-municip-light-blue rounded-lg mt-10 py-20">
+    <div>
+      <div>
+        <app-input-title class="text-[2.4vh]">Linha</app-input-title>
+        <div class="flex items-center">
+          <select required id="line" formControlName="line" name="line"
+                  class="input w-96 whitespace-normal h-20 
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500">
-        <option value="">Selecionar a linha</option>
-        <option [value]="value.id" *ngFor="let value of lines">{{value.id}} {{ value.long_name}}</option>
-      </select>
-      <app-tooltip [tooltipText]="'Selecione a linha'"></app-tooltip>
-    </div>
-    <div class="text-red-500 font-bold py-2" *ngIf="line?.touched && line?.invalid">
-      <div *ngIf="line?.errors?.['required'] ">Linha Obrigatório</div>
-    </div>
-  </div>
-
-
-  <div *ngIf="routes.length > 1">
-    <div>
-      <app-input-title class="text-[2.4vh]">Rotas</app-input-title>
-      <div class="flex items-center flex-col ">
-        <div *ngFor="let route of routes ; ">
-          <input type="radio" id="route" [value]="route.id" formControlName="route" name="route" />
-          <label for={{route.id}}>{{ route.long_name }}</label>
+            <option value="">Selecionar a linha</option>
+            <option [value]="value.id" *ngFor="let value of lines">
+              {{value.id}} |  {{ value.long_name}}
+              </option>
+          </select>
+          <app-tooltip [tooltipText]="'Selecione a linha'"></app-tooltip>
         </div>
+        <div class="text-red-500 font-bold py-2" *ngIf="line?.touched && line?.invalid">
+          <div *ngIf="line?.errors?.['required'] ">Linha Obrigatório</div>
+        </div>
+      </div>
+
+
+      <div *ngIf="routes.length > 1" class="flex justify-center">
+          <!--<app-input-title class="text-[2.4vh]">Rotas</app-input-title>-->
+          <div class="flex flex-col text-start space-y-2 py-3 px-2 bg-blue-50
+              rounded-b-lg w-80">
+            <div *ngFor="let route of routes" class="space-x-2">
+              <input type="radio" id={{route.id}} [value]="route.id" formControlName="route" name="route"
+                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500
+                     dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                      dark:border-gray-600"
+                     />
+              <label for={{route.id}}>{{ route.long_name }}</label>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div>
+      <app-input-title class="text-[2.4vh]">Paragem</app-input-title>
+      <div class="flex items-center">
+        <select required id="pattern" formControlName="pattern" name="pattern"
+                class="input w-96 h-12
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+          <option value="">Selecionar a paragem</option>
+          <option [value]="value.id" *ngFor="let value of patterns">{{ value.headsign}}</option>
+        </select>
+        <app-tooltip [tooltipText]="'Selecione a paragem de destino'"></app-tooltip>
+      </div>
+      <div class="text-red-500 font-bold py-2" *ngIf="pattern?.touched && pattern?.invalid">
+        <div *ngIf="pattern?.errors?.['required'] ">Paragem Obrigatório</div>
+      </div>
+    </div>
+
+    <div>
+      <app-input-title class="text-[2.4vh]">Data</app-input-title>
+      <div class="flex items-center">
+        <input required placeholder="Data" type="date" id="date" formControlName="date" name="date"
+               class="input w-96 h-12
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500">
+        <app-tooltip [tooltipText]="'Utilize o seletor para a inserção da data'"></app-tooltip>
+      </div>
+      <div class="text-red-500 font-bold py-2" *ngIf="date?.touched && date?.invalid">
+        <div *ngIf="date?.errors?.['required'] ">Data Obrigatório</div>
       </div>
     </div>
   </div>
-  <div>
-    <app-input-title class="text-[2.4vh]">Paragem</app-input-title>
-    <div class="flex items-center">
-      <select required id="pattern" formControlName="pattern" name="pattern"
-              class="input w-52
-focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-transition-all duration-700 ease-in-out  decoration-sky-500">
-        <option value="">Selecionar a paragem</option>
-        <option [value]="value.id" *ngFor="let value of patterns">{{ value.headsign}}</option>
-      </select>
-      <app-tooltip [tooltipText]="'Selecione a paragem de destino'"></app-tooltip>
-    </div>
-    <div class="text-red-500 font-bold py-2" *ngIf="pattern?.touched && pattern?.invalid">
-      <div *ngIf="pattern?.errors?.['required'] ">Paragem Obrigatório</div>
-    </div>
-  </div>
-
-  <div>
-    <app-input-title class="text-[2.6vh]">Data</app-input-title>
-    <div class="flex items-center">
-      <input required placeholder="Data" type="date" id="date" formControlName="date" name="date"
-             class="input w-[35.2vh]
-focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-transition-all duration-700 ease-in-out  decoration-sky-500">
-      <app-tooltip [tooltipText]="'Utilize o seletor para a inserção da data'"></app-tooltip>
-    </div>
-    <div class="text-red-500 font-bold py-2" *ngIf="date?.touched && date?.invalid">
-      <div *ngIf="date?.errors?.['required'] ">Data Obrigatório</div>
-    </div>
-  </div>
-  <div>
 
     <div *ngIf="!(trips.length === 0)">
       <app-input-title class="text-[2.4vh]">Horário</app-input-title>
@@ -80,13 +86,12 @@ transition-all duration-700 ease-in-out  decoration-sky-500">
       <div class="text-red-500 font-bold py-2" *ngIf="trip?.touched && trip?.invalid">
         <div *ngIf="trip?.errors?.['required'] ">Paragem Obrigatório</div>
       </div>
+
+      <div *ngFor="let value of schedule">
+        <h1>{{value.arrival_time}} {{ getNameStopById(value.stop_id)}} </h1>
+      </div>
     </div>
 
-
-    <div *ngFor="let value of schedule">
-      <h1>{{value.arrival_time}} {{ getNameStopById(value.stop_id)}} </h1>
-    </div>
-  </div>
   <div *ngIf="trips.length === 0">
   <h1 class="text-2xl font-bold">Sem paragens para  a data selecionada</h1>
 </div>
