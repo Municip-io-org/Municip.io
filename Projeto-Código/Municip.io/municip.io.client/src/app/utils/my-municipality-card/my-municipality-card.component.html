@@ -1,0 +1,22 @@
+<app-card-outline-theme>
+  <div class="flex justify-center items-center text-[2rem] p-10 pb-14 text-left space-x-16">
+    <section>
+      <span class="font-bold">O meu município</span>
+      <div class="flex ml-11">
+        <div class="flex flex-col text-[1rem] space-y-4 mt-5">
+          <p class="font-bold">Distrito: <span class="font-normal">{{district | firstLetterUpperCase}}</span></p>
+          <p class="font-bold">Nº de Habitantes: <span class="font-normal">{{nPopulation | formatNumber3By3Pipe}} habitantes</span></p>
+          <p class="font-bold">Email: <span class="font-normal">{{email}}</span></p>
+          <p class="font-bold">Telefone: <span class="font-normal">{{phoneNumber | formatNumber3By3Pipe}}</span></p>
+        </div>
+      </div>
+    </section>
+    <section class="flex flex-col justify-center items-center">
+      <img src={{emblem}} alt="Brasão do Município" class="object-cover size-32 rounded-2xl" />
+      <app-btn-municip-blue class="relative top-10">
+        Mais Informações
+        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+      </app-btn-municip-blue>
+    </section>
+  </div>
+</app-card-outline-theme>

@@ -45,7 +45,8 @@ namespace Municip.io.Server.Models
         [JsonConverter(typeof(JsonStringEnumConverter))]
 
         public MunicipalityStatus status { get; set;}
-        
+        public string? emblemPhoto { get; set; }
+        public string? landscapePhoto { get; set; }
 
 
 

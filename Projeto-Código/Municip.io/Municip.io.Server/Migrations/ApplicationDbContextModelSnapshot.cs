@@ -358,7 +358,13 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("emblemPhoto")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("fax")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("landscapePhoto")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("localidade")
