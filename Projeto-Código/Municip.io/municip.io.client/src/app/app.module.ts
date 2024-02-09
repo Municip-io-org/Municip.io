@@ -41,6 +41,14 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { UserinfodialogComponent } from './utils/userinfodialog/userinfodialog.component';
 import { StopsMapComponent } from './transports/stops-map/stops-map.component';
 import { StopsPageComponent } from './transports/stops-page/stops-page.component';
+import { CitizenHomePageComponent } from './homePage/citizen-home-page/citizen-home-page.component';
+import { CardOutlineThemeComponent } from './utils/card-outline-theme/card-outline-theme.component';
+import { MyMunicipalityCardComponent } from './utils/my-municipality-card/my-municipality-card.component';
+import { FormatNumber3By3Pipe } from './pipes/format-number3-by3.pipe';
+import { NewsSmallComponent } from './utils/news-small/news-small.component';
+import { MyDataCardComponent } from './utils/my-data-card/my-data-card.component';
+import { EventsSmallComponent } from './utils/events-small/events-small.component';
+import { FirstLetterUpperCasePipe } from './pipes/first-letter-upper-case.pipe';
 
 
 
@@ -78,7 +86,15 @@ import { StopsPageComponent } from './transports/stops-page/stops-page.component
     MunicipalitymapComponent,
     UserinfodialogComponent,
     StopsMapComponent,
-    StopsPageComponent
+    StopsPageComponent,
+    CitizenHomePageComponent,
+    CardOutlineThemeComponent,
+    MyMunicipalityCardComponent,
+    FormatNumber3By3Pipe,
+    NewsSmallComponent,
+    MyDataCardComponent,
+    EventsSmallComponent,
+    FirstLetterUpperCasePipe
     
   ],
   imports: [

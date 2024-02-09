@@ -13,7 +13,7 @@ namespace Municip.io.Server.Models
     public class Municipality
     {
         public Guid Id { get; set; }
-        
+
 
         public string? name { get; set; }
         public string? president { get; set; }
@@ -46,6 +46,8 @@ namespace Municip.io.Server.Models
 
         public MunicipalityStatus status { get; set;}
         
+        public string? emblemPhoto { get; set; }
+        public string? landscapePhoto {get; set;}
 
 
 
