@@ -10,10 +10,16 @@
       <app-my-municipality-card county="Setúbal" nPopulation="127000000" email="camara.setubal@cm-setubal.pt"
                                 phoneNumber="265456789" emblem="/assets/images/brasaoSetubal.jpg"
                                 class="max-w-[50rem]"></app-my-municipality-card>
-      <app-my-data-card firstName="Maria" lastName="Albertina dos Anjos" email="maria.albertina@gamail.com"
-                        [birthDate]="date1" address="Ruas das Flores Nº5" nif="265456789"
-                        profilePicture="/assets/images/maria.jpg"
-                        class="max-w-[50rem]"></app-my-data-card>
+      <app-my-data-card [firstName]="user.firstName"
+                        [lastName]="user.surname"
+                        [email]="user.email"
+                        [birthDate]="user.birthDate"
+                        [address]="user.address"
+                        [nif]="user.nif"
+                        [photo]="user.photo!"
+                        class="max-w-[50rem]">
+      </app-my-data-card>
+
     </section>
     <div class="w-1 bg-gradient-to-tl from-municip-light-blue to-municip-blue rounded mx-[5vw] "></div>
     <section class="flex flex-col grow space-y-7 justify-center items-center">

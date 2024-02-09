@@ -12,5 +12,5 @@ export class MyDataCardComponent {
   @Input() birthDate: Date | undefined;
   @Input() address: string = "";
   @Input() nif: string = "";
-  @Input() profilePicture: string = "";
+  @Input() photo: string = "";
 }

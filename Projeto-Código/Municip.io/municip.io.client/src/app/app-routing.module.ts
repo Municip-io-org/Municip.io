@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'admindashboard', component: AdmindashboardComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
   { path: 'transports', component: TransportsMainComponent, data: {} },
-  { path: 'citizenHomePage', component: CitizenHomePageComponent, data: {} }
+  { path: 'citizenHomePage', component: CitizenHomePageComponent, data: {}, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
