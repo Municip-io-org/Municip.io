@@ -60,10 +60,25 @@ export interface MunicipalAdministrator {
 
 
 export interface Municipality {
-  name: string;
-  president: string;
+
+  areaha: string;
+  codigo: string;
+  codigoine: string;
   contact: string;
   description: string;
+  descpstal: string;
+  distrito: string;
+  eleitores: string;
+  email: string;
+  fax: string;
+  localidade: string;
+  name: string;
+  nif: string;
+  populacao: string;
+  president: string;
+  rua: string;
+  sitio: string;
+  telefone: string;
 }
 
 

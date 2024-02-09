@@ -2,7 +2,7 @@ import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, catchError, map, of, switchMap } from 'rxjs';
 import { Citizen } from './citizen-auth.service';
-import { MunicipalAdministrator } from './municipal-admin-auth.service';
+import { MunicipalAdministrator, Municipality } from './municipal-admin-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -72,9 +72,9 @@ export class UserAuthService {
     );
   }
 
-
-
-
+  getInfoMunicipality(nome: string) {
+    return this.http.get<Municipality>('/api/accounts/InfoMunicipality?name=' + nome);
+  }
 
 
   signOut() {

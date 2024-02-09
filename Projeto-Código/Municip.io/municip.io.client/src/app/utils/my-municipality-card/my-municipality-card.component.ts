@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './my-municipality-card.component.css'
 })
 export class MyMunicipalityCardComponent {
-  @Input() county: string = "";
+  @Input() district: string = "";
   @Input() nPopulation: string = "";
   @Input() email: string = "";
   @Input() phoneNumber: string = "";

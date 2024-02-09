@@ -12,20 +12,34 @@ import { Municipality, MunicipalAdminAuthService } from '../../services/municipa
 })
 export class SignUpMunicipalityComponent {
   municipality: Municipality = {
-name: '',
+    name: '',
     president: '',
     contact: '',
-description: ''
+    description: '',
+    areaha: '',
+    codigo: '',
+    codigoine: '',
+    descpstal: '',
+    distrito: '',
+    eleitores: '',
+    email: '',
+    fax: '',
+    localidade: '',
+    nif: '',
+    populacao: '',
+    rua: '',
+    sitio: '',
+    telefone: ''
   };
 
-  
-  
+
+
   constructor(private municipalAdminAuthService: MunicipalAdminAuthService, private router: Router, private route: ActivatedRoute) { }
 
   signUpMunicipalityForm = new FormGroup({
     president: new FormControl("", [Validators.required]),
     contact: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
-    description: new FormControl("",[Validators.required])
+    description: new FormControl("", [Validators.required])
   });
 
 
@@ -45,25 +59,12 @@ description: ''
   onSubmit() {
     var municipalName = this.route.snapshot.params['municipalName'];
 
-
     var municipality = this.signUpMunicipalityForm.value as Municipality
     municipality.name = municipalName
     this.municipalAdminAuthService.registerMunicipality(municipality as Municipality).subscribe(
-
-
       (result) => {
-     
         this.router.navigateByUrl('/signUp-Success');
-  
-
-
-
-
       });
-
-
   }
-
-  
 }
 

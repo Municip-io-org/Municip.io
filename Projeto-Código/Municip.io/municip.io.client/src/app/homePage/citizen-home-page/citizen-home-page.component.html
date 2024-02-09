@@ -1,15 +1,17 @@
 <app-header></app-header>
-<app-big-banner image="/assets/images/bannerSetubal.jpg" title="Município de Setúbal"
-                text="Setúbal, uma encantadora cidade portuguesa banhada pelo azul intenso do Oceano Atlântico,
-                é um tesouro situado na região da Península de Setúbal. Com uma rica história que remonta à antiguidade,
-                a cidade combina o charme de seu patrimônio histórico com a beleza natural que a rodeia.
-"></app-big-banner>
+<app-big-banner image="/assets/images/bannerSetubal.jpg" title="Município de {{municipality.name}}"
+                text={{municipality.description}}></app-big-banner>
 <div class="my-[4rem] mx-32 space-y-20">
   <div class="flex">
     <section class="flex flex-col space-y-20 w-[140rem]">
-      <app-my-municipality-card county="Setúbal" nPopulation="127000000" email="camara.setubal@cm-setubal.pt"
-                                phoneNumber="265456789" emblem="/assets/images/brasaoSetubal.jpg"
-                                class="max-w-[50rem]"></app-my-municipality-card>
+      <app-my-municipality-card [district]="municipality.distrito"
+                                [nPopulation]="municipality.populacao"
+                                [email]="municipality.email"
+                                [phoneNumber]="municipality.telefone"
+                                [emblem]="'/assets/images/brasaoSetubal.jpg'"
+                                class="max-w-[50rem]">
+      </app-my-municipality-card>
+
       <app-my-data-card [firstName]="user.firstName"
                         [lastName]="user.surname"
                         [email]="user.email"
@@ -25,7 +27,7 @@
     <section class="flex flex-col grow space-y-7 justify-center items-center">
       <div class="flex items-center font-open-sans text-[1.5rem] font-extrabold">
         <img src="/assets/images/icons/newspaper-folded.png" alt="Notícias" class="size-10 mr-5 " />
-        NOTÍCIAS DE SETÚBAL
+        NOTÍCIAS DE {{ municipality.name | uppercase }}
       </div>
       <ul class="space-y-7">
         <li>
@@ -52,7 +54,7 @@
   <section class="flex flex-col space-y-7 justify-center items-center">
     <div class="flex items-center font-open-sans text-[1.5rem] font-extrabold">
       <img src="/assets/images/icons/event.png" alt="Notícias" class="size-10 mr-5 " />
-      PRÓXIMOS EVENTOS DE SETÚBAL
+      PRÓXIMOS EVENTOS EM {{ municipality.name | uppercase }}
     </div>
     <div class="flex justify-center items-center space-x-7">
       <button class="flex justify-center items-center bg-black rounded-full size-12" (click)="moveLeft()">

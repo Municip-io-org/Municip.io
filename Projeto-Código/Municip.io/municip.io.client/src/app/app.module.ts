@@ -41,6 +41,7 @@ import { FormatNumber3By3Pipe } from './pipes/format-number3-by3.pipe';
 import { NewsSmallComponent } from './utils/news-small/news-small.component';
 import { MyDataCardComponent } from './utils/my-data-card/my-data-card.component';
 import { EventsSmallComponent } from './utils/events-small/events-small.component';
+import { FirstLetterUpperCasePipe } from './pipes/first-letter-upper-case.pipe';
 
 
 
@@ -79,7 +80,8 @@ import { EventsSmallComponent } from './utils/events-small/events-small.componen
     FormatNumber3By3Pipe,
     NewsSmallComponent,
     MyDataCardComponent,
-    EventsSmallComponent
+    EventsSmallComponent,
+    FirstLetterUpperCasePipe
     
   ],
   imports: [
