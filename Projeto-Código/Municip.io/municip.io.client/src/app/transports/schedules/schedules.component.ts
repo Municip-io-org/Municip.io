@@ -191,9 +191,8 @@ return this.scheduleForm.get('date');
   async handleDateChange(value: string) {
    
 
-    if (!value) {
-      console.log("qwndja")
-      const currentDate = new Date().toISOString().substring(0, 10);
+    if (!value || value.length !== 10 || value[4] !== "-" || value[7] !== "-") {
+       const currentDate = new Date().toISOString().substring(0, 10);
       this.scheduleForm.get('date')?.setValue(currentDate);
     }
 
