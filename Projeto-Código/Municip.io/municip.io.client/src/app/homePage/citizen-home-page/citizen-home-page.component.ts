@@ -73,7 +73,9 @@ export class CitizenHomePageComponent {
     president: 'Sem presidente',
     rua: 'Sem rua',
     sitio: 'Sem sitio',
-    telefone: 'Sem telefone'
+    telefone: 'Sem telefone',
+    emblemPhoto: 'Sem emblema',
+    landscapePhoto: 'Sem landscape',
   };
 
 

@@ -2,7 +2,7 @@
 import { HttpClient, HttpHeaders, JsonpClientBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, forkJoin, map, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,9 +38,38 @@ export class MunicipalAdminAuthService {
 
 
 
-  registerMunicipality(municipality: Municipality): Observable<Municipality> {
-    return this.http.post<Municipality>('api/accounts/registerMunicipality', municipality);
+  registerMunicipality(municipality: Municipality, emblemImage: File, landscapeImage: File): Observable<Municipality> {
+    const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    const imgurl = "https://api.imgur.com/3/image";
+
+    // Upload emblem photo to Imgur
+    const emblemFormData = new FormData();
+    emblemFormData.append('image', emblemImage);
+    const emblemPhotoUpload$ = this.http.post(imgurl, emblemFormData, { headers }).pipe(
+      map((response: any) => response['data']['link']),
+      tap((emblemPhotoUrl: string) => municipality.emblemPhoto = emblemPhotoUrl)
+    );
+
+    // Upload landscape photo to Imgur
+    const landscapeFormData = new FormData();
+    landscapeFormData.append('image', landscapeImage);
+    const landscapePhotoUpload$ = this.http.post(imgurl, landscapeFormData, { headers }).pipe(
+      map((response: any) => response['data']['link']),
+      tap((landscapePhotoUrl: string) => municipality.landscapePhoto = landscapePhotoUrl)
+    );
+
+    // Combine both uploads and make the final API call
+    return forkJoin([emblemPhotoUpload$, landscapePhotoUpload$]).pipe(
+      switchMap(([emblemPhotoUrl, landscapePhotoUrl]: [string, string]) => {
+        // Ensure both URLs are set before making the API call
+        municipality.emblemPhoto = emblemPhotoUrl;
+        municipality.landscapePhoto = landscapePhotoUrl;
+        // Make the API call to register the municipality
+        return this.http.post<Municipality>('api/accounts/registerMunicipality', municipality);
+      })
+    );
   }
+
 
 }
 
@@ -79,6 +108,8 @@ export interface Municipality {
   rua: string;
   sitio: string;
   telefone: string;
+  emblemPhoto: string;
+  landscapePhoto: string;
 }
 
 

@@ -1,5 +1,5 @@
 <app-header></app-header>
-<app-big-banner image="/assets/images/bannerSetubal.jpg" title="Município de {{municipality.name}}"
+<app-big-banner [image]="municipality.landscapePhoto!" title="Município de {{municipality.name}}"
                 text={{municipality.description}}></app-big-banner>
 <div class="my-[4rem] mx-32 space-y-20">
   <div class="flex">
@@ -8,7 +8,7 @@
                                 [nPopulation]="municipality.populacao"
                                 [email]="municipality.email"
                                 [phoneNumber]="municipality.telefone"
-                                [emblem]="'/assets/images/brasaoSetubal.jpg'"
+                                [emblem]="municipality.emblemPhoto!"
                                 class="max-w-[50rem]">
       </app-my-municipality-card>
 
