@@ -2,7 +2,7 @@
 <app-header></app-header>
 <div *ngIf="newUser">
   <app-profile-banner [image]="'/assets/images/admin/banner.jpg'"
-                      [title]="'Dados de ' + (newUser?.firstName || 'Utilizador')"
+                      [title]="'Dados de ' + (originalName || 'Utilizador')"
                       [text]="'Consulte e altere os seus dados pessoais'"
                       [profileimg]="'/assets/images/admin/banner.jpg'">
   </app-profile-banner>
@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col-md-12">
         <form [formGroup]="profileEdit" (ngSubmit)="OnSubmit()">
-          <div *ngIf="errors" class="text-red-500 text-sm font-bold space-y-2 text-start">
+          <div *ngIf="errors" class=" text-red-500 text-sm font-bold space-y-2 text-start">
             <div *ngFor="let error of errors">
               <p>{{error}}</p>
             </div>
@@ -25,6 +25,9 @@
                     <input required placeholder="{{newUser.firstName}}" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="newUser.firstName"
                            class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
                   </div>
+                  <div class="text-red-500 font-bold py-2" *ngIf="newUser.firstName?.touched && newUser.firstName?.invalid ">
+                    <div *ngIf="newUser.firstName?.errors?.['required'] ">Primeiro Nome Obrigatório</div>
+                  </div>
                 </div>
                 <div class="w-full lg:w-5/12 mb-4">
                   <app-input-title class="text-[2.6vh]">Apelido</app-input-title>
@@ -32,14 +35,32 @@
                     <input required placeholder="{{newUser.surname}}" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="newUser.surname"
                            class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
                   </div>
+                  <div class="text-red-500 font-bold py-2" *ngIf="newUser.surname?.touched && newUser.surname?.invalid">
+                    <div *ngIf="newUser.surname?.errors?.['required'] ">Apelido Obrigatório</div>
+                  </div>
                 </div>
               </div>
-              <div class="flex flex-wrap items-center justify-center mb-4">
-                <div class="w-full pr-5 ml-1/3">
+              <div class="flex flex-wrap items-start justify-between mb-8">
+                <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
                   <app-input-title class="text-[2.6vh]">Email</app-input-title>
                   <div class="flex items-center">
                     <input required placeholder="{{newUser.email}}" type="text" id="email" formControlName="email" name="email" [(ngModel)]="newUser.email"
                            class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+                  </div>
+                  <div class="text-red-500 font-bold py-2" *ngIf="newUser.email?.touched && newUser.email?.invalid ">
+                    <div *ngIf="newUser.email?.errors?.['required'] ">Email Obrigatório</div>
+                    <div *ngIf="newUser.email?.errors?.['email']">Email Inválido</div>
+                  </div>
+                </div>
+                <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
+                  <app-input-title class="text-[2.6vh]">Password</app-input-title>
+                  <div class="flex items-center">
+                    <input required placeholder="Introduza nova password" type="password" id="password" formControlName="password" name="password" [(ngModel)]="newUser.password"
+                           class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+                    <app-tooltip [tooltipText]="'A password deverá ter letras maiúsculas, minúsculas, números e símbolos'"></app-tooltip>
+                  </div>
+                  <div class="text-red-500 font-bold py-2" *ngIf="newUser.password?.touched && newUser.password?.invalid">
+                    <div *ngIf="newUser.password?.errors?.['required'] ">Palavra-Passe Obrigatório</div>
                   </div>
                 </div>
               </div>
@@ -51,21 +72,28 @@
                       <input required placeholder="{{newUser.address}}" type="text" id="address" formControlName="address" name="address" [(ngModel)]="newUser.address"
                              class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
                     </div>
-                 
+                    <div class="text-red-500 font-bold py-2" *ngIf="newUser.address?.touched && newUser.address?.invalid">
+                      <div *ngIf="newUser.address?.errors?.['required'] ">Morada Obrigatório</div>
+                    </div>
                 </div>
-                <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4">
-                  <app-input-title class="text-[2.6vh]">Código Postal</app-input-title>
-                  <div>
-                    <input required placeholder="{{newUser.postalCode1}}" type="text" id="postalCode1" formControlName="postalCode1" name="postalCode1" [(ngModel)]="newUser.postalCode1"
-                           class="input w-[10rem] text-center
+                  <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4">
+                    <app-input-title class="text-[2.6vh]">Código Postal</app-input-title>
+                    <div>
+                      <input required placeholder="{{newUser.postalCode1}}" type="text" id="postalCode1" formControlName="postalCode1" name="postalCode1" [(ngModel)]="newUser.postalCode1"
+                             class="input w-[10rem] text-center
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500" />
-                    <span>-</span>
-                    <input required placeholder="{{newUser.postalCode2}}" type="text" id="postalCode2" formControlName="postalCode2" name="postalCode2" [(ngModel)]="newUser.postalCode2" class="input w-[8rem] text-center
+                      <span>-</span>
+                      <input required placeholder="{{newUser.postalCode2}}" type="text" id="postalCode2" formControlName="postalCode2" name="postalCode2" [(ngModel)]="newUser.postalCode2" class="input w-[8rem] text-center
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500" />
+                    </div>
+                    <div class="text-red-500 font-bold py-2" *ngIf="(newUser.postalCode1?.touched && newUser.postalCode1?.invalid) || (newUser.postalCode2?.touched && newUser.postalCode2?.invalid) ">
+                      <div *ngIf="newUser.postalCode1?.errors?.['required'] || newUser.postalCode2?.errors?.['required'] ">Código Postal Obrigatório</div>
+                      <div *ngIf="newUser.postalCode1?.errors?.['pattern']">Primeiro código inválido</div>
+                      <div *ngIf="newUser.postalCode2?.errors?.['pattern']">Secundo código inválido</div>
+                    </div>
                   </div>
-                </div>
               </div>
 
               <div class="flex flex-wrap items-start justify-between mb-8">
@@ -74,6 +102,10 @@ transition-all duration-700 ease-in-out  decoration-sky-500" />
                   <div class="flex items-center">
                     <input required placeholder="{{newUser.nif}}" type="text" id="nif" formControlName="nif" name="nif" [(ngModel)]="newUser.nif"
                            class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" style="width: 100%;" />
+                  </div>
+                  <div class="text-red-500 font-bold py-2" *ngIf="newUser.nif?.touched && newUser.nif?.invalid">
+                    <div *ngIf="newUser.nif?.errors?.['required']">Nif obrigatório</div>
+                    <div *ngIf="newUser.nif?.errors?.['pattern']">Nif inválido</div>
                   </div>
                 </div>
                 <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4">

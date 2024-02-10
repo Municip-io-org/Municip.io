@@ -321,6 +321,7 @@ namespace Municip.io.Server.Controllers
                 {
                     existingCitizen.Address = updatedCitizen.Address;
                 }
+
                 if (existingCitizen.Nif != updatedCitizen.Nif)
                 {
                     existingCitizen.Nif = updatedCitizen.Nif;
@@ -330,22 +331,45 @@ namespace Municip.io.Server.Controllers
                 {
                     existingCitizen.postalCode1 = updatedCitizen.postalCode1;
                 }
+
                 if (existingCitizen.postalCode2 != updatedCitizen.postalCode2)
                 {
                     existingCitizen.postalCode2 = updatedCitizen.postalCode2;
                 }
 
+                if (existingCitizen.Password != updatedCitizen.Password)
+                {
+                    
+                    if (!IsValidPassword(updatedCitizen.Password))
+                    {
+                        ModelState.AddModelError("Password", "Password não obedece aos requisitos");
+                        var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                        return BadRequest(new { Message = "Erro de Validação", Errors = errors });
+                    }
+
+                    existingCitizen.Password = updatedCitizen.Password;
+                }
+
                 if (_context.ChangeTracker.HasChanges())
                 {
                     await _context.SaveChangesAsync();
-                    return Ok(); 
+                    return Ok();
                 }
 
-                return NoContent(); 
+                return NoContent();
             }
 
-            return BadRequest(new { Message = "Os dados não possuem um formato válido", ModelState = ModelState });
+            var validationErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+            return BadRequest(new { Message = "Erro de Validação", Errors = validationErrors });
         }
+
+
+        private bool IsValidPassword(string password)
+        {
+           
+            return password.Length >= 8; 
+        }
+
 
     }
 }
