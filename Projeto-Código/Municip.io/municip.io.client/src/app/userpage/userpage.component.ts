@@ -15,6 +15,7 @@ export class UserpageComponent {
   errors: string[] | null = null;
   originalName: string = "";
 
+
   constructor(private userAuthService: UserAuthService ) { }
   user: any;
   role: string = "";
@@ -58,7 +59,7 @@ export class UserpageComponent {
 
 
   profileEdit = new FormGroup({
-    firstName: new FormControl(null, [Validators.required]),
+    firstName: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.email, Validators.required]),
     surname: new FormControl("", [Validators.required]),
     birthDate: new FormControl(new Date(), [Validators.required]),
@@ -71,8 +72,47 @@ export class UserpageComponent {
       Validators.required,
       Validators.pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/)
     ]),
-  });
 
+  });
+  get firstName() {
+    return this.profileEdit.get('firstName');
+  }
+
+  get surname() {
+    return this.profileEdit.get('surname');
+  }
+
+  get email() {
+    return this.profileEdit.get('email');
+  }
+
+  get password() {
+    return this.profileEdit.get('password');
+  }
+
+  get nif() {
+    return this.profileEdit.get('nif');
+  }
+
+  get address() {
+    return this.profileEdit.get('address');
+  }
+
+  get postalCode1() {
+    return this.profileEdit.get('postalCode1');
+  }
+
+  get postalCode2() {
+    return this.profileEdit.get('postalCode2');
+  }
+
+  get birthDate() {
+    return this.profileEdit.get('birthDate');
+  }
+
+  get photo() {
+    return this.profileEdit.get('photo');
+  }
   OnSubmit() {
     console.log(this.profileEdit.value);
     
@@ -86,6 +126,7 @@ export class UserpageComponent {
     this.newUser.postalCode1 = formValues.postalCode1 || this.newUser.postalCode1;
     this.newUser.postalCode2 = formValues.postalCode2 || this.newUser.postalCode2;
     this.newUser.password = formValues.password || this.newUser.password;
+    this.newUser.profileimg = formValues.profileimg || this.newUser.profileimg;
     
     this.userAuthService.updateUser(this.newUser).subscribe(
       res => {

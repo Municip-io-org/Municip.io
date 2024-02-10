@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 using System.Text;
+using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Municip.io.Server.Controllers
@@ -310,6 +311,7 @@ namespace Municip.io.Server.Controllers
                 if (existingCitizen.Email != updatedCitizen.Email)
                 {
                     existingCitizen.Email = updatedCitizen.Email;
+                    
                 }
 
                 if (existingCitizen.birthDate != updatedCitizen.birthDate)
@@ -340,15 +342,15 @@ namespace Municip.io.Server.Controllers
                 if (existingCitizen.Password != updatedCitizen.Password)
                 {
                     
-                    if (!IsValidPassword(updatedCitizen.Password))
+                    if (!ValidadePassword(updatedCitizen.Password))
                     {
-                        ModelState.AddModelError("Password", "Password não obedece aos requisitos");
+                        ModelState.AddModelError("password", "Password não obedece aos requisitos");
                         var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
                         return BadRequest(new { Message = "Erro de Validação", Errors = errors });
                     }
 
                     existingCitizen.Password = updatedCitizen.Password;
-                }
+                } 
 
                 if (_context.ChangeTracker.HasChanges())
                 {
@@ -364,11 +366,15 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        private bool IsValidPassword(string password)
+        private bool ValidadePassword(string password)
         {
-           
-            return password.Length >= 8; 
+            return password.Length >= 8 &&
+                   password.Any(char.IsUpper) &&
+                   password.Any(char.IsDigit) &&
+                   password.Any(ch => !char.IsLetterOrDigit(ch));
         }
+
+        
 
 
     }
