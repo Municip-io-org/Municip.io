@@ -22,6 +22,8 @@ import { MunicipalitymapComponent } from './maps/municipalitymap/municipalitymap
 import { StopsMapComponent } from './transports/stops-map/stops-map.component';
 import { StopsPageComponent } from './transports/stops-page/stops-page.component';
 import { CitizenHomePageComponent } from './homePage/citizen-home-page/citizen-home-page.component';
+import { CitizenGuard } from './utils/guard/citizen.guard';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
 
 const routes: Routes = [
@@ -44,7 +46,8 @@ const routes: Routes = [
   { path: 'munadmin-dashboard/:municipalName', component: MunAdmindashboardComponent, data: {} },
   { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} },
   { path: 'transports/stops', component: StopsPageComponent, data: {} },
-  { path: 'citizenHomePage', component: CitizenHomePageComponent, data: {}, canActivate: [AuthGuardService] }
+  { path: 'citizenHomePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: 'accessDenied', component: AccessDeniedComponent, data: {} }
 ];
 
 @NgModule({

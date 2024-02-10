@@ -49,6 +49,7 @@ import { EventsSmallComponent } from './utils/events-small/events-small.componen
 import { MyDataCardComponent } from './utils/my-data-card/my-data-card.component';
 import { MyMunicipalityCardComponent } from './utils/my-municipality-card/my-municipality-card.component';
 import { NewsSmallComponent } from './utils/news-small/news-small.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
 
 
@@ -94,7 +95,8 @@ import { NewsSmallComponent } from './utils/news-small/news-small.component';
     EventsSmallComponent,
     MyDataCardComponent,
     MyMunicipalityCardComponent,
-    NewsSmallComponent
+    NewsSmallComponent,
+    AccessDeniedComponent
     
   ],
   imports: [
