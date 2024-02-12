@@ -4,5 +4,11 @@
     <h3 class="font-bold text-xl">{{stopTime}}</h3>
     <p class="text-sm">{{calculateTimeRemaining(stopTime)}}</p>
   </div>
-  <h1 class="flex items-center text-municip-normal-black"> {{stopName}}</h1>
+  <div class="flex flex-1 justify-between items-center">
+    <h1 class="flex text-municip-normal-black"> {{stopName}}</h1>
+    <div class="bg-gray-200  rounded-md p-1 cursor-pointer" (click)="redirectToStop()">
+      <img alt="arrow" src="assets/images/icons/arrow.png"
+           class="w-4 h-5" />
+    </div>
+  </div>
 </div>

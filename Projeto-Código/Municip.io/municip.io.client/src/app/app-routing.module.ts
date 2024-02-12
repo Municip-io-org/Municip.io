@@ -41,7 +41,7 @@ const routes: Routes = [
   { path: 'admindashboard', component: AdmindashboardComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
   { path: 'transports', component: TransportsMainComponent, data: {} },
-  {path : 'schedules', component: SchedulesComponent, data: {}},
+  { path: 'transports/schedules', component: SchedulesComponent, data: {}},
   { path: 'munadmin-dashboard/:municipalName', component: MunAdmindashboardComponent, data: {} },
   { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} },
   { path: 'transports/stops', component: StopsPageComponent, data: {} },
