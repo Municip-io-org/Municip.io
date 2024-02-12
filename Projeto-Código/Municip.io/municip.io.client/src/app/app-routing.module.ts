@@ -46,6 +46,8 @@ const routes: Routes = [
   { path: 'munadmin-dashboard/:municipalName', component: MunAdmindashboardComponent, data: {} },
   { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} },
   { path: 'transports/stops', component: StopsPageComponent, data: {} },
+  { path: 'transports/stops/:selectedStop', component: StopsPageComponent, data: {} },
+
   { path: 'citizenHomePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} }
 ];
