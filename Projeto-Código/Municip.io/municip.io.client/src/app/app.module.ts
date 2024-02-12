@@ -1,7 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BannerComponent } from './landingpage/banner/banner.component';
@@ -51,6 +50,7 @@ import { MyDataCardComponent } from './utils/my-data-card/my-data-card.component
 import { MyMunicipalityCardComponent } from './utils/my-municipality-card/my-municipality-card.component';
 import { NewsSmallComponent } from './utils/news-small/news-small.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { ProfileBannerComponent } from './utils/profile-banner/profile-banner.component';
 
 
 
@@ -98,7 +98,8 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
     MyDataCardComponent,
     MyMunicipalityCardComponent,
     NewsSmallComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    ProfileBannerComponent
     
   ],
   imports: [

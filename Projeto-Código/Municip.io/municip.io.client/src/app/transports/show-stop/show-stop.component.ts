@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class ShowStopComponent {
   @Input() stopName: string = "";
   @Input() stopTime: string = "";
-  @Input() stopId: string = "";
 
 
 
