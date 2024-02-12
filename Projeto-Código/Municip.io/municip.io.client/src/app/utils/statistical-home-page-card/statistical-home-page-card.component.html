@@ -1,0 +1,17 @@
+<div class="flex flex-col items-start font-inter p-10 space-y-3">
+  <section class="flex text-[2rem] text-left space-x-16 ">
+    <div class="flex justify-start items-center">
+      <img [src]="iconSrc" [alt]="iconAlt" class="object-cover h-24 rounded-2xl" />
+    </div>
+    <div class="font-semibold text-left">
+      <span class="text-municip-normal-black text-[1.8rem]">{{ title }}</span>
+      <p class="text-municip-blue text-[2.8rem]">
+        {{ value }}
+      </p>
+    </div>
+  </section>
+  <button class="flex font-semibold w-full justify-between items-center text-municip-normal-black text-[1.1rem] bg-municip-blank rounded-xl p-2" (click)="onClick()">
+    {{ buttonText }}
+    <img alt="arrow" src="/assets/images/arrows/right-arrow2.png" class="size-7" />
+  </button>
+</div>

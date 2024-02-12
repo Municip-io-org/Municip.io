@@ -1,7 +1,7 @@
 <app-header></app-header>
 <app-big-banner [image]="municipality.landscapePhoto!" title="Município de {{municipality.name}}"
                 text={{municipality.description}}></app-big-banner>
-<div class="my-[4rem] mx-32 space-y-20">
+<div class=" my-[4rem] mx-32 space-y-20">
   <div class="flex">
     <section class="flex flex-col space-y-20 w-[140rem]">
       <app-my-municipality-card [district]="municipality.distrito"
@@ -59,7 +59,23 @@
       </ul>
     </section>
   </div>
-  <section class="flex flex-col space-y-7 justify-center items-center">
-  </section>
+  <div class="flex items-center justify-around">
+    <app-statistical-home-page-card [iconSrc]="'/assets/images/icons/file.png'"
+                                    iconAlt="Ícone de Pedidos"
+                                    title="Pedidos Pendentes"
+                                    [value]="'114'"
+                                    buttonText="Analisar Pedidos"
+                                    (buttonClick)="pendingCitizensClick()">
+      
+    </app-statistical-home-page-card>
+    <app-statistical-home-page-card [iconSrc]="'/assets/images/icons/git.png'"
+                                    iconAlt="Ícone de Documentos por Aprovar"
+                                    title="Documentos por Aprovar"
+                                    [value]="'12'"
+                                    buttonText="Analisar Documentos"
+                                    (buttonClick)="approveDocumentsClick()">
+      
+    </app-statistical-home-page-card>
+  </div>
 </div>
 <app-footer></app-footer>

@@ -52,6 +52,7 @@ import { NewsSmallComponent } from './utils/news-small/news-small.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { ProfileBannerComponent } from './utils/profile-banner/profile-banner.component';
 import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
+import { StatisticalHomePageCardComponent } from './utils/statistical-home-page-card/statistical-home-page-card.component';
 
 
 
@@ -101,7 +102,8 @@ import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-pag
     NewsSmallComponent,
     AccessDeniedComponent,
     ProfileBannerComponent,
-    MunAdminHomePageComponent
+    MunAdminHomePageComponent,
+    StatisticalHomePageCardComponent
     
   ],
   imports: [

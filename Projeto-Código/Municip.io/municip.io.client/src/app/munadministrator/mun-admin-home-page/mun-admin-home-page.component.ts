@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { MunicipalAdministrator, Municipality } from '../../services/municipal-admin-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mun-admin-home-page',
@@ -9,7 +10,7 @@ import { MunicipalAdministrator, Municipality } from '../../services/municipal-a
   styleUrl: './mun-admin-home-page.component.css'
 })
 export class MunAdminHomePageComponent {
-  constructor(private userAuthService: UserAuthService) { }
+  constructor(private userAuthService: UserAuthService, private router: Router) { }
 
 
   anyUser: any;
@@ -85,7 +86,13 @@ export class MunAdminHomePageComponent {
       }
     );
 
+  }
 
+  pendingCitizensClick() {
+    this.router.navigateByUrl("/");
+  }
 
+  approveDocumentsClick() {
+    this.router.navigateByUrl("/");
   }
 }
