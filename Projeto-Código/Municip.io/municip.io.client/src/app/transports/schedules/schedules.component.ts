@@ -24,6 +24,7 @@ export class SchedulesComponent {
   trips: trip[] = [];
   path: stop[] | null = [];
   schedule: stopTime[] | null = [];
+  lineSelected : line | null = null;
 
 
   scheduleForm = new FormGroup({
@@ -155,10 +156,13 @@ return this.scheduleForm.get('date');
 
 
   async handleLineChange(value: string) {
-
+    this.lineSelected = this.lines.find(line => line.id === value) || null;
 
     if (value === "") {
+      //caso o valor seja vazio, então tudo terá que ser resetado
       this.scheduleForm.get("route")?.setValue("");
+      this.scheduleForm.get("pattern")?.setValue("");
+      this.scheduleForm.get("trip")?.setValue("");
     } else if (!this.isRouteFromLine(this.scheduleForm.get('route')?.value || "")) {
       this.scheduleForm.get('route')?.setValue(this.routes[0].id);
     }
@@ -167,7 +171,7 @@ return this.scheduleForm.get('date');
   async handleRouteChange(value: string) {
 
     if (value === "") {
-      this.scheduleForm.get("pattern")?.setValue(this.patterns[0].id || "");
+    this.scheduleForm.get("pattern")?.setValue(this.patterns[0].id || "");
     } else if (!this.patterns.find(pattern => pattern.id === this.scheduleForm.get('pattern')?.value)) {
       this.scheduleForm.get('pattern')?.setValue(this.patterns[0].id || "");
     }
@@ -177,6 +181,7 @@ return this.scheduleForm.get('date');
   }
 
   async handlePatternChange(value: string) {
+
 
     if (value === "") {
       this.scheduleForm.get("trip")?.setValue(this.trips[0].id || "");
@@ -317,6 +322,14 @@ this.patterns = [];
       return stop ? stop.stop.name : "";
     }
     return "";
+
+  }
+
+  iswithoutTrips(): boolean {
+    if (this.trips.length === 0 && this.scheduleForm.get('pattern')?.value !== "") {
+      return true;
+    }
+    return false;
 
   }
 
