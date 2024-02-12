@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-show-stop',
@@ -8,6 +10,12 @@ import { Component, Input } from '@angular/core';
 export class ShowStopComponent {
   @Input() stopName: string = "";
   @Input() stopTime: string = "";
+  @Input() stopId: string = "";
+
+
+
+  constructor(private router: Router) { }
+
 
   calculateTimeRemaining(stopTime: string): string {
     const currentTime = new Date();
@@ -29,6 +37,12 @@ export class ShowStopComponent {
       timeRemaining = "Já passou";
     }
     return timeRemaining;
+  }
+
+
+  redirectToStop() {
+    this.router.navigateByUrl(`/transports/stops${this.stopId}`);
+
   }
 
 }
