@@ -1,6 +1,6 @@
 import { Component, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { BoundsService } from '../../maps/bounds.service';
-import { GoogleMap } from '@angular/google-maps';
+import { GoogleMap, MapMarker } from '@angular/google-maps';
 import { TransportsService } from '../../services/transports.service';
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -15,9 +15,12 @@ export class StopsMapComponent {
 
   @ViewChild(GoogleMap, { static: false }) googleMap: GoogleMap | undefined;
 
-  @Input() municipalityName: string = ''; 
+  @Input() municipalityName: string = '';
+  @Input() selectedStop: string = '';
+  selectedStopName: String = '';
 
-  selectedStop: string = '';
+
+  showMap: boolean = true;
   showNextBuses: boolean = false;
   nextBuses: any[] = [];
   lines: any[] = [];
@@ -38,15 +41,24 @@ export class StopsMapComponent {
   };
 
   infoWindow = new google.maps.InfoWindow();
-  showMap: boolean = true;
+  markers: google.maps.Marker[] = []; // Armazenar marcadores em uma matriz
+
+
+  ngOnInit(): void {
+    console.log("é esta:" + this.selectedStop)
+  };
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['municipalityName'] && changes['municipalityName'].currentValue) {
       this.setBoundsAndCenterForMunicipality(changes['municipalityName'].currentValue);
     }
+    if (changes['selectedStop'] && changes['selectedStop'].currentValue) {
+      this.highlightSelectedStop();
+    }
   }
 
   setBoundsAndCenterForMunicipality(municipalityName: string) {
+
     this.boundsService.getMunicipalityBounds(municipalityName).subscribe(bounds => {
       if (bounds && this.googleMap) {
         const newRestriction: google.maps.MapRestriction = {
@@ -70,17 +82,31 @@ export class StopsMapComponent {
 
         this.transportsService.getStopsFromMunicipality(this.municipalityName).subscribe(stops => {
           stops.forEach(stop => {
+            if (stop.id === this.selectedStop) {
+              this.selectedStopName = stop.name;
+            }
+
             const marker = new google.maps.Marker({
               position: { lat: parseFloat(stop.lat), lng: parseFloat(stop.lon) },
               map: this.googleMap?.googleMap,
               title: stop.name
             });
 
+
+            this.markers.push(marker); // Adicionar o marcador à matriz
+
             marker.addListener('click', () => {
               this.showInfoWindow(stop, marker);
             });
+
+            if (this.selectedStopName === stop.name) {
+              this.showInfoWindow(stop, marker);
+            }
+
+
           });
         });
+
       } else {
         this.showMap = false;
         console.error('DEU ERRO:', municipalityName);
@@ -96,7 +122,6 @@ export class StopsMapComponent {
     this.infoWindow.setContent(content);
     const infoWindowOptions: google.maps.InfoWindowOptions = {
       content: content,
-     
       maxWidth: 200
     };
     this.infoWindow.setOptions(infoWindowOptions);
@@ -109,7 +134,6 @@ export class StopsMapComponent {
     this.selectedStop = stop.name;
     this.getLines();
     this.getNextBuses(stop.id);
-
   }
 
   getLines() {
@@ -122,7 +146,7 @@ export class StopsMapComponent {
             color: line.color
           };
         });
-        this.lines = lineData; 
+        this.lines = lineData;
       },
       error => {
         console.error('Erro ao buscar as linhas:', error);
@@ -130,12 +154,11 @@ export class StopsMapComponent {
     );
   }
 
-
   getNextBuses(stopId: string) {
     this.transportsService.getRealtimeBuses(stopId).subscribe(
       buses => {
         const now = new Date();
-        const tenMinutesBeforeNow = new Date(now.getTime() - 10 * 60000); 
+        const tenMinutesBeforeNow = new Date(now.getTime() - 10 * 60000);
 
         this.nextBuses = buses.filter(bus => {
           const scheduledArrivalTime = new Date();
@@ -147,13 +170,11 @@ export class StopsMapComponent {
           return scheduledArrivalTime > tenMinutesBeforeNow;
         });
 
-
-        
-this.nextBuses.forEach(bus => {
+        this.nextBuses.forEach(bus => {
           const line = this.lines.find(line => line.id === bus.line_id);
           bus.color = line?.color || '#000000';
           bus.textColor = line?.textColor || '#FFFFFF';
-});
+        });
 
         this.showNextBuses = true;
         this.cdr.detectChanges();
@@ -176,5 +197,16 @@ this.nextBuses.forEach(bus => {
     return scheduledArrivalTime < now;
   }
 
+  highlightSelectedStop() {
+    this.markers.forEach(marker => {
+      if (marker.getTitle() === this.selectedStopName) {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+        const position = marker.getPosition();
+        if (position) {
+          this.googleMap?.googleMap?.panTo(position);
+        }
+      }
+    });
+  }
 
 }
