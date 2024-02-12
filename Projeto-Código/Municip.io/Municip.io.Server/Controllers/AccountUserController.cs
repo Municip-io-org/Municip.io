@@ -350,7 +350,12 @@ namespace Municip.io.Server.Controllers
                     }
 
                     existingCitizen.Password = updatedCitizen.Password;
-                } 
+                }
+
+                if (existingCitizen.photo != updatedCitizen.photo)
+                {
+                    existingCitizen.photo = updatedCitizen.photo;
+                }
 
                 if (_context.ChangeTracker.HasChanges())
                 {

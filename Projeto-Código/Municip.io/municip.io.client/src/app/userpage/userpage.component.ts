@@ -14,7 +14,8 @@ export class UserpageComponent {
   newUser: any;
   errors: string[] | null = null;
   originalName: string = "";
-
+  originalPhoto: string = "";
+  image!: File;
 
   constructor(private userAuthService: UserAuthService ) { }
   user: any;
@@ -31,6 +32,7 @@ export class UserpageComponent {
           res => {
             this.newUser = res;
             this.originalName = this.newUser.firstName;
+            this.originalPhoto = this.newUser.photo; 
             this.formatBirthDate();
             console.log(this.newUser);
           },
@@ -115,7 +117,7 @@ export class UserpageComponent {
   }
   OnSubmit() {
     console.log(this.profileEdit.value);
-    
+
     const formValues = this.profileEdit.value;
     this.newUser.name = formValues.firstName || this.newUser.name;
     this.newUser.surname = formValues.surname || this.newUser.surname;
@@ -126,18 +128,21 @@ export class UserpageComponent {
     this.newUser.postalCode1 = formValues.postalCode1 || this.newUser.postalCode1;
     this.newUser.postalCode2 = formValues.postalCode2 || this.newUser.postalCode2;
     this.newUser.password = formValues.password || this.newUser.password;
-    this.newUser.photo = formValues.photo || this.newUser.photo;
-    
-    this.userAuthService.updateUser(this.newUser).subscribe(
+
+    this.userAuthService.updateUser(this.newUser, this.newUser.photo).subscribe(
       res => {
         console.log(res);
+        this.originalName = this.newUser.firstName;
+        this.originalPhoto = this.newUser.photo;
       },
       (error) => {
-        console.log("erro " +error.error.errors)
+        console.log("erro " + error.error.errors)
         this.errors = error.error.errors;
       }
     );
-    this.originalName = this.newUser.firstName;
+    
+    
+    
   }
 
   getUserAttributes(): { key: string, value: any }[] {
@@ -157,5 +162,17 @@ export class UserpageComponent {
     const day = ('0' + date.getDate()).slice(-2);
     const formattedDate = `${year}-${month}-${day}`; 
     this.newUser.birthDate = formattedDate; 
+  }
+
+  onImagePicked(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    const file = fileInput?.files?.[0]; 
+
+    if (file) {
+      this.image = file;
+      this.newUser.photo = this.image;
+    } else {
+      console.error('No file selected');
+    }
   }
 }

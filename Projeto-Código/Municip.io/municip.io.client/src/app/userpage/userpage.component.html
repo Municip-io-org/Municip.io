@@ -4,7 +4,7 @@
   <app-profile-banner [image]="'/assets/images/admin/banner.jpg'"
                       [title]="'Dados de ' + (originalName || 'Utilizador')"
                       [text]="'Consulte e altere os seus dados pessoais'"
-                      [profileimg]="'{{photo}}'">
+                      [profileimg]="(originalPhoto || '/assets/images/admin/banner.jpg')">
   </app-profile-banner>
 
   <div class="container mt-10 w-[85%] pb-7">
@@ -67,36 +67,36 @@
                   </div>
                 </div>
               </div>
-             
-                <div class="flex flex-wrap items-start justify-between mb-8">
-                  <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
-                    <app-input-title class="text-[2.6vh]">Morada</app-input-title>
-                    <div class="flex items-center">
-                      <input required placeholder="{{newUser.address}}" type="text" id="address" formControlName="address" name="address" [(ngModel)]="newUser.address"
-                             class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
-                    </div>
-                    <div class="text-red-500 font-bold py-2" *ngIf="address?.touched && address?.invalid">
-                      <div *ngIf="address?.errors?.['required'] ">Morada Obrigatório</div>
-                    </div>
-                </div>
-                  <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4">
-                    <app-input-title class="text-[2.6vh]">Código Postal</app-input-title>
-                    <div>
-                      <input required placeholder="{{newUser.postalCode1}}" type="text" id="postalCode1" formControlName="postalCode1" name="postalCode1" [(ngModel)]="newUser.postalCode1"
-                             class="input w-[10rem] text-center
-focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-transition-all duration-700 ease-in-out  decoration-sky-500" />
-                      <span>-</span>
-                      <input required placeholder="{{newUser.postalCode2}}" type="text" id="postalCode2" formControlName="postalCode2" name="postalCode2" [(ngModel)]="newUser.postalCode2" class="input w-[8rem] text-center
-focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-transition-all duration-700 ease-in-out  decoration-sky-500" />
-                    </div>
-                    <div class="text-red-500 font-bold py-2" *ngIf="(postalCode1?.touched && postalCode1?.invalid) || (postalCode2?.touched && postalCode2?.invalid) ">
-                      <div *ngIf="postalCode1?.errors?.['required'] || postalCode2?.errors?.['required'] ">Código Postal Obrigatório</div>
-                      <div *ngIf="postalCode1?.errors?.['pattern']">Primeiro código inválido</div>
-                      <div *ngIf="postalCode2?.errors?.['pattern']">Segundo código inválido</div>
-                    </div>
+
+              <div class="flex flex-wrap items-start justify-between mb-8">
+                <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
+                  <app-input-title class="text-[2.6vh]">Morada</app-input-title>
+                  <div class="flex items-center">
+                    <input required placeholder="{{newUser.address}}" type="text" id="address" formControlName="address" name="address" [(ngModel)]="newUser.address"
+                           class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
                   </div>
+                  <div class="text-red-500 font-bold py-2" *ngIf="address?.touched && address?.invalid">
+                    <div *ngIf="address?.errors?.['required'] ">Morada Obrigatório</div>
+                  </div>
+                </div>
+                <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4">
+                  <app-input-title class="text-[2.6vh]">Código Postal</app-input-title>
+                  <div>
+                    <input required placeholder="{{newUser.postalCode1}}" type="text" id="postalCode1" formControlName="postalCode1" name="postalCode1" [(ngModel)]="newUser.postalCode1"
+                           class="input w-[10rem] text-center
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+                    <span>-</span>
+                    <input required placeholder="{{newUser.postalCode2}}" type="text" id="postalCode2" formControlName="postalCode2" name="postalCode2" [(ngModel)]="newUser.postalCode2" class="input w-[8rem] text-center
+focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+transition-all duration-700 ease-in-out  decoration-sky-500" />
+                  </div>
+                  <div class="text-red-500 font-bold py-2" *ngIf="(postalCode1?.touched && postalCode1?.invalid) || (postalCode2?.touched && postalCode2?.invalid) ">
+                    <div *ngIf="postalCode1?.errors?.['required'] || postalCode2?.errors?.['required'] ">Código Postal Obrigatório</div>
+                    <div *ngIf="postalCode1?.errors?.['pattern']">Primeiro código inválido</div>
+                    <div *ngIf="postalCode2?.errors?.['pattern']">Segundo código inválido</div>
+                  </div>
+                </div>
               </div>
 
               <div class="flex flex-wrap items-start justify-between mb-8">
@@ -122,10 +122,19 @@ transition-all duration-700 ease-in-out  decoration-sky-500" />
                   </div>
                 </div>
               </div>
-              <button type="submit"  class="self-end relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
-                Atualizar Dados
-                <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-              </button>
+              <app-input-title class="text-[2.6vh]">Foto</app-input-title>
+              <div class="flex items-center">
+                <input type="file" #filePicker id="photo" formControlName="photo" name="photo" (change)="onImagePicked($event)" class="input w-[35.2vh] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500">
+                <app-tooltip [tooltipText]="'Utilize o seletor para encontrar a sua foto'"></app-tooltip>
+              </div>
+
+              <!-- Submit button -->
+              <div class="flex justify-end">
+                <button type="submit" class="relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+                  Atualizar Dados
+                  <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+                </button>
+              </div>
             </section>
           </div>
         </form>
