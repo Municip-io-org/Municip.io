@@ -51,6 +51,7 @@ import { MyMunicipalityCardComponent } from './utils/my-municipality-card/my-mun
 import { NewsSmallComponent } from './utils/news-small/news-small.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { ProfileBannerComponent } from './utils/profile-banner/profile-banner.component';
+import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
 
 
 
@@ -99,7 +100,8 @@ import { ProfileBannerComponent } from './utils/profile-banner/profile-banner.co
     MyMunicipalityCardComponent,
     NewsSmallComponent,
     AccessDeniedComponent,
-    ProfileBannerComponent
+    ProfileBannerComponent,
+    MunAdminHomePageComponent
     
   ],
   imports: [

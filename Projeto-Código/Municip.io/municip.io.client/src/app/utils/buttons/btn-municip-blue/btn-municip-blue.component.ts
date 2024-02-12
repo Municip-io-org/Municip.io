@@ -6,5 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './btn-municip-blue.component.css'
 })
 export class BtnMunicipBlueComponent {
+    @Input() width?: string;
     @Input() text: string = "";
 }

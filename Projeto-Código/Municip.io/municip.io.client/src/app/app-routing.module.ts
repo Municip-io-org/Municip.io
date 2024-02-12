@@ -12,9 +12,7 @@ import { UserpageComponent } from './userpage/userpage.component';
 import { SignUpSuccessComponent } from './signUp/sign-up-success/sign-up-success.component';
 import { MunicipalityGuard } from './utils/guard/municipality.guard';
 import { AuthGuardService } from './utils/guard/auth.guard';
-
 import { AdmindashboardComponent } from './administrator/admindashboard/admindashboard.component';
-
 import { TransportsMainComponent } from './transports/transports-main/transports-main.component';
 import { SchedulesComponent } from './transports/schedules/schedules.component';
 import { MunAdmindashboardComponent } from './munadministrator/mun-admindashboard/mun-admindashboard.component';
@@ -24,6 +22,7 @@ import { StopsPageComponent } from './transports/stops-page/stops-page.component
 import { CitizenHomePageComponent } from './citizen/citizen-home-page/citizen-home-page.component';
 import { CitizenGuard } from './utils/guard/citizen.guard';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
 
 
 const routes: Routes = [
@@ -47,7 +46,7 @@ const routes: Routes = [
   { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} },
   { path: 'transports/stops', component: StopsPageComponent, data: {} },
   { path: 'transports/stops/:selectedStop', component: StopsPageComponent, data: {} },
-
+  { path: 'municipal/homePage', component: MunAdminHomePageComponent, data: {} },
   { path: 'citizenHomePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} }
 ];
