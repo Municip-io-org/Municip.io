@@ -1,101 +1,37 @@
 <app-header />
 <app-smaller-banner [title]="'Transportes - Hórario'" [image]="'assets/images/transports/transports.png'" />
+<div *ngIf="municipality">
+  {{municipality.id }} {{municipality.name}}
+</div>
 
-
-<form [formGroup]="scheduleForm" class="shadow-xl m-10 rounded-lg p-5">
-  <div class="flex justify-center space-x-10
-       bg-gradient-to-tl from-municip-light-blue to-municip-blue
-       rounded-lg  py-20">
-    <div>
-      <div>
-        <app-input-title class="text-[2.4vh] text-start"><span class="text-municip-blank">Linha</span></app-input-title>
-        <div class="flex items-center">
-          <select required id="line" formControlName="line" name="line"
-                  class="input w-96 truncate h-12 
+<form [formGroup]="scheduleForm">
+  <div>
+    <app-input-title class="text-[2.4vh]">Linha</app-input-title>
+    <div class="flex items-center">
+      <select required id="line" formControlName="line" name="line"
+              class="input w-52
 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
 transition-all duration-700 ease-in-out  decoration-sky-500">
-            <option value="">Selecionar a linha</option>
-            <option [value]="value.id" *ngFor="let value of lines">
-              {{value.id}} |  {{ value.long_name}}
-              </option>
-          </select>
-          <app-tooltip [tooltipText]="'Selecione a linha'"></app-tooltip>
-        </div>
-      </div>
-
-
-      <div *ngIf="routes.length > 1" class="flex justify-center">
-          <!--<app-input-title class="text-[2.4vh]">Rotas</app-input-title>-->
-          <div class="flex flex-col text-start space-y-2 py-3 px-2 bg-blue-50
-              rounded-b-lg w-80">
-            <div *ngFor="let route of routes" class="space-x-2">
-              <input type="radio" id={{route.id}} [value]="route.id" formControlName="route" name="route"
-                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500
-                     dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
-                      dark:border-gray-600"
-                     />
-              <label for={{route.id}}>{{ route.long_name }}</label>
-            </div>
-          </div>
-      </div>
+        <option value="">Selecionar a linha</option>
+        <option [value]="value.id" *ngFor="let value of lines">{{value.id}} {{ value.long_name}}</option>
+      </select>
+      <app-tooltip [tooltipText]="'Selecione a linha'"></app-tooltip>
     </div>
-    <div>
-      <app-input-title class="text-[2.4vh] text-start"><span class="text-municip-blank ">Paragem</span></app-input-title>
-      <div class="flex items-center">
-        <select required id="pattern" formControlName="pattern" name="pattern"
-                class="input w-96 h-12
-focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-transition-all duration-700 ease-in-out  decoration-sky-500">
-          <option value="">Selecionar a paragem</option>
-          <option [value]="value.id" *ngFor="let value of patterns">{{ value.headsign}}</option>
-        </select>
-        <app-tooltip [tooltipText]="'Selecione a paragem de destino'"></app-tooltip>
-      </div>
-    </div>
-
-    <div>
-      <app-input-title class="text-[2.4vh] text-start"><span class="text-municip-blank">Data</span></app-input-title>
-      <div class="flex items-center">
-        <input required placeholder="Data" type="date" id="date" formControlName="date" name="date"
-               class="input w-96 h-12
-focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-transition-all duration-700 ease-in-out  decoration-sky-500">
-        <app-tooltip [tooltipText]="'Utilize o seletor para a inserção da data'"></app-tooltip>
-      </div>
+    <div class="text-red-500 font-bold py-2" *ngIf="line?.touched && line?.invalid">
+      <div *ngIf="line?.errors?.['required'] ">Linha Obrigatório</div>
     </div>
   </div>
 
-    <div *ngIf="!(trips.length === 0)" class="mt-5">
-      <div *ngIf="lineSelected">
-        <h1 class="text-3xl text-center my-10 font-bold"><span style="background-color:{{lineSelected.color}}"
-                  class=" rounded-lg p-1 text-municip-blank">{{lineSelected.short_name}}</span>
-        {{lineSelected.long_name}}</h1>
-      </div>
-      <div>
-        <div class="flex flex-col items-center mb-10 ">
-          <app-input-title class="text-[2.4vh]">Horário</app-input-title>
-          <div class="flex items-center">
-            <select required id="trip" formControlName="trip" name="trip"
-                    class="input w-52
-        focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-        transition-all duration-700 ease-in-out  decoration-sky-500">
-              <option [value]="value.id" *ngFor="let value of trips ">{{ formatTime(value.schedule[0].arrival_time) }}</option>
-            </select>
-            <app-tooltip [tooltipText]="'Selecione o horário de começo de circulação'"></app-tooltip>
-          </div>
-        </div>
-        <div class="space-y-4 h-96 overflow-auto py-4">
-          <div *ngFor="let value of schedule" >
-            <app-show-stop [stopName]="getNameStopById(value.stop_id)" [stopTime]="formatTime(value.arrival_time)"
-                           class="flex justify-center"/>
-          </div>
+
+  <div *ngIf="routes.length > 1">
+    <div>
+      <app-input-title class="text-[2.4vh]">Rotas</app-input-title>
+      <div class="flex items-center flex-col ">
+        <div *ngFor="let route of routes ; ">
+            <input type="radio" id="route" [value]="route.id" formControlName="route" name="route"  />
+            <label for={{route.id}}>{{ route.long_name }}</label>
         </div>
       </div>
     </div>
-
-  <div *ngIf="iswithoutTrips()">
-  <h1 class="text-2xl font-bold my-5">Sem paragens para  a data selecionada</h1>
-</div>
-
-
+  </div>
 </form>

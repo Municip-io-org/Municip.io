@@ -39,7 +39,6 @@ import { MunAdmindashboardComponent } from './munadministrator/mun-admindashboar
 import { MunicipalitymapComponent } from './maps/municipalitymap/municipalitymap.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { UserinfodialogComponent } from './utils/userinfodialog/userinfodialog.component';
-import { ShowStopComponent } from './transports/show-stop/show-stop.component';
 import { StopsMapComponent } from './transports/stops-map/stops-map.component';
 import { StopsPageComponent } from './transports/stops-page/stops-page.component';
 import { CitizenHomePageComponent } from './citizen/citizen-home-page/citizen-home-page.component';
@@ -88,7 +87,6 @@ import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-pag
     MunAdmindashboardComponent,
     MunicipalitymapComponent,
     UserinfodialogComponent,
-    ShowStopComponent,
     StopsMapComponent,
     StopsPageComponent,
     CitizenHomePageComponent,
