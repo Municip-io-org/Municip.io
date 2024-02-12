@@ -12,13 +12,8 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:Projeto-Código/Municip.io/Municip.io.Server/Migrations/20240207095421_carlos.Designer.cs
-    [Migration("20240207095421_carlos")]
-    partial class carlos
-========
     [Migration("20240209193037_initial")]
     partial class initial
->>>>>>>> main:Projeto-Código/Municip.io/Municip.io.Server/Migrations/20240209193037_initial.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

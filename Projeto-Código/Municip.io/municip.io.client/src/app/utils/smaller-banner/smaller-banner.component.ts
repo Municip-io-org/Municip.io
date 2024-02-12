@@ -9,4 +9,5 @@ export class SmallerBannerComponent {
   @Input() title: string = "";
   @Input() text: string = "";
   @Input() image: string = "";
+
 }
