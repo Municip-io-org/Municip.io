@@ -25,7 +25,7 @@ export class CitizenStatusService {
 
   deleteCitizen(email: string) {
     var emailParse = email.replace('@', '%40');
-    return this.http.post<any>(`/api/citizenstatus/deleteMunicipality?email=${emailParse}`, {});
+    return this.http.post<any>(`/api/citizenstatus/deleteCitizen?email=${emailParse}`, {});
   }
 
   blockCitizen(email: string) {
@@ -34,3 +34,4 @@ export class CitizenStatusService {
 
   }
 }
+

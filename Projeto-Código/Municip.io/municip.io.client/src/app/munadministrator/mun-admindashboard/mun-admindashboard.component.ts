@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CitizenStatusService } from '../../services/citizen-status.service';
+import { UserinfodialogComponent } from '../../utils/userinfodialog/userinfodialog.component';
 
 @Component({
   selector: 'app-munadmindashboard',
@@ -15,6 +16,8 @@ export class MunAdmindashboardComponent {
   nameSearch: string = '';
   citizens: any[] = [];
   municipalName = 'Inicial';
+  isDialogOpen: boolean = false;
+  selectedUser: any;
 
   constructor(private citizenStatusService: CitizenStatusService, private router: Router, private route: ActivatedRoute) { }
 
@@ -26,6 +29,17 @@ export class MunAdmindashboardComponent {
 
     });
   }
+
+  openDialog(user: any) {
+    console.log(user);
+    this.selectedUser = user;
+    this.isDialogOpen = true;
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false;
+  }
+
 
   approveCitizen(email: any) {
     this.citizenStatusService.approveCitizen(email).subscribe((citizens: any) => {
@@ -40,11 +54,16 @@ this.citizenStatusService.blockCitizen(email).subscribe((citizens: any) => {
     })
   }
 
+
+
+
   deleteCitizen(email: any) {
 this.citizenStatusService.deleteCitizen(email).subscribe((citizens: any) => {
       this.citizens = citizens;
     })
   }
+
+
   
 
   sortTable(column: string): void {

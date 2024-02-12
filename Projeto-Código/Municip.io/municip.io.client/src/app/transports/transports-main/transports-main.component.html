@@ -2,16 +2,20 @@
 <div class="mb-40">
   <app-big-banner [image]="'/assets/images/transports/transports.png'" [title]="'Transportes de ' + municipality"
                   [text]="'Descubra os transportes disponíveis no nosso município, procurando por linha ou paragem em causa.'"/>
-  <div class="text-center w-1/2 mx-auto mt-5 font-medium  text-municip-black ">
+  <div class="text-center w-1/2 mx-auto my-10 font-medium  text-municip-black ">
     <p>
       Bem-vindo à página de Transportes do municip.io, a sua fonte de informações sobre a mobilidade no município de {{municipality}}.
     </p>
     <p> Nesta secção, estamos empenhados em fornecer-lhe dados atualizados e detalhados sobre os diversos meios de transporte que tornam a vida no nosso município mais conectada e eficiente.</p>
   </div>
-  <article class="flex justify-around mt-10 divide-x-8 divide-black">
-    <app-vertical-card [cardImage]="'/assets/images/transports/train.png'" [cardText]="'Consulte as linhas disponíveis e os respetivos horários dos transportes municipais'" [cardTitle]="'Pesquisar por Linhas'" />
-    <app-vertical-card [cardImage]="'/assets/images/transports/stop.png'" [cardText]="'Consulte as diversas paragens do município e quais os autocarros que a mesma apresenta'" [cardTitle]="'Pesquisar por Paragens'" />
-  </article>
-
+  <article class="flex justify-around mt-10 px-32">
+    <button class="hover:bg-blue-100 rounded-2xl transition duration-500">
+      <app-vertical-card [cardImage]="'/assets/images/transports/train.png'" [cardText]="'Consulte as linhas disponíveis e os respetivos horários dos transportes municipais'" [cardTitle]="'Pesquisar por Linhas'" />
+    </button>
+    <div class="bg-municip-light-blue w-0.5 rounded-xl"></div>
+    <button class="hover:bg-blue-100 rounded-2xl transition duration-500">
+      <app-vertical-card [cardImage]="'/assets/images/transports/stop.png'" [cardText]="'Consulte as diversas paragens do município e quais os autocarros que a mesma apresenta'" [cardTitle]="'Pesquisar por Paragens'" />
+      </button>
+      </article>
 </div>
 <app-footer/>

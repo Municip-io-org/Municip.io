@@ -34,8 +34,23 @@ import { TransportsMainComponent } from './transports/transports-main/transports
 import { VerticalCardComponent } from './utils/vertical-card/vertical-card.component';
 import { BigBannerComponent } from './utils/big-banner/big-banner.component';
 import { SmallerBannerComponent } from './utils/smaller-banner/smaller-banner.component';
+import { SchedulesComponent } from './transports/schedules/schedules.component';
 import { MunAdmindashboardComponent } from './munadministrator/mun-admindashboard/mun-admindashboard.component';
-import { ProfileBannerComponent } from './utils/profile-banner/profile-banner.component';
+import { MunicipalitymapComponent } from './maps/municipalitymap/municipalitymap.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { UserinfodialogComponent } from './utils/userinfodialog/userinfodialog.component';
+import { ShowStopComponent } from './transports/show-stop/show-stop.component';
+import { StopsMapComponent } from './transports/stops-map/stops-map.component';
+import { StopsPageComponent } from './transports/stops-page/stops-page.component';
+import { CitizenHomePageComponent } from './citizen/citizen-home-page/citizen-home-page.component';
+import { FirstLetterUpperCasePipe } from './pipes/first-letter-upper-case.pipe';
+import { FormatNumber3By3Pipe } from './pipes/format-number3-by3.pipe';
+import { CardOutlineThemeComponent } from './utils/card-outline-theme/card-outline-theme.component';
+import { EventsSmallComponent } from './utils/events-small/events-small.component';
+import { MyDataCardComponent } from './utils/my-data-card/my-data-card.component';
+import { MyMunicipalityCardComponent } from './utils/my-municipality-card/my-municipality-card.component';
+import { NewsSmallComponent } from './utils/news-small/news-small.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
 
 
@@ -68,15 +83,29 @@ import { ProfileBannerComponent } from './utils/profile-banner/profile-banner.co
     VerticalCardComponent,
     BigBannerComponent,
     SmallerBannerComponent,
+    SchedulesComponent,
     MunAdmindashboardComponent,
-    ProfileBannerComponent
+    MunicipalitymapComponent,
+    UserinfodialogComponent,
+    ShowStopComponent,
+    StopsMapComponent,
+    StopsPageComponent,
+    CitizenHomePageComponent,
+    FirstLetterUpperCasePipe,
+    FormatNumber3By3Pipe,
+    CardOutlineThemeComponent,
+    EventsSmallComponent,
+    MyDataCardComponent,
+    MyMunicipalityCardComponent,
+    NewsSmallComponent,
+    AccessDeniedComponent
     
   ],
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule, BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, GoogleMapsModule
   ],
   providers: [
     MunicipalityGuard,
