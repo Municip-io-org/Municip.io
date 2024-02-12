@@ -119,7 +119,9 @@ namespace Municip.io.Server.Migrations
                     distrito = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     date = table.Column<DateOnly>(type: "date", nullable: true),
                     numberOfUsers = table.Column<int>(type: "int", nullable: true),
-                    status = table.Column<int>(type: "int", nullable: false)
+                    status = table.Column<int>(type: "int", nullable: false),
+                    emblemPhoto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    landscapePhoto = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
-import { GoogleMap } from '@angular/google-maps';
+import { GoogleMap, MapMarker } from '@angular/google-maps';
 import { BoundsService } from '../bounds.service';
 
 @Component({
@@ -33,7 +33,7 @@ export class MunicipalitymapComponent implements AfterViewInit {
   showMap: boolean = true;
 
   ngAfterViewInit() {
-    this.municipalityName = 'kjfdnskfsnk';
+    this.municipalityName = 'Montijo';
     if (this.googleMap) {
       console.log("ENTROU");
       this.setBoundsAndCenterForMunicipality(this.municipalityName);
@@ -74,4 +74,6 @@ export class MunicipalitymapComponent implements AfterViewInit {
 
     });
   }
+
+
 }

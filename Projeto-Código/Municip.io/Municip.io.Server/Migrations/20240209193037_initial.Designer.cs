@@ -12,7 +12,7 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240206154230_initial")]
+    [Migration("20240209193037_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -361,7 +361,13 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("emblemPhoto")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("fax")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("landscapePhoto")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("localidade")
