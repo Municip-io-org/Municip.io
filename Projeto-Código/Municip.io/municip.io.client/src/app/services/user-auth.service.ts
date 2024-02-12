@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, catchError, map, of, switchMap } from 'rxjs';
 import { Citizen } from './citizen-auth.service';
@@ -36,9 +36,9 @@ export class UserAuthService {
       .pipe<boolean>(map((res: HttpResponse<string>) => {
         this._authStateChanged.next(res.ok);
         return res.ok;
-      }));
+      })); 
 
-
+           
   }
 
   getUserData() {
@@ -47,7 +47,7 @@ export class UserAuthService {
 
   getInfoByEmail(email: string) {
     let params = new HttpParams().set('email', email);
-    return this.http.get<MunicipalAdministrator | Citizen>(`/api/accounts/InfoByEmail/?email=${email}`, {});
+    return this.http.get<MunicipalAdministrator | Citizen>('/api/accounts/InfoByEmail/', { params });
   }
 
   getUserRole() {
@@ -106,25 +106,7 @@ export class UserAuthService {
       }));
   }
 
-  updateUser(user: Citizen,image:File) {
-    var headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
-    let imgurl = "https://api.imgur.com/3/image";
-
-    //upload to imgur
-    const formData = new FormData();
-    formData.append('image', image);
-    return this.http.post(imgurl, formData, { headers })
-      .pipe(switchMap((response: any) => {
-        console.log(response);
-        user.photo = response['data']['link'];
-        console.log(user);
-        console.log(user.photo);
-        return this.http.put('/api/accounts/UpdateUserInfo', user);
-      }));
-  }
 }
-
-
 
 export interface Login {
   password: string,

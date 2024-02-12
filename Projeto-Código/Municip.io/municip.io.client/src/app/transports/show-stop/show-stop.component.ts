@@ -8,7 +8,6 @@ import { Component, Input } from '@angular/core';
 export class ShowStopComponent {
   @Input() stopName: string = "";
   @Input() stopTime: string = "";
-  @Input() stopId: string = "";
 
   calculateTimeRemaining(stopTime: string): string {
     const currentTime = new Date();
