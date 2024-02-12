@@ -21,7 +21,7 @@ import { MunAdmindashboardComponent } from './munadministrator/mun-admindashboar
 import { MunicipalitymapComponent } from './maps/municipalitymap/municipalitymap.component';
 import { StopsMapComponent } from './transports/stops-map/stops-map.component';
 import { StopsPageComponent } from './transports/stops-page/stops-page.component';
-import { CitizenHomePageComponent } from './homePage/citizen-home-page/citizen-home-page.component';
+import { CitizenHomePageComponent } from './citizen/citizen-home-page/citizen-home-page.component';
 import { CitizenGuard } from './utils/guard/citizen.guard';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 

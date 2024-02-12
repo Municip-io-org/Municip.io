@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Roles, UserAuthService } from '../../services/user-auth.service';
+import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Citizen } from '../../services/citizen-auth.service';
-import { MunicipalAdministrator, Municipality } from '../../services/municipal-admin-auth.service';
+import { Roles, UserAuthService } from '../../services/user-auth.service';
 
 @Component({
   selector: 'app-citizen-home-page',
   templateUrl: './citizen-home-page.component.html',
-  styleUrl: './citizen-home-page.component.css',
+  styleUrl: './citizen-home-page.component.css'
 })
 export class CitizenHomePageComponent {
 

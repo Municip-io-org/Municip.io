@@ -41,7 +41,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { UserinfodialogComponent } from './utils/userinfodialog/userinfodialog.component';
 import { StopsMapComponent } from './transports/stops-map/stops-map.component';
 import { StopsPageComponent } from './transports/stops-page/stops-page.component';
-import { CitizenHomePageComponent } from './homePage/citizen-home-page/citizen-home-page.component';
+import { CitizenHomePageComponent } from './citizen/citizen-home-page/citizen-home-page.component';
 import { FirstLetterUpperCasePipe } from './pipes/first-letter-upper-case.pipe';
 import { FormatNumber3By3Pipe } from './pipes/format-number3-by3.pipe';
 import { CardOutlineThemeComponent } from './utils/card-outline-theme/card-outline-theme.component';
