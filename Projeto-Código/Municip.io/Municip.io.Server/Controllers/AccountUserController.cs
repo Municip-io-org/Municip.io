@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 using System.Text;
-using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Municip.io.Server.Controllers
@@ -36,7 +35,7 @@ namespace Municip.io.Server.Controllers
         [HttpGet("UserInfo", Name = "Dados")]
         public async Task<IActionResult> UserInfo()
         {
-
+       
             // if there is a user logged in send his info, else send bad request
             if (User.Identity.IsAuthenticated)
             {
@@ -55,7 +54,7 @@ namespace Municip.io.Server.Controllers
                 var user = await _userManager.GetUserAsync(User);
                 var role = await _userManager.GetRolesAsync(user);
                 return Json(
-                 new { role = role[0] });
+                 new { role = role[0] } );
             }
             return BadRequest(new { Message = "Utilizador não autenticado." });
         }
@@ -118,11 +117,11 @@ namespace Municip.io.Server.Controllers
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
-
+                    
                     errors.Add(error.Description);
                 }
-                return BadRequest(new { Message = "Falha no registo do cidadão.", ModelState = ModelState, errors });
-
+                   return BadRequest(new { Message = "Falha no registo do cidadão.", ModelState = ModelState, errors });
+                
             }
             return BadRequest(new { Message = "O modelo do cidadão é inválido.", ModelState = ModelState });
 
@@ -139,55 +138,55 @@ namespace Municip.io.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                
                 var user = new IdentityUser
                 {
                     UserName = municipalAdministrator.Email,
                     Email = municipalAdministrator.Email
                 };
 
+              
 
 
+            // Store user data in AspNetUsers database table
+            var result = await _userManager.CreateAsync(user, municipalAdministrator.Password);
 
-                // Store user data in AspNetUsers database table
-                var result = await _userManager.CreateAsync(user, municipalAdministrator.Password);
-
-
-                if (result.Succeeded)
-                {
+         
+            if (result.Succeeded)
+            {
 
 
                     await _userManager.AddToRoleAsync(user, "Municipal");
                     //add citizen to database
                     _context.MunicipalAdministrators.Add(municipalAdministrator);
-                    await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                     if (_context.Municipalities.Any(m => m.name == municipalAdministrator.municipality))
                     {
                         // municipio existe
                         //return Ok(new { Message = "NEXISTE" });
                         return Ok(true);
-                    }
+                }
                     // município nao existe
                     return Ok(false);
-                }
+            }
 
 
-                List<string> errors = new List<string>();
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
+            List<string> errors = new List<string>();
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
                     // add errors to array
-                    errors.Add(error.Description);
-                }
+                    errors.Add(error.Description);        
+            }
 
                 return BadRequest(new { Message = "Falha no registo do administrador municipal.", ModelState = ModelState, errors = errors });
                 // em vez disto devia enviar num array de string os 
             }
 
 
-            return BadRequest(new { Message = "O modelo do administrador municipal é inválido.", ModelState = ModelState });
+                return BadRequest(new { Message = "O modelo do administrador municipal é inválido.", ModelState = ModelState });
 
-        }
+    }
 
         /// <summary>
         /// Registo de município na base de dados. Executado aquando da criação do adminsitrador municipal na primeira vez
@@ -222,7 +221,7 @@ namespace Municip.io.Server.Controllers
                     municipality.numberOfUsers = 0;
                     municipality.status = MunicipalityStatus.Pending;
 
-
+                    
 
 
                     _context.Municipalities.Add(municipality);
@@ -278,7 +277,7 @@ namespace Municip.io.Server.Controllers
         [HttpGet("Exists")]
         public async Task<IActionResult> municipalityExists(string municipality)
         {
-            if (await _context.Municipalities.AnyAsync(m => m.name == municipality))
+            if(await _context.Municipalities.AnyAsync(m => m.name == municipality))
             {
                 return Json(true);
             }
@@ -286,101 +285,7 @@ namespace Municip.io.Server.Controllers
 
         }
 
-        [HttpPut("UpdateUserInfo")]
-        public async Task<IActionResult> UpdateUserInfo(Citizen updatedCitizen)
-        {
-            if (ModelState.IsValid)
-            {
-                var existingCitizen = await _context.Citizens.FindAsync(updatedCitizen.Id);
 
-                if (existingCitizen == null)
-                {
-                    return NotFound();
-                }
+}
 
-                if (existingCitizen.firstName != updatedCitizen.firstName)
-                {
-                    existingCitizen.firstName = updatedCitizen.firstName;
-                }
-
-                if (existingCitizen.Surname != updatedCitizen.Surname)
-                {
-                    existingCitizen.Surname = updatedCitizen.Surname;
-                }
-
-                if (existingCitizen.Email != updatedCitizen.Email)
-                {
-                    existingCitizen.Email = updatedCitizen.Email;
-                    
-                }
-
-                if (existingCitizen.birthDate != updatedCitizen.birthDate)
-                {
-                    existingCitizen.birthDate = updatedCitizen.birthDate;
-                }
-
-                if (existingCitizen.Address != updatedCitizen.Address)
-                {
-                    existingCitizen.Address = updatedCitizen.Address;
-                }
-
-                if (existingCitizen.Nif != updatedCitizen.Nif)
-                {
-                    existingCitizen.Nif = updatedCitizen.Nif;
-                }
-
-                if (existingCitizen.postalCode1 != updatedCitizen.postalCode1)
-                {
-                    existingCitizen.postalCode1 = updatedCitizen.postalCode1;
-                }
-
-                if (existingCitizen.postalCode2 != updatedCitizen.postalCode2)
-                {
-                    existingCitizen.postalCode2 = updatedCitizen.postalCode2;
-                }
-
-                if (existingCitizen.Password != updatedCitizen.Password)
-                {
-                    
-                    if (!ValidadePassword(updatedCitizen.Password))
-                    {
-                        ModelState.AddModelError("password", "Password não obedece aos requisitos");
-                        var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-                        return BadRequest(new { Message = "Erro de Validação", Errors = errors });
-                    }
-
-                    existingCitizen.Password = updatedCitizen.Password;
-                }
-
-                if (existingCitizen.photo != updatedCitizen.photo)
-                {
-                    existingCitizen.photo = updatedCitizen.photo;
-                }
-
-                if (_context.ChangeTracker.HasChanges())
-                {
-                    await _context.SaveChangesAsync();
-                    return Ok();
-                }
-
-                return NoContent();
-            }
-
-            var validationErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-            return BadRequest(new { Message = "Erro de Validação", Errors = validationErrors });
-        }
-
-
-        private bool ValidadePassword(string password)
-        {
-            return password.Length >= 8 &&
-                   password.Any(char.IsUpper) &&
-                   password.Any(char.IsDigit) &&
-                   password.Any(ch => !char.IsLetterOrDigit(ch));
-        }
-
-        
-
-
-    }
 }

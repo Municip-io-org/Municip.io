@@ -1,25 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
 import { UserAuthService } from '../../services/user-auth.service';
 
 @Component({
   selector: 'app-stops-page',
   templateUrl: './stops-page.component.html',
-  styleUrls: ['./stops-page.component.css']
+  styleUrl: './stops-page.component.css'
 })
-export class StopsPageComponent implements OnInit {
+export class StopsPageComponent {
   municipality: string = '';
-  selectedStop: string = '';
 
-  constructor(private service: UserAuthService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-    this.selectedStop = this.route.snapshot.params['selectedStop'];
 
-    console.log("teste:"+this.selectedStop)
-
-    this.service.getMunicipality().toPromise().then((municipality) => {
+  constructor(private service: UserAuthService) {
+    service.getMunicipality().toPromise().then((municipality) => {
       this.municipality = municipality || '';
+     
     });
   }
+
 }
