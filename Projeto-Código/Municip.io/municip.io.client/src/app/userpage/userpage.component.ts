@@ -65,7 +65,7 @@ export class UserpageComponent {
     birthDate: new FormControl(new Date(), [Validators.required]),
     address: new FormControl("", [Validators.required]),
     nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
-    profileimg: new FormControl(null, [Validators.required]),
+    photo: new FormControl(null, [Validators.required]),
     postalCode1: new FormControl("", [Validators.required, Validators.pattern(/^\d{4}$/)]),
     postalCode2: new FormControl("", [Validators.required, Validators.pattern(/^\d{3}$/)]),
     password: new FormControl("", [
@@ -126,7 +126,7 @@ export class UserpageComponent {
     this.newUser.postalCode1 = formValues.postalCode1 || this.newUser.postalCode1;
     this.newUser.postalCode2 = formValues.postalCode2 || this.newUser.postalCode2;
     this.newUser.password = formValues.password || this.newUser.password;
-    this.newUser.profileimg = formValues.profileimg || this.newUser.profileimg;
+    this.newUser.photo = formValues.photo || this.newUser.photo;
     
     this.userAuthService.updateUser(this.newUser).subscribe(
       res => {
