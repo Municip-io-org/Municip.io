@@ -50,6 +50,7 @@ import { MyDataCardComponent } from './utils/my-data-card/my-data-card.component
 import { MyMunicipalityCardComponent } from './utils/my-municipality-card/my-municipality-card.component';
 import { NewsSmallComponent } from './utils/news-small/news-small.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
 
 
 
@@ -96,7 +97,8 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
     MyDataCardComponent,
     MyMunicipalityCardComponent,
     NewsSmallComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    MunAdminHomePageComponent
     
   ],
   imports: [

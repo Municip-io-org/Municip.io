@@ -24,6 +24,7 @@ import { StopsPageComponent } from './transports/stops-page/stops-page.component
 import { CitizenHomePageComponent } from './citizen/citizen-home-page/citizen-home-page.component';
 import { CitizenGuard } from './utils/guard/citizen.guard';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} },
   { path: 'transports/stops', component: StopsPageComponent, data: {} },
   { path: 'citizenHomePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: 'municipal/homePage', component: MunAdminHomePageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} }
 ];
 
