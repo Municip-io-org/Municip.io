@@ -48,7 +48,7 @@ const routes: Routes = [
   { path: 'transports/stops', component: StopsPageComponent, data: {} },
   { path: 'transports/stops/:selectedStop', component: StopsPageComponent, data: {} },
   { path: 'municipal/homePage', component: MunAdminHomePageComponent, data: {}, canActivate: [MunicipalAdminGuard] },
-  { path: 'citizenHomePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: 'citizen/homePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} }
 ];
 
