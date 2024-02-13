@@ -836,10 +836,6 @@ video {
   margin-top: auto;
 }
 
-.ml-24{
-  margin-left: 6rem;
-}
-
 .box-border{
   box-sizing: border-box;
 }
@@ -910,6 +906,11 @@ video {
   height: 1.5rem;
 }
 
+.size-7{
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
 .size-8\/12{
   width: 66.666667%;
   height: 66.666667%;
@@ -923,11 +924,6 @@ video {
 .size-\[3rem\]{
   width: 3rem;
   height: 3rem;
-}
-
-.size-28{
-  width: 7rem;
-  height: 7rem;
 }
 
 .h-1{
@@ -1198,19 +1194,6 @@ video {
   width: 100vw;
 }
 
-.w-fit{
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
-.w-6\/12{
-  width: 50%;
-}
-
-.w-9\/12{
-  width: 75%;
-}
-
 .min-w-full{
   min-width: 100%;
 }
@@ -1425,12 +1408,6 @@ video {
   margin-bottom: calc(-3rem * var(--tw-space-y-reverse));
 }
 
-.space-y-14 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-y-reverse: 0;
-  margin-top: calc(3.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(3.5rem * var(--tw-space-y-reverse));
-}
-
 .divide-y > :not([hidden]) ~ :not([hidden]){
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
@@ -1507,11 +1484,6 @@ video {
 .rounded-b-lg{
   border-bottom-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
-}
-
-.rounded-l{
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
 }
 
 .border{
@@ -1955,12 +1927,20 @@ video {
   font-size: 1.063rem;
 }
 
+.text-\[1\.1rem\]{
+  font-size: 1.1rem;
+}
+
 .text-\[1\.5rem\]{
   font-size: 1.5rem;
 }
 
 .text-\[1\.7rem\]{
   font-size: 1.7rem;
+}
+
+.text-\[1\.8rem\]{
+  font-size: 1.8rem;
 }
 
 .text-\[16px\]{
@@ -1981,6 +1961,10 @@ video {
 
 .text-\[2\.6vh\]{
   font-size: 2.6vh;
+}
+
+.text-\[2\.8rem\]{
+  font-size: 2.8rem;
 }
 
 .text-\[2\.8vh\]{
@@ -2042,30 +2026,6 @@ video {
 .text-xs{
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-\[3rem\]{
-  font-size: 3rem;
-}
-
-.text-\[2\.5rem\]{
-  font-size: 2.5rem;
-}
-
-.text-\[1\.3rem\]{
-  font-size: 1.3rem;
-}
-
-.text-\[1\.1rem\]{
-  font-size: 1.1rem;
-}
-
-.text-\[1\.8rem\]{
-  font-size: 1.8rem;
-}
-
-.text-\[2\.8rem\]{
-  font-size: 2.8rem;
 }
 
 .font-black{
@@ -2175,6 +2135,11 @@ video {
   color: rgb(245 247 250 / var(--tw-text-opacity));
 }
 
+.text-municip-blue{
+  --tw-text-opacity: 1;
+  color: rgb(88 117 246 / var(--tw-text-opacity));
+}
+
 .text-municip-gray{
   --tw-text-opacity: 1;
   color: rgb(113 113 113 / var(--tw-text-opacity));
@@ -2202,11 +2167,6 @@ video {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-municip-blue{
-  --tw-text-opacity: 1;
-  color: rgb(88 117 246 / var(--tw-text-opacity));
 }
 
 .decoration-sky-500{
