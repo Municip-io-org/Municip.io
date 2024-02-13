@@ -78,7 +78,22 @@ namespace Municip.io.Server.Controllers
             return NotFound();
         }
 
-        
+
+
+        [HttpPost("SendAprove")]
+        public IActionResult SendAprove(string email,string name)
+        {
+            EmailSender.SendEmail(email, "Resultado de Inscrição", name, "aceitar o seu pedido de inscrição na nossa plataforma.", "root/html/AproveEmail.html");
+            return Ok("Success");
+        }
+
+
+        [HttpPost("SendDeny")]
+        public IActionResult SendDeny(string email, string name)
+        {
+            EmailSender.SendEmail(email, "Resultado de Inscrição", name, "recusar o seu pedido de inscrição na nossa plataforma", "root/html/DenyEmail.html");
+            return Ok("Success");
+        }
 
 
 
