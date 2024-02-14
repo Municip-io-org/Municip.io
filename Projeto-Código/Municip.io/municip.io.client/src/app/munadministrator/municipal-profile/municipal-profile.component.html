@@ -1,0 +1,81 @@
+<app-header></app-header>
+<app-big-banner [image]="municipality.landscapePhoto!" title="Município de {{municipality.name}}"
+                text={{municipality.description}}></app-big-banner>
+<div class=" my-[4rem] mx-32 space-y-20">
+  <div class="flex">
+    <section class="flex flex-col space-y-20 w-[140rem]">
+      <app-my-municipality-card [district]="municipality.distrito"
+                                [nPopulation]="municipality.populacao"
+                                [email]="municipality.email"
+                                [phoneNumber]="municipality.telefone"
+                                [emblem]="municipality.emblemPhoto!"
+                                class="max-w-[50rem]">
+      </app-my-municipality-card>
+
+      <app-my-data-card [firstName]="user.firstName"
+                        [lastName]="user.surname"
+                        [email]="user.email"
+                        photo="assets/images/icons/admin.png"
+                        class="max-w-[50rem]">
+      </app-my-data-card>
+    </section>
+    <div class="w-1 bg-gradient-to-tl from-municip-light-blue to-municip-blue rounded mx-[5vw] "></div>
+    <section class="flex flex-col w-full justify-center">
+      <div class="flex items-center font-open-sans text-left text-[1.5rem] font-extrabold">
+        <img src="/assets/images/icons/external-link.png" alt="Notícias" class="size-10 mr-5 " />
+        ATALHOS RÁPIDOS
+      </div>
+      <ul class="space-y-7 mt-10">
+        <li>
+          <app-btn-municip-blue width="15rem">
+            Gerir Munícipes
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          </app-btn-municip-blue>
+        </li>
+        <li>
+          <app-btn-municip-blue width="15rem">
+            Editar Perfil
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          </app-btn-municip-blue>
+        </li>
+        <li>
+          <app-btn-municip-blue width="15rem">
+            Criar Notícia
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          </app-btn-municip-blue>
+        </li>
+        <li>
+          <app-btn-municip-blue width="15rem">
+            Criar Evento
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          </app-btn-municip-blue>
+        </li>
+        <li>
+          <app-btn-municip-blue width="15rem">
+            Estatísticas
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          </app-btn-municip-blue>
+        </li>
+      </ul>
+    </section>
+  </div>
+  <div class="flex items-center justify-around">
+    <app-statistical-home-page-card [iconSrc]="'/assets/images/icons/file.png'"
+                                    iconAlt="Ícone de Pedidos"
+                                    title="Pedidos Pendentes"
+                                    [value]="'114'"
+                                    buttonText="Analisar Pedidos"
+                                    (buttonClick)="pendingCitizensClick()">
+
+    </app-statistical-home-page-card>
+    <app-statistical-home-page-card [iconSrc]="'/assets/images/icons/git.png'"
+                                    iconAlt="Ícone de Documentos por Aprovar"
+                                    title="Documentos por Aprovar"
+                                    [value]="'12'"
+                                    buttonText="Analisar Documentos"
+                                    (buttonClick)="approveDocumentsClick()">
+
+    </app-statistical-home-page-card>
+  </div>
+</div>
+<app-footer></app-footer>

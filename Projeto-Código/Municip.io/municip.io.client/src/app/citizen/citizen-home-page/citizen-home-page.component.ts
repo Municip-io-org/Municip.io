@@ -37,7 +37,6 @@ export class CitizenHomePageComponent {
   }
 
   anyUser: any;
-  role: string = "";
 
   user: Citizen = {
     firstName: 'Sem Nome',
@@ -104,19 +103,5 @@ export class CitizenHomePageComponent {
         console.error(error);
       }
     );
-
-    this.userAuthService.getUserRole().subscribe(
-      res => {
-        if (res.role == Roles.Citizen) {
-          this.role = res.role;
-        }
-      },
-      error => {
-        console.error(error);
-      }
-    );
-
-
-
   }
 }

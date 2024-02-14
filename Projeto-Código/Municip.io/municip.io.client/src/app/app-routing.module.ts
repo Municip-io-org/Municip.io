@@ -24,6 +24,8 @@ import { CitizenGuard } from './utils/guard/citizen.guard';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
 import { MunicipalAdminGuard } from './utils/guard/municipal-admin.guard';
+import { MunicipalProfileComponent } from './munadministrator/municipal-profile/municipal-profile.component';
+import { CitizenOrMunicipalAdminGuard } from './utils/guard/citizen-or-municipal-admin.guard';
 
 
 const routes: Routes = [
@@ -48,6 +50,7 @@ const routes: Routes = [
   { path: 'transports/stops', component: StopsPageComponent, data: {} },
   { path: 'transports/stops/:selectedStop', component: StopsPageComponent, data: {} },
   { path: 'municipal/homePage', component: MunAdminHomePageComponent, data: {}, canActivate: [MunicipalAdminGuard] },
+  { path: 'municipal/profile', component: MunicipalProfileComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'citizen/homePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} }
 ];

@@ -1,27 +1,21 @@
-
 import { Component } from '@angular/core';
-import { Roles, UserAuthService } from '../../services/user-auth.service';
-import { MunicipalAdministrator, Municipality } from '../../services/municipal-admin-auth.service';
+import { UserAuthService } from '../../services/user-auth.service';
+import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-mun-admin-home-page',
-  templateUrl: './mun-admin-home-page.component.html',
-  styleUrl: './mun-admin-home-page.component.css'
+  selector: 'app-municipal-profile',
+  templateUrl: './municipal-profile.component.html',
+  styleUrl: './municipal-profile.component.css'
 })
-export class MunAdminHomePageComponent {
+export class MunicipalProfileComponent {
+  
   constructor(private userAuthService: UserAuthService, private router: Router) { }
 
 
   anyUser: any;
+  user: any;
 
-  user: MunicipalAdministrator = {
-    firstName: '',
-    surname: '',
-    email: '',
-    password: '',
-    municipality: ''
-  };
 
 
   municipality: Municipality = {
@@ -53,27 +47,29 @@ export class MunAdminHomePageComponent {
       res => {
         this.anyUser = res;
         this.userAuthService.getInfoByEmail(this.anyUser.email).subscribe(
-          res => {
-            this.user = res as MunicipalAdministrator;
+          (res: any) => {
+            this.user = res;
             console.log("user", this.user);
 
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
-              res => {
-                this.municipality = res as Municipality;
+              (municipalityRes: any) => {
+                this.municipality = municipalityRes as Municipality;
                 console.log("municipality", this.municipality);
-
               },
               error => {
                 console.error(error);
               }
-            )
-          });
+            );
+          },
+          error => {
+            console.error(error);
+          }
+        );
       },
       error => {
         console.error(error);
       }
     );
-
   }
 
   pendingCitizensClick() {
