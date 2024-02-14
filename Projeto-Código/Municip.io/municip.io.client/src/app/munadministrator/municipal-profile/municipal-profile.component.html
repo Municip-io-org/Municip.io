@@ -1,24 +1,31 @@
 <app-header></app-header>
 <app-big-banner [image]="municipality.landscapePhoto!" title="Município de {{municipality.name}}"
                 text={{municipality.description}}></app-big-banner>
-<div class="flex flex-col my-[4rem] mx-32 space-y-20">
+<div class="flex flex-col bg-municip-blank py-[4rem] px-32 space-y-20">
   <div class="flex">
-    <section class="flex flex-col space-y-20 w-[140rem]">
-      <app-my-municipality-card [district]="municipality.distrito"
-                                [nPopulation]="municipality.populacao"
-                                [email]="municipality.email"
-                                [phoneNumber]="municipality.telefone"
-                                [emblem]="municipality.emblemPhoto!"
-                                class="max-w-[50rem]">
-      </app-my-municipality-card>
-
-      <app-my-data-card [firstName]="user.firstName"
-                        [lastName]="user.surname"
-                        [email]="user.email"
-                        photo="assets/images/icons/admin.png"
-                        class="max-w-[50rem]">
-      </app-my-data-card>
-    </section>
+    <app-card-outline-white class="flex flex-col font-inter w-[140rem]">
+      <div class="m-5 space-y-4">
+        <p class="font-semibold text-left">Informação Geral</p>
+        <section class="grid grid-cols-2 gap-x-2 gap-y-5 items-center">
+          <app-general-info [iconSrc]="'/assets/images/icons/file.png'"
+                            iconAlt="Ícone de Pedidos"
+                            title="2245341"
+                            text="Munícipes" />
+          <app-general-info [iconSrc]="'/assets/images/icons/file.png'"
+                            iconAlt="Ícone de Pedidos"
+                            title="230,2 Km2"
+                            text="de Área Territorial" />
+          <app-general-info [iconSrc]="'/assets/images/icons/file.png'"
+                            iconAlt="Ícone de Pedidos"
+                            title="Setúbal"
+                            text="Distrito" />
+          <app-general-info [iconSrc]="'/assets/images/icons/file.png'"
+                            iconAlt="Ícone de Pedidos"
+                            title="André Ventura"
+                            text="Presidente" />
+        </section>
+      </div>
+    </app-card-outline-white>
     <div class="w-1 bg-gradient-to-tl from-municip-light-blue to-municip-blue rounded mx-[5vw] "></div>
     <section class="flex flex-col w-full justify-center">
       <div class="flex items-center font-open-sans text-left text-[1.5rem] font-extrabold">
