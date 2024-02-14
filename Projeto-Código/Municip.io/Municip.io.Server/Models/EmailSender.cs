@@ -31,4 +31,38 @@ namespace Municip.io.Server.Models
             }
         }
     }
+
+
+    public enum CitizenStatusMessage
+    {
+        Approve,
+        Deny,
+        Remove,
+        Block,
+        Unblock
+    }
+
+    public static class CitizenStatusMessageExtensions
+    {
+        public static string toString(this CitizenStatusMessage me)
+        {
+            switch (me)
+            {
+                case CitizenStatusMessage.Approve:
+                    return "Depois de avaliarmos o seu pedido, decidimos aceitar o seu pedido de inscrição na nossa plataforma.";
+                case CitizenStatusMessage.Deny:
+                    return "Depois de avaliarmos o seu pedido, decidimos  recusar o seu pedido de inscrição na nossa plataforma";
+                case CitizenStatusMessage.Block:
+                    return "Decidimos bloquear a sua conta na nossa plataforma, disponha dos meios de contacto para qualquer dúvida";
+                case CitizenStatusMessage.Remove:
+                    return "Decidimos remover a sua conta da nossa plataforma, disponha dos meios de contacto para qualquer dúvida";
+                case CitizenStatusMessage.Unblock:
+                    return "Decidimos desbloquear a sua conta na nossa plataforma";
+
+                default:
+                    return "Desconhecido";
+            }
+        }
+    }
+
 }
