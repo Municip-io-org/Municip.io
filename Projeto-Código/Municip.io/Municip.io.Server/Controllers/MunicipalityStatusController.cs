@@ -12,10 +12,11 @@ namespace Municip.io.Server.Controllers
     public class MunicipalityStatusController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public MunicipalityStatusController(ApplicationDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        public MunicipalityStatusController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [HttpGet("municipalities")]
@@ -48,6 +49,7 @@ namespace Municip.io.Server.Controllers
             {
                 _context.Municipalities.Remove(municipality);
                 await _context.SaveChangesAsync();
+                await deleteAllAccountsByMunicipality(municipality.name);
                 return Json(_context.Municipalities.ToList());
             }
             return NotFound();
@@ -61,6 +63,31 @@ namespace Municip.io.Server.Controllers
             {
                 municipality.status = MunicipalityStatus.Pending;
                 _context.SaveChanges();
+                return Ok();
+            }
+            return NotFound();
+        }
+
+
+        [NonAction]
+        public async Task<IActionResult> deleteAllAccountsByMunicipality(string municipality)
+        {
+            var accounts = await _context.MunicipalAdministrators.Where(a => a.municipality == municipality).ToListAsync();
+            if (accounts != null)
+            {
+                _context.MunicipalAdministrators.RemoveRange(accounts);
+                await _context.SaveChangesAsync();
+
+
+                foreach (var account in accounts)
+                {
+                    var user = await _userManager.FindByEmailAsync(account.Email);
+                    if (user != null)
+                    {
+                        await _userManager.DeleteAsync(user);
+                    }
+                }
+
                 return Ok();
             }
             return NotFound();
