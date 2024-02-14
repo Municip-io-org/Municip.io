@@ -54,6 +54,7 @@ import { ProfileBannerComponent } from './utils/profile-banner/profile-banner.co
 import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
 import { StatisticalHomePageCardComponent } from './utils/statistical-home-page-card/statistical-home-page-card.component';
 import { MunicipalProfileComponent } from './munadministrator/municipal-profile/municipal-profile.component';
+import { NextEventsComponent } from './utils/next-events/next-events.component';
 
 
 
@@ -105,7 +106,8 @@ import { MunicipalProfileComponent } from './munadministrator/municipal-profile/
     ProfileBannerComponent,
     MunAdminHomePageComponent,
     StatisticalHomePageCardComponent,
-    MunicipalProfileComponent
+    MunicipalProfileComponent,
+    NextEventsComponent
     
   ],
   imports: [

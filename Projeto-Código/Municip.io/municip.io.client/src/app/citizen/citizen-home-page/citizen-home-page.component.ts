@@ -22,20 +22,6 @@ export class CitizenHomePageComponent {
     { image: '/assets/images/carnaval.jpg', title: 'Event 5', date: new Date(2000, 0, 15) },
   ];
 
-  public startIndex = 0;
-
-  moveLeft() {
-    if (this.startIndex > 0) {
-      this.startIndex--;
-    }
-  }
-
-  moveRight() {
-    if (this.startIndex < this.events.length - 4) {
-      this.startIndex++;
-    }
-  }
-
   anyUser: any;
 
   user: Citizen = {

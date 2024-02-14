@@ -1,7 +1,7 @@
 <app-header></app-header>
 <app-big-banner [image]="municipality.landscapePhoto!" title="Município de {{municipality.name}}"
                 text={{municipality.description}}></app-big-banner>
-<div class="my-[4rem] mx-32 space-y-20">
+<div class="flex flex-col my-[4rem] mx-32 space-y-20">
   <div class="flex">
     <section class="flex flex-col space-y-20 w-[140rem]">
       <app-my-municipality-card [district]="municipality.distrito"
@@ -51,26 +51,7 @@
       </ul>
     </section>
   </div>
-  <section class="flex flex-col space-y-7 justify-center items-center">
-    <div class="flex items-center font-open-sans text-[1.5rem] font-extrabold">
-      <img src="/assets/images/icons/event.png" alt="Notícias" class="size-10 mr-5 " />
-      PRÓXIMOS EVENTOS EM {{ municipality.name | uppercase }}
-    </div>
-    <div class="flex justify-center items-center space-x-7">
-      <button class="flex justify-center items-center bg-black rounded-full size-12" (click)="moveLeft()">
-        <img src="/assets/images/arrows/right-arrow.png" class="size-6 rotate-180" />
-      </button>
-      <ul class="flex space-x-7 justify-center">
-        <ng-container *ngFor="let event of events.slice(startIndex, startIndex + 4)">
-          <li *ngIf="event">
-            <app-events-small [image]="event.image" [title]="event.title" [date]="event.date"></app-events-small>
-          </li>
-        </ng-container>
-      </ul>
-      <button class="flex justify-center items-center bg-black rounded-full size-12" (click)="moveRight()">
-        <img src="/assets/images/arrows/right-arrow.png" class="size-6" />
-      </button>
-    </div>
-  </section>
+  <app-next-events [events]="events" [municipalityName]="municipality.name"></app-next-events>
 </div>
+
 <app-footer></app-footer>

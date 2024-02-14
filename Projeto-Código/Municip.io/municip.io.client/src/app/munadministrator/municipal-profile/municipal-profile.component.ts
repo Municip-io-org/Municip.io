@@ -12,6 +12,13 @@ export class MunicipalProfileComponent {
   
   constructor(private userAuthService: UserAuthService, private router: Router) { }
 
+  public events = [
+    { image: '/assets/images/carnaval.jpg', title: 'Event 1', date: new Date(2000, 0, 11) },
+    { image: '/assets/images/carnaval.jpg', title: 'Event 2', date: new Date(2000, 0, 12) },
+    { image: '/assets/images/carnaval.jpg', title: 'Event 3', date: new Date(2000, 0, 13) },
+    { image: '/assets/images/carnaval.jpg', title: 'Event 4', date: new Date(2000, 0, 14) },
+    { image: '/assets/images/carnaval.jpg', title: 'Event 5', date: new Date(2000, 0, 15) },
+  ];
 
   anyUser: any;
   user: any;
