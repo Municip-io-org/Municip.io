@@ -49,15 +49,42 @@ namespace Municip.io.Server.Models
             switch (me)
             {
                 case CitizenStatusMessage.Approve:
-                    return "Depois de avaliarmos o seu pedido, decidimos aceitar o seu pedido de inscrição na nossa plataforma.";
+                    return "Depois de avaliarmos o seu pedido, decidimos aceitar o pedido de inscrição na nossa plataforma.";
                 case CitizenStatusMessage.Deny:
-                    return "Depois de avaliarmos o seu pedido, decidimos  recusar o seu pedido de inscrição na nossa plataforma";
+                    return "Depois de avaliarmos o seu pedido, decidimos  recusar o pedido de inscrição na nossa plataforma";
                 case CitizenStatusMessage.Block:
                     return "Decidimos bloquear a sua conta na nossa plataforma, disponha dos meios de contacto para qualquer dúvida";
                 case CitizenStatusMessage.Remove:
                     return "Decidimos remover a sua conta da nossa plataforma, disponha dos meios de contacto para qualquer dúvida";
                 case CitizenStatusMessage.Unblock:
                     return "Decidimos desbloquear a sua conta na nossa plataforma";
+
+                default:
+                    return "Desconhecido";
+            }
+        }
+    }
+
+
+    public enum MunicipalityStatusMessage
+    {
+        Approve,
+        Deny,
+        Remove
+    }
+
+    public static class MunicipalityStatusMessageExtensions
+    {
+        public static string toString(this MunicipalityStatusMessage me)
+        {
+            switch (me)
+            {
+                case MunicipalityStatusMessage.Approve:
+                    return "Depois de avaliarmos o seu pedido, decidimos aceitar a inscrição da sua Câmara na nossa plataforma.";
+                case MunicipalityStatusMessage.Deny:
+                    return "Depois de avaliarmos o seu pedido, decidimos recusar a inscrição da sua Câmara na nossa plataforma";
+                case MunicipalityStatusMessage.Remove:
+                    return "Uma vez que o seu município foi removido da nossa plataforma, a sua conta será também romovida da nossa plataforma. Disponha dos meios de contacto para qualquer dúvida";
 
                 default:
                     return "Desconhecido";
