@@ -91,6 +91,7 @@ export interface Municipality {
   areaha: string;
   codigo: string;
   codigoine: string;
+  codigopostal: string;
   contact: string;
   description: string;
   descpstal: string;

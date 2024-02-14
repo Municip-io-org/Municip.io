@@ -28,6 +28,7 @@ export class MunAdminHomePageComponent {
     areaha: '0',
     codigo: '0',
     codigoine: '0',
+    codigopostal: 'Sem código postal',
     contact: 'Sem contato',
     description: 'Sem descrição',
     descpstal: 'Sem descrição postal',

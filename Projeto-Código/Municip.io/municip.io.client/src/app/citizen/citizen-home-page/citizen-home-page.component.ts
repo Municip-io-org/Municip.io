@@ -45,6 +45,7 @@ export class CitizenHomePageComponent {
     codigo: '0',
     codigoine: '0',
     contact: 'Sem contato',
+    codigopostal: 'Sem código postal',
     description: 'Sem descrição',
     descpstal: 'Sem descrição postal',
     distrito: 'Sem distrito',

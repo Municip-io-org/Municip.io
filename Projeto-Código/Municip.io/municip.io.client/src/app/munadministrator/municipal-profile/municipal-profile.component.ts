@@ -20,32 +20,37 @@ export class MunicipalProfileComponent {
     { image: '/assets/images/carnaval.jpg', title: 'Event 5', date: new Date(2000, 0, 15) },
   ];
 
+  public newsList = [
+    { image: '/assets/images/carnaval.jpg', title: 'Setúbal sai à rua para brincar ao Carnaval', text: 'Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de atividades associadas aos festejos, de que se destacam duas tardes de animação no centro da cidade, a 11 e 13 de fevereiro.' },
+    { image: '/assets/images/carnaval.jpg', title: 'Setúbal sai à rua para brincar ao Carnaval', text: 'Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de atividades associadas aos festejos, de que se destacam duas tardes de animação no centro da cidade, a 11 e 13 de fevereiro.' },
+  ];
+
   anyUser: any;
   user: any;
 
-
-
   municipality: Municipality = {
-    areaha: '0',
-    codigo: '0',
-    codigoine: '0',
-    contact: 'Sem contato',
-    description: 'Sem descrição',
-    descpstal: 'Sem descrição postal',
-    distrito: 'Sem distrito',
-    eleitores: '0',
-    email: 'sem_email@example.com',
-    fax: 'Sem fax',
-    localidade: 'Sem localidade',
-    name: 'Sem nome',
-    nif: '000000000',
-    populacao: '0',
-    president: 'Sem presidente',
-    rua: 'Sem rua',
-    sitio: 'Sem sitio',
-    telefone: 'Sem telefone',
-    emblemPhoto: 'Sem emblema',
-    landscapePhoto: 'Sem landscape',
+      areaha: '0',
+      codigo: '0',
+      codigoine: '0',
+      codigopostal: 'Sem código postal',
+      contact: 'Sem contato',
+      description: 'Sem descrição',
+      descpstal: 'Sem descrição postal',
+      distrito: 'Sem distrito',
+      eleitores: '0',
+      email: 'sem_email@example.com',
+      fax: 'Sem fax',
+      localidade: 'Sem localidade',
+      name: 'Sem nome',
+      nif: '000000000',
+      populacao: '0',
+      president: 'Sem presidente',
+      rua: 'Sem rua',
+      sitio: 'Sem sitio',
+      telefone: 'Sem telefone',
+      emblemPhoto: 'Sem emblema',
+      landscapePhoto: 'Sem landscape',
+      
   };
 
 
@@ -79,11 +84,11 @@ export class MunicipalProfileComponent {
     );
   }
 
-  pendingCitizensClick() {
+  exploreMapClick(){
     this.router.navigateByUrl("/");
   }
 
-  approveDocumentsClick() {
+  seeMoreNewsClick() {
     this.router.navigateByUrl("/");
   }
 }

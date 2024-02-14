@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-btn-municip-blue',
@@ -7,5 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class BtnMunicipBlueComponent {
     @Input() width?: string;
-    @Input() text: string = "";
+  @Input() text: string = "";
+
+  @Output() buttonClick: EventEmitter<void> = new EventEmitter<void>();
+
+  onClick(): void {
+    this.buttonClick.emit();
+  }
 }
