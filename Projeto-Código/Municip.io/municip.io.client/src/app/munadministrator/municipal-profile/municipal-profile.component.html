@@ -99,22 +99,14 @@
           <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
         </app-btn-municip-blue>
       </section>
-      <section class="flex flex-col space-y-4">
-        <div class="flex items-center font-open-sans text-[1.5rem] font-extrabold">
-          <img src="/assets/images/icons/map.png" alt="Notícias" class="size-10 mr-5 " />
-          MAPA DE {{ municipality.name | uppercase }}
-        </div>
-
-        <!--MAPA AQUI-->
-
-        <app-btn-municip-blue width="15rem"
-                              (buttonClick)="exploreMapClick()">
-          Explorar {{municipality.name}}
-          <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-        </app-btn-municip-blue>
-      </section>
+    
     </section>
   </div>
   
 </div>
+
+
+<app-municipalitymap [municipalityName]=municipality.name> </app-municipalitymap>
+
+
 <app-footer></app-footer>
