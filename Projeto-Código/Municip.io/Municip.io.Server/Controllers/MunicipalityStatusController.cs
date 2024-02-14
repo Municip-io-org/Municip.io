@@ -134,7 +134,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendDeny")]
         public IActionResult SendDeny(string email, string name, string municipality)
         {
-            EmailSender.SendEmail(email, $"Inscrição do Município de {name}", name, MunicipalityStatusMessage.Deny.toString(), "root/html/DenyEmail.html");
+            EmailSender.SendEmail(email, $"Inscrição do Município de {municipality}", name, MunicipalityStatusMessage.Deny.toString(), "root/html/DenyEmail.html");
             return Ok("Success");
         }
 
