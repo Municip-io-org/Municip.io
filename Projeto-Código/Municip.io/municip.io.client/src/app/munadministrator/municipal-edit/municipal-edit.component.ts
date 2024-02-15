@@ -82,6 +82,7 @@ export class MunicipalEditComponent {
     landscapePhoto: new FormControl(null, [Validators.required])
   });
 
+ 
 
   get president() {
     return this.municipalityEditForm.get('president');
