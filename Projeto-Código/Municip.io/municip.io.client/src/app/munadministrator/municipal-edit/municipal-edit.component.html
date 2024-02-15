@@ -1,0 +1,59 @@
+<div class="flex flex-col">
+  <form [formGroup]="municipalityEditForm" (ngSubmit)="onSubmit()">
+    <div class="py-[1rem] flex flex-col">
+      <section class="flex text-left justify-around mb-4">
+        <div class="w-[24rem]">
+          <app-input-title class="text-[2.4vh]">Presidente</app-input-title>
+          <input required placeholder={{municipality.president}} type="text" id="president" formControlName="president" name="v" [(ngModel)]="municipality.president"
+                 class="input w-[18rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+          <div class="text-red-500 font-bold py-2" *ngIf="president?.touched && president?.invalid ">
+            <div *ngIf="president?.errors?.['required'] ">Presidente Obrigatório</div>
+          </div>
+        </div>
+        <div class="w-[20rem]">
+          <app-input-title class="text-[2.4vh]">Contacto Telefónico</app-input-title>
+          <input required placeholder={{municipality.contact}} type="text" id="contact" formControlName="contact" name="contact" [(ngModel)]="municipality.contact"
+                 class="input w-[20rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+          <div class="text-red-500 font-bold py-2" *ngIf="contact?.touched && contact?.invalid ">
+            <div *ngIf="contact?.errors?.['required'] ">Contacto Obrigatório</div>
+            <div *ngIf="contact?.errors?.['pattern'] ">Contacto Inválido</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="flex text-left justify-around mb-4">
+        <div class="w-[24rem]">
+          <app-input-title class="text-[2.4vh]">Foto do Brasão</app-input-title>
+          <input type="file" #emblemPicker id="emblemPhoto" formControlName="emblemPhoto" name="emblemPhoto" (change)="onEmblemImagePicked($event)"
+                 [(ngModel)]="emblemImg"
+                 class="input w-[35.2vh] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500">
+          <div *ngIf="emblemPhoto?.errors?.['required'] ">Foto do Brasão Obrigatória</div>
+        </div>
+
+        <div class="w-[20rem]">
+          <app-input-title class="text-[2.4vh]">Foto da Paisagem</app-input-title>
+          <input type="file" #landscapePicker id="landscapePhoto" formControlName="landscapePhoto" name="landscapePhoto" (change)="onLandscapeImagePicked($event)"
+                 [(ngModel)]="landscapeImg"
+                 class="input w-[35.2vh] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500">
+          <div *ngIf="contact?.errors?.['required'] ">Foto da Paisagem Obrigatóri</div>
+        </div>
+      </section>
+
+      <div class="flex flex-col text-left w-full mt-6 mb-4">
+        <app-input-title class="text-[2.4vh]">Texto Informativo</app-input-title>
+        <textarea required placeholder={{municipality.description}} id="description" formControlName="description" name="description" [(ngModel)]="municipality.description"
+                  class="input box-border h-[20rem] resize-none grow focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500"></textarea>
+
+        <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">
+          <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatório</div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!municipalityEditForm.valid"
+              class="relative top-[1rem] self-end h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+        Finalizar
+        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+      </button>
+    </div>
+  </form>
+</div>
