@@ -1,7 +1,7 @@
 <app-header></app-header>
 <app-big-banner [image]="municipality.landscapePhoto!" title="Município de {{municipality.name}}"
                 text={{municipality.description}}></app-big-banner>
-<div class="flex flex-col bg-municip-blank py-[4rem] px-32 space-y-20">
+<div class="flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black px-32 space-y-20">
   <div class="flex flex-row font-inter">
     <section class="flex flex-col w-[180rem] space-y-12">
       <app-card-outline-white class="flex flex-col ">
@@ -28,7 +28,7 @@
         </div>
       </app-card-outline-white>
       <section class="flex flex-col text-left">
-        <p class="text-[1.5rem] ml-2">Descrição</p>
+        <p class="text-[1.5rem] font-semibold font-inter text-municip-normal-black ml-2">Descrição</p>
         <p>
           Com a presença romana, nos séculos I a IV da nossa era, nasceu Cetóbriga, um importante núcleo urbano e industrial, principalmente ligado à salga de peixe, que se estendeu pelas duas margens do rio Sado, integrando Troia.
           Durante as invasões bárbaras e a ocupação árabe, a zona habitada foi sendo progressivamente abandonada devido ao avanço das areias.
@@ -99,14 +99,16 @@
           <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
         </app-btn-municip-blue>
       </section>
-    
+
     </section>
   </div>
-  
+
+  <section class="flex flex-col space-y-6">
+    <div class="flex items-center font-open-sans text-[1.5rem] pl-[5.7rem] font-extrabold">
+      <img src="/assets/images/icons/map.png" alt="Notícias" class="size-10 mr-5 " />
+      MAPA DE {{ municipality.name | uppercase }}
+    </div>
+    <app-municipalitymap [municipalityName]=municipality.name> </app-municipalitymap>
+  </section>
 </div>
-
-
-<app-municipalitymap [municipalityName]=municipality.name> </app-municipalitymap>
-
-
 <app-footer></app-footer>

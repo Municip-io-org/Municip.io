@@ -23,6 +23,7 @@ export class MunicipalProfileComponent {
   public newsList = [
     { image: '/assets/images/carnaval.jpg', title: 'Setúbal sai à rua para brincar ao Carnaval', text: 'Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de atividades associadas aos festejos, de que se destacam duas tardes de animação no centro da cidade, a 11 e 13 de fevereiro.' },
     { image: '/assets/images/carnaval.jpg', title: 'Setúbal sai à rua para brincar ao Carnaval', text: 'Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de atividades associadas aos festejos, de que se destacam duas tardes de animação no centro da cidade, a 11 e 13 de fevereiro.' },
+    { image: '/assets/images/carnaval.jpg', title: 'Setúbal sai à rua para brincar ao Carnaval', text: 'Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de atividades associadas aos festejos, de que se destacam duas tardes de animação no centro da cidade, a 11 e 13 de fevereiro.' },
   ];
 
   anyUser: any;

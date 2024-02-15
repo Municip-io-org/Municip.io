@@ -12,7 +12,7 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240214170255_initial")]
+    [Migration("20240215100727_initial")]
     partial class initial
     {
         /// <inheritdoc />
