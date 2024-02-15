@@ -54,6 +54,9 @@ import { ProfileBannerComponent } from './utils/profile-banner/profile-banner.co
 import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
 import { StatisticalHomePageCardComponent } from './utils/statistical-home-page-card/statistical-home-page-card.component';
 
+import { NewsListComponent } from './news/news-list/news-list.component';
+import { NewsCardComponent } from './news/news-card/news-card.component';
+
 
 
 @NgModule({
@@ -103,7 +106,10 @@ import { StatisticalHomePageCardComponent } from './utils/statistical-home-page-
     AccessDeniedComponent,
     ProfileBannerComponent,
     MunAdminHomePageComponent,
-    StatisticalHomePageCardComponent
+    StatisticalHomePageCardComponent,
+   
+    NewsListComponent,
+    NewsCardComponent
     
   ],
   imports: [
