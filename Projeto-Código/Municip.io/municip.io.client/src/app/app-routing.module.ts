@@ -26,6 +26,7 @@ import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-pag
 import { MunicipalAdminGuard } from './utils/guard/municipal-admin.guard';
 import { MunicipalProfileComponent } from './munadministrator/municipal-profile/municipal-profile.component';
 import { CitizenOrMunicipalAdminGuard } from './utils/guard/citizen-or-municipal-admin.guard';
+import { CalendarComponent } from './events/my-events/calendar/calendar.component';
 
 
 const routes: Routes = [
@@ -52,7 +53,9 @@ const routes: Routes = [
   { path: 'municipal/homePage', component: MunAdminHomePageComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'municipal/profile', component: MunicipalProfileComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'citizen/homePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
-  { path: 'accessDenied', component: AccessDeniedComponent, data: {} }
+  { path: 'accessDenied', component: AccessDeniedComponent, data: {} },
+  //for see the calendar, remove later
+  { path: "calendar", component: CalendarComponent, data: {} }
 ];
 
 @NgModule({

@@ -58,6 +58,10 @@ import { NextEventsComponent } from './utils/next-events/next-events.component';
 import { GeneralInfoComponent } from './utils/general-info/general-info.component';
 import { CardOutlineWhiteComponent } from './utils/card-outline-white/card-outline-white.component';
 import { NextNewsComponent } from './utils/next-news/next-news.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarComponent } from './events/my-events/calendar/calendar.component';
+import { CalendarHeaderComponent } from './events/my-events/calendar-header/calendar-header.component';
 
 
 
@@ -113,14 +117,20 @@ import { NextNewsComponent } from './utils/next-news/next-news.component';
     NextEventsComponent,
     GeneralInfoComponent,
     CardOutlineWhiteComponent,
-    NextNewsComponent
+    NextNewsComponent,
+    CalendarComponent,
+    CalendarHeaderComponent
     
   ],
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule, BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule, GoogleMapsModule
+    ReactiveFormsModule, GoogleMapsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [
     MunicipalityGuard,
