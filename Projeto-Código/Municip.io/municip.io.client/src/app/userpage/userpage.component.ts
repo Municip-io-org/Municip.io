@@ -27,7 +27,7 @@ export class UserpageComponent {
         this.user = res;
         var emailToParse = this.user.email;
         var emailParsed = emailToParse.replace('@', '%40');
-
+        console.log("teste"+this.user.email)
         this.userAuthService.getInfoByEmail(emailParsed).subscribe(
           res => {
             this.newUser = res;
