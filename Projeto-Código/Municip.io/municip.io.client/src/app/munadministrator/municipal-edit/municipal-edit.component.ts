@@ -108,10 +108,17 @@ export class MunicipalEditComponent {
     const file: File = event.target.files[0];
     if (file) {
       this.emblemImg = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.municipality.emblemPhoto = reader.result as string; // Atribui o URL temporário à propriedade emblemPhoto
+      };
+      reader.readAsDataURL(file); // Lê o conteúdo do arquivo como um URL de dados
     } else {
       console.error('No file selected');
     }
   }
+
+
 
   onLandscapeImagePicked(event: any) {
     const file: File = event.target.files[0];
