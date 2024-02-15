@@ -7,7 +7,7 @@
          class="bg-blue-400 p-2 rounded-l-lg text-municip-blank
            hover:bg-blue-900 transition-all duration-500 ease-in-out
            ">
-      Previous
+      Anterior
     </div>
     <div mwlCalendarToday
          [(viewDate)]="viewDate"
@@ -15,7 +15,7 @@
          class="p-2 border-[0.5px] border-municip-normal-black
             hover:bg-gray-300 transition-all duration-500 ease-in-out
            ">
-      Today
+      Hoje
     </div>
     <div mwlCalendarNextView
          [view]="view"
@@ -24,7 +24,7 @@
          class="bg-blue-400 p-2 rounded-r-lg text-municip-blank
            hover:bg-blue-900 transition-all duration-500 ease-in-out
            ">
-      Next
+      Próximo
     </div>
   </div>
   <div>
@@ -32,22 +32,22 @@
   </div>
   <div class="flex cursor-pointer font-medium">
     <div (click)="viewChange.emit(CalendarView.Month)"
-        
+        [class.active]="view === CalendarView.Month"
          class="bg-blue-400 p-2 rounded-l-lg text-municip-blank
          hover:bg-blue-900 transition-all duration-500 ease-in-out">
-      Month
+      Mês
     </div>
     <div (click)="viewChange.emit(CalendarView.Week)"
          [class.active]="view === CalendarView.Week"
          class="p-2 bg-blue-400 text-municip-blank
             hover:bg-blue-900 transition-all duration-500 ease-in-out">
-      Week
+      Semana
     </div>
     <div (click)="viewChange.emit(CalendarView.Day)"
          [class.active]="view === CalendarView.Day"
          class="bg-blue-400 p-2 rounded-r-lg text-municip-blank
            hover:bg-blue-900 transition-all duration-500 ease-in-out">
-      Day
+      Dia
     </div>
   </div>
 </div>

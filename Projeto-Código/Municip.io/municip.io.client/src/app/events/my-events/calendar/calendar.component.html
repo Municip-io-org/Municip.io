@@ -1,28 +1,26 @@
-<app-calendar-header [(view)]="view" [(viewDate)]="viewDate" />
+<app-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale" />
 
 
 
-<div class="alert alert-info">
-  <div [ngSwitch]="view">
-    <span *ngSwitchCase="'month'">Click on a month label to change the view to that month.</span>
-    <span *ngSwitchCase="'week'">Click on a day header to change the view to that day.</span>
-    <span *ngSwitchCase="'day'">There is no other view to navigate to.</span>
-  </div>
-</div>
+
 
 <div [ngSwitch]="view">
   <mwl-calendar-month-view *ngSwitchCase="'month'"
                            [viewDate]="viewDate"
                            [events]="events"
-                           (dayClicked)="changeDay($event.day.date)">
+                           (dayClicked)="changeDay($event.day.date)"
+                           [locale]="locale"
+                           (beforeViewRender)="beforeMonthViewRender($event)">
   </mwl-calendar-month-view>
   <mwl-calendar-week-view *ngSwitchCase="'week'"
                           [viewDate]="viewDate"
                           [events]="events"
-                          (dayHeaderClicked)="changeDay($event.day.date)">
+                          (dayHeaderClicked)="changeDay($event.day.date)"
+                          [locale]="locale">
   </mwl-calendar-week-view>
   <mwl-calendar-day-view *ngSwitchCase="'day'"
                          [viewDate]="viewDate"
-                         [events]="events">
+                         [events]="events"
+                         [locale]="locale">
   </mwl-calendar-day-view>
 </div>

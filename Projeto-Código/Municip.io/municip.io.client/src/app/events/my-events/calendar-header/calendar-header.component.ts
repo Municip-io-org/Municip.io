@@ -6,16 +6,22 @@ import { CalendarView } from 'angular-calendar';
   templateUrl: './calendar-header.component.html',
   styleUrl: './calendar-header.component.css'
 })
-export class CalendarHeaderComponent {
+export class CalendarHeaderComponent  {
   @Input() view: CalendarView = CalendarView.Month;
 
   @Input() viewDate: Date = new Date();
 
-  @Input() locale: string = 'en';
+  @Input() locale: string = 'pt-PT';
 
   @Output() viewChange = new EventEmitter<CalendarView>();
 
   @Output() viewDateChange = new EventEmitter<Date>();
 
   CalendarView = CalendarView;
+
+
+
+
+  
+
 }
