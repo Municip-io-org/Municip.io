@@ -55,7 +55,7 @@
           <app-input-title class="hidden text-[2.4vh]">Foto da Paisagem</app-input-title>
           <input type="file" #landscapePicker id="landscapePhoto" formControlName="landscapePhoto"
                  name="landscapePhoto" (change)="onLandscapeImagePicked($event)"
-                 [(ngModel)]="landscapeImg"
+                 [(ngModel)]="landscapeImg" accept="image/*"
                  class="hidden input font-poppins w-[18rem]" />
           <button (click)="landscapePicker.click()" alt="editar paisagem"
                   class="bg-municip-highlight-black flex space-x-2 font-inter justify-center items-center p-3

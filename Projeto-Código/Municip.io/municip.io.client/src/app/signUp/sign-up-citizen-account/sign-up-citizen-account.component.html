@@ -146,8 +146,9 @@
 
             <app-input-title class="text-[2.6vh]">Foto</app-input-title>
             <div class="flex items-center">
-              <input type="file" #filePicker id="photo" formControlName="photo" name="photo" [(ngModel)]="citizen.photo" (change)="onImagePicked($event)" 
-                     class="input w-[35.2vh]">
+              <input type="file" #filePicker id="photo" formControlName="photo" name="photo"
+                     [(ngModel)]="citizen.photo" (change)="onImagePicked($event)" accept="image/*"
+                     class="input w-[35.2vh]" >
               <app-tooltip [tooltipText]="'Utilize o seletor para encontrar a sua foto'"></app-tooltip>
             </div>
        
