@@ -75,9 +75,9 @@ export class MunicipalEditComponent {
 
 
   municipalityEditForm = new FormGroup({
-    president: new FormControl("", [Validators.required]),
-    contact: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
-    description: new FormControl("", [Validators.required]),
+    president: new FormControl(null, [Validators.required]),
+    contact: new FormControl(null, [Validators.required, Validators.pattern(/^\d{9}$/)]),
+    description: new FormControl(null, [Validators.required]),
     emblemPhoto: new FormControl(null, [Validators.required]),
     landscapePhoto: new FormControl(null, [Validators.required])
   });
