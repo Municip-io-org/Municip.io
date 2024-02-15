@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Municip.io.Server.Models
 {
@@ -15,6 +16,8 @@ namespace Municip.io.Server.Models
         public string Surname { get; set; }
 
         public string Email { get; set; }
+
+        [NotMapped]
         public string Password { get; set; }
        
         public string Nif { get; set; }

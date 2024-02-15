@@ -58,7 +58,6 @@ namespace Municip.io.Server.Migrations
                     firstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nif = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -83,7 +82,6 @@ namespace Municip.io.Server.Migrations
                     firstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     photo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
