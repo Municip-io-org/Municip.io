@@ -14,18 +14,42 @@ export class UserAuthService {
   public onStateChanged() {
     return this._authStateChanged.asObservable();
   }
+
+  private readonly SESSION_STORAGE_KEY = 'userData';
+  private readonly MUNICIPALITY_STORAGE_KEY = 'userMunicipality';
+  private readonly ROLE_STORAGE_KEY = 'userRole';
+  private readonly INFO_STORAGE_KEY = 'infoByEmail'
   constructor(private http: HttpClient) { }
 
   getUserDataFromStorage(): any {
     console.log("foi buscar")
-    const userData = sessionStorage.getItem('userData');
+    const userData = sessionStorage.getItem(this.SESSION_STORAGE_KEY);
     return userData ? JSON.parse(userData) : null;
   }
 
   setUserDataToStorage(userData: any): void {
     console.log("define em sessin")
-    sessionStorage.setItem('userData', JSON.stringify(userData));
+    sessionStorage.setItem(this.SESSION_STORAGE_KEY, JSON.stringify(userData));
   }
+
+  private setUserMunicipalityToStorage(municipality: any): void {
+    sessionStorage.setItem(this.MUNICIPALITY_STORAGE_KEY, JSON.stringify(municipality));
+  }
+
+  private getUserMunicipalityFromStorage(): any {
+    const municipalityString = sessionStorage.getItem(this.MUNICIPALITY_STORAGE_KEY);
+    return municipalityString ? JSON.parse(municipalityString) : null;
+  }
+
+  private setUserRoleToStorage(role: any): void {
+    sessionStorage.setItem(this.ROLE_STORAGE_KEY, JSON.stringify(role));
+  }
+
+  private getUserRoleFromStorage(): any {
+    const roleString = sessionStorage.getItem(this.ROLE_STORAGE_KEY);
+    return roleString ? JSON.parse(roleString) : null;
+  }
+
 
   login(login: Login, useCookies: boolean, useSessionCookies: boolean): Observable<boolean> {
     let params = new HttpParams()
@@ -61,23 +85,72 @@ export class UserAuthService {
   }
 
   getInfoByEmail(email: string): Observable<any> {
-
-    return this.http.get<any>(`/api/accounts/InfoByEmail/?email=${email}`);
+    const cachedUserData = this.getUserInfoByEmailFromStorage(email);
+    if (cachedUserData && cachedUserData.email === email) {
+      console.log("NÃO FOI À API BUSCAR A USERINFO")
+      console.log(cachedUserData)
+      return of(cachedUserData);
+    } else {
+       console.log("Terrível, foi à api... :/")
+      return this.http.get<any>(`/api/accounts/InfoByEmail/?email=${email}`).pipe(
+        tap(userInfo => this.setUserInfoByEmailToStorage(email, userInfo)),
+        catchError(error => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+    }
   }
 
+  getUserInfoByEmailFromStorage(email: string): any {
+    const userDataString = sessionStorage.getItem(this.INFO_STORAGE_KEY);
+    const userData = userDataString ? JSON.parse(userDataString) : null;
+    return userData && userData.email === email ? userData : null;
+  }
+
+  setUserInfoByEmailToStorage(email: string, userInfo: any): void {
+    const cachedUserData = this.getUserInfoByEmailFromStorage(email);
+    if (cachedUserData && cachedUserData.email === email) {
+      sessionStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify({ ...cachedUserData, ...userInfo }));
+    } else {
+      sessionStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify(userInfo));
+    }
+  }
+
+
   getUserRole(): Observable<any> {
-    return this.http.get<any>('/api/accounts/UserRole');
+    const roleData = this.getUserRoleFromStorage();
+    if (roleData) {
+      console.log("Já tem a role!!!!")
+      return of(roleData);
+    } else {
+      console.log("Vai buscar à api a role")
+      return this.http.get<any>('/api/accounts/UserRole').pipe(
+        tap(role => this.setUserRoleToStorage(role)),
+        catchError(error => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+    }
   }
 
   getMunicipality(): Observable<any> {
-    return this.getUserData().pipe(
-      switchMap(userInfo =>
-        this.getInfoByEmail(userInfo.email).pipe(
-          map(user => user.municipality || null),
-          catchError(_ => of(null))
+    const municipalityData = this.getUserMunicipalityFromStorage();
+    if (municipalityData) {
+      console.log("Já tem o municipio!!!!")
+      return of(municipalityData);
+    } else {
+      console.log("VAI BUSCAR Á API O MUNICIPIO")
+      return this.getUserData().pipe(
+        switchMap(userInfo =>
+          this.getInfoByEmail(userInfo.email).pipe(
+            tap(municipality => this.setUserMunicipalityToStorage(municipality)),
+            catchError(_ => of(null))
+          )
         )
-      )
-    );
+      );
+    }
   }
 
   getInfoMunicipality(nome: string): Observable<any> {
