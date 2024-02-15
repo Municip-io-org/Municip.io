@@ -37,7 +37,7 @@ export class HeaderLoggedinComponent {
             this.user = res;
             this.firstName = this.user.firstName;
             this.photo = this.user.photo;
-    
+           
           },
           error => {
             console.error(error);
@@ -54,6 +54,8 @@ export class HeaderLoggedinComponent {
       res => {
         if (res.role == Roles.Citizen) {
           this.role = res.role;
+          
+          console.log("Ele é:" + this.role)
         }
       },
       error => {
