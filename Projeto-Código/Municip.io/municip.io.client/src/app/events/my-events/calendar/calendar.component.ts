@@ -47,7 +47,7 @@ export class CalendarComponent {
     body.forEach(day => {
       if (day.date.getDate() === new Date().getDate()) {
 
-        day.backgroundColor = '#5875F6';
+        day.backgroundColor = '#66D7FB';
       }
     });
 
