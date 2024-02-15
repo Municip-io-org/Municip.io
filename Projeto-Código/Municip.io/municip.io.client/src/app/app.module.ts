@@ -58,6 +58,7 @@ import { NextEventsComponent } from './utils/next-events/next-events.component';
 import { GeneralInfoComponent } from './utils/general-info/general-info.component';
 import { CardOutlineWhiteComponent } from './utils/card-outline-white/card-outline-white.component';
 import { NextNewsComponent } from './utils/next-news/next-news.component';
+import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedin.component';
 
 
 
@@ -113,7 +114,8 @@ import { NextNewsComponent } from './utils/next-news/next-news.component';
     NextEventsComponent,
     GeneralInfoComponent,
     CardOutlineWhiteComponent,
-    NextNewsComponent
+    NextNewsComponent,
+    HeaderLoggedinComponent
     
   ],
   imports: [
