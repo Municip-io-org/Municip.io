@@ -48,10 +48,7 @@ namespace Municip.ioTest
             _context.Citizens.AddRange(new[]
      {
                 new Citizen { Email = "test1@example.com", firstName = "Filipe", status = CitizenStatus.Pending,  Address = "123  avenida", Gender = "m",Municipality = " City",Nif = "123456789",Surname = "Fonseca",photo = "path/to/photo",postalCode1 = "1234",postalCode2 = "678" },
-                new Citizen { Email = "test2@example.com", firstName = "Teresa", status = CitizenStatus.Blocked,  Address = "123 rua ",Gender = "f",Municipality = " City",Nif = "123456789",
-    Surname = "Raquel",photo = "path/to/photo",
-    postalCode1 = "1235",
-    postalCode2 = "678" },
+                new Citizen { Email = "test2@example.com", firstName = "Teresa", status = CitizenStatus.Blocked,  Address = "123 rua ",Gender = "f",Municipality = " City",Nif = "123456789", Surname = "Raquel",photo = "path/to/photo", postalCode1 = "1235", postalCode2 = "678" },
                 new Citizen { Email = "test3@example.com", firstName = "Pedro", status = CitizenStatus.Approved,  Address = "123 avenida 456",
     Gender = "m",
     Municipality = " City",
@@ -68,10 +65,8 @@ namespace Municip.ioTest
         [Fact]
         public async Task ApproveCitizen_When_CitizenExistsAndIsBlocked_ShouldApproveAndSendUnblockEmail()
         {
-            // Arrange
             var email = "test2@example.com";
 
-            // Act
             var result = await _controller.approveCitizen(email);
 
             // Assert
@@ -83,16 +78,40 @@ namespace Municip.ioTest
         [Fact]
         public async Task DeleteCitizen_When_CitizenExists_ShouldDeleteAndSendRemoveEmail()
         {
-            // Arrange
             var email = "test1@example.com";
 
-            // Act
             var result = await _controller.deleteCitizen(email);
 
             // Assert
             Assert.NotNull(result);
             Assert.Equal(2, _context.Citizens.Count());
             Assert.Null(_context.Citizens.FirstOrDefault(c => c.Email == email));
+
+        }
+
+        [Fact]
+        public async Task BlockCitizen_When_CitizenExistsAndIsApproved_ShouldBlockAndSendBlockEmail()
+        {
+            var email = "test3@example.com";
+
+            var result = await _controller.blockCitizen(email);
+            Assert.NotNull(result);
+            Assert.Equal(3, _context.Citizens.Count());
+            Assert.Equal(CitizenStatus.Blocked, _context.Citizens.FirstOrDefault(c => c.Email == email)?.status);
+
+        }
+
+
+        //test approve with citizen that doesnt exist
+        [Fact]
+        public async Task ApproveCitizen_When_CitizenDoesNotExist_ShouldReturnNotFound()
+        {
+            var email = "naoexiste@gmail.com";
+            var result = await _controller.approveCitizen(email);
+            Assert.NotNull(result);
+            Assert.Equal(3, _context.Citizens.Count());
+            Assert.Null(_context.Citizens.FirstOrDefault(c => c.Email == email));
+
         }
     }
 }
