@@ -379,8 +379,36 @@ namespace Municip.io.Server.Controllers
                    password.Any(ch => !char.IsLetterOrDigit(ch));
         }
 
-        
 
+        [HttpPut("UpdateMunicipality")]
+        public async Task<IActionResult> UpdateMunicipality(Municipality updatedMunicipality)
+        {
+            if (!ModelState.IsValid)
+            {
+                var validationErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                return BadRequest(new { Message = "Erro de Validação", Errors = validationErrors });
+               
+            }
 
+            var existingMunicipality = await _context.Municipalities.FindAsync(updatedMunicipality.Id);
+
+            if (existingMunicipality == null)
+            {
+                return NotFound(new { message = "Municipality Not Found, can't update" });
+            }
+
+            existingMunicipality.president = updatedMunicipality.president;
+            existingMunicipality.contact = updatedMunicipality.contact;
+            existingMunicipality.description = updatedMunicipality.description;
+            existingMunicipality.emblemPhoto = updatedMunicipality.emblemPhoto;
+            existingMunicipality.landscapePhoto = updatedMunicipality.landscapePhoto;
+
+            if (_context.ChangeTracker.HasChanges())
+            {
+                await _context.SaveChangesAsync();
+            }
+
+            return Json(await _context.Municipalities.Where(m => m.name == existingMunicipality.name).FirstOrDefaultAsync());
+        }
     }
 }

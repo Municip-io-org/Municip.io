@@ -12,7 +12,7 @@
                  class="input font-poppins w-[18rem] " />
           <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 left-64 top-3.5" />
         </div>
-        <div class="text-red-500 font-bold py-2" *ngIf="president?.touched && president?.invalid">
+        <div class="absolute text-red-500 font-bold py-2" *ngIf="president?.touched && president?.invalid">
           <div *ngIf="president?.errors?.['required']">Presidente Obrigatório</div>
         </div>
       </div>
@@ -24,7 +24,7 @@
                  class="input font-poppins w-[18rem]" />
           <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 left-64 top-3.5" />
         </div>
-        <div class="text-red-500 font-bold py-2" *ngIf="contact?.touched && contact?.invalid ">
+        <div class="absolute text-red-500 font-bold py-2" *ngIf="contact?.touched && contact?.invalid ">
           <div *ngIf="contact?.errors?.['required'] ">Contacto Obrigatório</div>
           <div *ngIf="contact?.errors?.['pattern'] ">Contacto Inválido</div>
         </div>
@@ -87,6 +87,13 @@
     <img src="/assets/images/icons/pencil-white.png" alt="editar"
          class="size-5" />
     <span>Editar Munícipio</span>
+  </button>
+  <button *ngIf="editMode" (click)="cancelEditMode()" alt="editar paisagem" type="button"
+          class="absolute bg-municip-highlight-black flex space-x-2 font-inter justify-center items-center p-3 top-[15.3rem] right-[25rem]
+    rounded-2xl text-municip-blank transition duration-300 hover:bg-black">
+    <img src="/assets/images/icons/pencil-white.png" alt="editar"
+         class="size-5" />
+    <span>Cancelar Edição</span>
   </button>
 </div>
 <app-footer></app-footer>

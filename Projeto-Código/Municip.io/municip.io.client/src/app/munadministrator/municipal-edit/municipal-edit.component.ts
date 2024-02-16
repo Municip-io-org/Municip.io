@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Municipality } from '../../services/municipal-admin-auth.service';
+import { MunicipalAdminAuthService, Municipality } from '../../services/municipal-admin-auth.service';
 import { UserAuthService } from '../../services/user-auth.service';
 
 @Component({
@@ -43,14 +43,14 @@ export class MunicipalEditComponent {
   editMode: boolean = false;
 
   municipalityEditForm = new FormGroup({
-    president: new FormControl({ value: '', disabled:true}, [Validators.required]),
-    contact: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.pattern(/^\d{9}$/)]),
-    description: new FormControl({ value: '', disabled: true }, [Validators.required]),
+    president: new FormControl({ value: this.municipality.president, disabled:true}, [Validators.required]),
+    contact: new FormControl({ value: this.municipality.contact, disabled: true }, [Validators.required, Validators.pattern(/^\d{9}$/)]),
+    description: new FormControl({ value: this.municipality.description, disabled: true }, [Validators.required]),
     emblemPhoto: new FormControl({ value: null, disabled: true }),
     landscapePhoto: new FormControl({ value: null, disabled: true })
   });
 
-  constructor(private userAuthService: UserAuthService) { }
+  constructor(private userAuthService: UserAuthService, private municipalAdminAuthService :MunicipalAdminAuthService) { }
 
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
@@ -95,7 +95,6 @@ export class MunicipalEditComponent {
   }
 
   toggleEditMode() {
-    console.log(this.editMode);
     this.editMode = !this.editMode;
 
     if (this.editMode) {
@@ -103,8 +102,11 @@ export class MunicipalEditComponent {
     } else {
       this.municipalityEditForm.disable();
     }
+  }
 
-    console.log(this.editMode);
+  cancelEditMode() {
+    this.toggleEditMode();
+    this.initForm();
   }
 
   get president() {
@@ -159,21 +161,27 @@ export class MunicipalEditComponent {
 
 
   onSubmit() {
+   /* console.log(this.emblemImg.name);*/
 
-    console.log(this.municipality.president);
-    console.log(this.president?.value);
+  this.toggleEditMode();
 
-    this.toggleEditMode();
+    console.log("ANTES DE ENVIAR Á API");
 
-    // Construct municipality object from form values
-    /*var municipality = this.municipalityEditForm.value as unknown as Municipality;*/
+    this.municipality.president = this.president!.value!;
+    this.municipality.contact = this.contact!.value!.toString();
+    this.municipality.description = this.description!.value!;
 
-    //// Call the service method to register the municipality
-    //this.municipalAdminAuthService.registerMunicipality(municipality, this.emblemImg, this.landscapeImg).subscribe(
-    //  (result) => {
-    //    this.router.navigateByUrl('/signUp-Success');
-    //  });
+    console.log(this.municipality);
 
-
+  this.municipalAdminAuthService.updateMunicipality(this.municipality, this.emblemImg, this.landscapeImg).subscribe(
+    (result) => {
+      console.log("RESULTADO DA API");
+      console.log(result);
+    },
+    (error) => {
+      // Lida com erros, se necessário
+      console.log(error);
+    }
+  );
   }
 }
