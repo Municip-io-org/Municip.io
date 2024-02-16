@@ -40,6 +40,16 @@ export class MunicipalEditComponent {
   anyUser: any;
   user: any;
 
+  editMode: boolean = false;
+
+  municipalityEditForm = new FormGroup({
+    president: new FormControl({ value: '', disabled:true}, [Validators.required]),
+    contact: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.pattern(/^\d{9}$/)]),
+    description: new FormControl({ value: '', disabled: true }, [Validators.required]),
+    emblemPhoto: new FormControl({ value: null, disabled: true }),
+    landscapePhoto: new FormControl({ value: null, disabled: true })
+  });
+
   constructor(private userAuthService: UserAuthService) { }
 
   ngOnInit(): void {
@@ -56,6 +66,9 @@ export class MunicipalEditComponent {
                 this.municipality = municipalityRes as Municipality;
      
                 console.log("municipality", this.municipality);
+
+                this.initForm();
+                
               },
               error => {
                 console.error(error);
@@ -73,16 +86,26 @@ export class MunicipalEditComponent {
     );
   }
 
+  initForm() {
+    this.municipalityEditForm.patchValue({
+      president: this.municipality.president,
+      contact: this.municipality.contact,
+      description: this.municipality.description
+    });
+  }
 
-  municipalityEditForm = new FormGroup({
-    president: new FormControl(null, [Validators.required]),
-    contact: new FormControl(null, [Validators.required, Validators.pattern(/^\d{9}$/)]),
-    description: new FormControl(null, [Validators.required]),
-    emblemPhoto: new FormControl(null, [Validators.required]),
-    landscapePhoto: new FormControl(null, [Validators.required])
-  });
+  toggleEditMode() {
+    console.log(this.editMode);
+    this.editMode = !this.editMode;
 
- 
+    if (this.editMode) {
+      this.municipalityEditForm.enable();
+    } else {
+      this.municipalityEditForm.disable();
+    }
+
+    console.log(this.editMode);
+  }
 
   get president() {
     return this.municipalityEditForm.get('president');
@@ -124,6 +147,11 @@ export class MunicipalEditComponent {
     const file: File = event.target.files[0];
     if (file) {
       this.landscapeImg = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.municipality.landscapePhoto = reader.result as string; // Atribui o URL temporário à propriedade emblemPhoto
+      };
+      reader.readAsDataURL(file); // Lê o conteúdo do arquivo como um URL de dados
     } else {
       console.error('No file selected');
     }
@@ -132,8 +160,13 @@ export class MunicipalEditComponent {
 
   onSubmit() {
 
+    console.log(this.municipality.president);
+    console.log(this.president?.value);
+
+    this.toggleEditMode();
+
     // Construct municipality object from form values
-    var municipality = this.municipalityEditForm.value as unknown as Municipality;
+    /*var municipality = this.municipalityEditForm.value as unknown as Municipality;*/
 
     //// Call the service method to register the municipality
     //this.municipalAdminAuthService.registerMunicipality(municipality, this.emblemImg, this.landscapeImg).subscribe(
