@@ -1,10 +1,13 @@
-﻿namespace Municip.io.Server.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Municip.io.Server.Models
 {
     public class Event
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
 
+        [Range(1, int.MaxValue)]
         public int Capacity { get; set; }
 
         public DateTime StartDate { get; set; }
@@ -20,5 +23,17 @@
         public string Image { get; set; }
 
         public string Description { get; set; }
+
+
+        
+
+
+        // Navigation Properties
+        public Municipality Municipality { get; set; }
+        
+        public List<Citizen> Citizens { get; set; }
+
+
+
     }
 }

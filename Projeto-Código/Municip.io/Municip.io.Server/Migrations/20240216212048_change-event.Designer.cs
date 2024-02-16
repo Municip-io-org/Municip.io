@@ -12,8 +12,8 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240216164450_initial")]
-    partial class initial
+    [Migration("20240216212048_change-event")]
+    partial class changeevent
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -237,6 +237,9 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("EventId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -280,14 +283,18 @@ namespace Municip.io.Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EventId");
+
                     b.ToTable("Citizens");
                 });
 
             modelBuilder.Entity("Municip.io.Server.Models.Event", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
@@ -310,6 +317,9 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("MunicipalityId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -321,6 +331,8 @@ namespace Municip.io.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MunicipalityId");
 
                     b.ToTable("Events");
                 });
@@ -491,6 +503,29 @@ namespace Municip.io.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Municip.io.Server.Models.Citizen", b =>
+                {
+                    b.HasOne("Municip.io.Server.Models.Event", null)
+                        .WithMany("Citizens")
+                        .HasForeignKey("EventId");
+                });
+
+            modelBuilder.Entity("Municip.io.Server.Models.Event", b =>
+                {
+                    b.HasOne("Municip.io.Server.Models.Municipality", "Municipality")
+                        .WithMany()
+                        .HasForeignKey("MunicipalityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Municipality");
+                });
+
+            modelBuilder.Entity("Municip.io.Server.Models.Event", b =>
+                {
+                    b.Navigation("Citizens");
                 });
 #pragma warning restore 612, 618
         }
