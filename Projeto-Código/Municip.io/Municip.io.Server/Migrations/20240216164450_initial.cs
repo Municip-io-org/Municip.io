@@ -75,6 +75,26 @@ namespace Municip.io.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartRegistration = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndRegistration = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Local = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MunicipalAdministrators",
                 columns: table => new
                 {
@@ -292,6 +312,9 @@ namespace Municip.io.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "Citizens");
+
+            migrationBuilder.DropTable(
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "MunicipalAdministrators");

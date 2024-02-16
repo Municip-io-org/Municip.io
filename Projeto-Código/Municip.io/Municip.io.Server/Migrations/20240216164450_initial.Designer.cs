@@ -12,7 +12,7 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240215194232_initial")]
+    [Migration("20240216164450_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -281,6 +281,48 @@ namespace Municip.io.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Citizens");
+                });
+
+            modelBuilder.Entity("Municip.io.Server.Models.Event", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndRegistration")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Local")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartRegistration")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("Municip.io.Server.Models.MunicipalAdministrator", b =>
