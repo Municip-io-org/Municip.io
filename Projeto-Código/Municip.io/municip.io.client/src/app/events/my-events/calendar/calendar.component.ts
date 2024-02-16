@@ -35,17 +35,19 @@ export class CalendarComponent {
     {
       title: 'Click me',
       start: new Date(),
+      cssClass: 'event-cell',
     },
     {
       title: 'Or click me',
       start: new Date(),
-
+      cssClass: 'event-cell',
     },
 
     {
       title: 'Or click me',
       start: new Date(new Date().setHours(15, 0, 0, 0)),
       end: new Date(new Date().setHours(16, 0, 0, 0)),
+      cssClass:'event-cell',
     }
 
   ]
