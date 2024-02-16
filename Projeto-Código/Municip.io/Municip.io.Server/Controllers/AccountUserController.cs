@@ -29,6 +29,8 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
 
+       
+
         /// <summary>
         /// Obtém os dados do utilizador autenticado.
         /// </summary>
