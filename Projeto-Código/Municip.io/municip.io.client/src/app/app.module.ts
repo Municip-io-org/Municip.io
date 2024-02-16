@@ -57,6 +57,8 @@ import { StatisticalHomePageCardComponent } from './utils/statistical-home-page-
 import { NewsListComponent } from './news/news-list/news-list.component';
 import { NewsCardComponent } from './news/news-card/news-card.component';
 
+import { NewsCreateComponent } from './news/news-create/news-create.component';
+
 
 
 @NgModule({
@@ -109,7 +111,9 @@ import { NewsCardComponent } from './news/news-card/news-card.component';
     StatisticalHomePageCardComponent,
    
     NewsListComponent,
-    NewsCardComponent
+    NewsCardComponent,
+    
+    NewsCreateComponent
     
   ],
   imports: [
