@@ -12,7 +12,7 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240215100727_initial")]
+    [Migration("20240215194232_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -249,10 +249,6 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -294,10 +290,6 @@ namespace Municip.io.Server.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

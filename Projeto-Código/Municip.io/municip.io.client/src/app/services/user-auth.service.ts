@@ -138,8 +138,8 @@ export class UserAuthService {
   getMunicipality(): Observable<any> {
     const municipalityData = this.getUserMunicipalityFromStorage();
     if (municipalityData) {
-      console.log("Já tem o municipio!!!!")
-      return of(municipalityData);
+      console.log("Já tem o municipio!!!!??")
+      return of(municipalityData.municipality);
     } else {
       console.log("VAI BUSCAR Á API O MUNICIPIO")
       return this.getUserData().pipe(
