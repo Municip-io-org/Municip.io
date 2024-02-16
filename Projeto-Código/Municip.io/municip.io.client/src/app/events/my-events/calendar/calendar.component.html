@@ -1,5 +1,4 @@
-<app-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale" />
-
+<app-calendar-header [(view)]="view" [(viewDate)]="viewDate" [(activeDayIsOpen)]="activeDayIsOpen"  [locale]="locale" />
 
 
 
@@ -8,15 +7,17 @@
   <mwl-calendar-month-view *ngSwitchCase="'month'"
                            [viewDate]="viewDate"
                            [events]="events"
-                           (dayClicked)="changeDay($event.day.date)"
+                           [activeDayIsOpen]="activeDayIsOpen"
+                           (dayClicked)="dayClicked($event.day)"
                            [locale]="locale"
-                           (beforeViewRender)="beforeMonthViewRender($event)">
+                           (beforeViewRender)="beforeMonthViewRender($event)"
+                           (eventClicked)="eventClicked($event.event)">
   </mwl-calendar-month-view>
   <mwl-calendar-week-view *ngSwitchCase="'week'"
                           [viewDate]="viewDate"
                           [events]="events"
-                          (dayHeaderClicked)="changeDay($event.day.date)"
-                          [locale]="locale">
+                          [locale]="locale"
+                          (beforeViewRender)="beforeWeekViewRender($event)">
   </mwl-calendar-week-view>
   <mwl-calendar-day-view *ngSwitchCase="'day'"
                          [viewDate]="viewDate"

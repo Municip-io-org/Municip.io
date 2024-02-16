@@ -1,24 +1,27 @@
-import { Component, OnChanges } from '@angular/core';
-import { CalendarDateFormatter, CalendarEvent, CalendarMonthViewDay, CalendarView } from 'angular-calendar';
-import { registerLocaleData } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnChanges, ViewEncapsulation } from '@angular/core';
+import { CalendarDateFormatter, CalendarEvent, CalendarEventTitleFormatter, CalendarMonthViewDay, CalendarView, CalendarWeekViewBeforeRenderEvent } from 'angular-calendar';
 
-import localePt from '@angular/common/locales/pt';
+
 import { CustomDateFormatterService } from '../../../services/custom-date-formatter.service';
-import { Subject } from 'rxjs';
-
-registerLocaleData(localePt, 'pt-Pt');
-
-
+import { isSameDay, isSameMonth } from 'date-fns';
+import { CustomEventTitleFormatterService } from '../../../services/custom-event-title-formatter.service';
+import { Citizen } from '../../../services/citizen-auth.service';
 
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatterService,
+    },
+    {
+      provide: CalendarEventTitleFormatter,
+      useClass: CustomEventTitleFormatterService,
     },
   ],
 })
@@ -27,17 +30,52 @@ export class CalendarComponent {
 
   viewDate: Date = new Date();
 
-  events: CalendarEvent[] = [];
 
-  locale: string = 'pt-Pt';
+  events: CalendarEvent[] = [
+    {
+      title: 'Click me',
+      start: new Date(),
+    },
+    {
+      title: 'Or click me',
+      start: new Date(),
+
+    },
+
+    {
+      title: 'Or click me',
+      start: new Date(new Date().setHours(15, 0, 0, 0)),
+      end: new Date(new Date().setHours(16, 0, 0, 0)),
+    }
+
+  ]
+
+
+
+  locale: string = 'pt-PT';
+
+
+
+  activeDayIsOpen: boolean = true;
 
 
 
 
-  changeDay(date: Date) {
-    this.viewDate = date;
-    this.view = CalendarView.Day;
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    if (isSameMonth(date, this.viewDate)) {
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0
+      ) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
+      this.viewDate = date;
+    }
   }
+
+
 
 
 
@@ -45,12 +83,35 @@ export class CalendarComponent {
 
   beforeMonthViewRender({ body }: { body: CalendarMonthViewDay[] }): void {
     body.forEach(day => {
-      if (day.date.getDate() === new Date().getDate()) {
-
-        day.backgroundColor = '#66D7FB';
+      if (day.date.getMonth() === new Date().getMonth() && day.date.getDate() === new Date().getDate() && day.date.getFullYear() === new Date().getFullYear()) {
+        day.cssClass = 'blue-cell';
       }
     });
 
+
+  }
+
+  beforeWeekViewRender(body: CalendarWeekViewBeforeRenderEvent): void {
+    body.header.forEach(day => {
+      if (day.date.getMonth() === new Date().getMonth() && day.date.getDate() === new Date().getDate() && day.date.getFullYear() === new Date().getFullYear()) {
+        day.cssClass = 'blue-cell';
+      }
+    });
+  }
+
+
+  eventClicked(event: CalendarEvent<{ film: Citizen }>): void {
+    //TODO: change this when there is events
+    //window.open(
+    //  `https://www.themoviedb.org/movie/${event.meta.film.id}`,
+    //  '_blank'
+    //);
+    //navigate to /events/1
+
+    window.open(
+      "https://goog.com",
+      '_blank'
+    )
 
   }
 }
