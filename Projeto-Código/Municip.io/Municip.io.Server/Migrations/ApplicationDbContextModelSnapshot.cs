@@ -314,8 +314,9 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("MunicipalityId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Municipality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -328,8 +329,6 @@ namespace Municip.io.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MunicipalityId");
 
                     b.ToTable("Events");
                 });
@@ -507,17 +506,6 @@ namespace Municip.io.Server.Migrations
                     b.HasOne("Municip.io.Server.Models.Event", null)
                         .WithMany("Citizens")
                         .HasForeignKey("EventId");
-                });
-
-            modelBuilder.Entity("Municip.io.Server.Models.Event", b =>
-                {
-                    b.HasOne("Municip.io.Server.Models.Municipality", "Municipality")
-                        .WithMany()
-                        .HasForeignKey("MunicipalityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Municipality");
                 });
 
             modelBuilder.Entity("Municip.io.Server.Models.Event", b =>

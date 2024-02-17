@@ -24,12 +24,12 @@ namespace Municip.io.Server.Models
 
         public string Description { get; set; }
 
-
+        public string Municipality { get; set; }
         
 
 
         // Navigation Properties
-        public Municipality Municipality { get; set; }
+
         
         public List<Citizen> Citizens { get; set; }
 

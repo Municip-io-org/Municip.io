@@ -26,10 +26,7 @@ namespace Municip.io.Server.Controllers
             else
             {
                 return BadRequest(new { message = "Invalid model", ModelState });
-
             }
-
-
         }
 
         [HttpGet("GetEvents")]
@@ -39,22 +36,21 @@ namespace Municip.io.Server.Controllers
             return Json(events);
         }
 
-
-
-
         [HttpPost("EnrollCitizen")]
         public IActionResult EnrollCitizen(int eventId, string email)
         {
             var citizen = _context.Citizens.FirstOrDefault(c => c.Email == email);
             var evento = _context.Events.FirstOrDefault(e => e.Id == eventId);
-            if (citizen != null && evento != null)
+
+
+            if (citizen != null && evento != null && evento.Municipality == citizen.Municipality &&
+                (evento.Citizens == null || evento.Citizens.Find(c => c.Email == email) == null))
             {
-                //TODO: check if citizen is already enrolled and if he belongs to the municipality
-                Console.WriteLine(evento.Municipality.name);
-                if(evento.Citizens == null)
+                if (evento.Citizens == null)
                 {
                     evento.Citizens = new List<Citizen>();
                 }
+
                 if (evento.Citizens.Count < evento.Capacity)
                 {
                     evento.Citizens.Add(citizen);
@@ -68,19 +64,25 @@ namespace Municip.io.Server.Controllers
             }
             else
             {
-                if(citizen == null)
+                if (citizen == null)
                 {
                     return BadRequest(new { message = "Citizen not found" });
                 }
-                else
+                else if (evento == null)
                 {
                     return BadRequest(new { message = "Event not found" });
                 }
-
+                else if (evento.Municipality != citizen.Municipality)
+                {
+                    return BadRequest(new { message = "Citizen does not belong to the municipality" });
+                }
+                else
+                {
+                    return BadRequest(new { message = "Citizen is already enrolled" });
+                }
             }
         }
 
-        //get all events where a citizen is enrolled
         [HttpGet("GetEventsByCitizen")]
         public IActionResult GetEventsByCitizen(string email)
         {
@@ -95,8 +97,5 @@ namespace Municip.io.Server.Controllers
                 return BadRequest(new { message = "Citizen not found" });
             }
         }
-
-
-
     }
 }
