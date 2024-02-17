@@ -62,6 +62,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarComponent } from './events/my-events/calendar/calendar.component';
 import { CalendarHeaderComponent } from './events/my-events/calendar-header/calendar-header.component';
+import { MunicipalEditComponent } from './munadministrator/municipal-edit/municipal-edit.component';
 import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedin.component';
 
 
@@ -121,6 +122,7 @@ import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedi
     NextNewsComponent,
     CalendarComponent,
     CalendarHeaderComponent,
+    MunicipalEditComponent,
     HeaderLoggedinComponent
     
   ],

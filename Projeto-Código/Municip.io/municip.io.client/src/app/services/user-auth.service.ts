@@ -138,17 +138,19 @@ export class UserAuthService {
   getMunicipality(): Observable<any> {
     const municipalityData = this.getUserMunicipalityFromStorage();
     if (municipalityData) {
-      console.log("Já tem o municipio!!!!??")
-      return of(municipalityData.municipality);
+      console.log("Já tem o municipio!!!!??");
+      return of(municipalityData);
     } else {
-      console.log("VAI BUSCAR Á API O MUNICIPIO")
+      console.log("VAI BUSCAR Á API O MUNICIPIO");
       return this.getUserData().pipe(
         switchMap(userInfo =>
           this.getInfoByEmail(userInfo.email).pipe(
             tap(municipality => this.setUserMunicipalityToStorage(municipality)),
             catchError(_ => of(null))
           )
-        )
+        ),
+        // Retorna somente a propriedade 'municipality' do objeto retornado por getInfoByEmail
+        map(result => result?.municipality)
       );
     }
   }
