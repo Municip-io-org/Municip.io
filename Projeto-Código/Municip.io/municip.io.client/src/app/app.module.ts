@@ -64,6 +64,7 @@ import { CalendarComponent } from './events/my-events/calendar/calendar.componen
 import { CalendarHeaderComponent } from './events/my-events/calendar-header/calendar-header.component';
 import { MunicipalEditComponent } from './munadministrator/municipal-edit/municipal-edit.component';
 import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedin.component';
+import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
 
 
 
@@ -123,7 +124,8 @@ import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedi
     CalendarComponent,
     CalendarHeaderComponent,
     MunicipalEditComponent,
-    HeaderLoggedinComponent
+    HeaderLoggedinComponent,
+    CalendarPageComponent
     
   ],
   imports: [

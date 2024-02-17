@@ -10,6 +10,7 @@ import { EventsService } from '../../../services/events/events.service';
 import { Event } from '../../../services/events/events.service';
 import { Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserAuthService } from '../../../services/user-auth.service';
 
 @Component({
   selector: 'app-calendar',
@@ -30,25 +31,34 @@ import { Router } from '@angular/router';
 })
 export class CalendarComponent implements OnInit {
 
-  constructor(private eventService: EventsService, private router: Router) { }
+  constructor(private eventService: EventsService, private authService: UserAuthService
+    , private router: Router) { }
 
 
 
   ngOnInit(): void {
-    this.events$ = this.eventService.getEvents().pipe(
-      map((events) => {
-        return events.map((event) => {
-          return {
-            title: event.title,
-            start: new Date(event.startDate),
-            end: new Date(event.endDate),
-            cssClass: 'event-cell',
-            meta: {
-              event: event
+
+
+    this.authService.getUserData().subscribe((user) => {
+      this.events$ = this.eventService.getUserEvents(user.email).pipe(
+        map((events) => {
+          return events.map((event) => {
+            return {
+              title: event.title,
+              start: new Date(event.startDate),
+              end: new Date(event.endDate),
+              cssClass: 'event-cell',
+              meta: {
+                event: event
+              }
             }
-          }
-        });
-      })
+          });
+        })
+      );
+    },
+      (error) => {
+        console.error(error);
+      }
     );
   }
 

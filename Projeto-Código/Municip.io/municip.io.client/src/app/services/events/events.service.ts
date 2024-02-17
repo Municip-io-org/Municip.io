@@ -12,6 +12,11 @@ export class EventsService {
     return this.http.get<Event[]>('api/events/GetEvents');
   }
 
+  getUserEvents(email: string): Observable<Event[]> {
+    const params = { email: email }; 
+    return this.http.get<Event[]>('api/events/GetEventsByCitizen', { params: params });
+  }
+
 }
 
 export interface Event {
