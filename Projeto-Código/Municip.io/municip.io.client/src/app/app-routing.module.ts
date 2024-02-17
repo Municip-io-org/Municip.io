@@ -25,6 +25,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
 import { MunicipalAdminGuard } from './utils/guard/municipal-admin.guard';
 import {NewsListComponent } from './news/news-list/news-list.component';
+import { NewsCreateComponent } from './news/news-create/news-create.component';
 
 
 const routes: Routes = [
@@ -51,7 +52,8 @@ const routes: Routes = [
   { path: 'municipal/homePage', component: MunAdminHomePageComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'citizen/homePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} },
-  { path: 'news', component: NewsListComponent, data: {} }
+  { path: 'news', component: NewsListComponent, data: {} },
+  { path: 'news/news-create', component: NewsCreateComponent, data: {} }
 ];
 
 @NgModule({

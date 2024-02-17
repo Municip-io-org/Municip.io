@@ -1,1 +1,76 @@
-<p>news-create works!</p>
+<app-header />
+
+<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
+                    [title]="'Criar Notícia'"
+                    [text]="'Criação uma nova notícia'">
+</app-smaller-banner>
+<div class="flex justify-center items-center pt-11 ">
+  <div class="flex-grow">
+    <form [formGroup]="newsCreate" (ngSubmit)="OnSubmit()" class="mx-[5%] w-[70%]">
+      <div *ngIf="errors" class=" text-red-500 text-sm font-bold space-y-2 text-start">
+        <div *ngFor="let error of errors">
+          <p>{{error}}</p>
+        </div>
+      </div>
+      <div class="py-[1vh] w-full">
+        <section class="flex flex-col text-left space-y-7 pl-[25rem] ">
+
+          <div class="w-full lg:w-[90%] mb-4 ml-1/3">
+            <app-input-title class="text-[2.6vh] ml-1/4">Titulo</app-input-title>
+            <div class="flex items-center">
+              <input required placeholder="Titulo" type="text" id="title" formControlName="title" name="title" [(ngModel)]="news.title"
+                     class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+            </div>
+            <div class="text-red-500 font-bold py-2" *ngIf="title?.touched && title?.invalid ">
+              <div *ngIf="title?.errors?.['required'] ">Título Obrigatório</div>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-[90%] mb-4 ml-1/3">
+            <app-input-title class="text-[2.6vh] ml-1/4">Subtitulo</app-input-title>
+            <div class="relative w-full">
+              <textarea required placeholder="Subtitulo (Maximo 300 caracteres)" id="subtitle" formControlName="subtitle" name="subtitle" [(ngModel)]="news.subtitle" maxlength="300"
+                        class="input text-left w-full h-[auto] lg:h-[10rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500"
+                        (input)="updateCharacterCount($event)"></textarea>
+              <span class="absolute bottom-2 right-2 text-gray-500">{{ subtitleCharacterCount }}/300</span>
+            </div>
+
+            <div class="text-red-500 font-bold py-2" *ngIf="subtitle?.touched && subtitle?.invalid ">
+              <div *ngIf="subtitle?.errors?.['required'] ">Subtítulo Obrigatório</div>
+            </div>
+
+          </div>
+
+          <app-input-title class="text-[2.6vh]">Imagem da Capa</app-input-title>
+          <div class="flex items-center">
+            <input type="file" #filePicker id="photo" formControlName="photo" name="photo" (change)="onImagePicked($event)" class="input w-[35.2vh] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500">
+            <app-tooltip [tooltipText]="'Utilize o seletor para escolher a imagem'"></app-tooltip>
+          </div>
+
+          <div class="w-full lg:w-[90%] mb-4 ml-1/3">
+            <app-input-title class="text-[2.6vh] ml-1/4">Corpo da Notícia</app-input-title>
+            <div class="flex items-center relative">
+              <textarea required placeholder="Corpo da Notícia (Maximo 2000 caracteres)" id="mainText" formControlName="mainText" name="mainText" [(ngModel)]="news.mainText" maxlength="2000"
+                        class="input text-left w-full h-[auto] lg:h-[30rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500"
+                        (input)="updateCharacterCount($event)"></textarea>
+              <span class="absolute bottom-2 right-2 text-gray-500">{{ mainTextCharacterCount }}/2000</span>
+            </div>
+            <div class="text-red-500 font-bold py-2" *ngIf="mainText?.touched && mainText?.invalid ">
+              <div *ngIf="mainText?.errors?.['required'] ">Corpo da Notícia Obrigatório</div>
+            </div>
+          </div>
+
+          <div class="flex justify-end pb-10">
+            <button type="submit" class="relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+              Criar Notícia
+              <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+            </button>
+          </div>
+        </section>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+  <app-footer />
