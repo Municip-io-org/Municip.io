@@ -31,8 +31,11 @@ export class MunicipalEditComponent {
     sitio: '',
     telefone: '',
     emblemPhoto: '',
-    landscapePhoto: ''
+    landscapePhoto: '',
   };
+
+  currentEmblemPhoto!: string;
+  currentLandscapePhoto!: string;
 
   emblemImg!: File;
   landscapeImg!: File;
@@ -90,8 +93,13 @@ export class MunicipalEditComponent {
     this.municipalityEditForm.patchValue({
       president: this.municipality.president,
       contact: this.municipality.contact,
-      description: this.municipality.description
+      description: this.municipality.description,
+      emblemPhoto: null,
+      landscapePhoto: null
     });
+
+    this.currentEmblemPhoto = this.municipality.emblemPhoto;
+    this.currentLandscapePhoto = this.municipality.landscapePhoto;
   }
 
   toggleEditMode() {
@@ -108,6 +116,8 @@ export class MunicipalEditComponent {
     this.toggleEditMode();
     this.initForm();
   }
+
+  
 
   get president() {
     return this.municipalityEditForm.get('president');
@@ -135,7 +145,7 @@ export class MunicipalEditComponent {
       this.emblemImg = file;
       const reader = new FileReader();
       reader.onload = () => {
-        this.municipality.emblemPhoto = reader.result as string; // Atribui o URL temporário à propriedade emblemPhoto
+        this.currentEmblemPhoto = reader.result as string; // Atribui o URL temporário à propriedade emblemPhoto
       };
       reader.readAsDataURL(file); // Lê o conteúdo do arquivo como um URL de dados
     } else {
@@ -151,7 +161,7 @@ export class MunicipalEditComponent {
       this.landscapeImg = file;
       const reader = new FileReader();
       reader.onload = () => {
-        this.municipality.landscapePhoto = reader.result as string; // Atribui o URL temporário à propriedade emblemPhoto
+        this.currentLandscapePhoto = reader.result as string; // Atribui o URL temporário à propriedade emblemPhoto
       };
       reader.readAsDataURL(file); // Lê o conteúdo do arquivo como um URL de dados
     } else {
@@ -161,27 +171,26 @@ export class MunicipalEditComponent {
 
 
   onSubmit() {
-   /* console.log(this.emblemImg.name);*/
 
   this.toggleEditMode();
 
-    console.log("ANTES DE ENVIAR Á API");
+    /*console.log("ANTES DE ENVIAR Á API");*/
 
     this.municipality.president = this.president!.value!;
     this.municipality.contact = this.contact!.value!.toString();
     this.municipality.description = this.description!.value!;
 
-    console.log(this.municipality);
+    /*console.log(this.municipality);*/
 
   this.municipalAdminAuthService.updateMunicipality(this.municipality, this.emblemImg, this.landscapeImg).subscribe(
-    (result) => {
-      console.log("RESULTADO DA API");
-      console.log(result);
-    },
-    (error) => {
-      // Lida com erros, se necessário
-      console.log(error);
-    }
+    //(result) => {
+    //  console.log("RESULTADO DA API");
+    //  console.log(result);
+    //},
+    //(error) => {
+    //  // Lida com erros, se necessário
+    //  console.log(error);
+    //}
   );
   }
 }
