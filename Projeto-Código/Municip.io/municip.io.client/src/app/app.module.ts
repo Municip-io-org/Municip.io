@@ -60,6 +60,7 @@ import { CardOutlineWhiteComponent } from './utils/card-outline-white/card-outli
 import { NextNewsComponent } from './utils/next-news/next-news.component';
 import { MunicipalEditComponent } from './munadministrator/municipal-edit/municipal-edit.component';
 import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedin.component';
+import { MunicipalEventsComponent } from './events/municipal-events/municipal-events.component';
 
 
 
@@ -117,7 +118,8 @@ import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedi
     CardOutlineWhiteComponent,
     NextNewsComponent,
     MunicipalEditComponent,
-    HeaderLoggedinComponent
+    HeaderLoggedinComponent,
+    MunicipalEventsComponent
     
   ],
   imports: [

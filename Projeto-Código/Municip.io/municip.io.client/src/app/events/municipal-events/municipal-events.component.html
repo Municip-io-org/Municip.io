@@ -1,0 +1,35 @@
+<app-header-loggedin></app-header-loggedin>
+<app-smaller-banner
+                    title="Eventos de {{municipality.name}}"
+                    image={{municipality.landscapePhoto}}
+                    ></app-smaller-banner>
+<div class="flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 space-y-20">
+
+  <section class="flex flex-wrap justify-around ">
+    <ng-container *ngFor="let event of events">
+      <app-card-outline-theme class="mb-20">
+        <div class="flex flex-col font-roboto text-left space-x-2 max-w-[28rem] text-[1.063rem] bg-white py-7 px-7">
+          <img [src]="event.image" alt="Foto do evento" class="object-cover w-[28rem] rounded-3xl" />
+          <p class="text-[0.96rem] text-right font-open-sans font-semibold">{{event.date | date: "d/MM/yyyy"}}</p>
+          <section class="flex flex-col text-municip-highlight-black ">
+            <p class="font-bold text-center text-[2rem]">{{event.title}}</p>
+            <p class=" font-bold text-ellipsis overflow-hidden line-clamp-3 ">{{event.text}}</p>
+          </section>
+          <div class="flex justify-between items-center font-open-sans font-extrabold pt-4">
+            <div class="flex items-center">
+              <img src="/assets/images/icons/user.png" alt="Notícias" class="size-10 mr-2" />
+              {{ event.nRegistrations }}/{{ event.nTotalRegistrations }} inscritos
+            </div>
+            <app-btn-municip-blue width="10rem">
+              Ver Mais
+              <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+            </app-btn-municip-blue>
+          </div>
+        </div>
+      </app-card-outline-theme>
+    </ng-container>
+  </section>
+  
+
+</div>
+<app-footer></app-footer>

@@ -27,6 +27,7 @@ import { MunicipalAdminGuard } from './utils/guard/municipal-admin.guard';
 import { MunicipalProfileComponent } from './munadministrator/municipal-profile/municipal-profile.component';
 import { CitizenOrMunicipalAdminGuard } from './utils/guard/citizen-or-municipal-admin.guard';
 import { MunicipalEditComponent } from './munadministrator/municipal-edit/municipal-edit.component';
+import { MunicipalEventsComponent } from './events/municipal-events/municipal-events.component';
 
 
 const routes: Routes = [
@@ -54,6 +55,7 @@ const routes: Routes = [
   { path: 'municipal/profile', component: MunicipalProfileComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'municipal/edit', component: MunicipalEditComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'citizen/homePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: 'events', component: MunicipalEventsComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} }
 ];
 
