@@ -17,7 +17,7 @@ transition-all duration-700 ease-in-out  decoration-sky-500"> <a routerLink="/ab
           transition-all duration-700 ease-in-out  decoration-sky-500"> <a routerLink="/termsconditions">Termos e Condições</a> </li>
     </ul>
 
-    <div class="space-x-3 flex justify-end w-1/3" *ngIf="!isSignedIn">
+    <div class="space-x-3 flex justify-end w-1/3" >
       <button routerLink="/signUp-SelectAccountType" class="border-2 border-black px-2 py-1 rounded-md
               hover:border-sky-500 transition-all duration-500 ease-in-out">
         Registar-se
@@ -27,13 +27,7 @@ transition-all duration-700 ease-in-out  decoration-sky-500"> <a routerLink="/ab
         Entrar
       </button>
     </div>
-    <div class="space-x-3 flex justify-end w-1/3" *ngIf="isSignedIn">
-      <button routerLink="/"  (click)="signOut()" class="bg-black text-white px-2 py-1 rounded-md
-          hover:bg-sky-500 transition-all duration-500 ease-in-out">
-        Terminar Sessão
-      </button>
-     
-    </div>
+
     </div>
 
 
