@@ -51,6 +51,7 @@ export class CalendarComponent implements OnInit {
               meta: {
                 event: event
               }
+              
             }
           });
         })
@@ -60,6 +61,15 @@ export class CalendarComponent implements OnInit {
         console.error(error);
       }
     );
+
+
+     this.events$.subscribe((events) => {
+      if (events.length === 0) {
+        this.activeDayIsOpen = false;
+      }
+    });
+
+
   }
 
 

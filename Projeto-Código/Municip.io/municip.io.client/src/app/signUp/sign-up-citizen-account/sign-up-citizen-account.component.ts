@@ -24,7 +24,7 @@ export class SignUpCitizenAccountComponent {
     postalCode1: '',
     postalCode2: '',
     birthDate: new Date(),
-    photo: ''
+    photo: '',
   };
 
 
@@ -40,22 +40,22 @@ export class SignUpCitizenAccountComponent {
   }
 
   constructor(private citizenAuthService: CitizenAuthService, private router: Router) {
- 
+
   }
 
   signUpCitizenForm = new FormGroup({
-    firstName: new FormControl("",[Validators.required]),
-    surname: new FormControl("",[Validators.required]),
-    email: new FormControl("", [Validators.email,Validators.required]),
-    password: new FormControl("",[Validators.required]),
-    nif: new FormControl("",[Validators.required ,Validators.pattern(/^\d{9}$/)]),
-    gender: new FormControl("",[Validators.required]),
-    municipality: new FormControl("",[Validators.required]),
-    address: new FormControl("",[Validators.required]),
-    postalCode1: new FormControl("",[Validators.required, Validators.pattern(/^\d{4}$/)]),
-    postalCode2: new FormControl("",[Validators.required, Validators.pattern(/^\d{3}$/)]),
+    firstName: new FormControl("", [Validators.required]),
+    surname: new FormControl("", [Validators.required]),
+    email: new FormControl("", [Validators.email, Validators.required]),
+    password: new FormControl("", [Validators.required]),
+    nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
+    gender: new FormControl("", [Validators.required]),
+    municipality: new FormControl("", [Validators.required]),
+    address: new FormControl("", [Validators.required]),
+    postalCode1: new FormControl("", [Validators.required, Validators.pattern(/^\d{4}$/)]),
+    postalCode2: new FormControl("", [Validators.required, Validators.pattern(/^\d{3}$/)]),
     birthDate: new FormControl(new Date(), [Validators.required]),
-    photo: new FormControl(null,[Validators.required])
+    photo: new FormControl(null, [Validators.required])
   });
 
 
@@ -104,9 +104,9 @@ export class SignUpCitizenAccountComponent {
     return this.signUpCitizenForm.get('birthDate');
   }
 
-get photo() {
+  get photo() {
 
-  return this.signUpCitizenForm.get('photo');
+    return this.signUpCitizenForm.get('photo');
 
 
   }
@@ -127,7 +127,7 @@ get photo() {
 
   onSubmit() {
 
- 
+
 
 
     this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen, this.image).subscribe(
@@ -139,7 +139,7 @@ get photo() {
       (error) => {
         console.log(error.error.errors)
         this.errors = error.error.errors;
-    }
+      }
     );
   }
 

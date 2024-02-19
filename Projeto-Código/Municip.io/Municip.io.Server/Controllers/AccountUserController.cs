@@ -108,6 +108,7 @@ namespace Municip.io.Server.Controllers
                     //add citizen to database
                     citizen.date = DateOnly.FromDateTime(DateTime.Now);
                     citizen.status = CitizenStatus.Pending;
+                    citizen.Events = new List<Event>();
                     _context.Citizens.Add(citizen);
                     await _context.SaveChangesAsync();
                     return Ok();

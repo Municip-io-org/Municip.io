@@ -51,6 +51,30 @@ namespace Municip.io.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Citizens",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    firstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nif = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    postalCode1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    postalCode2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    birthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    status = table.Column<int>(type: "int", nullable: false),
+                    date = table.Column<DateOnly>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Citizens", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Events",
                 columns: table => new
                 {
@@ -231,33 +255,27 @@ namespace Municip.io.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Citizens",
+                name: "CitizenEvent",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    firstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nif = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    postalCode1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    postalCode2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    birthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    status = table.Column<int>(type: "int", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
-                    EventId = table.Column<int>(type: "int", nullable: true)
+                    CitizensId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EventsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Citizens", x => x.Id);
+                    table.PrimaryKey("PK_CitizenEvent", x => new { x.CitizensId, x.EventsId });
                     table.ForeignKey(
-                        name: "FK_Citizens_Events_EventId",
-                        column: x => x.EventId,
+                        name: "FK_CitizenEvent_Citizens_CitizensId",
+                        column: x => x.CitizensId,
+                        principalTable: "Citizens",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CitizenEvent_Events_EventsId",
+                        column: x => x.EventsId,
                         principalTable: "Events",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -300,9 +318,9 @@ namespace Municip.io.Server.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Citizens_EventId",
-                table: "Citizens",
-                column: "EventId");
+                name: "IX_CitizenEvent_EventsId",
+                table: "CitizenEvent",
+                column: "EventsId");
         }
 
         /// <inheritdoc />
@@ -324,7 +342,7 @@ namespace Municip.io.Server.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Citizens");
+                name: "CitizenEvent");
 
             migrationBuilder.DropTable(
                 name: "MunicipalAdministrators");
@@ -337,6 +355,9 @@ namespace Municip.io.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Citizens");
 
             migrationBuilder.DropTable(
                 name: "Events");

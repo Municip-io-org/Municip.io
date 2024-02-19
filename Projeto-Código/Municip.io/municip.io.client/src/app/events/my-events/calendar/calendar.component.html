@@ -23,12 +23,15 @@
                             [viewDate]="viewDate"
                             [events]="events"
                             [locale]="locale"
-                            (beforeViewRender)="beforeWeekViewRender($event)">
+                            (beforeViewRender)="beforeWeekViewRender($event)"
+                            (eventClicked)="eventClicked($event.event)">
     </mwl-calendar-week-view>
     <mwl-calendar-day-view *ngSwitchCase="'day'"
                            [viewDate]="viewDate"
                            [events]="events"
-                           [locale]="locale">
+                           [locale]="locale"
+                           (eventClicked)="eventClicked($event.event)"
+                           >
     </mwl-calendar-day-view>
   </div>
 </div>

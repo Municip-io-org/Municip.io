@@ -37,6 +37,10 @@ namespace Municip.io.Server.Models
 
         public DateOnly date { get; set; }
 
+        // Navigation Properties
+
+        public List<Event> Events { get; set; }
+
 
     }
 }

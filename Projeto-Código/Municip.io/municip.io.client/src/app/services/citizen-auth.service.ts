@@ -24,6 +24,7 @@ export class CitizenAuthService {
       .pipe(switchMap((response: any) => {
         console.log(response);
         citizen.photo = response['data']['link'];
+        citizen.events = [];
         console.log(citizen);
         console.log(citizen.photo);
         return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
@@ -49,4 +50,5 @@ export interface Citizen {
   postalCode2: string;
   birthDate: Date
   photo?: string;
+  events?: Event[];
 }

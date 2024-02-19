@@ -22,6 +22,21 @@ namespace Municip.io.Server.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CitizenEvent", b =>
+                {
+                    b.Property<Guid>("CitizensId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("EventsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CitizensId", "EventsId");
+
+                    b.HasIndex("EventsId");
+
+                    b.ToTable("CitizenEvent");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -234,9 +249,6 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EventId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -279,8 +291,6 @@ namespace Municip.io.Server.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EventId");
 
                     b.ToTable("Citizens");
                 });
@@ -450,6 +460,21 @@ namespace Municip.io.Server.Migrations
                     b.ToTable("Municipalities");
                 });
 
+            modelBuilder.Entity("CitizenEvent", b =>
+                {
+                    b.HasOne("Municip.io.Server.Models.Citizen", null)
+                        .WithMany()
+                        .HasForeignKey("CitizensId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Municip.io.Server.Models.Event", null)
+                        .WithMany()
+                        .HasForeignKey("EventsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -499,18 +524,6 @@ namespace Municip.io.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Municip.io.Server.Models.Citizen", b =>
-                {
-                    b.HasOne("Municip.io.Server.Models.Event", null)
-                        .WithMany("Citizens")
-                        .HasForeignKey("EventId");
-                });
-
-            modelBuilder.Entity("Municip.io.Server.Models.Event", b =>
-                {
-                    b.Navigation("Citizens");
                 });
 #pragma warning restore 612, 618
         }

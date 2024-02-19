@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 
@@ -46,10 +47,7 @@ namespace Municip.io.Server.Controllers
             if (citizen != null && evento != null && evento.Municipality == citizen.Municipality &&
                 (evento.Citizens == null || evento.Citizens.Find(c => c.Email == email) == null))
             {
-                if (evento.Citizens == null)
-                {
-                    evento.Citizens = new List<Citizen>();
-                }
+                evento.Citizens ??= [];
 
                 if (evento.Citizens.Count < evento.Capacity)
                 {
@@ -82,6 +80,45 @@ namespace Municip.io.Server.Controllers
                 }
             }
         }
+
+
+        //rmove a citizen from an event
+        [HttpPost("RemoveCitizen")]
+        public IActionResult RemoveCitizen(int eventId, string email)
+        {
+            var citizen = _context.Citizens.FirstOrDefault(c => c.Email == email);
+            var evento = _context.Events.Include(e=> e.Citizens).FirstOrDefault(e => e.Id == eventId);
+
+            if (citizen != null && evento != null && evento.Municipality == citizen.Municipality &&
+                               (evento.Citizens != null && evento.Citizens.Find(c => c.Email == email) != null))
+            {
+                evento.Citizens.Remove(citizen);
+                _context.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                if (citizen == null)
+                {
+                    return BadRequest(new { message = "Citizen not found" });
+                }
+                else if (evento == null)
+                {
+                    return BadRequest(new { message = "Event not found" });
+                }
+                else if (evento.Municipality != citizen.Municipality)
+                {
+                    return BadRequest(new { message = "Citizen does not belong to the municipality" });
+                }
+                else
+                {
+                    return BadRequest(new { message = "Citizen is not enrolled" });
+                }
+            }
+        }
+
+
+
 
         [HttpGet("GetEventsByCitizen")]
         public IActionResult GetEventsByCitizen(string email)
