@@ -36,5 +36,11 @@ namespace Municip.io.Server.Models
         public CitizenStatus status { get; set; }
 
         public DateOnly date { get; set; }
+
+        // Navigation Properties
+
+        public List<Event> Events { get; set; }
+
+
     }
 }

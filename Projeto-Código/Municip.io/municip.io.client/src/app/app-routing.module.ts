@@ -27,6 +27,7 @@ import { MunicipalAdminGuard } from './utils/guard/municipal-admin.guard';
 import { MunicipalProfileComponent } from './munadministrator/municipal-profile/municipal-profile.component';
 import { CitizenOrMunicipalAdminGuard } from './utils/guard/citizen-or-municipal-admin.guard';
 import { MunicipalEditComponent } from './munadministrator/municipal-edit/municipal-edit.component';
+import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
 
 
 const routes: Routes = [
@@ -45,7 +46,7 @@ const routes: Routes = [
   { path: 'admindashboard', component: AdmindashboardComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
   { path: 'transports', component: TransportsMainComponent, data: {} },
-  { path: 'transports/schedules', component: SchedulesComponent, data: {}},
+  { path: 'transports/schedules', component: SchedulesComponent, data: {} },
   { path: 'munadmin-dashboard/:municipalName', component: MunAdmindashboardComponent, data: {} },
   { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} },
   { path: 'transports/stops', component: StopsPageComponent, data: {} },
@@ -54,7 +55,8 @@ const routes: Routes = [
   { path: 'municipal/profile', component: MunicipalProfileComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'municipal/edit', component: MunicipalEditComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'citizen/homePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
-  { path: 'accessDenied', component: AccessDeniedComponent, data: {} }
+  { path: 'accessDenied', component: AccessDeniedComponent, data: {} },
+  { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] }
 ];
 
 @NgModule({
