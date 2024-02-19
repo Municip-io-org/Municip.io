@@ -1,0 +1,93 @@
+
+
+<form [formGroup]="eventForm" (ngSubmit)="OnSubmit()">
+  <div *ngIf="errors" class=" text-red-500 text-sm font-bold space-y-2 text-start">
+    <div *ngFor="let error of errors">
+      <p>{{error}}</p>
+    </div>
+  </div>
+
+
+  <div class="flex items-center justify-between">
+    <div class="w-full lg:w-5/12 mb-4 h-32">
+      <app-input-title class="text-[2.6vh]">Título</app-input-title>
+      <div class="flex items-center">
+        <input required placeholder="Título do evento" type="text" id="title" formControlName="title" name="title"
+               class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+      </div>
+      <div class="text-red-500 font-bold py-2" *ngIf="title?.touched && title?.invalid ">
+        <div *ngIf="title?.errors?.['required'] ">Título Obrigatório</div>
+      </div>
+    </div>
+    <div class="w-full lg:w-5/12 mb-4 h-32">
+      <app-input-title class="text-[2.6vh]">Número máximo de participantes</app-input-title>
+      <div class="flex items-center">
+        <input required placeholder="Capacidade do evento" type="number" id="capacity" formControlName="capacity" name="capacity"
+               class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+      </div>
+      <div class="text-red-500 font-bold py-2" *ngIf="capacity?.touched && capacity?.invalid">
+        <div *ngIf="capacity?.errors?.['required'] ">Capacidade Obrigatória</div>
+      </div>
+    </div>
+  </div>
+  <div class="flex items-center justify-between">
+    <div class="w-full lg:w-5/12 mb-4 h-32">
+      <app-input-title class="text-[2.6vh]">Localização</app-input-title>
+      <div class="flex items-center">
+        <input required placeholder="Localização do evento" type="text" id="local" formControlName="local" name="local"
+               class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+      </div>
+      <div class="text-red-500 font-bold py-2" *ngIf="local?.touched && local?.invalid ">
+        <div *ngIf="local?.errors?.['required'] ">Local Obrigatório</div>
+      </div>
+    </div>
+    <div class="w-full lg:w-5/12 mb-4 h-32">
+      <app-input-title class="text-[2.6vh]">Foto</app-input-title>
+      <div class="flex items-center">
+        <input type="file" #filePicker id="image" formControlName="image" name="image"
+               (change)="onImagePicked($event)" accept="image/*"
+               class="input w-full">
+        <app-tooltip [tooltipText]="'Utilize o seletor para encontrar a sua foto'"></app-tooltip>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="w-full mb-4">
+    <app-input-title class="text-[2.6vh]">Descrição</app-input-title>
+    <div class="flex items-center">
+      <textarea required placeholder="Descrição do evento" id="description" formControlName="description" name="description"
+                class="input w-full h-30 lg:h-60 focus-visible:ring-municip-blue focus-visible:ring-[1.5px]
+                focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500
+                resize-none">
+      </textarea>
+    </div>
+    <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">
+      <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatório</div>
+    </div>
+  </div>
+
+
+  <div date-rangepicker class="flex items-center">
+    <div class="relative">
+      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+        </svg>
+      </div>
+      <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+    </div>
+    <span class="mx-4 text-gray-500">to</span>
+    <div class="relative">
+      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+        </svg>
+      </div>
+      <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+    </div>
+  </div>
+
+
+</form>
