@@ -9,7 +9,7 @@ export class StatisticalHomePageCardComponent {
   @Input() iconSrc: string = '';
   @Input() iconAlt: string = '';
   @Input() title: string = '';
-  @Input() value: string = '';
+  @Input() value: string = ''; 
   @Input() buttonText: string = '';
 
   @Output() buttonClick: EventEmitter<void> = new EventEmitter<void>();

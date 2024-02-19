@@ -15,13 +15,13 @@
           <div class=" text-red-500 text-sm font-bold space-y-2 text-start">
               <p>{{error}}</p>
           </div>
-          <input placeholder="Email" type="email" id="email" formControlName="email" name="email" class="input w-[20rem]
-                 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-                 transition-all duration-700 ease-in-out  decoration-sky-500">
+          <input placeholder="Email" type="email" id="email" formControlName="email" name="email"
+                 class="input w-[20rem]">
           <div class="flex flex-col">
             <app-input-title class="text-[2.4vh]"></app-input-title>
-            <input required placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="user.password" class="input w-[20rem]
-focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out  decoration-sky-500">        <!--ngmodel pode sair-->
+            <input required placeholder="Introduza a sua palavra-passe" type="password" id="password"
+                   formControlName="password" name="password" [(ngModel)]="user.password"
+                   class="input w-[20rem]" />
           </div>
           <button type="submit" class="h-auto w-[20rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
                   border-0 py-3 focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">

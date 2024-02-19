@@ -20,6 +20,7 @@ export class StopsPageComponent implements OnInit {
 
     this.service.getMunicipality().toPromise().then((municipality) => {
       this.municipality = municipality || '';
+      console.log(municipality)
     });
   }
 }

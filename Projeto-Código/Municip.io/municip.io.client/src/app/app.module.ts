@@ -53,6 +53,18 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { ProfileBannerComponent } from './utils/profile-banner/profile-banner.component';
 import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
 import { StatisticalHomePageCardComponent } from './utils/statistical-home-page-card/statistical-home-page-card.component';
+import { MunicipalProfileComponent } from './munadministrator/municipal-profile/municipal-profile.component';
+import { NextEventsComponent } from './utils/next-events/next-events.component';
+import { GeneralInfoComponent } from './utils/general-info/general-info.component';
+import { CardOutlineWhiteComponent } from './utils/card-outline-white/card-outline-white.component';
+import { NextNewsComponent } from './utils/next-news/next-news.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarComponent } from './events/my-events/calendar/calendar.component';
+import { CalendarHeaderComponent } from './events/my-events/calendar-header/calendar-header.component';
+import { MunicipalEditComponent } from './munadministrator/municipal-edit/municipal-edit.component';
+import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedin.component';
+import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
 
 import { NewsListComponent } from './news/news-list/news-list.component';
 import { NewsCardComponent } from './news/news-card/news-card.component';
@@ -113,14 +125,28 @@ import { NewsCreateComponent } from './news/news-create/news-create.component';
     NewsListComponent,
     NewsCardComponent,
     
-    NewsCreateComponent
+    NewsCreateComponent,
+    MunicipalProfileComponent,
+    NextEventsComponent,
+    GeneralInfoComponent,
+    CardOutlineWhiteComponent,
+    NextNewsComponent,
+    CalendarComponent,
+    CalendarHeaderComponent,
+    MunicipalEditComponent,
+    HeaderLoggedinComponent,
+    CalendarPageComponent
     
   ],
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule, BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule, GoogleMapsModule
+    ReactiveFormsModule, GoogleMapsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [
     MunicipalityGuard,

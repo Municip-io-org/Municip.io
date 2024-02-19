@@ -14,7 +14,6 @@ export class MunAdminHomePageComponent {
 
 
   anyUser: any;
-  role: string = "";
 
   user: MunicipalAdministrator = {
     firstName: '',
@@ -29,6 +28,7 @@ export class MunAdminHomePageComponent {
     areaha: '0',
     codigo: '0',
     codigoine: '0',
+    codigopostal: 'Sem código postal',
     contact: 'Sem contato',
     description: 'Sem descrição',
     descpstal: 'Sem descrição postal',
@@ -69,17 +69,6 @@ export class MunAdminHomePageComponent {
               }
             )
           });
-      },
-      error => {
-        console.error(error);
-      }
-    );
-
-    this.userAuthService.getUserRole().subscribe(
-      res => {
-        if (res.role == Roles.Municipal) {
-          this.role = res.role;
-        }
       },
       error => {
         console.error(error);

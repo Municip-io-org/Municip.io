@@ -58,7 +58,6 @@ namespace Municip.io.Server.Migrations
                     firstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nif = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -76,6 +75,28 @@ namespace Municip.io.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartRegistration = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndRegistration = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Local = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MunicipalAdministrators",
                 columns: table => new
                 {
@@ -83,7 +104,6 @@ namespace Municip.io.Server.Migrations
                     firstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     photo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -234,6 +254,30 @@ namespace Municip.io.Server.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CitizenEvent",
+                columns: table => new
+                {
+                    CitizensId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EventsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CitizenEvent", x => new { x.CitizensId, x.EventsId });
+                    table.ForeignKey(
+                        name: "FK_CitizenEvent_Citizens_CitizensId",
+                        column: x => x.CitizensId,
+                        principalTable: "Citizens",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CitizenEvent_Events_EventsId",
+                        column: x => x.EventsId,
+                        principalTable: "Events",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -272,6 +316,11 @@ namespace Municip.io.Server.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CitizenEvent_EventsId",
+                table: "CitizenEvent",
+                column: "EventsId");
         }
 
         /// <inheritdoc />
@@ -293,7 +342,7 @@ namespace Municip.io.Server.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Citizens");
+                name: "CitizenEvent");
 
             migrationBuilder.DropTable(
                 name: "MunicipalAdministrators");
@@ -306,6 +355,12 @@ namespace Municip.io.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Citizens");
+
+            migrationBuilder.DropTable(
+                name: "Events");
         }
     }
 }

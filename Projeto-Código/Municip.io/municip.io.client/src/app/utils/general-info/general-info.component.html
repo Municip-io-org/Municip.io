@@ -1,0 +1,13 @@
+<div class="flex flex-col items-start font-inter">
+  <section class="flex text-[2rem] text-left space-x-2 ">
+    <div class="flex justify-start items-center">
+      <img [src]="iconSrc" [alt]="iconAlt" class="object-cover h-16" />
+    </div>
+    <div class="text-left">
+      <span class="font-bold text-municip-normal-black text-[2rem]">{{ title | firstLetterUpperCase }}</span>
+      <p class="text-municip-gray text-[1.2rem] capitalize">
+        {{ text }}
+      </p>
+    </div>
+  </section>
+</div>

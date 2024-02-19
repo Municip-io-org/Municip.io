@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, Input, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
 import { BoundsService } from '../bounds.service';
 
@@ -7,20 +7,23 @@ import { BoundsService } from '../bounds.service';
   templateUrl: './municipalitymap.component.html',
   styleUrls: ['./municipalitymap.component.css']
 })
-export class MunicipalitymapComponent implements AfterViewInit {
+export class MunicipalitymapComponent {
 
-  constructor(private boundsService: BoundsService) { }
+
+  constructor(private boundsService: BoundsService, private cdr: ChangeDetectorRef) { }
 
   @ViewChild(GoogleMap, { static: false }) googleMap: GoogleMap | undefined;
 
-  municipalityName: string = '';
+  @Input() municipalityName: string = '';
+
+  showMap: boolean = true;
   zoom = 10;
   center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   options: google.maps.MapOptions = {
     mapTypeId: 'hybrid',
     zoomControl: true,
     scrollwheel: false,
-    disableDoubleClickZoom: true,
+    disableDoubleClickZoom: false,
     draggable: true,
     restriction: null,
     minZoom: 10,
@@ -30,20 +33,24 @@ export class MunicipalitymapComponent implements AfterViewInit {
     rotateControl: false
   };
 
-  showMap: boolean = true;
+  infoWindow = new google.maps.InfoWindow();
+  markers: google.maps.Marker[] = []; // Armazenar marcadores em uma matriz
 
-  ngAfterViewInit() {
-    this.municipalityName = 'Montijo';
-    if (this.googleMap) {
-      console.log("ENTROU");
-      this.setBoundsAndCenterForMunicipality(this.municipalityName);
+
+  
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['municipalityName'] && changes['municipalityName'].currentValue) {
+      this.setBoundsAndCenterForMunicipality(changes['municipalityName'].currentValue);
+      this.showMap = true;
     }
+
   }
 
   setBoundsAndCenterForMunicipality(municipalityName: string) {
+
     this.boundsService.getMunicipalityBounds(municipalityName).subscribe(bounds => {
-      if (bounds) {
-        console.log("Entra no if do setBoundsAndCenterForMunicipality");
+      if (bounds && this.googleMap) {
         const newRestriction: google.maps.MapRestriction = {
           latLngBounds: {
             north: bounds.north,
@@ -60,20 +67,21 @@ export class MunicipalitymapComponent implements AfterViewInit {
         const centerLng = (bounds.east + bounds.west) / 2;
         this.center = { lat: centerLat, lng: centerLng };
 
-        if (this.googleMap) {
-          this.googleMap.options = this.options;
-          this.googleMap.center = this.center;
-        }
+        this.googleMap.options = this.options;
+        this.googleMap.center = this.center;
+
+
+
+
+
       } else {
         this.showMap = false;
-        console.error('DEU ERRO:', municipalityName);
+        console.error('DEU ERRO:', this.municipalityName);
       }
     }, error => {
       this.showMap = false;
       console.error('Erro ao obter os limites do município:', error);
-
     });
   }
-
 
 }

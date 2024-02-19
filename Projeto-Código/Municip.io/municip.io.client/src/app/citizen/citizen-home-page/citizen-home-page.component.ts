@@ -22,22 +22,7 @@ export class CitizenHomePageComponent {
     { image: '/assets/images/carnaval.jpg', title: 'Event 5', date: new Date(2000, 0, 15) },
   ];
 
-  public startIndex = 0;
-
-  moveLeft() {
-    if (this.startIndex > 0) {
-      this.startIndex--;
-    }
-  }
-
-  moveRight() {
-    if (this.startIndex < this.events.length - 4) {
-      this.startIndex++;
-    }
-  }
-
   anyUser: any;
-  role: string = "";
 
   user: Citizen = {
     firstName: 'Sem Nome',
@@ -60,6 +45,7 @@ export class CitizenHomePageComponent {
     codigo: '0',
     codigoine: '0',
     contact: 'Sem contato',
+    codigopostal: 'Sem código postal',
     description: 'Sem descrição',
     descpstal: 'Sem descrição postal',
     distrito: 'Sem distrito',
@@ -104,19 +90,5 @@ export class CitizenHomePageComponent {
         console.error(error);
       }
     );
-
-    this.userAuthService.getUserRole().subscribe(
-      res => {
-        if (res.role == Roles.Citizen) {
-          this.role = res.role;
-        }
-      },
-      error => {
-        console.error(error);
-      }
-    );
-
-
-
   }
 }
