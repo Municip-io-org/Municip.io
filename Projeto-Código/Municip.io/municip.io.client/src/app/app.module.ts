@@ -67,6 +67,7 @@ import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedi
 import { MunicipalEventsComponent } from './events/municipal-events/municipal-events.component';
 import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
 import { BlackBtnIconTextComponent } from './utils/buttons/black-btn-icon-text/black-btn-icon-text.component';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 
 
@@ -141,6 +142,7 @@ import { BlackBtnIconTextComponent } from './utils/buttons/black-btn-icon-text/b
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    InfiniteScrollModule,
   ],
   providers: [
     MunicipalityGuard,

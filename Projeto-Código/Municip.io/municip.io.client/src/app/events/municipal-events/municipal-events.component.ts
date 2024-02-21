@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { EventsService, Event } from '../../services/events/events.service';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 @Component({
   selector: 'app-municipal-events',
@@ -40,6 +41,7 @@ export class MunicipalEventsComponent {
   isLoading = false;
   currentPage = 1;
   itemsPerPage = 5;
+  
 
   constructor(private userAuthService: UserAuthService, private eventsService: EventsService) { }
 
