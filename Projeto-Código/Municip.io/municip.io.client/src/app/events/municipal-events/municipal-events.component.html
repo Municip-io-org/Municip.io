@@ -3,9 +3,19 @@
                     title="Eventos de {{municipality.name}}"
                     image={{municipality.landscapePhoto}}
                     ></app-smaller-banner>
-<div class="flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 space-y-20">
-
-  <div infiniteScroll
+<div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]">
+  <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] flex justify-center items-center">
+    <app-black-btn-icon-text altImage="Criar evento"
+                             image="/assets/images/icons/plus-white.png">
+      Criar Eventos
+    </app-black-btn-icon-text>
+  </div>
+  <div *ngIf="events.length === 0"
+       class="flex justify-center items-center text-municip-normal-black grow ">
+    <p class="text-[3rem] font-semibold">Não há eventos.</p>
+  </div>
+  <div *ngIf="events.length > 0"
+      infiniteScroll
       [infiniteScrollDistance]="0"
       [infiniteScrollThrottle]="500"
       (scrolled)="onScrollDown()">
@@ -36,8 +46,7 @@
             <div class="flex justify-between items-center font-open-sans font-extrabold pt-4">
               <div class="flex items-center">
                 <img src="/assets/images/icons/user.png" alt="Notícias" class="size-10 mr-2" />
-                <!--{{ event.nRegistrations }}/-->
-                {{ event.capacity }} inscritos
+               {{ event.nRegistrations }}/{{ event.capacity }} inscritos
               </div>
               <app-btn-municip-blue width="10rem">
                 Ver Mais
@@ -50,4 +59,4 @@
     </section>
   </div>
 </div>
-<app-footer></app-footer>
+<app-footer class="flex-shrink-0"></app-footer>
