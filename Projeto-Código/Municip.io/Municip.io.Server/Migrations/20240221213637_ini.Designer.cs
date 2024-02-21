@@ -12,8 +12,8 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240221105412_nova")]
-    partial class nova
+    [Migration("20240221213637_ini")]
+    partial class ini
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -340,6 +340,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("nRegistrations")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Municip.io.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class ini : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -82,6 +82,7 @@ namespace Municip.io.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
+                    nRegistrations = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StartRegistration = table.Column<DateTime>(type: "datetime2", nullable: false),

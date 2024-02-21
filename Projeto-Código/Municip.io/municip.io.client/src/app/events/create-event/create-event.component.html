@@ -54,25 +54,26 @@
         </div>
       </div>
 
-      <div class="w-4/6">
+      <div class="w-1/2">
         <div>
           <app-input-title class="text-[2.6vh]">Hora de Início</app-input-title>
-          <div class="flex items-center space-x-5">
+          <div class="flex items-center justify-between
+               input w-full h-12 lg:h-14
+               ">
             <input placeholder="Início do evento" formControlName="startHour"
                    [ngxTimepicker]="startHour" [format]="24" readonly
-                   class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px]
-focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500">
+                   class="w-4/6 h-full bg-municip-blank-gray focus:outline-none">
             <ngx-material-timepicker-toggle [for]="startHour"></ngx-material-timepicker-toggle>
             <ngx-material-timepicker #startHour></ngx-material-timepicker>
           </div>
         </div>
         <div>
           <app-input-title class="text-[2.6vh]">Hora de Fim</app-input-title>
-          <div class="flex items-center space-x-5">
+          <div class="flex items-center justify-between
+               input w-full h-12 lg:h-14">
             <input placeholder="Fim do evento" formControlName="endHour"
                    [ngxTimepicker]="endHour" [format]="24" readonly
-                   class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px]
-focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500">
+                   class="w-4/6 h-full bg-municip-blank-gray focus:outline-none">
             <ngx-material-timepicker-toggle [for]="endHour"></ngx-material-timepicker-toggle>
             <ngx-material-timepicker #endHour></ngx-material-timepicker>
           </div>  

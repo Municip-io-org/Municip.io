@@ -81,11 +81,11 @@ export class CreateEventComponent implements OnInit {
   }
 
   get startRegistrationDate() {
-    return this.eventForm.get('startRegistration');
+    return this.eventForm.get('startRegistrationDate');
   }
 
   get endRegistrationDate() {
-    return this.eventForm.get('endRegistration');
+    return this.eventForm.get('endRegistrationDate');
   }
 
   get local() {
