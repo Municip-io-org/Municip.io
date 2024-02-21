@@ -66,6 +66,7 @@ import { MunicipalEditComponent } from './munadministrator/municipal-edit/munici
 import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedin.component';
 import { MunicipalEventsComponent } from './events/municipal-events/municipal-events.component';
 import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
+import { BlackBtnIconTextComponent } from './utils/buttons/black-btn-icon-text/black-btn-icon-text.component';
 
 
 
@@ -127,7 +128,8 @@ import { CalendarPageComponent } from './events/my-events/calendar-page/calendar
     MunicipalEditComponent,
     HeaderLoggedinComponent,
     MunicipalEventsComponent,
-    CalendarPageComponent
+    CalendarPageComponent,
+    BlackBtnIconTextComponent
     
   ],
   imports: [

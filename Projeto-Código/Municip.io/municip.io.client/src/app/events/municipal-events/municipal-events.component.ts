@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Municipality } from '../../services/municipal-admin-auth.service';
-import { UserAuthService } from '../../services/user-auth.service';
+import { Roles, UserAuthService } from '../../services/user-auth.service';
 
 @Component({
   selector: 'app-municipal-events',
@@ -33,6 +33,7 @@ export class MunicipalEventsComponent {
   };
 
   user: any;
+  isMunAdmin: boolean = false;
 
   public events = [
     {
@@ -75,9 +76,17 @@ export class MunicipalEventsComponent {
         let anyUser: any;
         anyUser = res;
         this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
-          (res: any) => {
+          async (res: any) => {
             this.user = res;
             console.log("user", this.user);
+
+
+            const userRole = await this.userAuthService.getUserRole().toPromise();
+            console.log(userRole);
+            if (userRole!.role === Roles.Municipal) {
+              console.log("É admin municipal")
+              this.isMunAdmin = true;
+            }
 
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: any) => {
