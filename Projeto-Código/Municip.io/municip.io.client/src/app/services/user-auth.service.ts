@@ -139,7 +139,7 @@ export class UserAuthService {
     const municipalityData = this.getUserMunicipalityFromStorage();
     if (municipalityData) {
       console.log("Já tem o municipio!!!!??");
-      return of(municipalityData);
+      return of(municipalityData.municipality);
     } else {
       console.log("VAI BUSCAR Á API O MUNICIPIO");
       return this.getUserData().pipe(
@@ -149,7 +149,6 @@ export class UserAuthService {
             catchError(_ => of(null))
           )
         ),
-        // Retorna somente a propriedade 'municipality' do objeto retornado por getInfoByEmail
         map(result => result?.municipality)
       );
     }
