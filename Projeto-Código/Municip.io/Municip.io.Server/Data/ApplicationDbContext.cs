@@ -16,6 +16,8 @@ namespace Municip.io.Server.Data
 
         public DbSet<Municipality> Municipalities { get; set; }
 
+        public DbSet<Event> Events { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
                 base(options)
             { }

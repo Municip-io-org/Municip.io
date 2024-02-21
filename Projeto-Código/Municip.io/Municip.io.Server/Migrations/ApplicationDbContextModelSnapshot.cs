@@ -22,6 +22,21 @@ namespace Municip.io.Server.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CitizenEvent", b =>
+                {
+                    b.Property<Guid>("CitizensId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("EventsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CitizensId", "EventsId");
+
+                    b.HasIndex("EventsId");
+
+                    b.ToTable("CitizenEvent");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -280,6 +295,54 @@ namespace Municip.io.Server.Migrations
                     b.ToTable("Citizens");
                 });
 
+            modelBuilder.Entity("Municip.io.Server.Models.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndRegistration")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Local")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Municipality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartRegistration")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
+                });
+
             modelBuilder.Entity("Municip.io.Server.Models.MunicipalAdministrator", b =>
                 {
                     b.Property<Guid>("Id")
@@ -395,6 +458,21 @@ namespace Municip.io.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Municipalities");
+                });
+
+            modelBuilder.Entity("CitizenEvent", b =>
+                {
+                    b.HasOne("Municip.io.Server.Models.Citizen", null)
+                        .WithMany()
+                        .HasForeignKey("CitizensId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Municip.io.Server.Models.Event", null)
+                        .WithMany()
+                        .HasForeignKey("EventsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
