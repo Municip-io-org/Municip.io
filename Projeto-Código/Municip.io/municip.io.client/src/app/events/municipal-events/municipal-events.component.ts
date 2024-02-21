@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
+import { EventsService, Event } from '../../services/events/events.service';
 
 @Component({
   selector: 'app-municipal-events',
@@ -35,40 +36,12 @@ export class MunicipalEventsComponent {
   user: any;
   isMunAdmin: boolean = false;
 
-  public events = [
-    {
-      image: '/assets/images/carnaval.jpg', title: 'Event 1', date: new Date(2000, 0, 11),
-      nRegistrations: 32,
-      nTotalRegistrations: 40,
-      text: 'Mostra fotográfica patente na Galeria de Exposições e no Espaço João Paulo Cotrim, que apela ao respeito pela diferença e ao combate ao racismo, sendo o resultado do palmilhar daquele território por Luís Ramos.' 
-    },
-    {
-      image: '/assets/images/carnaval.jpg', title: 'Event 2', date: new Date(2000, 0, 12),
-      nRegistrations: 32,
-      nTotalRegistrations: 60,
-      text: 'Mostra fotográfica patente na Galeria de Exposições e no Espaço João Paulo Cotrim, que apela ao respeito pela diferença e ao combate ao racismo, sendo o resultado do palmilhar daquele território por Luís Ramos.'
-    },
-    {
-      image: '/assets/images/carnaval.jpg', title: 'Event 3', date: new Date(2000, 0, 13),
-      nRegistrations: 32,
-      nTotalRegistrations: 40,
-      text: 'Mostra fotográfica patente na Galeria de Exposições e no Espaço João Paulo Cotrim, que apela ao respeito pela diferença e ao combate ao racismo, sendo o resultado do palmilhar daquele território por Luís Ramos.'
-    },
-    {
-      image: '/assets/images/carnaval.jpg', title: 'Event 4', date: new Date(2000, 0, 14),
-      nRegistrations: 32,
-      nTotalRegistrations: 40,
-      text: 'Mostra fotográfica patente na Galeria de Exposições e no Espaço João Paulo Cotrim, que apela ao respeito pela diferença e ao combate ao racismo, sendo o resultado do palmilhar daquele território por Luís Ramos.'
-    },
-    {
-      image: '/assets/images/carnaval.jpg', title: 'Event 5', date: new Date(2000, 0, 15),
-      nRegistrations: 32,
-      nTotalRegistrations: 40,
-      text: 'Mostra fotográfica patente na Galeria de Exposições e no Espaço João Paulo Cotrim, que apela ao respeito pela diferença e ao combate ao racismo, sendo o resultado do palmilhar daquele território por Luís Ramos.'
-    },
-  ];
+  events: Event[] = [];
+  isLoading = false;
+  currentPage = 1;
+  itemsPerPage = 5;
 
-  constructor(private userAuthService: UserAuthService) { }
+  constructor(private userAuthService: UserAuthService, private eventsService: EventsService) { }
 
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
@@ -94,6 +67,8 @@ export class MunicipalEventsComponent {
 
                 console.log("municipality", this.municipality);
 
+
+                this.loadData();
               },
               error => {
                 console.error(error);
@@ -111,4 +86,27 @@ export class MunicipalEventsComponent {
     );
   }
 
+  toggleLoading() { this.isLoading = !this.isLoading; }
+
+  loadData() {
+    this.toggleLoading();
+    this.eventsService.getItems(this.currentPage, this.itemsPerPage).subscribe({
+      next: res => this.events = res,
+      error: err => console.log(err),
+      complete: () => this.toggleLoading(),
+    });
+  }
+
+  onScrollDown() {
+    this.currentPage++;
+
+    this.toggleLoading();
+    this.eventsService.getItems(this.currentPage, this.itemsPerPage).subscribe({
+      next: res => this.events = [...this.events, ...res],
+      error: err => console.log(err),
+      complete: () => this.toggleLoading(),
+    });
+  } 
+
+  
 }

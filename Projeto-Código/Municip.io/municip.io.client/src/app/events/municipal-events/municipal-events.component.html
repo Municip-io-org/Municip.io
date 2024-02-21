@@ -24,15 +24,16 @@
             </button>
           </div>
           <img [src]="event.image" alt="Foto do evento" class="object-cover w-[28rem] rounded-3xl" />
-          <p class="text-[0.96rem] text-right font-open-sans font-semibold">{{event.date | date: "d/MM/yyyy"}}</p>
+          <p class="text-[0.96rem] text-right font-open-sans font-semibold">{{event.endDate | date: "d/MM/yyyy"}}</p>
           <section class="flex flex-col text-municip-highlight-black ">
             <p class="font-bold text-center text-[2rem]">{{event.title}}</p>
-            <p class=" font-bold text-ellipsis overflow-hidden line-clamp-3 ">{{event.text}}</p>
+            <p class=" font-bold text-ellipsis overflow-hidden line-clamp-3 ">{{event.description}}</p>
           </section>
           <div class="flex justify-between items-center font-open-sans font-extrabold pt-4">
             <div class="flex items-center">
               <img src="/assets/images/icons/user.png" alt="Notícias" class="size-10 mr-2" />
-              {{ event.nRegistrations }}/{{ event.nTotalRegistrations }} inscritos
+              <!--{{ event.nRegistrations }}/-->
+              {{ event.capacity }} inscritos
             </div>
             <app-btn-municip-blue width="10rem">
               Ver Mais
