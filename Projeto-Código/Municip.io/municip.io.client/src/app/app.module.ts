@@ -64,12 +64,15 @@ import { CalendarComponent } from './events/my-events/calendar/calendar.componen
 import { CalendarHeaderComponent } from './events/my-events/calendar-header/calendar-header.component';
 import { MunicipalEditComponent } from './munadministrator/municipal-edit/municipal-edit.component';
 import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedin.component';
+import { MunicipalEventsComponent } from './events/municipal-events/municipal-events.component';
 import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
 import { CreateEventComponent } from './events/create-event/create-event.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { BlackBtnIconTextComponent } from './utils/buttons/black-btn-icon-text/black-btn-icon-text.component';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
@@ -138,6 +141,9 @@ registerLocaleData(localePt, 'pt-PT');
     HeaderLoggedinComponent,
     CalendarPageComponent,
     CreateEventComponent,
+    MunicipalEventsComponent,
+    CalendarPageComponent,
+    BlackBtnIconTextComponent
     
   ],
   imports: [
@@ -151,7 +157,8 @@ registerLocaleData(localePt, 'pt-PT');
     }),
 
     NgxMaterialTimepickerModule.setOpts('pt-PT'),
-    MatFormFieldModule, MatInputModule, MatDatepickerModule
+    MatFormFieldModule, MatInputModule, MatDatepickerModule,
+    InfiniteScrollModule,
   ],
   providers: [
     MunicipalityGuard,

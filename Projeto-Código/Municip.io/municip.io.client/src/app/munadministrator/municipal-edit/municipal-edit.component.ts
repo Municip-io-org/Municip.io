@@ -40,7 +40,6 @@ export class MunicipalEditComponent {
   emblemImg!: File;
   landscapeImg!: File;
 
-  anyUser: any;
   user: any;
 
   editMode: boolean = false;
@@ -58,8 +57,8 @@ export class MunicipalEditComponent {
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
       res => {
-        this.anyUser = res;
-        this.userAuthService.getInfoByEmail(this.anyUser.email).subscribe(
+        let anyUser = res;
+        this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
           (res: any) => {
             this.user = res;
             console.log("user", this.user);

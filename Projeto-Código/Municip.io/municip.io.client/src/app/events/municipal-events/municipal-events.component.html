@@ -1,0 +1,62 @@
+<app-header-loggedin></app-header-loggedin>
+<app-smaller-banner
+                    title="Eventos de {{municipality.name}}"
+                    image={{municipality.landscapePhoto}}
+                    ></app-smaller-banner>
+<div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]">
+  <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] flex justify-center items-center">
+    <app-black-btn-icon-text altImage="Criar evento"
+                             image="/assets/images/icons/plus-white.png">
+      Criar Eventos
+    </app-black-btn-icon-text>
+  </div>
+  <div *ngIf="events.length === 0"
+       class="flex justify-center items-center text-municip-normal-black grow ">
+    <p class="text-[3rem] font-semibold">Não há eventos.</p>
+  </div>
+  <div *ngIf="events.length > 0"
+      infiniteScroll
+      [infiniteScrollDistance]="0"
+      [infiniteScrollThrottle]="500"
+      (scrolled)="onScrollDown()">
+    <section class="flex flex-wrap justify-around ">
+      <ng-container *ngFor="let event of events">
+        <app-card-outline-theme class="mb-20">
+          <div class="relative flex flex-col font-roboto text-left space-x-2 max-w-[28rem] text-[1.063rem] bg-white py-7 px-7">
+            <div *ngIf="isMunAdmin" class="absolute -top-3 -left-3">
+              <app-black-btn-icon-text altImage="Editar evento"
+                                       image="/assets/images/icons/pencil-white.png">
+                Editar
+              </app-black-btn-icon-text>
+            </div>
+            <div *ngIf="isMunAdmin" class="absolute -top-3 -right-3">
+              <button alt="Apagar evento" type="button"
+                      class=" text-municip-blank bg-municip-highlight-black flex justify-center items-center space-x-2 p-1 rounded-full w-full
+        transition duration-300 hover:bg-black">
+                <img src="/assets/images/icons/delete-white.png" alt="editar"
+                     class="size-10" />
+              </button>
+            </div>
+            <img [src]="event.image" alt="Foto do evento" class="object-cover w-[28rem] rounded-3xl" />
+            <p class="text-[0.96rem] text-right font-open-sans font-semibold">{{event.endDate | date: "d/MM/yyyy"}}</p>
+            <section class="flex flex-col text-municip-highlight-black ">
+              <p class="font-bold text-center text-[2rem]">{{event.title}}</p>
+              <p class=" font-bold text-ellipsis overflow-hidden line-clamp-3 ">{{event.description}}</p>
+            </section>
+            <div class="flex justify-between items-center font-open-sans font-extrabold pt-4">
+              <div class="flex items-center">
+                <img src="/assets/images/icons/user.png" alt="Notícias" class="size-10 mr-2" />
+               {{ event.nRegistrations }}/{{ event.capacity }} inscritos
+              </div>
+              <app-btn-municip-blue width="10rem">
+                Ver Mais
+                <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+              </app-btn-municip-blue>
+            </div>
+          </div>
+        </app-card-outline-theme>
+      </ng-container>
+    </section>
+  </div>
+</div>
+<app-footer class="flex-shrink-0"></app-footer>

@@ -37,25 +37,30 @@
         <input type="file" #emblemPicker id="emblemPhoto" formControlName="emblemPhoto" name="emblemPhoto"
                (change)="onEmblemImagePicked($event)" accept="image/*"
                class="hidden input font-poppins w-[18rem] " />
-        <button *ngIf="editMode" (click)="emblemPicker.click()" alt="editar brasão" type="button"
-                class="bg-municip-highlight-black flex justify-center p-3 rounded-full transition duration-300 hover:bg-black">
-          <img src="/assets/images/icons/pencil-white.png" alt="editar"
-               class="size-5" />
-        </button>
+        
+        <app-black-btn-icon-text *ngIf="editMode"
+      
+                                 altImage="editar brasão"
+                                 image="/assets/images/icons/pencil-white.png"
+                                 (buttonClick)="emblemPicker.click()">
+        </app-black-btn-icon-text>
       </div>
 
       <div class="absolute -top-60 left-8">
-        <app-input-title class="hidden text-[2.4vh]">Foto da Paisagem</app-input-title>
+        <app-input-title class="hidden text-[2.4rem]">Foto da Paisagem</app-input-title>
         <input type="file" #landscapePicker id="landscapePhoto" formControlName="landscapePhoto"
                name="landscapePhoto" (change)="onLandscapeImagePicked($event)" accept="image/*"
                class="hidden input font-poppins w-[18rem]" />
-        <button *ngIf="editMode" (click)="landscapePicker.click()" alt="editar paisagem" type="button"
-                class="bg-municip-highlight-black flex space-x-2 font-inter justify-center items-center p-3
-                  rounded-2xl text-municip-blank transition duration-300 hover:bg-black">
-          <img src="/assets/images/icons/pencil-white.png" alt="editar"
-               class="size-5" />
-          <span>Editar Paisagem</span>
-        </button>
+     
+        <app-black-btn-icon-text *ngIf="editMode" class="text-[1.063rem]"
+                         
+                                 altImage="editar paisagem"
+                                 image="/assets/images/icons/pencil-white.png"
+                                 (buttonClick)="landscapePicker.click()">
+          Editar Paisagem
+        </app-black-btn-icon-text>
+  
+        
       </div>
     </section>
 
@@ -81,19 +86,19 @@
     </button>
 
   </form>
-  <button *ngIf="!editMode" (click)="toggleEditMode()" alt="editar paisagem" type="button"
-          class="absolute bg-municip-highlight-black flex space-x-2 font-inter justify-center items-center p-3 top-[15.3rem] right-[25rem]
-      rounded-2xl text-municip-blank transition duration-300 hover:bg-black">
-    <img src="/assets/images/icons/pencil-white.png" alt="editar"
-         class="size-5" />
-    <span>Editar Munícipio</span>
-  </button>
-  <button *ngIf="editMode" (click)="cancelEditMode()" alt="editar paisagem" type="button"
-          class="absolute bg-municip-highlight-black flex space-x-2 font-inter justify-center items-center p-3 top-[15.3rem] right-[25rem]
-    rounded-2xl text-municip-blank transition duration-300 hover:bg-black">
-    <img src="/assets/images/icons/pencil-white.png" alt="editar"
-         class="size-5" />
-    <span>Cancelar Edição</span>
-  </button>
+  <div  *ngIf="!editMode" class="absolute top-[15.3rem] right-[25rem] text-[1.063rem]">
+    <app-black-btn-icon-text altImage="editar munícipio"
+                             image="/assets/images/icons/pencil-white.png"
+                             (buttonClick)="toggleEditMode()">
+      Editar Munícipio
+    </app-black-btn-icon-text>
+  </div>
+  <div *ngIf="editMode" class="absolute top-[15.3rem] right-[25rem] text-[1.063rem]">
+    <app-black-btn-icon-text altImage="Cancelar"
+                             image="/assets/images/icons/pencil-white.png"
+                             (buttonClick)="cancelEditMode()">
+      Cancelar Edição
+    </app-black-btn-icon-text>
+  </div>
 </div>
 <app-footer></app-footer>

@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './btn-municip-blue.component.css'
 })
 export class BtnMunicipBlueComponent {
-    @Input() width?: string;
+  @Input() width?: string;
   @Input() text: string = "";
 
   @Output() buttonClick: EventEmitter<void> = new EventEmitter<void>();
