@@ -1,15 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Event } from '../../services/events/events.service';
+import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
+
 
 
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
-  styleUrl: './create-event.component.css'
+  styleUrl: './create-event.component.css',
+  providers: [provideNativeDateAdapter()],
+  encapsulation: ViewEncapsulation.None,
 })
+
+
+
 export class CreateEventComponent {
 
+  constructor(private dateAdapter: DateAdapter<Date>) {
+    // Set the locale to pt in the calendar
+    this.dateAdapter.setLocale('pt');
+
+    this.eventForm.valueChanges.subscribe((value) => {
+      console.log(value);
+    });
+
+  }
 
   errors: string[] | null = null;
   photo!: File;
@@ -18,13 +34,19 @@ export class CreateEventComponent {
     title: new FormControl('', [Validators.required]),
     capacity: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
     startDate: new FormControl('', [Validators.required]),
+    startHour: new FormControl('', [Validators.required]),
     endDate: new FormControl('', [Validators.required]),
-    startRegistration: new FormControl('', [Validators.required]),
-    endRegistration: new FormControl('', [Validators.required]),
+    endHour: new FormControl('', [Validators.required]),
+    startRegistrationDate: new FormControl('', [Validators.required]),
+    startRegistrationHour: new FormControl('', [Validators.required]),
+    endRegistrationDate: new FormControl('', [Validators.required]),
+    endRegistrationHour: new FormControl('', [Validators.required]),
     local: new FormControl('', [Validators.required]),
     image: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required])
+    description: new FormControl('', [Validators.required]),
+
   })
+
 
 
   get title() {
@@ -69,7 +91,7 @@ export class CreateEventComponent {
   }
 
 
-  
+
   onImagePicked(event: any) {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0]; // Use optional chaining here
@@ -82,5 +104,9 @@ export class CreateEventComponent {
       console.error('No file selected');
     }
   }
+  
+
+
+
 
 }

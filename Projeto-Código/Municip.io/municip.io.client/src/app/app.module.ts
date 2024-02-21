@@ -66,7 +66,17 @@ import { MunicipalEditComponent } from './munadministrator/municipal-edit/munici
 import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedin.component';
 import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
 import { CreateEventComponent } from './events/create-event/create-event.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+
+registerLocaleData(localePt, 'pt-PT');
 
 
 @NgModule({
@@ -127,7 +137,7 @@ import { CreateEventComponent } from './events/create-event/create-event.compone
     MunicipalEditComponent,
     HeaderLoggedinComponent,
     CalendarPageComponent,
-    CreateEventComponent
+    CreateEventComponent,
     
   ],
   imports: [
@@ -139,6 +149,9 @@ import { CreateEventComponent } from './events/create-event/create-event.compone
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+
+    NgxMaterialTimepickerModule.setOpts('pt-PT'),
+    MatFormFieldModule, MatInputModule, MatDatepickerModule
   ],
   providers: [
     MunicipalityGuard,
@@ -146,7 +159,8 @@ import { CreateEventComponent } from './events/create-event/create-event.compone
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
       
-    }
+    },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
