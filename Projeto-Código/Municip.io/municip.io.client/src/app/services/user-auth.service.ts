@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/comm
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { Municipality } from './municipal-admin-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -135,7 +136,7 @@ export class UserAuthService {
     }
   }
 
-  getMunicipality(): Observable<any> {
+  getMunicipality(): Observable<string> {
     const municipalityData = this.getUserMunicipalityFromStorage();
     if (municipalityData) {
       console.log("Já tem o municipio!!!!??");
@@ -154,7 +155,7 @@ export class UserAuthService {
     }
   }
 
-  getInfoMunicipality(nome: string): Observable<any> {
+  getInfoMunicipality(nome: string): Observable<Municipality> {
     return this.http.get<any>(`/api/accounts/InfoMunicipality?name=${nome}`);
   }
 

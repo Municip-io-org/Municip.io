@@ -1,7 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Event } from '../../services/events/events.service';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
+import { UserAuthService } from '../../services/user-auth.service';
 
 
 
@@ -15,17 +16,31 @@ import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 
 
 
-export class CreateEventComponent {
+export class CreateEventComponent implements OnInit {
 
-  constructor(private dateAdapter: DateAdapter<Date>) {
+  constructor(private dateAdapter: DateAdapter<Date>, private authService: UserAuthService) {
     // Set the locale to pt in the calendar
     this.dateAdapter.setLocale('pt');
 
-    this.eventForm.valueChanges.subscribe((value) => {
-      console.log(value);
-    });
+
 
   }
+  municipalityImage: string = "";
+
+  ngOnInit(): void {
+    this.authService.getUserData().subscribe((user) => {
+      this.authService.getInfoByEmail(user.email).subscribe((account) => {
+        this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
+          console.log(municipality)
+          this.municipalityImage = municipality.landscapePhoto;
+        });
+      });
+
+    }
+    );
+  }
+
+
 
   errors: string[] | null = null;
   photo!: File;
@@ -65,11 +80,11 @@ export class CreateEventComponent {
     return this.eventForm.get('endDate');
   }
 
-  get startRegistration() {
+  get startRegistrationDate() {
     return this.eventForm.get('startRegistration');
   }
 
-  get endRegistration() {
+  get endRegistrationDate() {
     return this.eventForm.get('endRegistration');
   }
 
@@ -87,7 +102,7 @@ export class CreateEventComponent {
 
 
   OnSubmit() {
-
+  
   }
 
 
@@ -104,7 +119,7 @@ export class CreateEventComponent {
       console.error('No file selected');
     }
   }
-  
+
 
 
 
