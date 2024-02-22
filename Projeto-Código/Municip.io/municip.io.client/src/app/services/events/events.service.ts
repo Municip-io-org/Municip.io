@@ -40,7 +40,7 @@ export class EventsService {
       endRegistration: new Date(2000, 0, 10),
       local: 'Local 1',
       image: '/assets/images/carnaval.jpg',
-      description: 'Description of Event 1'
+      description: 'Description of Event 1 ajdojadofjaofijaofjaofjaof jaoifja oijfoajfoaijfoajfo ajfoiajf oiajoi aoidjasodjas daspdjajdopaisjd paofdjpasf jodjasdojaso jfaosfjaosjfjdaso  oafaosifj ofijasofijhaof fhaofh foiahsfoah '
     }, {
       id: '1',
       title: 'Event 2',
