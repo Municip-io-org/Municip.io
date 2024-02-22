@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Event, EventsService } from '../../services/events/events.service';
+import { Event, EventsService } from '../../../services/events/events.service';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
-import { UserAuthService } from '../../services/user-auth.service';
+import { UserAuthService } from '../../../services/user-auth.service';
 
 
 

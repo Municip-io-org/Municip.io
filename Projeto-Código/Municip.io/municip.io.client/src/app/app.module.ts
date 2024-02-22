@@ -66,7 +66,7 @@ import { MunicipalEditComponent } from './munadministrator/municipal-edit/munici
 import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedin.component';
 import { MunicipalEventsComponent } from './events/municipal-events/municipal-events.component';
 import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
-import { CreateEventComponent } from './events/create-event/create-event.component';
+import { CreateEventComponent } from './events/municip-actions/create-event/create-event.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
@@ -79,6 +79,7 @@ import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DatetimepickerComponent } from './utils/events/datetimepicker/datetimepicker.component';
+import { EditEventComponent } from './events/municip-actions/edit-event/edit-event.component';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -147,7 +148,8 @@ registerLocaleData(localePt, 'pt-PT');
     CalendarPageComponent,
     BlackBtnIconTextComponent,
     EventPageComponent,
-    DatetimepickerComponent
+    DatetimepickerComponent,
+    EditEventComponent
     
   ],
   imports: [

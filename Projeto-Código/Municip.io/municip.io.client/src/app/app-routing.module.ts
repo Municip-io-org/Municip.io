@@ -29,7 +29,7 @@ import { CitizenOrMunicipalAdminGuard } from './utils/guard/citizen-or-municipal
 import { MunicipalEditComponent } from './munadministrator/municipal-edit/municipal-edit.component';
 import { MunicipalEventsComponent } from './events/municipal-events/municipal-events.component';
 import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
-import { CreateEventComponent } from './events/create-event/create-event.component';
+import { CreateEventComponent } from './events/municip-actions/create-event/create-event.component';
 import { EventPageComponent } from './events/event-page/event-page.component';
 
 
