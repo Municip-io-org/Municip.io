@@ -10,7 +10,7 @@ namespace Municip.io.Server.Models
         [Range(1, int.MaxValue)]
         public int Capacity { get; set; }
 
-        public int nRegistrations { get; set; }
+        public int NRegistrations { get; set; }
 
         public DateTime StartDate { get; set; }
 
@@ -37,9 +37,9 @@ namespace Municip.io.Server.Models
 
 
         public bool IncrementRegistrations(){
-            if (nRegistrations < Capacity)
+            if (NRegistrations < Capacity)
             {
-                nRegistrations++;
+                NRegistrations++;
                 return true; 
             }
             else
@@ -48,9 +48,9 @@ namespace Municip.io.Server.Models
             }
         }
         public bool DecrementRegistrations(){
-            if (nRegistrations > 0)
+            if (NRegistrations > 0)
             {
-                nRegistrations--;
+                NRegistrations--;
                 return true; 
             }
             else

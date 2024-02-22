@@ -12,8 +12,8 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240221105412_nova")]
-    partial class nova
+    [Migration("20240222123501_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -330,6 +330,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("Municipality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NRegistrations")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
