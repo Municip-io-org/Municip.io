@@ -4,7 +4,7 @@
                     image={{municipality.landscapePhoto}}
                     ></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]">
-  <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] flex justify-center items-center">
+  <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
     <app-black-btn-icon-text altImage="Criar evento"
                              image="/assets/images/icons/plus-white.png">
       Criar Eventos
@@ -21,8 +21,8 @@
       (scrolled)="onScrollDown()">
     <section class="flex flex-wrap justify-around ">
       <ng-container *ngFor="let event of events">
-        <app-card-outline-theme class="mb-20">
-          <div class="relative flex flex-col font-roboto text-left space-x-2 max-w-[28rem] text-[1.063rem] bg-white py-7 px-7">
+        <app-card-outline-theme class="mb-20 ">
+          <div class="relative flex flex-col font-roboto text-left gap-x-2 max-w-[28rem] text-[1.063rem] bg-white py-7 px-7 ">
             <div *ngIf="isMunAdmin" class="absolute -top-3 -left-3">
               <app-black-btn-icon-text altImage="Editar evento"
                                        image="/assets/images/icons/pencil-white.png">
@@ -48,7 +48,7 @@
                 <img src="/assets/images/icons/user.png" alt="Notícias" class="size-10 mr-2" />
                {{ event.nRegistrations }}/{{ event.capacity }} inscritos
               </div>
-              <app-btn-municip-blue width="10rem">
+              <app-btn-municip-blue width="10rem" >
                 Ver Mais
                 <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
               </app-btn-municip-blue>

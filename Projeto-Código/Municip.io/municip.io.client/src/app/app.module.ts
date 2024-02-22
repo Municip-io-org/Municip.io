@@ -68,6 +68,7 @@ import { MunicipalEventsComponent } from './events/municipal-events/municipal-ev
 import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
 import { BlackBtnIconTextComponent } from './utils/buttons/black-btn-icon-text/black-btn-icon-text.component';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { EventPageComponent } from './events/event-page/event-page.component';
 
 
 
@@ -130,7 +131,8 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
     HeaderLoggedinComponent,
     MunicipalEventsComponent,
     CalendarPageComponent,
-    BlackBtnIconTextComponent
+    BlackBtnIconTextComponent,
+    EventPageComponent
     
   ],
   imports: [
