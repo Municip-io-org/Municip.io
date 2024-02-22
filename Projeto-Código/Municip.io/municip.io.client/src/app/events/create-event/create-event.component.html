@@ -3,7 +3,7 @@
 <app-smaller-banner [title]="'Criar Evento'" [image]="municipalityImage"
                     class="font-inter" />
 
-<form [formGroup]="eventForm" (ngSubmit)="OnSubmit()" class="px-40 mb-32 mt-10">
+<form [formGroup]="eventForm" (ngSubmit)="OnSubmit()" class="px-32 mb-32 mt-10">
   <div *ngIf="error" class=" text-red-500 text-xl font-bold space-y-2 text-start mb-5">
     <p>{{error}}</p>
   </div>
@@ -44,7 +44,7 @@
       <div class="h-40">
         <app-input-title class="text-[2.6vh]">Período de Inscrição</app-input-title>
         <mat-form-field class="inputRange w-full">
-          <mat-date-range-input [formGroup]="eventForm" [rangePicker]="pickerRegistration">
+          <mat-date-range-input [formGroup]="eventForm" [rangePicker]="pickerRegistration" >
             <input matStartDate formControlName="startRegistrationDate" placeholder="Data de Início">
             <input matEndDate formControlName="endRegistrationDate" placeholder="  Data de Fim">
           </mat-date-range-input>
@@ -52,11 +52,13 @@
           <mat-date-range-picker #pickerRegistration></mat-date-range-picker>
         </mat-form-field>
         <div class="text-red-500 font-bold py-2" *ngIf="(startRegistrationDate?.touched && startRegistrationDate?.invalid) || (endRegistrationDate?.touched && endRegistrationDate?.invalid)">
-          <div>Data de Registo Obrigatória</div>
+          <div *ngIf="startRegistrationDate?.errors?.['matStartDateInvalid'] ">Data de Início Inválida</div>
+          <div *ngIf="endRegistrationDate?.errors?.['matEndDateInvalid'] ">Data de Fim Inválida</div>
+          <div *ngIf="startRegistrationDate?.errors?.['required'] || endRegistrationDate?.errors?.['required']">Data de Registo Obrigatória</div>
         </div>
       </div>
 
-      <div class="w-1/2">
+      <div class="w-full flex space-x-5 items-center">
         <div class="h-32">
           <app-input-title class="text-[2.6vh]">Hora de Início</app-input-title>
           <div class="flex items-center justify-between
@@ -72,6 +74,7 @@
             <div *ngIf="startRegistrationHour?.errors?.['required'] ">Hora Obrigatória</div>
           </div>
         </div>
+        <span class="h-0.5 w-5 bg-black mt-3"></span>
         <div class="h-32">
           <app-input-title class="text-[2.6vh]">Hora de Fim</app-input-title>
           <div class="flex items-center justify-between
@@ -104,11 +107,13 @@
           <mat-date-range-picker #pickerEventDate></mat-date-range-picker>
         </mat-form-field>
         <div class="text-red-500 font-bold py-2" *ngIf="(startDate?.touched && startDate?.invalid) || (endDate?.touched && endDate?.invalid)">
-          <div>Data Obrigatória</div>
+          <div *ngIf="startDate?.errors?.['matStartDateInvalid'] ">Data de Início Inválida</div>
+          <div *ngIf="endDate?.errors?.['matEndDateInvalid'] ">Data de Fim Inválida</div>
+          <div *ngIf="startDate?.errors?.['required'] || endDate?.errors?.['required']">Data Obrigatória</div>
         </div>
       </div>
 
-      <div class="w-1/2">
+      <div class="w-full flex space-x-5 items-center">
         <div class="h-32">
           <app-input-title class="text-[2.6vh]">Hora de Início</app-input-title>
 
@@ -128,6 +133,7 @@
             <div *ngIf="startHour?.errors?.['required'] ">Hora Obrigatória</div>
           </div>
         </div>
+        <span class="h-0.5 w-5 bg-black mt-3"></span>
         <div class="h-32">
           <app-input-title class="text-[2.6vh]">Hora de Fim</app-input-title>
           <div class="flex items-center justify-between
