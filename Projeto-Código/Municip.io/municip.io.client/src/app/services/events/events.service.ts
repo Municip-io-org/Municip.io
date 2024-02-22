@@ -27,6 +27,10 @@ export class EventsService {
       })
     );
   }
+
+  getEventById(eventId: string) {
+    return this.http.get<Event>(`api/events/GetEventById?eventId=${eventId}`);
+  }
 }
 
 export interface Event {

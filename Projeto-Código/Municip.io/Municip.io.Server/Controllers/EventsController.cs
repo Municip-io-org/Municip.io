@@ -59,8 +59,8 @@ namespace Municip.io.Server.Controllers
             return Json(municipalityEvents);
         }
 
-        [HttpGet("GetEventsById")]
-        public IActionResult GetEventsById(int eventId)
+        [HttpGet("GetEventById")]
+        public IActionResult GetEventById(int eventId)
         {
             if (!ModelState.IsValid)
             {

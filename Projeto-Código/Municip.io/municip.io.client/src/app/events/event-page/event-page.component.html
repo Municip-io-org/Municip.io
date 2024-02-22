@@ -1,1 +1,19 @@
-<p>event-page works!</p>
+<app-header-loggedin></app-header-loggedin>
+<app-smaller-banner title="Eventos de {{municipality.name}}"
+                    image={{municipality.landscapePhoto}}></app-smaller-banner>
+<div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]">
+  <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
+    <app-black-btn-icon-text altImage="Editar Evento"
+                             image="/assets/images/icons/pencil-white.png">
+      Editar evento
+    </app-black-btn-icon-text>
+  </div>
+  <div *ngIf="isMunAdmin" class="absolute -top-3 left-[20rem] text-[1.063rem] font-roboto flex justify-center items-center">
+    <app-black-btn-icon-text altImage="Remover Evento"
+                             image="/assets/images/icons/delete-white.png">
+      Remover Evento
+    </app-black-btn-icon-text>
+  </div>
+  <img src={{event.image}} alt="Imagem do evento"
+       class=" rounded-2xl"/>
+</div>
