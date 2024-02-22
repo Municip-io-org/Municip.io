@@ -158,6 +158,7 @@ export class CreateEventComponent implements OnInit {
           console.log(event);
         },
         (error) => {
+          console.log(error)
           this.error = error.error.message;
           window.scrollTo(0, 0);
         }
