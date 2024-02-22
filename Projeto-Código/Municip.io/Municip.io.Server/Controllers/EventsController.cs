@@ -26,18 +26,20 @@ namespace Municip.io.Server.Controllers
                 }
 
 
-                if (newEvent.StartRegistration > newEvent.StartDate)
+                if (newEvent.StartRegistration > newEvent.StartDate || newEvent.EndRegistration > newEvent.StartDate)
                 {
-                    return BadRequest(new { message = "A data de início do registo não pode ser depois do início do evento" });
-                }
-                else if (newEvent.EndRegistration > newEvent.StartDate)
-                {
-                    return BadRequest(new { message = "A data de fim do registo não pode ser depois do início do evento" });
-                    //}else if ()
-                    //{
+                    return BadRequest(new { message = "A data de inscrição não pode ser depois do início do evento" });
 
-                    //}
                 }
+                else if (newEvent.StartRegistration > newEvent.EndRegistration)
+                {
+                    return BadRequest(new { message = "A data inicio de inscrição não pode ser depois da data de fim de inscrição" });
+                }
+                else if (newEvent.StartDate > newEvent.EndDate)
+                {
+                    return BadRequest(new { message = "A data inicio do evento não pode ser depois da data de fim do evento" });
+                }
+
                 else
                 {
                     _context.Events.Add(newEvent);

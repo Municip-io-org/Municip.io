@@ -4,10 +4,8 @@
                     class="font-inter" />
 
 <form [formGroup]="eventForm" (ngSubmit)="OnSubmit()" class="px-40 mb-32 mt-10">
-  <div *ngIf="errors" class=" text-red-500 text-sm font-bold space-y-2 text-start">
-    <div *ngFor="let error of errors">
-      <p>{{error}}</p>
-    </div>
+  <div *ngIf="error" class=" text-red-500 text-xl font-bold space-y-2 text-start mb-5">
+    <p>{{error}}</p>
   </div>
 
 
@@ -25,7 +23,7 @@
     <div class="w-full lg:w-5/12 mb-4 h-32">
       <app-input-title class="text-[2.6vh]">Número máximo de participantes</app-input-title>
       <div class="flex items-center">
-        <input required placeholder="Capacidade do evento"  type="number" id="capacity" formControlName="capacity" name="capacity"
+        <input required placeholder="Capacidade do evento" type="number" id="capacity" formControlName="capacity" name="capacity"
                class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
       </div>
       <div class="text-red-500 font-bold py-2" *ngIf="capacity?.touched && capacity?.invalid">

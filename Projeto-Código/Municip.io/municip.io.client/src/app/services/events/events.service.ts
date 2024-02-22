@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
+import { Municipality } from '../municipal-admin-auth.service';
+import { Citizen } from '../citizen-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +31,20 @@ export class EventsService {
     return of(items);
   }
 
-  createEvent(event: Event) { }
+  createEvent(event: Event, image: File) {
+    var headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    let imgurl = "https://api.imgur.com/3/image";
+
+    //upload to imgur
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post(imgurl, formData, { headers })
+      .pipe(switchMap((response: any) => {
+        event.image= response['data']['link']; 
+        return this.http.post<Event>('api/events/CreateEvent', event);
+      }));
+
+  }
 
 
 
@@ -292,7 +307,7 @@ export class EventsService {
 }
 
 export interface Event {
-  id: string;
+  id?: string;
   title: string;
   capacity: number;
   nRegistrations: number;
@@ -301,6 +316,8 @@ export interface Event {
   startRegistration: Date;
   endRegistration: Date;
   local: string;
-  image: string;
+  image?: string;
   description: string;
+  citizens?: Citizen[];
+  municipality?: string;
 }

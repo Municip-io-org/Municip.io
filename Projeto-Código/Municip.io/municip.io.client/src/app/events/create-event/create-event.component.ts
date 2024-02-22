@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Event } from '../../services/events/events.service';
+import { Event, EventsService } from '../../services/events/events.service';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 import { UserAuthService } from '../../services/user-auth.service';
 
@@ -18,7 +18,9 @@ import { UserAuthService } from '../../services/user-auth.service';
 
 export class CreateEventComponent implements OnInit {
 
-  constructor(private dateAdapter: DateAdapter<Date>, private authService: UserAuthService) {
+  constructor(private dateAdapter: DateAdapter<Date>, private authService: UserAuthService,
+    private eventService: EventsService
+  ) {
     // Set the locale to pt in the calendar
     this.dateAdapter.setLocale('pt');
 
@@ -29,6 +31,7 @@ export class CreateEventComponent implements OnInit {
 
   }
   municipalityImage: string = "";
+  municipalityName: string = "";
 
   ngOnInit(): void {
     this.authService.getUserData().subscribe((user) => {
@@ -36,6 +39,7 @@ export class CreateEventComponent implements OnInit {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
           console.log(municipality)
           this.municipalityImage = municipality.landscapePhoto;
+          this.municipalityName = municipality.name;
         });
       });
 
@@ -45,7 +49,7 @@ export class CreateEventComponent implements OnInit {
 
 
 
-  errors: string[] | null = null;
+  error: string | null = null;
   photo!: File;
 
   eventForm = new FormGroup({
@@ -121,8 +125,61 @@ export class CreateEventComponent implements OnInit {
 
 
   OnSubmit() {
-    console.log("asjnjk")
+    //create a new object of type event and put the date and time in the same variable
+
+
+
+    if (this.eventForm.valid) {
+
+      let newStartDate = this.createDateTime(new Date(this.startDate?.value || ""), this.startHour?.value || "");
+      let newEndDate = this.createDateTime(new Date(this.endDate?.value || ""), this.endHour?.value || "");
+      let newStartRegistrationDate = this.createDateTime(new Date(this.startRegistrationDate?.value || ""), this.startRegistrationHour?.value || "");
+      let newEndRegistrationDate = this.createDateTime(new Date(this.endRegistrationDate?.value || ""), this.endRegistrationHour?.value || "");
+
+
+
+      const newEvent: Event = {
+        title: this.title?.value || "",
+        capacity: parseInt(this.capacity?.value || "10"),
+        nRegistrations: 0,
+        startDate: newStartDate,
+        endDate: newEndDate,
+        startRegistration: newStartRegistrationDate,
+        endRegistration: newEndRegistrationDate,
+        local: this.local?.value || "",
+        description: this.description?.value || "",
+        citizens: [],
+        municipality: this.municipalityName
+      }
+
+      this.eventService.createEvent(newEvent, this.photo).subscribe(
+        (event) => {
+          this.error=null;
+          console.log(event);
+        },
+        (error) => {
+          this.error = error.error.message;
+          window.scrollTo(0, 0);
+        }
+      );
+    }
+
   }
+
+
+  createDateTime(date: Date, time: string): Date {
+    let partTime = time.split(':');
+    let startHour = parseInt(partTime[0]);
+    let partEndHout = parseInt(partTime[1]);
+
+    let newDate = new Date(date);
+    newDate.setHours(startHour);
+    newDate.setMinutes(partEndHout);
+
+    return newDate;
+
+  }
+
 
 
 
