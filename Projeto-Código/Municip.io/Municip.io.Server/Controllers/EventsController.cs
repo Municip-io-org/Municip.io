@@ -56,8 +56,6 @@ namespace Municip.io.Server.Controllers
                 return NotFound(new { message = "Events from " + municipalityName + " Not Found" });
             }
 
-            
-
             return Json(municipalityEvents);
         }
 
