@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Event, EventsService } from '../../services/events/events.service';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 import { UserAuthService } from '../../services/user-auth.service';
@@ -79,36 +79,36 @@ export class CreateEventComponent implements OnInit {
     return this.eventForm.get('capacity');
   }
 
-  get startDate() {
-    return this.eventForm.get('startDate');
+  get startDate(): FormControl {
+    return this.eventForm.get('startDate') as FormControl;
   }
 
   get endDate() {
-    return this.eventForm.get('endDate');
+    return this.eventForm.get('endDate') as FormControl;
   }
 
   get startRegistrationDate() {
-    return this.eventForm.get('startRegistrationDate');
+    return this.eventForm.get('startRegistrationDate') as FormControl;
   }
 
   get endRegistrationDate() {
-    return this.eventForm.get('endRegistrationDate');
+    return this.eventForm.get('endRegistrationDate') as FormControl;
   }
 
   get startHour() {
-    return this.eventForm.get('startHour');
+    return this.eventForm.get('startHour') as FormControl;
   }
 
   get endHour() {
-    return this.eventForm.get('endHour');
+    return this.eventForm.get('endHour') as FormControl;
   }
 
   get startRegistrationHour() {
-    return this.eventForm.get('startRegistrationHour');
+    return this.eventForm.get('startRegistrationHour') as FormControl;
   }
 
   get endRegistrationHour() {
-    return this.eventForm.get('endRegistrationHour');
+    return this.eventForm.get('endRegistrationHour') as FormControl;
   }
 
   get local() {

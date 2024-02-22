@@ -78,6 +78,7 @@ import { EventPageComponent } from './events/event-page/event-page.component';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { DatetimepickerComponent } from './utils/events/datetimepicker/datetimepicker.component';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -145,7 +146,8 @@ registerLocaleData(localePt, 'pt-PT');
     MunicipalEventsComponent,
     CalendarPageComponent,
     BlackBtnIconTextComponent,
-    EventPageComponent
+    EventPageComponent,
+    DatetimepickerComponent
     
   ],
   imports: [
