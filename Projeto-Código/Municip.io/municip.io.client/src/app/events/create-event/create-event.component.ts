@@ -88,6 +88,22 @@ export class CreateEventComponent implements OnInit {
     return this.eventForm.get('endRegistrationDate');
   }
 
+  get startHour() {
+    return this.eventForm.get('startHour');
+  }
+
+  get endHour() {
+    return this.eventForm.get('endHour');
+  }
+
+  get startRegistrationHour() {
+    return this.eventForm.get('startRegistrationHour');
+  }
+
+  get endRegistrationHour() {
+    return this.eventForm.get('endRegistrationHour');
+  }
+
   get local() {
     return this.eventForm.get('local');
   }
@@ -102,7 +118,7 @@ export class CreateEventComponent implements OnInit {
 
 
   OnSubmit() {
-  
+    console.log("asjnjk")
   }
 
 
