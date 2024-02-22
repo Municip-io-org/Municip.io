@@ -40,7 +40,7 @@ export class MunicipalEventsComponent {
   events: Event[] = [];
   isLoading = false;
   currentPage = 1;
-  itemsPerPage = 5;
+  itemsPerPage = 6;
   
 
   constructor(private userAuthService: UserAuthService, private eventsService: EventsService) { }

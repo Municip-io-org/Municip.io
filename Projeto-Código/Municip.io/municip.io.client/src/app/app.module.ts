@@ -73,6 +73,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BlackBtnIconTextComponent } from './utils/buttons/black-btn-icon-text/black-btn-icon-text.component';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { EventPageComponent } from './events/event-page/event-page.component';
 
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
@@ -143,7 +144,8 @@ registerLocaleData(localePt, 'pt-PT');
     CreateEventComponent,
     MunicipalEventsComponent,
     CalendarPageComponent,
-    BlackBtnIconTextComponent
+    BlackBtnIconTextComponent,
+    EventPageComponent
     
   ],
   imports: [
