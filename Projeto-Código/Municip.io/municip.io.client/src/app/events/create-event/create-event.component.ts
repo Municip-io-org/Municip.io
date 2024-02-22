@@ -22,6 +22,9 @@ export class CreateEventComponent implements OnInit {
     // Set the locale to pt in the calendar
     this.dateAdapter.setLocale('pt');
 
+    this.eventForm.valueChanges.subscribe((value) => {
+      console.log(value)
+    });
 
 
   }
@@ -47,7 +50,7 @@ export class CreateEventComponent implements OnInit {
 
   eventForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    capacity: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
+    capacity: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(10)]),
     startDate: new FormControl('', [Validators.required]),
     startHour: new FormControl('', [Validators.required]),
     endDate: new FormControl('', [Validators.required]),

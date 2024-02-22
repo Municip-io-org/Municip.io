@@ -20,9 +20,31 @@ namespace Municip.io.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Events.Add(newEvent);
-                _context.SaveChanges();
-                return Ok();
+                if (newEvent.Capacity == 0)
+                {
+                    newEvent.Capacity = 10;
+                }
+
+
+                if (newEvent.StartRegistration > newEvent.StartDate)
+                {
+                    return BadRequest(new { message = "A data de início do registo não pode ser depois do início do evento" });
+                }
+                else if (newEvent.EndRegistration > newEvent.StartDate)
+                {
+                    return BadRequest(new { message = "A data de fim do registo não pode ser depois do início do evento" });
+                    //}else if ()
+                    //{
+
+                    //}
+                }
+                else
+                {
+                    _context.Events.Add(newEvent);
+                    _context.SaveChanges();
+                    return Ok();
+                }
+
             }
             else
             {
@@ -87,7 +109,7 @@ namespace Municip.io.Server.Controllers
         public IActionResult RemoveCitizen(int eventId, string email)
         {
             var citizen = _context.Citizens.FirstOrDefault(c => c.Email == email);
-            var evento = _context.Events.Include(e=> e.Citizens).FirstOrDefault(e => e.Id == eventId);
+            var evento = _context.Events.Include(e => e.Citizens).FirstOrDefault(e => e.Id == eventId);
 
             if (citizen != null && evento != null && evento.Municipality == citizen.Municipality &&
                                (evento.Citizens != null && evento.Citizens.Find(c => c.Email == email) != null))

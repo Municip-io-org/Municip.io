@@ -28,6 +28,11 @@ export class EventsService {
     }
     return of(items);
   }
+
+  createEvent(event: Event) { }
+
+
+
   public testEvents = [
     {
       id: '1',
