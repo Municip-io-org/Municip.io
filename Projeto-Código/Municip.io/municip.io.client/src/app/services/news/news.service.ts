@@ -26,6 +26,7 @@ export class NewsService {
         news.photo = response['data']['link'];
         console.log(news);
         console.log(news.photo);
+        console.log("NODNAODNAODNAODAODNAONDADNOADNAONDOADOANDOADNOADOA ",news);
         return this.http.post<News>('/api/news/CreateNews', news);
       }));
   }
