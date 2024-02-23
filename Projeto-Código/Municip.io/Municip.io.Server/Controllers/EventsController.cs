@@ -42,11 +42,11 @@ namespace Municip.io.Server.Controllers
                 }
                 else if (newEvent.StartDate == newEvent.EndDate)
                 {
-                    return BadRequest(new { message = "A data inicio do evento não pode ser igual a data de fim do evento" });
+                    return BadRequest(new { message = "A data início do evento não pode ser igual a data de fim do evento" });
                 }
                 else if (newEvent.StartRegistration == newEvent.EndRegistration)
                 {
-                    return BadRequest(new { message = "A data inicio de inscrição não pode ser igual a data de fim de inscrição" });
+                    return BadRequest(new { message = "A data início de inscrição não pode ser igual a data de fim de inscrição" });
                 }
 
                 else
@@ -62,6 +62,61 @@ namespace Municip.io.Server.Controllers
                 return BadRequest(new { message = "Invalid model", ModelState });
             }
         }
+
+
+
+        [HttpPut("UpdateEvent")]
+        public IActionResult UpdateEvent(Event updatedEvent)
+        {
+            if (ModelState.IsValid)
+            {
+                var evento = _context.Events.FirstOrDefault(e => e.Id == updatedEvent.Id);
+                if (evento != null)
+                {
+                    if (updatedEvent.Capacity == 0)
+                    {
+                        updatedEvent.Capacity = 1;
+                    }
+
+                    if (updatedEvent.StartRegistration > updatedEvent.StartDate || updatedEvent.EndRegistration > updatedEvent.StartDate)
+                    {
+                        return BadRequest(new { message = "A data de inscrição tem de ser antes da data do evento" });
+
+                    }
+                    else if (updatedEvent.StartRegistration > updatedEvent.EndRegistration)
+                    {
+                        return BadRequest(new { message = "Data de Inscrição Inválida" });
+                    }
+                    else if (updatedEvent.StartDate > updatedEvent.EndDate)
+                    {
+                        return BadRequest(new { message = "Data de Evento Inválida" });
+                    }
+                    else if (updatedEvent.StartDate == updatedEvent.EndDate)
+                    {
+                        return BadRequest(new { message = "A data início do evento não pode ser igual a data de fim do evento" });
+                    }
+                    else if (updatedEvent.StartRegistration == updatedEvent.EndRegistration)
+                    {
+                        return BadRequest(new { message = "A data início de inscrição não pode ser igual a data de fim de inscrição" });
+                    }
+                    else
+                    {
+                        _context.Entry(evento).CurrentValues.SetValues(updatedEvent);
+                        _context.SaveChanges();
+                        return Ok();
+                    }
+                }
+                else
+                {
+                    return BadRequest(new { message = "Event not found" });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Invalid model", ModelState });
+            }
+        }
+
 
         [HttpGet("GetEvents")]
         public IActionResult GetEvents()

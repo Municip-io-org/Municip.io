@@ -15,7 +15,7 @@ export class EventsService {
   }
 
   getUserEvents(email: string): Observable<Event[]> {
-    const params = { email: email }; 
+    const params = { email: email };
     return this.http.get<Event[]>('api/events/GetEventsByCitizen', { params: params });
   }
 
@@ -28,11 +28,31 @@ export class EventsService {
     formData.append('image', image);
     return this.http.post(imgurl, formData, { headers })
       .pipe(switchMap((response: any) => {
-        event.image= response['data']['link']; 
+        event.image = response['data']['link'];
         return this.http.post<Event>('api/events/CreateEvent', event);
       }));
 
   }
+  updateEvent(event: Event, image: File) {
+
+    if (!image) return this.http.put<Event>('api/events/UpdateEvent', event);
+
+
+    var headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    let imgurl = "https://api.imgur.com/3/image";
+
+
+
+    //upload to imgur
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post(imgurl, formData, { headers })
+      .pipe(switchMap((response: any) => {
+        event.image = response['data']['link'];
+        return this.http.put<Event>('api/events/UpdateEvent', event);
+      }));
+  }
+
 
 
   getEventByPagination(page = 1, itemsPerPage = 10, municipalityName: string): Observable<Event[]> {

@@ -14,7 +14,7 @@
       <app-input-title class="text-[2.6vh]">Título</app-input-title>
       <div class="flex items-center">
         <input required placeholder="Título do evento" type="text" id="title" formControlName="title" name="title"
-               class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+               class="input w-full h-12 lg:h-14" />
       </div>
       <div class="text-red-500 font-bold py-2" *ngIf="title?.touched && title?.invalid ">
         <div *ngIf="title?.errors?.['required'] ">Título Obrigatório</div>
@@ -24,7 +24,7 @@
       <app-input-title class="text-[2.6vh]">Número máximo de participantes</app-input-title>
       <div class="flex items-center">
         <input required placeholder="Capacidade do evento" type="number" id="capacity" formControlName="capacity" name="capacity"
-               class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+               class="input w-full h-12 lg:h-14 " />
       </div>
       <div class="text-red-500 font-bold py-2" *ngIf="capacity?.touched && capacity?.invalid">
         <div *ngIf="capacity?.errors?.['required'] ">Capacidade Obrigatória</div>
@@ -41,16 +41,14 @@
 
       <app-datetimepicker [titleDate]="'Período de Inscrição'" [formGroup]="eventForm"
                           [StartHourPlaceholder]="'Início de Incrição'" [EndHourPlaceholder]="'Fim de Inscrição'"
-                          [startDateReceived]="startRegistrationDate" [endDateReceived]="endRegistrationDate"
-                          [startHourReceived]="startRegistrationHour" [endHourReceived]="endRegistrationHour" />
+                          [formReceived]="eventRegistration" />
     </div>
 
     <div class="w-full lg:w-5/12 mb-4 p-6 shadow-2xl rounded-xl">
 
       <app-datetimepicker [titleDate]="'Período de Evento'" [formGroup]="eventForm"
                           [StartHourPlaceholder]="'Início do Evento'" [EndHourPlaceholder]="'Fim do Evento'"
-                          [startDateReceived]="startDate" [endDateReceived]="endDate"
-                          [startHourReceived]="startHour" [endHourReceived]="endHour" />
+                          [formReceived]="eventDate" />
     </div>
   </div>
   <div class="flex items-center justify-between ">
@@ -58,7 +56,7 @@
       <app-input-title class="text-[2.6vh]">Localização</app-input-title>
       <div class="flex items-center">
         <input required placeholder="Localização do evento" type="text" id="local" formControlName="local" name="local"
-               class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+               class="input w-full h-12 lg:h-14 " />
       </div>
       <div class="text-red-500 font-bold py-2" *ngIf="local?.touched && local?.invalid ">
         <div *ngIf="local?.errors?.['required'] ">Local Obrigatório</div>
@@ -83,8 +81,7 @@
     <app-input-title class="text-[2.6vh]">Descrição</app-input-title>
     <div class="flex items-center">
       <textarea required placeholder="Descrição do evento" id="description" formControlName="description" name="description"
-                class="input w-full h-30 lg:h-60 focus-visible:ring-municip-blue focus-visible:ring-[1.5px]
-                focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500
+                class="input w-full h-30 lg:h-60
                 resize-none">
       </textarea>
     </div>
@@ -92,17 +89,27 @@
       <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatório</div>
     </div>
   </div>
-  <div class="flex flex-1 justify-end mt-12">
-    <button type="submit" [disabled]="!eventForm.valid"
-            class="self-end h-auto w-[10rem] flex justify-center items-center font-semibold
+  <div class="flex mt-12">
+
+    <button class="border-municip-gray border-2 rounded-md p-4 text-lg h-fit
+            hover:bg-municip-blank  transition duration-700 ease-in-out
+            hover:border-municip-blue text-municip-highlight-black"
+            (click)="cancel()">
+      Cancelar
+    </button>
+    <div class="flex flex-1 justify-end ">
+      <button type="submit" [disabled]="!eventForm.valid"
+              class="self-end h-auto w-fit px-4 flex justify-center items-center font-semibold
           text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
 border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg
           transition duration-700 ease-in-out
             disabled:cursor-not-allowed
             ">
-      Criar Evento
-      <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-    </button>
+        Submeter Alterações
+        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+      </button>
+    </div>
+
   </div>
 
 
