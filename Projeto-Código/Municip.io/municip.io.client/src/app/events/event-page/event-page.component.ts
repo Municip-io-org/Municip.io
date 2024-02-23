@@ -10,10 +10,8 @@ import { EventsService, Event } from '../../services/events/events.service';
   styleUrl: './event-page.component.css'
 })
 export class EventPageComponent {
-  selectedEvent: string = 'Nenhum evento selecionado';
 
   event: Event = {
-    id: 'Sem Id',
     title: 'Sem Titulo',
     capacity: 0,
     nRegistrations: 0,
@@ -24,7 +22,7 @@ export class EventPageComponent {
     local: 'Sem Local',
     image: 'Sem Imagem',
     description: 'Sem Descrição'
-  };;
+  };
 
   municipality: Municipality = {
     name: '',
@@ -63,10 +61,7 @@ export class EventPageComponent {
   constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.selectedEvent = this.activatedRoute.snapshot.params['selectedEvent'];
-
-    console.log("Evento selecionado:" + this.selectedEvent);
-
+    this.event = this.activatedRoute.snapshot.data['event'];
 
     this.userAuthService.getUserData().subscribe(
       res => {
@@ -90,17 +85,6 @@ export class EventPageComponent {
                 this.municipality = municipalityRes;
 
                 console.log("municipality", this.municipality);
-
-
-                this.eventsService.getEventById(this.selectedEvent).subscribe(
-                  (eventRes: Event) => {
-                    this.event = eventRes;
-                  },
-                  error => {
-                    console.error(error);
-                  }
-                );
-
               },
               error => {
                 console.error(error);

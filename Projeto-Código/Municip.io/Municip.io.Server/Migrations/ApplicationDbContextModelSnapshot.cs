@@ -341,9 +341,6 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("nRegistrations")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Events");
