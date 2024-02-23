@@ -7,7 +7,7 @@
 
 <div class="flex justify-center items-center pt-11 ">
   <div class="flex-grow">
-    <form [formGroup]="newsCreate" (ngSubmit)="OnSubmit()" class="mx-[5%] w-[70%]">
+    <form [formGroup]="newsCreateForm" (ngSubmit)="OnSubmit()" class="mx-[5%] w-[70%]">
       <div *ngIf="errors" class=" text-red-500 text-sm font-bold space-y-2 text-start">
         <div *ngFor="let error of errors">
           <p>{{error}}</p>
@@ -15,7 +15,6 @@
       </div>
       <div class="py-[1vh] w-full">
         <section class="flex flex-col text-left space-y-7 pl-[25rem]">
-
           <div class="w-full lg:w-[90%] mb-4 ml-1/3">
             <app-input-title class="text-[2.6vh] ml-1/4">Titulo</app-input-title>
             <div class="flex items-center">
