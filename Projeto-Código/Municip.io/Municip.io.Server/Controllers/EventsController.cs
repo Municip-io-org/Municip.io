@@ -22,7 +22,7 @@ namespace Municip.io.Server.Controllers
             {
                 if (newEvent.Capacity == 0)
                 {
-                    newEvent.Capacity = 10;
+                    newEvent.Capacity = 1;
                 }
 
 

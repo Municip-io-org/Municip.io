@@ -54,7 +54,7 @@ export class CreateEventComponent implements OnInit {
 
   eventForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    capacity: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(10)]),
+    capacity: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1)]),
     startDate: new FormControl('', [Validators.required]),
     startHour: new FormControl('', [Validators.required]),
     endDate: new FormControl('', [Validators.required]),
