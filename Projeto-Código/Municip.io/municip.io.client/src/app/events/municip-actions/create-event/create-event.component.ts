@@ -125,10 +125,6 @@ export class CreateEventComponent implements OnInit {
 
 
   OnSubmit() {
-    //create a new object of type event and put the date and time in the same variable
-
-
-
     if (this.eventForm.valid) {
 
       let newStartDate = this.createDateTime(new Date(this.startDate?.value || ""), this.startHour?.value || "");
