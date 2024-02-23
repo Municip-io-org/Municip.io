@@ -21,6 +21,8 @@ namespace Municip.io.Server.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
                 base(options)
             { }
+   
+public DbSet<Municip.io.Server.Models.News> News { get; set; } = default!;
         }
 
 

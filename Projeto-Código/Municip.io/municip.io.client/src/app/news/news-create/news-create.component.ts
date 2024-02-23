@@ -19,7 +19,7 @@ export class NewsCreateComponent {
   errors: string[] | null = null;
   image!: File;
   subtitleCharacterCount = 0;
-  mainTextCharacterCount =0;
+  mainTextCharacterCount = 0;
 
   constructor() { }
 
