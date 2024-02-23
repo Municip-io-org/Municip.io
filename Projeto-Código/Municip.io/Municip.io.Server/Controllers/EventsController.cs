@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 
@@ -35,6 +36,50 @@ namespace Municip.io.Server.Controllers
         {
             var events = _context.Events;
             return Json(events);
+        }
+
+        [HttpGet("GetEventsByMunicipality")]
+        public IActionResult GetEventsByMunicipality(string municipalityName)
+        {
+            if (!ModelState.IsValid)
+            {
+                var validationErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                return BadRequest(new { Message = "Erro de Validação", Errors = validationErrors });
+
+            }
+
+            var events = _context.Events;
+            var municipalityEvents = events.Where(e => e.Municipality == municipalityName);
+
+            if (municipalityEvents.IsNullOrEmpty())
+            {
+                return NotFound(new { message = "Events from " + municipalityName + " Not Found" });
+            }
+
+            return Json(municipalityEvents);
+        }
+
+        [HttpGet("GetEventById")]
+        public IActionResult GetEventById(int eventId)
+        {
+            if (!ModelState.IsValid)
+            {
+                var validationErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                return BadRequest(new { Message = "Erro de Validação", Errors = validationErrors });
+
+            }
+
+            var events = _context.Events;
+            var eventById = events.Where(e => e.Id == eventId).FirstOrDefault();
+
+            if (eventById == null)
+            {
+                return NotFound(new { message = "Not Found any event with id: " + eventId });
+            }
+
+
+
+            return Json(eventById);
         }
 
         [HttpPost("EnrollCitizen")]

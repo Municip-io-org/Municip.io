@@ -3,6 +3,7 @@ import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { EventsService, Event } from '../../services/events/events.service';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-municipal-events',
@@ -43,7 +44,7 @@ export class MunicipalEventsComponent {
   itemsPerPage = 6;
   
 
-  constructor(private userAuthService: UserAuthService, private eventsService: EventsService) { }
+  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router) { }
 
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
@@ -92,7 +93,7 @@ export class MunicipalEventsComponent {
 
   loadData() {
     this.toggleLoading();
-    this.eventsService.getItems(this.currentPage, this.itemsPerPage).subscribe({
+    this.eventsService.getEventByPagination(this.currentPage, this.itemsPerPage, this.municipality.name).subscribe({
       next: res => this.events = res,
       error: err => console.log(err),
       complete: () => this.toggleLoading(),
@@ -103,12 +104,15 @@ export class MunicipalEventsComponent {
     this.currentPage++;
 
     this.toggleLoading();
-    this.eventsService.getItems(this.currentPage, this.itemsPerPage).subscribe({
+    this.eventsService.getEventByPagination(this.currentPage, this.itemsPerPage, this.municipality.name).subscribe({
       next: res => this.events = [...this.events, ...res],
       error: err => console.log(err),
       complete: () => this.toggleLoading(),
     });
   } 
 
-  
+  goToEventPage(eventId: string) {
+    this.router.navigateByUrl(`/events/${eventId}`);
+  }
+
 }

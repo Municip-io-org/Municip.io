@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { UserAuthService } from '../../services/user-auth.service';
+import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { Municipality } from '../../services/municipal-admin-auth.service';
+import { EventsService, Event } from '../../services/events/events.service';
 
 @Component({
   selector: 'app-event-page',
@@ -8,15 +10,116 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './event-page.component.css'
 })
 export class EventPageComponent {
-  selectedEvent: String = 'Nenhum evento selecionado';
+  selectedEvent: string = 'Nenhum evento selecionado';
+
+  event: Event = {
+    id: 'Sem Id',
+    title: 'Sem Titulo',
+    capacity: 0,
+    nRegistrations: 0,
+    startDate: new Date(),
+    endDate: new Date(),
+    startRegistration: new Date(),
+    endRegistration: new Date(),
+    local: 'Sem Local',
+    image: 'Sem Imagem',
+    description: 'Sem Descrição'
+  };;
+
+  municipality: Municipality = {
+    name: '',
+    president: '',
+    contact: '',
+    description: '',
+    areaha: '',
+    codigo: '',
+    codigopostal: '',
+    codigoine: '',
+    descpstal: '',
+    distrito: '',
+    eleitores: '',
+    email: '',
+    fax: '',
+    localidade: '',
+    nif: '',
+    populacao: '',
+    rua: '',
+    sitio: '',
+    telefone: '',
+    emblemPhoto: '',
+    landscapePhoto: '',
+  };
+
+  user: any;
+  isMunAdmin: boolean = false;
+
+  events: Event[] = [];
+  isLoading = false;
+  currentPage = 1;
+  itemsPerPage = 6;
 
 
-  constructor(private userAuthService: UserAuthService, private router: ActivatedRoute) { }
+
+  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.selectedEvent = this.router.snapshot.params['selectedEvent'];
+    this.selectedEvent = this.activatedRoute.snapshot.params['selectedEvent'];
 
     console.log("Evento selecionado:" + this.selectedEvent);
 
+
+    this.userAuthService.getUserData().subscribe(
+      res => {
+        let anyUser: any;
+        anyUser = res;
+        this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
+          async (res: any) => {
+            this.user = res;
+            console.log("user", this.user);
+
+
+            const userRole = await this.userAuthService.getUserRole().toPromise();
+            console.log(userRole);
+            if (userRole!.role === Roles.Municipal) {
+              console.log("É admin municipal")
+              this.isMunAdmin = true;
+            }
+
+            this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
+              (municipalityRes: Municipality) => {
+                this.municipality = municipalityRes;
+
+                console.log("municipality", this.municipality);
+
+
+                this.eventsService.getEventById(this.selectedEvent).subscribe(
+                  (eventRes: Event) => {
+                    this.event = eventRes;
+                  },
+                  error => {
+                    console.error(error);
+                  }
+                );
+
+              },
+              error => {
+                console.error(error);
+              }
+            );
+
+            
+          },
+          error => {
+            console.error(error);
+          }
+        );
+      },
+      error => {
+        console.error(error);
+      }
+    );
   }
+
+
 }
+
