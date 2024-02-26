@@ -5,7 +5,8 @@
 
 
 <ng-container *ngIf="isDialogOpen">
-  <app-one-button-dialog (confirm)="closeDialog()" title="Sucesso" message="Operação realizada com sucesso"></app-one-button-dialog>
+  <app-dialog-message (confirm)="closeDialog()" title="Sucesso" message="Operação realizada com sucesso"
+                      [isConfirm]=true></app-dialog-message>
 </ng-container>
 
 <form [formGroup]="eventForm" (ngSubmit)="OnSubmit()" class="px-32 mb-32 mt-10">
@@ -106,8 +107,7 @@
     <button class="border-municip-gray border-2 rounded-md p-4 text-lg h-fit
             hover:bg-municip-blank  transition duration-700 ease-in-out
             hover:border-municip-blue text-municip-highlight-black"
-            (click)="cancel()"
-            >
+            (click)="cancel()">
       Cancelar
     </button>
     <div class="flex flex-1 justify-end ">

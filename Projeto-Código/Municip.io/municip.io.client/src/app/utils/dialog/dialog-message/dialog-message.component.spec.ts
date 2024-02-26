@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OneButtonDialogComponent } from './one-button-dialog.component';
+import { DialogMessageComponent } from './dialog-message.component';
 
-describe('OneButtonDialogComponent', () => {
-  let component: OneButtonDialogComponent;
-  let fixture: ComponentFixture<OneButtonDialogComponent>;
+describe('DialogMessageComponent', () => {
+  let component: DialogMessageComponent;
+  let fixture: ComponentFixture<DialogMessageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OneButtonDialogComponent]
+      declarations: [DialogMessageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(OneButtonDialogComponent);
+    fixture = TestBed.createComponent(DialogMessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

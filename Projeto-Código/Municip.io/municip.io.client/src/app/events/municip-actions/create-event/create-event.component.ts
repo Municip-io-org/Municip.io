@@ -165,7 +165,8 @@ export class CreateEventComponent implements OnInit {
         local: this.local?.value || "",
         description: this.description?.value || "",
         citizens: [],
-        municipality: this.municipalityName
+        municipality: this.municipalityName,
+        image: '',
       }
 
       this.eventService.createEvent(newEvent, this.photo).subscribe(

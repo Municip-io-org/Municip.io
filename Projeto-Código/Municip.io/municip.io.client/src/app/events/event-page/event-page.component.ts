@@ -22,7 +22,9 @@ export class EventPageComponent {
     endRegistration: new Date(),
     local: 'Sem Local',
     image: 'Sem Imagem',
-    description: 'Sem Descrição'
+    description: 'Sem Descrição',
+    citizens: [],
+    municipality : ''
   };
 
   municipality: Municipality = {

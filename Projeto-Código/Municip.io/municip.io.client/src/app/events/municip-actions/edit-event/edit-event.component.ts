@@ -24,7 +24,7 @@ export class EditEventComponent implements OnInit {
 
   imagePreview: string = "";
 
-  eventSelected: Event | null = null;
+  eventSelected!: Event;
 
   isDialogOpen: boolean = false;
 
@@ -179,16 +179,15 @@ export class EditEventComponent implements OnInit {
         id: this.eventSelected!.id,
         title: this.title?.value || "",
         capacity: parseInt(this.capacity?.value || "10"),
-        nRegistrations: 0,
         startDate: newStartDate,
         endDate: newEndDate,
         startRegistration: newStartRegistrationDate,
         endRegistration: newEndRegistrationDate,
         local: this.local?.value || "",
         description: this.description?.value || "",
-        citizens: [],
-        municipality: this.municipalityName,
-        image: this.eventSelected?.image
+        municipality: this.eventSelected.municipality,
+        image: this.eventSelected.image,
+        nRegistrations: this.eventSelected.nRegistrations,
       }
 
       this.eventService.updateEvent(newEvent, this.photo).subscribe(
@@ -251,8 +250,8 @@ export class EditEventComponent implements OnInit {
 
   closeDialog() {
     this.isDialogOpen = false;
-
   }
+
 
 
 

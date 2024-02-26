@@ -81,8 +81,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { DatetimepickerComponent } from './utils/events/datetimepicker/datetimepicker.component';
 import { EditEventComponent } from './events/municip-actions/edit-event/edit-event.component';
 
-import { TwoButtonsDialogComponent } from './utils/dialog/two-buttons-dialog/two-buttons-dialog.component';
-import { OneButtonDialogComponent } from './utils/dialog/one-button-dialog/one-button-dialog.component';
+import { DialogMessageComponent } from './utils/dialog/dialog-message/dialog-message.component';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -153,9 +152,8 @@ registerLocaleData(localePt, 'pt-PT');
     EventPageComponent,
     DatetimepickerComponent,
     EditEventComponent,
-    TwoButtonsDialogComponent,
-    OneButtonDialogComponent
-    
+    DialogMessageComponent
+
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -176,7 +174,7 @@ registerLocaleData(localePt, 'pt-PT');
     AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
-      
+
     },
     provideAnimationsAsync()
   ],
