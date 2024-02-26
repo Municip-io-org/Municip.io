@@ -11,6 +11,10 @@ import { EventsService, Event } from '../../services/events/events.service';
 })
 export class EventPageComponent {
 
+  isDialogOpen: boolean = false;
+  dialogTitle = '';
+dialogMessage = '';
+
   event: Event = {
     id: '',
     title: 'Sem Titulo',
@@ -105,6 +109,9 @@ export class EventPageComponent {
     );
   }
 
+  closeDialog() {
+    this.isDialogOpen = false;
+  }
 
   goToEditEventPage(eventId: string) {
     this.router.navigateByUrl(`/events/edit/${eventId}`);
@@ -114,12 +121,16 @@ export class EventPageComponent {
     console.log('Inscrição no evento:');
     this.EventsService.enrollEvent(eventId, email).subscribe(
       response => {
-        console.log('Inscrição bem-sucedida:', response);
-       this.event.nRegistrations++;
+        this.isDialogOpen = true;
+this.dialogTitle = 'Inscrição bem-sucedida';
+this.dialogMessage = 'Foi inscrito com sucesso no evento '+this.event.title ;
+        this.event.nRegistrations++;
       },
       error => {
-
-        console.error('Erro ao inscrever :', error);
+        this.isDialogOpen = true;
+        this.dialogTitle = 'Erro na inscrição';
+        this.dialogMessage = error.error.message;
+        console.log(error)
       }
     );
   }

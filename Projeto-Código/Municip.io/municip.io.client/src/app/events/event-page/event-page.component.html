@@ -1,4 +1,10 @@
 <app-header-loggedin></app-header-loggedin>
+
+
+<ng-container *ngIf="isDialogOpen">
+  <app-one-button-dialog [title]="dialogTitle" [message]="dialogMessage" (confirm)="closeDialog()"></app-one-button-dialog>
+</ng-container>
+
 <app-smaller-banner title={{event.title}}
                     image={{municipality.landscapePhoto}}></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
