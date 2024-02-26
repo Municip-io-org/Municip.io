@@ -14,6 +14,7 @@ export class EventPageComponent {
   isDialogOpen: boolean = false;
   dialogTitle = '';
   dialogMessage = '';
+  isSuccesfullEnroll : boolean = false;
 
   event: Event = {
     id: '',
@@ -28,7 +29,7 @@ export class EventPageComponent {
     image: 'Sem Imagem',
     description: 'Sem Descrição',
     citizens: [],
-    municipality : ''
+    municipality: ''
   };
 
   municipality: Municipality = {
@@ -66,7 +67,7 @@ export class EventPageComponent {
 
 
 
-  constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router, private EventsService : EventsService) { }
+  constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router, private EventsService: EventsService) { }
 
   ngOnInit(): void {
     this.event = this.activatedRoute.snapshot.data['event'];
@@ -101,7 +102,7 @@ export class EventPageComponent {
               }
             );
 
-            
+
           },
           error => {
             console.error(error);
@@ -126,12 +127,14 @@ export class EventPageComponent {
     console.log('Inscrição no evento:');
     this.EventsService.enrollEvent(eventId, email).subscribe(
       response => {
+        this.isSuccesfullEnroll = true;
         this.isDialogOpen = true;
-    this.dialogTitle = 'Inscrição bem-sucedida';
-    this.dialogMessage = 'Foi inscrito com sucesso no evento '+this.event.title ;
+        this.dialogTitle = 'Inscrição bem-sucedida';
+        this.dialogMessage = 'Foi inscrito com sucesso no evento ' + this.event.title;
         this.event.nRegistrations++;
       },
       error => {
+        this.isSuccesfullEnroll = false;
         this.isDialogOpen = true;
         this.dialogTitle = 'Erro na inscrição';
         this.dialogMessage = error.error.message;

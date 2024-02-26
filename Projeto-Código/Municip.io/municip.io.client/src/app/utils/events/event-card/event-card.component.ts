@@ -19,7 +19,8 @@ export class EventCardComponent {
     endRegistration: new Date(),
     local: 'Sem Local',
     image: 'Sem Imagem',
-    description: 'Sem Descrição'
+    description: 'Sem Descrição',
+    municipality: 'Sem Municipio'
   };
 
   @Input() isMunAdmin: boolean = false;
