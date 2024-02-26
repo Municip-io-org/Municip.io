@@ -80,6 +80,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { DatetimepickerComponent } from './utils/events/datetimepicker/datetimepicker.component';
 import { EditEventComponent } from './events/municip-actions/edit-event/edit-event.component';
 import { EventCardComponent } from './utils/events/event-card/event-card.component';
+import { EventsListComponent } from './events/my-events/events-list/events-list.component';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -151,6 +152,7 @@ registerLocaleData(localePt, 'pt-PT');
     DatetimepickerComponent,
     EditEventComponent,
     EventCardComponent,
+    EventsListComponent,
     
   ],
   imports: [
