@@ -96,8 +96,8 @@ export interface Event {
   startRegistration: Date;
   endRegistration: Date;
   local: string;
-  image?: string;
+  image: string;
   description: string;
   citizens?: Citizen[];
-  municipality?: string;
+  municipality: string;
 }

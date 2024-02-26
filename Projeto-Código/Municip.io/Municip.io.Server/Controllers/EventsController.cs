@@ -157,7 +157,8 @@ namespace Municip.io.Server.Controllers
             }
 
             var events = _context.Events;
-            var eventById = events.Where(e => e.Id == eventId).FirstOrDefault();
+            var eventById = _context.Events.Where(e => e.Id == eventId).Include(e => e.Citizens);
+
 
             if (eventById == null)
             {
@@ -272,7 +273,7 @@ namespace Municip.io.Server.Controllers
             var citizen = _context.Citizens.FirstOrDefault(c => c.Email == email);
             if (citizen != null)
             {
-                var events = _context.Events.Where(e => e.Citizens.Contains(citizen));
+                var events = _context.Events.Where(e => e.Citizens.Contains(citizen)).Include(e => e.Citizens);
                 return Json(events);
             }
             else

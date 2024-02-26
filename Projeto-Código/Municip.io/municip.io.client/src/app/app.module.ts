@@ -82,8 +82,7 @@ import { EditEventComponent } from './events/municip-actions/edit-event/edit-eve
 import { EventCardComponent } from './utils/events/event-card/event-card.component';
 import { EventsListComponent } from './events/my-events/events-list/events-list.component';
 
-import { TwoButtonsDialogComponent } from './utils/dialog/two-buttons-dialog/two-buttons-dialog.component';
-import { OneButtonDialogComponent } from './utils/dialog/one-button-dialog/one-button-dialog.component';
+import { DialogMessageComponent } from './utils/dialog/dialog-message/dialog-message.component';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -154,8 +153,7 @@ registerLocaleData(localePt, 'pt-PT');
     EventPageComponent,
     DatetimepickerComponent,
     EditEventComponent,
-    TwoButtonsDialogComponent,
-    OneButtonDialogComponent,
+    DialogMessageComponent,
     EventCardComponent,
     EventsListComponent,
     
@@ -179,7 +177,7 @@ registerLocaleData(localePt, 'pt-PT');
     AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
-      
+
     },
     provideAnimationsAsync()
   ],

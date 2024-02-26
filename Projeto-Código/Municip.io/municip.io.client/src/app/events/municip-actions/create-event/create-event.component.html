@@ -3,6 +3,13 @@
 <app-smaller-banner [title]="'Criar Evento'" [image]="municipalityImage"
                     class="font-inter" />
 
+
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-message (confirm)="closeDialog()" title="Sucesso" message="Operação realizada com sucesso"
+                      [isConfirm]=true></app-dialog-message>
+</ng-container>
+
+
 <form [formGroup]="eventForm" (ngSubmit)="OnSubmit()" class="px-32 mb-32 mt-10">
   <div *ngIf="error" class=" text-red-500 text-xl font-bold space-y-2 text-start mb-5">
     <p>{{error}}</p>

@@ -27,7 +27,8 @@ export class EventPageComponent {
     local: 'Sem Local',
     image: 'Sem Imagem',
     description: 'Sem Descrição',
-    citizens: []
+    citizens: [],
+    municipality : ''
   };
 
   municipality: Municipality = {
