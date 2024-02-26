@@ -63,7 +63,7 @@ const routes: Routes = [
   { path: 'events/create', component: CreateEventComponent, data: {} },
   { path: 'events/edit/:id', component: EditEventComponent, data: {} },
   { path: 'events', component: MunicipalEventsComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
-  { path: 'events/:selectedEvent', component: EventPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
+  { path: 'events/:eventId', component: EventPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} },
   { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] },
 ];

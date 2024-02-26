@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 import { EventsService, Event } from '../../services/events/events.service';
 
@@ -12,6 +12,7 @@ import { EventsService, Event } from '../../services/events/events.service';
 export class EventPageComponent {
 
   event: Event = {
+    id: '',
     title: 'Sem Titulo',
     capacity: 0,
     nRegistrations: 0,
@@ -58,7 +59,7 @@ export class EventPageComponent {
 
 
 
-  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private activatedRoute: ActivatedRoute) { }
+  constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.event = this.activatedRoute.snapshot.data['event'];
@@ -104,6 +105,10 @@ export class EventPageComponent {
     );
   }
 
+
+  goToEditEventPage(eventId: string) {
+    this.router.navigateByUrl(`/events/edit/${eventId}`);
+  }
 
 }
 

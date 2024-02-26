@@ -25,12 +25,12 @@ export class UserSameMunicipalityGuard implements CanActivate {
     const userMunicipality = await this.userAuthService.getMunicipality().toPromise();
 
     // Obtém os parâmetros 'eventId' e 'newsId' da rota atual
-    const selectedEvent = next.params['selectedEvent'];
+    const eventId = next.params['eventId'];
     
     const newsId = next.params['newsId'];
 
-    if (selectedEvent) {
-      const event = await this.eventsService.getEventById(selectedEvent).toPromise();
+    if (eventId) {
+      const event = await this.eventsService.getEventById(eventId).toPromise();
 
       if (userMunicipality == event!.municipality) {
         next.data = { event: event! };

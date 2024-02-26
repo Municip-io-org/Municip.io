@@ -4,7 +4,8 @@
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
   <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
     <app-black-btn-icon-text altImage="Editar Evento"
-                             image="/assets/images/icons/pencil-white.png">
+                             image="/assets/images/icons/pencil-white.png"
+                             (buttonClick)="goToEditEventPage(event.id!)">
       Editar evento
     </app-black-btn-icon-text>
   </div>
@@ -15,7 +16,7 @@
     </app-black-btn-icon-text>
   </div>
   <img src={{event.image}} alt="Imagem do evento"
-       class="object-cover w-[60rem] h-[30rem]  rounded-2xl self-center"/>
+       class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center"/>
   <section class="flex -mt-12 text-municip-gray justify-evenly text-[1.063rem] ">
     <div class="flex justify-center gap-x-2 items-center">
       <img src="/assets/images/icons/map.png" class="size-10" />
