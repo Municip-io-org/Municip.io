@@ -29,10 +29,11 @@ export class EditEventComponent implements OnInit {
   isDialogOpen: boolean = false;
 
   constructor(private dateAdapter: DateAdapter<Date>, private authService: UserAuthService,
-    private eventService: EventsService, private route: ActivatedRoute, private router: Router
+    private eventService: EventsService, private route: ActivatedRoute, private router: Router,
   ) {
     // Set the locale to pt in the calendar
     this.dateAdapter.setLocale('pt');
+
   }
 
 
@@ -246,8 +247,21 @@ export class EditEventComponent implements OnInit {
     this.router.navigate(['/events']);
   }
 
+
+
   closeDialog() {
     this.isDialogOpen = false;
+
   }
+
+
+
+
+
+
+
+
+
+
 
 }

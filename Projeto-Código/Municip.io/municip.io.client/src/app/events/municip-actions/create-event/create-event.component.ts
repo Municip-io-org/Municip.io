@@ -3,7 +3,6 @@ import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Event, EventsService } from '../../../services/events/events.service';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 import { UserAuthService } from '../../../services/user-auth.service';
-import { format } from 'date-fns';
 import { Router } from '@angular/router';
 
 
@@ -27,10 +26,11 @@ export class CreateEventComponent implements OnInit {
   error: string | null = null;
   photo!: File;
 
+  isDialogOpen: boolean = false;
 
 
   constructor(private dateAdapter: DateAdapter<Date>, private authService: UserAuthService,
-    private eventService: EventsService, private router: Router
+    private eventService: EventsService, private router: Router,
   ) {
     // Set the locale to pt in the calendar
     this.dateAdapter.setLocale('pt');
@@ -51,7 +51,7 @@ export class CreateEventComponent implements OnInit {
       });
 
     });
-   
+
   }
 
 
@@ -171,6 +171,7 @@ export class CreateEventComponent implements OnInit {
       this.eventService.createEvent(newEvent, this.photo).subscribe(
         (event) => {
           this.error = null;
+          this.isDialogOpen = true;
           console.log(event);
         },
         (error) => {
@@ -217,6 +218,13 @@ export class CreateEventComponent implements OnInit {
   cancel() {
     //redirect to the event list
     this.router.navigate(['/events']);
+  }
+
+
+
+  closeDialog() {
+    this.isDialogOpen = false;
+
   }
 
 
