@@ -54,6 +54,10 @@ export class EventsService {
   }
 
 
+  enrollEvent(eventId: string, email: string) {
+    email=email.replace('@', '%40');
+    return this.http.post<any>(`api/events/EnrollCitizen?eventId=${eventId}&email=${email}`, {});
+  }
 
   getEventByPagination(page = 1, itemsPerPage = 10, municipalityName: string): Observable<Event[]> {
     const startIndex = (page - 1) * itemsPerPage;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 import { EventsService, Event } from '../../services/events/events.service';
 
@@ -10,10 +10,9 @@ import { EventsService, Event } from '../../services/events/events.service';
   styleUrl: './event-page.component.css'
 })
 export class EventPageComponent {
-  selectedEvent: string = 'Nenhum evento selecionado';
 
   event: Event = {
-    id: 'Sem Id',
+    id: '',
     title: 'Sem Titulo',
     capacity: 0,
     nRegistrations: 0,
@@ -24,7 +23,7 @@ export class EventPageComponent {
     local: 'Sem Local',
     image: 'Sem Imagem',
     description: 'Sem Descrição'
-  };;
+  };
 
   municipality: Municipality = {
     name: '',
@@ -60,13 +59,10 @@ export class EventPageComponent {
 
 
 
-  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private activatedRoute: ActivatedRoute) { }
+  constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router, private EventsService : EventsService) { }
 
   ngOnInit(): void {
-    this.selectedEvent = this.activatedRoute.snapshot.params['selectedEvent'];
-
-    console.log("Evento selecionado:" + this.selectedEvent);
-
+    this.event = this.activatedRoute.snapshot.data['event'];
 
     this.userAuthService.getUserData().subscribe(
       res => {
@@ -90,17 +86,6 @@ export class EventPageComponent {
                 this.municipality = municipalityRes;
 
                 console.log("municipality", this.municipality);
-
-
-                this.eventsService.getEventById(this.selectedEvent).subscribe(
-                  (eventRes: Event) => {
-                    this.event = eventRes;
-                  },
-                  error => {
-                    console.error(error);
-                  }
-                );
-
               },
               error => {
                 console.error(error);
@@ -121,5 +106,25 @@ export class EventPageComponent {
   }
 
 
+  goToEditEventPage(eventId: string) {
+    this.router.navigateByUrl(`/events/edit/${eventId}`);
+  }
+
+  enrollInEvent(eventId: string, email: string) {
+    console.log('Inscrição no evento:');
+    this.EventsService.enrollEvent(eventId, email).subscribe(
+      response => {
+        console.log('Inscrição bem-sucedida:', response);
+       this.event.nRegistrations++;
+      },
+      error => {
+
+        console.error('Erro ao inscrever :', error);
+      }
+    );
+  }
 }
+
+
+
 

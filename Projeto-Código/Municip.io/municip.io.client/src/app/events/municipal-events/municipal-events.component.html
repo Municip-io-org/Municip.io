@@ -6,7 +6,8 @@
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]">
   <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
     <app-black-btn-icon-text altImage="Criar evento"
-                             image="/assets/images/icons/plus-white.png">
+                             image="/assets/images/icons/plus-white.png"
+                             (buttonClick)="goToCreateEventPage()">
       Criar Eventos
     </app-black-btn-icon-text>
   </div>
@@ -25,7 +26,8 @@
           <div class="relative flex flex-col font-roboto text-left gap-x-2 max-w-[28rem] text-[1.063rem] bg-white py-7 px-7 ">
             <div *ngIf="isMunAdmin" class="absolute -top-3 -left-3">
               <app-black-btn-icon-text altImage="Editar evento"
-                                       image="/assets/images/icons/pencil-white.png">
+                                       image="/assets/images/icons/pencil-white.png"
+                                       (buttonClick)="goToEditEventPage(event.id!)">
                 Editar
               </app-black-btn-icon-text>
             </div>
@@ -37,7 +39,7 @@
                      class="size-10" />
               </button>
             </div>
-            <img [src]="event.image" alt="Foto do evento" class="object-cover w-[28rem] rounded-3xl" />
+            <img [src]="event.image" alt="Foto do evento" class="object-cover w-[28rem] h-[16rem] rounded-3xl" />
             <p class="text-[0.96rem] text-right font-open-sans font-semibold">{{event.endDate | date: "d/MM/yyyy"}}</p>
             <section class="flex flex-col text-municip-highlight-black ">
               <p class="font-bold text-center text-[2rem]">{{event.title}}</p>
@@ -45,7 +47,7 @@
             </section>
             <div class="flex justify-between items-center font-open-sans font-extrabold pt-4">
               <div class="flex items-center">
-                <img src="/assets/images/icons/user.png" alt="Notícias" class="size-10 mr-2" />
+                <img src="/assets/images/icons/user.png" alt="Número de inscrições" class="size-10 mr-2" />
                {{ event.nRegistrations }}/{{ event.capacity }} inscritos
               </div>
               <app-btn-municip-blue width="10rem"

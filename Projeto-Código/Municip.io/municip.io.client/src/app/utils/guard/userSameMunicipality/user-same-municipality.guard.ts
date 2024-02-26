@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { EventsService, Event } from '../../../services/events/events.service';
 import { UserAuthService } from '../../../services/user-auth.service';
-import { Municipality } from '../../../services/municipal-admin-auth.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,6 @@ import { Municipality } from '../../../services/municipal-admin-auth.service';
 export class UserSameMunicipalityGuard implements CanActivate {
 
   constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router) { }
-
   async canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> {
@@ -23,27 +22,23 @@ export class UserSameMunicipalityGuard implements CanActivate {
       return false;
     }
 
-    const userMunicipality: Municipality = await this.userAuthService.getMunicipality().toPromise();
+    const userMunicipality = await this.userAuthService.getMunicipality().toPromise();
 
     // Obtém os parâmetros 'eventId' e 'newsId' da rota atual
     const eventId = next.params['eventId'];
+    
     const newsId = next.params['newsId'];
 
     if (eventId) {
+      const event = await this.eventsService.getEventById(eventId).toPromise();
 
-      this.eventsService.getEventById(eventId).subscribe(
-        (eventRes: Event) => {
-         /* if (userMunicipality.name == eventRes.mun)*/
-        },
-        error => {
-          console.error(error);
-        }
-      );
-
-      
-      
-      this.router.navigateByUrl(`/events/${eventId}`);
-      return true;
+      if (userMunicipality == event!.municipality) {
+        next.data = { event: event! };
+        return true;
+      } else {
+        this.router.navigateByUrl('/accessDenied');
+        return false;
+      }
     } else if (newsId) {
       this.router.navigateByUrl(`/news/${newsId}`);
       return false;
@@ -53,3 +48,4 @@ export class UserSameMunicipalityGuard implements CanActivate {
     }
   }
 }
+
