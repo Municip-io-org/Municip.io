@@ -63,6 +63,9 @@ export class UserAuthService {
     }).pipe(
       map((res: HttpResponse<string>) => {
         this.setUserDataToStorage(login);
+
+
+        
         return res.ok;
       })
     );
@@ -180,7 +183,12 @@ export class UserAuthService {
     }).pipe(
       map((res: HttpResponse<string>) => {
         if (res.ok) {
-          this.setUserDataToStorage(null); // Limpa os dados do usuário ao sair
+          this.setUserDataToStorage(null);
+          this.setUserMunicipalityToStorage(null);
+          this.setUserRoleToStorage(null);
+          
+          
+
           return true;
         }
         return false;

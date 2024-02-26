@@ -173,48 +173,60 @@ namespace Municip.io.Server.Controllers
         [HttpPost("EnrollCitizen")]
         public IActionResult EnrollCitizen(int eventId, string email)
         {
-            var citizen = _context.Citizens.FirstOrDefault(c => c.Email == email);
-            var evento = _context.Events.FirstOrDefault(e => e.Id == eventId);
-
-
-            if (citizen != null && evento != null && evento.Municipality == citizen.Municipality &&
-                (evento.Citizens == null || evento.Citizens.Find(c => c.Email == email) == null))
+            try
             {
-                evento.Citizens ??= [];
+                var citizen = _context.Citizens.FirstOrDefault(c => c.Email == email);
+                var evento = _context.Events.FirstOrDefault(e => e.Id == eventId);
 
-                if (evento.Citizens.Count < evento.Capacity)
+                if (citizen != null && evento != null && evento.Municipality == citizen.Municipality &&
+                    (evento.Citizens == null || evento.Citizens.Find(c => c.Email == email) == null))
                 {
-                    evento.Citizens.Add(citizen);
-                    evento.NRegistrations=evento.NRegistrations+1;
-                    _context.SaveChanges();
-                    return Ok();
-                   
+                    evento.Citizens ??= [];
+
+                    if (evento.Citizens.Count < evento.Capacity)
+                    {
+
+                        if (evento.Citizens.Find(c => c.Email == email) != null)
+                        {
+                            return BadRequest(new { message = "Cidadão já registado" });
+                        }
+
+                        evento.Citizens.Add(citizen);
+                        evento.NRegistrations = evento.NRegistrations + 1;
+                        _context.SaveChanges();
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest(new { message = "O evento está cheio" });
+                    }
                 }
                 else
                 {
-                    return BadRequest(new { message = "Event is full" });
+                    if (citizen == null)
+                    {
+                        return BadRequest(new { message = "Cidadão não encontrado" });
+                    }
+                    else if (evento == null)
+                    {
+                        return BadRequest(new { message = "Evento não encontrado" });
+                    }
+                    else if (evento.Municipality != citizen.Municipality)
+                    {
+                        return BadRequest(new { message = "O cidadão em causa não pertence ao município" });
+                    }
+                    else
+                    {
+                        return BadRequest(new { message = "Cidadão já registado" });
+                    }
                 }
             }
-            else
+            catch (Exception e)
             {
-                if (citizen == null)
-                {
-                    return BadRequest(new { message = "Citizen not found" });
-                }
-                else if (evento == null)
-                {
-                    return BadRequest(new { message = "Event not found" });
-                }
-                else if (evento.Municipality != citizen.Municipality)
-                {
-                    return BadRequest(new { message = "Citizen does not belong to the municipality" });
-                }
-                else
-                {
-                    return BadRequest(new { message = "Citizen is already enrolled" });
-                }
+                return BadRequest(new { message = "Ocorreu um erro desconhecido ao inscrever o cidadão no evento" });
             }
         }
+
 
 
         //rmove a citizen from an event

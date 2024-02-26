@@ -59,11 +59,22 @@ export class EventsService {
     return this.http.post<any>(`api/events/EnrollCitizen?eventId=${eventId}&email=${email}`, {});
   }
 
-  getEventByPagination(page = 1, itemsPerPage = 10, municipalityName: string): Observable<Event[]> {
+  getPaginationEventByMunicipality(page = 1, itemsPerPage = 10, municipalityName: string): Observable<Event[]> {
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
     return this.http.get<Event[]>(`api/events/GetEventsByMunicipality?municipalityName=${municipalityName}`).pipe(
+      map(municipalityEvents => {
+        return municipalityEvents.slice(startIndex, endIndex);
+      })
+    );
+  }
+
+  getPaginationEventByCitizen(page = 1, itemsPerPage = 10, email: string): Observable<Event[]> {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    return this.http.get<Event[]>(`api/events/GetEventsByCitizen?email=${email}`).pipe(
       map(municipalityEvents => {
         return municipalityEvents.slice(startIndex, endIndex);
       })
