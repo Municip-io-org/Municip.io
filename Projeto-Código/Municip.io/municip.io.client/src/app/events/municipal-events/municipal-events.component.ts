@@ -111,17 +111,13 @@ export class MunicipalEventsComponent {
     });
   } 
 
-  goToEventPage(eventId: string) {
-    this.router.navigateByUrl(`/events/${eventId}`);
-  }
+ 
 
   goToCreateEventPage() {
     this.router.navigateByUrl(`events/create`);
   }
   
 
-  goToEditEventPage(eventId: string) {
-    this.router.navigateByUrl(`/events/edit/${eventId}`);
-  }
+  
 
 }

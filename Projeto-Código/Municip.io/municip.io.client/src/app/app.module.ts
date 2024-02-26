@@ -74,12 +74,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BlackBtnIconTextComponent } from './utils/buttons/black-btn-icon-text/black-btn-icon-text.component';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { EventPageComponent } from './events/event-page/event-page.component';
-
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DatetimepickerComponent } from './utils/events/datetimepicker/datetimepicker.component';
 import { EditEventComponent } from './events/municip-actions/edit-event/edit-event.component';
+import { EventCardComponent } from './utils/events/event-card/event-card.component';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -149,7 +149,8 @@ registerLocaleData(localePt, 'pt-PT');
     BlackBtnIconTextComponent,
     EventPageComponent,
     DatetimepickerComponent,
-    EditEventComponent
+    EditEventComponent,
+    EventCardComponent,
     
   ],
   imports: [
