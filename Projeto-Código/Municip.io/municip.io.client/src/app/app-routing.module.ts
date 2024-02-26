@@ -60,7 +60,7 @@ const routes: Routes = [
   { path: 'municipal/edit', component: MunicipalEditComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'citizen/homePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'events/create', component: CreateEventComponent, data: {} },
-  { path: 'events/edit/:id', component: EditEventComponent, data: {} },
+  { path: 'events/edit/:eventId', component: EditEventComponent, data: {} },
   { path: 'events', component: MunicipalEventsComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'events/:selectedEvent', component: EventPageComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} },

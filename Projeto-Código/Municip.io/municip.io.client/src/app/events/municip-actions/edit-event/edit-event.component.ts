@@ -26,15 +26,13 @@ export class EditEventComponent implements OnInit {
 
   eventSelected: Event | null = null;
 
+  isDialogOpen: boolean = false;
+
   constructor(private dateAdapter: DateAdapter<Date>, private authService: UserAuthService,
     private eventService: EventsService, private route: ActivatedRoute, private router: Router
   ) {
     // Set the locale to pt in the calendar
     this.dateAdapter.setLocale('pt');
-
-
-
-
   }
 
 
@@ -48,7 +46,7 @@ export class EditEventComponent implements OnInit {
       });
 
     });
-    let eventId = this.route.snapshot.params['id'];
+    let eventId = this.route.snapshot.params['eventId'];
     this.eventService.getEventById(eventId).subscribe((event: Event) => {
 
       if (event) {
@@ -194,6 +192,7 @@ export class EditEventComponent implements OnInit {
 
       this.eventService.updateEvent(newEvent, this.photo).subscribe(
         (event) => {
+          this.isDialogOpen = true;
           this.error = null;
           console.log(event);
         },
@@ -244,8 +243,11 @@ export class EditEventComponent implements OnInit {
 
 
   cancel() {
-    //redirect to the event list
     this.router.navigate(['/events']);
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false;
   }
 
 }

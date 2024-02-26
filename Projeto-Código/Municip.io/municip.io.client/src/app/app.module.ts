@@ -81,6 +81,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { DatetimepickerComponent } from './utils/events/datetimepicker/datetimepicker.component';
 import { EditEventComponent } from './events/municip-actions/edit-event/edit-event.component';
 
+import { TwoButtonsDialogComponent } from './utils/dialog/two-buttons-dialog/two-buttons-dialog.component';
+import { OneButtonDialogComponent } from './utils/dialog/one-button-dialog/one-button-dialog.component';
+
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -149,7 +152,9 @@ registerLocaleData(localePt, 'pt-PT');
     BlackBtnIconTextComponent,
     EventPageComponent,
     DatetimepickerComponent,
-    EditEventComponent
+    EditEventComponent,
+    TwoButtonsDialogComponent,
+    OneButtonDialogComponent
     
   ],
   imports: [

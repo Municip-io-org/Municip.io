@@ -266,5 +266,23 @@ namespace Municip.io.Server.Controllers
                 return BadRequest(new { message = "Citizen not found" });
             }
         }
+
+
+
+        [HttpDelete("RemoveEvent")]
+        public IActionResult RemoveEvent(int eventId)
+        {
+            var evento = _context.Events.FirstOrDefault(e => e.Id == eventId);
+            if (evento != null)
+            {
+                _context.Events.Remove(evento);
+                _context.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(new { message = "Event not found" });
+            }
+        }
     }
 }
