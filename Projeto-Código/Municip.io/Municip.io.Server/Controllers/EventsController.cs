@@ -157,7 +157,7 @@ namespace Municip.io.Server.Controllers
             }
 
             var events = _context.Events;
-            var eventById = _context.Events.Where(e => e.Id == eventId).Include(e => e.Citizens);
+            var eventById = _context.Events.Where(e => e.Id == eventId).Include(e => e.Citizens).FirstOrDefault();
 
 
             if (eventById == null)

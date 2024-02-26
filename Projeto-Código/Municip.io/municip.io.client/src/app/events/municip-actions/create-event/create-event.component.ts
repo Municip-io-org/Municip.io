@@ -26,7 +26,7 @@ export class CreateEventComponent implements OnInit {
   error: string | null = null;
   photo!: File;
 
-  isDialogOpen: boolean = false;
+  isDialogOpen: boolean = true;
 
 
   constructor(private dateAdapter: DateAdapter<Date>, private authService: UserAuthService,

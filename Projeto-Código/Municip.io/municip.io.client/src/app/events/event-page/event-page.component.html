@@ -2,7 +2,9 @@
 
 
 <ng-container *ngIf="isDialogOpen">
-  <app-one-button-dialog [title]="dialogTitle" [message]="dialogMessage" (confirm)="closeDialog()"></app-one-button-dialog>
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" (confirm)="closeDialog()"
+                      [isConfirm]="isSuccesfullEnroll"
+                      ></app-dialog-message>
 </ng-container>
 
 <app-smaller-banner title={{event.title}}
@@ -22,7 +24,7 @@
     </app-black-btn-icon-text>
   </div>
   <img src={{event.image}} alt="Imagem do evento"
-       class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center"/>
+       class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center" />
   <section class="flex -mt-12 text-municip-gray justify-evenly text-[1.063rem] ">
     <div class="flex justify-center gap-x-2 items-center">
       <img src="/assets/images/icons/map.png" class="size-10" />
