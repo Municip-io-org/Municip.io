@@ -129,8 +129,10 @@ namespace Municip.io.Server.Controllers
                 if (evento.Citizens.Count < evento.Capacity)
                 {
                     evento.Citizens.Add(citizen);
+                    evento.NRegistrations=evento.NRegistrations+1;
                     _context.SaveChanges();
                     return Ok();
+                   
                 }
                 else
                 {

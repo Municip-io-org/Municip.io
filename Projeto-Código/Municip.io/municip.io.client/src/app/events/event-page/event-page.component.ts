@@ -59,7 +59,7 @@ export class EventPageComponent {
 
 
 
-  constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router, private EventsService : EventsService) { }
 
   ngOnInit(): void {
     this.event = this.activatedRoute.snapshot.data['event'];
@@ -110,5 +110,21 @@ export class EventPageComponent {
     this.router.navigateByUrl(`/events/edit/${eventId}`);
   }
 
+  enrollInEvent(eventId: string, email: string) {
+    console.log('Inscrição no evento:');
+    this.EventsService.enrollEvent(eventId, email).subscribe(
+      response => {
+        console.log('Inscrição bem-sucedida:', response);
+       this.event.nRegistrations++;
+      },
+      error => {
+
+        console.error('Erro ao inscrever :', error);
+      }
+    );
+  }
 }
+
+
+
 

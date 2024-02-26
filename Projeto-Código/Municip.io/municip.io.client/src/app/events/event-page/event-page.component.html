@@ -35,9 +35,9 @@
       </div>
     </div>
     <div class="flex flex-col justify-center items-center space-y-2 font-open-sans font-extrabold text-municip-highlight-black ">
-      <app-btn-municip-blue width="10rem">
+      <app-btn-municip-blue width="10rem" (click)="enrollInEvent(event.id!, user.email)">
         Inscrever
-        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1"  />
       </app-btn-municip-blue>
       <div class="flex items-center ">
         <img src="/assets/images/icons/user.png" alt="Número de inscrições" class="size-10 mr-2" />
