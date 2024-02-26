@@ -35,10 +35,14 @@
       </div>
     </div>
     <div class="flex flex-col justify-center items-center space-y-2 font-open-sans font-extrabold text-municip-highlight-black ">
-      <app-btn-municip-blue width="10rem">
-        Inscrever
-        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-      </app-btn-municip-blue>
+      <p *ngIf="event.nRegistrations >= event.capacity" class="text-red-500">O evento já está lotado</p>
+      <div class="relative">
+        <div *ngIf="event.nRegistrations >= event.capacity" class="absolute rounded inset-0 bg-gray-700 opacity-50"></div>
+        <app-btn-municip-blue width="10rem">
+          Inscrever
+          <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+        </app-btn-municip-blue>
+      </div>
       <div class="flex items-center ">
         <img src="/assets/images/icons/user.png" alt="Número de inscrições" class="size-10 mr-2" />
         {{ event.nRegistrations }}/{{ event.capacity }} inscritos
