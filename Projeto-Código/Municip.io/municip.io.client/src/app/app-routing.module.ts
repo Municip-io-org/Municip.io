@@ -33,6 +33,7 @@ import { CreateEventComponent } from './events/municip-actions/create-event/crea
 import { EventPageComponent } from './events/event-page/event-page.component';
 import { EditEventComponent } from './events/municip-actions/edit-event/edit-event.component';
 import { UserSameMunicipalityGuard } from './utils/guard/userSameMunicipality/user-same-municipality.guard';
+import { EventsListComponent } from './events/my-events/events-list/events-list.component';
 
 
 const routes: Routes = [
@@ -62,10 +63,12 @@ const routes: Routes = [
   { path: 'citizen/homePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'events/create', component: CreateEventComponent, data: {} },
   { path: 'events/edit/:eventId', component: EditEventComponent, data: {} },
+  { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: 'events/myEvents', component: EventsListComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'events', component: MunicipalEventsComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'events/:eventId', component: EventPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} },
-  { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] },
+  
 ];
 
 @NgModule({
