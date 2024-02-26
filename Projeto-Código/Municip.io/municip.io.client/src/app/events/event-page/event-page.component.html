@@ -45,7 +45,7 @@
       <div class="relative">
         <div *ngIf="event.nRegistrations >= event.capacity" class="absolute rounded inset-0 bg-gray-700 opacity-50"></div>
         <app-btn-municip-blue width="10rem" (click)="enrollInEvent(event.id!, user.email)">
-          Inscrever
+          {{ isEnrolled() ? 'Desinscrever' : 'Inscrever' }}
           <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
         </app-btn-municip-blue>
       </div>

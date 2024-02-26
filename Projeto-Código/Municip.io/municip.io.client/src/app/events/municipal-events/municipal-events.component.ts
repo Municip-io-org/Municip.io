@@ -109,6 +109,7 @@ export class MunicipalEventsComponent {
       error: err => console.log(err),
       complete: () => this.toggleLoading(),
     });
+    console.log(this.events);
   } 
 
  

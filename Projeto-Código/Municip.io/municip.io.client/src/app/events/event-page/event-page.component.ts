@@ -13,7 +13,7 @@ export class EventPageComponent {
 
   isDialogOpen: boolean = false;
   dialogTitle = '';
-dialogMessage = '';
+  dialogMessage = '';
 
   event: Event = {
     id: '',
@@ -26,7 +26,8 @@ dialogMessage = '';
     endRegistration: new Date(),
     local: 'Sem Local',
     image: 'Sem Imagem',
-    description: 'Sem Descrição'
+    description: 'Sem Descrição',
+    citizens: []
   };
 
   municipality: Municipality = {
@@ -55,6 +56,7 @@ dialogMessage = '';
 
   user: any;
   isMunAdmin: boolean = false;
+  
 
   events: Event[] = [];
   isLoading = false;
@@ -67,6 +69,8 @@ dialogMessage = '';
 
   ngOnInit(): void {
     this.event = this.activatedRoute.snapshot.data['event'];
+    console.log("EVENTO SELECIONADO");
+    console.log(this.event);
 
     this.userAuthService.getUserData().subscribe(
       res => {
@@ -122,8 +126,8 @@ dialogMessage = '';
     this.EventsService.enrollEvent(eventId, email).subscribe(
       response => {
         this.isDialogOpen = true;
-this.dialogTitle = 'Inscrição bem-sucedida';
-this.dialogMessage = 'Foi inscrito com sucesso no evento '+this.event.title ;
+    this.dialogTitle = 'Inscrição bem-sucedida';
+    this.dialogMessage = 'Foi inscrito com sucesso no evento '+this.event.title ;
         this.event.nRegistrations++;
       },
       error => {
@@ -133,6 +137,14 @@ this.dialogMessage = 'Foi inscrito com sucesso no evento '+this.event.title ;
         console.log(error)
       }
     );
+  }
+
+  isEnrolled(): boolean {
+    
+    for (const citizen of this.event.citizens || []) {
+      if (citizen.email === this.user.email) return true;
+    }
+    return false;
   }
 }
 
