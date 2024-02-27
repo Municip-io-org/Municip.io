@@ -1,8 +1,10 @@
-<app-header />
+<app-header-loggedin></app-header-loggedin>
+
 <app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
                     [title]="'Notícias de ' + (municipalityuser || 'Município')"
                     [text]="'Consulte as notícias relativas ao municipio'">
 </app-smaller-banner>
+
   <div class=" flex justify-center items-center flex-wrap self-center space-y-10 pt-10 pb-10">
     <div *ngFor="let news of newsList">
       <app-news-card 
@@ -16,7 +18,6 @@
       
     </div>
   </div>
- 
    <div *ngIf="role == 'Municipal'" class="flex justify-end pb-10">
      <button type="button" routerLink="/news/news-create" class="relative h-auto w-[11rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
        Criar Nova Notícia
