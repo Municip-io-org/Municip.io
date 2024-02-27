@@ -1,17 +1,24 @@
 <app-header />
 <app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
-                    [title]="'Notícias de blabla'"
+                    [title]="'Notícias de ' + (municipalityuser || 'Município')"
                     [text]="'Consulte as notícias relativas ao municipio'">
 </app-smaller-banner>
   <div class=" flex justify-center items-center flex-wrap self-center space-y-10 pt-10 pb-10">
     <div *ngFor="let news of newsList">
       <app-news-card
-                     title="{{news.title}}"
+                     title={{news.title}}
                      subtitle="{{news.subtitle}}"
-                     image="{{news.image}}"
+                     image="{{news.photo}}"
                      date="{{news.date}}">
       </app-news-card>
       
     </div>
   </div>
+ 
+   <div *ngIf="role == 'Municipal'" class="flex justify-end pb-10">
+     <button type="button" routerLink="/news/news-create" class="relative h-auto w-[11rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+       Criar Nova Notícia
+       <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+     </button>
+   </div>
 <app-footer />

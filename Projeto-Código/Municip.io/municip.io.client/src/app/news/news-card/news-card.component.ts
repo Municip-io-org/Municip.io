@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class NewsCardComponent {
   @Input() title: string= "TITULO da noticia";
   @Input() subtitle: string = "subsubsubsubsubsusbubsubsubsusb";
-  @Input() image: string = "/assets/images/admin/banner.jpg";
+  @Input() image: string = "";
   @Input() date: string = "27/3/2012";
 
 }

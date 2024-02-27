@@ -9,8 +9,8 @@ export class NewsService {
 
   constructor(private http : HttpClient) { }
 
-  getNews(): Observable<News[]> {
-    return this.http.get<News[]>('api/events/GetNews');
+  getNews(municipality: string): Observable<News[]> {
+    return this.http.get<News[]>(`api/news/GetNews?municipality=${municipality}`);
   }
 
   createNews(news: News, image: File): Observable<News> {
