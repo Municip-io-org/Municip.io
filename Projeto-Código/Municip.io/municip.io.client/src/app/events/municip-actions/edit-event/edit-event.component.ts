@@ -20,7 +20,7 @@ export class EditEventComponent implements OnInit {
 
 
   error: string | null = null;
-  photo!: File;
+  photo?: File;
 
   imagePreview: string = "";
 
@@ -47,6 +47,13 @@ export class EditEventComponent implements OnInit {
       });
 
     });
+    this.getEventSelected();
+
+  }
+
+
+  getEventSelected() {
+
     let eventId = this.route.snapshot.params['eventId'];
     this.eventService.getEventById(eventId).subscribe((event: Event) => {
 
@@ -75,8 +82,6 @@ export class EditEventComponent implements OnInit {
         this.imagePreview = event.image || "";
       }
     });
-
-
   }
 
 
@@ -228,7 +233,6 @@ export class EditEventComponent implements OnInit {
   onImagePicked(event: any) {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0]; // Use optional chaining here
-
     if (file) {
       this.photo = file;
       const reader = new FileReader();
@@ -252,6 +256,9 @@ export class EditEventComponent implements OnInit {
 
   closeDialog() {
     this.isDialogOpen = false;
+
+    this.getEventSelected();
+    this.photo = undefined;
   }
 
 
