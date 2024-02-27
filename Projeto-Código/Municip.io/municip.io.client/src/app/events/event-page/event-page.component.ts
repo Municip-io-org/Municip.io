@@ -156,7 +156,7 @@ export class EventPageComponent {
         this.dialogTitle = 'Desistência bem-sucedida';
         this.dialogMessage = 'Desistiu com sucesso do evento ' + this.event.title;
         
-
+        this.isSuccesfullEnroll = true;
         
       },
       error => {
