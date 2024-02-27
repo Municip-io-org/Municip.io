@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './black-btn-icon-text.component.css'
 })
 export class BlackBtnIconTextComponent {
+  @Input() justImage: boolean = false;
   @Input() altImage: string = 'Alt Aqui';
   @Input() image: string = '/assets/images/icons/pencil-white.png';
   @Output() buttonClick: EventEmitter<any> = new EventEmitter();
