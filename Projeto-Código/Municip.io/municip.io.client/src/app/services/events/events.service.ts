@@ -59,7 +59,7 @@ export class EventsService {
     return this.http.post<any>(`api/events/EnrollCitizen?eventId=${eventId}&email=${email}`, {});
   }
 
-  getPaginationEventByMunicipality(page = 1, itemsPerPage = 10, events: Event[]) :Event[] {
+  getPaginationEvent(page = 1, itemsPerPage = 10, events: Event[]) :Event[] {
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     return events.slice(startIndex, endIndex);
@@ -74,6 +74,10 @@ export class EventsService {
         return municipalityEvents.slice(startIndex, endIndex);
       })
     );
+  }
+
+  getEventByCitizen(email: string) {
+    return this.http.get<Event[]>(`api/events/GetEventsByCitizen?email=${email}`)
   }
 
   getEventByMunicipality(municipalityName: string) {

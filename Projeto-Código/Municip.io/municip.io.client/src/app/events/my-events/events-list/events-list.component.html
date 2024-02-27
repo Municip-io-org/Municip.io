@@ -2,17 +2,18 @@
 <app-smaller-banner title="Eventos Inscritos"
                     image={{municipality.landscapePhoto}}></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]">
-  <div *ngIf="events.length === 0"
+  <div *ngIf="showEvents.length === 0"
        class="flex justify-center items-center text-municip-normal-black grow ">
     <p class="text-[3rem] font-semibold">Não está inscrito a nenhum evento.</p>
   </div>
-  <div *ngIf="events.length > 0"
+  <div *ngIf="showEvents.length > 0"
        infiniteScroll
-       [infiniteScrollDistance]="0"
+       [infiniteScrollDistance]="10"
        [infiniteScrollThrottle]="500"
-       (scrolled)="onScrollDown()">
+       (scrolled)="onScrollDown()"
+       [alwaysCallback]="true">
     <section class="flex flex-wrap justify-around gap-16">
-      <ng-container *ngFor="let event of events">
+      <ng-container *ngFor="let event of showEvents">
         <app-event-card [event]="event"></app-event-card>
       </ng-container>
     </section>

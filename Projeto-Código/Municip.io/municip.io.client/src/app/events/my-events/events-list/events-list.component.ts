@@ -51,6 +51,8 @@ export class EventsListComponent {
   };
 
   events: Event[] = [];
+  showEvents: Event[] = [];
+
   isLoading = false;
   currentPage = 1;
   itemsPerPage = 6;
@@ -102,22 +104,33 @@ export class EventsListComponent {
 
   loadData() {
     this.toggleLoading();
-    this.eventsService.getPaginationEventByCitizen(this.currentPage, this.itemsPerPage, this.user.email).subscribe({
-      next: res => this.events = res,
-      error: err => console.log(err),
-      complete: () => this.toggleLoading(),
-    });
+
+    this.eventsService.getEventByCitizen(this.user.email).subscribe(
+      (eventsRes: any) => {
+        this.events = eventsRes as Event[];
+        this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+        this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
+        this.toggleLoading();
+      },
+      error => {
+        console.error(error);
+      }
+    );
+
+    this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
+
+
   }
 
   onScrollDown() {
-    this.currentPage++;
+    if (this.events.length > this.showEvents.length) {
+      console.log("Scroll");
+      console.log((this.events.length > this.showEvents.length));
 
-    this.toggleLoading();
-    this.eventsService.getPaginationEventByCitizen(this.currentPage, this.itemsPerPage, this.user.email).subscribe({
-      next: res => this.events = [...this.events, ...res],
-      error: err => console.log(err),
-      complete: () => this.toggleLoading(),
-    });
+      this.currentPage++;
+      this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
+      this.toggleLoading();
+    }
   } 
 
 }

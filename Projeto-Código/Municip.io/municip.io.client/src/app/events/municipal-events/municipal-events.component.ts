@@ -97,7 +97,7 @@ export class MunicipalEventsComponent {
       (eventsRes: any) => {
         this.events = eventsRes as Event[];
         this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
-        this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEventByMunicipality(this.currentPage, this.itemsPerPage, this.events)];
+        this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
         this.toggleLoading();
       },
       error => {
@@ -105,7 +105,7 @@ export class MunicipalEventsComponent {
       }
     );
 
-    this.showEvents = this.eventsService.getPaginationEventByMunicipality(this.currentPage, this.itemsPerPage, this.events);
+    this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
      
 
   }
@@ -116,7 +116,7 @@ export class MunicipalEventsComponent {
       console.log((this.events.length > this.showEvents.length));
 
       this.currentPage++;
-      this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEventByMunicipality(this.currentPage, this.itemsPerPage, this.events)];
+      this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
       this.toggleLoading();
     }
   } 
