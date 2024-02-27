@@ -12,6 +12,7 @@ import { EventsService, Event } from '../../services/events/events.service';
 export class EventPageComponent {
 
   isDialogOpen: boolean = false;
+  isRemoveEventDialogOpen: boolean = false;
   dialogTitle = '';
   dialogMessage = '';
   isSuccesfullEnroll : boolean = false;
@@ -119,8 +120,8 @@ export class EventPageComponent {
     this.isDialogOpen = false;
   }
 
-  goToEditEventPage(eventId: string) {
-    this.router.navigateByUrl(`/events/edit/${eventId}`);
+  goToEditEventPage() {
+    this.router.navigateByUrl(`/events/edit/${this.event.id}`);
   }
 
   enrollInEvent(eventId: string, email: string) {
@@ -142,6 +143,42 @@ export class EventPageComponent {
       }
     );
   }
+
+  openRemoveEventDialog() {
+    console.log('Remoção do evento:' + this.event.id);
+    this.isRemoveEventDialogOpen = true;
+    this.dialogTitle = 'Deseja apagar o evento ' + this.event.title + '?';
+    this.dialogMessage = 'Confirme a sua ação';
+  }
+
+  closeRemoveEventDialog() {
+    this.isRemoveEventDialogOpen = false;
+  }
+
+  removeEvent() {
+    this.closeRemoveEventDialog();
+    console.log('Remover do evento: ' + this.event.id);
+   
+    this.EventsService.removeEvent(this.event.id!).subscribe(
+      response => {
+        if (response.status === 200) {
+          this.router.navigateByUrl(`/events`);
+        } else { 
+          this.isDialogOpen = true;
+          this.dialogTitle = 'Erro na remoção do evento';
+          this.dialogMessage = 'Ocorreu um erro ao remover o evento';
+        }
+      },
+      error => {
+        console.error('Erro ao remover o evento:', error);
+        this.isDialogOpen = true;
+        this.dialogTitle = 'Erro na remoção do evento';
+        this.dialogMessage = 'Ocorreu um erro ao remover o evento';
+      }
+    );
+  }
+
+
 
   isEnrolled(): boolean {
     

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, of, switchMap } from 'rxjs';
 import { Municipality } from '../municipal-admin-auth.service';
@@ -86,6 +86,10 @@ export class EventsService {
 
   getEventById(eventId: string) {
     return this.http.get<Event>(`api/events/GetEventById?eventId=${eventId}`);
+  }
+
+  removeEvent(eventId: string): Observable<HttpResponse<any>> {
+    return this.http.delete<any>(`api/events/RemoveEvent?eventId=${eventId}`, { observe: 'response' });
   }
 }
 
