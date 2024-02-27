@@ -240,6 +240,7 @@ namespace Municip.io.Server.Controllers
                                               (evento.Citizens != null && evento.Citizens.Find(c => c.Email == email) != null))
             {
                 evento.Citizens.Remove(citizen);
+                evento.NRegistrations = evento.NRegistrations - 1;
                 _context.SaveChanges();
                 return Ok();
             }

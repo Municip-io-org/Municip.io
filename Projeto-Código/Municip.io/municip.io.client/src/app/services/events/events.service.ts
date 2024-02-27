@@ -54,6 +54,11 @@ export class EventsService {
   }
 
 
+  dropOutEvent(eventId: string, email: string) {
+email=email.replace('@', '%40');
+    return this.http.post<any>(`api/events/DropOutCitizen?eventId=${eventId}&email=${email}`, {});
+  }
+
   enrollEvent(eventId: string, email: string) {
     email=email.replace('@', '%40');
     return this.http.post<any>(`api/events/EnrollCitizen?eventId=${eventId}&email=${email}`, {});

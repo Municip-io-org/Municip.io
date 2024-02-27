@@ -52,11 +52,20 @@
       <p *ngIf="event.nRegistrations >= event.capacity" class="text-red-500">O evento já está lotado</p>
       <div class="relative">
         <div *ngIf="event.nRegistrations >= event.capacity" class="absolute rounded inset-0 bg-gray-700 opacity-50"></div>
-        <app-btn-municip-blue width="10rem" (click)="enrollInEvent(event.id!, user.email)">
-          {{ isEnrolled() ? 'Desinscrever' : 'Inscrever' }}
+        <ng-container *ngIf="!isEnrolled()">
+          <app-btn-municip-blue width="10rem" (click)="enrollInEvent(event.id!, user.email)">
+            Inscrever
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          </app-btn-municip-blue>
+        </ng-container>
+      </div>
+
+      <ng-container *ngIf="isEnrolled()">
+        <app-btn-municip-blue width="10rem" (click)="dropOutEvent(event.id!, user.email)">
+          Desinscrever
           <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
         </app-btn-municip-blue>
-      </div>
+      </ng-container>
       <div class="flex items-center ">
         <img src="/assets/images/icons/user.png" alt="Número de inscrições" class="size-10 mr-2" />
         {{ event.nRegistrations }}/{{ event.capacity }} inscritos

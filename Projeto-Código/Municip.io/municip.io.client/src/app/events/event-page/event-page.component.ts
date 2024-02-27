@@ -16,6 +16,7 @@ export class EventPageComponent {
   dialogTitle = '';
   dialogMessage = '';
   isSuccesfullEnroll : boolean = false;
+  
 
   event: Event = {
     id: '',
@@ -118,6 +119,7 @@ export class EventPageComponent {
 
   closeDialog() {
     this.isDialogOpen = false;
+    window.location.reload();
   }
 
   goToEditEventPage() {
@@ -132,12 +134,34 @@ export class EventPageComponent {
         this.isDialogOpen = true;
         this.dialogTitle = 'Inscrição bem-sucedida';
         this.dialogMessage = 'Foi inscrito com sucesso no evento ' + this.event.title;
-        this.event.nRegistrations++;
+        
+
+        
       },
       error => {
         this.isSuccesfullEnroll = false;
         this.isDialogOpen = true;
         this.dialogTitle = 'Erro na inscrição';
+        this.dialogMessage = error.error.message;
+        console.log(error)
+      }
+    );
+  }
+
+  dropOutEvent(eventId: string, email: string) {
+
+    this.EventsService.dropOutEvent(eventId, email).subscribe(
+      response => {
+        this.isDialogOpen = true;
+        this.dialogTitle = 'Desistência bem-sucedida';
+        this.dialogMessage = 'Desistiu com sucesso do evento ' + this.event.title;
+        
+
+        
+      },
+      error => {
+        this.isDialogOpen = true;
+        this.dialogTitle = 'Erro na desistência';
         this.dialogMessage = error.error.message;
         console.log(error)
       }
