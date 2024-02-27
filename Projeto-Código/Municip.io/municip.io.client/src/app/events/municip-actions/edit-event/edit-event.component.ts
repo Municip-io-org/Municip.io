@@ -47,7 +47,9 @@ export class EditEventComponent implements OnInit {
       });
 
     });
-    this.getEventSelected();
+
+    this.eventSelected = this.route.snapshot.data['event'];
+    this.setForm(this.eventSelected);
 
   }
 
@@ -59,30 +61,36 @@ export class EditEventComponent implements OnInit {
 
       if (event) {
         this.eventSelected = event;
-        this.eventForm.setValue({
-          title: event.title,
-          capacity: event.capacity.toString(),
-          eventDate: {
-            startDate: new Date(event.startDate),
-            startHour: format(event.startDate, "HH:mm"),
-            endDate: new Date(event.endDate),
-            endHour: format(event.endDate, "HH:mm"),
-          },
-          eventRegistration: {
-            startDate: new Date(event.startRegistration),
-            startHour: format(event.startRegistration, "HH:mm"),
-            endDate: new Date(event.endRegistration),
-            endHour: format(event.endRegistration, "HH:mm"),
-          },
-          local: event.local,
-          description: event.description,
-          image: ''
-        });
-
-        this.imagePreview = event.image || "";
+        this.setForm(event);
       }
     });
   }
+
+  setForm(event: Event) {
+    this.eventForm.setValue({
+      title: event.title,
+      capacity: event.capacity.toString(),
+      eventDate: {
+        startDate: new Date(event.startDate),
+        startHour: format(event.startDate, "HH:mm"),
+        endDate: new Date(event.endDate),
+        endHour: format(event.endDate, "HH:mm"),
+      },
+      eventRegistration: {
+        startDate: new Date(event.startRegistration),
+        startHour: format(event.startRegistration, "HH:mm"),
+        endDate: new Date(event.endRegistration),
+        endHour: format(event.endRegistration, "HH:mm"),
+      },
+      local: event.local,
+      description: event.description,
+      image: ''
+    });
+
+    this.imagePreview = event.image || "";
+  }
+
+
 
 
 
