@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/comm
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { Municipality } from './municipal-admin-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,9 @@ export class UserAuthService {
     }).pipe(
       map((res: HttpResponse<string>) => {
         this.setUserDataToStorage(login);
+
+
+        
         return res.ok;
       })
     );
@@ -135,11 +139,11 @@ export class UserAuthService {
     }
   }
 
-  getMunicipality(): Observable<any> {
+  getMunicipality(): Observable<string> {
     const municipalityData = this.getUserMunicipalityFromStorage();
     if (municipalityData) {
       console.log("Já tem o municipio!!!!??");
-      return of(municipalityData);
+      return of(municipalityData.municipality);
     } else {
       console.log("VAI BUSCAR Á API O MUNICIPIO");
       return this.getUserData().pipe(
@@ -149,13 +153,12 @@ export class UserAuthService {
             catchError(_ => of(null))
           )
         ),
-        // Retorna somente a propriedade 'municipality' do objeto retornado por getInfoByEmail
         map(result => result?.municipality)
       );
     }
   }
 
-  getInfoMunicipality(nome: string): Observable<any> {
+  getInfoMunicipality(nome: string): Observable<Municipality> {
     return this.http.get<any>(`/api/accounts/InfoMunicipality?name=${nome}`);
   }
 
@@ -180,7 +183,12 @@ export class UserAuthService {
     }).pipe(
       map((res: HttpResponse<string>) => {
         if (res.ok) {
-          this.setUserDataToStorage(null); // Limpa os dados do usuário ao sair
+          this.setUserDataToStorage(null);
+          this.setUserMunicipalityToStorage(null);
+          this.setUserRoleToStorage(null);
+          
+          
+
           return true;
         }
         return false;

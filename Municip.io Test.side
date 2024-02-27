@@ -1,0 +1,404 @@
+{
+  "id": "8b864d39-9231-4e16-8a7c-fecaeef7ee09",
+  "version": "2.0",
+  "name": "Municip.io Test",
+  "url": "https://municip.io:4200",
+  "tests": [{
+    "id": "13345bfd-82bd-45c0-852b-404ee0d246ae",
+    "name": "Create municipality",
+    "commands": [{
+      "id": "0c0c07ff-0218-45c4-bfd5-60a1cca856d1",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "648fbb10-4efd-43a3-82fe-590570a3e7bc",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b4c3cc32-0af3-4ad6-ab45-a7b6c2bb2413",
+      "comment": "",
+      "command": "click",
+      "target": "css=.border-2",
+      "targets": [
+        ["css=.border-2", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Registar-se')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fcad96f6-df20-42a8-84c0-c4e86b2cd5c3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.rounded-\\[10px\\]:nth-child(2) .text-municip-gray",
+      "targets": [
+        ["css=.rounded-\\[10px\\]:nth-child(2) .text-municip-gray", "css:finder"],
+        ["xpath=//button[2]/div/div[2]/p[2]", "xpath:position"],
+        ["xpath=//p[contains(.,'Para representantes autorizados de municípios nacionais')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "25fa6d77-1470-4f4c-a653-bd98415cd82e",
+      "comment": "",
+      "command": "click",
+      "target": "id=firstName",
+      "targets": [
+        ["id=firstName", "id"],
+        ["name=firstName", "name"],
+        ["css=#firstName", "css:finder"],
+        ["xpath=//input[@id='firstName']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a8e12e53-dc51-4632-a9f6-1c6a7165c31e",
+      "comment": "",
+      "command": "type",
+      "target": "id=firstName",
+      "targets": [
+        ["id=firstName", "id"],
+        ["name=firstName", "name"],
+        ["css=#firstName", "css:finder"],
+        ["xpath=//input[@id='firstName']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Testname"
+    }, {
+      "id": "032cbb56-0bd3-4671-9f55-758ae80fcbd1",
+      "comment": "",
+      "command": "type",
+      "target": "id=surname",
+      "targets": [
+        ["id=surname", "id"],
+        ["name=surname", "name"],
+        ["css=#surname", "css:finder"],
+        ["xpath=//input[@id='surname']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "Testsurname"
+    }, {
+      "id": "83a8b4fc-c367-49b6-b462-8e07bb98ead6",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "testselenium@test.com"
+    }, {
+      "id": "5993dc4d-fa34-4f45-a487-71d851f63355",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[4]/div/input", "xpath:position"]
+      ],
+      "value": "1qaz\"WSX"
+    }, {
+      "id": "66686255-43cf-488d-b648-6e2cfabf0099",
+      "comment": "",
+      "command": "click",
+      "target": "id=municipality",
+      "targets": [
+        ["id=municipality", "id"],
+        ["name=municipality", "name"],
+        ["css=#municipality", "css:finder"],
+        ["xpath=//select[@id='municipality']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a17f31f-b585-4298-a8c4-1a3f2df85706",
+      "comment": "",
+      "command": "select",
+      "target": "id=municipality",
+      "targets": [],
+      "value": "label=Almada"
+    }, {
+      "id": "9df6c7b8-b03a-4931-939d-74de8d28153a",
+      "comment": "",
+      "command": "click",
+      "target": "id=photo",
+      "targets": [
+        ["id=photo", "id"],
+        ["name=photo", "name"],
+        ["css=#photo", "css:finder"],
+        ["xpath=//input[@id='photo']", "xpath:attributes"],
+        ["xpath=//div[6]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "038e3af7-6438-4185-86fc-dcf036c351f6",
+      "comment": "",
+      "command": "type",
+      "target": "id=photo",
+      "targets": [
+        ["id=photo", "id"],
+        ["name=photo", "name"],
+        ["css=#photo", "css:finder"],
+        ["xpath=//input[@id='photo']", "xpath:attributes"],
+        ["xpath=//div[6]/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\Utilizador\\Desktop\\4fE6Ncm.jpeg"
+    }, {
+      "id": "32bc8656-96a1-4daa-b5b9-e1046badd50f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.top-\\[1rem\\]",
+      "targets": [
+        ["css=.top-\\[1rem\\]", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continuar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "020db889-3475-469c-bf9f-699d83e18104",
+      "comment": "",
+      "command": "click",
+      "target": "id=president",
+      "targets": [
+        ["id=president", "id"],
+        ["name=v", "name"],
+        ["css=#president", "css:finder"],
+        ["xpath=//input[@id='president']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "16336098-f7e0-4045-9cbd-a0f27108952e",
+      "comment": "",
+      "command": "type",
+      "target": "id=president",
+      "targets": [
+        ["id=president", "id"],
+        ["name=v", "name"],
+        ["css=#president", "css:finder"],
+        ["xpath=//input[@id='president']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "PresidenteTest"
+    }, {
+      "id": "7e993cdf-2b14-4b7b-9d14-c61c5363e00c",
+      "comment": "",
+      "command": "type",
+      "target": "id=contact",
+      "targets": [
+        ["id=contact", "id"],
+        ["name=contact", "name"],
+        ["css=#contact", "css:finder"],
+        ["xpath=//input[@id='contact']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "931234567"
+    }, {
+      "id": "718bac01-f4d0-4adf-8195-11d20598200d",
+      "comment": "",
+      "command": "click",
+      "target": "id=emblemPhoto",
+      "targets": [
+        ["id=emblemPhoto", "id"],
+        ["name=emblemPhoto", "name"],
+        ["css=#emblemPhoto", "css:finder"],
+        ["xpath=//input[@id='emblemPhoto']", "xpath:attributes"],
+        ["xpath=//section[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f2cf7f6d-c3c8-4c91-b155-9cfa5ee94fdd",
+      "comment": "",
+      "command": "type",
+      "target": "id=emblemPhoto",
+      "targets": [
+        ["id=emblemPhoto", "id"],
+        ["name=emblemPhoto", "name"],
+        ["css=#emblemPhoto", "css:finder"],
+        ["xpath=//input[@id='emblemPhoto']", "xpath:attributes"],
+        ["xpath=//section[2]/div/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\Utilizador\\Desktop\\4fE6Ncm.jpeg"
+    }, {
+      "id": "5121a701-308f-4d4a-b5be-4eb43d4cb475",
+      "comment": "",
+      "command": "click",
+      "target": "id=landscapePhoto",
+      "targets": [
+        ["id=landscapePhoto", "id"],
+        ["name=landscapePhoto", "name"],
+        ["css=#landscapePhoto", "css:finder"],
+        ["xpath=//input[@id='landscapePhoto']", "xpath:attributes"],
+        ["xpath=//section[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "df54e22a-1ce2-4091-8c8a-be4a60c22408",
+      "comment": "",
+      "command": "type",
+      "target": "id=landscapePhoto",
+      "targets": [
+        ["id=landscapePhoto", "id"],
+        ["name=landscapePhoto", "name"],
+        ["css=#landscapePhoto", "css:finder"],
+        ["xpath=//input[@id='landscapePhoto']", "xpath:attributes"],
+        ["xpath=//section[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\Utilizador\\Desktop\\4fE6Ncm.jpeg"
+    }, {
+      "id": "ef51b74d-ab19-4c8e-90fd-bdd324ea8bd3",
+      "comment": "",
+      "command": "click",
+      "target": "id=description",
+      "targets": [
+        ["id=description", "id"],
+        ["name=description", "name"],
+        ["css=#description", "css:finder"],
+        ["xpath=//textarea[@id='description']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "90a36ff5-f07c-4431-843f-e34a95514094",
+      "comment": "",
+      "command": "type",
+      "target": "id=description",
+      "targets": [
+        ["id=description", "id"],
+        ["name=description", "name"],
+        ["css=#description", "css:finder"],
+        ["xpath=//textarea[@id='description']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Este é um texto informativo relativo à câmara municipal de Almada. "
+    }, {
+      "id": "8b8dc8a4-560f-40d0-93f3-c5310d1bafd8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.top-\\[1rem\\]",
+      "targets": [
+        ["css=.top-\\[1rem\\]", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Finalizar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6add93b7-7e36-4c87-9168-7d1c22ca32e0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-\\[13rem\\]",
+      "targets": [
+        ["css=.w-\\[13rem\\]", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continuar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "969eba51-5568-454c-9096-92ea636dc1e2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-black",
+      "targets": [
+        ["css=.bg-black", "css:finder"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Entrar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6fe2800e-6560-4b47-92a1-8bb935936260",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.bg-black",
+      "targets": [
+        ["css=.bg-black", "css:finder"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Entrar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "446375aa-8ffb-4b74-b318-53bce43f4fe4",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.bg-black",
+      "targets": [
+        ["css=.bg-black", "css:finder"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Entrar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "52e94daf-bdb7-4984-81df-9d55d33e8377",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4e6931c4-15f7-4c74-8f2b-4f548e372a43",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testselenium@test.com"
+    }, {
+      "id": "89b99876-700e-4a70-9845-ba1fd369491c",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "1qaz\"WSX"
+    }, {
+      "id": "e54fc522-a58c-44f2-a402-13236acd4dbb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.h-auto",
+      "targets": [
+        ["css=.h-auto", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Entrar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "51064974-307f-4f9a-8a52-00b506e4355c",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["13345bfd-82bd-45c0-852b-404ee0d246ae"]
+  }],
+  "urls": ["https://municip.io:4200/"],
+  "plugins": []
+}

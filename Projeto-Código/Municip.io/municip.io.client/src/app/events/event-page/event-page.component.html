@@ -1,0 +1,79 @@
+<app-header-loggedin></app-header-loggedin>
+
+
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" (confirm)="closeDialog()"
+                      [isConfirm]="isSuccesfullEnroll"
+                      ></app-dialog-message>
+</ng-container>
+
+<ng-container *ngIf="isRemoveEventDialogOpen">
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" [twoButtons]="true"  (confirm)="removeEvent()" (cancel)="closeRemoveEventDialog()" 
+                      [isConfirm]="false"></app-dialog-message>
+</ng-container>
+
+<app-smaller-banner title={{event.title}}
+                    image={{municipality.landscapePhoto}}></app-smaller-banner>
+<div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
+  <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
+    <app-black-btn-icon-text altImage="Editar Evento"
+                             image="/assets/images/icons/pencil-white.png"
+                             (buttonClick)="goToEditEventPage()">
+      Editar evento
+    </app-black-btn-icon-text>
+  </div>
+  <div *ngIf="isMunAdmin" class="absolute -top-3 left-[20rem] text-[1.063rem] font-roboto flex justify-center items-center">
+    <app-black-btn-icon-text altImage="Remover Evento"
+                             image="/assets/images/icons/delete-white.png"
+                             (buttonClick)="openRemoveEventDialog()">
+      Remover Evento
+    </app-black-btn-icon-text>
+  </div>
+  <img src={{event.image}} alt="Imagem do evento"
+       class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center" />
+  <section class="flex -mt-12 text-municip-gray justify-evenly text-[1.063rem] ">
+    <div class="flex justify-center gap-x-2">
+      <img src="/assets/images/icons/map.png" class="size-10" />
+      <p class="text-municip-highlight-black font-semibold pt-[0.8rem]">{{event.local}}</p>
+    </div>
+    <div class="flex flex-col gap-y-4">
+      <div>
+        <p class="font-semibold text-center text-municip-highlight-black">Período de inscrição</p>
+        <p>Início das Inscrições: {{ event.startRegistration | date: "dd/MM/yyyy 'às' HH:mm" }}</p>
+        <p>Fim das Inscrições: {{ event.endRegistration | date: "dd/MM/yyyy 'às' HH:mm" }}</p>
+      </div>
+      <div>
+        <p class="font-semibold text-center text-municip-highlight-black">Período do Evento</p>
+        <p>Começo do Evento: {{ event.startDate | date: "dd/MM/yyyy 'às' HH:mm" }}</p>
+        <p>Fim do Evento: {{ event.endDate | date: "dd/MM/yyyy 'às' HH:mm" }}</p>
+      </div>
+    </div>
+    <div class="flex flex-col space-y-2 font-open-sans font-extrabold text-municip-highlight-black ">
+      <p *ngIf="event.nRegistrations >= event.capacity" class="text-red-500">O evento já está lotado</p>
+      <div class="relative">
+        <div *ngIf="event.nRegistrations >= event.capacity" class="absolute rounded inset-0 bg-gray-700 opacity-50"></div>
+        <ng-container *ngIf="!isEnrolled()">
+          <app-btn-municip-blue width="10rem" (click)="enrollInEvent(event.id!, user.email)">
+            Inscrever
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          </app-btn-municip-blue>
+        </ng-container>
+      </div>
+
+      <ng-container *ngIf="isEnrolled()">
+        <app-btn-municip-blue width="10rem" (click)="dropOutEvent(event.id!, user.email)">
+          Desinscrever
+          <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+        </app-btn-municip-blue>
+      </ng-container>
+      <div class="flex items-center ">
+        <img src="/assets/images/icons/user.png" alt="Número de inscrições" class="size-10 mr-2" />
+        {{ event.nRegistrations }}/{{ event.capacity }} inscritos
+      </div>
+    </div>
+  </section>
+  <section class="text-left text-municip-normal-black text-[1.25rem] px-[3rem] pb-[3rem]">
+    {{event.description}}
+  </section>
+</div>
+<app-footer></app-footer>

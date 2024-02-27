@@ -1,0 +1,55 @@
+<div [formGroup]="componentForm">
+  <div class="h-40">
+    <app-input-title class="text-[2.6vh]">{{titleDate}}</app-input-title>
+    <mat-form-field class="inputRange w-full">
+      <mat-date-range-input [formGroup]="componentForm" [rangePicker]="pickerEventDate">
+        <input matStartDate formControlName="startDate" placeholder="Data de Início">
+        <input matEndDate formControlName="endDate" placeholder="  Data de Fim">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="pickerEventDate"></mat-datepicker-toggle>
+      <mat-date-range-picker #pickerEventDate></mat-date-range-picker>
+    </mat-form-field>
+    <div class="text-red-500 font-bold py-2" *ngIf="(startDate?.touched && startDate?.invalid) || (endDate?.touched && endDate?.invalid)">
+      <div *ngIf="startDate?.errors?.['matStartDateInvalid'] ">Data de Início Inválida</div>
+      <div *ngIf="endDate?.errors?.['matEndDateInvalid'] ">Data de Fim Inválida</div>
+      <div *ngIf="startDate?.errors?.['required'] || endDate?.errors?.['required']">Data Obrigatória</div>
+    </div>
+  </div>
+
+  <div class="w-full flex space-x-5 items-center">
+    <div class="h-32">
+      <app-input-title class="text-[2.6vh]">{{titleStartHour}}</app-input-title>
+
+      <div class="flex items-center justify-between
+      input w-full h-12 lg:h-14
+      ">
+        <input placeholder={{StartHourPlaceholder}} formControlName="startHour"
+               [ngxTimepicker]="startHourT" [format]="24" readonly
+               class="w-full h-full bg-municip-blank-gray focus:outline-none">
+        <ngx-material-timepicker-toggle [for]="startHourT"></ngx-material-timepicker-toggle>
+        <ngx-material-timepicker #startHourT></ngx-material-timepicker>
+
+
+
+      </div>
+      <div class="text-red-500 font-bold py-2 " *ngIf="startHour?.touched && startHour?.invalid">
+        <div *ngIf="startHour?.errors?.['required'] ">Hora Obrigatória</div>
+      </div>
+    </div>
+    <span class="h-0.5 w-5 bg-black mt-3"></span>
+    <div class="h-32">
+      <app-input-title class="text-[2.6vh]">{{titleEndHour}}</app-input-title>
+      <div class="flex items-center justify-between
+      input w-full h-12 lg:h-14">
+        <input placeholder={{EndHourPlaceholder}} formControlName="endHour"
+               [ngxTimepicker]="endHourT" [format]="24" readonly
+               class="w-full h-full bg-municip-blank-gray focus:outline-none">
+        <ngx-material-timepicker-toggle [for]="endHourT"></ngx-material-timepicker-toggle>
+        <ngx-material-timepicker #endHourT></ngx-material-timepicker>
+      </div>
+      <div class="text-red-500 font-bold py-2 " *ngIf="endHour?.touched && endHour?.invalid">
+        <div *ngIf="endHour?.errors?.['required'] ">Hora Obrigatória</div>
+      </div>
+    </div>
+  </div>
+</div>

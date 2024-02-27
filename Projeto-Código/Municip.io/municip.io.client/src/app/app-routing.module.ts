@@ -29,7 +29,13 @@ import { NewsCreateComponent } from './news/news-create/news-create.component';
 import { MunicipalProfileComponent } from './munadministrator/municipal-profile/municipal-profile.component';
 import { CitizenOrMunicipalAdminGuard } from './utils/guard/citizen-or-municipal-admin.guard';
 import { MunicipalEditComponent } from './munadministrator/municipal-edit/municipal-edit.component';
+import { MunicipalEventsComponent } from './events/municipal-events/municipal-events.component';
 import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
+import { CreateEventComponent } from './events/municip-actions/create-event/create-event.component';
+import { EventPageComponent } from './events/event-page/event-page.component';
+import { EditEventComponent } from './events/municip-actions/edit-event/edit-event.component';
+import { UserSameMunicipalityGuard } from './utils/guard/userSameMunicipality/user-same-municipality.guard';
+import { EventsListComponent } from './events/my-events/events-list/events-list.component';
 
 
 const routes: Routes = [
@@ -57,10 +63,17 @@ const routes: Routes = [
   { path: 'municipal/profile', component: MunicipalProfileComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'municipal/edit', component: MunicipalEditComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'citizen/homePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: 'events/create', component: CreateEventComponent, data: {} },
+  { path: 'events/edit/:eventId', component: EditEventComponent, data: {} },
+  { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: 'events/myEvents', component: EventsListComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: 'events', component: MunicipalEventsComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
+  { path: 'events/:eventId', component: EventPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} },
   { path: 'news', component: NewsListComponent, data: {} },
   { path: 'news/news-create', component: NewsCreateComponent, data: {} },
   { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] }
+  
 ];
 
 @NgModule({

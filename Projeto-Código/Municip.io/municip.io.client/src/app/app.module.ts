@@ -64,13 +64,33 @@ import { CalendarComponent } from './events/my-events/calendar/calendar.componen
 import { CalendarHeaderComponent } from './events/my-events/calendar-header/calendar-header.component';
 import { MunicipalEditComponent } from './munadministrator/municipal-edit/municipal-edit.component';
 import { HeaderLoggedinComponent } from './layout/header-loggedin/header-loggedin.component';
+import { MunicipalEventsComponent } from './events/municipal-events/municipal-events.component';
 import { CalendarPageComponent } from './events/my-events/calendar-page/calendar-page.component';
+import { CreateEventComponent } from './events/municip-actions/create-event/create-event.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BlackBtnIconTextComponent } from './utils/buttons/black-btn-icon-text/black-btn-icon-text.component';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { EventPageComponent } from './events/event-page/event-page.component';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { DatetimepickerComponent } from './utils/events/datetimepicker/datetimepicker.component';
+import { EditEventComponent } from './events/municip-actions/edit-event/edit-event.component';
+import { EventCardComponent } from './utils/events/event-card/event-card.component';
+import { EventsListComponent } from './events/my-events/events-list/events-list.component';
 
 import { NewsListComponent } from './news/news-list/news-list.component';
 import { NewsCardComponent } from './news/news-card/news-card.component';
 
 import { NewsCreateComponent } from './news/news-create/news-create.component';
 
+import { DialogMessageComponent } from './utils/dialog/dialog-message/dialog-message.component';
+
+
+registerLocaleData(localePt, 'pt-PT');
 
 
 @NgModule({
@@ -135,7 +155,17 @@ import { NewsCreateComponent } from './news/news-create/news-create.component';
     CalendarHeaderComponent,
     MunicipalEditComponent,
     HeaderLoggedinComponent,
-    CalendarPageComponent
+    CalendarPageComponent,
+    CreateEventComponent,
+    MunicipalEventsComponent,
+    CalendarPageComponent,
+    BlackBtnIconTextComponent,
+    EventPageComponent,
+    DatetimepickerComponent,
+    EditEventComponent,
+    DialogMessageComponent,
+    EventCardComponent,
+    EventsListComponent,
     
   ],
   imports: [
@@ -147,14 +177,19 @@ import { NewsCreateComponent } from './news/news-create/news-create.component';
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+
+    NgxMaterialTimepickerModule.setOpts('pt-PT'),
+    MatFormFieldModule, MatInputModule, MatDatepickerModule,
+    InfiniteScrollModule,
   ],
   providers: [
     MunicipalityGuard,
     AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
-      
-    }
+
+    },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
