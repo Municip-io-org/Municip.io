@@ -176,7 +176,7 @@ namespace Municip.io.Server.Controllers
             try
             {
                 var citizen = _context.Citizens.FirstOrDefault(c => c.Email == email);
-                var evento = _context.Events.FirstOrDefault(e => e.Id == eventId);
+                var evento = _context.Events.Include(e=> e.Citizens).FirstOrDefault(e => e.Id == eventId);
 
                 if (citizen != null && evento != null && evento.Municipality == citizen.Municipality &&
                     (evento.Citizens == null || evento.Citizens.Find(c => c.Email == email) == null))
@@ -186,10 +186,12 @@ namespace Municip.io.Server.Controllers
                     if (evento.Citizens.Count < evento.Capacity)
                     {
 
-                        if (evento.Citizens.Find(c => c.Email == email) != null)
+
+                        if (evento.Citizens.Any(c => c.Email == email))
                         {
-                            return BadRequest(new { message = "Cidadão já registado" });
+                            return BadRequest(new { message = "Cidadão já está inscrito no evento" });
                         }
+
 
                         evento.Citizens.Add(citizen);
                         evento.NRegistrations = evento.NRegistrations + 1;
