@@ -188,6 +188,8 @@ export class EditEventComponent implements OnInit {
         municipality: this.eventSelected.municipality,
         image: this.eventSelected.image,
         nRegistrations: this.eventSelected.nRegistrations,
+        //this will not clean the citizens array, is just to avoid the error
+        citizens: [],
       }
 
       this.eventService.updateEvent(newEvent, this.photo).subscribe(

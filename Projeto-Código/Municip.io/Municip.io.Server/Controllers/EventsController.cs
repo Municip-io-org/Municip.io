@@ -101,6 +101,7 @@ namespace Municip.io.Server.Controllers
                     }
                     else
                     {
+
                         _context.Entry(evento).CurrentValues.SetValues(updatedEvent);
                         _context.SaveChanges();
                         return Ok();
