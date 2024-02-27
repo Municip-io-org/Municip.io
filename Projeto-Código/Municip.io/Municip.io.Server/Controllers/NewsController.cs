@@ -43,10 +43,10 @@ namespace Municip.io.Server.Controllers
             return Json(municipalNews);
         }
 
-        [HttpPost("DeleteNews")]
-        public async Task<IActionResult> DeleteNews(int id)
+        [HttpDelete("DeleteNews")]
+        public async Task<IActionResult> DeleteNews(Guid id)
         {
-            /*
+            
             var news = await _context.News.FirstOrDefaultAsync(n => n.Id == id);
             if (news != null)
             {
@@ -57,8 +57,8 @@ namespace Municip.io.Server.Controllers
             else
             {
                 return NotFound();
-            }*/
-            return Ok();
+            }
+            
         }
     }
 }

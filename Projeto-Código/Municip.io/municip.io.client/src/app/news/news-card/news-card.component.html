@@ -1,15 +1,19 @@
-
 <div class="w-[90rem] h-90 flex flex-row flex-wrap border-solid border-municip-blue border-2 rounded-[0.8rem] space-y-5 px-2 relative">
   <img src="{{image}}" alt="newsing" class="h-[15rem] flex self-center rounded-[0.5rem] w-[30rem] left-0 m-6" />
   <div class="flex flex-col items-start w-[50rem] text-left">
     <div>
       <h1 class="text-municip-normal-black font-bold text-4xl ml-6">{{title}}</h1>
-      <p class="pt-3 pl-11">{{subtitle}}</p> 
+      <p class="pt-3 pl-11">{{subtitle}}</p>
     </div>
     <div class="absolute top-0 right-0 mr-5 mt-5">
       <p class="text-sm text-gray-500">{{date}}</p>
     </div>
-    <div class="absolute bottom-4 right-0 mr-8 mb-1">
+
+    <div class="flex absolute bottom-4 right-0 mr-8 mb-1">
+      <button type="button" (click)="deleteCurrent(this)" class="relative h-10 w-[2.5rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl bg-red-500 border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-red-800 rounded text-lg transition duration-700 ease-in-out mr-2">
+        <img alt="delete" src="/assets/images/icons/delete.png" class="size-3.5 " />
+      </button>
+    
       <button type="button" routerLink="/termsconditions" class="relative h-10 w-[7rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
         Ler Mais
         <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />

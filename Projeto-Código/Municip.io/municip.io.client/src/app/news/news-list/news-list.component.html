@@ -5,11 +5,13 @@
 </app-smaller-banner>
   <div class=" flex justify-center items-center flex-wrap self-center space-y-10 pt-10 pb-10">
     <div *ngFor="let news of newsList">
-      <app-news-card
+      <app-news-card 
                      title={{news.title}}
                      subtitle="{{news.subtitle}}"
                      image="{{news.photo}}"
-                     date="{{news.date}}">
+                     date="{{news.date}}"
+                     id="{{news.id}}"
+                     (deleteid) ="deleteNews($event)">
       </app-news-card>
       
     </div>

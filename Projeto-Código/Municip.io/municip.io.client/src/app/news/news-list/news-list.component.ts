@@ -10,6 +10,8 @@ import { Roles, UserAuthService } from '../../services/user-auth.service';
 })
 export class NewsListComponent {
 
+  
+
   constructor(private newsService: NewsService, private router: Router, private userAuthService: UserAuthService) { }
 
 
@@ -85,5 +87,20 @@ export class NewsListComponent {
 //      subtitle: "subsubsubsubsubsusbubsubsubsusb2",
 //      image: "/assets/images/admin/banner.jpg",
 //      date: "28/3/2012"
-//    },];
+  //    },];
+
+  deleteNews(news: any) {
+   
+    this.newsService.deleteNews(news).subscribe(
+      (res) => {
+        console.log("Noticia apagada com sucesso", res);
+        this.LoadData();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
+    
+  }
 }
