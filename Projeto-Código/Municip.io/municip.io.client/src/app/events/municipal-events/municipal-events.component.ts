@@ -39,9 +39,11 @@ export class MunicipalEventsComponent {
   isMunAdmin: boolean = false;
 
   events: Event[] = [];
+  showEvents: Event[] = [];
+
   isLoading = false;
   currentPage = 1;
-  itemsPerPage = 6;
+  itemsPerPage = 3;
   
 
   constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router) { }
@@ -67,10 +69,7 @@ export class MunicipalEventsComponent {
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: any) => {
                 this.municipality = municipalityRes as Municipality;
-
                 console.log("municipality", this.municipality);
-
-
                 this.loadData();
               },
               error => {
@@ -93,23 +92,33 @@ export class MunicipalEventsComponent {
 
   loadData() {
     this.toggleLoading();
-    this.eventsService.getPaginationEventByMunicipality(this.currentPage, this.itemsPerPage, this.municipality.name).subscribe({
-      next: res => this.events = res,
-      error: err => console.log(err),
-      complete: () => this.toggleLoading(),
-    });
+
+    this.eventsService.getEventByMunicipality(this.municipality.name).subscribe(
+      (eventsRes: any) => {
+        this.events = eventsRes as Event[];
+        this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+        this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEventByMunicipality(this.currentPage, this.itemsPerPage, this.events)];
+        this.toggleLoading();
+      },
+      error => {
+        console.error(error);
+      }
+    );
+
+    this.showEvents = this.eventsService.getPaginationEventByMunicipality(this.currentPage, this.itemsPerPage, this.events);
+     
+
   }
 
-  onScrollDown() {
-    this.currentPage++;
+  onScrollDown() { 
+    if (this.events.length > this.showEvents.length) {
+      console.log("Scroll");
+      console.log((this.events.length > this.showEvents.length));
 
-    this.toggleLoading();
-    this.eventsService.getPaginationEventByMunicipality(this.currentPage, this.itemsPerPage, this.municipality.name).subscribe({
-      next: res => this.events = [...this.events, ...res],
-      error: err => console.log(err),
-      complete: () => this.toggleLoading(),
-    });
-    console.log(this.events);
+      this.currentPage++;
+      this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEventByMunicipality(this.currentPage, this.itemsPerPage, this.events)];
+      this.toggleLoading();
+    }
   } 
 
  
