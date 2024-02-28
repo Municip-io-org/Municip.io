@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { EventsService, Event } from '../../services/events/events.service';
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-municipal-events',
@@ -43,6 +43,8 @@ export class MunicipalEventsComponent {
   showEvents: Event[] = [];
   nameSearch: string = '';
   ascendingOrder: boolean = true;
+  orderOptions: any[] = [{ label: 'Evento mais Próximo', value: true }, { label: 'Evento mais Distante', value: false }];
+ 
 
   isLoading = false;
   currentPage = 1;
@@ -185,7 +187,8 @@ export class MunicipalEventsComponent {
 
 
   toggleSortOrder() {
-    this.ascendingOrder = !this.ascendingOrder;
+
+    console.log("Ordem de classificação alterada:", this.ascendingOrder ? 'Ascendente' : 'Descendente');
     this.sortEventsByDate();
   }
 

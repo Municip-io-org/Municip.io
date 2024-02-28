@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { slideInAnimation } from './route-animation';
+import { PrimeNGConfig } from 'primeng/api';
 
 
 @Component({
@@ -12,10 +13,10 @@ import { slideInAnimation } from './route-animation';
 export class AppComponent implements OnInit {
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private primeNgConfig: PrimeNGConfig) {}
 
   ngOnInit() {
-
+    this.primeNgConfig.ripple = true;
   }
 
 

@@ -52,6 +52,9 @@ export class EventsListComponent {
 
   events: Event[] = [];
   showEvents: Event[] = [];
+  nameSearch: string = '';
+  ascendingOrder: boolean = true;
+  orderOptions: any[] = [{ label: 'Evento mais Próximo', value: true }, { label: 'Evento mais Distante', value: false }];
 
   isLoading = false;
   currentPage = 1;
@@ -131,6 +134,30 @@ export class EventsListComponent {
       this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
       this.toggleLoading();
     }
-  } 
+  }
+
+  get filteredEvents() {
+    if (this.nameSearch == '') return this.showEvents;
+    return this.events.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
+  }
+
+
+  toggleSortOrder() {
+
+    console.log("Ordem de classificação alterada:", this.ascendingOrder ? 'Ascendente' : 'Descendente');
+    this.sortEventsByDate();
+  }
+
+  sortEventsByDate() {
+    this.currentPage = 1;
+    if (this.ascendingOrder) {
+      this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+      this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
+
+    } else {
+      this.events.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+      this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
+    }
+  }
 
 }

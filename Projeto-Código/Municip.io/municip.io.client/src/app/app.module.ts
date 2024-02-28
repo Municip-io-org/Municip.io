@@ -81,9 +81,9 @@ import { DatetimepickerComponent } from './utils/events/datetimepicker/datetimep
 import { EditEventComponent } from './events/municip-actions/edit-event/edit-event.component';
 import { EventCardComponent } from './utils/events/event-card/event-card.component';
 import { EventsListComponent } from './events/my-events/events-list/events-list.component';
-
 import { DialogMessageComponent } from './utils/dialog/dialog-message/dialog-message.component';
-
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { RippleModule } from 'primeng/ripple'
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -170,7 +170,7 @@ registerLocaleData(localePt, 'pt-PT');
 
     NgxMaterialTimepickerModule.setOpts('pt-PT'),
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
-    InfiniteScrollModule,
+    InfiniteScrollModule, SelectButtonModule, RippleModule,
   ],
   providers: [
     MunicipalityGuard,
