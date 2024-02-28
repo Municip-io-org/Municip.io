@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Event } from '../../../services/events/events.service';
+import { EventsService, Event } from '../../../services/events/events.service';
 
 @Component({
   selector: 'app-event-card',
@@ -8,6 +8,7 @@ import { Event } from '../../../services/events/events.service';
   styleUrl: './event-card.component.css'
 })
 export class EventCardComponent {
+
   @Input() event: Event = {
     id: '',
     title: 'Sem Titulo',
@@ -25,13 +26,26 @@ export class EventCardComponent {
 
   @Input() isMunAdmin: boolean = false;
 
-  constructor(private router: Router) { }
+  @Output() removeEventEmit: EventEmitter<string> = new EventEmitter<string>();
 
-  goToEditEventPage(eventId: string) {
-    this.router.navigateByUrl(`/events/edit/${eventId}`);
+  
+
+
+  constructor(private router: Router, private eventsService: EventsService) { }
+
+  goToEditEventPage() {
+    this.router.navigateByUrl(`/events/edit/${this.event.id}`);
   }
 
-  goToEventPage(eventId: string) {
-    this.router.navigateByUrl(`/events/${eventId}`);
+  goToEventPage() {
+    this.router.navigateByUrl(`/events/${this.event.id}`);
   }
+
+  
+
+  removeEvent() {
+    const eventData: string = this.event.id! + '|' + this.event.title!;
+    this.removeEventEmit.emit(eventData);
+  }
+
 }

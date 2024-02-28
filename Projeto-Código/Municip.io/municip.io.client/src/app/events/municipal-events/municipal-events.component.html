@@ -1,8 +1,15 @@
 <app-header-loggedin></app-header-loggedin>
-<app-smaller-banner
-                    title="Eventos de {{municipality.name}}"
-                    image={{municipality.landscapePhoto}}
-                    ></app-smaller-banner>
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" (confirm)="closeDialog()"
+                      [isConfirm]="false"></app-dialog-message>
+</ng-container>
+
+<ng-container *ngIf="isRemoveEventDialogOpen">
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" [twoButtons]="true" (confirm)="removeEvent()" (cancel)="closeRemoveEventDialog()"
+                      [isConfirm]="false"></app-dialog-message>
+</ng-container>
+<app-smaller-banner title="Eventos de {{municipality.name}}"
+                    image={{municipality.landscapePhoto}}></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]">
   <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
     <app-black-btn-icon-text altImage="Criar evento"
@@ -11,18 +18,19 @@
       Criar Eventos
     </app-black-btn-icon-text>
   </div>
-  <div *ngIf="events.length === 0"
+  <div *ngIf="showEvents.length === 0"
        class="flex justify-center items-center text-municip-normal-black grow ">
     <p class="text-[3rem] font-semibold">Não há eventos.</p>
   </div>
-  <div *ngIf="events.length > 0"
-      infiniteScroll
-      [infiniteScrollDistance]="0"
-      [infiniteScrollThrottle]="500"
-      (scrolled)="onScrollDown()">
+  <div *ngIf="showEvents.length > 0"
+       infiniteScroll
+       [infiniteScrollDistance]="10"
+       [infiniteScrollThrottle]="500"
+       (scrolled)="onScrollDown()"
+       [alwaysCallback]="true">
     <section class="flex flex-wrap justify-around gap-16">
-      <ng-container *ngFor="let event of events">
-        <app-event-card [event]="event" [isMunAdmin]="isMunAdmin"></app-event-card>
+      <ng-container *ngFor="let event of showEvents">
+        <app-event-card [event]="event" [isMunAdmin]="isMunAdmin" (removeEventEmit)="openRemoveEventDialog($event)" ></app-event-card>
       </ng-container>
     </section>
   </div>

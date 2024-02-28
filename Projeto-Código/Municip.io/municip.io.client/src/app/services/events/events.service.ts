@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, of, switchMap } from 'rxjs';
 import { Municipality } from '../municipal-admin-auth.service';
@@ -53,35 +53,36 @@ export class EventsService {
   }
 
 
+  dropOutEvent(eventId: string, email: string) {
+email=email.replace('@', '%40');
+    return this.http.post<any>(`api/events/DropOutCitizen?eventId=${eventId}&email=${email}`, {});
+  }
+
   enrollEvent(eventId: string, email: string) {
     email=email.replace('@', '%40');
     return this.http.post<any>(`api/events/EnrollCitizen?eventId=${eventId}&email=${email}`, {});
   }
 
-  getPaginationEventByMunicipality(page = 1, itemsPerPage = 10, municipalityName: string): Observable<Event[]> {
+  getPaginationEvent(page = 1, itemsPerPage = 10, events: Event[]) :Event[] {
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-
-    return this.http.get<Event[]>(`api/events/GetEventsByMunicipality?municipalityName=${municipalityName}`).pipe(
-      map(municipalityEvents => {
-        return municipalityEvents.slice(startIndex, endIndex);
-      })
-    );
+    return events.slice(startIndex, endIndex);
   }
 
-  getPaginationEventByCitizen(page = 1, itemsPerPage = 10, email: string): Observable<Event[]> {
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
+  getEventByCitizen(email: string) {
+    return this.http.get<Event[]>(`api/events/GetEventsByCitizen?email=${email}`)
+  }
 
-    return this.http.get<Event[]>(`api/events/GetEventsByCitizen?email=${email}`).pipe(
-      map(municipalityEvents => {
-        return municipalityEvents.slice(startIndex, endIndex);
-      })
-    );
+  getEventByMunicipality(municipalityName: string) {
+    return this.http.get<Event>(`api/events/GetEventsByMunicipality?municipalityName=${municipalityName}`);
   }
 
   getEventById(eventId: string) {
     return this.http.get<Event>(`api/events/GetEventById?eventId=${eventId}`);
+  }
+
+  removeEvent(eventId: string): Observable<HttpResponse<any>> {
+    return this.http.delete<any>(`api/events/RemoveEvent?eventId=${eventId}`, { observe: 'response' });
   }
 }
 

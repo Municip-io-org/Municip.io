@@ -1,7 +1,9 @@
 <button type="button"
         class="text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-3 rounded-full w-full
         transition duration-300 hover:bg-black"
-        (click)="onClick()">
-  <img [src]="image" [alt]="altImage" class="size-5" /> 
+        (click)="onClick()"
+        [ngClass]="{'p-1': justImage, 'p-3': !justImage}">
+  <img [src]="image" [alt]="altImage" [class.size-5]="!justImage" [class.size-10]="justImage" />
   <ng-content></ng-content>
 </button>
+

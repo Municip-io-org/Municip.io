@@ -12,9 +12,11 @@ import { EventsService, Event } from '../../services/events/events.service';
 export class EventPageComponent {
 
   isDialogOpen: boolean = false;
+  isRemoveEventDialogOpen: boolean = false;
   dialogTitle = '';
   dialogMessage = '';
   isSuccesfullEnroll : boolean = false;
+  
 
   event: Event = {
     id: '',
@@ -58,6 +60,7 @@ export class EventPageComponent {
 
   user: any;
   isMunAdmin: boolean = false;
+  
 
   events: Event[] = [];
   isLoading = false;
@@ -70,6 +73,8 @@ export class EventPageComponent {
 
   ngOnInit(): void {
     this.event = this.activatedRoute.snapshot.data['event'];
+    console.log("EVENTO SELECIONADO");
+    console.log(this.event);
 
     this.userAuthService.getUserData().subscribe(
       res => {
@@ -114,10 +119,11 @@ export class EventPageComponent {
 
   closeDialog() {
     this.isDialogOpen = false;
+    window.location.reload();
   }
 
-  goToEditEventPage(eventId: string) {
-    this.router.navigateByUrl(`/events/edit/${eventId}`);
+  goToEditEventPage() {
+    this.router.navigateByUrl(`/events/edit/${this.event.id}`);
   }
 
   enrollInEvent(eventId: string, email: string) {
@@ -128,7 +134,9 @@ export class EventPageComponent {
         this.isDialogOpen = true;
         this.dialogTitle = 'Inscrição bem-sucedida';
         this.dialogMessage = 'Foi inscrito com sucesso no evento ' + this.event.title;
-        this.event.nRegistrations++;
+        
+
+        
       },
       error => {
         this.isSuccesfullEnroll = false;
@@ -138,6 +146,70 @@ export class EventPageComponent {
         console.log(error)
       }
     );
+  }
+
+  dropOutEvent(eventId: string, email: string) {
+
+    this.EventsService.dropOutEvent(eventId, email).subscribe(
+      response => {
+        this.isDialogOpen = true;
+        this.dialogTitle = 'Desistência bem-sucedida';
+        this.dialogMessage = 'Desistiu com sucesso do evento ' + this.event.title;
+        
+        this.isSuccesfullEnroll = true;
+        
+      },
+      error => {
+        this.isDialogOpen = true;
+        this.dialogTitle = 'Erro na desistência';
+        this.dialogMessage = error.error.message;
+        console.log(error)
+      }
+    );
+  }
+
+  openRemoveEventDialog() {
+    console.log('Remoção do evento:' + this.event.id);
+    this.isRemoveEventDialogOpen = true;
+    this.dialogTitle = 'Deseja apagar o evento ' + this.event.title + '?';
+    this.dialogMessage = 'Confirme a sua ação';
+  }
+
+  closeRemoveEventDialog() {
+    this.isRemoveEventDialogOpen = false;
+  }
+
+  removeEvent() {
+    this.closeRemoveEventDialog();
+    console.log('Remover do evento: ' + this.event.id);
+   
+    this.EventsService.removeEvent(this.event.id!).subscribe(
+      response => {
+        if (response.status === 200) {
+          this.router.navigateByUrl(`/events`);
+        } else { 
+          this.isDialogOpen = true;
+          this.dialogTitle = 'Erro na remoção do evento';
+          this.dialogMessage = 'Ocorreu um erro ao remover o evento';
+        }
+      },
+      error => {
+        console.error('Erro ao remover o evento:', error);
+        this.isDialogOpen = true;
+        this.dialogTitle = 'Erro na remoção do evento';
+        this.dialogMessage = 'Ocorreu um erro ao remover o evento';
+      }
+    );
+  }
+
+
+
+  isEnrolled(): boolean {
+    
+    for (const citizen of this.event.citizens || []) {
+      if (citizen.email === this.user.email) return true;
+    }
+    return false;
   }
 }
 

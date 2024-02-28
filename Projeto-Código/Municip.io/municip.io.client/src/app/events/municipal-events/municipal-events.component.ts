@@ -39,9 +39,17 @@ export class MunicipalEventsComponent {
   isMunAdmin: boolean = false;
 
   events: Event[] = [];
+  eventIdToRemove: string = '';
+  showEvents: Event[] = [];
+
   isLoading = false;
   currentPage = 1;
-  itemsPerPage = 6;
+  itemsPerPage = 3;
+
+  isDialogOpen: boolean = false;
+  isRemoveEventDialogOpen: boolean = false;
+  dialogTitle = '';
+  dialogMessage = '';
   
 
   constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router) { }
@@ -67,10 +75,7 @@ export class MunicipalEventsComponent {
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: any) => {
                 this.municipality = municipalityRes as Municipality;
-
                 console.log("municipality", this.municipality);
-
-
                 this.loadData();
               },
               error => {
@@ -93,22 +98,33 @@ export class MunicipalEventsComponent {
 
   loadData() {
     this.toggleLoading();
-    this.eventsService.getPaginationEventByMunicipality(this.currentPage, this.itemsPerPage, this.municipality.name).subscribe({
-      next: res => this.events = res,
-      error: err => console.log(err),
-      complete: () => this.toggleLoading(),
-    });
+
+    this.eventsService.getEventByMunicipality(this.municipality.name).subscribe(
+      (eventsRes: any) => {
+        this.events = eventsRes as Event[];
+        this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+        this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
+        this.toggleLoading();
+      },
+      error => {
+        console.error(error);
+      }
+    );
+
+    this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
+     
+
   }
 
-  onScrollDown() {
-    this.currentPage++;
+  onScrollDown() { 
+    if (this.events.length > this.showEvents.length) {
+      console.log("Scroll");
+      console.log((this.events.length > this.showEvents.length));
 
-    this.toggleLoading();
-    this.eventsService.getPaginationEventByMunicipality(this.currentPage, this.itemsPerPage, this.municipality.name).subscribe({
-      next: res => this.events = [...this.events, ...res],
-      error: err => console.log(err),
-      complete: () => this.toggleLoading(),
-    });
+      this.currentPage++;
+      this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
+      this.toggleLoading();
+    }
   } 
 
  
@@ -116,8 +132,49 @@ export class MunicipalEventsComponent {
   goToCreateEventPage() {
     this.router.navigateByUrl(`events/create`);
   }
-  
+
+  openRemoveEventDialog(eventData: string) {
+
+    const [eventId, eventTitle] = eventData.split('|');
+
+    console.log('Remoção do evento:' + eventTitle);
+    this.isRemoveEventDialogOpen = true;
+    this.dialogTitle = 'Deseja apagar o evento ' + eventTitle + '?';
+    this.dialogMessage = 'Confirme a sua ação';
+    this.eventIdToRemove = eventId;
+  }
+
+  closeRemoveEventDialog() {
+    this.isRemoveEventDialogOpen = false;
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false;
+    window.location.reload();
+  }
 
   
+  removeEvent() {
+    this.closeRemoveEventDialog();
 
+    console.log('Remover do evento: ' + this.eventIdToRemove);
+
+    this.eventsService.removeEvent(this.eventIdToRemove).subscribe(
+      response => {
+        if (response.status === 200) {
+          window.location.reload();
+        } else {
+          this.isDialogOpen = true;
+          this.dialogTitle = 'Erro na remoção do evento';
+          this.dialogMessage = 'Ocorreu um erro ao remover o evento';
+        }
+      },
+      error => {
+        console.error('Erro ao remover o evento:', error);
+        this.isDialogOpen = true;
+        this.dialogTitle = 'Erro na remoção do evento';
+        this.dialogMessage = 'Ocorreu um erro ao remover o evento';
+      }
+    );
+  }
 }
