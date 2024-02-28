@@ -1,3 +1,7 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+</head>
 <app-header-loggedin></app-header-loggedin>
 <ng-container *ngIf="isDialogOpen">
   <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" (confirm)="closeDialog()"
@@ -11,6 +15,20 @@
 <app-smaller-banner title="Eventos de {{municipality.name}}"
                     image={{municipality.landscapePhoto}}></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]">
+  <div class="-mt-[2rem] relative">
+    <label for="nameSearch" class="sr-only">Procurar por eventos</label>
+    <div class="flex items-center">
+      <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+        <span class="fas fa-search"></span>
+      </i>
+      <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por eventos"
+             class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300  hover:border-black">
+    </div>
+  </div>
+  <button type="button" (click)="toggleSortOrder()">
+    {{ ascendingOrder ? 'Ordenar Descendente' : 'Ordenar Ascendente' }}
+  </button>
+
   <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
     <app-black-btn-icon-text altImage="Criar evento"
                              image="/assets/images/icons/plus-white.png"
@@ -19,8 +37,8 @@
     </app-black-btn-icon-text>
   </div>
   <div *ngIf="showEvents.length === 0"
-       class="flex justify-center items-center text-municip-normal-black grow ">
-    <p class="text-[3rem] font-semibold">Não há eventos.</p>
+       class="flex justify-center items-center text-municip-normal-black grow text-[3rem] ">
+    <p class="font-semibold">Não há eventos.</p>
   </div>
   <div *ngIf="showEvents.length > 0"
        infiniteScroll
@@ -29,8 +47,20 @@
        (scrolled)="onScrollDown()"
        [alwaysCallback]="true">
     <section class="flex flex-wrap justify-around gap-16">
-      <ng-container *ngFor="let event of showEvents">
-        <app-event-card [event]="event" [isMunAdmin]="isMunAdmin" (removeEventEmit)="openRemoveEventDialog($event)" ></app-event-card>
+      <div *ngIf="filteredEvents.length === 0"
+            class="flex flex-col justify-center items-center text-municip-normal-black grow space-y-4 text-[3rem] ">
+        <p class=" font-semibold">A sua pesquisa - “{{nameSearch}}” - não encontrou nenhum evento.</p>
+          <div class="text-[2rem]">
+            Sugestões:
+            <ul>
+              <li>&#8226; Certifique-se de que nenhuma palavra contém erros ortográficos.</li>
+              <li>&#8226; Tente utilizar outras palavras-chave.</li>
+            </ul>
+          </div>
+      </div>
+      <ng-container *ngFor="let event of filteredEvents">
+        
+        <app-event-card [event]="event" [isMunAdmin]="isMunAdmin" (removeEventEmit)="openRemoveEventDialog($event)"></app-event-card>
       </ng-container>
     </section>
   </div>

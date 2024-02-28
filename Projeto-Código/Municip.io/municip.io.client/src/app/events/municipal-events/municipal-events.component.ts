@@ -41,6 +41,8 @@ export class MunicipalEventsComponent {
   events: Event[] = [];
   eventIdToRemove: string = '';
   showEvents: Event[] = [];
+  nameSearch: string = '';
+  ascendingOrder: boolean = true;
 
   isLoading = false;
   currentPage = 1;
@@ -102,7 +104,7 @@ export class MunicipalEventsComponent {
     this.eventsService.getEventByMunicipality(this.municipality.name).subscribe(
       (eventsRes: any) => {
         this.events = eventsRes as Event[];
-        this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+        this.sortEventsByDate();
         this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
         this.toggleLoading();
       },
@@ -110,8 +112,6 @@ export class MunicipalEventsComponent {
         console.error(error);
       }
     );
-
-    this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
      
 
   }
@@ -120,9 +120,10 @@ export class MunicipalEventsComponent {
     if (this.events.length > this.showEvents.length) {
       console.log("Scroll");
       console.log((this.events.length > this.showEvents.length));
-
+      
       this.currentPage++;
       this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
+
       this.toggleLoading();
     }
   } 
@@ -153,7 +154,6 @@ export class MunicipalEventsComponent {
     window.location.reload();
   }
 
-  
   removeEvent() {
     this.closeRemoveEventDialog();
 
@@ -176,5 +176,28 @@ export class MunicipalEventsComponent {
         this.dialogMessage = 'Ocorreu um erro ao remover o evento';
       }
     );
+  }
+
+  get filteredEvents() {
+    if (this.nameSearch == '') return this.showEvents;
+    return this.events.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
+  }
+
+
+  toggleSortOrder() {
+    this.ascendingOrder = !this.ascendingOrder;
+    this.sortEventsByDate();
+  }
+
+  sortEventsByDate() {
+    this.currentPage = 1;
+    if (this.ascendingOrder) {
+      this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+      this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
+      
+    } else {
+      this.events.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+      this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
+    }
   }
 }
