@@ -20,7 +20,7 @@ export class EditEventComponent implements OnInit {
 
 
   error: string | null = null;
-  photo!: File;
+  photo?: File;
 
   imagePreview: string = "";
 
@@ -47,37 +47,50 @@ export class EditEventComponent implements OnInit {
       });
 
     });
+
+    this.eventSelected = this.route.snapshot.data['event'];
+    this.setForm(this.eventSelected);
+
+  }
+
+
+  getEventSelected() {
+
     let eventId = this.route.snapshot.params['eventId'];
     this.eventService.getEventById(eventId).subscribe((event: Event) => {
 
       if (event) {
         this.eventSelected = event;
-        this.eventForm.setValue({
-          title: event.title,
-          capacity: event.capacity.toString(),
-          eventDate: {
-            startDate: new Date(event.startDate),
-            startHour: format(event.startDate, "HH:mm"),
-            endDate: new Date(event.endDate),
-            endHour: format(event.endDate, "HH:mm"),
-          },
-          eventRegistration: {
-            startDate: new Date(event.startRegistration),
-            startHour: format(event.startRegistration, "HH:mm"),
-            endDate: new Date(event.endRegistration),
-            endHour: format(event.endRegistration, "HH:mm"),
-          },
-          local: event.local,
-          description: event.description,
-          image: ''
-        });
-
-        this.imagePreview = event.image || "";
+        this.setForm(event);
       }
     });
-
-
   }
+
+  setForm(event: Event) {
+    this.eventForm.setValue({
+      title: event.title,
+      capacity: event.capacity.toString(),
+      eventDate: {
+        startDate: new Date(event.startDate),
+        startHour: format(event.startDate, "HH:mm"),
+        endDate: new Date(event.endDate),
+        endHour: format(event.endDate, "HH:mm"),
+      },
+      eventRegistration: {
+        startDate: new Date(event.startRegistration),
+        startHour: format(event.startRegistration, "HH:mm"),
+        endDate: new Date(event.endRegistration),
+        endHour: format(event.endRegistration, "HH:mm"),
+      },
+      local: event.local,
+      description: event.description,
+      image: ''
+    });
+
+    this.imagePreview = event.image || "";
+  }
+
+
 
 
 
@@ -228,7 +241,6 @@ export class EditEventComponent implements OnInit {
   onImagePicked(event: any) {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0]; // Use optional chaining here
-
     if (file) {
       this.photo = file;
       const reader = new FileReader();
@@ -252,6 +264,9 @@ export class EditEventComponent implements OnInit {
 
   closeDialog() {
     this.isDialogOpen = false;
+
+    this.getEventSelected();
+    this.photo = undefined;
   }
 
 
