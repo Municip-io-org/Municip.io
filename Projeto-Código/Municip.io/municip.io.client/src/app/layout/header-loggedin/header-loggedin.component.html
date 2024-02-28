@@ -3,22 +3,29 @@
 
     <img class="w-56 pl-[2rem]" alt="logo" src="/assets/images/logos/logo-black-right.png" />
 
-    <ul class="flex w-full justify-center space-x-20">
-      <li class="hover:text-lg hover:underline hover:underline-offset-8 transition-all duration-700 ease-in-out  decoration-sky-500">
-        <a routerLink="/">Home</a>
+    <ul class="flex w-full justify-around ">
+      <li class="transition-all duration-700 ease-in-out  decoration-sky-500">
+        <a routerLink="/" class="group">
+          Home
+          <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+        </a>
       </li>
 
-      <li class="hover:text-lg hover:underline hover:underline-offset-8 transition-all duration-700 ease-in-out  decoration-sky-500">
-        <a routerLink="">Municipio</a>
+      <li class="   transition-all duration-700 ease-in-out  decoration-sky-500">
+        <a routerLink="" class="group">
+          Municipio
+          <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+        </a>
       </li>
 
-      <li class="relative" (click)="showDropdownAgenda = !showDropdownAgenda">
-        <button class="hover:text-lg hover:underline hover:underline-offset-8 transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
+      <li class="relative group" (click)="setActiveDropdown(Dropdowns.Events)">
+        <button class="transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Agenda
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
+        <span class="flex self-center max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
         <div *ngIf="showDropdownAgenda" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
             <li>
@@ -50,13 +57,15 @@
 
 
 
-      <li class="relative" (click)="showDropdownBiblioteca = !showDropdownBiblioteca">
-        <button class="hover:text-lg hover:underline hover:underline-offset-8 transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
+      <li class="relative group" (click)="setActiveDropdown(Dropdowns.Library)">
+        <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Biblioteca
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
+        <span class="flex self-center max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+
         <div *ngIf="showDropdownBiblioteca" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
             <li>
@@ -72,13 +81,14 @@
         </div>
       </li>
 
-      <li class="relative" (click)="showDropdownDocumentos = !showDropdownDocumentos">
-        <button class="hover:text-lg hover:underline hover:underline-offset-8 transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
+      <li class="relative group" (click)="setActiveDropdown(Dropdowns.Documents)">
+        <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Documentos
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
+        <span class="flex self-center max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
         <div *ngIf="showDropdownDocumentos" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
             <li>
@@ -94,13 +104,15 @@
         </div>
       </li>
 
-      <li class="relative" (click)="showDropdownNoticias = !showDropdownNoticias">
-        <button class="hover:text-lg hover:underline hover:underline-offset-8 transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
+      <li class="relative group" (click)="setActiveDropdown(Dropdowns.News)">
+        <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Notícias
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
+        <span class="flex self-center max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+
         <div *ngIf="showDropdownNoticias" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
             <li>
@@ -116,13 +128,15 @@
         </div>
       </li>
 
-      <li class="relative" (click)="showDropdownTransportes = !showDropdownTransportes">
-        <button class="hover:text-lg hover:underline hover:underline-offset-8 transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
+      <li class="relative group" (click)="setActiveDropdown(Dropdowns.Transports)">
+        <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Transportes
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
+        <span class="flex self-center max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+
         <div *ngIf="showDropdownTransportes" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
             <li>
@@ -138,17 +152,18 @@
 
     </ul>
 
-    <div class="space-x-3 flex justify-end w-1/3 relative" *ngIf="isSignedIn">
+    <div class="space-x-3 flex justify-end min-w-fit relative" *ngIf="isSignedIn">
       <div class="flex items-center space-x-2">
         <img src="{{ user.photo }}" alt="{{ user.firstName }}" class="w-10 h-10 rounded-full">
 
-        <div class="relative" (click)="showSignOutDropdown=!showSignOutDropdown">
-          <button class="hover:text-lg hover:underline hover:underline-offset-8 transition-all duration-700 ease-in-out  decoration-sky-500 flex items-center">
+        <div class="relative group" (click)="showSignOutDropdown=!showSignOutDropdown">
+          <button class="transition-all duration-700 ease-in-out  decoration-sky-500 flex items-center">
             Bem-vindo, {{user.firstName}}
             <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
+          <span class="flex self-center max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
 
           <div *ngIf="showSignOutDropdown" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 right-0 mt-1">
             <ul class="py-2 text-sm text-gray-700">
@@ -172,8 +187,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
 
 </header>
