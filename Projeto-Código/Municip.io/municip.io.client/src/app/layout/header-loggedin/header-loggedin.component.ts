@@ -37,7 +37,7 @@ export class HeaderLoggedinComponent {
             this.user = res;
             this.firstName = this.user.firstName;
             this.photo = this.user.photo;
-           
+
           },
           error => {
             console.error(error);
@@ -52,17 +52,21 @@ export class HeaderLoggedinComponent {
 
     this.auth.getUserRole().subscribe(
       res => {
-        if (res.role == Roles.Citizen) {
-          this.role = res.role;
-          
-          console.log("Ele é:" + this.role)
-        }
+
+        this.role = res.role;
+
+        console.log("Ele é:" + this.role)
       },
       error => {
         console.error(error);
       }
     );
   }
+
+  get Roles() {
+    return Roles;
+  }
+
   signOut() {
     if (this.isSignedIn) {
       this.auth.signOut().forEach(response => {
@@ -73,8 +77,8 @@ export class HeaderLoggedinComponent {
     }
   }
 }
-  
 
-  
+
+
 
 

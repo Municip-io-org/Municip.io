@@ -22,14 +22,26 @@
         <div *ngIf="showDropdownAgenda" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
             <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 1</a>
+              <a routerLink="/events/" class="block px-4 py-2 hover:bg-gray-100">Eventos</a>
+            </li>
+
+            <span *ngIf="role===Roles.Citizen">
+            <li>
+              <a routerLink="/events/calendar" class="block px-4 py-2 hover:bg-gray-100">Calendário Pessoal</a>
             </li>
             <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 2</a>
+              <a routerLink="/events/myEvents" class="block px-4 py-2 hover:bg-gray-100">Meus Eventos</a>
             </li>
+            </span>
+
+            <span *ngIf="role===Roles.Municipal">
             <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 3</a>
+              <a routerLink="/events/create" class="block px-4 py-2 hover:bg-gray-100">Criar</a>
             </li>
+            </span>
+
+
+
           </ul>
         </div>
       </li>
@@ -119,7 +131,7 @@
             <li>
               <a routerLink="/transports/schedules" class="block px-4 py-2 hover:bg-gray-100">Horários</a>
             </li>
-            
+
           </ul>
         </div>
       </li>
@@ -146,12 +158,12 @@
                 </button>
               </li>
               <li>
-                <div *ngIf="role==='Citizen'">
+                <div *ngIf="role=== Roles.Citizen">
                   <a routerLink="/citizen/profile" class="block px-4 py-2 hover:bg-gray-100">O meu Perfil </a>
 
                 </div>
 
-                <div *ngIf="role==='Municipal'">
+                <div *ngIf="role===Roles.Municipal">
                   <a routerLink="/municipal/profile" class="block px-4 py-2 hover:bg-gray-100">Perfil Administração</a>
                 </div>
               </li>
@@ -161,7 +173,7 @@
       </div>
     </div>
 
-    
-    </div>
+
+  </div>
 
 </header>
