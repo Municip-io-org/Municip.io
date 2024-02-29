@@ -1,6 +1,5 @@
 <app-card-outline-theme class="mb-20 ">
-
-  <div class="relative flex flex-col font-roboto text-left gap-x-2 max-w-[28rem] text-[1.063rem] bg-white p-7">
+  <div class="relative flex flex-col font-roboto justify-center text-left gap-x-2 max-w-[28rem] h-[35rem] text-[1.063rem] bg-white p-7">
 
     <div *ngIf="isMunAdmin" class="absolute -top-3 -left-3">
       <app-black-btn-icon-text altImage="Editar evento"
@@ -21,7 +20,7 @@
     <img [src]="event.image" alt="Foto do evento" class="object-cover w-[28rem] h-[16rem] rounded-3xl" />
     <p class="text-[0.96rem] text-right font-open-sans font-semibold">De {{event.startDate | date: "d/MM/yyyy"}} a {{event.endDate | date: "d/MM/yyyy"}}</p>
     <section class="flex flex-col text-municip-highlight-black ">
-      <p class="font-bold text-center text-[2rem]">{{event.title}}</p>
+      <p class="font-bold text-center text-[2rem] text-ellipsis overflow-hidden line-clamp-2">{{event.title}}</p>
       <p class=" font-bold text-ellipsis overflow-hidden line-clamp-3 ">{{event.description}}</p>
     </section>
     <div class="flex justify-between items-center font-open-sans font-extrabold pt-4">

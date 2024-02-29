@@ -7,10 +7,14 @@
     <button class="flex justify-center items-center bg-black rounded-full size-12" (click)="moveLeft()">
       <img src="/assets/images/arrows/right-arrow.png" class="size-6 rotate-180" />
     </button>
+    <div *ngIf="events.length === 0"
+         class="flex text-center justify-center items-center text-municip-normal-black grow text-[1.5rem] ">
+      <p class="font-semibold">Não há eventos.</p>
+    </div>
     <ul class="flex space-x-7 justify-center">
       <ng-container *ngFor="let event of events.slice(startIndex, startIndex + 4)">
         <li *ngIf="event">
-          <app-events-small [image]="event.image" [title]="event.title" [date]="event.date"></app-events-small>
+          <app-events-small [eventId]="event.id" [image]="event.image" [title]="event.title" [date]="event.startDate"></app-events-small>
         </li>
       </ng-container>
     </ul>

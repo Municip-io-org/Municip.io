@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-events-small',
@@ -6,8 +7,14 @@ import { Component, Input } from '@angular/core';
   styleUrl: './events-small.component.css'
 })
 export class EventsSmallComponent {
+  @Input() eventId: string = "";
   @Input() image: string = "";
   @Input() title: string = "";
   @Input() date: Date | undefined;
 
+  constructor(private router: Router) { }
+
+  goToEventPage() {
+    this.router.navigateByUrl(`events/${this.eventId}`);
+  }
 }
