@@ -290,88 +290,56 @@ namespace Municip.io.Server.Controllers
         }
 
         [HttpPut("UpdateUserInfo")]
-        public async Task<IActionResult> UpdateUserInfo(Citizen updatedCitizen)
+        public async Task<IActionResult> UpdateUserInfo(Citizen updatedCitizen, string passwordConfirmation)
         {
             if (ModelState.IsValid)
             {
                 var existingCitizen = await _context.Citizens.FindAsync(updatedCitizen.Id);
+
+               
 
                 if (existingCitizen == null)
                 {
                     return NotFound();
                 }
 
-                if (existingCitizen.firstName != updatedCitizen.firstName)
+                
+                if (!ValidadePassword(updatedCitizen.Password))
                 {
-                    existingCitizen.firstName = updatedCitizen.firstName;
+                    BadRequest(new { Message = "A password não cumpre os requisitos necessários." });
                 }
 
-                if (existingCitizen.Surname != updatedCitizen.Surname)
+               
+                else if (updatedCitizen.Password != existingCitizen.Password )
                 {
-                    existingCitizen.Surname = updatedCitizen.Surname;
-                }
-
-                if (existingCitizen.Email != updatedCitizen.Email)
-                {
-                    existingCitizen.Email = updatedCitizen.Email;
-                    
-                }
-
-                if (existingCitizen.birthDate != updatedCitizen.birthDate)
-                {
-                    existingCitizen.birthDate = updatedCitizen.birthDate;
-                }
-
-                if (existingCitizen.Address != updatedCitizen.Address)
-                {
-                    existingCitizen.Address = updatedCitizen.Address;
-                }
-
-                if (existingCitizen.Nif != updatedCitizen.Nif)
-                {
-                    existingCitizen.Nif = updatedCitizen.Nif;
-                }
-
-                if (existingCitizen.postalCode1 != updatedCitizen.postalCode1)
-                {
-                    existingCitizen.postalCode1 = updatedCitizen.postalCode1;
-                }
-
-                if (existingCitizen.postalCode2 != updatedCitizen.postalCode2)
-                {
-                    existingCitizen.postalCode2 = updatedCitizen.postalCode2;
-                }
-
-                if (existingCitizen.Password != updatedCitizen.Password)
-                {
-                    
-                    if (!ValidadePassword(updatedCitizen.Password))
+                    if (await _userManager.CheckPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), passwordConfirmation))
                     {
-                        ModelState.AddModelError("password", "Password não obedece aos requisitos");
-                        var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-                        return BadRequest(new { Message = "Erro de Validação", Errors = errors });
+                        existingCitizen.Password = updatedCitizen.Password;
+                        _context.SaveChanges();
+                        return Ok();
                     }
-
-                    existingCitizen.Password = updatedCitizen.Password;
+                    else
+                    {
+                        return BadRequest(new { Message = "A password de confirmação não corresponde à password antiga." });
+                    }
                 }
 
-                if (existingCitizen.photo != updatedCitizen.photo)
+               
+                else if (updatedCitizen.Password == null)
                 {
-                    existingCitizen.photo = updatedCitizen.photo;
+                    updatedCitizen.Password = existingCitizen.Password;
                 }
 
-                if (_context.ChangeTracker.HasChanges())
-                {
-                    await _context.SaveChangesAsync();
-                    return Ok();
-                }
-
-                return NoContent();
+                
+                _context.Entry(existingCitizen).CurrentValues.SetValues(updatedCitizen);
+                _context.SaveChanges();
+                return Ok();
             }
 
             var validationErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
             return BadRequest(new { Message = "Erro de Validação", Errors = validationErrors });
         }
+
 
 
         private bool ValidadePassword(string password)

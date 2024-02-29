@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { Municipality } from './municipal-admin-auth.service';
+import { Citizen } from './citizen-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -151,7 +152,7 @@ export class UserAuthService {
     return this.http.get<any>(`/api/accounts/InfoMunicipality?name=${nome}`);
   }
 
-  updateUser(user: any, image: File): Observable<any> {
+  updateUser(user: Citizen, image: File, passConfirm:string): Observable<any> {
     const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
     const imgurl = "https://api.imgur.com/3/image";
     const formData = new FormData();
@@ -159,7 +160,8 @@ export class UserAuthService {
     return this.http.post(imgurl, formData, { headers }).pipe(
       switchMap((response: any) => {
         user.photo = response['data']['link'];
-        return this.http.put('/api/accounts/UpdateUserInfo', user);
+        console.log(user);
+        return this.http.put(`/api/accounts/UpdateUserInfo?passwordConfirmation=${passConfirm}`, user );
       })
     );
   }

@@ -90,7 +90,6 @@ import { NewsCreateComponent } from './news/news-create/news-create.component';
 import { DialogMessageComponent } from './utils/dialog/dialog-message/dialog-message.component';
 import { NewsPageComponent } from './news/news-page/news-page.component';
 
-import { DialogMessageComponent } from './utils/dialog/dialog-message/dialog-message.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { RippleModule } from 'primeng/ripple'
 

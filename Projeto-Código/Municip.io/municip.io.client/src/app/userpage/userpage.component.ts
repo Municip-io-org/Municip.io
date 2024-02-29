@@ -1,7 +1,8 @@
 import { Component, Query } from '@angular/core';
 
 import {Roles, UserAuthService } from '../services/user-auth.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { passwordsMatchValidator } from '../../../validator';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class UserpageComponent {
         this.userAuthService.getInfoByEmail(emailParsed).subscribe(
           res => {
             this.newUser = res;
+            console.log("dasdasdas",this.newUser);
             this.originalName = this.newUser.firstName;
             this.originalPhoto = this.newUser.photo; 
             this.formatBirthDate();
@@ -69,11 +71,13 @@ export class UserpageComponent {
     postalCode1: new FormControl("", [Validators.required, Validators.pattern(/^\d{4}$/)]),
     postalCode2: new FormControl("", [Validators.required, Validators.pattern(/^\d{3}$/)]),
     password: new FormControl("", [
-      Validators.required,
+    
       Validators.pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/)
     ]),
-
+    passwordConfirmation: new FormControl("", [Validators.required]),
+  
   });
+
   get firstName() {
     return this.profileEdit.get('firstName');
   }
@@ -113,6 +117,10 @@ export class UserpageComponent {
   get photo() {
     return this.profileEdit.get('photo');
   }
+
+  get passwordConfirmation() {
+    return this.profileEdit.get('passwordConfirmation');
+  }
   OnSubmit() {
 
     const formValues = this.profileEdit.value;
@@ -124,10 +132,13 @@ export class UserpageComponent {
     this.newUser.nif = formValues.nif || this.newUser.nif;
     this.newUser.postalCode1 = formValues.postalCode1 || this.newUser.postalCode1;
     this.newUser.postalCode2 = formValues.postalCode2 || this.newUser.postalCode2;
-    this.newUser.password = formValues.password || this.newUser.password;
-
-    this.userAuthService.updateUser(this.newUser, this.newUser.photo).subscribe(
+    this.newUser.password = formValues.password? formValues.password : "";
+    var passConfirm = formValues.passwordConfirmation || "";
+    this.newUser.events = [];
+    
+    this.userAuthService.updateUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
       res => {
+
         this.originalName = this.newUser.firstName;
         this.originalPhoto = this.newUser.photo;
       },
@@ -171,4 +182,6 @@ export class UserpageComponent {
       console.error('No file selected');
     }
   }
+
+ 
 }
