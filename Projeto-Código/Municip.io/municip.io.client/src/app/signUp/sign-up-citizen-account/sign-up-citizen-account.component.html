@@ -1,12 +1,12 @@
 
 
 <div class="flex text-municip-black text-[2vh] font-poppins">
-  <div class="h-screen grow bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center">
+  <div class=" grow bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center">
     <div class=" flex justify-center text-white">
       <img alt="logo" src="/assets/images/logos/logo-white-right.png" class="size-8/12 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
     </div>
   </div>
-  <div class="h-screen mx-[3vh] w-[140vh] flex items-center justify-center ">
+  <div class=" mx-[3vh] w-[140vh] flex items-center justify-center ">
     <div class="flex grow flex-col">
       <h1 class="font-black text-[4vh] text-left text-black my-2">Registo de Munícipe</h1>
       <h3 class="font-medium text-left text-municip-normal-black mb-2">Insira os seus dados</h3>
@@ -18,31 +18,31 @@
         </div>
         <div class="py-[1vh] flex justify-around">
           <section class=" flex flex-col text-left space-y-2 ">
-            <div>
+            <div class="h-32">
               <app-input-title class="text-[2.6vh]">Primeiro Nome</app-input-title>
               <div class="flex items-center">
                 <input required placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="citizen.firstName"
-                       class="input w-[35.2vh]"/>
+                       class="input w-[35.2vh] h-12" />
                 <app-tooltip [tooltipText]="'De acordo com o Documento de Identificação.'"></app-tooltip>
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="firstName?.touched && firstName?.invalid ">
                 <div *ngIf="firstName?.errors?.['required'] ">Primeiro Nome Obrigatório</div>
               </div>
             </div>
-            <div>
+            <div class="h-32">
               <app-input-title class="text-[2.6vh]">Email</app-input-title>
               <input required placeholder="Introduza o seu email" type="email" id="email" formControlName="email" name="email" [(ngModel)]="citizen.email"
-                     class="input w-[35.2vh]" />
+                     class="input w-[35.2vh] h-12" />
               <div class="text-red-500 font-bold py-2" *ngIf="email?.touched && email?.invalid ">
                 <div *ngIf="email?.errors?.['required'] ">Email Obrigatório</div>
                 <div *ngIf="email?.errors?.['email']">Email Inválido</div>
               </div>
             </div>
-            <div>
+            <div class="h-32">
               <app-input-title class="text-[2.6vh]">NIF</app-input-title>
               <div class="flex items-center">
                 <input required placeholder="Introduza o seu NIF" type="text" id="nif" formControlName="nif" name="nif" [(ngModel)]="citizen.nif"
-                       class="input w-[35.2vh]"/>
+                       class="input w-[35.2vh] h-12" />
                 <app-tooltip [tooltipText]="'9 dígitos'"></app-tooltip>
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="nif?.touched && nif?.invalid">
@@ -50,10 +50,10 @@
                 <div *ngIf="nif?.errors?.['pattern']">Nif inválido</div>
               </div>
             </div>
-            <div>
+            <div class="h-32">
               <app-input-title class="text-[2.6vh]">Género</app-input-title>
               <select required id="gender" formControlName="gender" name="gender" [(ngModel)]="citizen.gender"
-                      class="input w-[35.2vh]">
+                      class="input w-[35.2vh]  h-12">
                 <option value="">Escolha o seu género</option>
                 <option value="m">Masculino</option>
                 <option value="f">Feminino</option>
@@ -63,19 +63,19 @@
                 <div *ngIf="gender?.errors?.['required'] ">Género Obrigatório</div>
               </div>
             </div>
-            <div>
+            <div class="h-32">
               <app-input-title class="text-[2.6vh]">Rua, Nºde Porta e Andar</app-input-title>
               <input required placeholder="Introduza a sua morada" type="text" id="address" formControlName="address" name="address" [(ngModel)]="citizen.address"
-                     class="input w-[35.2vh]" />
+                     class="input w-[35.2vh] h-12" />
               <div class="text-red-500 font-bold py-2" *ngIf="address?.touched && address?.invalid">
                 <div *ngIf="address?.errors?.['required'] ">Morada Obrigatório</div>
               </div>
             </div>
-            <div>
+            <div class="h-32">
               <app-input-title class="text-[2.6vh]">Município</app-input-title>
               <div class="flex items-center">
                 <select required id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="citizen.municipality"
-                        class="input w-[35.2vh]">
+                        class="input w-[35.2vh] h-12">
                   <option value="">Escolha o seu município</option>
                   <option [value]="value" *ngFor="let value of getValues()">{{ value }}</option>
                 </select>
@@ -88,23 +88,23 @@
             </div>
 
           </section>
-          <section class="flex flex-col text-left space-y-2 ">
-            <div>
+          <section class="flex flex-col text-left space-y-2 w-[35.2vh]">
+            <div class="h-32">
               <app-input-title class="text-[2.6vh]">Apelido</app-input-title>
               <div class="flex items-center">
                 <input required placeholder="Introduza o seu apelido" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="citizen.surname"
-                       class="input w-[35.2vh]" />
+                       class="input w-[35.2vh] h-12" />
                 <app-tooltip [tooltipText]="'De acordo com o Documento de Identificação.'"></app-tooltip>
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="surname?.touched && surname?.invalid">
                 <div *ngIf="surname?.errors?.['required'] ">Apelido Obrigatório</div>
               </div>
             </div>
-            <div>
+            <div class="h-32">
               <app-input-title class="text-[2.6vh]">Palavra-Passe</app-input-title>
               <div class="flex items-center">
                 <input required placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="citizen.password"
-                       class="input w-[35.2vh]">
+                       class="input w-[35.2vh] h-12">
                 <app-tooltip [tooltipText]="'A password deverá ter letras maiúsculas, minúsculas, números e símbolos'"></app-tooltip>
 
               </div>
@@ -112,11 +112,19 @@
                 <div *ngIf="password?.errors?.['required'] ">Palavra-Passe Obrigatório</div>
               </div>
             </div>
-            <div>
+            <div class="h-32">
               <app-input-title class="text-[2.6vh]">Data de Nascimento</app-input-title>
               <div class="flex items-center">
-                <input required placeholder="Introduza a sua data de nascimento" type="date" id="birthDate" formControlName="birthDate" name="birthDate" [(ngModel)]="citizen.birthDate"
-                       class="input w-[35.2vh]">
+                <!--<input required placeholder="Introduza a sua data de nascimento" type="date" id="birthDate" formControlName="birthDate" name="birthDate" [(ngModel)]="citizen.birthDate"
+                class="input w-[35.2vh]">-->
+                <mat-form-field class="inputRange w-full">
+                  <input id="birthDate" formControlName="birthDate" name="birthDate"
+                          [(ngModel)]="citizen.birthDate" matInput [matDatepicker]="picker"
+                         
+                         >
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
                 <app-tooltip [tooltipText]="'Utilize o seletor para a inserção da data'"></app-tooltip>
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="birthDate?.touched && birthDate?.invalid">
@@ -124,18 +132,23 @@
               </div>
             </div>
             <!--<div class="flex flex-col">
-                    <app-input-title class="text-[2.8vh]">Fotografia de Utilizador</app-input-title>
-                    <input type="hidden" id="profilePic" name="profilePic" class="input w-[20rem]
-      focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
-      transition-all duration-700 ease-in-out  decoration-sky-500">
-                  </div>-->
-            <div>
+                          <app-input-title class="text-[2.8vh]">Fotografia de Utilizador</app-input-title>
+                          <input type="hidden" id="profilePic" name="profilePic" class="input w-[20rem]
+            focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
+            transition-all duration-700 ease-in-out  decoration-sky-500">
+                        </div>-->
+            <div class="h-32">
               <app-input-title class="text-[2.6vh]">Código Postal</app-input-title>
-              <div>
-                <input required placeholder="0000" type="text" id="postalCode1" formControlName="postalCode1" name="postalCode1" [(ngModel)]="citizen.postalCode1"
-                       class="input w-[10rem] text-center" />
+              <div class="flex w-[35.2vh] items-center space-x-2">
+                <input required placeholder="0000" type="text" id="postalCode1"
+                       formControlName="postalCode1" name="postalCode1"
+                       [(ngModel)]="citizen.postalCode1"
+                       class="input text-center w-1/2" />
                 <span>-</span>
-                <input required placeholder="000" type="text" id="postalCode2" formControlName="postalCode2" name="postalCode2" [(ngModel)]="citizen.postalCode2" class="input w-[8rem] text-center" />
+                <input required placeholder="000" type="text" id="postalCode2"
+                       formControlName="postalCode2" name="postalCode2"
+                       [(ngModel)]="citizen.postalCode2"
+                       class="input text-center w-1/3" />
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="(postalCode1?.touched && postalCode1?.invalid) || (postalCode2?.touched && postalCode2?.invalid) ">
                 <div *ngIf="postalCode1?.errors?.['required'] || postalCode2?.errors?.['required'] ">Código Postal Obrigatório</div>
@@ -143,27 +156,34 @@
                 <div *ngIf="postalCode2?.errors?.['pattern']">Secundo código inválido</div>
               </div>
             </div>
-
-            <app-input-title class="text-[2.6vh]">Foto</app-input-title>
-            <div class="flex items-center">
-              <input type="file" #filePicker id="photo" formControlName="photo" name="photo"
-                     [(ngModel)]="citizen.photo" (change)="onImagePicked($event)" accept="image/*"
-                     class="input w-[35.2vh]" >
-              <app-tooltip [tooltipText]="'Utilize o seletor para encontrar a sua foto'"></app-tooltip>
+            <div class="h-32">
+              <app-input-title class="text-[2.6vh]">Foto</app-input-title>
+              <div class="flex items-center">
+                <input type="file" #filePicker id="photo" formControlName="photo" name="photo"
+                       [(ngModel)]="citizen.photo" (change)="onImagePicked($event)" accept="image/*"
+                       class="input w-[35.2vh] h-12">
+                <app-tooltip [tooltipText]="'Utilize o seletor para encontrar a sua foto'"></app-tooltip>
+              </div>
             </div>
-       
-        <button type="submit" [disabled]="!signUpCitizenForm.valid" class="self-end relative top-[16.7vh] h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
-  border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
-          Registar
-          <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-        </button>
-        <!--<button class="btn-primary btn spaced-button" type="submit" [disabled]="!signUpCitizenForm.valid">Create</button>-->
-        </section>
-</div>
+            <div class="h-32 flex justify-end items-center">
+              <button type="submit" [disabled]="!signUpCitizenForm.valid"
+                      class=" relative h-auto w-[10rem] flex justify-center
+                    items-center font-semibold text-municip-blank bg-gradient-to-tl
+                    from-municip-light-blue to-municip-blue
+  border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg
+                    transition duration-700 ease-in-out">
+                Registar
+                <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+              </button>
+            </div>
+            <!--<button class="btn-primary btn spaced-button" type="submit" [disabled]="!signUpCitizenForm.valid">Create</button>-->
+          </section>
+        </div>
       </form>
-      
-      <hr class="rounded-3xl border-t-[#ECECF0] my-4" />
-      <div class="text-right font-medium text-municip-normal-black ">Já tem conta? <a routerLink="/login" class="cursor-pointer font-bold text-black ml-2 hover:underline">Faça login</a></div>
+      <div class="pb-5">
+        <hr class="rounded-3xl border-t-[#ECECF0] my-4" />
+        <div class="text-right font-medium text-municip-normal-black ">Já tem conta? <a routerLink="/login" class="cursor-pointer font-bold text-black ml-2 hover:underline">Faça login</a></div>
+      </div>
     </div>
   </div>
 </div>

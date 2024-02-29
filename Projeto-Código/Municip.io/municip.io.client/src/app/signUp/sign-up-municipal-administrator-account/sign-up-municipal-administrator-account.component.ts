@@ -7,7 +7,7 @@ import { Municipalities } from '../../municipalities.enum';
 @Component({
   selector: 'app-sign-up-municipal-administrator-account',
   templateUrl: './sign-up-municipal-administrator-account.component.html',
-  styleUrl: './sign-up-municipal-administrator-account.component.css'
+  styleUrl: './sign-up-municipal-administrator-account.component.css',
 })
 
 

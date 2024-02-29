@@ -1,14 +1,18 @@
 /// <reference path="../sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component.ts" />
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { CitizenAuthService, Citizen } from '../../services/citizen-auth.service';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Municipalities } from '../../municipalities.enum';
+import { provideNativeDateAdapter, DateAdapter } from '@angular/material/core';
+
 
 @Component({
   selector: 'app-sign-up-citizen-account',
   templateUrl: './sign-up-citizen-account.component.html',
-  styleUrl: './sign-up-citizen-account.component.css'
+  styleUrl: './sign-up-citizen-account.component.css',
+  providers: [provideNativeDateAdapter()],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SignUpCitizenAccountComponent {
 
@@ -19,7 +23,7 @@ export class SignUpCitizenAccountComponent {
     password: '',
     nif: '',
     gender: '',
-    municipality: 'test',
+    municipality: '',
     address: '',
     postalCode1: '',
     postalCode2: '',
@@ -39,8 +43,9 @@ export class SignUpCitizenAccountComponent {
     return Object.values(this.municipalities)
   }
 
-  constructor(private citizenAuthService: CitizenAuthService, private router: Router) {
-
+  constructor(private citizenAuthService: CitizenAuthService, private router: Router,
+    private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('pt');
   }
 
   signUpCitizenForm = new FormGroup({
