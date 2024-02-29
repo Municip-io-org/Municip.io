@@ -3700,10 +3700,6 @@ video {
   margin-top: -0.5rem;
 }
 
-.-mt-\[2rem\]{
-  margin-top: -2rem;
-}
-
 .-mt-\[3rem\]{
   margin-top: -3rem;
 }
@@ -3844,6 +3840,13 @@ video {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+}
+
+.line-clamp-2{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .block{
@@ -4050,6 +4053,10 @@ video {
   height: 100vh;
 }
 
+.h-\[35rem\]{
+  height: 35rem;
+}
+
 .max-h-\[400px\]{
   max-height: 400px;
 }
@@ -4246,6 +4253,10 @@ video {
   width: 40rem;
 }
 
+.w-\[50rem\]{
+  width: 50rem;
+}
+
 .w-\[60rem\]{
   width: 60rem;
 }
@@ -4274,8 +4285,17 @@ video {
   width: 100vw;
 }
 
+.min-w-fit{
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+
 .min-w-full{
   min-width: 100%;
+}
+
+.max-w-0{
+  max-width: 0px;
 }
 
 .max-w-\[15rem\]{
@@ -4394,21 +4414,13 @@ video {
   justify-content: space-evenly;
 }
 
-.gap-16{
-  gap: 4rem;
-}
-
-.gap-4{
-  gap: 1rem;
-}
-
-.gap-12{
-  gap: 3rem;
-}
-
 .gap-x-2{
   -moz-column-gap: 0.5rem;
        column-gap: 0.5rem;
+}
+
+.gap-y-16{
+  row-gap: 4rem;
 }
 
 .gap-y-20{
@@ -4421,30 +4433,6 @@ video {
 
 .gap-y-5{
   row-gap: 1.25rem;
-}
-
-.gap-x-12{
-  -moz-column-gap: 3rem;
-       column-gap: 3rem;
-}
-
-.gap-x-8{
-  -moz-column-gap: 2rem;
-       column-gap: 2rem;
-}
-
-.gap-y-16{
-  row-gap: 4rem;
-}
-
-.gap-x-10{
-  -moz-column-gap: 2.5rem;
-       column-gap: 2.5rem;
-}
-
-.gap-x-\[2rem\]{
-  -moz-column-gap: 2rem;
-       column-gap: 2rem;
 }
 
 .space-x-10 > :not([hidden]) ~ :not([hidden]){
@@ -4836,6 +4824,11 @@ video {
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
 }
 
+.bg-sky-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(2 132 199 / var(--tw-bg-opacity));
+}
+
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -5211,6 +5204,10 @@ video {
 
 .text-\[1\.2rem\]{
   font-size: 1.2rem;
+}
+
+.text-\[1\.3rem\]{
+  font-size: 1.3rem;
 }
 
 .text-\[1\.5rem\]{
@@ -5744,6 +5741,10 @@ body {
 
 .group:hover .group-hover\:flex{
   display: flex;
+}
+
+.group:hover .group-hover\:max-w-full{
+  max-width: 100%;
 }
 
 @media (min-width: 640px){
