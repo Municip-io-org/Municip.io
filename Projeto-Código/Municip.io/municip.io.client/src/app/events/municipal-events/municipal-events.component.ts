@@ -66,20 +66,16 @@ export class MunicipalEventsComponent {
         this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
           async (res: any) => {
             this.user = res;
-            console.log("user", this.user);
 
 
             const userRole = await this.userAuthService.getUserRole().toPromise();
-            console.log(userRole);
             if (userRole!.role === Roles.Municipal) {
-              console.log("É admin municipal")
               this.isMunAdmin = true;
             }
 
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: any) => {
                 this.municipality = municipalityRes as Municipality;
-                console.log("municipality", this.municipality);
                 this.loadData();
               },
               error => {
@@ -120,8 +116,6 @@ export class MunicipalEventsComponent {
 
   onScrollDown() { 
     if (this.events.length > this.showEvents.length) {
-      console.log("Scroll");
-      console.log((this.events.length > this.showEvents.length));
       
       this.currentPage++;
       this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
@@ -140,7 +134,7 @@ export class MunicipalEventsComponent {
 
     const [eventId, eventTitle] = eventData.split('|');
 
-    console.log('Remoção do evento:' + eventTitle);
+    
     this.isRemoveEventDialogOpen = true;
     this.dialogTitle = 'Deseja apagar o evento ' + eventTitle + '?';
     this.dialogMessage = 'Confirme a sua ação';
@@ -159,7 +153,6 @@ export class MunicipalEventsComponent {
   removeEvent() {
     this.closeRemoveEventDialog();
 
-    console.log('Remover do evento: ' + this.eventIdToRemove);
 
     this.eventsService.removeEvent(this.eventIdToRemove).subscribe(
       response => {
@@ -188,7 +181,6 @@ export class MunicipalEventsComponent {
 
   toggleSortOrder() {
 
-    console.log("Ordem de classificação alterada:", this.ascendingOrder ? 'Ascendente' : 'Descendente');
     this.sortEventsByDate();
   }
 

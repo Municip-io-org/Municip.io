@@ -55,7 +55,6 @@ export class HeaderLoggedinComponent {
 
         this.role = res.role;
 
-        console.log("Ele é:" + this.role)
       },
       error => {
         console.error(error);

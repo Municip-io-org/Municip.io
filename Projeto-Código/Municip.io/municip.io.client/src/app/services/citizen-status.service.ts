@@ -16,7 +16,6 @@ export class CitizenStatusService {
 
   //approveMunicipality
   approveCitizen(email: string) {
-    console.log(email + "Dentro do serviço")
     var emailParse = email.replace('@', '%40');
 
     return this.http.post<any>(`/api/citizenstatus/approveCitizen?email=${emailParse}`, {});

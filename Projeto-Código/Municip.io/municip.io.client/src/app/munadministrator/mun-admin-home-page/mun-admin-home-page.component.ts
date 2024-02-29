@@ -56,12 +56,10 @@ export class MunAdminHomePageComponent {
         this.userAuthService.getInfoByEmail(this.anyUser.email).subscribe(
           res => {
             this.user = res as MunicipalAdministrator;
-            console.log("user", this.user);
 
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               res => {
                 this.municipality = res as Municipality;
-                console.log("municipality", this.municipality);
 
               },
               error => {

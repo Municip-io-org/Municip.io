@@ -20,7 +20,6 @@ export class DatetimepickerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.componentForm.value);
     this.componentForm = this.formReceived;
   }
 

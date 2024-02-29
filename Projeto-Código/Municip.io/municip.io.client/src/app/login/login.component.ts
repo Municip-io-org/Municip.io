@@ -33,7 +33,6 @@ export class LoginComponent {
   error: string = "";
 
    onSubmit() {
-    console.log(this.loginForm.value);
     
      //nao esta a ter o user e pass (null) e falta fazer a navigation apenas quando for autenticado
      this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(

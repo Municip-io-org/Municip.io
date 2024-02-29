@@ -16,11 +16,9 @@ export class StopsPageComponent implements OnInit {
   ngOnInit(): void {
     this.selectedStop = this.route.snapshot.params['selectedStop'];
 
-    console.log("teste:" + this.selectedStop)
 
     this.service.getMunicipality().toPromise().then((municipality) => {
       this.municipality = municipality || '';
-      console.log(municipality)
     });
   }
 }

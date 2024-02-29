@@ -61,13 +61,11 @@ export class MunicipalEditComponent {
         this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
           (res: any) => {
             this.user = res;
-            console.log("user", this.user);
 
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: any) => {
                 this.municipality = municipalityRes as Municipality;
      
-                console.log("municipality", this.municipality);
 
                 this.initForm();
                 
@@ -173,23 +171,14 @@ export class MunicipalEditComponent {
 
   this.toggleEditMode();
 
-    /*console.log("ANTES DE ENVIAR Á API");*/
 
     this.municipality.president = this.president!.value!;
     this.municipality.contact = this.contact!.value!.toString();
     this.municipality.description = this.description!.value!;
 
-    /*console.log(this.municipality);*/
 
   this.municipalAdminAuthService.updateMunicipality(this.municipality, this.emblemImg, this.landscapeImg).subscribe(
-    //(result) => {
-    //  console.log("RESULTADO DA API");
-    //  console.log(result);
-    //},
-    //(error) => {
-    //  // Lida com erros, se necessário
-    //  console.log(error);
-    //}
+
   );
   }
 }

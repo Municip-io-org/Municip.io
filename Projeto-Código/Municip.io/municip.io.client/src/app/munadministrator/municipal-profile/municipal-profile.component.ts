@@ -59,12 +59,10 @@ export class MunicipalProfileComponent {
         this.userAuthService.getInfoByEmail(this.anyUser.email).subscribe(
           (res: any) => {
             this.user = res;
-            console.log("user", this.user);
 
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: any) => {
                 this.municipality = municipalityRes as Municipality;
-                console.log("municipality", this.municipality);
                 this.loadData();
               },
               error => {
