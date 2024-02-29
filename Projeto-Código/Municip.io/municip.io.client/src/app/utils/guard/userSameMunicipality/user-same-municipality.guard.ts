@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { EventsService, Event } from '../../../services/events/events.service';
 import { UserAuthService } from '../../../services/user-auth.service';
+import { NewsService } from '../../../services/news/news.service';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { UserAuthService } from '../../../services/user-auth.service';
 })
 export class UserSameMunicipalityGuard implements CanActivate {
 
-  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router) { }
+  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router, private newsService: NewsService) { }
   async canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> {
@@ -40,8 +41,18 @@ export class UserSameMunicipalityGuard implements CanActivate {
         return false;
       }
     } else if (newsId) {
-      this.router.navigateByUrl(`/news/${newsId}`);
-      return false;
+      const news = await this.newsService.getNewsById(newsId).toPromise();
+      console.log("DADHAUDBAUDBAUI", news?.municipality);
+      if (userMunicipality == news!.municipality) {
+       
+        next.data = { news: news! };
+        return true;
+      } else {
+        this.router.navigateByUrl('/accessDenied');
+        //return true;
+
+        return false;
+      }
     } else {
       this.router.navigateByUrl('/accessDenied');
       return false;

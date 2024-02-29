@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 
@@ -59,6 +60,24 @@ namespace Municip.io.Server.Controllers
                 return NotFound();
             }
             
+        }
+
+        [HttpGet("GetNewsById")]
+        public IActionResult GetNewsById(Guid newsId)
+        {
+            if (!ModelState.IsValid)
+            {
+                var validationErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                return BadRequest(new { Message = "Erro de Validação", Errors = validationErrors });
+            }
+
+            var newsById = _context.News.Where(e => e.Id == newsId).FirstOrDefault();
+            if (newsById == null)
+            {
+                return NotFound(new { message = "Not Found any event with id: " + newsId });
+            }
+
+            return Json(newsById);
         }
     }
 }

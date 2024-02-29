@@ -17,7 +17,7 @@ export class NewsCreateComponent {
     mainText: '',
     photo: '',
     date: new Date(),
-    Municipality: ''
+    municipality: ''
   };
   user: any;
 newUser: any;
@@ -78,7 +78,7 @@ newUser: any;
 
   OnSubmit() {
    
-    this.news.Municipality = this.newUser.municipality;
+    this.news.municipality = this.newUser.municipality;
    
     this.news.title = this.newsCreateForm.value.title || "";
     this.news.subtitle = this.newsCreateForm.value.subtitle || "";

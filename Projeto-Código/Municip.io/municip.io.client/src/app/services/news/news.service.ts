@@ -24,15 +24,18 @@ export class NewsService {
       .pipe(switchMap((response: any) => {
         console.log(response);
         news.photo = response['data']['link'];
-        console.log(news);
-        console.log(news.photo);
-        console.log("NODNAODNAODNAODAODNAONDADNOADNAONDOADOANDOADNOADOA ",news);
+        
         return this.http.post<News>('/api/news/CreateNews', news);
       }));
   }
 
   deleteNews(id: string): Observable<any> {
     return this.http.delete('api/news/DeleteNews', { params: { id: id } });
+  }
+
+  getNewsById(newsId: string) {
+    console.log("ID: ", newsId);
+    return this.http.get<News>(`api/news/GetNewsById?newsId=${newsId}`);
   }
  }
 
@@ -42,5 +45,5 @@ export interface News {
   mainText: string;
   photo?: string;
   date: Date;
-  Municipality: string;
+  municipality: string;
 }

@@ -88,6 +88,7 @@ import { NewsCardComponent } from './news/news-card/news-card.component';
 import { NewsCreateComponent } from './news/news-create/news-create.component';
 
 import { DialogMessageComponent } from './utils/dialog/dialog-message/dialog-message.component';
+import { NewsPageComponent } from './news/news-page/news-page.component';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -166,6 +167,7 @@ registerLocaleData(localePt, 'pt-PT');
     DialogMessageComponent,
     EventCardComponent,
     EventsListComponent,
+    NewsPageComponent,
     
   ],
   imports: [
