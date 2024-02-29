@@ -71,18 +71,15 @@ export class EventsListComponent {
         this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
           async (res: any) => {
             this.user = res;
-            console.log("user", this.user);
 
 
             const userRole = await this.userAuthService.getUserRole().toPromise();
-            console.log(userRole);
             
 
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: any) => {
                 this.municipality = municipalityRes as Municipality;
 
-                console.log("municipality", this.municipality);
 
 
                 this.loadData();
@@ -127,8 +124,6 @@ export class EventsListComponent {
 
   onScrollDown() {
     if (this.events.length > this.showEvents.length) {
-      console.log("Scroll");
-      console.log((this.events.length > this.showEvents.length));
 
       this.currentPage++;
       this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
@@ -144,7 +139,6 @@ export class EventsListComponent {
 
   toggleSortOrder() {
 
-    console.log("Ordem de classificação alterada:", this.ascendingOrder ? 'Ascendente' : 'Descendente');
     this.sortEventsByDate();
   }
 

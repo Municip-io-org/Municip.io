@@ -21,7 +21,6 @@ export class MunicipalityGuard implements CanActivate {
       this.router.navigate(['']);
       return false;
     } else {
-      console.log("AQUI DÁ")
       
       return true;
     }

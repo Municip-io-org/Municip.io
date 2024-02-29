@@ -73,8 +73,6 @@ export class EventPageComponent {
 
   ngOnInit(): void {
     this.event = this.activatedRoute.snapshot.data['event'];
-    console.log("EVENTO SELECIONADO");
-    console.log(this.event);
 
     this.userAuthService.getUserData().subscribe(
       res => {
@@ -83,13 +81,10 @@ export class EventPageComponent {
         this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
           async (res: any) => {
             this.user = res;
-            console.log("user", this.user);
 
 
             const userRole = await this.userAuthService.getUserRole().toPromise();
-            console.log(userRole);
             if (userRole!.role === Roles.Municipal) {
-              console.log("É admin municipal")
               this.isMunAdmin = true;
             }
 
@@ -97,7 +92,6 @@ export class EventPageComponent {
               (municipalityRes: Municipality) => {
                 this.municipality = municipalityRes;
 
-                console.log("municipality", this.municipality);
               },
               error => {
                 console.error(error);
@@ -127,7 +121,6 @@ export class EventPageComponent {
   }
 
   enrollInEvent(eventId: string, email: string) {
-    console.log('Inscrição no evento:');
     this.EventsService.enrollEvent(eventId, email).subscribe(
       response => {
         this.isSuccesfullEnroll = true;
@@ -169,7 +162,6 @@ export class EventPageComponent {
   }
 
   openRemoveEventDialog() {
-    console.log('Remoção do evento:' + this.event.id);
     this.isRemoveEventDialogOpen = true;
     this.dialogTitle = 'Deseja apagar o evento ' + this.event.title + '?';
     this.dialogMessage = 'Confirme a sua ação';
@@ -181,7 +173,6 @@ export class EventPageComponent {
 
   removeEvent() {
     this.closeRemoveEventDialog();
-    console.log('Remover do evento: ' + this.event.id);
    
     this.EventsService.removeEvent(this.event.id!).subscribe(
       response => {

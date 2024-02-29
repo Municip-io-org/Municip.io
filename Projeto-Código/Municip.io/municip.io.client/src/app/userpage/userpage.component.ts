@@ -27,14 +27,12 @@ export class UserpageComponent {
         this.user = res;
         var emailToParse = this.user.email;
         var emailParsed = emailToParse.replace('@', '%40');
-        console.log("teste"+this.user.email)
         this.userAuthService.getInfoByEmail(emailParsed).subscribe(
           res => {
             this.newUser = res;
             this.originalName = this.newUser.firstName;
             this.originalPhoto = this.newUser.photo; 
             this.formatBirthDate();
-            console.log(this.newUser);
           },
           error => {
             console.error(error);
@@ -116,7 +114,6 @@ export class UserpageComponent {
     return this.profileEdit.get('photo');
   }
   OnSubmit() {
-    console.log(this.profileEdit.value);
 
     const formValues = this.profileEdit.value;
     this.newUser.name = formValues.firstName || this.newUser.name;
@@ -131,7 +128,6 @@ export class UserpageComponent {
 
     this.userAuthService.updateUser(this.newUser, this.newUser.photo).subscribe(
       res => {
-        console.log(res);
         this.originalName = this.newUser.firstName;
         this.originalPhoto = this.newUser.photo;
       },

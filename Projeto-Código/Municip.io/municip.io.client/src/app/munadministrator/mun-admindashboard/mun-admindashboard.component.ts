@@ -25,13 +25,11 @@ export class MunAdmindashboardComponent {
     this.municipalName = this.route.snapshot.params['municipalName'];
     this.citizenStatusService.getCitizens(this.municipalName).subscribe((citizens: any) => {
       this.citizens = citizens;
-      console.log(this.citizens);
 
     });
   }
 
   openDialog(user: any) {
-    console.log(user);
     this.selectedUser = user;
     this.isDialogOpen = true;
   }

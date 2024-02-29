@@ -1,6 +1,7 @@
-<div class="flex flex-col font-roboto text-left space-x-2 w-[10rem] rounded-2xl hover:cursor-pointer transition duration-300 hover:bg-gray-200 " (click)="goToEventPage()">
+<div class="flex flex-col font-roboto text-left space-x-2 w-[10rem] h-[12rem] rounded-2xl hover:cursor-pointer transition duration-300 hover:bg-gray-200 "
+     (click)="goToEventPage()">
   <img src={{image}} alt="Foto do evento" class="object-cover w-[10rem] h-[7rem] rounded-2xl" />
-  <section class="flex flex-col ">
+  <section class="flex flex-col justify-evenly">
     <p class="font-bold text-[1.063rem] text-ellipsis overflow-hidden line-clamp-2">{{title}}</p>
     <p class="text-[0.96rem]">{{date | date: "d/MM/yyyy"}}</p>
   </section>
