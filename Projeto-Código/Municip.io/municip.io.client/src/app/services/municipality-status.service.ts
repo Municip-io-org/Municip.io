@@ -16,7 +16,6 @@ export class MunicipalityStatusService {
 
   //approveMunicipality
   approveMunicipality(name: string) {
-    console.log(name + "Dentro do serviço")
 
     return this.http.post<any>(`/api/municipalitystatus/approveMunicipality?name=${name}`, {});
 

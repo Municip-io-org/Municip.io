@@ -1,7 +1,27 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+</head>
 <app-header-loggedin></app-header-loggedin>
 <app-smaller-banner title="Eventos Inscritos"
                     image={{municipality.landscapePhoto}}></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]">
+  <div class=" flex items-center justify-between space-x-4 -mt-[3rem]">
+    <div class="relative w-[50rem] ">
+      <label for="nameSearch" class="sr-only">Procurar por eventos</label>
+      <div class="flex items-center">
+        <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+          <span class="fas fa-search"></span>
+        </i>
+        <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por eventos"
+               class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300  hover:border-black">
+      </div>
+    </div>
+    <p-selectButton [options]="orderOptions" [(ngModel)]="ascendingOrder" optionLabel="label" optionValue="value" [unselectable]="true"
+                    (onChange)="toggleSortOrder()"
+                    styleClass="orderOptions">
+    </p-selectButton>
+  </div>
   <div *ngIf="showEvents.length === 0"
        class="flex justify-center items-center text-municip-normal-black grow ">
     <p class="text-[3rem] font-semibold">Não está inscrito a nenhum evento.</p>
@@ -12,8 +32,20 @@
        [infiniteScrollThrottle]="500"
        (scrolled)="onScrollDown()"
        [alwaysCallback]="true">
-    <section class="flex flex-wrap justify-around gap-16">
-      <ng-container *ngFor="let event of showEvents">
+    <section class="flex flex-wrap justify-around gap-y-16">
+      <div *ngIf="filteredEvents.length === 0"
+           class="flex flex-col justify-center items-center text-municip-normal-black grow space-y-4 text-[2rem] ">
+        <p class=" font-semibold">A sua pesquisa - “{{nameSearch}}” - não encontrou nenhum evento.</p>
+        <div class="text-[1.3rem]">
+          Sugestões:
+          <ul>
+            <li>&#8226; Certifique-se de que nenhuma palavra contém erros ortográficos.</li>
+            <li>&#8226; Tente utilizar outras palavras-chave.</li>
+          </ul>
+        </div>
+      </div>
+      <ng-container *ngFor="let event of filteredEvents">
+
         <app-event-card [event]="event"></app-event-card>
       </ng-container>
     </section>

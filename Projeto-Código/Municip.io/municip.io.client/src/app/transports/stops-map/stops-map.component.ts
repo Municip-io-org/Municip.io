@@ -45,7 +45,6 @@ export class StopsMapComponent {
 
 
   ngOnInit(): void {
-    console.log("é esta:" + this.selectedStop)
   };
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -178,7 +177,6 @@ export class StopsMapComponent {
 
         this.showNextBuses = true;
         this.cdr.detectChanges();
-        console.log('Próximos autocarros:', this.nextBuses);
       },
       error => {
         console.error('Erro ao buscar os próximos autocarros:', error);

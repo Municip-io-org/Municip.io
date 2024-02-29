@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { EventsService, Event } from '../../services/events/events.service';
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-municipal-events',
@@ -41,6 +41,10 @@ export class MunicipalEventsComponent {
   events: Event[] = [];
   eventIdToRemove: string = '';
   showEvents: Event[] = [];
+  nameSearch: string = '';
+  ascendingOrder: boolean = true;
+  orderOptions: any[] = [{ label: 'Evento mais Próximo', value: true }, { label: 'Evento mais Distante', value: false }];
+ 
 
   isLoading = false;
   currentPage = 1;
@@ -62,20 +66,16 @@ export class MunicipalEventsComponent {
         this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
           async (res: any) => {
             this.user = res;
-            console.log("user", this.user);
 
 
             const userRole = await this.userAuthService.getUserRole().toPromise();
-            console.log(userRole);
             if (userRole!.role === Roles.Municipal) {
-              console.log("É admin municipal")
               this.isMunAdmin = true;
             }
 
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: any) => {
                 this.municipality = municipalityRes as Municipality;
-                console.log("municipality", this.municipality);
                 this.loadData();
               },
               error => {
@@ -102,7 +102,7 @@ export class MunicipalEventsComponent {
     this.eventsService.getEventByMunicipality(this.municipality.name).subscribe(
       (eventsRes: any) => {
         this.events = eventsRes as Event[];
-        this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+        this.sortEventsByDate();
         this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
         this.toggleLoading();
       },
@@ -110,19 +110,16 @@ export class MunicipalEventsComponent {
         console.error(error);
       }
     );
-
-    this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
      
 
   }
 
   onScrollDown() { 
     if (this.events.length > this.showEvents.length) {
-      console.log("Scroll");
-      console.log((this.events.length > this.showEvents.length));
-
+      
       this.currentPage++;
       this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
+
       this.toggleLoading();
     }
   } 
@@ -137,7 +134,7 @@ export class MunicipalEventsComponent {
 
     const [eventId, eventTitle] = eventData.split('|');
 
-    console.log('Remoção do evento:' + eventTitle);
+    
     this.isRemoveEventDialogOpen = true;
     this.dialogTitle = 'Deseja apagar o evento ' + eventTitle + '?';
     this.dialogMessage = 'Confirme a sua ação';
@@ -153,11 +150,9 @@ export class MunicipalEventsComponent {
     window.location.reload();
   }
 
-  
   removeEvent() {
     this.closeRemoveEventDialog();
 
-    console.log('Remover do evento: ' + this.eventIdToRemove);
 
     this.eventsService.removeEvent(this.eventIdToRemove).subscribe(
       response => {
@@ -176,5 +171,28 @@ export class MunicipalEventsComponent {
         this.dialogMessage = 'Ocorreu um erro ao remover o evento';
       }
     );
+  }
+
+  get filteredEvents() {
+    if (this.nameSearch == '') return this.showEvents;
+    return this.events.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
+  }
+
+
+  toggleSortOrder() {
+
+    this.sortEventsByDate();
+  }
+
+  sortEventsByDate() {
+    this.currentPage = 1;
+    if (this.ascendingOrder) {
+      this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+      this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
+      
+    } else {
+      this.events.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+      this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
+    }
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserAuthService } from '../../services/user-auth.service';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Router } from '@angular/router';
+import { EventsService, Event } from '../../services/events/events.service';
 
 @Component({
   selector: 'app-municipal-profile',
@@ -10,15 +11,9 @@ import { Router } from '@angular/router';
 })
 export class MunicipalProfileComponent {
   
-  constructor(private userAuthService: UserAuthService, private router: Router) { }
+  
 
-  public events = [
-    { image: '/assets/images/carnaval.jpg', title: 'Event 1', date: new Date(2000, 0, 11) },
-    { image: '/assets/images/carnaval.jpg', title: 'Event 2', date: new Date(2000, 0, 12) },
-    { image: '/assets/images/carnaval.jpg', title: 'Event 3', date: new Date(2000, 0, 13) },
-    { image: '/assets/images/carnaval.jpg', title: 'Event 4', date: new Date(2000, 0, 14) },
-    { image: '/assets/images/carnaval.jpg', title: 'Event 5', date: new Date(2000, 0, 15) },
-  ];
+  events: Event[] = [];
 
   public newsList = [
     { image: '/assets/images/carnaval.jpg', title: 'Setúbal sai à rua para brincar ao Carnaval', text: 'Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de atividades associadas aos festejos, de que se destacam duas tardes de animação no centro da cidade, a 11 e 13 de fevereiro.' },
@@ -54,6 +49,8 @@ export class MunicipalProfileComponent {
       
   };
 
+  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router) { }
+
 
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
@@ -62,12 +59,11 @@ export class MunicipalProfileComponent {
         this.userAuthService.getInfoByEmail(this.anyUser.email).subscribe(
           (res: any) => {
             this.user = res;
-            console.log("user", this.user);
 
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: any) => {
                 this.municipality = municipalityRes as Municipality;
-                console.log("municipality", this.municipality);
+                this.loadData();
               },
               error => {
                 console.error(error);
@@ -91,5 +87,24 @@ export class MunicipalProfileComponent {
 
   seeMoreNewsClick() {
     this.router.navigateByUrl("/");
+  }
+
+  loadData() {
+
+    this.eventsService.getEventByMunicipality(this.municipality.name).subscribe(
+      (eventsRes: any) => {
+        this.events = eventsRes as Event[];
+        this.sortEventsByDate();
+      },
+      error => {
+        console.error(error);
+      }
+    );
+
+
+  }
+
+  sortEventsByDate() {
+    this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());   
   }
 }

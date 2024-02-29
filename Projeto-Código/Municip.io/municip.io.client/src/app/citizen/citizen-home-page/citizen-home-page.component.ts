@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Citizen } from '../../services/citizen-auth.service';
-import { Roles, UserAuthService } from '../../services/user-auth.service';
+import { UserAuthService } from '../../services/user-auth.service';
+import { EventsService, Event } from '../../services/events/events.service';
 
 @Component({
   selector: 'app-citizen-home-page',
@@ -10,17 +11,9 @@ import { Roles, UserAuthService } from '../../services/user-auth.service';
 })
 export class CitizenHomePageComponent {
 
-  constructor(private userAuthService: UserAuthService) { }
+  constructor(private userAuthService: UserAuthService, private eventsService: EventsService) { }
 
-  public date1 = new Date(2000, 0, 10);
-
-  public events = [
-    { image: '/assets/images/carnaval.jpg', title: 'Event 1', date: new Date(2000, 0, 11) },
-    { image: '/assets/images/carnaval.jpg', title: 'Event 2', date: new Date(2000, 0, 12) },
-    { image: '/assets/images/carnaval.jpg', title: 'Event 3', date: new Date(2000, 0, 13) },
-    { image: '/assets/images/carnaval.jpg', title: 'Event 4', date: new Date(2000, 0, 14) },
-    { image: '/assets/images/carnaval.jpg', title: 'Event 5', date: new Date(2000, 0, 15) },
-  ];
+  events: Event[] = [];
 
   anyUser: any;
 
@@ -78,7 +71,7 @@ export class CitizenHomePageComponent {
               res => {
                 this.municipality = res as Municipality;
                 console.log("municipality", this.municipality);
-
+                this.loadData();
               },
               error => {
                 console.error(error);
@@ -91,4 +84,23 @@ export class CitizenHomePageComponent {
       }
     );
   }
+  loadData() {
+
+    this.eventsService.getEventByMunicipality(this.municipality.name).subscribe(
+      (eventsRes: any) => {
+        this.events = eventsRes as Event[];
+        this.sortEventsByDate();
+      },
+      error => {
+        console.error(error);
+      }
+    );
+
+
+  }
+
+  sortEventsByDate() {
+    this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+  }
+
 }

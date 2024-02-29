@@ -90,6 +90,9 @@ import { NewsCreateComponent } from './news/news-create/news-create.component';
 import { DialogMessageComponent } from './utils/dialog/dialog-message/dialog-message.component';
 import { NewsPageComponent } from './news/news-page/news-page.component';
 
+import { DialogMessageComponent } from './utils/dialog/dialog-message/dialog-message.component';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { RippleModule } from 'primeng/ripple'
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -182,7 +185,7 @@ registerLocaleData(localePt, 'pt-PT');
 
     NgxMaterialTimepickerModule.setOpts('pt-PT'),
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
-    InfiniteScrollModule,
+    InfiniteScrollModule, SelectButtonModule, RippleModule,
   ],
   providers: [
     MunicipalityGuard,

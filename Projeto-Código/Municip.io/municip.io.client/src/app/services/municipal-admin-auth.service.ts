@@ -74,7 +74,6 @@ export class MunicipalAdminAuthService {
       this.uploadImageToImgur(imgurl, emblemImage, headers) :
       municipality.emblemPhoto;
 
-    console.log("1 " + municipality.emblemPhoto);
 
     // Upload landscape photo to Imgur if not null
     const landscapePhotoUpload$ = landscapeImage ?
@@ -88,7 +87,6 @@ export class MunicipalAdminAuthService {
         municipality.emblemPhoto = emblemImage ? emblemPhotoUrl : municipality.emblemPhoto;
         municipality.landscapePhoto = landscapeImage ? landscapePhotoUrl : municipality.landscapePhoto;
 
-        console.log("2 " + municipality.emblemPhoto);
 
         // Make the API call to update the municipality
         return this.http.put<Municipality>('api/accounts/UpdateMunicipality', municipality);

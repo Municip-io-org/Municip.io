@@ -14,7 +14,6 @@ export class TransportsMainComponent {
   constructor(private service: UserAuthService) {
     service.getMunicipality().toPromise().then((municipality) => {
       this.municipality = municipality || '';
-      console.log(municipality);
     });
   }
 

@@ -104,23 +104,22 @@
   </div>
   <div class="flex mt-12">
 
-    <button class="border-municip-gray border-2 rounded-md p-4 text-lg h-fit
-            hover:bg-municip-blank  transition duration-700 ease-in-out
-            hover:border-municip-blue text-municip-highlight-black"
+    <button class="border-municip-gray border-2 rounded-md
+            hover:bg-municip-blank
+            hover:border-municip-blue text-municip-highlight-black
+            inline-flex py-3 px-8
+            focus:outline-none text-lg
+            transition duration-700 ease-in-out justify-center items-center
+            "
             (click)="cancel()">
-      Cancelar
+      Voltar
     </button>
     <div class="flex flex-1 justify-end ">
-      <button type="submit" [disabled]="!eventForm.valid"
-              class="self-end h-auto w-fit px-4 flex justify-center items-center font-semibold
-          text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
-border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg
-          transition duration-700 ease-in-out
-            disabled:cursor-not-allowed
-            ">
+      <app-btn-municip-blue [disabled]="!eventForm.valid" buttonClass="disabled:!cursor-not-allowed"
+                            type="submit">
         Submeter Alterações
         <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-      </button>
+      </app-btn-municip-blue>
     </div>
 
   </div>

@@ -20,14 +20,12 @@ export class AdmindashboardComponent {
   ngOnInit() {
     this.municipalityStatusService.getMunicipalities().subscribe((municipalities: any) => {
       this.municipalities = municipalities;
-      console.log(this.municipalities)
     });
   }
 
   approveMunicipality(name: any) {
     this.municipalityStatusService.approveMunicipality(name).subscribe((municipalities: any) => {
       this.municipalities = municipalities;
-      console.log(this.municipalities)
     });
   }
 

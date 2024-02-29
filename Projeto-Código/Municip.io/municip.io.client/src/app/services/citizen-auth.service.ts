@@ -22,11 +22,8 @@ export class CitizenAuthService {
     formData.append('image', image);
     return this.http.post(imgurl, formData, { headers })
       .pipe(switchMap((response: any) => {
-        console.log(response);
         citizen.photo = response['data']['link'];
         citizen.events = [];
-        console.log(citizen);
-        console.log(citizen.photo);
         return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
       }));
   }
