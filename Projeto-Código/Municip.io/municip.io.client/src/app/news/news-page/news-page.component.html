@@ -2,15 +2,18 @@
 <app-header-loggedin></app-header-loggedin>
 
 <app-smaller-banner title={{news.title}}
-                    [image]="'/assets/images/admin/banner.jpg'"></app-smaller-banner>
+                    [image]="'/assets/images/admin/banner.jpg'"
+                    text={{news.subtitle}}>></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
   <div *ngIf="role == 'Municipal'" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
 
     <app-black-btn-icon-text altImage="Editar Notícia"
-                             image="/assets/images/icons/pencil-white.png"
-                             >
+                             image="/assets/images/icons/pencil-white.png">
       Editar evento
     </app-black-btn-icon-text>
+  </div>
+  <img src={{news.photo}} alt="Imagem do evento"
+       class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center" />
   </div>
   <p>news-page works!</p>
 
