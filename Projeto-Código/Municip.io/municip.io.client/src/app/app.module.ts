@@ -83,7 +83,8 @@ import { EventCardComponent } from './utils/events/event-card/event-card.compone
 import { EventsListComponent } from './events/my-events/events-list/events-list.component';
 import { DialogMessageComponent } from './utils/dialog/dialog-message/dialog-message.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { RippleModule } from 'primeng/ripple'
+import { RippleModule } from 'primeng/ripple';
+import { DatePickerComponent } from './utils/input/date-picker/date-picker.component'
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -156,6 +157,7 @@ registerLocaleData(localePt, 'pt-PT');
     DialogMessageComponent,
     EventCardComponent,
     EventsListComponent,
+    DatePickerComponent,
     
   ],
   imports: [

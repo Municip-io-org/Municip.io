@@ -12,7 +12,6 @@ import { provideNativeDateAdapter, DateAdapter } from '@angular/material/core';
   templateUrl: './sign-up-citizen-account.component.html',
   styleUrl: './sign-up-citizen-account.component.css',
   providers: [provideNativeDateAdapter()],
-  encapsulation: ViewEncapsulation.None,
 })
 export class SignUpCitizenAccountComponent {
 
@@ -106,7 +105,7 @@ export class SignUpCitizenAccountComponent {
   }
 
   get birthDate() {
-    return this.signUpCitizenForm.get('birthDate');
+    return this.signUpCitizenForm.get('birthDate') as FormControl;
   }
 
   get photo() {
