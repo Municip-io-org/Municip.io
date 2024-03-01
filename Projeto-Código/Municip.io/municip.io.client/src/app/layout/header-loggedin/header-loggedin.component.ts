@@ -126,8 +126,17 @@ export class HeaderLoggedinComponent {
     return Dropdowns;
   }
 
-
+  goToHomePage() {
+    if (this.role === 'Citizen') {
+      this.router.navigateByUrl(`/citizen/homePage`)
+    }
+    if (this.role === 'Municipal') {
+      this.router.navigateByUrl(`/municipal/homePage`)
+    }
+  }
 }
+
+
 
 
 //create a ennum for the name of the dropdowns

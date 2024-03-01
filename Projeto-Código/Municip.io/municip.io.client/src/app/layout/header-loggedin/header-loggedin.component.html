@@ -5,14 +5,15 @@
 
     <ul class="flex w-full justify-around ">
       <li class="transition-all duration-700 ease-in-out  decoration-sky-500">
-        <a routerLink="/" class="group">
+
+        <a (click)="goToHomePage()" class="group hover:cursor-pointer">
           Home
           <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
         </a>
       </li>
 
       <li class="   transition-all duration-700 ease-in-out  decoration-sky-500">
-        <a routerLink="" class="group">
+        <a routerLink="/municipal/profile" class="group">
           Municipio
           <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
         </a>
