@@ -174,7 +174,7 @@ export class MunicipalEventsComponent {
   }
 
   get filteredEvents() {
-    if (this.nameSearch == '') return this.showEvents;
+    //if (this.nameSearch == '') return this.showEvents;
     return this.events.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }
 
