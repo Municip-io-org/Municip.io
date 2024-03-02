@@ -3,7 +3,7 @@
 
 <app-smaller-banner title={{news.title}}
                     [image]="'/assets/images/admin/banner.jpg'"
-                    text={{news.subtitle}}>></app-smaller-banner>
+                    text={{news.subtitle}}></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
   <div *ngIf="role == 'Municipal'" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
 
@@ -15,7 +15,11 @@
   <img src={{news.photo}} alt="Imagem do evento"
        class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center" />
   </div>
-  <p>news-page works!</p>
 
-
+<div class="bg-municip-blank ">
+  <div class="container mx-auto pb-5 w-[70%]">
+    <p class="text-s text-gray-500 pb-5">{{news.date}}</p>
+    <p class="text-center text-justify break-words text-municip-normal-black text-[1.2rem]">{{news.mainText}}</p>
+  </div>
+</div>
   <app-footer></app-footer>

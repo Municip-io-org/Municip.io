@@ -20,7 +20,14 @@ export class NewsPageComponent {
   ngOnInit() {
     this.news = this.activatedRoute.snapshot.data['news'];
     console.log("EVENTO SELECIONADO");
-    console.log(this.news);
+
+    const [datePart] = this.news.date.split('T');
+    const date = new Date(datePart);
+    const formattedDate = date.toLocaleDateString('pt-PT');
+    this.news = { ...this.news, date: formattedDate };
+    this.news = { ...this.news , mainText: this.DecodeTabsAndNewlines(this.news.mainText)}
+  
+     
 
     this.userAuthService.getUserRole().subscribe(
       res => {
@@ -54,5 +61,10 @@ export class NewsPageComponent {
       }
     );
   }
+  DecodeTabsAndNewlines(text: string): string {
+    return text.replace(/\\t/g, '\t').replace(/\\n/g, '\n');
+
+  }
 
 }
+

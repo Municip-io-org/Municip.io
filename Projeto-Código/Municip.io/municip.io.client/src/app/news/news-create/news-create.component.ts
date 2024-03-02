@@ -82,7 +82,7 @@ newUser: any;
    
     this.news.title = this.newsCreateForm.value.title || "";
     this.news.subtitle = this.newsCreateForm.value.subtitle || "";
-    this.news.mainText = this.newsCreateForm.value.mainText || "";
+    this.news.mainText =  this.KeepTabsAndNewlines(this.newsCreateForm.value.mainText || "");
     this.news.date = this.newsCreateForm.value.date || new Date();
  
     this.newsService.createNews(this.news as News,this.image).subscribe(
@@ -109,6 +109,9 @@ newUser: any;
     } else {
       console.error('No file selected');
     }
+  }
+  KeepTabsAndNewlines(text: string): string {
+    return text.replace(/\t/g, '\\t').replace(/\n/g, '\\n');
   }
 
   updateCharacterCount(event: any) {
