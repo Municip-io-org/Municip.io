@@ -91,7 +91,8 @@ import { DialogMessageComponent } from './utils/dialog/dialog-message/dialog-mes
 import { NewsPageComponent } from './news/news-page/news-page.component';
 
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { RippleModule } from 'primeng/ripple'
+import { RippleModule } from 'primeng/ripple';
+import { NewsEditComponent } from './news/news-edit/news-edit.component'
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -170,6 +171,7 @@ registerLocaleData(localePt, 'pt-PT');
     EventCardComponent,
     EventsListComponent,
     NewsPageComponent,
+    NewsEditComponent,
     
   ],
   imports: [

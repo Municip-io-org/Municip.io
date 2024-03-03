@@ -36,7 +36,8 @@ import { EventPageComponent } from './events/event-page/event-page.component';
 import { EditEventComponent } from './events/municip-actions/edit-event/edit-event.component';
 import { UserSameMunicipalityGuard } from './utils/guard/userSameMunicipality/user-same-municipality.guard';
 import { EventsListComponent } from './events/my-events/events-list/events-list.component';
-import { NewsPageComponent} from './news/news-page/news-page.component';
+import { NewsPageComponent } from './news/news-page/news-page.component';
+import { NewsEditComponent } from './news/news-edit/news-edit.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -73,7 +74,9 @@ const routes: Routes = [
   { path: 'news', component: NewsListComponent, data: {} },
   { path: 'news/news-create', component: NewsCreateComponent, data: {} },
   { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] },
-  { path: 'news/:newsId', component: NewsPageComponent, data: {},canActivate: [UserSameMunicipalityGuard]}
+  { path: 'news/:newsId', component: NewsPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
+  { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [UserSameMunicipalityGuard] }
+  
 ];
 
 @NgModule({

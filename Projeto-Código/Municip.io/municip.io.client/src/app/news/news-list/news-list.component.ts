@@ -9,6 +9,7 @@ import { Roles, UserAuthService } from '../../services/user-auth.service';
   styleUrl: './news-list.component.css'
 })
 export class NewsListComponent {
+    
 
   
 
@@ -20,15 +21,21 @@ export class NewsListComponent {
   newUser: any;
   role: string = "";
   municipalityuser: string = "Municipio";
+  sortedNewsList: any[] = [];
+  ascendingOrder: boolean = true;
+  orderOptions: any[] = [{ label: 'Notícia mais Recente', value: true }, { label: 'Notícia mais Antiga', value: false }];
+  
+  nameSearch: string = "";
+ 
 
   ngOnInit() {
     this.userAuthService.getUserRole().subscribe(
       res => {
-        if (res.role == Roles.Citizen) {
+       
           this.role = res.role;
  
           this.LoadData();
-        }
+        
       },
       error => {
         console.error(error);
@@ -37,6 +44,7 @@ export class NewsListComponent {
   
   }
   LoadData() {
+  
     this.userAuthService.getUserData().subscribe(
       res => {
         this.user = res;
@@ -56,6 +64,7 @@ export class NewsListComponent {
                   this.municipalityuser = this.newUser.municipality;
                   return { ...news, date: formattedDate };
                 });
+                this.sortedNewsList = this.newsList;
                 console.log(this.newsList);
               },
               (error) => {
@@ -74,20 +83,11 @@ export class NewsListComponent {
       }
     );
   }
-//  }
-//newsList = [
-//    {
-//      title: "TITULO da noticia",
-//      subtitle: "subsubsubsubsubsusbubsubsubsusb",
-//      image: "/assets/images/admin/banner.jpg",
-//      date: "27/3/2012"
-//    },
-//    {
-//      title: "TITULO da noticia2",
-//      subtitle: "subsubsubsubsubsusbubsubsubsusb2",
-//      image: "/assets/images/admin/banner.jpg",
-//      date: "28/3/2012"
-  //    },];
+
+  get filteredNews() {
+    if (this.nameSearch == '') return this.sortedNewsList;
+    return this.sortedNewsList.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
+  }
 
   deleteNews(news: any) {
    
@@ -103,4 +103,21 @@ export class NewsListComponent {
 
     
   }
+
+  toggleSortOrder() {
+    this.sortNewsByDate();
+  }
+
+  sortNewsByDate() {
+    const newsListCopy = [...this.newsList];
+    newsListCopy.sort((a, b) => {
+      if (this.ascendingOrder) {
+        return new Date(b.date.split('/').reverse().join('/')).getTime() - new Date(a.date.split('/').reverse().join('/')).getTime();
+      } else {
+        return new Date(a.date.split('/').reverse().join('/')).getTime() - new Date(b.date.split('/').reverse().join('/')).getTime();
+      }
+    });
+    this.sortedNewsList = newsListCopy;
+  }
+
 }

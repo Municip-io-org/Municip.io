@@ -33,6 +33,19 @@ export class NewsService {
     return this.http.delete('api/news/DeleteNews', { params: { id: id } });
   }
 
+  updateNews(news: News, image: File): Observable<News> {
+    const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    const imgurl = "https://api.imgur.com/3/image";
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post(imgurl, formData, { headers }).pipe(
+      switchMap((response: any) => {
+        news.photo = response['data']['link'];
+        console.log(news);
+        return this.http.put<News>('/api/news/UpdateNews', news);
+      }));
+  }
+
   getNewsById(newsId: string) {
     console.log("ID: ", newsId);
     return this.http.get<News>(`api/news/GetNewsById?newsId=${newsId}`);

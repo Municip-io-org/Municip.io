@@ -8,11 +8,12 @@
   <div *ngIf="role == 'Municipal'" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
 
     <app-black-btn-icon-text altImage="Editar Notícia"
-                             image="/assets/images/icons/pencil-white.png">
-      Editar evento
+                             image="/assets/images/icons/pencil-white.png"
+                             routerLink="/news/edit/{{news.id}}">
+      Editar Notícia
     </app-black-btn-icon-text>
   </div>
-  <img src={{news.photo}} alt="Imagem do evento"
+  <img src={{news.photo}} alt="Imagem da Notícia"
        class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center" />
   </div>
 

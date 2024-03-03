@@ -5,23 +5,54 @@
                     [text]="'Consulte as notícias relativas ao municipio'">
 </app-smaller-banner>
 
-  <div class=" flex justify-center items-center flex-wrap self-center space-y-10 pt-10 pb-10">
-    <div *ngFor="let news of newsList">
-      <app-news-card 
-                     title={{news.title}}
-                     subtitle="{{news.subtitle}}"
-                     image="{{news.photo}}"
-                     date="{{news.date}}"
-                     id="{{news.id}}"
-                     (deleteid) ="deleteNews($event)">
-      </app-news-card>
-      
+
+<div *ngIf="newsList.length === 0"
+     class="flex justify-center items-center text-municip-normal-black grow ">
+  <p class="text-[3rem] font-semibold">Não Há Notícias Disponíveis.</p>
+</div>
+
+<div *ngIf="newsList.length > 0">
+  <div class="bg-municip-blank text-municip-normal-black">
+    <div class="flex justify-center">
+    <div class="flex items-center justify-between space-x-4 pt-[3rem] container w-full">
+      <div class="relative w-[50rem] ">
+        <label for="nameSearch" class="sr-only">Procurar por Notícias</label>
+        <div class="flex items-center">
+          <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+            <span class="fas fa-search"></span>
+          </i>
+          <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por Notícias"
+                 class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300  hover:border-black">
+        </div>
+      </div>
+      <p-selectButton [options]="orderOptions" [(ngModel)]="ascendingOrder" optionLabel="label" optionValue="value" [unselectable]="true"
+                      (onChange)="toggleSortOrder()"
+                      styleClass="orderOptions">
+      </p-selectButton>
+    </div>
+</div>
+    <div class="flex justify-center">
+      <div class="container w-[90%] ">
+        <div class=" flex justify-center items-center flex-wrap self-center space-y-10 pt-10 pb-10">
+          <div *ngFor="let news of filteredNews">
+            <app-news-card title={{news.title}}
+                           subtitle="{{news.subtitle}}"
+                           image="{{news.photo}}"
+                           date="{{news.date}}"
+                           id="{{news.id}}"
+                           (deleteid)="deleteNews($event)">
+            </app-news-card>
+
+          </div>
+        </div>
+        <div *ngIf="role == 'Municipal'" class="flex justify-end pb-10 ">
+          <button type="button" routerLink="/news/news-create" class="relative h-auto w-[11rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+            Criar Nova Notícia
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-   <div *ngIf="role == 'Municipal'" class="flex justify-end pb-10">
-     <button type="button" routerLink="/news/news-create" class="relative h-auto w-[11rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
-       Criar Nova Notícia
-       <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-     </button>
-   </div>
-<app-footer />
+</div>
+  <app-footer />

@@ -31,7 +31,7 @@ export class NewsPageComponent {
 
     this.userAuthService.getUserRole().subscribe(
       res => {
-        if (res.role == Roles.Citizen) {
+ 
           this.role = res.role;
 
           this.userAuthService.getUserData().subscribe(
@@ -54,7 +54,7 @@ export class NewsPageComponent {
               console.error(error);
             }
           );
-        }
+        
       },
       error => {
         console.error(error);

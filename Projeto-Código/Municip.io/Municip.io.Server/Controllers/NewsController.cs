@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
+using System.Diagnostics;
 
 namespace Municip.io.Server.Controllers
 {
@@ -60,6 +61,30 @@ namespace Municip.io.Server.Controllers
                 return NotFound();
             }
             
+        }
+
+        [HttpPut("UpdateNews")]
+        public async Task<IActionResult> UpdateNews(News updatedNews)
+        {
+            if (ModelState.IsValid)
+            {
+                var news = await _context.News.FirstOrDefaultAsync(n => n.Id == updatedNews.Id);
+                if (news != null)
+                {
+                    _context.Entry(news).CurrentValues.SetValues(updatedNews);
+                    _context.SaveChanges();
+                    
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Notícia Inválida", ModelState });
+            }
         }
 
         [HttpGet("GetNewsById")]
