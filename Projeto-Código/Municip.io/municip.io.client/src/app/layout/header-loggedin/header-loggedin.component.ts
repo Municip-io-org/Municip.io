@@ -19,6 +19,7 @@ export class HeaderLoggedinComponent {
   showDropdownNoticias: boolean = false;
   showDropdownTransportes: boolean = false;
   showSignOutDropdown: boolean = false;
+  showDropdownMunicipality: boolean = false;
 
   constructor(private auth: UserAuthService, private router: Router) { }
 
@@ -95,6 +96,9 @@ export class HeaderLoggedinComponent {
       case Dropdowns.Transports:
         this.showDropdownTransportes = !this.showDropdownTransportes;
         break;
+      case Dropdowns.Municipality:
+        this.showDropdownMunicipality = !this.showDropdownMunicipality;
+        break;
       default:
     }
   }
@@ -115,6 +119,9 @@ export class HeaderLoggedinComponent {
       }
       if (dropdown !== Dropdowns.Transports) {
         this.showDropdownTransportes = false;
+      }
+      if (dropdown !== Dropdowns.Municipality) {
+        this.showDropdownMunicipality = false;
       }
     }
 
@@ -140,13 +147,18 @@ export class HeaderLoggedinComponent {
 
 
 //create a ennum for the name of the dropdowns
+
+
+
+
 export enum Dropdowns {
-  Events = 'events',
-  Library = 'library',
-  Documents = 'documents',
-  News = 'news',
-  Transports = 'transports',
-  CloseAll = 'closeAll'
+    Events = 'events',
+    Library = 'library',
+    Documents = 'documents',
+    News = 'news',
+    Transports = 'transports',
+    CloseAll = 'closeAll',
+    Municipality = "Municipality"
 }
 
 

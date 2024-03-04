@@ -12,11 +12,28 @@
         </a>
       </li>
 
-      <li class="   transition-all duration-700 ease-in-out  decoration-sky-500">
-        <a routerLink="/municipal/profile" class="group">
-          Municipio
-          <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
-        </a>
+      <li class="relative group" (click)="setActiveDropdown(Dropdowns.Municipality)">
+        <button class="transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
+          Município
+          <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <span class="flex self-center max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+        <div *ngIf="showDropdownMunicipality" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
+          <ul class="py-2 text-sm text-gray-700">
+            <li>
+              <a routerLink="/municipal/profile" class="block px-4 py-2 hover:bg-gray-100">Ver Município</a>
+            </li>
+
+            <span *ngIf="role===Roles.Municipal">
+            <li>
+              <a routerLink="/municipal/edit" class="block px-4 py-2 hover:bg-gray-100">Editar Município</a>
+            </li>
+            </span>
+
+          </ul>
+        </div>
       </li>
 
       <li class="relative group" (click)="setActiveDropdown(Dropdowns.Events)">
@@ -37,6 +54,7 @@
             <li>
               <a routerLink="/events/calendar" class="block px-4 py-2 hover:bg-gray-100">Calendário Pessoal</a>
             </li>
+
             <li>
               <a routerLink="/events/myEvents" class="block px-4 py-2 hover:bg-gray-100">Meus Eventos</a>
             </li>
@@ -47,9 +65,6 @@
               <a routerLink="/events/create" class="block px-4 py-2 hover:bg-gray-100">Criar</a>
             </li>
             </span>
-
-
-
           </ul>
         </div>
       </li>

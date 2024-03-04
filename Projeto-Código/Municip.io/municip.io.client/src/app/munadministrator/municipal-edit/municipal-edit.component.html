@@ -3,7 +3,7 @@
                     [image]="currentLandscapePhoto"
                     [profileimg]="currentEmblemPhoto"></app-profile-banner>
 <div class="flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 space-y-20">
-  <form [formGroup]="municipalityEditForm" (ngSubmit)="onSubmit()" class="pt-[1rem] flex flex-col pb-[5rem]">
+  <form [formGroup]="municipalityEditForm" (ngSubmit)="onSubmit()" class="pt-[1rem] relative flex flex-col pb-[5rem]">
     <section class="flex text-left justify-around mb-4 ">
       <div class="w-[24rem]" *ngIf="municipalityEditForm">
         <app-input-title class="text-[2.4vh]">Presidente</app-input-title>
@@ -77,7 +77,7 @@
     </div>
 
     <button *ngIf="editMode" type="submit" [disabled]="!municipalityEditForm.valid"
-            class="absolute -bottom-[10rem] right-[10rem] h-auto w-[15rem] flex justify-center
+            class="absolute -bottom-[0rem] right-[2rem] h-auto w-[15rem] flex justify-center
               items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue
               to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600
               rounded text-lg transition duration-700 ease-in-out">
