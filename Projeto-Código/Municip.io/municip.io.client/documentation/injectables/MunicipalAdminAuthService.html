@@ -1,0 +1,818 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>municip.io.client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">municip.io.client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >MunicipalAdminAuthService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/municipal-admin-auth.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#registerMunicipalAdmin" >registerMunicipalAdmin</a>
+                            </li>
+                            <li>
+                                <a href="#registerMunicipality" >registerMunicipality</a>
+                            </li>
+                            <li>
+                                <a href="#updateMunicipality" >updateMunicipality</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#uploadImageToImgur" >uploadImageToImgur</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(http: HttpClient, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/municipal-admin-auth.service.ts:10</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                    <code>HttpClient</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerMunicipalAdmin"></a>
+                    <span class="name">
+                        <span ><b>registerMunicipalAdmin</b></span>
+                        <a href="#registerMunicipalAdmin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>registerMunicipalAdmin(municipalAdministrator: <a href="../interfaces/MunicipalAdministrator.html" target="_self">MunicipalAdministrator</a>, image: File)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="15"
+                                    class="link-to-prism">src/app/services/municipal-admin-auth.service.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>municipalAdministrator</td>
+                                            <td>
+                                                            <code><a href="../interfaces/MunicipalAdministrator.html" target="_self" >MunicipalAdministrator</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>image</td>
+                                            <td>
+                                                        <code>File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerMunicipality"></a>
+                    <span class="name">
+                        <span ><b>registerMunicipality</b></span>
+                        <a href="#registerMunicipality"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>registerMunicipality(municipality: <a href="../interfaces/Municipality.html" target="_self">Municipality</a>, emblemImage: File, landscapeImage: File)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="36"
+                                    class="link-to-prism">src/app/services/municipal-admin-auth.service.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>municipality</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Municipality.html" target="_self" >Municipality</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>emblemImage</td>
+                                            <td>
+                                                        <code>File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>landscapeImage</td>
+                                            <td>
+                                                        <code>File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Municipality.html" target="_self" >Observable&lt;Municipality&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateMunicipality"></a>
+                    <span class="name">
+                        <span ><b>updateMunicipality</b></span>
+                        <a href="#updateMunicipality"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateMunicipality(municipality: <a href="../interfaces/Municipality.html" target="_self">Municipality</a>, emblemImage: File, landscapeImage: File)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/services/municipal-admin-auth.service.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>municipality</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Municipality.html" target="_self" >Municipality</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>emblemImage</td>
+                                            <td>
+                                                        <code>File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>landscapeImage</td>
+                                            <td>
+                                                        <code>File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Municipality.html" target="_self" >Observable&lt;Municipality&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadImageToImgur"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>uploadImageToImgur</b></span>
+                        <a href="#uploadImageToImgur"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>uploadImageToImgur(url: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, image: File, headers: HttpHeaders)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/services/municipal-admin-auth.service.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>url</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>image</td>
+                                            <td>
+                                                        <code>File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>headers</td>
+                                            <td>
+                                                        <code>HttpHeaders</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;string&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
+import { Injectable } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { Observable, forkJoin, map, switchMap, tap } from &#x27;rxjs&#x27;;
+
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class MunicipalAdminAuthService {
+
+  constructor(private http: HttpClient, private router: Router) { }
+
+
+  registerMunicipalAdmin(municipalAdministrator: MunicipalAdministrator, image: File): Observable&lt;boolean&gt; {
+
+    var headers &#x3D; new HttpHeaders({ &#x27;authorization&#x27;: &#x27;Client-ID a9e7323ad868dd2&#x27; });
+    let imgurl &#x3D; &quot;https://api.imgur.com/3/image&quot;;
+
+    //upload to imgur
+    const formData &#x3D; new FormData();
+    formData.append(&#x27;image&#x27;, image);
+    return this.http.post(imgurl, formData, { headers })
+      .pipe(switchMap((response: any) &#x3D;&gt; {
+        municipalAdministrator.photo &#x3D; response[&#x27;data&#x27;][&#x27;link&#x27;];
+        return this.http.post&lt;boolean&gt;(&#x27;api/accounts/registerMunicipalAdministrator&#x27;, municipalAdministrator);
+      }));
+
+
+
+  }
+
+
+
+
+  registerMunicipality(municipality: Municipality, emblemImage: File, landscapeImage: File): Observable&lt;Municipality&gt; {
+    const headers &#x3D; new HttpHeaders({ &#x27;authorization&#x27;: &#x27;Client-ID a9e7323ad868dd2&#x27; });
+    const imgurl &#x3D; &quot;https://api.imgur.com/3/image&quot;;
+
+    // Upload emblem photo to Imgur
+    const emblemFormData &#x3D; new FormData();
+    emblemFormData.append(&#x27;image&#x27;, emblemImage);
+    const emblemPhotoUpload$ &#x3D; this.http.post(imgurl, emblemFormData, { headers }).pipe(
+      map((response: any) &#x3D;&gt; response[&#x27;data&#x27;][&#x27;link&#x27;]),
+      tap((emblemPhotoUrl: string) &#x3D;&gt; municipality.emblemPhoto &#x3D; emblemPhotoUrl)
+    );
+
+    // Upload landscape photo to Imgur
+    const landscapeFormData &#x3D; new FormData();
+    landscapeFormData.append(&#x27;image&#x27;, landscapeImage);
+    const landscapePhotoUpload$ &#x3D; this.http.post(imgurl, landscapeFormData, { headers }).pipe(
+      map((response: any) &#x3D;&gt; response[&#x27;data&#x27;][&#x27;link&#x27;]),
+      tap((landscapePhotoUrl: string) &#x3D;&gt; municipality.landscapePhoto &#x3D; landscapePhotoUrl)
+    );
+
+    // Combine both uploads and make the final API call
+    return forkJoin([emblemPhotoUpload$, landscapePhotoUpload$]).pipe(
+      switchMap(([emblemPhotoUrl, landscapePhotoUrl]: [string, string]) &#x3D;&gt; {
+        // Ensure both URLs are set before making the API call
+        municipality.emblemPhoto &#x3D; emblemPhotoUrl;
+        municipality.landscapePhoto &#x3D; landscapePhotoUrl;
+        // Make the API call to register the municipality
+        return this.http.post&lt;Municipality&gt;(&#x27;api/accounts/registerMunicipality&#x27;, municipality);
+      })
+    );
+  }
+
+  updateMunicipality(municipality: Municipality, emblemImage: File, landscapeImage: File): Observable&lt;Municipality&gt; {
+    const headers &#x3D; new HttpHeaders({ &#x27;authorization&#x27;: &#x27;Client-ID a9e7323ad868dd2&#x27; });
+    const imgurl &#x3D; &quot;https://api.imgur.com/3/image&quot;;
+
+    // Upload emblem photo to Imgur if not null
+    const emblemPhotoUpload$ &#x3D; emblemImage ?
+      this.uploadImageToImgur(imgurl, emblemImage, headers) :
+      municipality.emblemPhoto;
+
+
+    // Upload landscape photo to Imgur if not null
+    const landscapePhotoUpload$ &#x3D; landscapeImage ?
+      this.uploadImageToImgur(imgurl, landscapeImage, headers) :
+      municipality.landscapePhoto;
+
+    // Combine both uploads and make the final API call
+    return forkJoin([emblemPhotoUpload$, landscapePhotoUpload$]).pipe(
+      switchMap(([emblemPhotoUrl, landscapePhotoUrl]: [string, string]) &#x3D;&gt; {
+        // Update municipality properties with the URLs
+        municipality.emblemPhoto &#x3D; emblemImage ? emblemPhotoUrl : municipality.emblemPhoto;
+        municipality.landscapePhoto &#x3D; landscapeImage ? landscapePhotoUrl : municipality.landscapePhoto;
+
+
+        // Make the API call to update the municipality
+        return this.http.put&lt;Municipality&gt;(&#x27;api/accounts/UpdateMunicipality&#x27;, municipality);
+      })
+    );
+  }
+
+  private uploadImageToImgur(url: string, image: File, headers: HttpHeaders): Observable&lt;string&gt; {
+    const formData &#x3D; new FormData();
+    formData.append(&#x27;image&#x27;, image);
+    return this.http.post(url, formData, { headers }).pipe(
+      map((response: any) &#x3D;&gt; response[&#x27;data&#x27;][&#x27;link&#x27;])
+    );
+  }
+
+}
+
+
+
+
+
+
+export interface MunicipalAdministrator {
+  firstName: string;
+  surname: string;
+  email: string;
+  password: string;
+  municipality: string;
+  photo?: string;
+}
+
+
+export interface Municipality {
+  areaha: string;
+  codigo: string;
+  codigoine: string;
+  codigopostal: string;
+  contact: string;
+  description: string;
+  descpstal: string;
+  distrito: string;
+  eleitores: string;
+  email: string;
+  fax: string;
+  localidade: string;
+  name: string;
+  nif: string;
+  populacao: string;
+  president: string;
+  rua: string;
+  sitio: string;
+  telefone: string;
+  emblemPhoto: string;
+  landscapePhoto: string;
+}
+
+
+
+
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'MunicipalAdminAuthService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

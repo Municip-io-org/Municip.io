@@ -1,0 +1,1450 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>municip.io.client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">municip.io.client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  MunicipalEditComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/munadministrator/municipal-edit/municipal-edit.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-municipal-edit</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./municipal-edit.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./municipal-edit.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#currentEmblemPhoto" >currentEmblemPhoto</a>
+                            </li>
+                            <li>
+                                <a href="#currentLandscapePhoto" >currentLandscapePhoto</a>
+                            </li>
+                            <li>
+                                <a href="#editMode" >editMode</a>
+                            </li>
+                            <li>
+                                <a href="#emblemImg" >emblemImg</a>
+                            </li>
+                            <li>
+                                <a href="#landscapeImg" >landscapeImg</a>
+                            </li>
+                            <li>
+                                <a href="#municipality" >municipality</a>
+                            </li>
+                            <li>
+                                <a href="#municipalityEditForm" >municipalityEditForm</a>
+                            </li>
+                            <li>
+                                <a href="#user" >user</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cancelEditMode" >cancelEditMode</a>
+                            </li>
+                            <li>
+                                <a href="#initForm" >initForm</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onEmblemImagePicked" >onEmblemImagePicked</a>
+                            </li>
+                            <li>
+                                <a href="#onLandscapeImagePicked" >onLandscapeImagePicked</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#toggleEditMode" >toggleEditMode</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#president" >president</a>
+                                </li>
+                                <li>
+                                    <a href="#contact" >contact</a>
+                                </li>
+                                <li>
+                                    <a href="#description" >description</a>
+                                </li>
+                                <li>
+                                    <a href="#emblemPhoto" >emblemPhoto</a>
+                                </li>
+                                <li>
+                                    <a href="#landscapePhoto" >landscapePhoto</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(userAuthService: <a href="../injectables/UserAuthService.html" target="_self">UserAuthService</a>, municipalAdminAuthService: <a href="../injectables/MunicipalAdminAuthService.html" target="_self">MunicipalAdminAuthService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:53</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userAuthService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserAuthService.html" target="_self" >UserAuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>municipalAdminAuthService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MunicipalAdminAuthService.html" target="_self" >MunicipalAdminAuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cancelEditMode"></a>
+                    <span class="name">
+                        <span ><b>cancelEditMode</b></span>
+                        <a href="#cancelEditMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cancelEditMode()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initForm"></a>
+                    <span class="name">
+                        <span ><b>initForm</b></span>
+                        <a href="#initForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onEmblemImagePicked"></a>
+                    <span class="name">
+                        <span ><b>onEmblemImagePicked</b></span>
+                        <a href="#onEmblemImagePicked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onEmblemImagePicked(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:139</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onLandscapeImagePicked"></a>
+                    <span class="name">
+                        <span ><b>onLandscapeImagePicked</b></span>
+                        <a href="#onLandscapeImagePicked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onLandscapeImagePicked(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:155</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleEditMode"></a>
+                    <span class="name">
+                        <span ><b>toggleEditMode</b></span>
+                        <a href="#toggleEditMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleEditMode()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentEmblemPhoto"></a>
+                    <span class="name">
+                        <span ><b>currentEmblemPhoto</b></span>
+                        <a href="#currentEmblemPhoto"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentLandscapePhoto"></a>
+                    <span class="name">
+                        <span ><b>currentLandscapePhoto</b></span>
+                        <a href="#currentLandscapePhoto"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editMode"></a>
+                    <span class="name">
+                        <span ><b>editMode</b></span>
+                        <a href="#editMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="emblemImg"></a>
+                    <span class="name">
+                        <span ><b>emblemImg</b></span>
+                        <a href="#emblemImg"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>File</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="landscapeImg"></a>
+                    <span class="name">
+                        <span ><b>landscapeImg</b></span>
+                        <a href="#landscapeImg"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>File</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="municipality"></a>
+                    <span class="name">
+                        <span ><b>municipality</b></span>
+                        <a href="#municipality"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Municipality.html" target="_self" >Municipality</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    name: &#x27;&#x27;,
+    president: &#x27;&#x27;,
+    contact: &#x27;&#x27;,
+    description: &#x27;&#x27;,
+    areaha: &#x27;&#x27;,
+    codigo: &#x27;&#x27;,
+    codigopostal: &#x27;&#x27;,
+    codigoine: &#x27;&#x27;,
+    descpstal: &#x27;&#x27;,
+    distrito: &#x27;&#x27;,
+    eleitores: &#x27;&#x27;,
+    email: &#x27;&#x27;,
+    fax: &#x27;&#x27;,
+    localidade: &#x27;&#x27;,
+    nif: &#x27;&#x27;,
+    populacao: &#x27;&#x27;,
+    rua: &#x27;&#x27;,
+    sitio: &#x27;&#x27;,
+    telefone: &#x27;&#x27;,
+    emblemPhoto: &#x27;&#x27;,
+    landscapePhoto: &#x27;&#x27;,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="municipalityEditForm"></a>
+                    <span class="name">
+                        <span ><b>municipalityEditForm</b></span>
+                        <a href="#municipalityEditForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    president: new FormControl({ value: this.municipality.president, disabled:true}, [Validators.required]),
+    contact: new FormControl({ value: this.municipality.contact, disabled: true }, [Validators.required, Validators.pattern(/^\d{9}$/)]),
+    description: new FormControl({ value: this.municipality.description, disabled: true }, [Validators.required]),
+    emblemPhoto: new FormControl({ value: null, disabled: true }),
+    landscapePhoto: new FormControl({ value: null, disabled: true })
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user"></a>
+                    <span class="name">
+                        <span ><b>user</b></span>
+                        <a href="#user"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="president"></a>
+                        <span class="name"><b>president</b><a href="#president"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>president()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:119</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="contact"></a>
+                        <span class="name"><b>contact</b><a href="#contact"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>contact()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:123</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="description"></a>
+                        <span class="name"><b>description</b><a href="#description"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>description()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:127</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="emblemPhoto"></a>
+                        <span class="name"><b>emblemPhoto</b><a href="#emblemPhoto"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>emblemPhoto()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:131</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="landscapePhoto"></a>
+                        <span class="name"><b>landscapePhoto</b><a href="#landscapePhoto"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>landscapePhoto()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/munadministrator/municipal-edit/municipal-edit.component.ts:135</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { MunicipalAdminAuthService, Municipality } from &#x27;../../services/municipal-admin-auth.service&#x27;;
+import { UserAuthService } from &#x27;../../services/user-auth.service&#x27;;
+
+@Component({
+  selector: &#x27;app-municipal-edit&#x27;,
+  templateUrl: &#x27;./municipal-edit.component.html&#x27;,
+  styleUrl: &#x27;./municipal-edit.component.css&#x27;
+})
+export class MunicipalEditComponent {
+
+  municipality: Municipality &#x3D; {
+    name: &#x27;&#x27;,
+    president: &#x27;&#x27;,
+    contact: &#x27;&#x27;,
+    description: &#x27;&#x27;,
+    areaha: &#x27;&#x27;,
+    codigo: &#x27;&#x27;,
+    codigopostal: &#x27;&#x27;,
+    codigoine: &#x27;&#x27;,
+    descpstal: &#x27;&#x27;,
+    distrito: &#x27;&#x27;,
+    eleitores: &#x27;&#x27;,
+    email: &#x27;&#x27;,
+    fax: &#x27;&#x27;,
+    localidade: &#x27;&#x27;,
+    nif: &#x27;&#x27;,
+    populacao: &#x27;&#x27;,
+    rua: &#x27;&#x27;,
+    sitio: &#x27;&#x27;,
+    telefone: &#x27;&#x27;,
+    emblemPhoto: &#x27;&#x27;,
+    landscapePhoto: &#x27;&#x27;,
+  };
+
+  currentEmblemPhoto!: string;
+  currentLandscapePhoto!: string;
+
+  emblemImg!: File;
+  landscapeImg!: File;
+
+  user: any;
+
+  editMode: boolean &#x3D; false;
+
+  municipalityEditForm &#x3D; new FormGroup({
+    president: new FormControl({ value: this.municipality.president, disabled:true}, [Validators.required]),
+    contact: new FormControl({ value: this.municipality.contact, disabled: true }, [Validators.required, Validators.pattern(/^\d{9}$/)]),
+    description: new FormControl({ value: this.municipality.description, disabled: true }, [Validators.required]),
+    emblemPhoto: new FormControl({ value: null, disabled: true }),
+    landscapePhoto: new FormControl({ value: null, disabled: true })
+  });
+
+  constructor(private userAuthService: UserAuthService, private municipalAdminAuthService :MunicipalAdminAuthService) { }
+
+  ngOnInit(): void {
+    this.userAuthService.getUserData().subscribe(
+      res &#x3D;&gt; {
+        let anyUser &#x3D; res;
+        this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
+          (res: any) &#x3D;&gt; {
+            this.user &#x3D; res;
+
+            this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
+              (municipalityRes: any) &#x3D;&gt; {
+                this.municipality &#x3D; municipalityRes as Municipality;
+     
+
+                this.initForm();
+                
+              },
+              error &#x3D;&gt; {
+                console.error(error);
+              }
+            );
+          },
+          error &#x3D;&gt; {
+            console.error(error);
+          }
+        );
+      },
+      error &#x3D;&gt; {
+        console.error(error);
+      }
+    );
+  }
+
+  initForm() {
+    this.municipalityEditForm.patchValue({
+      president: this.municipality.president,
+      contact: this.municipality.contact,
+      description: this.municipality.description,
+      emblemPhoto: null,
+      landscapePhoto: null
+    });
+
+    this.currentEmblemPhoto &#x3D; this.municipality.emblemPhoto;
+    this.currentLandscapePhoto &#x3D; this.municipality.landscapePhoto;
+  }
+
+  toggleEditMode() {
+    this.editMode &#x3D; !this.editMode;
+
+    if (this.editMode) {
+      this.municipalityEditForm.enable();
+    } else {
+      this.municipalityEditForm.disable();
+    }
+  }
+
+  cancelEditMode() {
+    this.toggleEditMode();
+    this.initForm();
+  }
+
+  
+
+  get president() {
+    return this.municipalityEditForm.get(&#x27;president&#x27;);
+  }
+
+  get contact() {
+    return this.municipalityEditForm.get(&#x27;contact&#x27;);
+  }
+
+  get description() {
+    return this.municipalityEditForm.get(&#x27;description&#x27;);
+  }
+
+  get emblemPhoto() {
+    return this.municipalityEditForm.get(&#x27;emblemPhoto&#x27;);
+  }
+
+  get landscapePhoto() {
+    return this.municipalityEditForm.get(&#x27;landscapePhoto&#x27;);
+  }
+
+  onEmblemImagePicked(event: any) {
+    const file: File &#x3D; event.target.files[0];
+    if (file) {
+      this.emblemImg &#x3D; file;
+      const reader &#x3D; new FileReader();
+      reader.onload &#x3D; () &#x3D;&gt; {
+        this.currentEmblemPhoto &#x3D; reader.result as string; // Atribui o URL temporário à propriedade emblemPhoto
+      };
+      reader.readAsDataURL(file); // Lê o conteúdo do arquivo como um URL de dados
+    } else {
+      console.error(&#x27;No file selected&#x27;);
+    }
+  }
+
+
+
+  onLandscapeImagePicked(event: any) {
+    const file: File &#x3D; event.target.files[0];
+    if (file) {
+      this.landscapeImg &#x3D; file;
+      const reader &#x3D; new FileReader();
+      reader.onload &#x3D; () &#x3D;&gt; {
+        this.currentLandscapePhoto &#x3D; reader.result as string; // Atribui o URL temporário à propriedade emblemPhoto
+      };
+      reader.readAsDataURL(file); // Lê o conteúdo do arquivo como um URL de dados
+    } else {
+      console.error(&#x27;No file selected&#x27;);
+    }
+  }
+
+
+  onSubmit() {
+
+  this.toggleEditMode();
+
+
+    this.municipality.president &#x3D; this.president!.value!;
+    this.municipality.contact &#x3D; this.contact!.value!.toString();
+    this.municipality.description &#x3D; this.description!.value!;
+
+
+  this.municipalAdminAuthService.updateMunicipality(this.municipality, this.emblemImg, this.landscapeImg).subscribe(
+
+  );
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-header-loggedin&gt;&lt;/app-header-loggedin&gt;
+&lt;app-profile-banner title&#x3D;&quot;Dados do Munícipio&quot;
+                    [image]&#x3D;&quot;currentLandscapePhoto&quot;
+                    [profileimg]&#x3D;&quot;currentEmblemPhoto&quot;&gt;&lt;/app-profile-banner&gt;
+&lt;div class&#x3D;&quot;flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 space-y-20&quot;&gt;
+  &lt;form [formGroup]&#x3D;&quot;municipalityEditForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;pt-[1rem] relative flex flex-col pb-[5rem]&quot;&gt;
+    &lt;section class&#x3D;&quot;flex text-left justify-around mb-4 &quot;&gt;
+      &lt;div class&#x3D;&quot;w-[24rem]&quot; *ngIf&#x3D;&quot;municipalityEditForm&quot;&gt;
+        &lt;app-input-title class&#x3D;&quot;text-[2.4vh]&quot;&gt;Presidente&lt;/app-input-title&gt;
+        &lt;div class&#x3D;&quot;relative&quot;&gt;
+          &lt;input required type&#x3D;&quot;text&quot; id&#x3D;&quot;president&quot; formControlName&#x3D;&quot;president&quot; name&#x3D;&quot;president&quot;
+                 class&#x3D;&quot;input font-poppins w-[18rem] &quot; /&gt;
+          &lt;img *ngIf&#x3D;&quot;editMode&quot; src&#x3D;&quot;/assets/images/icons/pencil.png&quot; alt&#x3D;&quot;editar&quot; class&#x3D;&quot;absolute size-5 left-64 top-3.5&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;absolute text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;president?.touched &amp;&amp; president?.invalid&quot;&gt;
+          &lt;div *ngIf&#x3D;&quot;president?.errors?.[&#x27;required&#x27;]&quot;&gt;Presidente Obrigatório&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;w-[20rem]&quot;&gt;
+        &lt;app-input-title class&#x3D;&quot;text-[2.4vh]&quot;&gt;Contacto Telefónico&lt;/app-input-title&gt;
+        &lt;div class&#x3D;&quot;relative&quot;&gt;
+          &lt;input required type&#x3D;&quot;number&quot; id&#x3D;&quot;contact&quot;
+                 formControlName&#x3D;&quot;contact&quot; name&#x3D;&quot;contact&quot;
+                 class&#x3D;&quot;input font-poppins w-[18rem]&quot; /&gt;
+          &lt;img *ngIf&#x3D;&quot;editMode&quot; src&#x3D;&quot;/assets/images/icons/pencil.png&quot; alt&#x3D;&quot;editar&quot; class&#x3D;&quot;absolute size-5 left-64 top-3.5&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;absolute text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;contact?.touched &amp;&amp; contact?.invalid &quot;&gt;
+          &lt;div *ngIf&#x3D;&quot;contact?.errors?.[&#x27;required&#x27;] &quot;&gt;Contacto Obrigatório&lt;/div&gt;
+          &lt;div *ngIf&#x3D;&quot;contact?.errors?.[&#x27;pattern&#x27;] &quot;&gt;Contacto Inválido&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class&#x3D;&quot;relative flex text-left justify-around mb-4&quot;&gt;
+      &lt;div class&#x3D;&quot;absolute -top-40 right-8&quot;&gt;
+        &lt;app-input-title class&#x3D;&quot;hidden text-[2.4vh]&quot;&gt;Foto do Brasão&lt;/app-input-title&gt;
+        &lt;input type&#x3D;&quot;file&quot; #emblemPicker id&#x3D;&quot;emblemPhoto&quot; formControlName&#x3D;&quot;emblemPhoto&quot; name&#x3D;&quot;emblemPhoto&quot;
+               (change)&#x3D;&quot;onEmblemImagePicked($event)&quot; accept&#x3D;&quot;image/*&quot;
+               class&#x3D;&quot;hidden input font-poppins w-[18rem] &quot; /&gt;
+        
+        &lt;app-black-btn-icon-text *ngIf&#x3D;&quot;editMode&quot;
+      
+                                 altImage&#x3D;&quot;editar brasão&quot;
+                                 image&#x3D;&quot;/assets/images/icons/pencil-white.png&quot;
+                                 (buttonClick)&#x3D;&quot;emblemPicker.click()&quot;&gt;
+        &lt;/app-black-btn-icon-text&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;absolute -top-60 left-8&quot;&gt;
+        &lt;app-input-title class&#x3D;&quot;hidden text-[2.4rem]&quot;&gt;Foto da Paisagem&lt;/app-input-title&gt;
+        &lt;input type&#x3D;&quot;file&quot; #landscapePicker id&#x3D;&quot;landscapePhoto&quot; formControlName&#x3D;&quot;landscapePhoto&quot;
+               name&#x3D;&quot;landscapePhoto&quot; (change)&#x3D;&quot;onLandscapeImagePicked($event)&quot; accept&#x3D;&quot;image/*&quot;
+               class&#x3D;&quot;hidden input font-poppins w-[18rem]&quot; /&gt;
+     
+        &lt;app-black-btn-icon-text *ngIf&#x3D;&quot;editMode&quot; class&#x3D;&quot;text-[1.063rem]&quot;
+                         
+                                 altImage&#x3D;&quot;editar paisagem&quot;
+                                 image&#x3D;&quot;/assets/images/icons/pencil-white.png&quot;
+                                 (buttonClick)&#x3D;&quot;landscapePicker.click()&quot;&gt;
+          Editar Paisagem
+        &lt;/app-black-btn-icon-text&gt;
+  
+        
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;div class&#x3D;&quot;flex flex-col text-left w-full mt-6 mb-4 relative&quot;&gt;
+      &lt;app-input-title class&#x3D;&quot;text-[2.4vh]&quot;&gt;Texto Informativo&lt;/app-input-title&gt;
+      &lt;textarea required id&#x3D;&quot;description&quot; formControlName&#x3D;&quot;description&quot; name&#x3D;&quot;description&quot;
+                class&#x3D;&quot;input font-poppins box-border h-[20rem] resize-none grow
+                  decoration-sky-500&quot;&gt;
+        &lt;/textarea&gt;
+      &lt;img *ngIf&#x3D;&quot;editMode&quot; src&#x3D;&quot;/assets/images/icons/pencil.png&quot; alt&#x3D;&quot;editar&quot; class&#x3D;&quot;absolute size-5 right-6 top-14&quot; /&gt;
+      &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;description?.touched &amp;&amp; description?.invalid &quot;&gt;
+        &lt;div *ngIf&#x3D;&quot;description?.errors?.[&#x27;required&#x27;] &quot;&gt;Descrição Obrigatório&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;button *ngIf&#x3D;&quot;editMode&quot; type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;!municipalityEditForm.valid&quot;
+            class&#x3D;&quot;absolute -bottom-[0rem] right-[2rem] h-auto w-[15rem] flex justify-center
+              items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue
+              to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600
+              rounded text-lg transition duration-700 ease-in-out&quot;&gt;
+      Finalizar Alterações
+      &lt;img alt&#x3D;&quot;arrow&quot; src&#x3D;&quot;/assets/images/arrows/right-arrow.png&quot; class&#x3D;&quot;size-3.5 ml-1&quot; /&gt;
+    &lt;/button&gt;
+
+  &lt;/form&gt;
+  &lt;div  *ngIf&#x3D;&quot;!editMode&quot; class&#x3D;&quot;absolute top-[15.3rem] right-[25rem] text-[1.063rem]&quot;&gt;
+    &lt;app-black-btn-icon-text altImage&#x3D;&quot;editar munícipio&quot;
+                             image&#x3D;&quot;/assets/images/icons/pencil-white.png&quot;
+                             (buttonClick)&#x3D;&quot;toggleEditMode()&quot;&gt;
+      Editar Munícipio
+    &lt;/app-black-btn-icon-text&gt;
+  &lt;/div&gt;
+  &lt;div *ngIf&#x3D;&quot;editMode&quot; class&#x3D;&quot;absolute top-[15.3rem] right-[25rem] text-[1.063rem]&quot;&gt;
+    &lt;app-black-btn-icon-text altImage&#x3D;&quot;Cancelar&quot;
+                             image&#x3D;&quot;/assets/images/icons/pencil-white.png&quot;
+                             (buttonClick)&#x3D;&quot;cancelEditMode()&quot;&gt;
+      Cancelar Edição
+    &lt;/app-black-btn-icon-text&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;app-footer&gt;&lt;/app-footer&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-header-loggedin></app-header-loggedin><app-profile-banner title="Dados do Munícipio"                    [image]="currentLandscapePhoto"                    [profileimg]="currentEmblemPhoto"></app-profile-banner><div class="flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 space-y-20">  <form [formGroup]="municipalityEditForm" (ngSubmit)="onSubmit()" class="pt-[1rem] relative flex flex-col pb-[5rem]">    <section class="flex text-left justify-around mb-4 ">      <div class="w-[24rem]" *ngIf="municipalityEditForm">        <app-input-title class="text-[2.4vh]">Presidente</app-input-title>        <div class="relative">          <input required type="text" id="president" formControlName="president" name="president"                 class="input font-poppins w-[18rem] " />          <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 left-64 top-3.5" />        </div>        <div class="absolute text-red-500 font-bold py-2" *ngIf="president?.touched && president?.invalid">          <div *ngIf="president?.errors?.[\'required\']">Presidente Obrigatório</div>        </div>      </div>      <div class="w-[20rem]">        <app-input-title class="text-[2.4vh]">Contacto Telefónico</app-input-title>        <div class="relative">          <input required type="number" id="contact"                 formControlName="contact" name="contact"                 class="input font-poppins w-[18rem]" />          <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 left-64 top-3.5" />        </div>        <div class="absolute text-red-500 font-bold py-2" *ngIf="contact?.touched && contact?.invalid ">          <div *ngIf="contact?.errors?.[\'required\'] ">Contacto Obrigatório</div>          <div *ngIf="contact?.errors?.[\'pattern\'] ">Contacto Inválido</div>        </div>      </div>    </section>    <section class="relative flex text-left justify-around mb-4">      <div class="absolute -top-40 right-8">        <app-input-title class="hidden text-[2.4vh]">Foto do Brasão</app-input-title>        <input type="file" #emblemPicker id="emblemPhoto" formControlName="emblemPhoto" name="emblemPhoto"               (change)="onEmblemImagePicked($event)" accept="image/*"               class="hidden input font-poppins w-[18rem] " />                <app-black-btn-icon-text *ngIf="editMode"                                       altImage="editar brasão"                                 image="/assets/images/icons/pencil-white.png"                                 (buttonClick)="emblemPicker.click()">        </app-black-btn-icon-text>      </div>      <div class="absolute -top-60 left-8">        <app-input-title class="hidden text-[2.4rem]">Foto da Paisagem</app-input-title>        <input type="file" #landscapePicker id="landscapePhoto" formControlName="landscapePhoto"               name="landscapePhoto" (change)="onLandscapeImagePicked($event)" accept="image/*"               class="hidden input font-poppins w-[18rem]" />             <app-black-btn-icon-text *ngIf="editMode" class="text-[1.063rem]"                                                          altImage="editar paisagem"                                 image="/assets/images/icons/pencil-white.png"                                 (buttonClick)="landscapePicker.click()">          Editar Paisagem        </app-black-btn-icon-text>                </div>    </section>    <div class="flex flex-col text-left w-full mt-6 mb-4 relative">      <app-input-title class="text-[2.4vh]">Texto Informativo</app-input-title>      <textarea required id="description" formControlName="description" name="description"                class="input font-poppins box-border h-[20rem] resize-none grow                  decoration-sky-500">        </textarea>      <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />      <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">        <div *ngIf="description?.errors?.[\'required\'] ">Descrição Obrigatório</div>      </div>    </div>    <button *ngIf="editMode" type="submit" [disabled]="!municipalityEditForm.valid"            class="absolute -bottom-[0rem] right-[2rem] h-auto w-[15rem] flex justify-center              items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue              to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600              rounded text-lg transition duration-700 ease-in-out">      Finalizar Alterações      <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />    </button>  </form>  <div  *ngIf="!editMode" class="absolute top-[15.3rem] right-[25rem] text-[1.063rem]">    <app-black-btn-icon-text altImage="editar munícipio"                             image="/assets/images/icons/pencil-white.png"                             (buttonClick)="toggleEditMode()">      Editar Munícipio    </app-black-btn-icon-text>  </div>  <div *ngIf="editMode" class="absolute top-[15.3rem] right-[25rem] text-[1.063rem]">    <app-black-btn-icon-text altImage="Cancelar"                             image="/assets/images/icons/pencil-white.png"                             (buttonClick)="cancelEditMode()">      Cancelar Edição    </app-black-btn-icon-text>  </div></div><app-footer></app-footer></div>'
+    var COMPONENTS = [{'name': 'AboutusComponent', 'selector': 'app-aboutus'},{'name': 'AccessDeniedComponent', 'selector': 'app-access-denied'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BannerComponent', 'selector': 'app-banner'},{'name': 'BigBannerComponent', 'selector': 'app-big-banner'},{'name': 'BlackBtnIconTextComponent', 'selector': 'app-black-btn-icon-text'},{'name': 'BtnMunicipBlueComponent', 'selector': 'app-btn-municip-blue'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarHeaderComponent', 'selector': 'app-calendar-header'},{'name': 'CalendarPageComponent', 'selector': 'app-calendar-page'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardOutlineThemeComponent', 'selector': 'app-card-outline-theme'},{'name': 'CardOutlineWhiteComponent', 'selector': 'app-card-outline-white'},{'name': 'CardTeamComponent', 'selector': 'app-card-team'},{'name': 'CitizenHomePageComponent', 'selector': 'app-citizen-home-page'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DatetimepickerComponent', 'selector': 'app-datetimepicker'},{'name': 'DialogMessageComponent', 'selector': 'app-dialog-message'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EventCardComponent', 'selector': 'app-event-card'},{'name': 'EventPageComponent', 'selector': 'app-event-page'},{'name': 'EventsListComponent', 'selector': 'app-events-list'},{'name': 'EventsSmallComponent', 'selector': 'app-events-small'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GeneralInfoComponent', 'selector': 'app-general-info'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderLoggedinComponent', 'selector': 'app-header-loggedin'},{'name': 'InputTitleComponent', 'selector': 'app-input-title'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MunAdmindashboardComponent', 'selector': 'app-munadmindashboard'},{'name': 'MunAdminHomePageComponent', 'selector': 'app-mun-admin-home-page'},{'name': 'MunicipalEditComponent', 'selector': 'app-municipal-edit'},{'name': 'MunicipalEventsComponent', 'selector': 'app-municipal-events'},{'name': 'MunicipalitymapComponent', 'selector': 'app-municipalitymap'},{'name': 'MunicipalProfileComponent', 'selector': 'app-municipal-profile'},{'name': 'MyDataCardComponent', 'selector': 'app-my-data-card'},{'name': 'MyMunicipalityCardComponent', 'selector': 'app-my-municipality-card'},{'name': 'NewsCardComponent', 'selector': 'app-news-card'},{'name': 'NewsCreateComponent', 'selector': 'app-news-create'},{'name': 'NewsEditComponent', 'selector': 'app-news-edit'},{'name': 'NewsListComponent', 'selector': 'app-news-list'},{'name': 'NewsPageComponent', 'selector': 'app-news-page'},{'name': 'NewsSmallComponent', 'selector': 'app-news-small'},{'name': 'NextEventsComponent', 'selector': 'app-next-events'},{'name': 'NextNewsComponent', 'selector': 'app-next-news'},{'name': 'ProfileBannerComponent', 'selector': 'app-profile-banner'},{'name': 'SchedulesComponent', 'selector': 'app-schedules'},{'name': 'SelectAccountTypeComponent', 'selector': 'app-select-account-type'},{'name': 'ShowHidePasswordComponent', 'selector': 'app-show-hide-password'},{'name': 'ShowStopComponent', 'selector': 'app-show-stop'},{'name': 'SignUpCitizenAccountComponent', 'selector': 'app-sign-up-citizen-account'},{'name': 'SignUpMunicipalAdministratorAccountComponent', 'selector': 'app-sign-up-municipal-administrator-account'},{'name': 'SignUpMunicipalityComponent', 'selector': 'app-sign-up-municipality'},{'name': 'SignUpSuccessComponent', 'selector': 'app-sign-up-success'},{'name': 'SmallerBannerComponent', 'selector': 'app-smaller-banner'},{'name': 'SpinnerComponent', 'selector': 'app-spinner'},{'name': 'StatisticalHomePageCardComponent', 'selector': 'app-statistical-home-page-card'},{'name': 'StopsMapComponent', 'selector': 'app-stops-map'},{'name': 'StopsPageComponent', 'selector': 'app-stops-page'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'TooltipComponent', 'selector': 'app-tooltip'},{'name': 'TransportsMainComponent', 'selector': 'app-transports-main'},{'name': 'UserinfodialogComponent', 'selector': 'app-userinfodialog'},{'name': 'UserpageComponent', 'selector': 'app-userpage'},{'name': 'VerticalCardComponent', 'selector': 'app-vertical-card'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'MunicipalEditComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MunicipalEditComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

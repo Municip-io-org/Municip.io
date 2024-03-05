@@ -1,0 +1,372 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>municip.io.client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">municip.io.client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  AboutusComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/aboutus/aboutus/aboutus.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-aboutus</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./aboutus.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./aboutus.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+
+@Component({
+  selector: &#x27;app-aboutus&#x27;,
+  templateUrl: &#x27;./aboutus.component.html&#x27;,
+  styleUrl: &#x27;./aboutus.component.css&#x27;
+})
+export class AboutusComponent {
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-header /&gt;
+&lt;section class&#x3D;&quot;text-gray-700 body-font border-t border-gray-200&quot;&gt;
+  &lt;div class&#x3D;&quot;container px-5 py-8 mx-auto&quot;&gt;
+    &lt;div class&#x3D;&quot;flex flex-col text-center w-full mb-8&quot;&gt;
+      &lt;h1 class&#x3D;&quot;sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900&quot;&gt;Sobre Nós&lt;/h1&gt;
+      &lt;p class&#x3D;&quot;lg:w-2/3 mx-auto leading-relaxed text-base&quot;&gt;Conheça a equipa responsável pela Municip.io&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;flex flex-col text-justify mb-8 mx-auto&quot;&gt;
+
+      &lt;img class&#x3D;&quot;mx-auto h-64 mb-8&quot; src&#x3D;&quot;/assets/images/team/aboutusbanner.jpg&quot;&gt;
+      &lt;p class&#x3D;&quot;lg:w-2/3 mx-auto leading-relaxed text-base&quot;&gt;
+        A municip.io visa contribuir para a transição digital do setor público, oferecendo aos municípios uma plataforma de disponibilização de serviços e informações, facilitando o acesso dos cidadãos aos mesmos, agindo enquanto instrumento para uma adaptação às crescentes necessidades digitais.
+        &lt;br /&gt; &lt;br /&gt;Pretendemos assim, possibilitar uma importante otimização dos recursos municipais, contribuindo ainda para a adoção de medidas sustentáveis no território.
+      &lt;/p&gt;
+
+    &lt;/div&gt;
+
+
+    &lt;div class&#x3D;&quot;flex flex-wrap&quot;&gt;
+
+      &lt;div class&#x3D;&quot;p-2 lg:w-1/2 md:w-1/2 w-full&quot;&gt;
+        &lt;app-card-team [cardPhoto]&#x3D;&quot;&#x27;/assets/images/team/mourabg.png&#x27;&quot; [cardName]&#x3D;&quot;&#x27;Pedro Moura&#x27;&quot; [cardDescription]&#x3D;&quot;&#x27;Estudante de Engenharia Informática do IPS. Fascinado pela inovação e transformação digital&#x27;&quot;&gt;&lt;/app-card-team&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;p-2 lg:w-1/2 md:w-1/2 w-full&quot;&gt;
+        &lt;app-card-team [cardPhoto]&#x3D;&quot;&#x27;/assets/images/team/carlosbg.png&#x27;&quot; [cardName]&#x3D;&quot;&#x27;Carlos Luz&#x27;&quot; [cardDescription]&#x3D;&quot;&#x27;Estudante de Engenharia Informática do IPS &#x27;&quot;&gt;&lt;/app-card-team&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;p-2 lg:w-1/2 md:w-1/2 w-full&quot;&gt;
+        &lt;app-card-team [cardPhoto]&#x3D;&quot;&#x27;/assets/images/team/andrebg.png&#x27;&quot; [cardName]&#x3D;&quot;&#x27;André Caetano&#x27;&quot; [cardDescription]&#x3D;&quot;&#x27;Estudante de Engenharia Informática do IPS &#x27;&quot;&gt;&lt;/app-card-team&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;p-2 lg:w-1/2 md:w-1/2 w-full&quot;&gt;
+        &lt;app-card-team [cardPhoto]&#x3D;&quot;&#x27;/assets/images/team/ruibg.png&#x27;&quot; [cardName]&#x3D;&quot;&#x27;Rui Jesus&#x27;&quot; [cardDescription]&#x3D;&quot;&#x27;Estudante de Engenharia Informática do IPS &#x27;&quot;&gt;&lt;/app-card-team&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+
+   
+
+
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section class&#x3D;&quot;text-gray-700 body-font border-t border-gray-200&quot;&gt;
+  &lt;div class&#x3D;&quot;container px-5 py-24 mx-auto&quot;&gt;
+    &lt;div class&#x3D;&quot;xl:w-1/2 lg:w-3/4 w-full mx-auto text-center&quot;&gt;
+      &lt;svg xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; fill&#x3D;&quot;currentColor&quot; class&#x3D;&quot;inline-block w-8 h-8 text-gray-400 mb-8&quot; viewBox&#x3D;&quot;0 0 975.036 975.036&quot;&gt;
+        &lt;path d&#x3D;&quot;M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z&quot;&gt;&lt;/path&gt;
+      &lt;/svg&gt;
+      &lt;p class&#x3D;&quot;leading-relaxed text-lg&quot;&gt;
+        O avanço da tecnologia baseia-se na sua integração de modo a que nem sequer se dê por ela, para que faça parte da vida quotidiana.
+      &lt;/p&gt;
+      &lt;span class&#x3D;&quot;inline-block h-1 w-10 rounded bg-indigo-500 mt-8 mb-6&quot;&gt;&lt;/span&gt;
+      &lt;h2 class&#x3D;&quot;text-gray-900 font-medium title-font tracking-wider text-sm&quot;&gt;Bill Gates&lt;/h2&gt;
+      &lt;p class&#x3D;&quot;text-gray-500&quot;&gt;Co-founder of Microsoft&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-header /><section class="text-gray-700 body-font border-t border-gray-200">  <div class="container px-5 py-8 mx-auto">    <div class="flex flex-col text-center w-full mb-8">      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Sobre Nós</h1>      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Conheça a equipa responsável pela Municip.io</p>    </div>    <div class="flex flex-col text-justify mb-8 mx-auto">      <img class="mx-auto h-64 mb-8" src="/assets/images/team/aboutusbanner.jpg">      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">        A municip.io visa contribuir para a transição digital do setor público, oferecendo aos municípios uma plataforma de disponibilização de serviços e informações, facilitando o acesso dos cidadãos aos mesmos, agindo enquanto instrumento para uma adaptação às crescentes necessidades digitais.        <br /> <br />Pretendemos assim, possibilitar uma importante otimização dos recursos municipais, contribuindo ainda para a adoção de medidas sustentáveis no território.      </p>    </div>    <div class="flex flex-wrap">      <div class="p-2 lg:w-1/2 md:w-1/2 w-full">        <app-card-team [cardPhoto]="\'/assets/images/team/mourabg.png\'" [cardName]="\'Pedro Moura\'" [cardDescription]="\'Estudante de Engenharia Informática do IPS. Fascinado pela inovação e transformação digital\'"></app-card-team>      </div>      <div class="p-2 lg:w-1/2 md:w-1/2 w-full">        <app-card-team [cardPhoto]="\'/assets/images/team/carlosbg.png\'" [cardName]="\'Carlos Luz\'" [cardDescription]="\'Estudante de Engenharia Informática do IPS \'"></app-card-team>      </div>      <div class="p-2 lg:w-1/2 md:w-1/2 w-full">        <app-card-team [cardPhoto]="\'/assets/images/team/andrebg.png\'" [cardName]="\'André Caetano\'" [cardDescription]="\'Estudante de Engenharia Informática do IPS \'"></app-card-team>      </div>      <div class="p-2 lg:w-1/2 md:w-1/2 w-full">        <app-card-team [cardPhoto]="\'/assets/images/team/ruibg.png\'" [cardName]="\'Rui Jesus\'" [cardDescription]="\'Estudante de Engenharia Informática do IPS \'"></app-card-team>      </div>    </div>     </div></section><section class="text-gray-700 body-font border-t border-gray-200">  <div class="container px-5 py-24 mx-auto">    <div class="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="inline-block w-8 h-8 text-gray-400 mb-8" viewBox="0 0 975.036 975.036">        <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>      </svg>      <p class="leading-relaxed text-lg">        O avanço da tecnologia baseia-se na sua integração de modo a que nem sequer se dê por ela, para que faça parte da vida quotidiana.      </p>      <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-8 mb-6"></span>      <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">Bill Gates</h2>      <p class="text-gray-500">Co-founder of Microsoft</p>    </div>  </div></section></div>'
+    var COMPONENTS = [{'name': 'AboutusComponent', 'selector': 'app-aboutus'},{'name': 'AccessDeniedComponent', 'selector': 'app-access-denied'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BannerComponent', 'selector': 'app-banner'},{'name': 'BigBannerComponent', 'selector': 'app-big-banner'},{'name': 'BlackBtnIconTextComponent', 'selector': 'app-black-btn-icon-text'},{'name': 'BtnMunicipBlueComponent', 'selector': 'app-btn-municip-blue'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarHeaderComponent', 'selector': 'app-calendar-header'},{'name': 'CalendarPageComponent', 'selector': 'app-calendar-page'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardOutlineThemeComponent', 'selector': 'app-card-outline-theme'},{'name': 'CardOutlineWhiteComponent', 'selector': 'app-card-outline-white'},{'name': 'CardTeamComponent', 'selector': 'app-card-team'},{'name': 'CitizenHomePageComponent', 'selector': 'app-citizen-home-page'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DatetimepickerComponent', 'selector': 'app-datetimepicker'},{'name': 'DialogMessageComponent', 'selector': 'app-dialog-message'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EventCardComponent', 'selector': 'app-event-card'},{'name': 'EventPageComponent', 'selector': 'app-event-page'},{'name': 'EventsListComponent', 'selector': 'app-events-list'},{'name': 'EventsSmallComponent', 'selector': 'app-events-small'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GeneralInfoComponent', 'selector': 'app-general-info'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderLoggedinComponent', 'selector': 'app-header-loggedin'},{'name': 'InputTitleComponent', 'selector': 'app-input-title'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MunAdmindashboardComponent', 'selector': 'app-munadmindashboard'},{'name': 'MunAdminHomePageComponent', 'selector': 'app-mun-admin-home-page'},{'name': 'MunicipalEditComponent', 'selector': 'app-municipal-edit'},{'name': 'MunicipalEventsComponent', 'selector': 'app-municipal-events'},{'name': 'MunicipalitymapComponent', 'selector': 'app-municipalitymap'},{'name': 'MunicipalProfileComponent', 'selector': 'app-municipal-profile'},{'name': 'MyDataCardComponent', 'selector': 'app-my-data-card'},{'name': 'MyMunicipalityCardComponent', 'selector': 'app-my-municipality-card'},{'name': 'NewsCardComponent', 'selector': 'app-news-card'},{'name': 'NewsCreateComponent', 'selector': 'app-news-create'},{'name': 'NewsEditComponent', 'selector': 'app-news-edit'},{'name': 'NewsListComponent', 'selector': 'app-news-list'},{'name': 'NewsPageComponent', 'selector': 'app-news-page'},{'name': 'NewsSmallComponent', 'selector': 'app-news-small'},{'name': 'NextEventsComponent', 'selector': 'app-next-events'},{'name': 'NextNewsComponent', 'selector': 'app-next-news'},{'name': 'ProfileBannerComponent', 'selector': 'app-profile-banner'},{'name': 'SchedulesComponent', 'selector': 'app-schedules'},{'name': 'SelectAccountTypeComponent', 'selector': 'app-select-account-type'},{'name': 'ShowHidePasswordComponent', 'selector': 'app-show-hide-password'},{'name': 'ShowStopComponent', 'selector': 'app-show-stop'},{'name': 'SignUpCitizenAccountComponent', 'selector': 'app-sign-up-citizen-account'},{'name': 'SignUpMunicipalAdministratorAccountComponent', 'selector': 'app-sign-up-municipal-administrator-account'},{'name': 'SignUpMunicipalityComponent', 'selector': 'app-sign-up-municipality'},{'name': 'SignUpSuccessComponent', 'selector': 'app-sign-up-success'},{'name': 'SmallerBannerComponent', 'selector': 'app-smaller-banner'},{'name': 'SpinnerComponent', 'selector': 'app-spinner'},{'name': 'StatisticalHomePageCardComponent', 'selector': 'app-statistical-home-page-card'},{'name': 'StopsMapComponent', 'selector': 'app-stops-map'},{'name': 'StopsPageComponent', 'selector': 'app-stops-page'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'TooltipComponent', 'selector': 'app-tooltip'},{'name': 'TransportsMainComponent', 'selector': 'app-transports-main'},{'name': 'UserinfodialogComponent', 'selector': 'app-userinfodialog'},{'name': 'UserpageComponent', 'selector': 'app-userpage'},{'name': 'VerticalCardComponent', 'selector': 'app-vertical-card'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'AboutusComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'AboutusComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

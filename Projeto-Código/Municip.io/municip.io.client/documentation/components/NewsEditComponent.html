@@ -1,0 +1,1208 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>municip.io.client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">municip.io.client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  NewsEditComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/news/news-edit/news-edit.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-news-edit</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./news-edit.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./news-edit.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#errors" >errors</a>
+                            </li>
+                            <li>
+                                <a href="#image" >image</a>
+                            </li>
+                            <li>
+                                <a href="#mainTextCharacterCount" >mainTextCharacterCount</a>
+                            </li>
+                            <li>
+                                <a href="#news" >news</a>
+                            </li>
+                            <li>
+                                <a href="#newsEditForm" >newsEditForm</a>
+                            </li>
+                            <li>
+                                <a href="#newUser" >newUser</a>
+                            </li>
+                            <li>
+                                <a href="#subtitleCharacterCount" >subtitleCharacterCount</a>
+                            </li>
+                            <li>
+                                <a href="#user" >user</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onImagePicked" >onImagePicked</a>
+                            </li>
+                            <li>
+                                <a href="#OnSubmit" >OnSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#updateCharacterCount" >updateCharacterCount</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#title" >title</a>
+                                </li>
+                                <li>
+                                    <a href="#subtitle" >subtitle</a>
+                                </li>
+                                <li>
+                                    <a href="#mainText" >mainText</a>
+                                </li>
+                                <li>
+                                    <a href="#photo" >photo</a>
+                                </li>
+                                <li>
+                                    <a href="#date" >date</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(newsService: <a href="../injectables/NewsService.html" target="_self">NewsService</a>, activatedRoute: ActivatedRoute, userAuthService: <a href="../injectables/UserAuthService.html" target="_self">UserAuthService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:19</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>newsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/NewsService.html" target="_self" >NewsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activatedRoute</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userAuthService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserAuthService.html" target="_self" >UserAuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onImagePicked"></a>
+                    <span class="name">
+                        <span ><b>onImagePicked</b></span>
+                        <a href="#onImagePicked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onImagePicked(event: <a href="../interfaces/Event.html" target="_self">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Event.html" target="_self" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="OnSubmit"></a>
+                    <span class="name">
+                        <span ><b>OnSubmit</b></span>
+                        <a href="#OnSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>OnSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateCharacterCount"></a>
+                    <span class="name">
+                        <span ><b>updateCharacterCount</b></span>
+                        <a href="#updateCharacterCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateCharacterCount(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errors"></a>
+                    <span class="name">
+                        <span ><b>errors</b></span>
+                        <a href="#errors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[] | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="image"></a>
+                    <span class="name">
+                        <span ><b>image</b></span>
+                        <a href="#image"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>File</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mainTextCharacterCount"></a>
+                    <span class="name">
+                        <span ><b>mainTextCharacterCount</b></span>
+                        <a href="#mainTextCharacterCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="news"></a>
+                    <span class="name">
+                        <span ><b>news</b></span>
+                        <a href="#news"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newsEditForm"></a>
+                    <span class="name">
+                        <span ><b>newsEditForm</b></span>
+                        <a href="#newsEditForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    title: new FormControl(&quot;&quot;, [Validators.required]),
+    subtitle: new FormControl(&quot;&quot;, [Validators.email, Validators.required]),
+    mainText: new FormControl(&quot;&quot;, [Validators.required]),
+    photo: new FormControl(null, [Validators.required]),
+    date: new FormControl(new Date(), [Validators.required]),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newUser"></a>
+                    <span class="name">
+                        <span ><b>newUser</b></span>
+                        <a href="#newUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subtitleCharacterCount"></a>
+                    <span class="name">
+                        <span ><b>subtitleCharacterCount</b></span>
+                        <a href="#subtitleCharacterCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user"></a>
+                    <span class="name">
+                        <span ><b>user</b></span>
+                        <a href="#user"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="title"></a>
+                        <span class="name"><b>title</b><a href="#title"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>title()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:38</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="subtitle"></a>
+                        <span class="name"><b>subtitle</b><a href="#subtitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>subtitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:41</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mainText"></a>
+                        <span class="name"><b>mainText</b><a href="#mainText"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>mainText()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:44</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="photo"></a>
+                        <span class="name"><b>photo</b><a href="#photo"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>photo()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:47</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="date"></a>
+                        <span class="name"><b>date</b><a href="#date"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>date()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/news/news-edit/news-edit.component.ts:50</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { NewsService } from &#x27;../../services/news/news.service&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { UserAuthService } from &#x27;../../services/user-auth.service&#x27;;
+import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+
+@Component({
+  selector: &#x27;app-news-edit&#x27;,
+  templateUrl: &#x27;./news-edit.component.html&#x27;,
+  styleUrl: &#x27;./news-edit.component.css&#x27;
+})
+export class NewsEditComponent {
+  news: any;
+  user: any;
+  newUser: any;
+  errors: string[] | null &#x3D; null;
+  image!: File;
+  subtitleCharacterCount &#x3D; 0;
+  mainTextCharacterCount &#x3D; 0;
+
+  constructor(private newsService: NewsService, private activatedRoute: ActivatedRoute, private userAuthService: UserAuthService) { }
+
+  ngOnInit() {
+    this.news &#x3D; this.activatedRoute.snapshot.data[&#x27;news&#x27;];
+    console.log(&quot;EVENTO SELECIONADO&quot;);
+
+  }
+
+  newsEditForm &#x3D; new FormGroup({
+    title: new FormControl(&quot;&quot;, [Validators.required]),
+    subtitle: new FormControl(&quot;&quot;, [Validators.email, Validators.required]),
+    mainText: new FormControl(&quot;&quot;, [Validators.required]),
+    photo: new FormControl(null, [Validators.required]),
+    date: new FormControl(new Date(), [Validators.required]),
+  });
+
+
+  get title() {
+    return this.newsEditForm.get(&#x27;title&#x27;);
+  }
+  get subtitle() {
+    return this.newsEditForm.get(&#x27;subtitle&#x27;);
+  }
+  get mainText() {
+    return this.newsEditForm.get(&#x27;mainText&#x27;);
+  }
+  get photo() {
+    return this.newsEditForm.get(&#x27;photo&#x27;);
+  }
+  get date() {
+    return this.newsEditForm.get(&#x27;date&#x27;);
+  }
+
+  OnSubmit() {
+    this.news.date &#x3D; new Date();
+    if (this.image !&#x3D; null)
+    {
+      this.news.photo &#x3D; this.image;
+    }
+    this.newsService.updateNews(this.news, this.news.photo).subscribe(
+      (news) &#x3D;&gt; {
+        console.log(news);
+        this.errors &#x3D; null;
+      },
+      (error) &#x3D;&gt; {
+        console.error(error);
+        this.errors &#x3D; error.error;
+      }
+    );
+
+  }
+
+
+  onImagePicked(event: Event) {
+    const fileInput &#x3D; event.target as HTMLInputElement;
+    const file &#x3D; fileInput?.files?.[0];
+
+    if (file) {
+      this.image &#x3D; file;
+
+    } else {
+      console.error(&#x27;No file selected&#x27;);
+    }
+  }
+
+  updateCharacterCount(event: any) {
+    const target &#x3D; event.target as HTMLInputElement;
+    if (target.id &#x3D;&#x3D;&#x3D; &#x27;subtitle&#x27;) {
+      this.subtitleCharacterCount &#x3D; target.value.length;
+    } else if (target.id &#x3D;&#x3D;&#x3D; &#x27;mainText&#x27;) {
+      this.mainTextCharacterCount &#x3D; target.value.length;
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-header /&gt;
+
+&lt;app-smaller-banner [image]&#x3D;&quot;&#x27;/assets/images/admin/banner.jpg&#x27;&quot;
+                    [title]&#x3D;&quot;&#x27;Editar Notícia&#x27;&quot;
+                    [text]&#x3D;&quot;&#x27;Edição de uma notícia&#x27;&quot;&gt;
+&lt;/app-smaller-banner&gt;
+&lt;div class&#x3D;&quot;flex justify-center items-center pt-11 &quot;&gt;
+  &lt;div class&#x3D;&quot;container w-[60%]&quot;&gt;
+    &lt;form [formGroup]&#x3D;&quot;newsEditForm&quot; (ngSubmit)&#x3D;&quot;OnSubmit()&quot; class&#x3D;&quot;w-full&quot;&gt;
+      &lt;div *ngIf&#x3D;&quot;errors&quot; class&#x3D;&quot; text-red-500 text-sm font-bold space-y-2 text-start&quot;&gt;
+        &lt;div *ngFor&#x3D;&quot;let error of errors&quot;&gt;
+          &lt;p&gt;{{error}}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;p-0 w-full&quot;&gt;
+        &lt;section class&#x3D;&quot;flex flex-col text-left space-y-7&quot;&gt;
+          &lt;div class&#x3D;&quot;w-full mb-4&quot;&gt;
+            &lt;app-input-title class&#x3D;&quot;text-[2.6vh] ml-1/4&quot;&gt;Título&lt;/app-input-title&gt;
+            &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+              &lt;input required placeholder&#x3D;&quot;Título&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;title&quot; formControlName&#x3D;&quot;title&quot; name&#x3D;&quot;title&quot; [(ngModel)]&#x3D;&quot;news.title&quot;
+                     class&#x3D;&quot;input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;title?.touched &amp;&amp; title?.invalid &quot;&gt;
+              &lt;div *ngIf&#x3D;&quot;title?.errors?.[&#x27;required&#x27;] &quot;&gt;Título Obrigatório&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;w-full mb-4&quot;&gt;
+            &lt;app-input-title class&#x3D;&quot;text-[2.6vh] ml-1/4&quot;&gt;Subtitulo&lt;/app-input-title&gt;
+            &lt;div class&#x3D;&quot;relative w-full&quot;&gt;
+              &lt;textarea required placeholder&#x3D;&quot;Subtitulo (Maximo 300 caracteres)&quot; id&#x3D;&quot;subtitle&quot; formControlName&#x3D;&quot;subtitle&quot; name&#x3D;&quot;subtitle&quot; [(ngModel)]&#x3D;&quot;news.subtitle&quot; maxlength&#x3D;&quot;300&quot;
+                        class&#x3D;&quot;input text-left resize-none w-full h-[auto] lg:h-[10rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500&quot;
+                        (input)&#x3D;&quot;updateCharacterCount($event)&quot;&gt;&lt;/textarea&gt;
+              &lt;span class&#x3D;&quot;absolute bottom-2 right-2 text-gray-500&quot;&gt;{{ subtitleCharacterCount }}/300&lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;subtitle?.touched &amp;&amp; subtitle?.invalid &quot;&gt;
+              &lt;div *ngIf&#x3D;&quot;subtitle?.errors?.[&#x27;required&#x27;] &quot;&gt;Subtítulo Obrigatório&lt;/div&gt;
+            &lt;/div&gt;
+
+          &lt;/div&gt;
+
+          &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Imagem da Capa&lt;/app-input-title&gt;
+          &lt;div class&#x3D;&quot;flex items-center w-[40%]&quot;&gt;
+            &lt;input type&#x3D;&quot;file&quot; #filePicker id&#x3D;&quot;photo&quot; formControlName&#x3D;&quot;photo&quot; name&#x3D;&quot;photo&quot; (change)&#x3D;&quot;onImagePicked($event)&quot; class&#x3D;&quot;input w-full focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500&quot;&gt;
+            &lt;app-tooltip [tooltipText]&#x3D;&quot;&#x27;Utilize o seletor para escolher a imagem&#x27;&quot;&gt;&lt;/app-tooltip&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;w-full mb-4&quot;&gt;
+            &lt;app-input-title class&#x3D;&quot;text-[2.6vh] ml-1/4&quot;&gt;Corpo da Notícia&lt;/app-input-title&gt;
+            &lt;div class&#x3D;&quot;flex items-center relative &quot;&gt;
+              &lt;textarea required placeholder&#x3D;&quot;Corpo da Notícia (Maximo 9000 caracteres)&quot; id&#x3D;&quot;mainText&quot; formControlName&#x3D;&quot;mainText&quot; name&#x3D;&quot;mainText&quot; [(ngModel)]&#x3D;&quot;news.mainText&quot; maxlength&#x3D;&quot;9000&quot;
+                        class&#x3D;&quot;input text-left resize-none w-full h-[auto] lg:h-[30rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500&quot;
+                        (input)&#x3D;&quot;updateCharacterCount($event)&quot;&gt;&lt;/textarea&gt;
+              &lt;span class&#x3D;&quot;absolute bottom-2 right-2 text-gray-500&quot;&gt;{{ mainTextCharacterCount }}/9000&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;mainText?.touched &amp;&amp; mainText?.invalid &quot;&gt;
+              &lt;div *ngIf&#x3D;&quot;mainText?.errors?.[&#x27;required&#x27;] &quot;&gt;Corpo da Notícia Obrigatório&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;flex justify-end pb-10&quot;&gt;
+            &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out&quot;&gt;
+              Editar Notícia
+              &lt;img alt&#x3D;&quot;arrow&quot; src&#x3D;&quot;/assets/images/arrows/right-arrow.png&quot; class&#x3D;&quot;size-3.5 ml-1&quot; /&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;app-footer /&gt;
+
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-header /><app-smaller-banner [image]="\'/assets/images/admin/banner.jpg\'"                    [title]="\'Editar Notícia\'"                    [text]="\'Edição de uma notícia\'"></app-smaller-banner><div class="flex justify-center items-center pt-11 ">  <div class="container w-[60%]">    <form [formGroup]="newsEditForm" (ngSubmit)="OnSubmit()" class="w-full">      <div *ngIf="errors" class=" text-red-500 text-sm font-bold space-y-2 text-start">        <div *ngFor="let error of errors">          <p>{{error}}</p>        </div>      </div>      <div class="p-0 w-full">        <section class="flex flex-col text-left space-y-7">          <div class="w-full mb-4">            <app-input-title class="text-[2.6vh] ml-1/4">Título</app-input-title>            <div class="flex items-center">              <input required placeholder="Título" type="text" id="title" formControlName="title" name="title" [(ngModel)]="news.title"                     class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />            </div>            <div class="text-red-500 font-bold py-2" *ngIf="title?.touched && title?.invalid ">              <div *ngIf="title?.errors?.[\'required\'] ">Título Obrigatório</div>            </div>          </div>          <div class="w-full mb-4">            <app-input-title class="text-[2.6vh] ml-1/4">Subtitulo</app-input-title>            <div class="relative w-full">              <textarea required placeholder="Subtitulo (Maximo 300 caracteres)" id="subtitle" formControlName="subtitle" name="subtitle" [(ngModel)]="news.subtitle" maxlength="300"                        class="input text-left resize-none w-full h-[auto] lg:h-[10rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500"                        (input)="updateCharacterCount($event)"></textarea>              <span class="absolute bottom-2 right-2 text-gray-500">{{ subtitleCharacterCount }}/300</span>            </div>            <div class="text-red-500 font-bold py-2" *ngIf="subtitle?.touched && subtitle?.invalid ">              <div *ngIf="subtitle?.errors?.[\'required\'] ">Subtítulo Obrigatório</div>            </div>          </div>          <app-input-title class="text-[2.6vh]">Imagem da Capa</app-input-title>          <div class="flex items-center w-[40%]">            <input type="file" #filePicker id="photo" formControlName="photo" name="photo" (change)="onImagePicked($event)" class="input w-full focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500">            <app-tooltip [tooltipText]="\'Utilize o seletor para escolher a imagem\'"></app-tooltip>          </div>          <div class="w-full mb-4">            <app-input-title class="text-[2.6vh] ml-1/4">Corpo da Notícia</app-input-title>            <div class="flex items-center relative ">              <textarea required placeholder="Corpo da Notícia (Maximo 9000 caracteres)" id="mainText" formControlName="mainText" name="mainText" [(ngModel)]="news.mainText" maxlength="9000"                        class="input text-left resize-none w-full h-[auto] lg:h-[30rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500"                        (input)="updateCharacterCount($event)"></textarea>              <span class="absolute bottom-2 right-2 text-gray-500">{{ mainTextCharacterCount }}/9000</span>            </div>            <div class="text-red-500 font-bold py-2" *ngIf="mainText?.touched && mainText?.invalid ">              <div *ngIf="mainText?.errors?.[\'required\'] ">Corpo da Notícia Obrigatório</div>            </div>          </div>          <div class="flex justify-end pb-10">            <button type="submit" class="relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">              Editar Notícia              <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />            </button>          </div>        </section>      </div>    </form>  </div></div><app-footer /></div>'
+    var COMPONENTS = [{'name': 'AboutusComponent', 'selector': 'app-aboutus'},{'name': 'AccessDeniedComponent', 'selector': 'app-access-denied'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BannerComponent', 'selector': 'app-banner'},{'name': 'BigBannerComponent', 'selector': 'app-big-banner'},{'name': 'BlackBtnIconTextComponent', 'selector': 'app-black-btn-icon-text'},{'name': 'BtnMunicipBlueComponent', 'selector': 'app-btn-municip-blue'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarHeaderComponent', 'selector': 'app-calendar-header'},{'name': 'CalendarPageComponent', 'selector': 'app-calendar-page'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardOutlineThemeComponent', 'selector': 'app-card-outline-theme'},{'name': 'CardOutlineWhiteComponent', 'selector': 'app-card-outline-white'},{'name': 'CardTeamComponent', 'selector': 'app-card-team'},{'name': 'CitizenHomePageComponent', 'selector': 'app-citizen-home-page'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DatetimepickerComponent', 'selector': 'app-datetimepicker'},{'name': 'DialogMessageComponent', 'selector': 'app-dialog-message'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EventCardComponent', 'selector': 'app-event-card'},{'name': 'EventPageComponent', 'selector': 'app-event-page'},{'name': 'EventsListComponent', 'selector': 'app-events-list'},{'name': 'EventsSmallComponent', 'selector': 'app-events-small'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GeneralInfoComponent', 'selector': 'app-general-info'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderLoggedinComponent', 'selector': 'app-header-loggedin'},{'name': 'InputTitleComponent', 'selector': 'app-input-title'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MunAdmindashboardComponent', 'selector': 'app-munadmindashboard'},{'name': 'MunAdminHomePageComponent', 'selector': 'app-mun-admin-home-page'},{'name': 'MunicipalEditComponent', 'selector': 'app-municipal-edit'},{'name': 'MunicipalEventsComponent', 'selector': 'app-municipal-events'},{'name': 'MunicipalitymapComponent', 'selector': 'app-municipalitymap'},{'name': 'MunicipalProfileComponent', 'selector': 'app-municipal-profile'},{'name': 'MyDataCardComponent', 'selector': 'app-my-data-card'},{'name': 'MyMunicipalityCardComponent', 'selector': 'app-my-municipality-card'},{'name': 'NewsCardComponent', 'selector': 'app-news-card'},{'name': 'NewsCreateComponent', 'selector': 'app-news-create'},{'name': 'NewsEditComponent', 'selector': 'app-news-edit'},{'name': 'NewsListComponent', 'selector': 'app-news-list'},{'name': 'NewsPageComponent', 'selector': 'app-news-page'},{'name': 'NewsSmallComponent', 'selector': 'app-news-small'},{'name': 'NextEventsComponent', 'selector': 'app-next-events'},{'name': 'NextNewsComponent', 'selector': 'app-next-news'},{'name': 'ProfileBannerComponent', 'selector': 'app-profile-banner'},{'name': 'SchedulesComponent', 'selector': 'app-schedules'},{'name': 'SelectAccountTypeComponent', 'selector': 'app-select-account-type'},{'name': 'ShowHidePasswordComponent', 'selector': 'app-show-hide-password'},{'name': 'ShowStopComponent', 'selector': 'app-show-stop'},{'name': 'SignUpCitizenAccountComponent', 'selector': 'app-sign-up-citizen-account'},{'name': 'SignUpMunicipalAdministratorAccountComponent', 'selector': 'app-sign-up-municipal-administrator-account'},{'name': 'SignUpMunicipalityComponent', 'selector': 'app-sign-up-municipality'},{'name': 'SignUpSuccessComponent', 'selector': 'app-sign-up-success'},{'name': 'SmallerBannerComponent', 'selector': 'app-smaller-banner'},{'name': 'SpinnerComponent', 'selector': 'app-spinner'},{'name': 'StatisticalHomePageCardComponent', 'selector': 'app-statistical-home-page-card'},{'name': 'StopsMapComponent', 'selector': 'app-stops-map'},{'name': 'StopsPageComponent', 'selector': 'app-stops-page'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'TooltipComponent', 'selector': 'app-tooltip'},{'name': 'TransportsMainComponent', 'selector': 'app-transports-main'},{'name': 'UserinfodialogComponent', 'selector': 'app-userinfodialog'},{'name': 'UserpageComponent', 'selector': 'app-userpage'},{'name': 'VerticalCardComponent', 'selector': 'app-vertical-card'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'NewsEditComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'NewsEditComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,1401 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>municip.io.client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">municip.io.client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  SignUpCitizenAccountComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>provideNativeDateAdapter()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-sign-up-citizen-account</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./sign-up-citizen-account.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./sign-up-citizen-account.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#citizen" >citizen</a>
+                            </li>
+                            <li>
+                                <a href="#errors" >errors</a>
+                            </li>
+                            <li>
+                                <a href="#image" >image</a>
+                            </li>
+                            <li>
+                                <a href="#municipalities" >municipalities</a>
+                            </li>
+                            <li>
+                                <a href="#signUpCitizenForm" >signUpCitizenForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getValues" >getValues</a>
+                            </li>
+                            <li>
+                                <a href="#onImagePicked" >onImagePicked</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#firstName" >firstName</a>
+                                </li>
+                                <li>
+                                    <a href="#surname" >surname</a>
+                                </li>
+                                <li>
+                                    <a href="#email" >email</a>
+                                </li>
+                                <li>
+                                    <a href="#password" >password</a>
+                                </li>
+                                <li>
+                                    <a href="#nif" >nif</a>
+                                </li>
+                                <li>
+                                    <a href="#gender" >gender</a>
+                                </li>
+                                <li>
+                                    <a href="#municipality" >municipality</a>
+                                </li>
+                                <li>
+                                    <a href="#address" >address</a>
+                                </li>
+                                <li>
+                                    <a href="#postalCode1" >postalCode1</a>
+                                </li>
+                                <li>
+                                    <a href="#postalCode2" >postalCode2</a>
+                                </li>
+                                <li>
+                                    <a href="#birthDate" >birthDate</a>
+                                </li>
+                                <li>
+                                    <a href="#photo" >photo</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(citizenAuthService: <a href="../injectables/CitizenAuthService.html" target="_self">CitizenAuthService</a>, router: Router, dateAdapter: DateAdapter<Date>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:43</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>citizenAuthService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CitizenAuthService.html" target="_self" >CitizenAuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dateAdapter</td>
+                                                  
+                                                        <td>
+                                                                    <code>DateAdapter&lt;Date&gt;</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getValues"></a>
+                    <span class="name">
+                        <span ><b>getValues</b></span>
+                        <a href="#getValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getValues()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="41"
+                                    class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onImagePicked"></a>
+                    <span class="name">
+                        <span ><b>onImagePicked</b></span>
+                        <a href="#onImagePicked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onImagePicked(event: <a href="../interfaces/Event.html" target="_self">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="118"
+                                    class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:118</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Event.html" target="_self" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="citizen"></a>
+                    <span class="name">
+                        <span ><b>citizen</b></span>
+                        <a href="#citizen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Citizen.html" target="_self" >Citizen</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    firstName: &#x27;&#x27;,
+    surname: &#x27;&#x27;,
+    email: &#x27;&#x27;,
+    password: &#x27;&#x27;,
+    nif: &#x27;&#x27;,
+    gender: &#x27;&#x27;,
+    municipality: &#x27;&#x27;,
+    address: &#x27;&#x27;,
+    postalCode1: &#x27;&#x27;,
+    postalCode2: &#x27;&#x27;,
+    birthDate: new Date(),
+    photo: &#x27;&#x27;,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errors"></a>
+                    <span class="name">
+                        <span ><b>errors</b></span>
+                        <a href="#errors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[] | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="image"></a>
+                    <span class="name">
+                        <span ><b>image</b></span>
+                        <a href="#image"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>File</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="municipalities"></a>
+                    <span class="name">
+                        <span ><b>municipalities</b></span>
+                        <a href="#municipalities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Municipalities</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signUpCitizenForm"></a>
+                    <span class="name">
+                        <span ><b>signUpCitizenForm</b></span>
+                        <a href="#signUpCitizenForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    firstName: new FormControl(&quot;&quot;, [Validators.required]),
+    surname: new FormControl(&quot;&quot;, [Validators.required]),
+    email: new FormControl(&quot;&quot;, [Validators.email, Validators.required]),
+    password: new FormControl(&quot;&quot;, [Validators.required]),
+    nif: new FormControl(&quot;&quot;, [Validators.required, Validators.pattern(/^\d{9}$/)]),
+    gender: new FormControl(&quot;&quot;, [Validators.required]),
+    municipality: new FormControl(&quot;&quot;, [Validators.required]),
+    address: new FormControl(&quot;&quot;, [Validators.required]),
+    postalCode1: new FormControl(&quot;&quot;, [Validators.required, Validators.pattern(/^\d{4}$/)]),
+    postalCode2: new FormControl(&quot;&quot;, [Validators.required, Validators.pattern(/^\d{3}$/)]),
+    birthDate: new FormControl(new Date(), [Validators.required]),
+    photo: new FormControl(null, [Validators.required])
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="firstName"></a>
+                        <span class="name"><b>firstName</b><a href="#firstName"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>firstName()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:67</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="surname"></a>
+                        <span class="name"><b>surname</b><a href="#surname"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>surname()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:71</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="email"></a>
+                        <span class="name"><b>email</b><a href="#email"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>email()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:75</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="password"></a>
+                        <span class="name"><b>password</b><a href="#password"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>password()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:79</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="nif"></a>
+                        <span class="name"><b>nif</b><a href="#nif"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>nif()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:83</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="gender"></a>
+                        <span class="name"><b>gender</b><a href="#gender"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>gender()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:87</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="municipality"></a>
+                        <span class="name"><b>municipality</b><a href="#municipality"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>municipality()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:91</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="address"></a>
+                        <span class="name"><b>address</b><a href="#address"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>address()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:95</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="postalCode1"></a>
+                        <span class="name"><b>postalCode1</b><a href="#postalCode1"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>postalCode1()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:99</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="postalCode2"></a>
+                        <span class="name"><b>postalCode2</b><a href="#postalCode2"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>postalCode2()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:103</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="birthDate"></a>
+                        <span class="name"><b>birthDate</b><a href="#birthDate"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>birthDate()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:107</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="photo"></a>
+                        <span class="name"><b>photo</b><a href="#photo"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>photo()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts:111</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ViewEncapsulation } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { CitizenAuthService, Citizen } from &#x27;../../services/citizen-auth.service&#x27;;
+import { FormControl, FormGroup, NgForm, Validators } from &#x27;@angular/forms&#x27;;
+import { Municipalities } from &#x27;../../municipalities.enum&#x27;;
+import { provideNativeDateAdapter, DateAdapter } from &#x27;@angular/material/core&#x27;;
+
+
+@Component({
+  selector: &#x27;app-sign-up-citizen-account&#x27;,
+  templateUrl: &#x27;./sign-up-citizen-account.component.html&#x27;,
+  styleUrl: &#x27;./sign-up-citizen-account.component.css&#x27;,
+  providers: [provideNativeDateAdapter()],
+})
+export class SignUpCitizenAccountComponent {
+
+  citizen: Citizen &#x3D; {
+    firstName: &#x27;&#x27;,
+    surname: &#x27;&#x27;,
+    email: &#x27;&#x27;,
+    password: &#x27;&#x27;,
+    nif: &#x27;&#x27;,
+    gender: &#x27;&#x27;,
+    municipality: &#x27;&#x27;,
+    address: &#x27;&#x27;,
+    postalCode1: &#x27;&#x27;,
+    postalCode2: &#x27;&#x27;,
+    birthDate: new Date(),
+    photo: &#x27;&#x27;,
+  };
+
+
+  errors: string[] | null &#x3D; null;
+
+  municipalities &#x3D; Municipalities;
+  //declare file image
+  image!: File;
+
+
+  getValues() {
+    return Object.values(this.municipalities)
+  }
+
+  constructor(private citizenAuthService: CitizenAuthService, private router: Router,
+    private dateAdapter: DateAdapter&lt;Date&gt;) {
+    this.dateAdapter.setLocale(&#x27;pt&#x27;);
+  }
+
+  signUpCitizenForm &#x3D; new FormGroup({
+    firstName: new FormControl(&quot;&quot;, [Validators.required]),
+    surname: new FormControl(&quot;&quot;, [Validators.required]),
+    email: new FormControl(&quot;&quot;, [Validators.email, Validators.required]),
+    password: new FormControl(&quot;&quot;, [Validators.required]),
+    nif: new FormControl(&quot;&quot;, [Validators.required, Validators.pattern(/^\d{9}$/)]),
+    gender: new FormControl(&quot;&quot;, [Validators.required]),
+    municipality: new FormControl(&quot;&quot;, [Validators.required]),
+    address: new FormControl(&quot;&quot;, [Validators.required]),
+    postalCode1: new FormControl(&quot;&quot;, [Validators.required, Validators.pattern(/^\d{4}$/)]),
+    postalCode2: new FormControl(&quot;&quot;, [Validators.required, Validators.pattern(/^\d{3}$/)]),
+    birthDate: new FormControl(new Date(), [Validators.required]),
+    photo: new FormControl(null, [Validators.required])
+  });
+
+
+  // getters for form validation
+  get firstName() {
+    return this.signUpCitizenForm.get(&#x27;firstName&#x27;);
+  }
+
+  get surname() {
+    return this.signUpCitizenForm.get(&#x27;surname&#x27;);
+  }
+
+  get email() {
+    return this.signUpCitizenForm.get(&#x27;email&#x27;);
+  }
+
+  get password() {
+    return this.signUpCitizenForm.get(&#x27;password&#x27;);
+  }
+
+  get nif() {
+    return this.signUpCitizenForm.get(&#x27;nif&#x27;);
+  }
+
+  get gender() {
+    return this.signUpCitizenForm.get(&#x27;gender&#x27;);
+  }
+
+  get municipality() {
+    return this.signUpCitizenForm.get(&#x27;municipality&#x27;);
+  }
+
+  get address() {
+    return this.signUpCitizenForm.get(&#x27;address&#x27;);
+  }
+
+  get postalCode1() {
+    return this.signUpCitizenForm.get(&#x27;postalCode1&#x27;);
+  }
+
+  get postalCode2() {
+    return this.signUpCitizenForm.get(&#x27;postalCode2&#x27;);
+  }
+
+  get birthDate() {
+    return this.signUpCitizenForm.get(&#x27;birthDate&#x27;) as FormControl;
+  }
+
+  get photo() {
+
+    return this.signUpCitizenForm.get(&#x27;photo&#x27;);
+
+
+  }
+
+  onImagePicked(event: Event) {
+    const fileInput &#x3D; event.target as HTMLInputElement;
+    const file &#x3D; fileInput?.files?.[0]; // Use optional chaining here
+
+    if (file) {
+      this.image &#x3D; file;
+
+
+    } else {
+      console.error(&#x27;No file selected&#x27;);
+    }
+  }
+
+
+  onSubmit() {
+
+
+
+
+    this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen, this.image).subscribe(
+
+      result &#x3D;&gt; {
+        this.router.navigateByUrl(&#x27;/signUp-Success&#x27;);
+      },
+
+      (error) &#x3D;&gt; {
+        console.log(error.error.errors)
+        this.errors &#x3D; error.error.errors;
+      }
+    );
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">
+
+&lt;div class&#x3D;&quot;flex text-municip-black text-[2vh] font-poppins&quot;&gt;
+  &lt;div class&#x3D;&quot; grow bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center&quot;&gt;
+    &lt;div class&#x3D;&quot; flex justify-center text-white&quot;&gt;
+      &lt;img alt&#x3D;&quot;logo&quot; src&#x3D;&quot;/assets/images/logos/logo-white-right.png&quot; class&#x3D;&quot;size-8/12 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot; mx-[3vh] w-[140vh] flex items-center justify-center &quot;&gt;
+    &lt;div class&#x3D;&quot;flex grow flex-col&quot;&gt;
+      &lt;h1 class&#x3D;&quot;font-black text-[4vh] text-left text-black my-2&quot;&gt;Registo de Munícipe&lt;/h1&gt;
+      &lt;h3 class&#x3D;&quot;font-medium text-left text-municip-normal-black mb-2&quot;&gt;Insira os seus dados&lt;/h3&gt;
+      &lt;form [formGroup]&#x3D;&quot;signUpCitizenForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+        &lt;div *ngIf&#x3D;&quot;errors&quot; class&#x3D;&quot; text-red-500 text-sm font-bold space-y-2 text-start&quot;&gt;
+          &lt;div *ngFor&#x3D;&quot;let error of errors&quot;&gt;
+            &lt;p&gt;{{error}}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;py-[1vh] flex justify-around&quot;&gt;
+          &lt;section class&#x3D;&quot; flex flex-col text-left space-y-2 &quot;&gt;
+            &lt;div class&#x3D;&quot;h-32&quot;&gt;
+              &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Primeiro Nome&lt;/app-input-title&gt;
+              &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+                &lt;input required placeholder&#x3D;&quot;Introduza o seu primeiro nome&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;firstName&quot; formControlName&#x3D;&quot;firstName&quot; name&#x3D;&quot;firstName&quot; [(ngModel)]&#x3D;&quot;citizen.firstName&quot;
+                       class&#x3D;&quot;input w-[35.2vh] h-12 &quot; /&gt;
+                &lt;app-tooltip [tooltipText]&#x3D;&quot;&#x27;De acordo com o Documento de Identificação.&#x27;&quot;&gt;&lt;/app-tooltip&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;firstName?.touched &amp;&amp; firstName?.invalid &quot;&gt;
+                &lt;div *ngIf&#x3D;&quot;firstName?.errors?.[&#x27;required&#x27;] &quot;&gt;Primeiro Nome Obrigatório&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;h-32&quot;&gt;
+              &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Email&lt;/app-input-title&gt;
+              &lt;input required placeholder&#x3D;&quot;Introduza o seu email&quot; type&#x3D;&quot;email&quot; id&#x3D;&quot;email&quot; formControlName&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; [(ngModel)]&#x3D;&quot;citizen.email&quot;
+                     class&#x3D;&quot;input w-[35.2vh] h-12&quot; /&gt;
+              &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;email?.touched &amp;&amp; email?.invalid &quot;&gt;
+                &lt;div *ngIf&#x3D;&quot;email?.errors?.[&#x27;required&#x27;] &quot;&gt;Email Obrigatório&lt;/div&gt;
+                &lt;div *ngIf&#x3D;&quot;email?.errors?.[&#x27;email&#x27;]&quot;&gt;Email Inválido&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;h-32&quot;&gt;
+              &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;NIF&lt;/app-input-title&gt;
+              &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+                &lt;input required placeholder&#x3D;&quot;Introduza o seu NIF&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;nif&quot; formControlName&#x3D;&quot;nif&quot; name&#x3D;&quot;nif&quot; [(ngModel)]&#x3D;&quot;citizen.nif&quot;
+                       class&#x3D;&quot;input w-[35.2vh] h-12&quot; /&gt;
+                &lt;app-tooltip [tooltipText]&#x3D;&quot;&#x27;9 dígitos&#x27;&quot;&gt;&lt;/app-tooltip&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;nif?.touched &amp;&amp; nif?.invalid&quot;&gt;
+                &lt;div *ngIf&#x3D;&quot;nif?.errors?.[&#x27;required&#x27;]&quot;&gt;Nif obrigatório&lt;/div&gt;
+                &lt;div *ngIf&#x3D;&quot;nif?.errors?.[&#x27;pattern&#x27;]&quot;&gt;Nif inválido&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;h-32&quot;&gt;
+              &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Género&lt;/app-input-title&gt;
+              &lt;select required id&#x3D;&quot;gender&quot; formControlName&#x3D;&quot;gender&quot; name&#x3D;&quot;gender&quot; [(ngModel)]&#x3D;&quot;citizen.gender&quot;
+                      class&#x3D;&quot;input w-[35.2vh]  h-12&quot;&gt;
+                &lt;option value&#x3D;&quot;&quot;&gt;Escolha o seu género&lt;/option&gt;
+                &lt;option value&#x3D;&quot;m&quot;&gt;Masculino&lt;/option&gt;
+                &lt;option value&#x3D;&quot;f&quot;&gt;Feminino&lt;/option&gt;
+                &lt;option value&#x3D;&quot;o&quot;&gt;Outro&lt;/option&gt;
+              &lt;/select&gt;
+              &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;gender?.touched &amp;&amp; gender?.invalid&quot;&gt;
+                &lt;div *ngIf&#x3D;&quot;gender?.errors?.[&#x27;required&#x27;] &quot;&gt;Género Obrigatório&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;h-32&quot;&gt;
+              &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Rua, Nºde Porta e Andar&lt;/app-input-title&gt;
+              &lt;input required placeholder&#x3D;&quot;Introduza a sua morada&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;address&quot; formControlName&#x3D;&quot;address&quot; name&#x3D;&quot;address&quot; [(ngModel)]&#x3D;&quot;citizen.address&quot;
+                     class&#x3D;&quot;input w-[35.2vh] h-12&quot; /&gt;
+              &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;address?.touched &amp;&amp; address?.invalid&quot;&gt;
+                &lt;div *ngIf&#x3D;&quot;address?.errors?.[&#x27;required&#x27;] &quot;&gt;Morada Obrigatório&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;h-32&quot;&gt;
+              &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Município&lt;/app-input-title&gt;
+              &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+                &lt;select required id&#x3D;&quot;municipality&quot; formControlName&#x3D;&quot;municipality&quot; name&#x3D;&quot;municipality&quot; [(ngModel)]&#x3D;&quot;citizen.municipality&quot;
+                        class&#x3D;&quot;input w-[35.2vh] h-12&quot;&gt;
+                  &lt;option value&#x3D;&quot;&quot;&gt;Escolha o seu município&lt;/option&gt;
+                  &lt;option [value]&#x3D;&quot;value&quot; *ngFor&#x3D;&quot;let value of getValues()&quot;&gt;{{ value }}&lt;/option&gt;
+                &lt;/select&gt;
+                &lt;app-tooltip [tooltipText]&#x3D;&quot;&#x27;Selecione o seu município de residência&#x27;&quot;&gt;&lt;/app-tooltip&gt;
+
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;municipality?.touched &amp;&amp; municipality?.invalid&quot;&gt;
+                &lt;div *ngIf&#x3D;&quot;municipality?.errors?.[&#x27;required&#x27;] &quot;&gt;Município Obrigatório&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+          &lt;/section&gt;
+          &lt;section class&#x3D;&quot;flex flex-col text-left space-y-2 w-[35.2vh]&quot;&gt;
+            &lt;div class&#x3D;&quot;h-32&quot;&gt;
+              &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Apelido&lt;/app-input-title&gt;
+              &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+                &lt;input required placeholder&#x3D;&quot;Introduza o seu apelido&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;surname&quot; formControlName&#x3D;&quot;surname&quot; name&#x3D;&quot;surname&quot; [(ngModel)]&#x3D;&quot;citizen.surname&quot;
+                       class&#x3D;&quot;input w-[35.2vh] h-12&quot; /&gt;
+                &lt;app-tooltip [tooltipText]&#x3D;&quot;&#x27;De acordo com o Documento de Identificação.&#x27;&quot;&gt;&lt;/app-tooltip&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;surname?.touched &amp;&amp; surname?.invalid&quot;&gt;
+                &lt;div *ngIf&#x3D;&quot;surname?.errors?.[&#x27;required&#x27;] &quot;&gt;Apelido Obrigatório&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;h-32&quot;&gt;
+              &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Palavra-Passe&lt;/app-input-title&gt;
+              &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+                &lt;input required placeholder&#x3D;&quot;Introduza a sua palavra-passe&quot; type&#x3D;&quot;password&quot; id&#x3D;&quot;password&quot; formControlName&#x3D;&quot;password&quot; name&#x3D;&quot;password&quot; [(ngModel)]&#x3D;&quot;citizen.password&quot;
+                       class&#x3D;&quot;input w-[35.2vh] h-12&quot;&gt;
+                &lt;app-tooltip [tooltipText]&#x3D;&quot;&#x27;A password deverá ter letras maiúsculas, minúsculas, números e símbolos&#x27;&quot;&gt;&lt;/app-tooltip&gt;
+
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;password?.touched &amp;&amp; password?.invalid&quot;&gt;
+                &lt;div *ngIf&#x3D;&quot;password?.errors?.[&#x27;required&#x27;] &quot;&gt;Palavra-Passe Obrigatório&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;h-32&quot;&gt;
+              &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Data de Nascimento&lt;/app-input-title&gt;
+              &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+                &lt;app-date-picker [date]&#x3D;&quot;birthDate&quot; name&#x3D;&quot;birthDate&quot; class&#x3D;&quot;w-full&quot;/&gt;
+
+                &lt;app-tooltip [tooltipText]&#x3D;&quot;&#x27;Utilize o seletor para a inserção da data&#x27;&quot;&gt;&lt;/app-tooltip&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;birthDate?.touched &amp;&amp; birthDate?.invalid&quot;&gt;
+                &lt;div *ngIf&#x3D;&quot;birthDate?.errors?.[&#x27;required&#x27;] &quot;&gt;Data de Nascimento Obrigatório&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;h-32&quot;&gt;
+              &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Código Postal&lt;/app-input-title&gt;
+              &lt;div class&#x3D;&quot;flex w-[35.2vh] items-center space-x-2&quot;&gt;
+                &lt;input required placeholder&#x3D;&quot;0000&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;postalCode1&quot;
+                       formControlName&#x3D;&quot;postalCode1&quot; name&#x3D;&quot;postalCode1&quot;
+                       [(ngModel)]&#x3D;&quot;citizen.postalCode1&quot;
+                       class&#x3D;&quot;input text-center w-1/2&quot; /&gt;
+                &lt;span&gt;-&lt;/span&gt;
+                &lt;input required placeholder&#x3D;&quot;000&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;postalCode2&quot;
+                       formControlName&#x3D;&quot;postalCode2&quot; name&#x3D;&quot;postalCode2&quot;
+                       [(ngModel)]&#x3D;&quot;citizen.postalCode2&quot;
+                       class&#x3D;&quot;input text-center w-1/3&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;(postalCode1?.touched &amp;&amp; postalCode1?.invalid) || (postalCode2?.touched &amp;&amp; postalCode2?.invalid) &quot;&gt;
+                &lt;div *ngIf&#x3D;&quot;postalCode1?.errors?.[&#x27;required&#x27;] || postalCode2?.errors?.[&#x27;required&#x27;] &quot;&gt;Código Postal Obrigatório&lt;/div&gt;
+                &lt;div *ngIf&#x3D;&quot;postalCode1?.errors?.[&#x27;pattern&#x27;]&quot;&gt;Primeiro código inválido&lt;/div&gt;
+                &lt;div *ngIf&#x3D;&quot;postalCode2?.errors?.[&#x27;pattern&#x27;]&quot;&gt;Secundo código inválido&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;h-32&quot;&gt;
+              &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Foto&lt;/app-input-title&gt;
+              &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+                &lt;input type&#x3D;&quot;file&quot; #filePicker id&#x3D;&quot;photo&quot; formControlName&#x3D;&quot;photo&quot; name&#x3D;&quot;photo&quot;
+                       [(ngModel)]&#x3D;&quot;citizen.photo&quot; (change)&#x3D;&quot;onImagePicked($event)&quot; accept&#x3D;&quot;image/*&quot;
+                       class&#x3D;&quot;input w-[35.2vh] h-12&quot;&gt;
+                &lt;app-tooltip [tooltipText]&#x3D;&quot;&#x27;Utilize o seletor para encontrar a sua foto&#x27;&quot;&gt;&lt;/app-tooltip&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;h-32 flex justify-end items-center&quot;&gt;
+              &lt;button type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;!signUpCitizenForm.valid&quot;
+                      class&#x3D;&quot; relative h-auto w-[10rem] flex justify-center
+                    items-center font-semibold text-municip-blank bg-gradient-to-tl
+                    from-municip-light-blue to-municip-blue
+  border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg
+                    transition duration-700 ease-in-out&quot;&gt;
+                Registar
+                &lt;img alt&#x3D;&quot;arrow&quot; src&#x3D;&quot;/assets/images/arrows/right-arrow.png&quot; class&#x3D;&quot;size-3.5 ml-1&quot; /&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/section&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+      &lt;div class&#x3D;&quot;pb-5&quot;&gt;
+        &lt;hr class&#x3D;&quot;rounded-3xl border-t-[#ECECF0] my-4&quot; /&gt;
+        &lt;div class&#x3D;&quot;text-right font-medium text-municip-normal-black &quot;&gt;Já tem conta? &lt;a routerLink&#x3D;&quot;/login&quot; class&#x3D;&quot;cursor-pointer font-bold text-black ml-2 hover:underline&quot;&gt;Faça login&lt;/a&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex text-municip-black text-[2vh] font-poppins">  <div class=" grow bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center">    <div class=" flex justify-center text-white">      <img alt="logo" src="/assets/images/logos/logo-white-right.png" class="size-8/12 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />    </div>  </div>  <div class=" mx-[3vh] w-[140vh] flex items-center justify-center ">    <div class="flex grow flex-col">      <h1 class="font-black text-[4vh] text-left text-black my-2">Registo de Munícipe</h1>      <h3 class="font-medium text-left text-municip-normal-black mb-2">Insira os seus dados</h3>      <form [formGroup]="signUpCitizenForm" (ngSubmit)="onSubmit()">        <div *ngIf="errors" class=" text-red-500 text-sm font-bold space-y-2 text-start">          <div *ngFor="let error of errors">            <p>{{error}}</p>          </div>        </div>        <div class="py-[1vh] flex justify-around">          <section class=" flex flex-col text-left space-y-2 ">            <div class="h-32">              <app-input-title class="text-[2.6vh]">Primeiro Nome</app-input-title>              <div class="flex items-center">                <input required placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="citizen.firstName"                       class="input w-[35.2vh] h-12 " />                <app-tooltip [tooltipText]="\'De acordo com o Documento de Identificação.\'"></app-tooltip>              </div>              <div class="text-red-500 font-bold py-2" *ngIf="firstName?.touched && firstName?.invalid ">                <div *ngIf="firstName?.errors?.[\'required\'] ">Primeiro Nome Obrigatório</div>              </div>            </div>            <div class="h-32">              <app-input-title class="text-[2.6vh]">Email</app-input-title>              <input required placeholder="Introduza o seu email" type="email" id="email" formControlName="email" name="email" [(ngModel)]="citizen.email"                     class="input w-[35.2vh] h-12" />              <div class="text-red-500 font-bold py-2" *ngIf="email?.touched && email?.invalid ">                <div *ngIf="email?.errors?.[\'required\'] ">Email Obrigatório</div>                <div *ngIf="email?.errors?.[\'email\']">Email Inválido</div>              </div>            </div>            <div class="h-32">              <app-input-title class="text-[2.6vh]">NIF</app-input-title>              <div class="flex items-center">                <input required placeholder="Introduza o seu NIF" type="text" id="nif" formControlName="nif" name="nif" [(ngModel)]="citizen.nif"                       class="input w-[35.2vh] h-12" />                <app-tooltip [tooltipText]="\'9 dígitos\'"></app-tooltip>              </div>              <div class="text-red-500 font-bold py-2" *ngIf="nif?.touched && nif?.invalid">                <div *ngIf="nif?.errors?.[\'required\']">Nif obrigatório</div>                <div *ngIf="nif?.errors?.[\'pattern\']">Nif inválido</div>              </div>            </div>            <div class="h-32">              <app-input-title class="text-[2.6vh]">Género</app-input-title>              <select required id="gender" formControlName="gender" name="gender" [(ngModel)]="citizen.gender"                      class="input w-[35.2vh]  h-12">                <option value="">Escolha o seu género</option>                <option value="m">Masculino</option>                <option value="f">Feminino</option>                <option value="o">Outro</option>              </select>              <div class="text-red-500 font-bold py-2" *ngIf="gender?.touched && gender?.invalid">                <div *ngIf="gender?.errors?.[\'required\'] ">Género Obrigatório</div>              </div>            </div>            <div class="h-32">              <app-input-title class="text-[2.6vh]">Rua, Nºde Porta e Andar</app-input-title>              <input required placeholder="Introduza a sua morada" type="text" id="address" formControlName="address" name="address" [(ngModel)]="citizen.address"                     class="input w-[35.2vh] h-12" />              <div class="text-red-500 font-bold py-2" *ngIf="address?.touched && address?.invalid">                <div *ngIf="address?.errors?.[\'required\'] ">Morada Obrigatório</div>              </div>            </div>            <div class="h-32">              <app-input-title class="text-[2.6vh]">Município</app-input-title>              <div class="flex items-center">                <select required id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="citizen.municipality"                        class="input w-[35.2vh] h-12">                  <option value="">Escolha o seu município</option>                  <option [value]="value" *ngFor="let value of getValues()">{{ value }}</option>                </select>                <app-tooltip [tooltipText]="\'Selecione o seu município de residência\'"></app-tooltip>              </div>              <div class="text-red-500 font-bold py-2" *ngIf="municipality?.touched && municipality?.invalid">                <div *ngIf="municipality?.errors?.[\'required\'] ">Município Obrigatório</div>              </div>            </div>          </section>          <section class="flex flex-col text-left space-y-2 w-[35.2vh]">            <div class="h-32">              <app-input-title class="text-[2.6vh]">Apelido</app-input-title>              <div class="flex items-center">                <input required placeholder="Introduza o seu apelido" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="citizen.surname"                       class="input w-[35.2vh] h-12" />                <app-tooltip [tooltipText]="\'De acordo com o Documento de Identificação.\'"></app-tooltip>              </div>              <div class="text-red-500 font-bold py-2" *ngIf="surname?.touched && surname?.invalid">                <div *ngIf="surname?.errors?.[\'required\'] ">Apelido Obrigatório</div>              </div>            </div>            <div class="h-32">              <app-input-title class="text-[2.6vh]">Palavra-Passe</app-input-title>              <div class="flex items-center">                <input required placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="citizen.password"                       class="input w-[35.2vh] h-12">                <app-tooltip [tooltipText]="\'A password deverá ter letras maiúsculas, minúsculas, números e símbolos\'"></app-tooltip>              </div>              <div class="text-red-500 font-bold py-2" *ngIf="password?.touched && password?.invalid">                <div *ngIf="password?.errors?.[\'required\'] ">Palavra-Passe Obrigatório</div>              </div>            </div>            <div class="h-32">              <app-input-title class="text-[2.6vh]">Data de Nascimento</app-input-title>              <div class="flex items-center">                <app-date-picker [date]="birthDate" name="birthDate" class="w-full"/>                <app-tooltip [tooltipText]="\'Utilize o seletor para a inserção da data\'"></app-tooltip>              </div>              <div class="text-red-500 font-bold py-2" *ngIf="birthDate?.touched && birthDate?.invalid">                <div *ngIf="birthDate?.errors?.[\'required\'] ">Data de Nascimento Obrigatório</div>              </div>            </div>            <div class="h-32">              <app-input-title class="text-[2.6vh]">Código Postal</app-input-title>              <div class="flex w-[35.2vh] items-center space-x-2">                <input required placeholder="0000" type="text" id="postalCode1"                       formControlName="postalCode1" name="postalCode1"                       [(ngModel)]="citizen.postalCode1"                       class="input text-center w-1/2" />                <span>-</span>                <input required placeholder="000" type="text" id="postalCode2"                       formControlName="postalCode2" name="postalCode2"                       [(ngModel)]="citizen.postalCode2"                       class="input text-center w-1/3" />              </div>              <div class="text-red-500 font-bold py-2" *ngIf="(postalCode1?.touched && postalCode1?.invalid) || (postalCode2?.touched && postalCode2?.invalid) ">                <div *ngIf="postalCode1?.errors?.[\'required\'] || postalCode2?.errors?.[\'required\'] ">Código Postal Obrigatório</div>                <div *ngIf="postalCode1?.errors?.[\'pattern\']">Primeiro código inválido</div>                <div *ngIf="postalCode2?.errors?.[\'pattern\']">Secundo código inválido</div>              </div>            </div>            <div class="h-32">              <app-input-title class="text-[2.6vh]">Foto</app-input-title>              <div class="flex items-center">                <input type="file" #filePicker id="photo" formControlName="photo" name="photo"                       [(ngModel)]="citizen.photo" (change)="onImagePicked($event)" accept="image/*"                       class="input w-[35.2vh] h-12">                <app-tooltip [tooltipText]="\'Utilize o seletor para encontrar a sua foto\'"></app-tooltip>              </div>            </div>            <div class="h-32 flex justify-end items-center">              <button type="submit" [disabled]="!signUpCitizenForm.valid"                      class=" relative h-auto w-[10rem] flex justify-center                    items-center font-semibold text-municip-blank bg-gradient-to-tl                    from-municip-light-blue to-municip-blue  border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg                    transition duration-700 ease-in-out">                Registar                <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />              </button>            </div>          </section>        </div>      </form>      <div class="pb-5">        <hr class="rounded-3xl border-t-[#ECECF0] my-4" />        <div class="text-right font-medium text-municip-normal-black ">Já tem conta? <a routerLink="/login" class="cursor-pointer font-bold text-black ml-2 hover:underline">Faça login</a></div>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AboutusComponent', 'selector': 'app-aboutus'},{'name': 'AccessDeniedComponent', 'selector': 'app-access-denied'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BannerComponent', 'selector': 'app-banner'},{'name': 'BigBannerComponent', 'selector': 'app-big-banner'},{'name': 'BlackBtnIconTextComponent', 'selector': 'app-black-btn-icon-text'},{'name': 'BtnMunicipBlueComponent', 'selector': 'app-btn-municip-blue'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarHeaderComponent', 'selector': 'app-calendar-header'},{'name': 'CalendarPageComponent', 'selector': 'app-calendar-page'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardOutlineThemeComponent', 'selector': 'app-card-outline-theme'},{'name': 'CardOutlineWhiteComponent', 'selector': 'app-card-outline-white'},{'name': 'CardTeamComponent', 'selector': 'app-card-team'},{'name': 'CitizenHomePageComponent', 'selector': 'app-citizen-home-page'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DatetimepickerComponent', 'selector': 'app-datetimepicker'},{'name': 'DialogMessageComponent', 'selector': 'app-dialog-message'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EventCardComponent', 'selector': 'app-event-card'},{'name': 'EventPageComponent', 'selector': 'app-event-page'},{'name': 'EventsListComponent', 'selector': 'app-events-list'},{'name': 'EventsSmallComponent', 'selector': 'app-events-small'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GeneralInfoComponent', 'selector': 'app-general-info'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderLoggedinComponent', 'selector': 'app-header-loggedin'},{'name': 'InputTitleComponent', 'selector': 'app-input-title'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MunAdmindashboardComponent', 'selector': 'app-munadmindashboard'},{'name': 'MunAdminHomePageComponent', 'selector': 'app-mun-admin-home-page'},{'name': 'MunicipalEditComponent', 'selector': 'app-municipal-edit'},{'name': 'MunicipalEventsComponent', 'selector': 'app-municipal-events'},{'name': 'MunicipalitymapComponent', 'selector': 'app-municipalitymap'},{'name': 'MunicipalProfileComponent', 'selector': 'app-municipal-profile'},{'name': 'MyDataCardComponent', 'selector': 'app-my-data-card'},{'name': 'MyMunicipalityCardComponent', 'selector': 'app-my-municipality-card'},{'name': 'NewsCardComponent', 'selector': 'app-news-card'},{'name': 'NewsCreateComponent', 'selector': 'app-news-create'},{'name': 'NewsEditComponent', 'selector': 'app-news-edit'},{'name': 'NewsListComponent', 'selector': 'app-news-list'},{'name': 'NewsPageComponent', 'selector': 'app-news-page'},{'name': 'NewsSmallComponent', 'selector': 'app-news-small'},{'name': 'NextEventsComponent', 'selector': 'app-next-events'},{'name': 'NextNewsComponent', 'selector': 'app-next-news'},{'name': 'ProfileBannerComponent', 'selector': 'app-profile-banner'},{'name': 'SchedulesComponent', 'selector': 'app-schedules'},{'name': 'SelectAccountTypeComponent', 'selector': 'app-select-account-type'},{'name': 'ShowHidePasswordComponent', 'selector': 'app-show-hide-password'},{'name': 'ShowStopComponent', 'selector': 'app-show-stop'},{'name': 'SignUpCitizenAccountComponent', 'selector': 'app-sign-up-citizen-account'},{'name': 'SignUpMunicipalAdministratorAccountComponent', 'selector': 'app-sign-up-municipal-administrator-account'},{'name': 'SignUpMunicipalityComponent', 'selector': 'app-sign-up-municipality'},{'name': 'SignUpSuccessComponent', 'selector': 'app-sign-up-success'},{'name': 'SmallerBannerComponent', 'selector': 'app-smaller-banner'},{'name': 'SpinnerComponent', 'selector': 'app-spinner'},{'name': 'StatisticalHomePageCardComponent', 'selector': 'app-statistical-home-page-card'},{'name': 'StopsMapComponent', 'selector': 'app-stops-map'},{'name': 'StopsPageComponent', 'selector': 'app-stops-page'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'TooltipComponent', 'selector': 'app-tooltip'},{'name': 'TransportsMainComponent', 'selector': 'app-transports-main'},{'name': 'UserinfodialogComponent', 'selector': 'app-userinfodialog'},{'name': 'UserpageComponent', 'selector': 'app-userpage'},{'name': 'VerticalCardComponent', 'selector': 'app-vertical-card'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SignUpCitizenAccountComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SignUpCitizenAccountComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

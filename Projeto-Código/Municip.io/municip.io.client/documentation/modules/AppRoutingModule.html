@@ -1,0 +1,303 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>municip.io.client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">municip.io.client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content module">
+                   <div class="content-data">
+
+
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">Modules</li>
+    <li class="breadcrumb-item" >AppRoutingModule</li>
+</ol>
+
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <a href="#info" 
+            class="nav-link"
+            class="nav-link active"
+            role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+    </li>
+    <li class="nav-item">
+        <a href="#source" 
+            class="nav-link"
+            
+            role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/app-routing.module.ts</code>
+        </p>
+
+
+
+
+
+        <div class="container-fluid module">
+            <div class="row">
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
+import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import { LandingComponent } from &#x27;./landingpage/landing/landing.component&#x27;;
+import { AboutusComponent } from &#x27;./aboutus/aboutus/aboutus.component&#x27;;
+import { LoginComponent } from &#x27;./login/login.component&#x27;;
+import { TermsconditionsComponent } from &#x27;./termsconditions/termsconditions.component&#x27;;
+import { SelectAccountTypeComponent } from &#x27;./signUp/select-account-type/select-account-type.component&#x27;;
+import { SignUpCitizenAccountComponent } from &#x27;./signUp/sign-up-citizen-account/sign-up-citizen-account.component&#x27;;
+import { SignUpMunicipalAdministratorAccountComponent } from &#x27;./signUp/sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component&#x27;;
+import { SignUpMunicipalityComponent } from &#x27;./signUp/sign-up-municipality/sign-up-municipality.component&#x27;;
+import { UserpageComponent } from &#x27;./userpage/userpage.component&#x27;;
+import { SignUpSuccessComponent } from &#x27;./signUp/sign-up-success/sign-up-success.component&#x27;;
+import { MunicipalityGuard } from &#x27;./utils/guard/municipality.guard&#x27;;
+import { AuthGuardService } from &#x27;./utils/guard/auth.guard&#x27;;
+import { AdmindashboardComponent } from &#x27;./administrator/admindashboard/admindashboard.component&#x27;;
+import { TransportsMainComponent } from &#x27;./transports/transports-main/transports-main.component&#x27;;
+import { SchedulesComponent } from &#x27;./transports/schedules/schedules.component&#x27;;
+import { MunAdmindashboardComponent } from &#x27;./munadministrator/mun-admindashboard/mun-admindashboard.component&#x27;;
+import { MunicipalitymapComponent } from &#x27;./maps/municipalitymap/municipalitymap.component&#x27;;
+import { StopsMapComponent } from &#x27;./transports/stops-map/stops-map.component&#x27;;
+import { StopsPageComponent } from &#x27;./transports/stops-page/stops-page.component&#x27;;
+import { CitizenHomePageComponent } from &#x27;./citizen/citizen-home-page/citizen-home-page.component&#x27;;
+import { CitizenGuard } from &#x27;./utils/guard/citizen.guard&#x27;;
+import { AccessDeniedComponent } from &#x27;./access-denied/access-denied.component&#x27;;
+import { MunAdminHomePageComponent } from &#x27;./munadministrator/mun-admin-home-page/mun-admin-home-page.component&#x27;;
+import { MunicipalAdminGuard } from &#x27;./utils/guard/municipal-admin.guard&#x27;;
+import {NewsListComponent } from &#x27;./news/news-list/news-list.component&#x27;;
+import { NewsCreateComponent } from &#x27;./news/news-create/news-create.component&#x27;;
+import { MunicipalProfileComponent } from &#x27;./munadministrator/municipal-profile/municipal-profile.component&#x27;;
+import { CitizenOrMunicipalAdminGuard } from &#x27;./utils/guard/citizen-or-municipal-admin.guard&#x27;;
+import { MunicipalEditComponent } from &#x27;./munadministrator/municipal-edit/municipal-edit.component&#x27;;
+import { MunicipalEventsComponent } from &#x27;./events/municipal-events/municipal-events.component&#x27;;
+import { CalendarPageComponent } from &#x27;./events/my-events/calendar-page/calendar-page.component&#x27;;
+import { CreateEventComponent } from &#x27;./events/municip-actions/create-event/create-event.component&#x27;;
+import { EventPageComponent } from &#x27;./events/event-page/event-page.component&#x27;;
+import { EditEventComponent } from &#x27;./events/municip-actions/edit-event/edit-event.component&#x27;;
+import { UserSameMunicipalityGuard } from &#x27;./utils/guard/userSameMunicipality/user-same-municipality.guard&#x27;;
+import { EventsListComponent } from &#x27;./events/my-events/events-list/events-list.component&#x27;;
+import { NewsPageComponent } from &#x27;./news/news-page/news-page.component&#x27;;
+import { NewsEditComponent } from &#x27;./news/news-edit/news-edit.component&#x27;;
+
+const routes: Routes &#x3D; [
+  { path: &#x27;&#x27;, component: LandingComponent, pathMatch: &#x27;full&#x27;, data: { animation: &#x27;Home&#x27; } },
+  {
+    path: &#x27;login&#x27;, component:
+      LoginComponent, data: { animation: &#x27;Login&#x27; }
+  },
+  { path: &#x27;signUp-SelectAccountType&#x27;, component: SelectAccountTypeComponent, data: {} },
+  { path: &#x27;userpage&#x27;, component: UserpageComponent, data: {}, canActivate: [AuthGuardService] },
+  { path: &#x27;signUp-Citizen&#x27;, component: SignUpCitizenAccountComponent, data: {} },
+  { path: &#x27;signUp-MunicipalAdministrator&#x27;, component: SignUpMunicipalAdministratorAccountComponent, data: {} },
+  { path: &#x27;signUp-Municipality/:municipalName&#x27;, component: SignUpMunicipalityComponent, data: {}, canActivate: [MunicipalityGuard] },
+  { path: &#x27;signUp-Success&#x27;, component: SignUpSuccessComponent, data: {} },
+  { path: &#x27;aboutus&#x27;, component: AboutusComponent, data: {} },
+  { path: &#x27;admindashboard&#x27;, component: AdmindashboardComponent, data: {} },
+  { path: &#x27;termsconditions&#x27;, component: TermsconditionsComponent, data: {} },
+  { path: &#x27;transports&#x27;, component: TransportsMainComponent, data: {} },
+  { path: &#x27;transports/schedules&#x27;, component: SchedulesComponent, data: {} },
+  { path: &#x27;munadmin-dashboard/:municipalName&#x27;, component: MunAdmindashboardComponent, data: {} },
+  { path: &#x27;municipalitymap&#x27;, component: MunicipalitymapComponent, data: {} },
+  { path: &#x27;transports/stops&#x27;, component: StopsPageComponent, data: {} },
+  { path: &#x27;transports/stops/:selectedStop&#x27;, component: StopsPageComponent, data: {} },
+  { path: &#x27;municipal/homePage&#x27;, component: MunAdminHomePageComponent, data: {}, canActivate: [MunicipalAdminGuard] },
+  { path: &#x27;municipal/profile&#x27;, component: MunicipalProfileComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
+  { path: &#x27;municipal/edit&#x27;, component: MunicipalEditComponent, data: {}, canActivate: [MunicipalAdminGuard] },
+  { path: &#x27;citizen/homePage&#x27;, component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: &#x27;events/create&#x27;, component: CreateEventComponent, data: {}, canActivate:[MunicipalAdminGuard] },
+  { path: &#x27;events/edit/:eventId&#x27;, component: EditEventComponent, data: {}, canActivate: [MunicipalAdminGuard, UserSameMunicipalityGuard] },
+  { path: &#x27;events/calendar&#x27;, component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: &#x27;events/myEvents&#x27;, component: EventsListComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: &#x27;events&#x27;, component: MunicipalEventsComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
+  { path: &#x27;events/:eventId&#x27;, component: EventPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
+  { path: &#x27;accessDenied&#x27;, component: AccessDeniedComponent, data: {} },
+  { path: &#x27;news&#x27;, component: NewsListComponent, data: {} },
+  { path: &#x27;news/news-create&#x27;, component: NewsCreateComponent, data: {} },
+  { path: &#x27;events/calendar&#x27;, component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] },
+  { path: &#x27;news/:newsId&#x27;, component: NewsPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
+  { path: &#x27;news/edit/:newsId&#x27;, component: NewsEditComponent, data: {}, canActivate: [UserSameMunicipalityGuard] }
+  
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
+            var COMPODOC_CURRENT_PAGE_URL = 'AppRoutingModule.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
