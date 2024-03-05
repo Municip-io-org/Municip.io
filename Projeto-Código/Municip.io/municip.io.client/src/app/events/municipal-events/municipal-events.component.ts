@@ -43,7 +43,7 @@ export class MunicipalEventsComponent {
   showEvents: Event[] = [];
   nameSearch: string = '';
   ascendingOrder: boolean = true;
-  orderOptions: any[] = [{ label: 'Evento mais Próximo', value: true }, { label: 'Evento mais Distante', value: false }];
+  orderOptions: any[] = [{ label: 'Brevemente', value: true }, { label: 'Mais Distantes', value: false }];
  
 
   isLoading = false;
@@ -174,7 +174,7 @@ export class MunicipalEventsComponent {
   }
 
   get filteredEvents() {
-    if (this.nameSearch == '') return this.showEvents;
+    //if (this.nameSearch == '') return this.showEvents;
     return this.events.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }
 

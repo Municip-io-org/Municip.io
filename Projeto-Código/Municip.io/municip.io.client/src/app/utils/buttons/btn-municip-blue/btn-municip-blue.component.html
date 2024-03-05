@@ -1,7 +1,8 @@
 <button [ngClass]="[width? 'w-full': 'w-auto', buttonClass ]"
         class="inline-flex text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-3 px-8
-               focus:outline-none hover:bg-indigo-600 rounded text-lg
-               transition duration-700 ease-in-out justify-center items-center"
+               focus:outline-none rounded text-lg justify-center items-center
+               bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%]  
+               transition-all duration-300"
         [style.width]="width"
         (click)="onClick()"
         [disabled]="disabled"
