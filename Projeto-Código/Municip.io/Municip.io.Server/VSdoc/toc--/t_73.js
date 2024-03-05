@@ -1,1 +1,1 @@
-c['73']=[['74',"Email Property","topic_000000000000003B.html",0],['75',"Id Property","topic_0000000000000038.html",0],['76',"Password Property","topic_000000000000003C.html",0],['77',"Surname Property","topic_000000000000003A.html",0],['78',"firstName Property","topic_0000000000000039.html",0],['79',"municipality Property","topic_000000000000003D.html",0]];
+c['73']=[['74',"GeoAPIController Constructor","topic_0000000000000027.html",0],['75',"Methods","topic_0000000000000026_methods--.html",1]];

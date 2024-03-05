@@ -1,1 +1,1 @@
-search_result['83']=["topic_0000000000000024.html","Citizen.postalCode2 Property",""];
+search_result['83']=["topic_000000000000001F.html","EventsController.GetEventsByMunicipality Method","Esta chamada permite obter todos os eventos de um determinado município passando o nome do município como parâmetro e retorna um objeto do tipo Event"];

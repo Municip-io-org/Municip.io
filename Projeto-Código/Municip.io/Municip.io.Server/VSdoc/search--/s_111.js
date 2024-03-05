@@ -1,1 +1,1 @@
-search_result['111']=["topic_0000000000000036.html","InformacoesMunicipio.distrito Property",""];
+search_result['111']=["topic_0000000000000031.html","MunicipalityStatusController.SendAprove Method","Esta função envia um email para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município."];

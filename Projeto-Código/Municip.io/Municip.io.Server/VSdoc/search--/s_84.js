@@ -1,1 +1,1 @@
-search_result['84']=["topic_0000000000000025.html","Citizen.birthDate Property",""];
+search_result['84']=["topic_0000000000000020.html","EventsController.GetEventById Method","Esta chamada permite obter um evento por id passando o id do evento como parâmetro e retorna um objeto do tipo Event"];

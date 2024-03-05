@@ -1,1 +1,1 @@
-c['28']=[['29',"AccountUserController Class","topic_0000000000000001.html",1],['39',"GeoAPIController Class","topic_000000000000000A.html",1]];
+c['28']=[['29',"GeoAPI Constructor","topic_00000000000000C8.html",0],['30',"Methods","topic_00000000000000C7_methods--.html",1]];

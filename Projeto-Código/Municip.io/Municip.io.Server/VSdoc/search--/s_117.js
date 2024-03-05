@@ -1,1 +1,1 @@
-search_result['117']=["topic_0000000000000037_vars--.html","MunicipalAdministrator Fields",""];
+search_result['117']=["topic_0000000000000034_methods--.html","NewsController Methods",""];

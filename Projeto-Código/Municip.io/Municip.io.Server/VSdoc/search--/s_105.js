@@ -1,1 +1,1 @@
-search_result['105']=["topic_0000000000000030.html","InformacoesMunicipio.sitio Property",""];
+search_result['105']=["topic_000000000000002B.html","MunicipalityStatusController.getMunicipalities Method","Esta função retorna todos os municípios como json."];

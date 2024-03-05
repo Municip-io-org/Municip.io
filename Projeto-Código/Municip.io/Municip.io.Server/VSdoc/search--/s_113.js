@@ -1,1 +1,1 @@
-search_result['113']=["topic_0000000000000037_attached_props--.html","MunicipalAdministrator Attached Properties",""];
+search_result['113']=["topic_0000000000000033.html","MunicipalityStatusController.SendRemove Method","esta função envia um email de remoção para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município."];

@@ -1,1 +1,1 @@
-search_result['128']=["topic_000000000000003D.html","MunicipalAdministrator.municipality Property",""];
+search_result['128']=["topic_0000000000000038.html","NewsController.DeleteNews Method","esta função remove uma notícia. Recebe como parâmetro o id da notícia."];

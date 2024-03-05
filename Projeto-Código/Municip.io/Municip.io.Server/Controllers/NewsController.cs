@@ -7,6 +7,10 @@ using System.Diagnostics;
 
 namespace Municip.io.Server.Controllers
 {
+
+    /// <summary>
+    /// Este controlador é responsável por gerir as notícias.
+    /// </summary>
     [ApiController]
     [Route("api/news")]
     public class NewsController : Controller
@@ -19,6 +23,11 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Esta função cria uma notícia. Recebe como parâmetro a notícia.
+        /// </summary>
+        /// <param name="newNews"></param>
+        /// <returns></returns>
         [HttpPost("CreateNews")]
         public async Task<IActionResult> CreateNews(News newNews)
         {
@@ -37,6 +46,11 @@ namespace Municip.io.Server.Controllers
 
         }
 
+        /// <summary>
+        ///  esta função retorna todas as notícias de um município. Recebe como parâmetro o nome do município.
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <returns></returns>
         [HttpGet("GetNews")]
         public IActionResult GetNews(string municipality)
         {
@@ -45,6 +59,11 @@ namespace Municip.io.Server.Controllers
             return Json(municipalNews);
         }
 
+        /// <summary>
+        /// esta função remove uma notícia. Recebe como parâmetro o id da notícia.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("DeleteNews")]
         public async Task<IActionResult> DeleteNews(Guid id)
         {
@@ -63,6 +82,11 @@ namespace Municip.io.Server.Controllers
             
         }
 
+        /// <summary>
+        /// esta função atualiza uma notícia. Recebe como parâmetro a notícia atualizada.
+        /// </summary>
+        /// <param name="updatedNews"></param>
+        /// <returns></returns>
         [HttpPut("UpdateNews")]
         public async Task<IActionResult> UpdateNews(News updatedNews)
         {
@@ -87,6 +111,11 @@ namespace Municip.io.Server.Controllers
             }
         }
 
+        /// <summary>
+        /// esta função retorna uma notícia. Recebe como parâmetro o id da notícia.
+        /// </summary>
+        /// <param name="newsId"></param>
+        /// <returns></returns>
         [HttpGet("GetNewsById")]
         public IActionResult GetNewsById(Guid newsId)
         {

@@ -1,1 +1,1 @@
-search_result['39']=["topic_0000000000000011.html","ApplicationDbContext.Municipalities Property",""];
+search_result['39']=["topic_0000000000000011.html","CitizenStatusController.approveCitizen Method","Esta função aprova um cidadão. Recebe como parâmetro o email do cidadão ."];

@@ -6,6 +6,11 @@ using Municip.io.Server.Models;
 
 namespace Municip.io.Server.Controllers
 {
+
+
+  /// <summary>
+  /// Controller para os eventos
+  /// </summary>
     [ApiController]
     [Route("api/events")]
     public class EventsController : Controller
@@ -16,6 +21,12 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
 
+
+        /// <summary>
+        /// Esta chamada permite criar um evento no sistema, passando omo parâmetro um objeto do tipo Event
+        /// </summary>
+        /// <param name="newEvent"></param>
+        /// <returns></returns>
         [HttpPost("CreateEvent")]
         public IActionResult CreateEvent(Event newEvent)
         {
@@ -64,7 +75,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
-
+        /// <summary>
+        /// Esta chamada permite atualizar um evento no sistema, passando omo parâmetro um objeto do tipo Event
+        /// </summary>
+        /// <param name="updatedEvent"></param>
+        /// <returns></returns>
         [HttpPut("UpdateEvent")]
         public IActionResult UpdateEvent(Event updatedEvent)
         {
@@ -119,6 +134,10 @@ namespace Municip.io.Server.Controllers
         }
 
 
+        /// <summary>
+        /// Esta chamada permite obter todos os eventos no sistema
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("GetEvents")]
         public IActionResult GetEvents()
         {
@@ -126,6 +145,11 @@ namespace Municip.io.Server.Controllers
             return Json(events);
         }
 
+        /// <summary>
+        /// Esta chamada permite obter todos os eventos de um determinado município passando o nome do município como parâmetro e retorna um objeto do tipo Event
+        /// </summary>
+        /// <param name="municipalityName"></param>
+        /// <returns></returns>
         [HttpGet("GetEventsByMunicipality")]
         public IActionResult GetEventsByMunicipality(string municipalityName)
         {
@@ -146,6 +170,12 @@ namespace Municip.io.Server.Controllers
 
             return Json(municipalityEvents);
         }
+
+        /// <summary>
+        /// Esta chamada permite obter um evento por id passando o id do evento como parâmetro e retorna um objeto do tipo Event
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
 
         [HttpGet("GetEventById")]
         public IActionResult GetEventById(int eventId)
@@ -171,6 +201,12 @@ namespace Municip.io.Server.Controllers
             return Json(eventById);
         }
 
+        /// <summary>
+        /// Esta chamada permite inscrever um cidadão num evento passando o id do evento e o email do cidadão como parâmetros
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpPost("EnrollCitizen")]
         public IActionResult EnrollCitizen(int eventId, string email)
         {
@@ -230,6 +266,12 @@ namespace Municip.io.Server.Controllers
             }
         }
 
+        /// <summary>
+        /// Esta chamada permite desinscrever um cidadão num evento passando o id do evento e o email do cidadão como parâmetros
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpPost("DropOutCitizen")]
         public IActionResult DropOutCitizen(int eventId, string email)
         {
@@ -266,7 +308,12 @@ namespace Municip.io.Server.Controllers
         }
 
 
-
+        /// <summary>
+        /// Esta chamada permite remover um cidadão de um evento passando o id do evento e o email do cidadão como parâmetros
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpPost("RemoveCitizen")]
         public IActionResult RemoveCitizen(int eventId, string email)
         {
@@ -302,6 +349,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
+        /// <summary>
+        /// Esta chamada permite obter todos os eventos de um determinado cidadão passando o email do cidadão como parâmetro
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
 
 
         [HttpGet("GetEventsByCitizen")]
@@ -320,7 +372,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
-
+        /// <summary>
+        /// esta chamada permite remover um evento do sistema passando o id do evento como parâmetro, retornando ok ou bad request
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
         [HttpDelete("RemoveEvent")]
         public IActionResult RemoveEvent(int eventId)
         {

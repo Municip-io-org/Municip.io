@@ -1,1 +1,1 @@
-search_result['11']=["topic_0000000000000004.html","AccountUserController.RegisterCitizen Method","Registo de um cidadão (conta + base dados de cidadão)"];
+search_result['11']=["topic_0000000000000004.html","AccountUserController.UserRole Method",""];

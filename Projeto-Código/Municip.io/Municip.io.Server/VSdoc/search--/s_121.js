@@ -1,1 +1,1 @@
-search_result['121']=["topic_000000000000003A_attached_props--.html","MunicipalAdministrator Attached Properties",""];
+search_result['121']=["topic_0000000000000036.html","NewsController.CreateNews Method","Esta função cria uma notícia. Recebe como parâmetro a notícia."];

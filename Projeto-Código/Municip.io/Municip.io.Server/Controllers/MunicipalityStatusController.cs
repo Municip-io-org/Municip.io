@@ -7,6 +7,10 @@ using Municip.io.Server.Models;
 
 namespace Municip.io.Server.Controllers
 {
+
+    /// <summary>
+    /// Este controlador é responsável por gerir o estado dos municípios.
+    /// </summary>
     [ApiController]
     [Route("api/municipalitystatus")]
     public class MunicipalityStatusController : Controller
@@ -19,6 +23,10 @@ namespace Municip.io.Server.Controllers
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Esta função retorna todos os municípios como json.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("municipalities")]
         public IActionResult getMunicipalities()
         {
@@ -27,6 +35,11 @@ namespace Municip.io.Server.Controllers
             
         }
 
+        /// <summary>
+        /// Esta função aprova um município. Recebe como parâmetro o nome do município.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPost("approveMunicipality")]
         public async Task<IActionResult> approveMunicipality( string? name)
         {
@@ -42,6 +55,11 @@ namespace Municip.io.Server.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Esta função remove um município. Recebe como parâmetro o nome do município.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPost("deleteMunicipality")]
         public async Task<IActionResult> deleteMunicipality(string? name)
         {
@@ -65,6 +83,11 @@ namespace Municip.io.Server.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Esta função coloca um município em estado de espera. Recebe como parâmetro o nome do município.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPost("pendingMunicipality")]
         public IActionResult pendingMunicipality(string name)
         {
@@ -78,6 +101,11 @@ namespace Municip.io.Server.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Esta função remove todas as contas de administradores de um município. Recebe como parâmetro o nome do município. Não é uma ação passível de ser chamada via API
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <returns></returns>
 
         [NonAction]
         public async Task<IActionResult> deleteAllAccountsByMunicipality(string municipality)
@@ -103,7 +131,13 @@ namespace Municip.io.Server.Controllers
             return NotFound();
         }
 
-        //function to send email to all the admins of the municipality, receive the function to send the email
+
+        /// <summary>
+        /// esta função envia um email para todos os administradores de um município. Recebe como parâmetro o nome do município e uma função que envia o email. Não é uma ação passível de ser chamada via API
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <param name="sendEmail"></param>
+        /// <returns></returns>
         [NonAction]
         public async Task<IActionResult> sendEmailToMunicipalAdmins(string municipality, Func<string, string,string , IActionResult> sendEmail)
         {
@@ -121,7 +155,13 @@ namespace Municip.io.Server.Controllers
 
 
 
-
+        /// <summary>
+        /// Esta função envia um email para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <param name="municipality"></param>
+        /// <returns></returns>
 
         [HttpPost("SendAprove")]
         public IActionResult SendAprove(string email, string name, string municipality)
@@ -130,7 +170,13 @@ namespace Municip.io.Server.Controllers
             return Ok("Success");
         }
 
-
+        /// <summary>
+        /// esta função envia um email de negação para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <param name="municipality"></param>
+        /// <returns></returns>
         [HttpPost("SendDeny")]
         public IActionResult SendDeny(string email, string name, string municipality)
         {
@@ -138,7 +184,13 @@ namespace Municip.io.Server.Controllers
             return Ok("Success");
         }
 
-
+        /// <summary>
+        /// esta função envia um email de remoção para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <param name="municipality"></param>
+        /// <returns></returns>
         [HttpPost("SendRemove")]
         public IActionResult SendRemove(string email, string name, string municipality)
         {

@@ -1,1 +1,1 @@
-search_result['108']=["topic_0000000000000033.html","InformacoesMunicipio.eleitores Property",""];
+search_result['108']=["topic_000000000000002E.html","MunicipalityStatusController.pendingMunicipality Method","Esta função coloca um município em estado de espera. Recebe como parâmetro o nome do município."];

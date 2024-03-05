@@ -1,1 +1,1 @@
-search_result['12']=["topic_0000000000000005.html","AccountUserController.RegisterMunicipalAdministrator Method","Registo de um administrador municipal (conta + base de dados)"];
+search_result['12']=["topic_0000000000000005.html","AccountUserController.Logout Method",""];
