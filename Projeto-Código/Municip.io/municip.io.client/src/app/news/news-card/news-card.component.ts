@@ -13,7 +13,7 @@ export class NewsCardComponent {
   @Input() image: string = "";
   @Input() date: string = "27/3/2012";
   @Input() id: string ="";
-  @Output() deleteid = new EventEmitter<string>();;
+  @Output() deleteid = new EventEmitter<string>();
 
   constructor(private newsService: NewsService, private userAuthService: UserAuthService) { }
 
