@@ -1,1 +1,1 @@
-search_result['120']=["topic_000000000000003A.html","MunicipalAdministrator.Surname Property",""];
+search_result['120']=["topic_0000000000000035.html","NewsController Constructor",""];

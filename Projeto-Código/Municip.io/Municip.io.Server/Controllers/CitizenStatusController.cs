@@ -7,6 +7,10 @@ using Municip.io.Server.Models;
 
 namespace Municip.io.Server.Controllers
 {
+
+    /// <summary>
+    /// Este controlador é responsável por gerir o estado dos cidadãos.
+    /// </summary>
     [ApiController]
     [Route("api/citizenstatus")]
     public class CitizenStatusController : Controller
@@ -20,6 +24,11 @@ namespace Municip.io.Server.Controllers
         }
 
         //create a function to get all the citizens from a municipality as json. call it getCitizens
+        /// <summary>
+        /// Esta função retorna todos os cidadãos de um município. Recebe como parâmetro o nome do município.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpGet("citizens")]
             public IActionResult getCitizens(string? name)
         {
@@ -27,6 +36,11 @@ namespace Municip.io.Server.Controllers
             return Json(citizens);
         }
 
+        /// <summary>
+        /// Esta função aprova um cidadão. Recebe como parâmetro o email do cidadão .
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpPost("approveCitizen")]
         public async Task<IActionResult> approveCitizen(string? email)
         {
@@ -50,6 +64,12 @@ namespace Municip.io.Server.Controllers
             }
             return NotFound();
         }
+
+        /// <summary>
+        /// Esta função remove um cidadão. Recebe como parâmetro o email do cidadão .
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
 
         [HttpPost("deleteCitizen")]
         public async Task<IActionResult> deleteCitizen(string? email)
@@ -80,6 +100,11 @@ namespace Municip.io.Server.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Esta função bloqueia um cidadão. Recebe como parâmetro o email do cidadão .
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpPost("blockCitizen")]
         public async Task<IActionResult> blockCitizen(string? email)
         {
@@ -94,6 +119,11 @@ namespace Municip.io.Server.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Esta função desbloqueia um cidadão. Recebe como parâmetro o email do cidadão .
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpPost("pendingCitizen")]
         public async Task<IActionResult> pendingCitizen(string? email)
         {
@@ -108,7 +138,12 @@ namespace Municip.io.Server.Controllers
         }
 
 
-
+        /// <summary>
+        /// Esta função envia um email de aprovação para um cidadão.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPost("SendAprove")]
         public IActionResult SendAprove(string email,string name)
         {
@@ -116,6 +151,12 @@ namespace Municip.io.Server.Controllers
             return Ok("Success");
         }
 
+        /// <summary>
+        /// Esta função envia um email de reprovação para um cidadão.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
 
         [HttpPost("SendDeny")]
         public IActionResult SendDeny(string email, string name)
@@ -124,7 +165,12 @@ namespace Municip.io.Server.Controllers
             return Ok("Success");
         }
 
-
+        /// <summary>
+        /// Esta função envia um email de remoção para um cidadão.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPost("SendRemove")]
         public IActionResult SendRemove(string email, string name)
         {
@@ -132,6 +178,12 @@ namespace Municip.io.Server.Controllers
             return Ok("Success");
         }
 
+        /// <summary>
+        /// Esta função envia um email de bloqueio para um cidadão.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
 
         [HttpPost("SendBlock")]
         public IActionResult SendBlock(string email, string name)
@@ -140,6 +192,12 @@ namespace Municip.io.Server.Controllers
             return Ok("Success");
         }
 
+        /// <summary>
+        /// Esta função envia um email de desbloqueio para um cidadão.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPost("SendUnblock")]
         public IActionResult SendUnblock(string email, string name)
         {

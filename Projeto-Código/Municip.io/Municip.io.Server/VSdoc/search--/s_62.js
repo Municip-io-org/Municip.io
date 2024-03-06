@@ -1,1 +1,1 @@
-search_result['62']=["topic_0000000000000019.html","Citizen Class","Classe que representa o cidadão"];
+search_result['62']=["topic_0000000000000019.html","CitizenStatusController.SendUnblock Method","Esta função envia um email de desbloqueio para um cidadão."];

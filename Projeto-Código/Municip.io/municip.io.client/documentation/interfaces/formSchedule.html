@@ -1,0 +1,774 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>municip.io.client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">municip.io.client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  formSchedule</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/transports/schedules/schedules.component.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#date" 
+>
+                                            date
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#line" 
+>
+                                            line
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#pattern" 
+>
+                                            pattern
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#route" 
+>
+                                            route
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#trip" 
+>
+                                            trip
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="date"></a>
+                                        <span class="name "><b>date</b>
+                                            <a href="#date">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>date:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="line"></a>
+                                        <span class="name "><b>line</b>
+                                            <a href="#line">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>line:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="pattern"></a>
+                                        <span class="name "><b>pattern</b>
+                                            <a href="#pattern">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>pattern:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="route"></a>
+                                        <span class="name "><b>route</b>
+                                            <a href="#route">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>route:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="trip"></a>
+                                        <span class="name "><b>trip</b>
+                                            <a href="#trip">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>trip:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { TransportsService, line, municipalityTransport, pattern, route, stop, stopTime, trip } from &#x27;../../services/transports.service&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { UserAuthService } from &#x27;../../services/user-auth.service&#x27;;
+import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { HttpParams } from &#x27;@angular/common/http&#x27;;
+import { BindQueryParamsFactory } from &#x27;@ngneat/bind-query-params&#x27;;
+
+@Component({
+  selector: &#x27;app-schedules&#x27;,
+  templateUrl: &#x27;./schedules.component.html&#x27;,
+  styleUrl: &#x27;./schedules.component.css&#x27;
+})
+export class SchedulesComponent {
+
+  constructor(private service: TransportsService, private authService: UserAuthService, private router: Router,
+    private routeParams: ActivatedRoute, private factory: BindQueryParamsFactory) { }
+
+
+  municipality: municipalityTransport | null &#x3D; null;
+  lines: line[] &#x3D; [];
+  routes: route[] &#x3D; [];
+  patterns: pattern[] &#x3D; [];
+  trips: trip[] &#x3D; [];
+  path: stop[] | null &#x3D; [];
+  schedule: stopTime[] | null &#x3D; [];
+  lineSelected : line | null &#x3D; null;
+
+
+  scheduleForm &#x3D; new FormGroup({
+    line: new FormControl(&quot;&quot;),
+    route: new FormControl(&quot;&quot;),
+    pattern: new FormControl(&quot;&quot;),
+    trip: new FormControl(&quot;&quot; ),
+    date: new FormControl(&quot;&quot;)
+  });
+
+
+  get line() {
+    return this.scheduleForm.get(&#x27;line&#x27;);
+  }
+
+get route() {
+    return this.scheduleForm.get(&#x27;route&#x27;);
+  }
+
+  get pattern() {
+return this.scheduleForm.get(&#x27;pattern&#x27;);
+  }
+
+  get trip () {
+    return this.scheduleForm.get(&#x27;trip&#x27;);
+  }
+
+  get date() {
+return this.scheduleForm.get(&#x27;date&#x27;);
+  }
+
+
+  bindQueryParamsManager &#x3D; this.factory
+    .create&lt;formSchedule&gt;([
+      { queryKey: &#x27;line&#x27; },
+      { queryKey: &#x27;route&#x27; },
+      { queryKey: &#x27;pattern&#x27; },
+      { queryKey: &#x27;trip&#x27; },
+      { queryKey: &#x27;date&#x27; }
+    ]).connect(this.scheduleForm);
+
+
+
+  ngOnDestroy() {
+    this.bindQueryParamsManager.destroy();
+  }
+
+  async ngOnInit() {
+
+   
+    this.scheduleForm.get(&#x27;line&#x27;)?.valueChanges.subscribe(async (value) &#x3D;&gt; {
+
+      await this.getCurrentRoutesAndPatternsAndTrips();
+      await this.handleLineChange(value || &quot;&quot;);
+    });
+
+    this.scheduleForm.get(&quot;route&quot;)?.valueChanges.subscribe(async (value) &#x3D;&gt; {
+
+
+      await this.getCurrentRoutesAndPatternsAndTrips();
+
+     await this.handleRouteChange(value || &quot;&quot;)
+
+    });
+
+
+    this.scheduleForm.get(&quot;pattern&quot;)?.valueChanges.subscribe(async (value) &#x3D;&gt; {
+
+
+      await this.getCurrentRoutesAndPatternsAndTrips();
+
+
+      await this.handlePatternChange(value || &quot;&quot;);
+
+
+      this.getCurrentPath(value);
+
+
+
+
+    });
+
+
+    this.scheduleForm.get(&quot;date&quot;)?.valueChanges.subscribe(async (value) &#x3D;&gt; {
+      await this.getCurrentRoutesAndPatternsAndTrips();
+
+      await this.handleDateChange(value || &quot;&quot;);
+
+      
+    });
+
+    this.scheduleForm.get(&quot;trip&quot;)?.valueChanges.subscribe( async (value) &#x3D;&gt; {
+      this.getCurrentSchedule(value || &quot;&quot;);
+
+    });
+
+
+
+
+    this.handleDateChange(this.scheduleForm.get(&#x27;date&#x27;)?.value || &quot;&quot;);
+
+    
+    await this.getLines();
+
+
+    if (!this.lines.find(line &#x3D;&gt; line.id &#x3D;&#x3D;&#x3D; this.scheduleForm.get(&#x27;line&#x27;)?.value)) {
+      this.scheduleForm.get(&#x27;line&#x27;)?.setValue(&quot;&quot;);
+      this.scheduleForm.get(&#x27;route&#x27;)?.setValue(&quot;&quot;);
+      this.scheduleForm.get(&#x27;pattern&#x27;)?.setValue(&quot;&quot;);
+      this.scheduleForm.get(&#x27;trip&#x27;)?.setValue(&quot;&quot;);
+      return;
+    } 
+
+
+    await this.getCurrentRoutesAndPatternsAndTrips();
+
+
+    this.handleLineChange(this.scheduleForm.get(&#x27;line&#x27;)?.value || &quot;&quot;);
+    
+
+    this.handleRouteChange(this.scheduleForm.get(&#x27;route&#x27;)?.value || &quot;&quot;);
+    
+
+    this.handlePatternChange(this.scheduleForm.get(&#x27;pattern&#x27;)?.value || &quot;&quot;);
+
+  }
+
+
+
+
+  async handleLineChange(value: string) {
+    this.lineSelected &#x3D; this.lines.find(line &#x3D;&gt; line.id &#x3D;&#x3D;&#x3D; value) || null;
+
+    if (value &#x3D;&#x3D;&#x3D; &quot;&quot;) {
+      //caso o valor seja vazio, então tudo terá que ser resetado
+      this.scheduleForm.get(&quot;route&quot;)?.setValue(&quot;&quot;);
+      this.scheduleForm.get(&quot;pattern&quot;)?.setValue(&quot;&quot;);
+      this.scheduleForm.get(&quot;trip&quot;)?.setValue(&quot;&quot;);
+    } else if (!this.isRouteFromLine(this.scheduleForm.get(&#x27;route&#x27;)?.value || &quot;&quot;)) {
+      this.scheduleForm.get(&#x27;route&#x27;)?.setValue(this.routes[0].id);
+    }
+  }
+
+  async handleRouteChange(value: string) {
+
+    if (value &#x3D;&#x3D;&#x3D; &quot;&quot;) {
+    this.scheduleForm.get(&quot;pattern&quot;)?.setValue(this.patterns[0].id || &quot;&quot;);
+    } else if (!this.patterns.find(pattern &#x3D;&gt; pattern.id &#x3D;&#x3D;&#x3D; this.scheduleForm.get(&#x27;pattern&#x27;)?.value)) {
+      this.scheduleForm.get(&#x27;pattern&#x27;)?.setValue(this.patterns[0].id || &quot;&quot;);
+    }
+
+
+
+  }
+
+  async handlePatternChange(value: string) {
+
+
+    if (value &#x3D;&#x3D;&#x3D; &quot;&quot;) {
+      this.scheduleForm.get(&quot;trip&quot;)?.setValue(this.trips[0].id || &quot;&quot;);
+    } else if (!this.trips.find(trip &#x3D;&gt; trip.id &#x3D;&#x3D;&#x3D; this.scheduleForm.get(&#x27;trip&#x27;)?.value)) {
+      this.scheduleForm.get(&#x27;trip&#x27;)?.setValue(this.trips[0].id || &quot;&quot;);
+    }
+
+
+
+  }
+
+  async handleDateChange(value: string) {
+   
+
+    if (!value || value.length !&#x3D;&#x3D; 10 || value[4] !&#x3D;&#x3D; &quot;-&quot; || value[7] !&#x3D;&#x3D; &quot;-&quot;) {
+       const currentDate &#x3D; new Date().toISOString().substring(0, 10);
+      this.scheduleForm.get(&#x27;date&#x27;)?.setValue(currentDate);
+    }
+
+
+    this.scheduleForm.get(&#x27;trip&#x27;)?.setValue(this.trips[0].id || &quot;&quot;);
+  }
+
+
+
+
+
+
+
+  isRouteFromLine(id: string): boolean{
+    if (this.routes.find(route &#x3D;&gt; route.id &#x3D;&#x3D;&#x3D; id)) {
+      return true;
+    }
+    return false;
+  }
+
+
+  async getCurrentRoutesAndPatternsAndTrips() {
+    await this.getCurrentRoutes(this.scheduleForm.get(&#x27;line&#x27;)?.value || null);
+    await this.getCurrentPatterns(this.scheduleForm.get(&#x27;route&#x27;)?.value || null);
+    this.getCurrentTrips(this.scheduleForm.get(&#x27;pattern&#x27;)?.value || null);
+    this.getCurrentPath(this.scheduleForm.get(&#x27;pattern&#x27;)?.value || null);
+    this.getCurrentSchedule(this.scheduleForm.get(&#x27;trip&#x27;)?.value || null);
+  }
+
+
+
+  
+  async getLines() {
+    const municipality &#x3D; await this.authService.getMunicipality().toPromise();
+    if (municipality) {
+      const municip &#x3D; await this.service.getMunicipalityByName(municipality).toPromise();
+          if (municip) {
+            this.municipality &#x3D; municip;
+            const newLines &#x3D; await this.service.getLinesByMunicipalityId(municip.id).toPromise();
+            if (newLines) {
+                this.lines &#x3D; newLines;         
+              }
+            }
+          }
+        }
+      
+    
+
+
+  async getCurrentRoutes(line: string | null) {
+    this.routes &#x3D; [];
+    if (line) {
+      const selectedLine &#x3D; this.lines.find(line &#x3D;&gt; line.id &#x3D;&#x3D;&#x3D; this.scheduleForm.get(&#x27;line&#x27;)?.value);
+      if (selectedLine) {
+        for (let routeId of selectedLine.routes) {
+        let route &#x3D; await this.service.getRoute(routeId).toPromise();
+        if (route &amp;&amp; !this.routes.find(r &#x3D;&gt; r.id &#x3D;&#x3D;&#x3D; route!.id)) {
+          this.routes.push(route);
+
+              }
+          }
+      }
+    }
+  }
+
+
+  async getCurrentPatterns(route: string | null) {
+this.patterns &#x3D; [];
+    if (route) {
+      const selectedRoute &#x3D; this.routes.find(route &#x3D;&gt; route.id &#x3D;&#x3D;&#x3D; this.scheduleForm.get(&#x27;route&#x27;)?.value);
+      if (selectedRoute) {
+        for (let patternId of selectedRoute.patterns) {
+          let pattern &#x3D; await this.service.getPattern(patternId).toPromise();
+          if (pattern) {
+            this.patterns.push(pattern);
+          }
+        }
+      }
+    }
+  }
+
+
+  getCurrentTrips(pattern: string | null) {
+    this.trips &#x3D; [];
+    if (pattern) {
+      const selectedPattern &#x3D; this.patterns.find(pattern &#x3D;&gt; pattern.id &#x3D;&#x3D;&#x3D; this.scheduleForm.get(&#x27;pattern&#x27;)?.value);
+      if (selectedPattern) {
+        for (let trip of selectedPattern.trips) {
+          if (trip &amp;&amp; trip.dates.includes(this.scheduleForm.get(&#x27;date&#x27;)?.value?.replace(/-/g, &#x27;&#x27;) || &quot;&quot;) &amp;&amp; trip.schedule.length &gt; 0) {
+            this.trips.push(trip);
+          }
+        }
+        this.trips.sort((a, b) &#x3D;&gt; {
+          const arrivalTimeA &#x3D; a.schedule[0].arrival_time;
+          const arrivalTimeB &#x3D; b.schedule[0].arrival_time;
+          return arrivalTimeA.localeCompare(arrivalTimeB);
+        });
+      }
+    }
+  }
+
+  getCurrentPath(pattern: string | null) {
+    let patternSelected &#x3D; this.patterns.find(p &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; pattern);
+    this.path &#x3D; patternSelected ? patternSelected.path : null;
+  }
+
+  getCurrentSchedule(trip : string | null) {
+    let tripSelected &#x3D; this.trips.find(t&#x3D;&gt; t.id &#x3D;&#x3D;&#x3D;  trip);
+    this.schedule &#x3D; tripSelected ? tripSelected.schedule : null;
+
+  }
+
+
+  formatTime(time: string): string {
+    return time.substring(0, 5);
+  }
+
+
+  getNameStopById(id: string): string {
+    if (this.path) {
+      let stop &#x3D; this.path.find(stop &#x3D;&gt; stop.stop.id &#x3D;&#x3D;&#x3D; id);
+      return stop ? stop.stop.name : &quot;&quot;;
+    }
+    return &quot;&quot;;
+
+  }
+
+  iswithoutTrips(): boolean {
+    if (this.trips.length &#x3D;&#x3D;&#x3D; 0 &amp;&amp; this.scheduleForm.get(&#x27;pattern&#x27;)?.value !&#x3D;&#x3D; &quot;&quot;) {
+      return true;
+    }
+    return false;
+
+  }
+
+}
+
+interface formSchedule {
+  line: string;
+  route: string;
+  pattern: string;
+  trip: string;
+  date: string;
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'formSchedule.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

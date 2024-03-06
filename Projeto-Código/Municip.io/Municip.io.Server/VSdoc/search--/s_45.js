@@ -1,1 +1,1 @@
-search_result['45']=["topic_0000000000000012.html","ApplicationDbContext Constructor",""];
+search_result['45']=["topic_0000000000000012.html","CitizenStatusController.deleteCitizen Method","Esta função remove um cidadão. Recebe como parâmetro o email do cidadão ."];

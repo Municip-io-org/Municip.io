@@ -1,0 +1,1654 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>municip.io.client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">municip.io.client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  StopsMapComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/transports/stops-map/stops-map.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-stops-map</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./stops-map.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./stops-map.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#center" >center</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#googleMap" >googleMap</a>
+                            </li>
+                            <li>
+                                <a href="#infoWindow" >infoWindow</a>
+                            </li>
+                            <li>
+                                <a href="#lines" >lines</a>
+                            </li>
+                            <li>
+                                <a href="#markers" >markers</a>
+                            </li>
+                            <li>
+                                <a href="#nextBuses" >nextBuses</a>
+                            </li>
+                            <li>
+                                <a href="#options" >options</a>
+                            </li>
+                            <li>
+                                <a href="#selectedStopName" >selectedStopName</a>
+                            </li>
+                            <li>
+                                <a href="#showMap" >showMap</a>
+                            </li>
+                            <li>
+                                <a href="#showNextBuses" >showNextBuses</a>
+                            </li>
+                            <li>
+                                <a href="#zoom" >zoom</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getLines" >getLines</a>
+                            </li>
+                            <li>
+                                <a href="#getNextBuses" >getNextBuses</a>
+                            </li>
+                            <li>
+                                <a href="#highlightSelectedStop" >highlightSelectedStop</a>
+                            </li>
+                            <li>
+                                <a href="#isBusPassed" >isBusPassed</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#setBoundsAndCenterForMunicipality" >setBoundsAndCenterForMunicipality</a>
+                            </li>
+                            <li>
+                                <a href="#showInfoWindow" >showInfoWindow</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#municipalityName" >municipalityName</a>
+                            </li>
+                            <li>
+                                <a href="#selectedStop" >selectedStop</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(boundsService: <a href="../injectables/BoundsService.html" target="_self">BoundsService</a>, transportsService: <a href="../injectables/TransportsService.html" target="_self">TransportsService</a>, cdr: ChangeDetectorRef)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:12</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>boundsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BoundsService.html" target="_self" >BoundsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>transportsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TransportsService.html" target="_self" >TransportsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cdr</td>
+                                                  
+                                                        <td>
+                                                                    <code>ChangeDetectorRef</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="municipalityName"></a>
+                        <b>municipalityName</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:18</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedStop"></a>
+                        <b>selectedStop</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:19</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLines"></a>
+                    <span class="name">
+                        <span ><b>getLines</b></span>
+                        <a href="#getLines"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getLines()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getNextBuses"></a>
+                    <span class="name">
+                        <span ><b>getNextBuses</b></span>
+                        <a href="#getNextBuses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getNextBuses(stopId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>stopId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="highlightSelectedStop"></a>
+                    <span class="name">
+                        <span ><b>highlightSelectedStop</b></span>
+                        <a href="#highlightSelectedStop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>highlightSelectedStop()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:198</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isBusPassed"></a>
+                    <span class="name">
+                        <span ><b>isBusPassed</b></span>
+                        <a href="#isBusPassed"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isBusPassed(bus: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="187"
+                                    class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:187</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>bus</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: SimpleChanges)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                        <code>SimpleChanges</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setBoundsAndCenterForMunicipality"></a>
+                    <span class="name">
+                        <span ><b>setBoundsAndCenterForMunicipality</b></span>
+                        <a href="#setBoundsAndCenterForMunicipality"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setBoundsAndCenterForMunicipality(municipalityName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>municipalityName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showInfoWindow"></a>
+                    <span class="name">
+                        <span ><b>showInfoWindow</b></span>
+                        <a href="#showInfoWindow"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showInfoWindow(stop: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, marker: google.maps.Marker)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>stop</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>marker</td>
+                                            <td>
+                                                        <code>google.maps.Marker</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="center"></a>
+                    <span class="name">
+                        <span ><b>center</b></span>
+                        <a href="#center"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>google.maps.LatLngLiteral</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{ lat: 0, lng: 0 }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="googleMap"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>googleMap</b></span>
+                        <a href="#googleMap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>GoogleMap | undefined</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(GoogleMap, {static: false})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="infoWindow"></a>
+                    <span class="name">
+                        <span ><b>infoWindow</b></span>
+                        <a href="#infoWindow"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new google.maps.InfoWindow()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lines"></a>
+                    <span class="name">
+                        <span ><b>lines</b></span>
+                        <a href="#lines"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="markers"></a>
+                    <span class="name">
+                        <span ><b>markers</b></span>
+                        <a href="#markers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>google.maps.Marker[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nextBuses"></a>
+                    <span class="name">
+                        <span ><b>nextBuses</b></span>
+                        <a href="#nextBuses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="options"></a>
+                    <span class="name">
+                        <span ><b>options</b></span>
+                        <a href="#options"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>google.maps.MapOptions</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    mapTypeId: &#x27;hybrid&#x27;,
+    zoomControl: true,
+    scrollwheel: false,
+    disableDoubleClickZoom: false,
+    draggable: true,
+    restriction: null,
+    minZoom: 10,
+    fullscreenControl: false,
+    scaleControl: false,
+    mapTypeControl: false,
+    rotateControl: false
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedStopName"></a>
+                    <span class="name">
+                        <span ><b>selectedStopName</b></span>
+                        <a href="#selectedStopName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showMap"></a>
+                    <span class="name">
+                        <span ><b>showMap</b></span>
+                        <a href="#showMap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showNextBuses"></a>
+                    <span class="name">
+                        <span ><b>showNextBuses</b></span>
+                        <a href="#showNextBuses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="zoom"></a>
+                    <span class="name">
+                        <span ><b>zoom</b></span>
+                        <a href="#zoom"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>10</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/transports/stops-map/stops-map.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, SimpleChanges, ViewChild } from &#x27;@angular/core&#x27;;
+import { BoundsService } from &#x27;../../maps/bounds.service&#x27;;
+import { GoogleMap, MapMarker } from &#x27;@angular/google-maps&#x27;;
+import { TransportsService } from &#x27;../../services/transports.service&#x27;;
+import { ChangeDetectorRef } from &#x27;@angular/core&#x27;;
+
+@Component({
+  selector: &#x27;app-stops-map&#x27;,
+  templateUrl: &#x27;./stops-map.component.html&#x27;,
+  styleUrls: [&#x27;./stops-map.component.css&#x27;]
+})
+export class StopsMapComponent {
+
+  constructor(private boundsService: BoundsService, private transportsService: TransportsService, private cdr: ChangeDetectorRef) { }
+
+  @ViewChild(GoogleMap, { static: false }) googleMap: GoogleMap | undefined;
+
+  @Input() municipalityName: string &#x3D; &#x27;&#x27;;
+  @Input() selectedStop: string &#x3D; &#x27;&#x27;;
+  selectedStopName: String &#x3D; &#x27;&#x27;;
+
+
+  showMap: boolean &#x3D; true;
+  showNextBuses: boolean &#x3D; false;
+  nextBuses: any[] &#x3D; [];
+  lines: any[] &#x3D; [];
+  zoom &#x3D; 10;
+  center: google.maps.LatLngLiteral &#x3D; { lat: 0, lng: 0 };
+  options: google.maps.MapOptions &#x3D; {
+    mapTypeId: &#x27;hybrid&#x27;,
+    zoomControl: true,
+    scrollwheel: false,
+    disableDoubleClickZoom: false,
+    draggable: true,
+    restriction: null,
+    minZoom: 10,
+    fullscreenControl: false,
+    scaleControl: false,
+    mapTypeControl: false,
+    rotateControl: false
+  };
+
+  infoWindow &#x3D; new google.maps.InfoWindow();
+  markers: google.maps.Marker[] &#x3D; []; // Armazenar marcadores em uma matriz
+
+
+  ngOnInit(): void {
+  };
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes[&#x27;municipalityName&#x27;] &amp;&amp; changes[&#x27;municipalityName&#x27;].currentValue) {
+      this.setBoundsAndCenterForMunicipality(changes[&#x27;municipalityName&#x27;].currentValue);
+    }
+    if (changes[&#x27;selectedStop&#x27;] &amp;&amp; changes[&#x27;selectedStop&#x27;].currentValue) {
+      this.highlightSelectedStop();
+    }
+  }
+
+  setBoundsAndCenterForMunicipality(municipalityName: string) {
+
+    this.boundsService.getMunicipalityBounds(municipalityName).subscribe(bounds &#x3D;&gt; {
+      if (bounds &amp;&amp; this.googleMap) {
+        const newRestriction: google.maps.MapRestriction &#x3D; {
+          latLngBounds: {
+            north: bounds.north,
+            south: bounds.south,
+            east: bounds.east,
+            west: bounds.west
+          },
+          strictBounds: true
+        };
+
+        this.options &#x3D; { ...this.options, restriction: newRestriction };
+
+        const centerLat &#x3D; (bounds.north + bounds.south) / 2;
+        const centerLng &#x3D; (bounds.east + bounds.west) / 2;
+        this.center &#x3D; { lat: centerLat, lng: centerLng };
+
+        this.googleMap.options &#x3D; this.options;
+        this.googleMap.center &#x3D; this.center;
+
+        this.transportsService.getStopsFromMunicipality(this.municipalityName).subscribe(stops &#x3D;&gt; {
+          stops.forEach(stop &#x3D;&gt; {
+            if (stop.id &#x3D;&#x3D;&#x3D; this.selectedStop) {
+              this.selectedStopName &#x3D; stop.name;
+            }
+
+            const marker &#x3D; new google.maps.Marker({
+              position: { lat: parseFloat(stop.lat), lng: parseFloat(stop.lon) },
+              map: this.googleMap?.googleMap,
+              title: stop.name
+            });
+
+
+            this.markers.push(marker); // Adicionar o marcador à matriz
+
+            marker.addListener(&#x27;click&#x27;, () &#x3D;&gt; {
+              this.showInfoWindow(stop, marker);
+            });
+
+            if (this.selectedStopName &#x3D;&#x3D;&#x3D; stop.name) {
+              this.showInfoWindow(stop, marker);
+            }
+
+
+          });
+        });
+
+      } else {
+        this.showMap &#x3D; false;
+        console.error(&#x27;DEU ERRO:&#x27;, municipalityName);
+      }
+    }, error &#x3D;&gt; {
+      this.showMap &#x3D; false;
+      console.error(&#x27;Erro ao obter os limites do município:&#x27;, error);
+    });
+  }
+
+  showInfoWindow(stop: any, marker: google.maps.Marker) {
+    const content &#x3D; &#x60;&lt;b&gt;${stop.name}&lt;/b&gt;&lt;br/&gt;&lt;br/&gt; &lt;p style&#x3D;&quot;font-weight: 500&quot;&gt; &lt;b&gt;Linhas:&lt;/b&gt;  ${stop.lines.join(&#x27;, &#x27;)} &lt;/p&gt;&lt;/div&gt;&#x60;;
+    this.infoWindow.setContent(content);
+    const infoWindowOptions: google.maps.InfoWindowOptions &#x3D; {
+      content: content,
+      maxWidth: 200
+    };
+    this.infoWindow.setOptions(infoWindowOptions);
+    this.infoWindow.open({
+      anchor: marker,
+      map: this.googleMap?.googleMap,
+      shouldFocus: false
+    });
+
+    this.selectedStop &#x3D; stop.name;
+    this.getLines();
+    this.getNextBuses(stop.id);
+  }
+
+  getLines() {
+    this.transportsService.getLines().subscribe(
+      lines &#x3D;&gt; {
+        const lineData &#x3D; lines.map(line &#x3D;&gt; {
+          return {
+            id: line.id,
+            textColor: line.text_color,
+            color: line.color
+          };
+        });
+        this.lines &#x3D; lineData;
+      },
+      error &#x3D;&gt; {
+        console.error(&#x27;Erro ao buscar as linhas:&#x27;, error);
+      }
+    );
+  }
+
+  getNextBuses(stopId: string) {
+    this.transportsService.getRealtimeBuses(stopId).subscribe(
+      buses &#x3D;&gt; {
+        const now &#x3D; new Date();
+        const tenMinutesBeforeNow &#x3D; new Date(now.getTime() - 10 * 60000);
+
+        this.nextBuses &#x3D; buses.filter(bus &#x3D;&gt; {
+          const scheduledArrivalTime &#x3D; new Date();
+          const scheduledArrivalParts &#x3D; bus.scheduled_arrival.split(&quot;:&quot;);
+          scheduledArrivalTime.setHours(parseInt(scheduledArrivalParts[0]));
+          scheduledArrivalTime.setMinutes(parseInt(scheduledArrivalParts[1]));
+          scheduledArrivalTime.setSeconds(parseInt(scheduledArrivalParts[2]));
+
+          return scheduledArrivalTime &gt; tenMinutesBeforeNow;
+        });
+
+        this.nextBuses.forEach(bus &#x3D;&gt; {
+          const line &#x3D; this.lines.find(line &#x3D;&gt; line.id &#x3D;&#x3D;&#x3D; bus.line_id);
+          bus.color &#x3D; line?.color || &#x27;#000000&#x27;;
+          bus.textColor &#x3D; line?.textColor || &#x27;#FFFFFF&#x27;;
+        });
+
+        this.showNextBuses &#x3D; true;
+        this.cdr.detectChanges();
+      },
+      error &#x3D;&gt; {
+        console.error(&#x27;Erro ao buscar os próximos autocarros:&#x27;, error);
+      }
+    );
+  }
+
+  isBusPassed(bus: any): boolean {
+    const now &#x3D; new Date();
+    const scheduledArrivalTime &#x3D; new Date();
+    const scheduledArrivalParts &#x3D; bus.scheduled_arrival.split(&quot;:&quot;);
+    scheduledArrivalTime.setHours(parseInt(scheduledArrivalParts[0]));
+    scheduledArrivalTime.setMinutes(parseInt(scheduledArrivalParts[1]));
+    scheduledArrivalTime.setSeconds(parseInt(scheduledArrivalParts[2]));
+
+    return scheduledArrivalTime &lt; now;
+  }
+
+  highlightSelectedStop() {
+    this.markers.forEach(marker &#x3D;&gt; {
+      if (marker.getTitle() &#x3D;&#x3D;&#x3D; this.selectedStopName) {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+        const position &#x3D; marker.getPosition();
+        if (position) {
+          this.googleMap?.googleMap?.panTo(position);
+        }
+      }
+    });
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ng-container *ngIf&#x3D;&quot;municipalityName &#x3D;&#x3D;&#x3D; &#x27;&#x27;&quot;&gt;
+  &lt;div class&#x3D;&quot;mb-40 flex flex-col items-center justify-center mt-40&quot;&gt;
+    &lt;p class&#x3D;&quot;text-xl font-semibold mb-4&quot;&gt;Sem município atribuído, ERRO!&lt;/p&gt;
+    &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;Por favor, efetue login para visualizar os dados para o município atribuído.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/ng-container&gt;
+
+&lt;ng-container *ngIf&#x3D;&quot;municipalityName !&#x3D;&#x3D; &#x27;&#x27; &amp;&amp; showMap&quot;&gt;
+  &lt;google-map height&#x3D;&quot;37.5rem&quot; width&#x3D;&quot;100%&quot; [zoom]&#x3D;&quot;zoom&quot; [center]&#x3D;&quot;center&quot; [options]&#x3D;&quot;options&quot; #mapInstance&#x3D;&quot;googleMap&quot;&gt;&lt;/google-map&gt;
+  &lt;br /&gt;
+
+  &lt;div class&#x3D;&quot;flex justify-center flex-col items-center&quot;&gt;
+    &lt;p class&#x3D;&quot;font-roboto font-bold text-2xl text-municip-black&quot;&gt;Paragem Selecionada em Tempo Real&lt;/p&gt;
+
+    &lt;p class&#x3D;&quot;italic text-gray-500&quot;&gt; {{ selectedStop }} &lt;/p&gt;
+    &lt;br /&gt;
+    &lt;div class&#x3D;&quot;overflow-x-auto max-h-[400px] rounded-xl border border-gray-400&quot;&gt;
+
+      &lt;div class&#x3D;&quot;sticky top-0 bg-[#91D1E3]&quot;&gt;
+        &lt;table class&#x3D;&quot;table-auto border-collapse border border-gray-400 w-[70rem] rounded-xl&quot;&gt;
+          &lt;thead&gt;
+            &lt;tr class&#x3D;&quot;text-black&quot;&gt;
+              &lt;th class&#x3D;&quot;px-4 py-2 border border-gray-400 w-1/12&quot;&gt;Linha&lt;/th&gt;
+              &lt;th class&#x3D;&quot;px-4 py-2 border border-gray-400 w-4/12&quot;&gt;Destino&lt;/th&gt;
+              &lt;th class&#x3D;&quot;px-4 py-2 border border-gray-400 w-2/12&quot;&gt;Chegada Prevista&lt;/th&gt;
+              &lt;th class&#x3D;&quot;px-4 py-2 border border-gray-400 w-2/12&quot;&gt;Chegada Estimada&lt;/th&gt;
+              &lt;th class&#x3D;&quot;px-4 py-2 border border-gray-400 w-3/12&quot;&gt;Chegada Real&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+      &lt;table class&#x3D;&quot;table-auto border-collapse border border-gray-400 w-[70rem] rounded-xl&quot;&gt;
+        &lt;tbody class&#x3D;&quot;divide-y divide-gray-400&quot;&gt;
+          &lt;ng-container *ngIf&#x3D;&quot;nextBuses.length &gt; 0; else noData&quot;&gt;
+            &lt;ng-container *ngFor&#x3D;&quot;let bus of nextBuses&quot;&gt;
+              &lt;tr [class.opacity-50]&#x3D;&quot;isBusPassed(bus)&quot;&gt;
+                &lt;td class&#x3D;&quot;px-4 py-2 border border-gray-400 w-1/12 text-center&quot;&gt;
+                  &lt;div class&#x3D;&quot;flex items-center justify-center&quot;&gt;
+                    &lt;div [style.backgroundColor]&#x3D;&quot;bus.color&quot; class&#x3D;&quot;rounded-xl px-2 py-1 flex items-center justify-center&quot;&gt;
+                      &lt;span class&#x3D;&quot;text-white&quot;&gt;{{ bus.line_id }}&lt;/span&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/td&gt;
+                &lt;td class&#x3D;&quot;px-4 py-2 border border-gray-400 w-4/12&quot;&gt;{{ bus.headsign || &#x27;---&#x27; }}&lt;/td&gt;
+                &lt;td class&#x3D;&quot;px-4 py-2 border border-gray-400 w-2/12&quot;&gt;{{ bus.scheduled_arrival ? bus.scheduled_arrival.slice(0, 5) : &#x27;---&#x27; }}&lt;/td&gt;
+                &lt;td class&#x3D;&quot;px-4 py-2 border border-gray-400 w-2/12&quot;&gt;{{ bus.estimated_arrival ? bus.estimated_arrival.slice(0, 5) : &#x27;---&#x27; }}&lt;/td&gt;
+                &lt;td class&#x3D;&quot;px-4 py-2 border border-gray-400 w-3/12&quot;&gt;{{ bus.observed_arrival ? bus.observed_arrival.slice(0, 5) : &#x27;---&#x27; }}&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/ng-container&gt;
+          &lt;/ng-container&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;br /&gt;
+&lt;/ng-container&gt;
+
+&lt;ng-container *ngIf&#x3D;&quot;!showMap&quot;&gt;
+  &lt;div class&#x3D;&quot;mb-40 flex flex-col items-center justify-center&quot;&gt;
+
+    &lt;p class&#x3D;&quot;text-xl font-semibold mb-4&quot;&gt;Não foi possível mostrar o mapa para o município de {{ municipalityName }}&lt;/p&gt;
+    &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;Lamentamos, mas não conseguimos exibir o mapa. Por favor, tente novamente mais tarde.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/ng-container&gt;
+
+&lt;ng-template #noData&gt;
+  &lt;tr&gt;
+    &lt;td colspan&#x3D;&quot;5&quot; class&#x3D;&quot;px-4 py-2 border border-gray-400 text-center&quot;&gt;Selecione uma paragem para visualizar os próximos autocarros&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/ng-template&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./stops-map.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="municipalityName === \'\'">  <div class="mb-40 flex flex-col items-center justify-center mt-40">    <p class="text-xl font-semibold mb-4">Sem município atribuído, ERRO!</p>    <p class="text-gray-600">Por favor, efetue login para visualizar os dados para o município atribuído.</p>  </div></ng-container><ng-container *ngIf="municipalityName !== \'\' && showMap">  <google-map height="37.5rem" width="100%" [zoom]="zoom" [center]="center" [options]="options" #mapInstance="googleMap"></google-map>  <br />  <div class="flex justify-center flex-col items-center">    <p class="font-roboto font-bold text-2xl text-municip-black">Paragem Selecionada em Tempo Real</p>    <p class="italic text-gray-500"> {{ selectedStop }} </p>    <br />    <div class="overflow-x-auto max-h-[400px] rounded-xl border border-gray-400">      <div class="sticky top-0 bg-[#91D1E3]">        <table class="table-auto border-collapse border border-gray-400 w-[70rem] rounded-xl">          <thead>            <tr class="text-black">              <th class="px-4 py-2 border border-gray-400 w-1/12">Linha</th>              <th class="px-4 py-2 border border-gray-400 w-4/12">Destino</th>              <th class="px-4 py-2 border border-gray-400 w-2/12">Chegada Prevista</th>              <th class="px-4 py-2 border border-gray-400 w-2/12">Chegada Estimada</th>              <th class="px-4 py-2 border border-gray-400 w-3/12">Chegada Real</th>            </tr>          </thead>        </table>      </div>      <table class="table-auto border-collapse border border-gray-400 w-[70rem] rounded-xl">        <tbody class="divide-y divide-gray-400">          <ng-container *ngIf="nextBuses.length > 0; else noData">            <ng-container *ngFor="let bus of nextBuses">              <tr [class.opacity-50]="isBusPassed(bus)">                <td class="px-4 py-2 border border-gray-400 w-1/12 text-center">                  <div class="flex items-center justify-center">                    <div [style.backgroundColor]="bus.color" class="rounded-xl px-2 py-1 flex items-center justify-center">                      <span class="text-white">{{ bus.line_id }}</span>                    </div>                  </div>                </td>                <td class="px-4 py-2 border border-gray-400 w-4/12">{{ bus.headsign || \'---\' }}</td>                <td class="px-4 py-2 border border-gray-400 w-2/12">{{ bus.scheduled_arrival ? bus.scheduled_arrival.slice(0, 5) : \'---\' }}</td>                <td class="px-4 py-2 border border-gray-400 w-2/12">{{ bus.estimated_arrival ? bus.estimated_arrival.slice(0, 5) : \'---\' }}</td>                <td class="px-4 py-2 border border-gray-400 w-3/12">{{ bus.observed_arrival ? bus.observed_arrival.slice(0, 5) : \'---\' }}</td>              </tr>            </ng-container>          </ng-container>        </tbody>      </table>    </div>  </div>  <br /></ng-container><ng-container *ngIf="!showMap">  <div class="mb-40 flex flex-col items-center justify-center">    <p class="text-xl font-semibold mb-4">Não foi possível mostrar o mapa para o município de {{ municipalityName }}</p>    <p class="text-gray-600">Lamentamos, mas não conseguimos exibir o mapa. Por favor, tente novamente mais tarde.</p>  </div></ng-container><ng-template #noData>  <tr>    <td colspan="5" class="px-4 py-2 border border-gray-400 text-center">Selecione uma paragem para visualizar os próximos autocarros</td>  </tr></ng-template></div>'
+    var COMPONENTS = [{'name': 'AboutusComponent', 'selector': 'app-aboutus'},{'name': 'AccessDeniedComponent', 'selector': 'app-access-denied'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BannerComponent', 'selector': 'app-banner'},{'name': 'BigBannerComponent', 'selector': 'app-big-banner'},{'name': 'BlackBtnIconTextComponent', 'selector': 'app-black-btn-icon-text'},{'name': 'BtnMunicipBlueComponent', 'selector': 'app-btn-municip-blue'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarHeaderComponent', 'selector': 'app-calendar-header'},{'name': 'CalendarPageComponent', 'selector': 'app-calendar-page'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardOutlineThemeComponent', 'selector': 'app-card-outline-theme'},{'name': 'CardOutlineWhiteComponent', 'selector': 'app-card-outline-white'},{'name': 'CardTeamComponent', 'selector': 'app-card-team'},{'name': 'CitizenHomePageComponent', 'selector': 'app-citizen-home-page'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DatetimepickerComponent', 'selector': 'app-datetimepicker'},{'name': 'DialogMessageComponent', 'selector': 'app-dialog-message'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EventCardComponent', 'selector': 'app-event-card'},{'name': 'EventPageComponent', 'selector': 'app-event-page'},{'name': 'EventsListComponent', 'selector': 'app-events-list'},{'name': 'EventsSmallComponent', 'selector': 'app-events-small'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GeneralInfoComponent', 'selector': 'app-general-info'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderLoggedinComponent', 'selector': 'app-header-loggedin'},{'name': 'InputTitleComponent', 'selector': 'app-input-title'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MunAdmindashboardComponent', 'selector': 'app-munadmindashboard'},{'name': 'MunAdminHomePageComponent', 'selector': 'app-mun-admin-home-page'},{'name': 'MunicipalEditComponent', 'selector': 'app-municipal-edit'},{'name': 'MunicipalEventsComponent', 'selector': 'app-municipal-events'},{'name': 'MunicipalitymapComponent', 'selector': 'app-municipalitymap'},{'name': 'MunicipalProfileComponent', 'selector': 'app-municipal-profile'},{'name': 'MyDataCardComponent', 'selector': 'app-my-data-card'},{'name': 'MyMunicipalityCardComponent', 'selector': 'app-my-municipality-card'},{'name': 'NewsCardComponent', 'selector': 'app-news-card'},{'name': 'NewsCreateComponent', 'selector': 'app-news-create'},{'name': 'NewsEditComponent', 'selector': 'app-news-edit'},{'name': 'NewsListComponent', 'selector': 'app-news-list'},{'name': 'NewsPageComponent', 'selector': 'app-news-page'},{'name': 'NewsSmallComponent', 'selector': 'app-news-small'},{'name': 'NextEventsComponent', 'selector': 'app-next-events'},{'name': 'NextNewsComponent', 'selector': 'app-next-news'},{'name': 'ProfileBannerComponent', 'selector': 'app-profile-banner'},{'name': 'SchedulesComponent', 'selector': 'app-schedules'},{'name': 'SelectAccountTypeComponent', 'selector': 'app-select-account-type'},{'name': 'ShowHidePasswordComponent', 'selector': 'app-show-hide-password'},{'name': 'ShowStopComponent', 'selector': 'app-show-stop'},{'name': 'SignUpCitizenAccountComponent', 'selector': 'app-sign-up-citizen-account'},{'name': 'SignUpMunicipalAdministratorAccountComponent', 'selector': 'app-sign-up-municipal-administrator-account'},{'name': 'SignUpMunicipalityComponent', 'selector': 'app-sign-up-municipality'},{'name': 'SignUpSuccessComponent', 'selector': 'app-sign-up-success'},{'name': 'SmallerBannerComponent', 'selector': 'app-smaller-banner'},{'name': 'SpinnerComponent', 'selector': 'app-spinner'},{'name': 'StatisticalHomePageCardComponent', 'selector': 'app-statistical-home-page-card'},{'name': 'StopsMapComponent', 'selector': 'app-stops-map'},{'name': 'StopsPageComponent', 'selector': 'app-stops-page'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'TooltipComponent', 'selector': 'app-tooltip'},{'name': 'TransportsMainComponent', 'selector': 'app-transports-main'},{'name': 'UserinfodialogComponent', 'selector': 'app-userinfodialog'},{'name': 'UserpageComponent', 'selector': 'app-userpage'},{'name': 'VerticalCardComponent', 'selector': 'app-vertical-card'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'StopsMapComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StopsMapComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

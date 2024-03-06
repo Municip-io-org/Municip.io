@@ -1,1 +1,1 @@
-search_result['47']=["topic_0000000000000014.html","initial Class",""];
+search_result['47']=["topic_0000000000000014.html","CitizenStatusController.pendingCitizen Method","Esta função desbloqueia um cidadão. Recebe como parâmetro o email do cidadão ."];

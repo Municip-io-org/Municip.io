@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="GENERATOR" content="VSdocman - documentation generator; https://www.helixoft.com" />
 	<link rel="icon" href="favicon.ico">
-	<title>initial.BuildTargetModel Method</title>
+	<title>CitizenStatusController.SendRemove Method</title>
 
 	<link rel="stylesheet" type="text/css" href="msdn2019/toc.css" />
 	<script src="msdn2019/toc.js"></script>
@@ -74,11 +74,11 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
   </div>
 
 <div id="mainBody">
-		<h1 class="title">initial.BuildTargetModel Method</h1>
+		<h1 class="title">CitizenStatusController.SendRemove Method</h1>
         
 		<div class="metadata">
         Namespace:
-<a href="topic_0000000000000013.html">Municip.io.Server.Migrations</a>
+<a href="topic_0000000000000000.html">Municip.io.Server.Controllers</a>
 
 
 
@@ -89,6 +89,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
        
        
+        <summary-info>Esta função envia um email de remoção para um cidadão.</summary-info>
 
 
 
@@ -138,7 +139,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeVB">
-					<pre xml:space="preserve" class="brush: vb">Protected Overrides Sub BuildTargetModel( _&nbsp;<br />   ByVal <i>modelBuilder</i> As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.modelbuilder">ModelBuilder</a> _&nbsp;<br />)</pre>			
+					<pre xml:space="preserve" class="brush: vb">&lt;HttpPost(&quot;SendRemove&quot;)&gt; _&nbsp;<br />Public Function SendRemove( _&nbsp;<br />   ByVal <i>email</i> As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>, _&nbsp;<br />   ByVal <i>name</i> As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a> _&nbsp;<br />) As <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -177,7 +178,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCsharp">
-					<pre xml:space="preserve" class="brush: csharp">protected override <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.void">void</a> BuildTargetModel(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.modelbuilder">ModelBuilder</a> <i>modelBuilder</i>&nbsp;<br />)</pre>			
+					<pre xml:space="preserve" class="brush: csharp">[HttpPost(&quot;SendRemove&quot;)]&nbsp;<br />public <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a> SendRemove(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">string</a> <i>email</i>,&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">string</a> <i>name</i>&nbsp;<br />)</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -217,7 +218,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeCpp">
-					<pre xml:space="preserve" class="brush: cpp">protected: &nbsp;<br /><a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.void">void</a> BuildTargetModel(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.modelbuilder">ModelBuilder</a>^ <i>modelBuilder</i>&nbsp;<br />) </pre>			
+					<pre xml:space="preserve" class="brush: cpp">[HttpPost(&quot;SendRemove&quot;)]&nbsp;<br />public: &nbsp;<br /><a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a>^ SendRemove(&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ <i>email</i>,&nbsp;<br />   <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>^ <i>name</i>&nbsp;<br />) </pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -256,7 +257,7 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 				</div>
 				
 				<div class="codeSnippetCode codeJScript">
-					<pre xml:space="preserve" class="brush: js">protected function BuildTargetModel(&nbsp;<br />    <i>modelBuilder</i> : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.modelbuilder">ModelBuilder</a>&nbsp;<br />);</pre>			
+					<pre xml:space="preserve" class="brush: js">public &nbsp;<br />   HttpPost(&quot;SendRemove&quot;)&nbsp;<br />function SendRemove(&nbsp;<br />    <i>email</i> : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>,&nbsp;<br />    <i>name</i> : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">String</a>&nbsp;<br />) : <a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a>;</pre>			
 				</div>
 				<div class="codeSnippetCode codeNA">
 					<pre xml:space="preserve">This language is not supported or no code example is available.</pre>			
@@ -268,22 +269,39 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 
 <h4 class="subHeading">
-	Parameters</h4><dl paramName="modelBuilder" class="parameterList">
+	Parameters</h4><dl paramName="email" class="parameterList">
 	<dt>
 		<span class="parameter">
-			modelBuilder
+			email
 		</span>
 	</dt>
 	<dd>
-		<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.modelbuilder">ModelBuilder</a> 
+		<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">string</a> 
 	</dd>
 </dl>
 <p>
-	 
+	&lt;default&gt; 
+</p>
+<dl paramName="name" class="parameterList">
+	<dt>
+		<span class="parameter">
+			name
+		</span>
+	</dt>
+	<dd>
+		<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/system.string">string</a> 
+	</dd>
+</dl>
+<p>
+	&lt;default&gt; 
 </p>
 
 <p />
 
+	<h4 class="subHeading">
+		Return Value</h4>
+	<a target="_top" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a> 
+	
 
 
 
@@ -371,11 +389,11 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	<div id="seeAlsoSection" class="section">	
 		<div>
-			<a href="topic_0000000000000014.html">initial Class</a><br />
+			<a href="topic_000000000000000E.html">CitizenStatusController Class</a><br />
 
 
 
-<a href="topic_0000000000000013.html">Municip.io.Server.Migrations Namespace</a><br />
+<a href="topic_0000000000000000.html">Municip.io.Server.Controllers Namespace</a><br />
 
 
 			

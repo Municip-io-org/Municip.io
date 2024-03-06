@@ -1,1 +1,1 @@
-search_result['130']=["topic_000000000000003F.html","Municipality Class","Classe que representa o município"];
+search_result['130']=["topic_000000000000003A.html","NewsController.GetNewsById Method","esta função retorna uma notícia. Recebe como parâmetro o id da notícia."];

@@ -1,1 +1,1 @@
-search_result['85']=["topic_0000000000000026.html","InformacoesMunicipio Class","Classe que representa a info do município para GET da API"];
+search_result['85']=["topic_0000000000000021.html","EventsController.EnrollCitizen Method","Esta chamada permite inscrever um cidadão num evento passando o id do evento e o email do cidadão como parâmetros"];
