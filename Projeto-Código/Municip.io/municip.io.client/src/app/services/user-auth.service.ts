@@ -17,7 +17,7 @@ export class UserAuthService {
     return this._authStateChanged.asObservable();
   }
 
-  private readonly SESSION_STORAGE_KEY = 'userData';
+  private readonly LOCAL_STORAGE_KEY = 'userData';
   private readonly MUNICIPALITY_STORAGE_KEY = 'userMunicipality';
   private readonly ROLE_STORAGE_KEY = 'userRole';
   private readonly INFO_STORAGE_KEY = 'infoByEmail'
@@ -25,29 +25,29 @@ export class UserAuthService {
 
   getUserDataFromStorage(): any {
 
-    const userData = sessionStorage.getItem(this.SESSION_STORAGE_KEY);
+    const userData = localStorage.getItem(this.LOCAL_STORAGE_KEY);
     return userData ? JSON.parse(userData) : null;
   }
 
   setUserDataToStorage(userData: any): void {
-    sessionStorage.setItem(this.SESSION_STORAGE_KEY, JSON.stringify(userData));
+    localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(userData));
   }
 
   private setUserMunicipalityToStorage(municipality: any): void {
-    sessionStorage.setItem(this.MUNICIPALITY_STORAGE_KEY, JSON.stringify(municipality));
+    localStorage.setItem(this.MUNICIPALITY_STORAGE_KEY, JSON.stringify(municipality));
   }
 
   private getUserMunicipalityFromStorage(): any {
-    const municipalityString = sessionStorage.getItem(this.MUNICIPALITY_STORAGE_KEY);
+    const municipalityString = localStorage.getItem(this.MUNICIPALITY_STORAGE_KEY);
     return municipalityString ? JSON.parse(municipalityString) : null;
   }
 
   private setUserRoleToStorage(role: any): void {
-    sessionStorage.setItem(this.ROLE_STORAGE_KEY, JSON.stringify(role));
+    localStorage.setItem(this.ROLE_STORAGE_KEY, JSON.stringify(role));
   }
 
   private getUserRoleFromStorage(): any {
-    const roleString = sessionStorage.getItem(this.ROLE_STORAGE_KEY);
+    const roleString = localStorage.getItem(this.ROLE_STORAGE_KEY);
     return roleString ? JSON.parse(roleString) : null;
   }
 
@@ -101,7 +101,7 @@ export class UserAuthService {
   }
 
   getUserInfoByEmailFromStorage(email: string): any {
-    const userDataString = sessionStorage.getItem(this.INFO_STORAGE_KEY);
+    const userDataString = localStorage.getItem(this.INFO_STORAGE_KEY);
     const userData = userDataString ? JSON.parse(userDataString) : null;
     return userData && userData.email === email ? userData : null;
   }
@@ -109,9 +109,9 @@ export class UserAuthService {
   setUserInfoByEmailToStorage(email: string, userInfo: any): void {
     const cachedUserData = this.getUserInfoByEmailFromStorage(email);
     if (cachedUserData && cachedUserData.email === email) {
-      sessionStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify({ ...cachedUserData, ...userInfo }));
+      localStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify({ ...cachedUserData, ...userInfo }));
     } else {
-      sessionStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify(userInfo));
+      localStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify(userInfo));
     }
   }
 
