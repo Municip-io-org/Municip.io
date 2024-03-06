@@ -71,11 +71,11 @@ const routes: Routes = [
   { path: 'events', component: MunicipalEventsComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'events/:eventId', component: EventPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} },
-  { path: 'news', component: NewsListComponent, data: {} },
-  { path: 'news/news-create', component: NewsCreateComponent, data: {} },
+  { path: 'news', component: NewsListComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
+  { path: 'news/news-create', component: NewsCreateComponent, data: {}, canActivate: [MunicipalAdminGuard]  },
   { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'news/:newsId', component: NewsPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
-  { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [UserSameMunicipalityGuard] }
+  { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [UserSameMunicipalityGuard, MunicipalAdminGuard, ] }
   
 ];
 

@@ -1,8 +1,7 @@
 <app-header-loggedin></app-header-loggedin>
 
-<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
-                    [title]="'Notícias de ' + (municipalityuser || 'Município')"
-                    [text]="'Consulte as notícias relativas ao municipio'">
+<app-smaller-banner image={{municipality.landscapePhoto}}
+                    title="Notícias de {{municipality.name}}">
 </app-smaller-banner>
 
 

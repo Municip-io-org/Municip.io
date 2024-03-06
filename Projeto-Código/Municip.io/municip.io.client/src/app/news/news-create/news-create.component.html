@@ -1,9 +1,15 @@
-<app-header />
+<app-header-loggedin></app-header-loggedin>
 
 <app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
                     [title]="'Criar Notícia'"
                     [text]="'Criação uma nova notícia'">
 </app-smaller-banner>
+
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-message (confirm)="closeDialog()" title="Sucesso" message="Operação realizada com sucesso"
+                      [isConfirm]=true></app-dialog-message>
+</ng-container>
+
 <div class="flex justify-center items-center pt-11 ">
   <div class="container w-[60%]">
     <form [formGroup]="newsCreateForm" (ngSubmit)="OnSubmit()" class="w-full">
@@ -48,12 +54,13 @@
 
           <div class="w-full mb-4">
             <app-input-title class="text-[2.6vh] ml-1/4">Corpo da Notícia</app-input-title>
-            <div class="flex items-center relative ">
-              <textarea required placeholder="Corpo da Notícia (Maximo 9000 caracteres)" id="mainText" formControlName="mainText" name="mainText" [(ngModel)]="news.mainText" maxlength="9000"
-                        class="input text-left resize-none w-full h-[auto] lg:h-[30rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500"
-                        (input)="updateCharacterCount($event)"></textarea>
+            <div class="flex items-center relative">
+              <div contenteditable="true" placeholder="Corpo da Notícia (Máximo de 9000 caracteres)" id="mainText" formControlName="mainText" name="mainText" [(ngModel)]="news.mainText" maxlength="9000"
+                   class="input text-left resize-none w-full h-[auto] lg:h-[30rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500"
+                   (input)="updateCharacterCount($event)"></div>
               <span class="absolute bottom-2 right-2 text-gray-500">{{ mainTextCharacterCount }}/9000</span>
             </div>
+
             <div class="text-red-500 font-bold py-2" *ngIf="mainText?.touched && mainText?.invalid ">
               <div *ngIf="mainText?.errors?.['required'] ">Corpo da Notícia Obrigatório</div>
             </div>

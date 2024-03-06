@@ -67,7 +67,8 @@ namespace Municip.io.Server.Migrations
                     birthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     status = table.Column<int>(type: "int", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false)
+                    date = table.Column<DateOnly>(type: "date", nullable: false),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -288,14 +288,13 @@ namespace Municip.io.Server.Controllers
             return Json(false);
 
         }
-
+        
         [HttpPut("UpdateUserInfo")]
         public async Task<IActionResult> UpdateUserInfo(Citizen updatedCitizen, string passwordConfirmation)
         {
             if (ModelState.IsValid)
             {
                 var existingCitizen = await _context.Citizens.FindAsync(updatedCitizen.Id);
-
                
 
                 if (existingCitizen == null)
@@ -303,37 +302,87 @@ namespace Municip.io.Server.Controllers
                     return NotFound();
                 }
 
-                
                 if (!ValidadePassword(updatedCitizen.Password))
                 {
-                    BadRequest(new { Message = "A password não cumpre os requisitos necessários." });
+                   updatedCitizen.Password = null;
                 }
 
-               
-                else if (updatedCitizen.Password != existingCitizen.Password )
+
+                if (!await _userManager.CheckPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), passwordConfirmation))
                 {
-                    if (await _userManager.CheckPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), passwordConfirmation))
-                    {
-                        existingCitizen.Password = updatedCitizen.Password;
-                        _context.SaveChanges();
-                        return Ok();
+                    return BadRequest(new { Message = "A senha de confirmação não corresponde à senha antiga." });
+                }
+                else {
+
+
+                    if (updatedCitizen.Password != null && !await _userManager.CheckPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), updatedCitizen.Password))
+                    { 
+                      await _userManager.RemovePasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
+
+                      await  _userManager.AddPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), updatedCitizen.Password);
+                      await  _userManager.UpdateAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
                     }
-                    else
-                    {
-                        return BadRequest(new { Message = "A password de confirmação não corresponde à password antiga." });
-                    }
+
+
+                    _context.Entry(existingCitizen).CurrentValues.SetValues(updatedCitizen);
+                    _context.SaveChanges();
+                    return Ok();
                 }
 
-               
-                else if (updatedCitizen.Password == null)
+
+            }
+
+            var validationErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+            return BadRequest(new { Message = "Erro de Validação", Errors = validationErrors });
+        }
+
+
+
+
+
+        [HttpPut("UpdateAdmMunicipalInfo")]
+        public async Task<IActionResult> UpdateAdmMunicipalInfo(MunicipalAdministrator updatedCitizen, string passwordConfirmation)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingCitizen = await _context.MunicipalAdministrators.FindAsync(updatedCitizen.Id);
+
+
+
+                if (existingCitizen == null)
                 {
-                    updatedCitizen.Password = existingCitizen.Password;
+                    return NotFound();
                 }
 
-                
-                _context.Entry(existingCitizen).CurrentValues.SetValues(updatedCitizen);
-                _context.SaveChanges();
-                return Ok();
+                if (!ValidadePassword(updatedCitizen.Password))
+                {
+                    updatedCitizen.Password = null;
+                }
+
+
+                if (!await _userManager.CheckPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), passwordConfirmation))
+                {
+                    return BadRequest(new { Message = "A senha de confirmação não corresponde à senha antiga." });
+                }
+                else
+                {
+
+
+                    if (updatedCitizen.Password != null && !await _userManager.CheckPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), updatedCitizen.Password))
+                    {
+                        await _userManager.RemovePasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
+
+                        await _userManager.AddPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), updatedCitizen.Password);
+                        await _userManager.UpdateAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
+                    }
+
+
+                    _context.Entry(existingCitizen).CurrentValues.SetValues(updatedCitizen);
+                    _context.SaveChanges();
+                    return Ok();
+                }
+
+
             }
 
             var validationErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();

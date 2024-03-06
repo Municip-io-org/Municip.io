@@ -132,13 +132,10 @@
         <div *ngIf="showDropdownNoticias" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
             <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 1</a>
+              <a routerLink="/news" class="block px-4 py-2 hover:bg-gray-100">Ver Notícias</a>
             </li>
-            <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 2</a>
-            </li>
-            <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 3</a>
+            <li *ngIf="role == 'Municipal'">
+              <a routerLink="/news/news-create" class="block px-4 py-2 hover:bg-gray-100">Criar Notícia</a>
             </li>
           </ul>
         </div>

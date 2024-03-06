@@ -3,9 +3,13 @@
     <img src="/assets/images/icons/newspaper-folded.png" alt="Notícias" class="size-10 mr-5" />
     NOTÍCIAS DE {{ municipalityName | uppercase }}
   </div>
+  <div *ngIf="newsList.length === 0"
+       class="flex text-center justify-center items-center text-municip-normal-black grow text-[1.5rem] ">
+    <p class="font-semibold">Não há notícias.</p>
+  </div>
   <ul class="space-y-7">
-    <li *ngFor="let news of newsList">
-      <app-news-small [image]="news.image" [title]="news.title" [text]="news.text"></app-news-small>
+    <li *ngFor="let news of newsList.slice(0, 3)">
+      <app-news-small [image]="news.photo" [title]="news.title" [text]="news.subtitle" [newsId]="news.id"></app-news-small>
     </li>
   </ul>
 </section>
