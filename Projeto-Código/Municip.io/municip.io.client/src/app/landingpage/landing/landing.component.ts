@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Title } from "@angular/platform-browser";
+import { UserAuthService } from '../../services/user-auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,7 +11,25 @@ import { Title } from "@angular/platform-browser";
 })
 export class LandingComponent {
 
-constructor(private titleService: Title) {
+   anyUser: any;
+
+  ngOnInit() {
+    this.userAuthService.getUserData().subscribe(
+      res => {
+        this.anyUser = res;
+
+        if (this.anyUser.email != null) {
+
+
+          this.router.navigate(['/userpage']);
+        
+        }
+      });
+
+   
+  }
+
+constructor(private titleService: Title, private userAuthService : UserAuthService, private router : Router) {
     this.titleService.setTitle("Municip.io Landing");
   }
 
