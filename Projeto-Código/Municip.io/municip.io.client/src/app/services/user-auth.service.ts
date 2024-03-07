@@ -114,10 +114,8 @@ export class UserAuthService {
     var toStore;
     if (cachedUserData && cachedUserData.email === email) {
       toStore = JSON.stringify({ ...cachedUserData, ...userInfo });
-     // localStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify({ ...cachedUserData, ...userInfo }));
     } else {
 toStore = JSON.stringify(userInfo);
-   //   localStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify(userInfo));
     }
 
    var encryptedData = this.encryptionService.encryptData(toStore);
