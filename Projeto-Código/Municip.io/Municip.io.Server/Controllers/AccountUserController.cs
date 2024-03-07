@@ -100,6 +100,12 @@ namespace Municip.io.Server.Controllers
                     return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
                 }
 
+                if (!IsMunicipalityValid(citizen.Municipality))
+                {
+                    ModelState.AddModelError(string.Empty, "O município fornecido não é válido.");
+                    return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+                }
+
 
                 // Store user data in AspNetUsers database table
                 var result = await _userManager.CreateAsync(user, citizen.Password);
@@ -148,6 +154,17 @@ namespace Municip.io.Server.Controllers
 
             return age >= 18 && age < 120;
         }
+
+        private bool IsMunicipalityValid(string municipality)
+        {
+            var approvedMunicipality = _context.Municipalities
+                .Any(m => m.status == MunicipalityStatus.Approved && m.name == municipality);
+
+            return approvedMunicipality;
+        }
+
+
+
 
         /// <summary>
         ///Registo de um administrador municipal (conta + base de dados) 
