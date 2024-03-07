@@ -1,0 +1,67 @@
+<app-header />
+<div class="mb-40">
+  <app-big-banner [image]="'/assets/images/transports/transports.png'" [title]="'Documentos de ' + municipality"
+                  [text]="'Solicite os seus documentos através do portal Municip.io, possibilitando o seu pagamento e disponibilização online.'"
+                  class="font-inter" />
+
+
+  <div class="overflow-hidden bg-white py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-2 lg:px-[0rem]">
+      <div class="mx-auto grid max-w-2xl grid-cols-1  gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+        <div class="lg:pr-8 lg:pt-4">
+          <div class="lg:max-w-lg mx-auto mx-0">
+            <h2 class="text-base font-semibold leading-7 text-municip-blue">A conveniência do seu lado</h2>
+            <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Documentos de {{municipality}}</p>
+            <p class="mt-6 text-lg leading-8 text-gray-600">Solicite os seus documentos, analise os seus pedidos, efetue o pagamento, tudo isto, no conforto do seu lar.</p>
+            <dl class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+              <div class="relative pl-9">
+                <dt class="inline font-semibold text-gray-900">
+                  <svg class="absolute left-1 top-1 h-5 w-5 text-municip-blue" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" clip-rule="evenodd" />
+                  </svg>
+                  Sem Filas.
+                </dt>
+                <dd class="inline">Escolha o documento a pedir, insira os seus dados, e aguarde a aprovação do documento. Não necessitará de qualquer tipo de deslocação.</dd>
+              </div>
+              <div class="relative pl-9">
+                <dt class="inline font-semibold text-gray-900">
+                  <svg class="absolute left-1 top-1 h-5 w-5 text-municip-blue" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+                  </svg>
+                  Pague online e de forma segura.
+                </dt>
+                <dd class="inline">Efetue o pagamento através dos meios online, de forma totalmente segura e em minutos.</dd>
+              </div>
+              <div class="relative pl-9">
+                <dt class="inline font-semibold text-gray-900">
+                  <svg class="absolute left-1 top-1 h-5 w-5 text-municip-blue" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M4.632 3.533A2 2 0 016.577 2h6.846a2 2 0 011.945 1.533l1.976 8.234A3.489 3.489 0 0016 11.5H4c-.476 0-.93.095-1.344.267l1.976-8.234z" />
+                    <path fill-rule="evenodd" d="M4 13a2 2 0 100 4h12a2 2 0 100-4H4zm11.24 2a.75.75 0 01.75-.75H16a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75h-.01a.75.75 0 01-.75-.75V15zm-2.25-.75a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75H13a.75.75 0 00.75-.75V15a.75.75 0 00-.75-.75h-.01z" clip-rule="evenodd" />
+                  </svg>
+                  Os seus documentos, connosco.
+                </dt>
+                <dd class="inline">Os seus documentos estarão disponíveis na aba "Meus Documentos".</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+        <img src="/assets/images/documents/docspreview.JPG" alt="Preview Municip.io" class=" max-w-[45rem] rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[55rem] md:-ml-4 lg:-ml-0 mt-8" width="2432" height="1442">
+      </div>
+    </div>
+  </div>
+
+
+  <article class="flex justify-around mt-0 px-32 mb-10 pb-10 font-roboto">
+    <a class="hover:bg-blue-100 rounded-2xl transition duration-500 cursor-pointer"
+       href="/transports/schedules">
+      <app-vertical-card [cardImage]="'/assets/images/documents/folder.png'" [cardText]="'Efetue o pedido de um documento específico através do nosso portal'" [cardTitle]="'Pedir Documento'" />
+    </a>
+    <div class="bg-municip-light-blue w-0.5 rounded-xl"></div>
+    <a class="hover:bg-blue-100 rounded-2xl transition duration-500 cursor-pointer"
+       href="/transports/stops">
+      <app-vertical-card [cardImage]="'/assets/images/documents/document.png'" [cardText]="'Consulte os diversos documentos pedidos, estados, entre outros.'" [cardTitle]="'Os meus Documentos'" />
+    </a>
+  </article>
+
+
+  <app-footer />

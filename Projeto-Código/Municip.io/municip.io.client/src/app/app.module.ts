@@ -93,7 +93,8 @@ import { NewsPageComponent } from './news/news-page/news-page.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { RippleModule } from 'primeng/ripple';
 import { NewsEditComponent } from './news/news-edit/news-edit.component'
-import { DatePickerComponent } from './utils/input/date-picker/date-picker.component'
+import { DatePickerComponent } from './utils/input/date-picker/date-picker.component';
+import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component'
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -174,6 +175,7 @@ registerLocaleData(localePt, 'pt-PT');
     NewsPageComponent,
     NewsEditComponent,
     DatePickerComponent,
+    DocsHomepageComponent,
     
   ],
   imports: [

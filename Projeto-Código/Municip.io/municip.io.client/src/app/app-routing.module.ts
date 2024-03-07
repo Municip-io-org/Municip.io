@@ -38,6 +38,7 @@ import { UserSameMunicipalityGuard } from './utils/guard/userSameMunicipality/us
 import { EventsListComponent } from './events/my-events/events-list/events-list.component';
 import { NewsPageComponent } from './news/news-page/news-page.component';
 import { NewsEditComponent } from './news/news-edit/news-edit.component';
+import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -75,7 +76,8 @@ const routes: Routes = [
   { path: 'news/news-create', component: NewsCreateComponent, data: {}, canActivate: [MunicipalAdminGuard]  },
   { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'news/:newsId', component: NewsPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
-  { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [UserSameMunicipalityGuard, MunicipalAdminGuard, ] }
+  { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [UserSameMunicipalityGuard, MunicipalAdminGuard,] },
+  { path: 'documents', component: DocsHomepageComponent, data: {} },
   
 ];
 
