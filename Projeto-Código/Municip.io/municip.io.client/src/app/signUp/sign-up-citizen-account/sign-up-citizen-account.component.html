@@ -86,7 +86,8 @@
 
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="municipality?.touched && municipality?.invalid">
-                <div *ngIf="municipality?.errors?.['required'] ">Município Obrigatório</div>
+                <div *ngIf="municipality?.errors?.['required']">Município Obrigatório</div>
+                <div *ngIf="municipality?.errors?.['invalidMunicipality']">Município inválido</div>
               </div>
             </div>
 
