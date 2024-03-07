@@ -46,9 +46,31 @@ export class SignUpCitizenAccountComponent {
     address: new FormControl("", [Validators.required]),
     postalCode1: new FormControl("", [Validators.required, Validators.pattern(/^\d{4}$/)]),
     postalCode2: new FormControl("", [Validators.required, Validators.pattern(/^\d{3}$/)]),
-    birthDate: new FormControl(new Date(), [Validators.required]),
+    birthDate: new FormControl(new Date(), [Validators.required, this.adultAgeValidator.bind(this)]),
     photo: new FormControl(null, [Validators.required])
   });
+
+  validateMunicipality(control: FormControl): { [key: string]: boolean } | null {
+    if (!control.value || this.municipalities.find(municipality => municipality.name === control.value)) {
+      return null;
+    }
+    return { 'invalidMunicipality': true };
+  }
+
+  adultAgeValidator(control: FormControl): { [key: string]: boolean } | null {
+    const birthDate: Date = control.value;
+    const today: Date = new Date();
+    const age: number = today.getFullYear() - birthDate.getFullYear();
+
+    if (age < 18) {
+      return { 'underage': true };
+    } else if (age > 120) {
+      return { 'over120': true };
+    }
+
+    return null;
+  };
+
 
   constructor(private citizenAuthService: CitizenAuthService, private router: Router, private municipalityService: MunicipalAdminAuthService,
     private dateAdapter: DateAdapter<Date>) {
@@ -72,12 +94,9 @@ export class SignUpCitizenAccountComponent {
     );
   }
 
-  validateMunicipality(control: FormControl): { [key: string]: boolean } | null {
-    if (!control.value || this.municipalities.find(municipality => municipality.name === control.value)) {
-      return null;
-    }
-    return { 'invalidMunicipality': true };
-  }
+  
+
+  
 
   get firstName() {
     return this.signUpCitizenForm.get('firstName');
@@ -139,7 +158,6 @@ export class SignUpCitizenAccountComponent {
   }
 
   onSubmit() {
-    console.log("SUBMIT");
     this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen, this.image).subscribe(
       result => {
         this.router.navigateByUrl('/signUp-Success');

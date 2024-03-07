@@ -87,7 +87,7 @@
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="municipality?.touched && municipality?.invalid">
                 <div *ngIf="municipality?.errors?.['required']">Município Obrigatório</div>
-                <div *ngIf="municipality?.errors?.['invalidMunicipality']">Município inválido</div>
+                <div *ngIf="municipality?.errors?.['invalidMunicipality']">Município Inválido</div>
               </div>
             </div>
 
@@ -124,7 +124,9 @@
                 <app-tooltip [tooltipText]="'Utilize o seletor para a inserção da data'"></app-tooltip>
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="birthDate?.touched && birthDate?.invalid">
-                <div *ngIf="birthDate?.errors?.['required'] ">Data de Nascimento Obrigatório</div>
+                <div *ngIf="birthDate?.errors?.['required'] ">Data de Nascimento Obrigatória</div>
+                <div *ngIf="birthDate?.errors?.['underage']">Tem que ter +18 anos</div>
+                <div *ngIf="birthDate?.errors?.['over120']">É velhinho demais, né?</div>
               </div>
             </div>
             <div class="h-32">
@@ -161,7 +163,7 @@
                     items-center font-semibold text-municip-blank bg-gradient-to-tl
                     from-municip-light-blue to-municip-blue
   border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg 
-                    transition duration-700 ease-in-out disabled:bg-gray-400 disabled:cursor-not-allowed">
+                    transition duration-700 ease-in-out disabled:cursor-not-allowed">
                 Registar
                 <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
               </button>

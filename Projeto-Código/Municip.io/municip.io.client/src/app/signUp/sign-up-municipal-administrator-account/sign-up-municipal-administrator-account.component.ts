@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MunicipalAdministrator, MunicipalAdminAuthService } from '../../services/municipal-admin-auth.service';
+import { MunicipalAdministrator, MunicipalAdminAuthService, Municipality } from '../../services/municipal-admin-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Municipalities } from '../../municipalities.enum';
@@ -25,13 +25,15 @@ export class SignUpMunicipalAdministratorAccountComponent {
   errors: string[] | null = null;
 
   
+  defaultMunicipalityOption = 'Escolha o seu município';
   municipalities = Municipalities;
 
   image!: File;
 
-  getValues() {
+  getMunicipalities() {
     return Object.values(this.municipalities)
   }
+
   constructor(private municipalAdminAuthService: MunicipalAdminAuthService, private router: Router) { }
 
   signUpMunicipalAdminForm = new FormGroup({
@@ -39,9 +41,17 @@ export class SignUpMunicipalAdministratorAccountComponent {
     surname: new FormControl("",[Validators.required]),
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("",[Validators.required]),
-    municipality: new FormControl("", [Validators.required]),
+    municipality: new FormControl("", [Validators.required, this.validateMunicipality.bind(this)]),
     photo: new FormControl(null, [Validators.required])
   });
+
+  validateMunicipality(control: FormControl): { [key: string]: boolean } | null {
+    if (!control.value || this.getMunicipalities().find((municipality: Municipalities) => municipality === control.value)) {
+      return null;
+    }
+    return { 'invalidMunicipality': true };
+  }
+
 
   onSubmit() {
 

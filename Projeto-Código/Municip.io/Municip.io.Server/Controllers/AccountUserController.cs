@@ -94,6 +94,12 @@ namespace Municip.io.Server.Controllers
                     Email = citizen.Email
                 };
 
+                if (!IsAgeValid(citizen.birthDate))
+                {
+                    ModelState.AddModelError(string.Empty, "A idade do cidadão deve estar entre 18 e 120 anos.");
+                    return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+                }
+
 
                 // Store user data in AspNetUsers database table
                 var result = await _userManager.CreateAsync(user, citizen.Password);
@@ -130,6 +136,19 @@ namespace Municip.io.Server.Controllers
             return BadRequest(new { Message = "O modelo do cidadão é inválido.", ModelState = ModelState });
 
         }
+
+        private bool IsAgeValid(DateTime birthDate)
+        {
+            DateTime now = DateTime.Now;
+            int age = now.Year - birthDate.Year;
+            if (now.Month < birthDate.Month || (now.Month == birthDate.Month && now.Day < birthDate.Day))
+            {
+                age--;
+            }
+
+            return age >= 18 && age < 120;
+        }
+
         /// <summary>
         ///Registo de um administrador municipal (conta + base de dados) 
         /// </summary>

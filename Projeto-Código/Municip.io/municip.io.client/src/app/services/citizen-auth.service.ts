@@ -45,7 +45,7 @@ export interface Citizen {
   address: string;
   postalCode1: string;
   postalCode2: string;
-  birthDate: Date
+  birthDate: Date;
   photo?: string;
   events?: Event[];
 }
