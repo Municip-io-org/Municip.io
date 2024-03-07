@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { MunicipalAdministrator, Municipality } from './municipal-admin-auth.service';
 import { Citizen } from './citizen-auth.service';
+import { EncryptionService } from './crypto/encryption.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,34 +22,36 @@ export class UserAuthService {
   private readonly MUNICIPALITY_STORAGE_KEY = 'userMunicipality';
   private readonly ROLE_STORAGE_KEY = 'userRole';
   private readonly INFO_STORAGE_KEY = 'infoByEmail'
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private encryptionService: EncryptionService) { }
 
   getUserDataFromStorage(): any {
-
-    const userData = localStorage.getItem(this.LOCAL_STORAGE_KEY);
-    return userData ? JSON.parse(userData) : null;
+    const encryptedData = localStorage.getItem(this.LOCAL_STORAGE_KEY);
+    return encryptedData ? this.encryptionService.decryptData(encryptedData) : null;
   }
 
   setUserDataToStorage(userData: any): void {
-    localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(userData));
+    const encryptedData = this.encryptionService.encryptData(userData);
+    localStorage.setItem(this.LOCAL_STORAGE_KEY, encryptedData);
   }
 
   private setUserMunicipalityToStorage(municipality: any): void {
-    localStorage.setItem(this.MUNICIPALITY_STORAGE_KEY, JSON.stringify(municipality));
+    const encryptedData = this.encryptionService.encryptData(municipality);
+    localStorage.setItem(this.MUNICIPALITY_STORAGE_KEY, encryptedData);
   }
 
   private getUserMunicipalityFromStorage(): any {
-    const municipalityString = localStorage.getItem(this.MUNICIPALITY_STORAGE_KEY);
-    return municipalityString ? JSON.parse(municipalityString) : null;
+    const encryptedData = localStorage.getItem(this.MUNICIPALITY_STORAGE_KEY);
+    return encryptedData ? this.encryptionService.decryptData(encryptedData) : null;
   }
 
   private setUserRoleToStorage(role: any): void {
-    localStorage.setItem(this.ROLE_STORAGE_KEY, JSON.stringify(role));
+    const encryptedData = this.encryptionService.encryptData(role);
+    localStorage.setItem(this.ROLE_STORAGE_KEY, encryptedData);
   }
 
   private getUserRoleFromStorage(): any {
-    const roleString = localStorage.getItem(this.ROLE_STORAGE_KEY);
-    return roleString ? JSON.parse(roleString) : null;
+    const encryptedData = localStorage.getItem(this.ROLE_STORAGE_KEY);
+    return encryptedData ? this.encryptionService.decryptData(encryptedData) : null;
   }
 
 
@@ -101,19 +104,29 @@ export class UserAuthService {
   }
 
   getUserInfoByEmailFromStorage(email: string): any {
-    const userDataString = localStorage.getItem(this.INFO_STORAGE_KEY);
-    const userData = userDataString ? JSON.parse(userDataString) : null;
-    return userData && userData.email === email ? userData : null;
+    const encryptedData = localStorage.getItem(this.INFO_STORAGE_KEY);
+    const decryptedData = encryptedData ? this.encryptionService.decryptData(encryptedData) : null;
+    return decryptedData && decryptedData.email === email ? decryptedData : null;
   }
 
   setUserInfoByEmailToStorage(email: string, userInfo: any): void {
     const cachedUserData = this.getUserInfoByEmailFromStorage(email);
+    var toStore;
     if (cachedUserData && cachedUserData.email === email) {
-      localStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify({ ...cachedUserData, ...userInfo }));
+      toStore = JSON.stringify({ ...cachedUserData, ...userInfo });
+     // localStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify({ ...cachedUserData, ...userInfo }));
     } else {
-      localStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify(userInfo));
+toStore = JSON.stringify(userInfo);
+   //   localStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify(userInfo));
     }
+
+   var encryptedData = this.encryptionService.encryptData(toStore);
+localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
+
+
   }
+
+
 
 
   getUserRole(): Observable<any> {
@@ -192,8 +205,10 @@ export class UserAuthService {
           this.setUserDataToStorage(null);
           this.setUserMunicipalityToStorage(null);
           this.setUserRoleToStorage(null);
-          
-          
+          localStorage.removeItem(this.LOCAL_STORAGE_KEY);
+          localStorage.removeItem(this.MUNICIPALITY_STORAGE_KEY);
+          localStorage.removeItem(this.ROLE_STORAGE_KEY);
+          localStorage.removeItem(this.INFO_STORAGE_KEY);
 
           return true;
         }
