@@ -1,16 +1,14 @@
-/// <reference path="../sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component.ts" />
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CitizenAuthService, Citizen } from '../../services/citizen-auth.service';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Municipalities } from '../../municipalities.enum';
-import { provideNativeDateAdapter, DateAdapter } from '@angular/material/core';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Municipality, MunicipalAdminAuthService } from '../../services/municipal-admin-auth.service';
+import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-sign-up-citizen-account',
   templateUrl: './sign-up-citizen-account.component.html',
-  styleUrl: './sign-up-citizen-account.component.css',
+  styleUrls: ['./sign-up-citizen-account.component.css'],
   providers: [provideNativeDateAdapter()],
 })
 export class SignUpCitizenAccountComponent {
@@ -30,22 +28,12 @@ export class SignUpCitizenAccountComponent {
     photo: '',
   };
 
-
   errors: string[] | null = null;
 
-  municipalities = Municipalities;
-  //declare file image
+  defaultMunicipalityOption = 'Escolha o seu município';
+  municipalities: Municipality[] = [];
+
   image!: File;
-
-
-  getValues() {
-    return Object.values(this.municipalities)
-  }
-
-  constructor(private citizenAuthService: CitizenAuthService, private router: Router,
-    private dateAdapter: DateAdapter<Date>) {
-    this.dateAdapter.setLocale('pt');
-  }
 
   signUpCitizenForm = new FormGroup({
     firstName: new FormControl("", [Validators.required]),
@@ -54,7 +42,7 @@ export class SignUpCitizenAccountComponent {
     password: new FormControl("", [Validators.required]),
     nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
     gender: new FormControl("", [Validators.required]),
-    municipality: new FormControl("", [Validators.required]),
+    municipality: new FormControl("", [Validators.required, this.validateMunicipality.bind(this)]),
     address: new FormControl("", [Validators.required]),
     postalCode1: new FormControl("", [Validators.required, Validators.pattern(/^\d{4}$/)]),
     postalCode2: new FormControl("", [Validators.required, Validators.pattern(/^\d{3}$/)]),
@@ -62,8 +50,35 @@ export class SignUpCitizenAccountComponent {
     photo: new FormControl(null, [Validators.required])
   });
 
+  constructor(private citizenAuthService: CitizenAuthService, private router: Router, private municipalityService: MunicipalAdminAuthService,
+    private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('pt');
+  }
 
-  // getters for form validation
+  ngOnInit(): void {
+    this.municipalityService.getApprovedMunicipalities().subscribe(
+      (res: any) => {
+        this.municipalities = res as Municipality[];
+        this.municipalities.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
+
+        if (this.municipalities.length === 0) {
+          this.defaultMunicipalityOption = 'Não há municípios neste momento';
+        }
+       
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+
+  validateMunicipality(control: FormControl): { [key: string]: boolean } | null {
+    if (!control.value || this.municipalities.find(municipality => municipality.name === control.value)) {
+      return null;
+    }
+    return { 'invalidMunicipality': true };
+  }
+
   get firstName() {
     return this.signUpCitizenForm.get('firstName');
   }
@@ -109,42 +124,30 @@ export class SignUpCitizenAccountComponent {
   }
 
   get photo() {
-
     return this.signUpCitizenForm.get('photo');
-
-
   }
 
   onImagePicked(event: Event) {
     const fileInput = event.target as HTMLInputElement;
-    const file = fileInput?.files?.[0]; // Use optional chaining here
+    const file = fileInput?.files?.[0];
 
     if (file) {
       this.image = file;
-
-
     } else {
       console.error('No file selected');
     }
   }
 
-
   onSubmit() {
-
-
-
-
+    console.log("SUBMIT");
     this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen, this.image).subscribe(
-
       result => {
         this.router.navigateByUrl('/signUp-Success');
       },
-
       (error) => {
-        console.log(error.error.errors)
+        console.log(error.error.errors);
         this.errors = error.error.errors;
       }
     );
   }
-
 }

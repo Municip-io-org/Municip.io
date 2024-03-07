@@ -36,6 +36,17 @@ namespace Municip.io.Server.Controllers
         }
 
         /// <summary>
+        /// Esta função retorna todos os municípios aprovados como json.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("approvedMunicipalities")]
+        public IActionResult GetApprovedMunicipalities()
+        {
+            var approvedMunicipalities = _context.Municipalities.Where(m => m.status == MunicipalityStatus.Approved).ToList();
+            return Json(approvedMunicipalities);
+        }
+
+        /// <summary>
         /// Esta função aprova um município. Recebe como parâmetro o nome do município.
         /// </summary>
         /// <param name="name"></param>

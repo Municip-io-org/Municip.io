@@ -53,7 +53,7 @@
             <div class="h-32">
               <app-input-title class="text-[2.6vh]">Género</app-input-title>
               <select required id="gender" formControlName="gender" name="gender" [(ngModel)]="citizen.gender"
-                      class="input w-[35.2vh]  h-12">
+                      class="input w-[35.2vh]  h-14">
                 <option value="">Escolha o seu género</option>
                 <option value="m">Masculino</option>
                 <option value="f">Feminino</option>
@@ -66,7 +66,7 @@
             <div class="h-32">
               <app-input-title class="text-[2.6vh]">Rua, Nºde Porta e Andar</app-input-title>
               <input required placeholder="Introduza a sua morada" type="text" id="address" formControlName="address" name="address" [(ngModel)]="citizen.address"
-                     class="input w-[35.2vh] h-12" />
+                     class="input w-[35.2vh] h-14" />
               <div class="text-red-500 font-bold py-2" *ngIf="address?.touched && address?.invalid">
                 <div *ngIf="address?.errors?.['required'] ">Morada Obrigatório</div>
               </div>
@@ -74,11 +74,14 @@
             <div class="h-32">
               <app-input-title class="text-[2.6vh]">Município</app-input-title>
               <div class="flex items-center">
-                <select required id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="citizen.municipality"
-                        class="input w-[35.2vh] h-12">
-                  <option value="">Escolha o seu município</option>
-                  <option [value]="value" *ngFor="let value of getValues()">{{ value }}</option>
-                </select>
+
+                <input required id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="citizen.municipality"
+                       class="input w-[35.2vh] h-12" list="municipalities" [placeholder]="defaultMunicipalityOption">
+
+                <datalist id="municipalities" *ngIf="municipalities.length > 0">
+                  <option *ngFor="let municipality of municipalities" [value]="municipality.name">{{ municipality.name }}</option>
+                </datalist>
+
                 <app-tooltip [tooltipText]="'Selecione o seu município de residência'"></app-tooltip>
 
               </div>
@@ -147,7 +150,7 @@
               <div class="flex items-center">
                 <input type="file" #filePicker id="photo" formControlName="photo" name="photo"
                        [(ngModel)]="citizen.photo" (change)="onImagePicked($event)" accept="image/*"
-                       class="input w-[35.2vh] h-12">
+                       class="input w-[35.2vh] h-14">
                 <app-tooltip [tooltipText]="'Utilize o seletor para encontrar a sua foto'"></app-tooltip>
               </div>
             </div>
@@ -156,8 +159,8 @@
                       class=" relative h-auto w-[10rem] flex justify-center
                     items-center font-semibold text-municip-blank bg-gradient-to-tl
                     from-municip-light-blue to-municip-blue
-  border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg
-                    transition duration-700 ease-in-out">
+  border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg 
+                    transition duration-700 ease-in-out disabled:bg-gray-400 disabled:cursor-not-allowed">
                 Registar
                 <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
               </button>
