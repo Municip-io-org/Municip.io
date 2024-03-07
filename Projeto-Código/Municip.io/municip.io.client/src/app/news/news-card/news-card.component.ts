@@ -8,8 +8,8 @@ import { Roles, UserAuthService } from '../../services/user-auth.service';
   styleUrl: './news-card.component.css'
 })
 export class NewsCardComponent {
-  @Input() title: string= "TITULO da noticia";
-  @Input() subtitle: string = "subsubsubsubsubsusbubsubsubsusb";
+  @Input() title: string= "Titulo da noticia";
+  @Input() subtitle: string = "Subtítulo da noticia";
   @Input() image: string = "";
   @Input() date: string = "27/3/2012";
   @Input() id: string ="";

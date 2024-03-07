@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NewsService } from '../../services/news/news.service';
 import { Router } from '@angular/router';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
+import { Municipality } from '../../services/municipal-admin-auth.service';
 
 @Component({
   selector: 'app-news-list',
@@ -24,7 +25,29 @@ export class NewsListComponent {
   sortedNewsList: any[] = [];
   ascendingOrder: boolean = true;
   orderOptions: any[] = [{ label: 'Notícia mais Recente', value: true }, { label: 'Notícia mais Antiga', value: false }];
-  
+   municipality: Municipality = {
+    name: '',
+    president: '',
+    contact: '',
+    description: '',
+    areaha: '',
+    codigo: '',
+    codigopostal: '',
+    codigoine: '',
+    descpstal: '',
+    distrito: '',
+    eleitores: '',
+    email: '',
+    fax: '',
+    localidade: '',
+    nif: '',
+    populacao: '',
+    rua: '',
+    sitio: '',
+    telefone: '',
+    emblemPhoto: '',
+    landscapePhoto: '',
+  };
   nameSearch: string = "";
  
 
@@ -33,7 +56,7 @@ export class NewsListComponent {
       res => {
        
           this.role = res.role;
- 
+        
           this.LoadData();
         
       },
@@ -41,7 +64,7 @@ export class NewsListComponent {
         console.error(error);
       }
     );
-  
+    
   }
   LoadData() {
   
@@ -66,6 +89,16 @@ export class NewsListComponent {
                 });
                 this.sortedNewsList = this.newsList;
                 console.log(this.newsList);
+                this.userAuthService.getInfoMunicipality(this.newUser.municipality).subscribe(
+                  (municipalityRes: Municipality) => {
+                    this.municipality = municipalityRes;
+
+                  },
+                  error => {
+                    console.error(error);
+                  }
+                );
+                console.log(this.municipality);
               },
               (error) => {
                 console.log(error);

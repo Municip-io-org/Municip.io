@@ -25,7 +25,7 @@ export class NewsPageComponent {
     const date = new Date(datePart);
     const formattedDate = date.toLocaleDateString('pt-PT');
     this.news = { ...this.news, date: formattedDate };
-    this.news = { ...this.news , mainText: this.DecodeTabsAndNewlines(this.news.mainText)}
+    
   
      
 
@@ -61,10 +61,7 @@ export class NewsPageComponent {
       }
     );
   }
-  DecodeTabsAndNewlines(text: string): string {
-    return text.replace(/\\t/g, '\t').replace(/\\n/g, '\n');
-
-  }
+  
 
 }
 

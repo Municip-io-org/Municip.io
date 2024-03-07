@@ -1,9 +1,15 @@
-<app-header />
+<app-header-loggedin></app-header-loggedin>
 
 <app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
                     [title]="'Editar Notícia'"
                     [text]="'Edição de uma notícia'">
 </app-smaller-banner>
+
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-message (confirm)="closeDialog()" title="Sucesso" message="Operação realizada com sucesso"
+                      [isConfirm]=true></app-dialog-message>
+</ng-container>
+
 <div class="flex justify-center items-center pt-11 ">
   <div class="container w-[60%]">
     <form [formGroup]="newsEditForm" (ngSubmit)="OnSubmit()" class="w-full">
@@ -59,12 +65,26 @@
             </div>
           </div>
 
-          <div class="flex justify-end pb-10">
+          <div class="flex justify-between pb-10">
+            <button class="border-municip-gray border-2 rounded-md
+        hover:bg-municip-blank
+        hover:border-municip-blue text-municip-highlight-black
+        inline-flex py-3 px-8
+        focus:outline-none text-lg
+        transition duration-700 ease-in-out justify-center items-center
+        "
+                    routerLink="/news">
+              Voltar
+            </button>
             <button type="submit" class="relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
               Editar Notícia
               <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
             </button>
+
+            
           </div>
+
+
         </section>
       </div>
     </form>

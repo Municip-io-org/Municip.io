@@ -26,6 +26,8 @@ newUser: any;
   subtitleCharacterCount = 0;
   mainTextCharacterCount = 0;
 
+  isDialogOpen: boolean = false;
+
   constructor(private newsService: NewsService, private router: Router, private userAuthService: UserAuthService) { }
 
   ngOnInit() {
@@ -82,7 +84,7 @@ newUser: any;
    
     this.news.title = this.newsCreateForm.value.title || "";
     this.news.subtitle = this.newsCreateForm.value.subtitle || "";
-    this.news.mainText =  this.KeepTabsAndNewlines(this.newsCreateForm.value.mainText || "");
+    this.news.mainText =  this.newsCreateForm.value.mainText || "";
     this.news.date = this.newsCreateForm.value.date || new Date();
  
     this.newsService.createNews(this.news as News,this.image).subscribe(
@@ -110,8 +112,12 @@ newUser: any;
       console.error('No file selected');
     }
   }
-  KeepTabsAndNewlines(text: string): string {
-    return text.replace(/\t/g, '\\t').replace(/\n/g, '\\n');
+
+ 
+
+  closeDialog() {
+    this.isDialogOpen = false;
+    this.router.navigate(['/news']);
   }
 
   updateCharacterCount(event: any) {

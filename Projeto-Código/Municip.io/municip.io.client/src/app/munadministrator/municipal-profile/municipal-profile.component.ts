@@ -3,6 +3,7 @@ import { UserAuthService } from '../../services/user-auth.service';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Router } from '@angular/router';
 import { EventsService, Event } from '../../services/events/events.service';
+import { News, NewsService } from '../../services/news/news.service';
 
 @Component({
   selector: 'app-municipal-profile',
@@ -15,11 +16,7 @@ export class MunicipalProfileComponent {
 
   events: Event[] = [];
 
-  public newsList = [
-    { image: '/assets/images/carnaval.jpg', title: 'Setúbal sai à rua para brincar ao Carnaval', text: 'Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de atividades associadas aos festejos, de que se destacam duas tardes de animação no centro da cidade, a 11 e 13 de fevereiro.' },
-    { image: '/assets/images/carnaval.jpg', title: 'Setúbal sai à rua para brincar ao Carnaval', text: 'Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de atividades associadas aos festejos, de que se destacam duas tardes de animação no centro da cidade, a 11 e 13 de fevereiro.' },
-    { image: '/assets/images/carnaval.jpg', title: 'Setúbal sai à rua para brincar ao Carnaval', text: 'Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de atividades associadas aos festejos, de que se destacam duas tardes de animação no centro da cidade, a 11 e 13 de fevereiro.' },
-  ];
+  newsList:News[] = [];
 
   anyUser: any;
   user: any;
@@ -49,7 +46,7 @@ export class MunicipalProfileComponent {
       
   };
 
-  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router) { }
+  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router,private newsService:NewsService) { }
 
 
   ngOnInit(): void {
@@ -86,7 +83,7 @@ export class MunicipalProfileComponent {
   }
 
   seeMoreNewsClick() {
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/news");
   }
 
   loadData() {
@@ -101,8 +98,18 @@ export class MunicipalProfileComponent {
       }
     );
 
-
+    this.newsService.getNews(this.user.municipality).subscribe(
+      (listOfNews: any) => {
+        this.newsList = listOfNews as News[];
+        console.log(this.newsList);
+        },
+        error => {
+          console.log(error);
+      }
+);
+      
   }
+  
 
   sortEventsByDate() {
     this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());   

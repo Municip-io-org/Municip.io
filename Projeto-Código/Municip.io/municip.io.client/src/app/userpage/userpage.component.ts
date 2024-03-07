@@ -11,7 +11,7 @@ import { passwordsMatchValidator } from '../../../validator';
   styleUrl: './userpage.component.css'
 })
 export class UserpageComponent {
-  //user: any;
+  
   newUser: any;
   errors: string[] | null = null;
   originalName: string = "";
@@ -49,9 +49,9 @@ export class UserpageComponent {
 
     this.userAuthService.getUserRole().subscribe(
       res => {
-        if (res.role == Roles.Citizen) {
+        
           this.role = res.role;
-        }
+        console.log("role", this.role);
       },
       error => {
         console.error(error);
@@ -135,19 +135,34 @@ export class UserpageComponent {
     this.newUser.password = formValues.password? formValues.password : "";
     var passConfirm = formValues.passwordConfirmation || "";
     this.newUser.events = [];
-    
-    this.userAuthService.updateUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
-      res => {
+    if(this.role == 'Citizen')
+    {
+      this.userAuthService.updateUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
+        res => {
 
-        this.originalName = this.newUser.firstName;
-        this.originalPhoto = this.newUser.photo;
-      },
-      (error) => {
-        console.log("erro " + error.error.errors)
-        this.errors = error.error.errors;
-      }
-    );
-    
+          
+          this.originalName = this.newUser.firstName;
+          this.originalPhoto = this.newUser.photo;
+        },
+        (error) => {
+          console.log("erro " + error.error.errors)
+          this.errors = error.error.errors;
+        }
+      );
+    }
+else
+    {
+      this.userAuthService.updateMunicipAdminUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
+        res => {
+          this.originalName = this.newUser.firstName;
+          this.originalPhoto = this.newUser.photo;
+        },
+        (error) => {
+          console.log("erro " + error.error.errors)
+          this.errors = error.error.errors;
+        }
+      );
+    }
     
     
   }

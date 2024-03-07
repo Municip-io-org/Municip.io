@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NewsService } from '../../services/news/news.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -17,8 +17,9 @@ export class NewsEditComponent {
   image!: File;
   subtitleCharacterCount = 0;
   mainTextCharacterCount = 0;
+  isDialogOpen: boolean = false;
 
-  constructor(private newsService: NewsService, private activatedRoute: ActivatedRoute, private userAuthService: UserAuthService) { }
+  constructor(private newsService: NewsService, private activatedRoute: ActivatedRoute,private router :Router, private userAuthService: UserAuthService) { }
 
   ngOnInit() {
     this.news = this.activatedRoute.snapshot.data['news'];
@@ -60,14 +61,15 @@ export class NewsEditComponent {
     this.newsService.updateNews(this.news, this.news.photo).subscribe(
       (news) => {
         console.log(news);
+        this.isDialogOpen = true;
         this.errors = null;
+      
       },
       (error) => {
         console.error(error);
         this.errors = error.error;
       }
     );
-
   }
 
 
@@ -81,6 +83,11 @@ export class NewsEditComponent {
     } else {
       console.error('No file selected');
     }
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false;
+
   }
 
   updateCharacterCount(event: any) {

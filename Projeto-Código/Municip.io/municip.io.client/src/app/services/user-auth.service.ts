@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/comm
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { Municipality } from './municipal-admin-auth.service';
+import { MunicipalAdministrator, Municipality } from './municipal-admin-auth.service';
 import { Citizen } from './citizen-auth.service';
 
 @Injectable({
@@ -165,6 +165,21 @@ export class UserAuthService {
       })
     );
   }
+
+  updateMunicipAdminUser(user: MunicipalAdministrator, image: File, passConfirm: string): Observable<any> {
+    const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    const imgurl = "https://api.imgur.com/3/image";
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post(imgurl, formData, { headers }).pipe(
+      switchMap((response: any) => {
+        user.photo = response['data']['link'];
+        console.log(user);
+        return this.http.put(`/api/accounts/UpdateAdmMunicipalInfo?passwordConfirmation=${passConfirm}`, user);
+      })
+    );
+  }
+
 
   signOut(): Observable<boolean> {
     return this.http.post('/api/accounts/logout', {}, {
