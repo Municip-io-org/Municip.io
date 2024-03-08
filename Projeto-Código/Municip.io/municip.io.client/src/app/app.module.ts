@@ -95,7 +95,8 @@ import { RippleModule } from 'primeng/ripple';
 import { NewsEditComponent } from './news/news-edit/news-edit.component'
 import { DatePickerComponent } from './utils/input/date-picker/date-picker.component';
 import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component';
-import { MyDocumentsComponent } from './documents/my-documents/my-documents.component'
+import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
+import { DocumentCardComponent } from './utils/documents/document-card/document-card.component'
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -178,6 +179,7 @@ registerLocaleData(localePt, 'pt-PT');
     DatePickerComponent,
     DocsHomepageComponent,
     MyDocumentsComponent,
+    DocumentCardComponent,
     
   ],
   imports: [

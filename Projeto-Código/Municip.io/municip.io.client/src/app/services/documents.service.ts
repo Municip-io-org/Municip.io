@@ -6,10 +6,10 @@ import { Injectable } from '@angular/core';
 export class DocumentsService {
 
   documents: Document[] = [
-    { id: 1, type: DocumentType.ID, name: 'ID Card', status: StatusDocument.approved, date: new Date('2020-12-01') },
-    { id: 2, type: DocumentType.Passport, name: 'Passport', status: StatusDocument.approved, date: new Date('2020-12-01') },
-    { id: 3, type: DocumentType.DriverLicense, name: 'Driver License', status: StatusDocument.pending, date: new Date('2020-12-01') },
-    { id: 4, type: DocumentType.Other, name: 'Other', status: StatusDocument.rejected, date: new Date('2020-12-01') }
+    { id: 1, type: DocumentType.Alvara, name: 'Alvará de funcionamento', status: StatusDocument.approved, date: new Date('2021-12-01') },
+    { id: 2, type: DocumentType.Requirement, name: 'Requerimento de passaporte', status: StatusDocument.approved, date: new Date('2020-12-01') },
+    { id: 3, type: DocumentType.Certeficated, name: 'Certificado de Residência', status: StatusDocument.pending, date: new Date('2020-12-01') },
+    { id: 4, type: DocumentType.Other, name: 'Certidão de Nascimento', status: StatusDocument.rejected, date: new Date('2020-10-01') }
   ];
 
   constructor() { }
@@ -32,14 +32,14 @@ export interface Document {
 }
 
 export enum StatusDocument {
-  pending = 'pending',
-  approved = 'approved',
-  rejected = 'rejected'
+  pending = 'Pendente',
+  approved = 'Aprovado',
+  rejected = 'Rejeitado'
 }
 
 export enum DocumentType {
-  ID = 'ID',
-  Passport = 'Passport',
-  DriverLicense = 'Driver License',
-  Other = 'Other'
+  Requirement = "Requerimento",
+  Alvara = 'Alvará',
+  Certeficated = 'Certificado',
+  Other = 'Outro'
 }
