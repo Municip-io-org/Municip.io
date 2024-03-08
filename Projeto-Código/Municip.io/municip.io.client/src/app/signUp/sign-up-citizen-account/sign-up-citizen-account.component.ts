@@ -40,7 +40,7 @@ export class SignUpCitizenAccountComponent {
     surname: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.email, Validators.required]),
     password: new FormControl("", [Validators.required]),
-    country: new FormControl("", [Validators.required, this.validateCountry.bind(this)]),
+    country: new FormControl({ alpha2Code: 'PT' }, [Validators.required, this.validateCountry.bind(this)]),
     nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
     gender: new FormControl("", [Validators.required]),
     municipality: new FormControl("", [Validators.required, this.validateMunicipality.bind(this)]),

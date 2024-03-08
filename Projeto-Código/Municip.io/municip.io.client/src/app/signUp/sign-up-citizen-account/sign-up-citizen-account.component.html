@@ -41,14 +41,14 @@
             <div class=" flex flex-col">
               <app-input-title class="text-[1.4rem]">NIF</app-input-title>
               <section class="flex flex-col">
-                <div>
+                <div class="">
                   <div class="flex items-center">
                     <app-country-picker [country]="country" class="w-[12rem] h-[4rem]">
                     </app-country-picker>
                     <app-tooltip [tooltipText]="'Selecione um país válido'"></app-tooltip>
                   </div>
                  
-                  <div class="text-red-500 font-bold py-2" *ngIf="country?.touched && country?.invalid">
+                  <div class="text-red-500 font-bold py-2 relative bottom-[0.7rem] " *ngIf="(country.dirty || country.touched) && country?.invalid">
                     <div *ngIf="country?.errors?.['required']">País obrigatório</div>
                     <div *ngIf="country?.errors?.['invalidCountry']">País inválido</div>
                   </div>
