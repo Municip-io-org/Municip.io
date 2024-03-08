@@ -40,6 +40,7 @@ export class SignUpCitizenAccountComponent {
     surname: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.email, Validators.required]),
     password: new FormControl("", [Validators.required]),
+    country: new FormControl("", [Validators.required]),
     nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
     gender: new FormControl("", [Validators.required]),
     municipality: new FormControl("", [Validators.required, this.validateMunicipality.bind(this)]),
@@ -78,6 +79,11 @@ export class SignUpCitizenAccountComponent {
   }
 
   ngOnInit(): void {
+    this.signUpCitizenForm.get('country')!.valueChanges
+      .subscribe(country => console
+        .log('this.signUpCitizenForm.get("country").valueChanges', country));
+
+
     this.municipalityService.getApprovedMunicipalities().subscribe(
       (res: any) => {
         this.municipalities = res as Municipality[];
@@ -114,6 +120,9 @@ export class SignUpCitizenAccountComponent {
     return this.signUpCitizenForm.get('password');
   }
 
+  get country() {
+    return this.signUpCitizenForm.get('country') as FormControl;
+  }
   get nif() {
     return this.signUpCitizenForm.get('nif');
   }
