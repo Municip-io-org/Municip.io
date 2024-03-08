@@ -40,7 +40,7 @@ export class SignUpCitizenAccountComponent {
     surname: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.email, Validators.required]),
     password: new FormControl("", [Validators.required]),
-    country: new FormControl("", [Validators.required]),
+    country: new FormControl("", [Validators.required, this.validateCountry.bind(this)]),
     nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
     gender: new FormControl("", [Validators.required]),
     municipality: new FormControl("", [Validators.required, this.validateMunicipality.bind(this)]),
@@ -56,6 +56,16 @@ export class SignUpCitizenAccountComponent {
       return null;
     }
     return { 'invalidMunicipality': true };
+  }
+
+  validateCountry(control: FormControl): { [key: string]: boolean } | null {
+    const value: Country = control.value;
+    if (value && typeof value === 'object' && 'alpha2Code' in value && 'name' in value) {
+      return null; 
+    } else {
+      return { 'invalidCountry': true }; 
+    }
+   
   }
 
   adultAgeValidator(control: FormControl): { [key: string]: boolean } | null {

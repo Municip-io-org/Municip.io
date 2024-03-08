@@ -40,18 +40,32 @@
             </div>
             <div class=" flex flex-col">
               <app-input-title class="text-[1.4rem]">NIF</app-input-title>
-              <app-country-picker [country]="country" class="w-[12rem]">
-
-              </app-country-picker>
-              <div class="flex items-center">
-                <input required placeholder="Introduza o seu NIF" type="text" id="nif" formControlName="nif" name="nif" [(ngModel)]="citizen.nif"
-                       class="input w-[21rem] h-12" />
-                <app-tooltip [tooltipText]="'9 dígitos'"></app-tooltip>
-              </div>
-              <div class="text-red-500 font-bold py-2" *ngIf="nif?.touched && nif?.invalid">
-                <div *ngIf="nif?.errors?.['required']">Nif obrigatório</div>
-                <div *ngIf="nif?.errors?.['pattern']">Nif inválido</div>
-              </div>
+              <section class="flex flex-col">
+                <div>
+                  <div class="flex items-center">
+                    <app-country-picker [country]="country" class="w-[12rem] h-[4rem]">
+                    </app-country-picker>
+                    <app-tooltip [tooltipText]="'Selecione um país válido'"></app-tooltip>
+                  </div>
+                 
+                  <div class="text-red-500 font-bold py-2" *ngIf="country?.touched && country?.invalid">
+                    <div *ngIf="country?.errors?.['required']">País obrigatório</div>
+                    <div *ngIf="country?.errors?.['invalidCountry']">País inválido</div>
+                  </div>
+                </div>
+                
+                <div>
+                  <div class="flex items-center">
+                    <input required placeholder="Introduza o seu NIF" type="text" id="nif" formControlName="nif" name="nif" [(ngModel)]="citizen.nif"
+                           class="input w-[15rem] h-12" />
+                    <app-tooltip [tooltipText]="'9 dígitos'"></app-tooltip>
+                  </div>
+                  <div class="text-red-500 font-bold py-2" *ngIf="nif?.touched && nif?.invalid">
+                    <div *ngIf="nif?.errors?.['required']">Nif obrigatório</div>
+                    <div *ngIf="nif?.errors?.['pattern']">Nif inválido</div>
+                  </div>
+                </div>
+              </section>
             </div>
             <div class="">
               <app-input-title class="text-[1.4rem]">Género</app-input-title>
