@@ -45,7 +45,6 @@
                   <div class="flex items-center">
                     <app-country-picker [country]="country" class="w-[12rem] h-[4rem]">
                     </app-country-picker>
-                    <app-tooltip [tooltipText]="'Selecione um país válido'"></app-tooltip>
                   </div>
                  
                   <div class="text-red-500 font-bold relative bottom-[0.7rem] " *ngIf="country.touched && country?.invalid">

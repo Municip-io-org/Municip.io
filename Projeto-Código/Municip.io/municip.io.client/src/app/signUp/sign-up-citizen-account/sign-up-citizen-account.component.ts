@@ -1,6 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CitizenAuthService, Citizen } from '../../services/citizen-auth.service';
+import { CitizenAuthService, Citizen, Country } from '../../services/citizen-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Municipality, MunicipalAdminAuthService } from '../../services/municipal-admin-auth.service';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
@@ -190,7 +190,7 @@ export class SignUpCitizenAccountComponent {
       surname: this.surname!.value!,
       email: this.email!.value!,
       password: this.password!.value!,
-      nif: `${(this.country!.value! as Country).alpha2Code}${this.nif!.value!}`, // Combine alpha2Code do país com o nif
+      nif: `${(this.country!.value! as Country).alpha2Code}${this.nif!.value!}`, 
       gender: this.gender!.value!,
       municipality: this.municipality!.value!,
       address: this.address!.value!,
@@ -212,10 +212,4 @@ export class SignUpCitizenAccountComponent {
     );
   }
 }
-interface Country {
-  name: string;
-  alpha2Code: string;
-  alpha3Code: string;
-  numericCode: string;
-  callingCode: string;
-}
+
