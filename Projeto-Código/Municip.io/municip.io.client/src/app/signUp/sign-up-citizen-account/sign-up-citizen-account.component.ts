@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { CitizenAuthService, Citizen } from '../../services/citizen-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -168,4 +168,11 @@ export class SignUpCitizenAccountComponent {
       }
     );
   }
+}
+interface Country {
+  name: string;
+  alpha2Code: string;
+  alpha3Code: string;
+  numericCode: string;
+  callingCode: string;
 }
