@@ -3,6 +3,7 @@ import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Citizen } from '../../services/citizen-auth.service';
 import { UserAuthService } from '../../services/user-auth.service';
 import { EventsService, Event } from '../../services/events/events.service';
+import { News, NewsService } from '../../services/news/news.service';
 
 @Component({
   selector: 'app-citizen-home-page',
@@ -11,12 +12,12 @@ import { EventsService, Event } from '../../services/events/events.service';
 })
 export class CitizenHomePageComponent {
 
-  constructor(private userAuthService: UserAuthService, private eventsService: EventsService) { }
+  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private newsService : NewsService) { }
 
   events: Event[] = [];
 
   anyUser: any;
-
+  newsList: News[] = [];
   user: Citizen = {
     firstName: 'Sem Nome',
     surname: 'Sem Apelido',
@@ -96,7 +97,15 @@ export class CitizenHomePageComponent {
       }
     );
 
-
+    this.newsService.getNews(this.user.municipality).subscribe(
+      (listOfNews: any) => {
+        this.newsList = listOfNews as News[];
+        console.log(this.newsList);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   sortEventsByDate() {
