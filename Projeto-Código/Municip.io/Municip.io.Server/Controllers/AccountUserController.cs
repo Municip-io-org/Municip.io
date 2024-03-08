@@ -29,7 +29,7 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
 
-       
+
 
         /// <summary>
         /// Obtém os dados do utilizador autenticado.
@@ -129,6 +129,9 @@ namespace Municip.io.Server.Controllers
                     citizen.Events = new List<Event>();
                     _context.Citizens.Add(citizen);
                     await _context.SaveChangesAsync();
+
+                    SendRegister(citizen.Email, citizen.firstName);
+
                     return Ok();
                 }
 
@@ -224,6 +227,7 @@ namespace Municip.io.Server.Controllers
 
                 if (result.Succeeded)
                 {
+                    this.SendRegister(municipalAdministrator.Email, municipalAdministrator.firstName);
 
 
                     await _userManager.AddToRoleAsync(user, "Municipal");
@@ -354,14 +358,14 @@ namespace Municip.io.Server.Controllers
             return Json(false);
 
         }
-        
+
         [HttpPut("UpdateUserInfo")]
         public async Task<IActionResult> UpdateUserInfo(Citizen updatedCitizen, string passwordConfirmation)
         {
             if (ModelState.IsValid)
             {
                 var existingCitizen = await _context.Citizens.FindAsync(updatedCitizen.Id);
-               
+
 
                 if (existingCitizen == null)
                 {
@@ -370,7 +374,7 @@ namespace Municip.io.Server.Controllers
 
                 if (!ValidadePassword(updatedCitizen.Password))
                 {
-                   updatedCitizen.Password = null;
+                    updatedCitizen.Password = null;
                 }
 
 
@@ -378,15 +382,16 @@ namespace Municip.io.Server.Controllers
                 {
                     return BadRequest(new { Message = "A senha de confirmação não corresponde à senha antiga." });
                 }
-                else {
+                else
+                {
 
 
                     if (updatedCitizen.Password != null && !await _userManager.CheckPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), updatedCitizen.Password))
-                    { 
-                      await _userManager.RemovePasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
+                    {
+                        await _userManager.RemovePasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
 
-                      await  _userManager.AddPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), updatedCitizen.Password);
-                      await  _userManager.UpdateAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
+                        await _userManager.AddPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), updatedCitizen.Password);
+                        await _userManager.UpdateAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
                     }
 
 
@@ -473,7 +478,7 @@ namespace Municip.io.Server.Controllers
             {
                 var validationErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
                 return BadRequest(new { Message = "Erro de Validação", Errors = validationErrors });
-               
+
             }
 
             var existingMunicipality = await _context.Municipalities.FindAsync(updatedMunicipality.Id);
@@ -496,5 +501,20 @@ namespace Municip.io.Server.Controllers
 
             return Json(await _context.Municipalities.Where(m => m.name == existingMunicipality.name).FirstOrDefaultAsync());
         }
+
+
+        /// <summary>
+        /// Esta função envia um email de aprovação para um cidadão.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [HttpPost("SendRegister")]
+        public IActionResult SendRegister(string email, string name)
+        {
+            EmailSender.SendEmail(email, "Inscrito Com Sucesso", name, AccountUserEmail.REGISTER.toString(), "root/html/AproveEmail.html");
+            return Ok("Success");
+        }
+
     }
 }
