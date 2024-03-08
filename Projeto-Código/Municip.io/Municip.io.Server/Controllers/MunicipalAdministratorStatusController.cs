@@ -1,23 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 
 namespace Municip.io.Server.Controllers
 {
-
-    /// <summary>
-    /// Este controlador é responsável por gerir o estado dos cidadãos.
-    /// </summary>
+    [Route("api/municipalAdministratorStatus")]
     [ApiController]
-    [Route("api/citizenstatus")]
-    public class CitizenStatusController : Controller
+    public class MunicipalAdministratorStatusController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        public CitizenStatusController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public MunicipalAdministratorStatusController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -29,11 +25,13 @@ namespace Municip.io.Server.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        [HttpGet("citizens")]
-            public IActionResult getCitizens(string? name)
+        [HttpGet("municipalAdministrators")]
+        public IActionResult getMunicipalAdministrators(string? name)
         {
-            var citizens = _context.Citizens.Where(c => c.Municipality == name).ToList();
-            return Json(citizens);
+
+            var munadmin = _context.MunicipalAdministrators.Where(m => m.municipality == name);
+            return Json(munadmin);
+
         }
 
         /// <summary>
@@ -41,26 +39,26 @@ namespace Municip.io.Server.Controllers
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        [HttpPost("approveCitizen")]
-        public async Task<IActionResult> approveCitizen(string? email)
+        [HttpPost("approveMunicipalAdministrator")]
+        public async Task<IActionResult> approveMunicipalAdministrator(string? email)
         {
-            var citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
-            if (citizen != null)
+            var ma = await _context.MunicipalAdministrators.FirstOrDefaultAsync(m => m.Email == email);
+            if (ma!= null)
             {
-                
-                if(citizen.status == CitizenStatus.Blocked)
+
+                if (ma.status == MunicipalAdministratorStatus.Blocked)
                 {
-                    SendUnblock(citizen.Email, citizen.firstName);
+                    SendUnblock(ma.Email, ma.firstName);
                 }
                 else
                 {
-                    SendAprove(citizen.Email, citizen.firstName);
+                    SendAprove(ma.Email, ma.firstName);
 
                 }
-                citizen.status = CitizenStatus.Approved;
+                ma.status = MunicipalAdministratorStatus.Approved;
                 await _context.SaveChangesAsync();
 
-                return Json(_context.Citizens.ToList());
+                return Json(_context.MunicipalAdministrators.ToList());
             }
             return NotFound();
         }
@@ -71,31 +69,31 @@ namespace Municip.io.Server.Controllers
         /// <param name="email"></param>
         /// <returns></returns>
 
-        [HttpPost("deleteCitizen")]
-        public async Task<IActionResult> deleteCitizen(string? email)
+        [HttpPost("deleteMunicipalAdministrator")]
+        public async Task<IActionResult> deleteMunicipalAdministrator(string? email)
         {
-            var citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
-            if (citizen != null)
+            var ma = await _context.MunicipalAdministrators.FirstOrDefaultAsync(c => c.Email == email);
+            if (ma!= null)
             {
-                _context.Citizens.Remove(citizen);
+                _context.MunicipalAdministrators.Remove(ma);
                 await _context.SaveChangesAsync();
 
-                
+
                 var user = await _userManager.FindByEmailAsync(email);
                 if (user != null)
                 {
                     await _userManager.DeleteAsync(user);
                 }
 
-                if (citizen.status == CitizenStatus.Pending)
+                if (ma.status == MunicipalAdministratorStatus.Pending)
                 {
-                    SendDeny(citizen.Email, citizen.firstName);
-                 }
+                    SendDeny(ma.Email, ma.firstName);
+                }
                 else
                 {
-                    SendRemove(citizen.Email, citizen.firstName);
+                    SendRemove(ma.Email, ma.firstName);
                 }
-                return Json(_context.Citizens.ToList());
+                return Json(_context.MunicipalAdministrators.ToList());
             }
             return NotFound();
         }
@@ -105,16 +103,16 @@ namespace Municip.io.Server.Controllers
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        [HttpPost("blockCitizen")]
-        public async Task<IActionResult> blockCitizen(string? email)
+        [HttpPost("blockMunicipalAdministrator")]
+        public async Task<IActionResult> blockMunicipalAdministrator(string? email)
         {
-            var citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
-            if (citizen != null)
+            var ma = await _context.MunicipalAdministrators.FirstOrDefaultAsync(m => m.Email == email);
+            if (ma!= null)
             {
-                citizen.status = CitizenStatus.Blocked;
+                ma.status = MunicipalAdministratorStatus.Blocked;
                 await _context.SaveChangesAsync();
-                SendBlock(citizen.Email, citizen.firstName);
-                return Json(_context.Citizens.ToList());
+                SendBlock(ma.Email, ma.firstName);
+                return Json(_context.MunicipalAdministrators.ToList());
             }
             return NotFound();
         }
@@ -124,15 +122,15 @@ namespace Municip.io.Server.Controllers
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        [HttpPost("pendingCitizen")]
-        public async Task<IActionResult> pendingCitizen(string? email)
+        [HttpPost("pendingMunicipalAdministrator")]
+        public async Task<IActionResult> pendingMunicipalAdministrator(string? email)
         {
-            var citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
-            if (citizen != null)
+            var ma = await _context.MunicipalAdministrators.FirstOrDefaultAsync(m => m.Email == email);
+            if (ma != null)
             {
-                citizen.status = CitizenStatus.Pending;
+                ma.status = MunicipalAdministratorStatus.Pending;
                 await _context.SaveChangesAsync();
-                return Json(_context.Citizens.ToList());
+                return Json(_context.MunicipalAdministrators.ToList());
             }
             return NotFound();
         }
@@ -145,7 +143,7 @@ namespace Municip.io.Server.Controllers
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpPost("SendAprove")]
-        public IActionResult SendAprove(string email,string name)
+        public IActionResult SendAprove(string email, string name)
         {
             EmailSender.SendEmail(email, "Resultado de Inscrição", name, UserStatusMessage.Approve.toString(), "root/html/AproveEmail.html");
             return Ok("Success");

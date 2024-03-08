@@ -22,7 +22,33 @@ export class MunicipalityStatusService {
   }
 
   deleteMunicipality(name: string) {
-    return this.http.post<any>(`/api/municipalitystatus/deleteMunicipality?name=${name}`, {});  }
+    return this.http.post<any>(`/api/municipalitystatus/deleteMunicipality?name=${name}`, {});
+  }
+
+
+
+
+  getMunicipalAdmins(name: string) {
+    return this.http.get<any>(`/api/municipalAdministratorStatus/municipalAdministrators?name=${name}`);
+  }
+
+  approveMunicipalAdmin(username: string) {
+
+    return this.http.post<any>(`/api/municipalAdministratorStatus/approveMunicipalAdministrator?username=${username}`, {});
+
+  }
+
+  deleteMunicipalAdmin(username: string) {
+    return this.http.post<any>(`/api/municipalAdministratorStatus/deleteMunicipalAdministrator?username=${username}`, {});
+  }
+
+
+  blockMunicipalAdmin(email: string) {
+    var emailParse = email.replace('@', '%40');
+    return this.http.post<any>(`/api/municipalAdministratorStatus/blockMunicipalAdministrator?email=${emailParse}`, {});
+
+  }
+
 }
 
 

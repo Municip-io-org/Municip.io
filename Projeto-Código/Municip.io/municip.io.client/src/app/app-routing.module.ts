@@ -39,6 +39,7 @@ import { EventsListComponent } from './events/my-events/events-list/events-list.
 import { NewsPageComponent } from './news/news-page/news-page.component';
 import { NewsEditComponent } from './news/news-edit/news-edit.component';
 import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component';
+import { AdminDashboardMunicipalAdminsComponent } from './administrator/admin-dashboard-municipal-admins/admin-dashboard-municipal-admins.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -54,6 +55,7 @@ const routes: Routes = [
   { path: 'signUp-Success', component: SignUpSuccessComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
   { path: 'admindashboard', component: AdmindashboardComponent, data: {} },
+  { path: 'admindashboard/:municipalName', component: AdminDashboardMunicipalAdminsComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
   { path: 'transports', component: TransportsMainComponent, data: {} },
   { path: 'transports/schedules', component: SchedulesComponent, data: {} },

@@ -95,6 +95,7 @@ import { RippleModule } from 'primeng/ripple';
 import { NewsEditComponent } from './news/news-edit/news-edit.component'
 import { DatePickerComponent } from './utils/input/date-picker/date-picker.component';
 import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component'
+import { AdminDashboardMunicipalAdminsComponent } from './administrator/admin-dashboard-municipal-admins/admin-dashboard-municipal-admins.component'
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -176,6 +177,7 @@ registerLocaleData(localePt, 'pt-PT');
     NewsEditComponent,
     DatePickerComponent,
     DocsHomepageComponent,
+    AdminDashboardMunicipalAdminsComponent,
     
   ],
   imports: [

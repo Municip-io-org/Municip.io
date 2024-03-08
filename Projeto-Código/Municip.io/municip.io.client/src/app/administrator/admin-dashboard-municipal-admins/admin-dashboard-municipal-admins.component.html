@@ -1,0 +1,100 @@
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+</head>
+<header class="font-">
+  <div class="flex items-center w-full shadow-md py-[0.7rem] px-3 font-poppins">
+
+    <img class="w-56 pl-[2rem]"
+         alt="logo"
+         src="/assets/images/logos/logo-black-right.png" />
+  </div>
+</header>
+<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
+                    [title]="'Gestão de Munícipes de ' + municipalName"
+                    [text]="'Efetue a gestão dos munícipes do ' + municipalName +' gerindo a presença dos mesmos na nossa aplicação'">
+</app-smaller-banner>
+
+<ng-container *ngIf="isDialogOpen">
+  <app-userinfodialog [user]="selectedUser" (close)="closeDialog()"></app-userinfodialog>
+</ng-container>
+<div class="container mx-auto px-4 sm:px-8">
+  <div class="py-8">
+
+    <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+      <div class="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
+
+        <!-- Add a search input for name -->
+        <div class="mb-4 relative">
+          <label for="nameSearch" class="sr-only">Procurar por município</label>
+          <div class="flex items-center">
+            <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+              <span class="fas fa-search"></span>
+            </i>
+            <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por cidadão"
+                   class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300 hover:border-black">
+          </div>
+        </div>
+        <table class="min-w-full leading-normal">
+          <thead>
+            <tr>
+              <th (click)="sortTable('id')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                ID
+                <span [class]="sortType === 'id' ? (sortReverse ? 'fas fa-caret-up' : 'fas fa-caret-down') : ''"></span>
+              </th>
+              <th (click)="sortTable('name')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Nome
+                <span [class]="sortType === 'name' ? (sortReverse ? 'fas fa-caret-up' : 'fas fa-caret-down') : ''"></span>
+              </th>
+              <th (click)="sortTable('date')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Data de Registo
+                <span [class]="sortType === 'date' ? (sortReverse ? 'fas fa-caret-up' : 'fas fa-caret-down') : ''"></span>
+              </th>
+              <th (click)="sortTable('status')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Estado
+                <span [class]="sortType === 'status' ? (sortReverse ? 'fas fa-caret-up' : 'fas fa-caret-down') : ''"></span>
+              </th>
+              <th (click)="sortTable('status')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Ação
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of filteredAdmins" [class]="(filteredAdmins.indexOf(m) % 2 === 0 ? 'bg-white' : 'bg-gray-100')" (click)="openDialog(m)">
+              <td class="px-5 py-5 text-left">{{ m.id }}</td>
+              <td class="px-5 py-5 text-left">{{ m.firstName }} {{ m.surname }}</td>
+              <td class="px-5 py-5 text-left">{{ m.date | date: 'dd/MM/yyyy' }}</td>
+              <td class="px-5 py-5 text-left">
+                <span *ngIf="m.status === 'Approved'" class="inline-block p-1.5 bg-green-500 text-white rounded-full text-xs">
+                  {{ m.status }}
+                </span>
+                <span *ngIf="m.status === 'Pending'" class="inline-block p-1.5 bg-yellow-500 text-white rounded-full text-xs">
+                  {{ m.status }}
+                </span>
+                <span *ngIf="m.status === 'Blocked'" class="inline-block p-1.5 bg-yellow-500 text-white rounded-full text-xs">
+                  {{ m.status }}
+                </span>
+              </td>
+
+              <td class="px-5 py-5 ">
+                <button *ngIf="m.status === 'Pending'" (click)="approveAdmin(m.email); $event.stopPropagation()" class="bg-green-500 text-white px-3 py-1 rounded-md mr-2">
+                  <i class="fas fa-check"></i>
+                </button>
+                <button *ngIf="m.status === 'Approved'" (click)="blockAdmin(m.email); $event.stopPropagation()" class="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2">
+                  <i class="fas fa-lock"></i>
+                </button>
+                <button *ngIf="m.status === 'Blocked'" (click)="approveAdmin(m.email); $event.stopPropagation()" class="bg-green-500 text-white px-3 py-1 rounded-md mr-2">
+                  <i class="fas fa-unlock"></i>
+                </button>
+                <button (click)="deleteAdmin(m.email); $event.stopPropagation()" class="bg-red-500 text-white px-3 py-1 rounded-md">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
