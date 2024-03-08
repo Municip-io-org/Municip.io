@@ -106,6 +106,12 @@ namespace Municip.io.Server.Controllers
                     return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
                 }
 
+                if (!IsNifValid(citizen.Nif))
+                {
+                    ModelState.AddModelError(string.Empty, "O formato do NIF fornecido não é válido.");
+                    return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+                }
+
 
                 // Store user data in AspNetUsers database table
                 var result = await _userManager.CreateAsync(user, citizen.Password);
@@ -163,6 +169,30 @@ namespace Municip.io.Server.Controllers
             return approvedMunicipality;
         }
 
+
+        // Verifica se o formato do NIF é válido
+        private bool IsNifValid(string nif)
+        {
+            
+            if (nif.Length != 11)
+            {
+                return false;
+            }
+
+           
+            if (!char.IsUpper(nif[0]) || !char.IsUpper(nif[1]))
+            {
+                return false;
+            }
+
+           
+            if (!nif.Substring(2).All(char.IsDigit))
+            {
+                return false;
+            }
+
+            return true;
+        }
 
 
 
