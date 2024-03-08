@@ -11,6 +11,14 @@ import { Country } from '../services/citizen-auth.service';
 })
 export class UserpageComponent {
 
+  isDialogOpen: boolean = false;
+  isRemoveEventDialogOpen: boolean = false;
+  dialogTitle = '';
+  dialogMessage = '';
+  isConfirm: boolean = false;
+
+
+
   newUser: any;
   errors: string[] | null = null;
   originalName: string = "";
@@ -72,7 +80,7 @@ export class UserpageComponent {
     surname: new FormControl("", [Validators.required]),
     birthDate: new FormControl(new Date(), [Validators.required]),
     address: new FormControl("", [Validators.required]),
-    country: new FormControl({ alpha2Code: 'PT' }, [Validators.required]),
+    country: new FormControl("", [Validators.required]),
     nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
     photo: new FormControl(null, [Validators.required]),
     postalCode1: new FormControl("", [Validators.required, Validators.pattern(/^\d{4}$/)]),
@@ -155,10 +163,22 @@ export class UserpageComponent {
 
           this.originalName = this.newUser.firstName;
           this.originalPhoto = this.newUser.photo;
+
+         
+          this.isDialogOpen = true;
+          this.dialogTitle = 'Atualização bem-sucedida';
+          this.dialogMessage = 'Os seus dados foram atualizados com sucesso';
+          this.isConfirm = true;
         },
         (error) => {
           console.log("erro " + error.error.errors)
           this.errors = error.error.errors;
+
+          
+          this.isDialogOpen = true;
+          this.dialogTitle = 'Erro na Atualização de dados';
+          this.dialogMessage = error.error.message;
+          this.isConfirm = false;
         }
       );
     }
@@ -209,5 +229,9 @@ export class UserpageComponent {
     }
   }
 
+  closeDialog() {
+    this.isDialogOpen = false;
+    window.location.reload();
+  }
 
 }
