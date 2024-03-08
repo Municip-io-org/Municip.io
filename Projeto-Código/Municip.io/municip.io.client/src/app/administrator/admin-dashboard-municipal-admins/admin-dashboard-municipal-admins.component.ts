@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AdminDashboardMunicipalAdminsComponent {
 
 
-  sortType = 'name';
+  sortType = 'firstName';
   sortReverse = false;
   nameSearch: string = '';
   admins: any[] = [];
@@ -24,8 +24,8 @@ export class AdminDashboardMunicipalAdminsComponent {
     this.municipalName = this.route.snapshot.params['municipalName'];
     this.municipalityStatusService.getMunicipalAdmins(this.municipalName).subscribe((admins: any) => {
       this.admins = admins;
-
     });
+
   }
 
   openDialog(user: any) {
@@ -96,5 +96,10 @@ export class AdminDashboardMunicipalAdminsComponent {
 
   private sortNumeric(a: number, b: number): number {
     return (a - b) * (this.sortReverse ? -1 : 1);
+  }
+
+
+  goBack() {
+    this.router.navigate(['/admindashboard']);
   }
 }

@@ -34,12 +34,12 @@ export class MunicipalityStatusService {
 
   approveMunicipalAdmin(username: string) {
 
-    return this.http.post<any>(`/api/municipalAdministratorStatus/approveMunicipalAdministrator?username=${username}`, {});
+    return this.http.post<any>(`/api/municipalAdministratorStatus/approveMunicipalAdministrator?email=${username}`, {});
 
   }
 
   deleteMunicipalAdmin(username: string) {
-    return this.http.post<any>(`/api/municipalAdministratorStatus/deleteMunicipalAdministrator?username=${username}`, {});
+    return this.http.post<any>(`/api/municipalAdministratorStatus/deleteMunicipalAdministrator?email=${username}`, {});
   }
 
 

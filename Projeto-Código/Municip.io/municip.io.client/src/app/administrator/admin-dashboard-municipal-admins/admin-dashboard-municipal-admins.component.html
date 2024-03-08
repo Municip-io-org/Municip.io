@@ -13,13 +13,18 @@
 </header>
 <app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
                     [title]="'Gestão de Munícipes de ' + municipalName"
-                    [text]="'Efetue a gestão dos munícipes do ' + municipalName +' gerindo a presença dos mesmos na nossa aplicação'">
-</app-smaller-banner>
-
+                    [text]="'Efetue a gestão dos munícipes do ' + municipalName +' gerindo a presença dos mesmos na nossa aplicação'" />
 <ng-container *ngIf="isDialogOpen">
   <app-userinfodialog [user]="selectedUser" (close)="closeDialog()"></app-userinfodialog>
 </ng-container>
 <div class="container mx-auto px-4 sm:px-8">
+  <div class="w-32 mt-10">
+    <app-black-btn-icon-text altImage="Voltar"
+                             image="/assets/images/arrows/left-arrow.png"
+                             (buttonClick)="goBack()">
+      Voltar
+    </app-black-btn-icon-text>
+  </div>
   <div class="py-8">
 
     <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -43,9 +48,9 @@
                 ID
                 <span [class]="sortType === 'id' ? (sortReverse ? 'fas fa-caret-up' : 'fas fa-caret-down') : ''"></span>
               </th>
-              <th (click)="sortTable('name')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <th (click)="sortTable('firstName')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Nome
-                <span [class]="sortType === 'name' ? (sortReverse ? 'fas fa-caret-up' : 'fas fa-caret-down') : ''"></span>
+                <span [class]="sortType === 'firstName' ? (sortReverse ? 'fas fa-caret-up' : 'fas fa-caret-down') : ''"></span>
               </th>
               <th (click)="sortTable('date')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Data de Registo

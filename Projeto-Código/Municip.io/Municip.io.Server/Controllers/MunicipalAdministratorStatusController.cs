@@ -19,9 +19,9 @@ namespace Municip.io.Server.Controllers
             _userManager = userManager;
         }
 
-        //create a function to get all the citizens from a municipality as json. call it getCitizens
+
         /// <summary>
-        /// Esta função retorna todos os cidadãos de um município. Recebe como parâmetro o nome do município.
+        /// Esta função retorna todos os administradores de um município. Recebe como parâmetro o nome do município.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -29,13 +29,13 @@ namespace Municip.io.Server.Controllers
         public IActionResult getMunicipalAdministrators(string? name)
         {
 
-            var munadmin = _context.MunicipalAdministrators.Where(m => m.municipality == name);
+            var munadmin = _context.MunicipalAdministrators.Where(m => m.municipality == name).ToList();
             return Json(munadmin);
 
         }
 
         /// <summary>
-        /// Esta função aprova um cidadão. Recebe como parâmetro o email do cidadão .
+        /// Esta função aprova um administrador. Recebe como parâmetro o email do administrador .
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
@@ -64,7 +64,7 @@ namespace Municip.io.Server.Controllers
         }
 
         /// <summary>
-        /// Esta função remove um cidadão. Recebe como parâmetro o email do cidadão .
+        /// Esta função remove um administrador. Recebe como parâmetro o email do administrador .
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
@@ -99,7 +99,7 @@ namespace Municip.io.Server.Controllers
         }
 
         /// <summary>
-        /// Esta função bloqueia um cidadão. Recebe como parâmetro o email do cidadão .
+        /// Esta função bloqueia um administrador. Recebe como parâmetro o email do administrador .
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
@@ -118,7 +118,7 @@ namespace Municip.io.Server.Controllers
         }
 
         /// <summary>
-        /// Esta função desbloqueia um cidadão. Recebe como parâmetro o email do cidadão .
+        /// Esta função desbloqueia um administrador. Recebe como parâmetro o email do administrador .
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
@@ -137,7 +137,7 @@ namespace Municip.io.Server.Controllers
 
 
         /// <summary>
-        /// Esta função envia um email de aprovação para um cidadão.
+        /// Esta função envia um email de aprovação para um administrador.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="name"></param>
@@ -150,7 +150,7 @@ namespace Municip.io.Server.Controllers
         }
 
         /// <summary>
-        /// Esta função envia um email de reprovação para um cidadão.
+        /// Esta função envia um email de reprovação para um administrador.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="name"></param>
@@ -164,7 +164,7 @@ namespace Municip.io.Server.Controllers
         }
 
         /// <summary>
-        /// Esta função envia um email de remoção para um cidadão.
+        /// Esta função envia um email de remoção para um administrador.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="name"></param>
@@ -177,7 +177,7 @@ namespace Municip.io.Server.Controllers
         }
 
         /// <summary>
-        /// Esta função envia um email de bloqueio para um cidadão.
+        /// Esta função envia um email de bloqueio para um administrador.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="name"></param>
@@ -191,7 +191,7 @@ namespace Municip.io.Server.Controllers
         }
 
         /// <summary>
-        /// Esta função envia um email de desbloqueio para um cidadão.
+        /// Esta função envia um email de desbloqueio para um administrador.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="name"></param>
