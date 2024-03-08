@@ -39,7 +39,7 @@ export class SignUpCitizenAccountComponent {
     firstName: new FormControl("", [Validators.required]),
     surname: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.email, Validators.required]),
-    password: new FormControl("", [Validators.required]),
+    password: new FormControl("", [Validators.required, this.validatePassword.bind(this)]),
     country: new FormControl({ alpha2Code: 'PT' }, [Validators.required]),
     nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
     gender: new FormControl("", [Validators.required]),
@@ -56,6 +56,26 @@ export class SignUpCitizenAccountComponent {
       return null;
     }
     return { 'invalidMunicipality': true };
+  }
+
+  validatePassword(control: FormControl): { [key: string]: boolean } | null {
+    const value: string = control.value;
+
+ 
+    const upperCaseRegex = /[A-Z]/;
+    const lowerCaseRegex = /[a-z]/;
+    const digitRegex = /[0-9]/;
+    const symbolRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+
+    const hasUpperCase = upperCaseRegex.test(value);
+    const hasLowerCase = lowerCaseRegex.test(value);
+    const hasDigit = digitRegex.test(value);
+    const hasSymbol = symbolRegex.test(value);
+
+
+    const isValid = hasUpperCase && hasLowerCase && hasDigit && hasSymbol;
+
+    return isValid ? null : { 'invalidPassword': true };
   }
 
   

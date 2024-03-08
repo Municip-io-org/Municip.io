@@ -18,7 +18,7 @@
         </div>
         <div class="py-[2rem] flex justify-around">
           <section class=" flex flex-col text-left space-y-2 ">
-            <div class="">
+            <div class="h-32">
               <app-input-title class="text-[1.4rem]">Primeiro Nome</app-input-title>
               <div class="flex items-center">
                 <input required placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="citizen.firstName"
@@ -29,7 +29,7 @@
                 <div *ngIf="firstName?.errors?.['required'] ">Primeiro Nome Obrigatório</div>
               </div>
             </div>
-            <div class="">
+            <div class="h-32">
               <app-input-title class="text-[1.4rem]">Email</app-input-title>
               <input required placeholder="Introduza o seu email" type="email" id="email" formControlName="email" name="email" [(ngModel)]="citizen.email"
                      class="input w-[21rem] h-12" />
@@ -41,7 +41,7 @@
             <div class=" flex flex-col">
               <app-input-title class="text-[1.4rem]">NIF</app-input-title>
               <section class="flex flex-col">
-                <div class="">
+                <div class="h-24">
                   <div class="flex items-center">
                     <app-country-picker [country]="country" class="w-[12rem] h-[4rem]">
                     </app-country-picker>
@@ -53,20 +53,20 @@
                   </div>
                 </div>
                 
-                <div>
+                <div class="h-20">
                   <div class="flex items-center">
                     <input required placeholder="Introduza o seu NIF" type="text" id="nif" formControlName="nif" name="nif" [(ngModel)]="citizen.nif"
                            class="input w-[15rem] h-12" />
                     <app-tooltip [tooltipText]="'9 dígitos'"></app-tooltip>
                   </div>
                   <div class="text-red-500 font-bold py-2" *ngIf="nif?.touched && nif?.invalid">
-                    <div *ngIf="nif?.errors?.['required']">Nif obrigatório</div>
-                    <div *ngIf="nif?.errors?.['pattern']">Nif inválido</div>
+                    <div *ngIf="nif?.errors?.['required']">NIF Obrigatório</div>
+                    <div *ngIf="nif?.errors?.['pattern']">NIF Inválido</div>
                   </div>
                 </div>
               </section>
             </div>
-            <div class="">
+            <div class="h-32">
               <app-input-title class="text-[1.4rem]">Género</app-input-title>
               <select required id="gender" formControlName="gender" name="gender" [(ngModel)]="citizen.gender"
                       class="input w-[21rem]  h-14">
@@ -79,7 +79,7 @@
                 <div *ngIf="gender?.errors?.['required'] ">Género Obrigatório</div>
               </div>
             </div>
-            <div class="">
+            <div class="h-32">
               <app-input-title class="text-[1.4rem]">Rua, Nºde Porta e Andar</app-input-title>
               <input required placeholder="Introduza a sua morada" type="text" id="address" formControlName="address" name="address" [(ngModel)]="citizen.address"
                      class="input w-[21rem] h-14" />
@@ -87,7 +87,7 @@
                 <div *ngIf="address?.errors?.['required'] ">Morada Obrigatório</div>
               </div>
             </div>
-            <div class="">
+            <div class="h-32">
               <app-input-title class="text-[1.4rem]">Município</app-input-title>
               <div class="flex items-center">
 
@@ -120,7 +120,7 @@
                 <div *ngIf="surname?.errors?.['required'] ">Apelido Obrigatório</div>
               </div>
             </div>
-            <div class="h-32">
+            <div class="h-36">
               <app-input-title class="text-[1.4rem]">Palavra-Passe</app-input-title>
               <div class="flex items-center">
                 <input required placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="citizen.password"
@@ -130,6 +130,7 @@
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="password?.touched && password?.invalid">
                 <div *ngIf="password?.errors?.['required'] ">Palavra-Passe Obrigatório</div>
+                <div *ngIf="password?.errors?.['invalidPassword'] ">Palavra-Passe Inválida</div>
               </div>
             </div>
             <div class="h-32">
@@ -160,8 +161,8 @@
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="(postalCode1?.touched && postalCode1?.invalid) || (postalCode2?.touched && postalCode2?.invalid) ">
                 <div *ngIf="postalCode1?.errors?.['required'] || postalCode2?.errors?.['required'] ">Código Postal Obrigatório</div>
-                <div *ngIf="postalCode1?.errors?.['pattern']">Primeiro código inválido</div>
-                <div *ngIf="postalCode2?.errors?.['pattern']">Secundo código inválido</div>
+                <div *ngIf="postalCode1?.errors?.['pattern']">Primeiro código Inválido</div>
+                <div *ngIf="postalCode2?.errors?.['pattern']">Secundo código Inválido</div>
               </div>
             </div>
             <div class="h-32">
