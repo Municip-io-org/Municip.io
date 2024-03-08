@@ -96,8 +96,18 @@
             <div *ngIf="role !='Municipal'" class="flex flex-wrap items-start justify-between mb-8">
               <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
                 <app-input-title class="text-[2.6vh]">NIF</app-input-title>
+                <div class="h-24">
+                  <div class="flex items-center">
+                    <app-country-picker [country]="country" class="w-[12rem] h-[4rem]">
+                    </app-country-picker>
+                  </div>
+
+                  <div class="text-red-500 font-bold relative bottom-[0.7rem] " *ngIf="country.touched && country?.invalid">
+                    <div *ngIf="country?.errors?.['required']">País obrigatório</div>
+                  </div>
+                </div>
                 <div class="flex items-center">
-                  <input required placeholder="{{newUser.nif}}" type="text" id="nif" formControlName="nif" name="nif" [(ngModel)]="newUser.nif"
+                  <input required placeholder="{{ newUser.nif.substring(2) }}" type="text" id="nif" formControlName="nif" name="nif"
                          class="input w-full h-12 lg:h-14 " />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="nif?.touched && nif?.invalid">
@@ -137,7 +147,9 @@
               </div>
             </div>
             <div class="flex justify-end">
-              <button type="submit" class="relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+              <button type="submit" [disabled]="passwordConfirmation?.invalid" class="relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank
+                      bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none
+                      hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out disabled:cursor-not-allowed">
                 Atualizar Dados
                 <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
               </button>

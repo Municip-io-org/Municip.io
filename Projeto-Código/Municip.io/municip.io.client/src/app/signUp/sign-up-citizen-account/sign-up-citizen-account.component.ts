@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CitizenAuthService, Citizen } from '../../services/citizen-auth.service';
+import { CitizenAuthService, Citizen, Country } from '../../services/citizen-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Municipality, MunicipalAdminAuthService } from '../../services/municipal-admin-auth.service';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
@@ -39,7 +39,8 @@ export class SignUpCitizenAccountComponent {
     firstName: new FormControl("", [Validators.required]),
     surname: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.email, Validators.required]),
-    password: new FormControl("", [Validators.required]),
+    password: new FormControl("", [Validators.required, this.validatePassword.bind(this)]),
+    country: new FormControl({ alpha2Code: 'PT' }, [Validators.required]),
     nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
     gender: new FormControl("", [Validators.required]),
     municipality: new FormControl("", [Validators.required, this.validateMunicipality.bind(this)]),
@@ -56,6 +57,28 @@ export class SignUpCitizenAccountComponent {
     }
     return { 'invalidMunicipality': true };
   }
+
+  validatePassword(control: FormControl): { [key: string]: boolean } | null {
+    const value: string = control.value;
+
+ 
+    const upperCaseRegex = /[A-Z]/;
+    const lowerCaseRegex = /[a-z]/;
+    const digitRegex = /[0-9]/;
+    const symbolRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+
+    const hasUpperCase = upperCaseRegex.test(value);
+    const hasLowerCase = lowerCaseRegex.test(value);
+    const hasDigit = digitRegex.test(value);
+    const hasSymbol = symbolRegex.test(value);
+
+
+    const isValid = hasUpperCase && hasLowerCase && hasDigit && hasSymbol;
+
+    return isValid ? null : { 'invalidPassword': true };
+  }
+
+  
 
   adultAgeValidator(control: FormControl): { [key: string]: boolean } | null {
     const birthDate: Date = control.value;
@@ -114,6 +137,9 @@ export class SignUpCitizenAccountComponent {
     return this.signUpCitizenForm.get('password');
   }
 
+  get country() {
+    return this.signUpCitizenForm.get('country') as FormControl;
+  }
   get nif() {
     return this.signUpCitizenForm.get('nif');
   }
@@ -158,7 +184,24 @@ export class SignUpCitizenAccountComponent {
   }
 
   onSubmit() {
-    this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen, this.image).subscribe(
+
+    const citizen: Citizen = {
+      firstName: this.firstName!.value!,
+      surname: this.surname!.value!,
+      email: this.email!.value!,
+      password: this.password!.value!,
+      nif: `${(this.country!.value! as Country).alpha2Code}${this.nif!.value!}`, 
+      gender: this.gender!.value!,
+      municipality: this.municipality!.value!,
+      address: this.address!.value!,
+      postalCode1: this.postalCode1!.value!,
+      postalCode2: this.postalCode2!.value!,
+      birthDate: this.birthDate!.value!,
+      photo: this.photo!.value!
+    };
+
+
+    this.citizenAuthService.registerCitizen(citizen, this.image).subscribe(
       result => {
         this.router.navigateByUrl('/signUp-Success');
       },
@@ -169,3 +212,4 @@ export class SignUpCitizenAccountComponent {
     );
   }
 }
+

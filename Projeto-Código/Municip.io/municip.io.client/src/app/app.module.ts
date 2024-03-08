@@ -94,7 +94,9 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { RippleModule } from 'primeng/ripple';
 import { NewsEditComponent } from './news/news-edit/news-edit.component'
 import { DatePickerComponent } from './utils/input/date-picker/date-picker.component';
-import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component'
+import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component';
+import { MatSelectCountryModule } from "@angular-material-extensions/select-country";
+import { CountryPickerComponent } from './utils/input/country-picker/country-picker.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -176,6 +178,7 @@ registerLocaleData(localePt, 'pt-PT');
     NewsEditComponent,
     DatePickerComponent,
     DocsHomepageComponent,
+    CountryPickerComponent,
     
   ],
   imports: [
@@ -187,7 +190,7 @@ registerLocaleData(localePt, 'pt-PT');
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-
+    MatSelectCountryModule.forRoot('pt'),
     NgxMaterialTimepickerModule.setOpts('pt-PT'),
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     InfiniteScrollModule, SelectButtonModule, RippleModule,
