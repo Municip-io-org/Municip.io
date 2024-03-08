@@ -40,7 +40,7 @@ export class SignUpCitizenAccountComponent {
     surname: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.email, Validators.required]),
     password: new FormControl("", [Validators.required]),
-    country: new FormControl({ alpha2Code: 'PT' }, [Validators.required, this.validateCountry.bind(this)]),
+    country: new FormControl({ alpha2Code: 'PT' }, [Validators.required]),
     nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
     gender: new FormControl("", [Validators.required]),
     municipality: new FormControl("", [Validators.required, this.validateMunicipality.bind(this)]),
@@ -58,15 +58,7 @@ export class SignUpCitizenAccountComponent {
     return { 'invalidMunicipality': true };
   }
 
-  validateCountry(control: FormControl): { [key: string]: boolean } | null {
-    const value: Country = control.value;
-    if (value && typeof value === 'object' && 'alpha2Code' in value && 'name' in value) {
-      return null; 
-    } else {
-      return { 'invalidCountry': true }; 
-    }
-   
-  }
+  
 
   adultAgeValidator(control: FormControl): { [key: string]: boolean } | null {
     const birthDate: Date = control.value;
@@ -89,11 +81,6 @@ export class SignUpCitizenAccountComponent {
   }
 
   ngOnInit(): void {
-    this.signUpCitizenForm.get('country')!.valueChanges
-      .subscribe(country => console
-        .log('this.signUpCitizenForm.get("country").valueChanges', country));
-
-
     this.municipalityService.getApprovedMunicipalities().subscribe(
       (res: any) => {
         this.municipalities = res as Municipality[];
@@ -177,7 +164,24 @@ export class SignUpCitizenAccountComponent {
   }
 
   onSubmit() {
-    this.citizenAuthService.registerCitizen(this.signUpCitizenForm.value as Citizen, this.image).subscribe(
+
+    const citizen: Citizen = {
+      firstName: this.firstName!.value!,
+      surname: this.surname!.value!,
+      email: this.email!.value!,
+      password: this.password!.value!,
+      nif: `${(this.country!.value! as Country).alpha2Code}${this.nif!.value!}`, // Combine alpha2Code do país com o nif
+      gender: this.gender!.value!,
+      municipality: this.municipality!.value!,
+      address: this.address!.value!,
+      postalCode1: this.postalCode1!.value!,
+      postalCode2: this.postalCode2!.value!,
+      birthDate: this.birthDate!.value!,
+      photo: this.photo!.value!
+    };
+
+
+    this.citizenAuthService.registerCitizen(citizen, this.image).subscribe(
       result => {
         this.router.navigateByUrl('/signUp-Success');
       },

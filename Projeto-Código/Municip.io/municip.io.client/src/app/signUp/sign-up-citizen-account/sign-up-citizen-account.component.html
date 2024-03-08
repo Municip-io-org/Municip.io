@@ -48,9 +48,8 @@
                     <app-tooltip [tooltipText]="'Selecione um país válido'"></app-tooltip>
                   </div>
                  
-                  <div class="text-red-500 font-bold py-2 relative bottom-[0.7rem] " *ngIf="(country.dirty || country.touched) && country?.invalid">
+                  <div class="text-red-500 font-bold relative bottom-[0.7rem] " *ngIf="country.touched && country?.invalid">
                     <div *ngIf="country?.errors?.['required']">País obrigatório</div>
-                    <div *ngIf="country?.errors?.['invalidCountry']">País inválido</div>
                   </div>
                 </div>
                 
