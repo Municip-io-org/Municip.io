@@ -6,7 +6,9 @@ import { UserAuthService } from '../../../services/user-auth.service';
 import { Router } from '@angular/router';
 
 
-
+/**
+ * Componente responsável por criar um evento.
+ */
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
@@ -16,7 +18,9 @@ import { Router } from '@angular/router';
 })
 
 
-
+/**
+ * Componente responsável por criar um evento.
+ */
 export class CreateEventComponent implements OnInit {
 
   municipalityImage: string = "";
@@ -29,6 +33,13 @@ export class CreateEventComponent implements OnInit {
   isDialogOpen: boolean = false;
 
 
+  /**
+   * Construtor do componente.
+   * @param dateAdapter
+   * @param authService
+   * @param eventService
+   * @param router
+   */
   constructor(private dateAdapter: DateAdapter<Date>, private authService: UserAuthService,
     private eventService: EventsService, private router: Router,
   ) {
@@ -40,7 +51,9 @@ export class CreateEventComponent implements OnInit {
 
   }
 
-
+  /**
+   * Método onInit 
+   */
   ngOnInit(): void {
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
@@ -143,7 +156,9 @@ export class CreateEventComponent implements OnInit {
     return this.eventForm.get('description');
   }
 
-
+  /**
+   *  Método Responsável pela submição do formulário
+   */
   OnSubmit() {
     if (this.eventForm.valid) {
 
@@ -185,7 +200,12 @@ export class CreateEventComponent implements OnInit {
 
   }
 
-
+  /**
+   * Cria um objeto do tipo date 
+   * @param date
+   * @param time
+   * @returns
+   */
   createDateTime(date: Date, time: string): Date {
     let partTime = time.split(':');
     let startHour = parseInt(partTime[0]);
@@ -201,7 +221,10 @@ export class CreateEventComponent implements OnInit {
 
 
 
-
+  /**
+   * Evento dispultado aquando do selecionamento de uma imagem
+   * @param event
+   */
   onImagePicked(event: any) {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0]; // Use optional chaining here
@@ -215,14 +238,17 @@ export class CreateEventComponent implements OnInit {
     }
   }
 
-
+  /**
+   * Método responsável pelo cancelamento do evento
+   */
   cancel() {
-    //redirect to the event list
     this.router.navigate(['/events']);
   }
 
 
-
+  /**
+   * Método responsável por fechar o diálogo
+   */
   closeDialog() {
     this.isDialogOpen = false;
     this.router.navigate(['/events']);

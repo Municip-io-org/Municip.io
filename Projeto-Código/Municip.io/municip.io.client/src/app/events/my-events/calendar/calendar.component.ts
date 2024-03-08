@@ -12,6 +12,10 @@ import { Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../../services/user-auth.service';
 
+
+/**
+ * Componente responsável por exibir um calendário de eventos.
+ */
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -31,15 +35,21 @@ import { UserAuthService } from '../../../services/user-auth.service';
 })
 export class CalendarComponent implements OnInit {
 
-  constructor(private eventService: EventsService, private authService: UserAuthService
-    , private router: Router) { }
+  /**
+   * Construtor da classe CalendarComponent.
+   * @param eventService O serviço responsável por lidar com os eventos.
+   * @param authService O serviço responsável pela autenticação do usuário.
+   * @param router O serviço de roteamento para navegar para outras páginas.
+   */
+  constructor(private eventService: EventsService, private authService: UserAuthService, private router: Router) { }
 
-
-
+  /**
+   * Método executado ao inicializar o componente.
+   */
   ngOnInit(): void {
-
-
+    // Obtém os dados do usuário autenticado
     this.authService.getUserData().subscribe((user) => {
+      // Obtém os eventos do usuário
       this.events$ = this.eventService.getUserEvents(user.email).pipe(
         map((events) => {
           return events.map((event) => {
@@ -51,53 +61,56 @@ export class CalendarComponent implements OnInit {
               meta: {
                 event: event
               }
-              
-            }
+            };
           });
         })
       );
     },
-      (error) => {
-        console.error(error);
-      }
-    );
+    (error) => {
+      console.error(error);
+    });
 
-
-     this.events$.subscribe((events) => {
+    // Verifica se não há eventos e fecha o dia ativo
+    this.events$.subscribe((events) => {
       if (events.length === 0) {
         this.activeDayIsOpen = false;
       }
     });
-
-
   }
 
-
-
-
+  /**
+   * O modo de visualização do calendário.
+   */
   view: CalendarView = CalendarView.Month;
 
+  /**
+   * A data de visualização do calendário.
+   */
   viewDate: Date = new Date();
 
+  /**
+   * Os eventos do calendário.
+   */
   events$: Observable<CalendarEvent<{ event: Event }>[]> = new Observable<CalendarEvent<{ event: Event }>[]>();
 
-
-
+  /**
+   * O idioma do calendário.
+   */
   locale: string = 'pt-PT';
 
-
-
+  /**
+   * Indica se o dia ativo está aberto.
+   */
   activeDayIsOpen: boolean = true;
 
-
-
-
+  /**
+   * Manipula o evento de clique em um dia do calendário.
+   * @param date A data do dia clicado.
+   * @param events Os eventos do dia clicado.
+   */
   dayClicked({ date, events }: { date: Date; events: CalendarEvent<{ event: Event }>[] }): void {
     if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
+      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
         this.activeDayIsOpen = false;
       } else {
         this.activeDayIsOpen = true;
@@ -106,22 +119,22 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-
+  /**
+   * Manipula o evento antes de renderizar a visualização mensal do calendário.
+   * @param body Os dias do mês a serem renderizados.
+   */
   beforeMonthViewRender({ body }: { body: CalendarMonthViewDay[] }): void {
     body.forEach(day => {
       if (day.date.getMonth() === new Date().getMonth() && day.date.getDate() === new Date().getDate() && day.date.getFullYear() === new Date().getFullYear()) {
         day.cssClass = 'blue-cell';
       }
     });
-
-
   }
 
+  /**
+   * Manipula o evento antes de renderizar a visualização semanal do calendário.
+   * @param body Os dias da semana a serem renderizados.
+   */
   beforeWeekViewRender(body: CalendarWeekViewBeforeRenderEvent): void {
     body.header.forEach(day => {
       if (day.date.getMonth() === new Date().getMonth() && day.date.getDate() === new Date().getDate() && day.date.getFullYear() === new Date().getFullYear()) {
@@ -130,10 +143,12 @@ export class CalendarComponent implements OnInit {
     });
   }
 
-
+  /**
+   * Manipula o evento de clique em um evento do calendário.
+   * @param event O evento clicado.
+   */
   eventClicked(event: CalendarEvent<{ event: Event }>): void {
-    //user router to navigate to /events/1
-    this.router.navigate(['/']);
-
+    // Navega para a página de detalhes do evento
+    this.router.navigate(['/events', event.meta?.event.id]);
   }
 }
