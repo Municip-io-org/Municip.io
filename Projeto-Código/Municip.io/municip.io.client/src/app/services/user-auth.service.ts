@@ -4,15 +4,23 @@ import { BehaviorSubject, Observable, Subject, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { MunicipalAdministrator, Municipality } from './municipal-admin-auth.service';
 import { Citizen } from './citizen-auth.service';
+import { EncryptionService } from './crypto/encryption.service';
 
 @Injectable({
   providedIn: 'root'
 })
+  /**
+   * Service responsible for user authentication and related operations.
+   */
 export class UserAuthService {
 
   private _authStateChanged: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
 
+  /**
+   * Observable to subscribe for authentication state changes.
+   * @returns An observable of boolean indicating authentication state changes.
+   */
   public onStateChanged() {
     return this._authStateChanged.asObservable();
   }
@@ -21,37 +29,73 @@ export class UserAuthService {
   private readonly MUNICIPALITY_STORAGE_KEY = 'userMunicipality';
   private readonly ROLE_STORAGE_KEY = 'userRole';
   private readonly INFO_STORAGE_KEY = 'infoByEmail'
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private encryptionService: EncryptionService) { }
 
+  /**
+   * Get user data from local storage.
+   * @returns User data fetched from local storage.
+   */
   getUserDataFromStorage(): any {
-
-    const userData = localStorage.getItem(this.LOCAL_STORAGE_KEY);
-    return userData ? JSON.parse(userData) : null;
+    const encryptedData = localStorage.getItem(this.LOCAL_STORAGE_KEY);
+    return encryptedData ? this.encryptionService.decryptData(encryptedData) : null;
   }
 
+
+  /**
+     * Set user data to local storage.
+     * @param userData User data to be stored.
+     */
   setUserDataToStorage(userData: any): void {
-    localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(userData));
+    const encryptedData = this.encryptionService.encryptData(userData);
+    localStorage.setItem(this.LOCAL_STORAGE_KEY, encryptedData);
   }
 
+  /**
+     * Set user municipality data to local storage.
+     * @param municipality Municipality data to be stored.
+     */
+  
   private setUserMunicipalityToStorage(municipality: any): void {
-    localStorage.setItem(this.MUNICIPALITY_STORAGE_KEY, JSON.stringify(municipality));
+    const encryptedData = this.encryptionService.encryptData(municipality);
+    localStorage.setItem(this.MUNICIPALITY_STORAGE_KEY, encryptedData);
   }
+
+  /**
+  * Get user municipality data from local storage.
+  * @returns Municipality data fetched from local storage.
+  */
 
   private getUserMunicipalityFromStorage(): any {
-    const municipalityString = localStorage.getItem(this.MUNICIPALITY_STORAGE_KEY);
-    return municipalityString ? JSON.parse(municipalityString) : null;
+    const encryptedData = localStorage.getItem(this.MUNICIPALITY_STORAGE_KEY);
+    return encryptedData ? this.encryptionService.decryptData(encryptedData) : null;
   }
 
+  /**
+  * Set user role data to local storage.
+  * @param role Role data to be stored.
+  */
   private setUserRoleToStorage(role: any): void {
-    localStorage.setItem(this.ROLE_STORAGE_KEY, JSON.stringify(role));
+    const encryptedData = this.encryptionService.encryptData(role);
+    localStorage.setItem(this.ROLE_STORAGE_KEY, encryptedData);
   }
 
+  /**
+ * Get user role data from local storage.
+ * @returns Role data fetched from local storage.
+ */
   private getUserRoleFromStorage(): any {
-    const roleString = localStorage.getItem(this.ROLE_STORAGE_KEY);
-    return roleString ? JSON.parse(roleString) : null;
+    const encryptedData = localStorage.getItem(this.ROLE_STORAGE_KEY);
+    return encryptedData ? this.encryptionService.decryptData(encryptedData) : null;
   }
 
 
+  /**
+ * Login user.
+ * @param login Login credentials.
+ * @param useCookies Flag indicating whether to use cookies.
+ * @param useSessionCookies Flag indicating whether to use session cookies.
+ * @returns Observable of boolean indicating login success.
+ */
   login(login: Login, useCookies: boolean, useSessionCookies: boolean): Observable<boolean> {
     let params = new HttpParams()
       .set('useCookies', useCookies.toString())
@@ -70,6 +114,11 @@ export class UserAuthService {
       })
     );
   }
+
+  /**
+ * Get user data.
+ * @returns Observable of user data.
+ */
   getUserData(): Observable<any> {
     const userData = this.getUserDataFromStorage();
     if (userData) {
@@ -85,6 +134,11 @@ export class UserAuthService {
     }
   }
 
+  /**
+ * Get user information by email.
+ * @param email Email address of the user.
+ * @returns Observable of user information.
+ */
   getInfoByEmail(email: string): Observable<any> {
     const cachedUserData = this.getUserInfoByEmailFromStorage(email);
     if (cachedUserData && cachedUserData.email === email) {
@@ -100,22 +154,44 @@ export class UserAuthService {
     }
   }
 
+  /**
+ * Get user information by email from local storage.
+ * @param email Email address of the user.
+ * @returns User information fetched from local storage.
+ */
   getUserInfoByEmailFromStorage(email: string): any {
-    const userDataString = localStorage.getItem(this.INFO_STORAGE_KEY);
-    const userData = userDataString ? JSON.parse(userDataString) : null;
-    return userData && userData.email === email ? userData : null;
+    const encryptedData = localStorage.getItem(this.INFO_STORAGE_KEY);
+    const decryptedData = encryptedData ? this.encryptionService.decryptData(encryptedData) : null;
+    return decryptedData && decryptedData.email === email ? decryptedData : null;
   }
 
+  /**
+ * Set user information by email to local storage.
+ * @param email Email address of the user.
+ * @param userInfo User information to be stored.
+ */
   setUserInfoByEmailToStorage(email: string, userInfo: any): void {
     const cachedUserData = this.getUserInfoByEmailFromStorage(email);
+    var toStore;
     if (cachedUserData && cachedUserData.email === email) {
-      localStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify({ ...cachedUserData, ...userInfo }));
+      toStore = JSON.stringify({ ...cachedUserData, ...userInfo });
     } else {
-      localStorage.setItem(this.INFO_STORAGE_KEY, JSON.stringify(userInfo));
+toStore = JSON.stringify(userInfo);
     }
+
+   var encryptedData = this.encryptionService.encryptData(toStore);
+localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
+
+
   }
 
 
+
+
+  /**
+   * Get user role.
+   * @returns Observable of user role.
+   */
   getUserRole(): Observable<any> {
     const roleData = this.getUserRoleFromStorage();
     if (roleData) {
@@ -131,6 +207,10 @@ export class UserAuthService {
     }
   }
 
+  /**
+ * Get municipality of the user.
+ * @returns Observable of municipality.
+ */
   getMunicipality(): Observable<string> {
     const municipalityData = this.getUserMunicipalityFromStorage();
     if (municipalityData) {
@@ -148,10 +228,22 @@ export class UserAuthService {
     }
   }
 
+  /**
+  * Fetch municipality information by name.
+  * @param nome Name of the municipality.
+  * @returns Observable of Municipality information.
+  */
   getInfoMunicipality(nome: string): Observable<Municipality> {
     return this.http.get<any>(`/api/accounts/InfoMunicipality?name=${nome}`);
   }
 
+  /**
+ * Update user information.
+ * @param user User object to be updated.
+ * @param image User profile image.
+ * @param passConfirm Password confirmation.
+ * @returns Observable of updated user information.
+ */
   updateUser(user: Citizen, image: File, passConfirm:string): Observable<any> {
     const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
     const imgurl = "https://api.imgur.com/3/image";
@@ -166,6 +258,13 @@ export class UserAuthService {
     );
   }
 
+  /**
+ * Update municipality administrator user information.
+ * @param user Municipality administrator user object to be updated.
+ * @param image User profile image.
+ * @param passConfirm Password confirmation.
+ * @returns Observable of updated municipality administrator user information.
+ */
   updateMunicipAdminUser(user: MunicipalAdministrator, image: File, passConfirm: string): Observable<any> {
     const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
     const imgurl = "https://api.imgur.com/3/image";
@@ -181,6 +280,10 @@ export class UserAuthService {
   }
 
 
+  /**
+  * Sign out the user.
+  * @returns Observable of boolean indicating if sign out was successful.
+  */
   signOut(): Observable<boolean> {
     return this.http.post('/api/accounts/logout', {}, {
       withCredentials: true,
@@ -192,8 +295,10 @@ export class UserAuthService {
           this.setUserDataToStorage(null);
           this.setUserMunicipalityToStorage(null);
           this.setUserRoleToStorage(null);
-          
-          
+          localStorage.removeItem(this.LOCAL_STORAGE_KEY);
+          localStorage.removeItem(this.MUNICIPALITY_STORAGE_KEY);
+          localStorage.removeItem(this.ROLE_STORAGE_KEY);
+          localStorage.removeItem(this.INFO_STORAGE_KEY);
 
           return true;
         }
@@ -202,6 +307,10 @@ export class UserAuthService {
     );
   }
 
+  /**
+  * Check if the user is signed in.
+  * @returns Observable of boolean indicating if the user is signed in.
+  */
   isSignedIn(): Observable<boolean> {
     return this.getUserData().pipe(
       map(userInfo => !!userInfo && !!userInfo.email),

@@ -153,6 +153,9 @@
         <div *ngIf="showDropdownTransportes" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
             <li>
+              <a routerLink="/transports" class="block px-4 py-2 hover:bg-gray-100">Transportes do Município</a>
+            </li>
+            <li>
               <a routerLink="/transports/stops" class="block px-4 py-2 hover:bg-gray-100">Paragens do Município</a>
             </li>
             <li>
@@ -186,13 +189,12 @@
                 </button>
               </li>
               <li>
-                <div *ngIf="role=== Roles.Citizen">
-                  <a routerLink="/citizen/profile" class="block px-4 py-2 hover:bg-gray-100">O meu Perfil </a>
-
-                </div>
+                <a routerLink="/userpage" class="block px-4 py-2 hover:bg-gray-100">O meu Perfil</a>
+               
 
                 <div *ngIf="role===Roles.Municipal">
                   <a routerLink="/municipal/profile" class="block px-4 py-2 hover:bg-gray-100">Perfil Administração</a>
+
                 </div>
               </li>
             </ul>

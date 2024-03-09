@@ -1,8 +1,7 @@
-import { Component, Query } from '@angular/core';
-
-import {Roles, UserAuthService } from '../services/user-auth.service';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { passwordsMatchValidator } from '../../../validator';
+import { Component } from '@angular/core';
+import { UserAuthService} from '../services/user-auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Country } from '../services/citizen-auth.service';
 
 
 @Component({
@@ -11,14 +10,22 @@ import { passwordsMatchValidator } from '../../../validator';
   styleUrl: './userpage.component.css'
 })
 export class UserpageComponent {
-  
+
+  isDialogOpen: boolean = false;
+  isRemoveEventDialogOpen: boolean = false;
+  dialogTitle = '';
+  dialogMessage = '';
+  isConfirm: boolean = false;
+
+
+
   newUser: any;
   errors: string[] | null = null;
   originalName: string = "";
   originalPhoto: string = "";
   image!: File;
 
-  constructor(private userAuthService: UserAuthService ) { }
+  constructor(private userAuthService: UserAuthService) { }
   user: any;
   role: string = "";
 
@@ -31,10 +38,26 @@ export class UserpageComponent {
         this.userAuthService.getInfoByEmail(emailParsed).subscribe(
           res => {
             this.newUser = res;
-            console.log("dasdasdas",this.newUser);
+            console.log("dasdasdas", this.newUser);
             this.originalName = this.newUser.firstName;
-            this.originalPhoto = this.newUser.photo; 
+            this.originalPhoto = this.newUser.photo;
             this.formatBirthDate();
+            
+            this.userAuthService.getUserRole().subscribe(
+              res => {
+
+                this.role = res.role;
+                console.log("role", this.role);
+
+                if (this.role == "Citizen") {
+                  this.country.setValue({ alpha2Code: this.newUser.nif.slice(0, 2) });
+                  this.nif.setValue(this.newUser.nif.slice(2));
+                }
+              },
+              error => {
+                console.error(error);
+              }
+            );
           },
           error => {
             console.error(error);
@@ -47,16 +70,7 @@ export class UserpageComponent {
       }
     );
 
-    this.userAuthService.getUserRole().subscribe(
-      res => {
-        
-          this.role = res.role;
-        console.log("role", this.role);
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    
   }
 
 
@@ -66,16 +80,17 @@ export class UserpageComponent {
     surname: new FormControl("", [Validators.required]),
     birthDate: new FormControl(new Date(), [Validators.required]),
     address: new FormControl("", [Validators.required]),
+    country: new FormControl("", [Validators.required]),
     nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
     photo: new FormControl(null, [Validators.required]),
     postalCode1: new FormControl("", [Validators.required, Validators.pattern(/^\d{4}$/)]),
     postalCode2: new FormControl("", [Validators.required, Validators.pattern(/^\d{3}$/)]),
     password: new FormControl("", [
-    
+
       Validators.pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/)
     ]),
     passwordConfirmation: new FormControl("", [Validators.required]),
-  
+
   });
 
   get firstName() {
@@ -94,8 +109,11 @@ export class UserpageComponent {
     return this.profileEdit.get('password');
   }
 
+  get country() {
+    return this.profileEdit.get('country') as FormControl;
+  }
   get nif() {
-    return this.profileEdit.get('nif');
+    return this.profileEdit.get('nif') as FormControl;
   }
 
   get address() {
@@ -129,29 +147,42 @@ export class UserpageComponent {
     this.newUser.email = formValues.email || this.newUser.email;
     this.newUser.birthDate = formValues.birthDate || this.newUser.birthDate;
     this.newUser.address = formValues.address || this.newUser.address;
-    this.newUser.nif = formValues.nif || this.newUser.nif;
+    this.newUser.country = formValues.country || this.newUser.country;
+
+    this.newUser.nif = `${(this.country!.value! as Country).alpha2Code}${this.nif!.value!}` || this.newUser.nif;
+
     this.newUser.postalCode1 = formValues.postalCode1 || this.newUser.postalCode1;
     this.newUser.postalCode2 = formValues.postalCode2 || this.newUser.postalCode2;
-    this.newUser.password = formValues.password? formValues.password : "";
+    this.newUser.password = formValues.password ? formValues.password : "";
     var passConfirm = formValues.passwordConfirmation || "";
     this.newUser.events = [];
-    if(this.role == 'Citizen')
-    {
+    if (this.role == 'Citizen') {
       this.userAuthService.updateUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
         res => {
 
-          
+
           this.originalName = this.newUser.firstName;
           this.originalPhoto = this.newUser.photo;
+
+         
+          this.isDialogOpen = true;
+          this.dialogTitle = 'Atualização bem-sucedida';
+          this.dialogMessage = 'Os seus dados foram atualizados com sucesso';
+          this.isConfirm = true;
         },
         (error) => {
           console.log("erro " + error.error.errors)
           this.errors = error.error.errors;
+
+          
+          this.isDialogOpen = true;
+          this.dialogTitle = 'Erro na Atualização de dados';
+          this.dialogMessage = error.error.message;
+          this.isConfirm = false;
         }
       );
     }
-else
-    {
+    else {
       this.userAuthService.updateMunicipAdminUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
         res => {
           this.originalName = this.newUser.firstName;
@@ -163,32 +194,32 @@ else
         }
       );
     }
-    
-    
+
+
   }
 
   getUserAttributes(): { key: string, value: any }[] {
     if (!this.newUser) {
       return [];
     }
-    
+
     return Object.keys(this.newUser).map(key => ({ key, value: this.newUser[key] }));
   }
-  
+
   formatBirthDate() {
 
-    const dateString = this.newUser.birthDate; 
+    const dateString = this.newUser.birthDate;
     const date = new Date(dateString);
     const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2); 
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const day = ('0' + date.getDate()).slice(-2);
-    const formattedDate = `${year}-${month}-${day}`; 
-    this.newUser.birthDate = formattedDate; 
+    const formattedDate = `${year}-${month}-${day}`;
+    this.newUser.birthDate = formattedDate;
   }
 
   onImagePicked(event: Event) {
     const fileInput = event.target as HTMLInputElement;
-    const file = fileInput?.files?.[0]; 
+    const file = fileInput?.files?.[0];
 
     if (file) {
       this.image = file;
@@ -198,5 +229,9 @@ else
     }
   }
 
- 
+  closeDialog() {
+    this.isDialogOpen = false;
+    window.location.reload();
+  }
+
 }

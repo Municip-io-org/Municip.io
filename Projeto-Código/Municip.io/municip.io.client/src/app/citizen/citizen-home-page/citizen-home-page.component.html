@@ -28,24 +28,10 @@
         NOTÍCIAS DE {{ municipality.name | uppercase }}
       </div>
       <ul class="space-y-7">
-        <li>
-          <app-news-small image="/assets/images/carnaval.jpg" title="Setúbal sai à rua para brincar ao Carnaval"
-                          text="Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de
-                      atividades associadas aos festejos, de que se destacam duas tardes de animação no centro
-                      da cidade, a 11 e 13 de fevereiro."></app-news-small>
+        <li *ngFor="let news of newsList.slice(0, 3)">
+          <app-news-small image="{{news.photo}}" [title]="news.title" [text]="news.subtitle" ></app-news-small>
         </li>
-        <li>
-          <app-news-small image="/assets/images/carnaval.jpg" title="Setúbal sai à rua para brincar ao Carnaval"
-                          text="Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de
-                atividades associadas aos festejos, de que se destacam duas tardes de animação no centro
-                da cidade, a 11 e 13 de fevereiro."></app-news-small>
-        </li>
-        <li>
-          <app-news-small image="/assets/images/carnaval.jpg" title="Setúbal sai à rua para brincar ao Carnaval"
-                          text="Setúbal vive o Carnaval de 2024 por todo o concelho, com um conjunto variado de
-                atividades associadas aos festejos, de que se destacam duas tardes de animação no centro
-                da cidade, a 11 e 13 de fevereiro."></app-news-small>
-        </li>
+        
       </ul>
     </section>
   </div>

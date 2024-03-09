@@ -40,6 +40,7 @@ import { NewsPageComponent } from './news/news-page/news-page.component';
 import { NewsEditComponent } from './news/news-edit/news-edit.component';
 import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component';
 import { AdminDashboardMunicipalAdminsComponent } from './administrator/admin-dashboard-municipal-admins/admin-dashboard-municipal-admins.component';
+import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -80,6 +81,7 @@ const routes: Routes = [
   { path: 'news/:newsId', component: NewsPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [UserSameMunicipalityGuard, MunicipalAdminGuard,] },
   { path: 'documents', component: DocsHomepageComponent, data: {} },
+  { path: 'documents/my', component: MyDocumentsComponent }
   
 ];
 
