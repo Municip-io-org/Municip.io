@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router';
 import { Municipality } from '../../services/municipal-admin-auth.service';
+import { DocumentsService, Document } from '../../services/documents.service';
 
 @Component({
   selector: 'app-request-document',
@@ -10,7 +11,7 @@ import { Municipality } from '../../services/municipal-admin-auth.service';
 })
 export class RequestDocumentComponent {
 
-
+  documents: Document[] = [];
 
   user: any;
   isMunAdmin: boolean = false;
@@ -42,7 +43,9 @@ export class RequestDocumentComponent {
   nameSearch: string = '';
 
 
-  constructor(private userAuthService: UserAuthService, private router: Router) { }
+  constructor(private userAuthService: UserAuthService, private router: Router, private documentsService: DocumentsService) {
+    this.documents = this.documentsService.documents;
+  }
 
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(

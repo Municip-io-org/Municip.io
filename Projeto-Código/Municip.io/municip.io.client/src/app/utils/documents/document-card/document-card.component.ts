@@ -10,6 +10,7 @@ export class DocumentCardComponent {
   @Input() document: Document = {
     id: 0,
     name: 'Certeficado De Residência',
+    subTitle: "Este requerimento de passaporte é sua porta de entrada para o mundo. Ao preencher este formulário, você está iniciando o processo que permitirá explorar novas culturas, conhecer novas pessoas e criar memórias inesquecíveis.",
     type: DocumentType.Certeficated,
     status: StatusDocument.approved,
     date: new Date()
