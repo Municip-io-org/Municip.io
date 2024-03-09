@@ -14,7 +14,7 @@ export class CitizenOrMunicipalAdminGuard implements CanActivate {
     const isSignedIn = await this.userAuthService.isSignedIn().toPromise();
 
     if (!isSignedIn) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/login');
       return false;
     }
 

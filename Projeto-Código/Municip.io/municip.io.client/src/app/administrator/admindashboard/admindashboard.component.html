@@ -61,7 +61,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let m of filteredMunicipalities" [class]="(filteredMunicipalities.indexOf(m) % 2 === 0 ? 'bg-white' : 'bg-gray-100')">
+            <tr *ngFor="let m of filteredMunicipalities" [class]="(filteredMunicipalities.indexOf(m) % 2 === 0 ? 'bg-white' : 'bg-gray-100')" (click)="sendToPage(m)">
               <td class="px-5 py-5 text-left">{{ m.id }}</td>
               <td class="px-5 py-5 text-left">{{ m.name }}</td>
               <td class="px-5 py-5 text-left">{{ m.numberOfUsers }}</td>

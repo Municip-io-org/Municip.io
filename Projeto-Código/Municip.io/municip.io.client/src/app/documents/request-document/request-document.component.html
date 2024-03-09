@@ -1,0 +1,55 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+</head>
+
+<app-header-loggedin />
+
+
+<app-smaller-banner title="Pedir Documentos"
+                    image={{municipality.landscapePhoto}}></app-smaller-banner>
+
+
+
+
+<div class="relative flex flex-col bg-municip-blank pt-[3rem] pb-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
+
+  <div class="relative w-full self-center ">
+    <label for="nameSearch" class="sr-only">Procure por eventos</label>
+    <div class="flex items-center">
+      <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+        <span class="fas fa-search"></span>
+      </i>
+      <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por documentos"
+             class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300  hover:border-black">
+    </div>
+  </div>
+
+
+  <div *ngIf="filteredDocuments.length === 0"
+       class="flex flex-col justify-center items-center text-municip-normal-black grow space-y-4 text-[2rem] ">
+    <p class=" font-semibold">A sua pesquisa - “{{nameSearch}}” - não encontrou nenhum documento.</p>
+    <div class="text-[1.3rem]">
+      Sugestões:
+      <ul>
+        <li>&#8226; Certifique-se de que nenhuma palavra contém erros ortográficos.</li>
+        <li>&#8226; Tente utilizar outras palavras-chave.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <app-card-outline-theme *ngIf="filteredDocuments.length > 0">
+    <section class="flex flex-wrap justify-around gap-y-16 px-20 pt-16 pb-5">
+
+      <ng-container *ngFor="let document of filteredDocuments">
+
+        <app-document-request-card [document]="document"></app-document-request-card>
+      </ng-container>
+    </section>
+  </app-card-outline-theme>
+</div>
+
+
+
+<app-footer />

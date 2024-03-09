@@ -1,5 +1,11 @@
 
 <app-header-loggedin></app-header-loggedin>
+
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" (confirm)="closeDialog()"
+                      [isConfirm]="isConfirm"></app-dialog-message>
+</ng-container>
+
 <div *ngIf="newUser">
   <app-profile-banner [image]="'/assets/images/admin/banner.jpg'"
                       [title]="'Dados de ' + (originalName || 'Utilizador')"
