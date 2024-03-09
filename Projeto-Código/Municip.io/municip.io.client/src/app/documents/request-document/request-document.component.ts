@@ -44,7 +44,7 @@ export class RequestDocumentComponent {
 
 
   constructor(private userAuthService: UserAuthService, private router: Router, private documentsService: DocumentsService) {
-    this.documents = this.documentsService.documents;
+   
   }
 
   ngOnInit(): void {
@@ -66,6 +66,15 @@ export class RequestDocumentComponent {
               (municipalityRes: Municipality) => {
                 this.municipality = municipalityRes;
 
+                this.documentsService.getDocuments().subscribe(
+                  (docRes: any) => {
+                    this.documents = docRes as Document[];
+                    
+                  },
+                  error => {
+                    console.error(error);
+                  }
+                );
               },
               error => {
                 console.error(error);
@@ -83,5 +92,10 @@ export class RequestDocumentComponent {
         console.error(error);
       }
     );
+
+  }
+
+  get filteredDocuments() {
+    return this.documents.filter(doc => doc.name.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }
 }

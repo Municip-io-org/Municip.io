@@ -101,6 +101,7 @@ import { CountryPickerComponent } from './utils/input/country-picker/country-pic
 import { RequestDocumentComponent } from './documents/request-document/request-document.component';
 import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
 import { DocumentCardComponent } from './utils/documents/document-card/document-card.component';
+import { DocumentRequestCardComponent } from './utils/documents/document-request-card/document-request-card.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -187,6 +188,7 @@ registerLocaleData(localePt, 'pt-PT');
     RequestDocumentComponent,
     MyDocumentsComponent,
     DocumentCardComponent,
+    DocumentRequestCardComponent,
     
   ],
   imports: [

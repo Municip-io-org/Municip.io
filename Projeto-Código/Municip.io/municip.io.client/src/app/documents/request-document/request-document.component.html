@@ -26,6 +26,28 @@
   </div>
 
 
+  <div *ngIf="filteredDocuments.length === 0"
+       class="flex flex-col justify-center items-center text-municip-normal-black grow space-y-4 text-[2rem] ">
+    <p class=" font-semibold">A sua pesquisa - “{{nameSearch}}” - não encontrou nenhum documento.</p>
+    <div class="text-[1.3rem]">
+      Sugestões:
+      <ul>
+        <li>&#8226; Certifique-se de que nenhuma palavra contém erros ortográficos.</li>
+        <li>&#8226; Tente utilizar outras palavras-chave.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <app-card-outline-theme *ngIf="filteredDocuments.length > 0">
+    <section class="flex flex-wrap justify-around gap-y-16 px-20 pt-16 pb-5">
+
+      <ng-container *ngFor="let document of filteredDocuments">
+
+        <app-document-request-card [document]="document"></app-document-request-card>
+      </ng-container>
+    </section>
+  </app-card-outline-theme>
 </div>
 
 
