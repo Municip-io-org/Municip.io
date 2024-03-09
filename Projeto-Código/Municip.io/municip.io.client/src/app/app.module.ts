@@ -98,6 +98,8 @@ import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.c
 import { MatSelectCountryModule } from "@angular-material-extensions/select-country";
 import { CountryPickerComponent } from './utils/input/country-picker/country-picker.component';
 import { RequestDocumentComponent } from './documents/request-document/request-document.component';
+import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
+import { DocumentCardComponent } from './utils/documents/document-card/document-card.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -181,6 +183,8 @@ registerLocaleData(localePt, 'pt-PT');
     DocsHomepageComponent,
     CountryPickerComponent,
     RequestDocumentComponent,
+    MyDocumentsComponent,
+    DocumentCardComponent,
     
   ],
   imports: [
