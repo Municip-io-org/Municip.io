@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class CitizenOrMunicipalAdminGuard implements CanActivate {
+export class AdministratorGuard implements CanActivate {
 
   constructor(private userAuthService: UserAuthService, private router: Router) { }
 
@@ -19,7 +19,7 @@ export class CitizenOrMunicipalAdminGuard implements CanActivate {
     }
 
     const userRole = await this.userAuthService.getUserRole().toPromise();
-    if (userRole!.role === Roles.Citizen || userRole!.role === Roles.Municipal) {
+    if (userRole!.role === Roles.Admin) {
       return true;
     } else {
       this.router.navigateByUrl('/accessDenied');
@@ -27,4 +27,3 @@ export class CitizenOrMunicipalAdminGuard implements CanActivate {
     }
   }
 }
-

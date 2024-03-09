@@ -94,7 +94,8 @@ transition-all duration-700 ease-in-out  decoration-sky-500
       <div class="space-y-4 h-96 overflow-auto py-4">
         <div *ngFor="let value of schedule">
           <app-show-stop [stopName]="getNameStopById(value.stop_id)" [stopTime]="formatTime(value.arrival_time)"
-                         [stopId]="value.stop_id"
+                         [stopId]="value.stop_id" [stopMunicipality]="getLocalityStopById(value.stop_id)" [userMunicipality]="municipality?.name ?? ''"
+
                          class="flex justify-center" />
         </div>
       </div>

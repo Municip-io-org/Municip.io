@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CitizenStatusService } from '../../services/citizen-status.service';
 import { UserinfodialogComponent } from '../../utils/userinfodialog/userinfodialog.component';
+import { UserAuthService } from '../../services/user-auth.service';
 
 @Component({
   selector: 'app-munadmindashboard',
@@ -19,10 +20,14 @@ export class MunAdmindashboardComponent {
   isDialogOpen: boolean = false;
   selectedUser: any;
 
-  constructor(private citizenStatusService: CitizenStatusService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private citizenStatusService: CitizenStatusService, private router: Router, private route: ActivatedRoute, private userAuthService: UserAuthService ) { }
 
   ngOnInit() {
-    this.municipalName = this.route.snapshot.params['municipalName'];
+   this.userAuthService.getMunicipality().subscribe((municipality: any) => {
+     this.municipalName = municipality;
+      
+    } );
+
     this.citizenStatusService.getCitizens(this.municipalName).subscribe((citizens: any) => {
       this.citizens = citizens;
 

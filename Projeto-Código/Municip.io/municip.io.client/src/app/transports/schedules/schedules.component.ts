@@ -325,6 +325,16 @@ this.patterns = [];
 
   }
 
+  getLocalityStopById(id : string): string {
+    if (this.path) {
+      let stop = this.path.find(stop => stop.stop.id === id);
+      return stop ? stop.stop.municipality_name : "";
+    }
+    return "";
+  }
+
+
+
   iswithoutTrips(): boolean {
     if (this.trips.length === 0 && this.scheduleForm.get('pattern')?.value !== "") {
       return true;
