@@ -56,15 +56,23 @@ export class LoginComponent {
                    res => {
                      console.log("res", this.newUser);
                      this.role = res.role;
-                     console.log("role", this.role );
-                     if (this.role == "Citizen") {
-                       if (this.newUser.status == 'Approved') {
+                     console.log("role", this.role);
+
+                     if (this.role == 'Administrator') {
+
+                        this.router.navigateByUrl('/municipal/homePage');
+
+                     } else if (this.newUser.status == 'Approved') {
+
+                       if (this.role == "Citizen") {
+
                          this.router.navigateByUrl('/citizen/homePage');
+
                        } else {
-                         this.router.navigateByUrl('/acessBlocked');
+                         this.router.navigateByUrl('/municipal/homePage');
                        } 
                      } else {
-                       this.router.navigateByUrl('/municipal/homePage');
+                       this.router.navigateByUrl('/acessBlocked')
                      }
 
                    },
