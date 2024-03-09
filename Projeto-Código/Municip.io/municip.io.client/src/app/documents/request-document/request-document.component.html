@@ -1,0 +1,33 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+</head>
+
+<app-header-loggedin />
+
+
+<app-smaller-banner title="Pedir Documentos"
+                    image='/assets/images/documents/wallpaper.jpg'></app-smaller-banner>
+
+
+
+
+<div class="relative flex flex-col bg-municip-blank pt-[3rem] pb-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
+
+  <div class="relative w-full self-center ">
+    <label for="nameSearch" class="sr-only">Procure por eventos</label>
+    <div class="flex items-center">
+      <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+        <span class="fas fa-search"></span>
+      </i>
+      <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por documentos"
+             class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300  hover:border-black">
+    </div>
+  </div>
+
+
+</div>
+
+
+
+<app-footer />
