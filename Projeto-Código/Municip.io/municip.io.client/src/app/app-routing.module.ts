@@ -42,6 +42,7 @@ import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.c
 import { RequestDocumentComponent } from './documents/request-document/request-document.component';
 import { AdminDashboardMunicipalAdminsComponent } from './administrator/admin-dashboard-municipal-admins/admin-dashboard-municipal-admins.component';
 import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
+import { AdministratorGuard } from './utils/guard/administrator.guard';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -56,12 +57,11 @@ const routes: Routes = [
   { path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {}, canActivate: [MunicipalityGuard] },
   { path: 'signUp-Success', component: SignUpSuccessComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
-  { path: 'admindashboard', component: AdmindashboardComponent, data: {} },
-  { path: 'admindashboard/:municipalName', component: AdminDashboardMunicipalAdminsComponent, data: {} },
+  { path: 'admindashboard', component: AdmindashboardComponent, data: {}, canActivate: [AdministratorGuard] },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
   { path: 'transports', component: TransportsMainComponent, data: {} },
   { path: 'transports/schedules', component: SchedulesComponent, data: {} },
-  { path: 'munadmin-dashboard/:municipalName', component: MunAdmindashboardComponent, data: {} },
+  { path: 'munadmin-dashboard', component: MunAdmindashboardComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} },
   { path: 'transports/stops', component: StopsPageComponent, data: {} },
   { path: 'transports/stops/:selectedStop', component: StopsPageComponent, data: {} },
