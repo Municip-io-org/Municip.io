@@ -40,6 +40,7 @@ import { NewsPageComponent } from './news/news-page/news-page.component';
 import { NewsEditComponent } from './news/news-edit/news-edit.component';
 import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component';
 import { RequestDocumentComponent } from './documents/request-document/request-document.component';
+import { AdminDashboardMunicipalAdminsComponent } from './administrator/admin-dashboard-municipal-admins/admin-dashboard-municipal-admins.component';
 import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
 
 const routes: Routes = [
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: 'signUp-Success', component: SignUpSuccessComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
   { path: 'admindashboard', component: AdmindashboardComponent, data: {} },
+  { path: 'admindashboard/:municipalName', component: AdminDashboardMunicipalAdminsComponent, data: {} },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
   { path: 'transports', component: TransportsMainComponent, data: {} },
   { path: 'transports/schedules', component: SchedulesComponent, data: {} },

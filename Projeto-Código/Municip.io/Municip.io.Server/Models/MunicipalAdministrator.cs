@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Municip.io.Server.Models
 {
@@ -24,6 +25,12 @@ namespace Municip.io.Server.Models
 
 
         public string photo { get; set; }
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public MunicipalAdministratorStatus status { get; set; }
+
+
+        public DateOnly date { get; set; }
 
         public MunicipalAdministrator(string firstName, string surname, string email, string municipality)
         {

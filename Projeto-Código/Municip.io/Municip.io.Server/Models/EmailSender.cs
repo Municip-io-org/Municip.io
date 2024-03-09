@@ -33,7 +33,7 @@ namespace Municip.io.Server.Models
     }
 
 
-    public enum CitizenStatusMessage
+    public enum UserStatusMessage
     {
         Approve,
         Deny,
@@ -42,21 +42,21 @@ namespace Municip.io.Server.Models
         Unblock
     }
 
-    public static class CitizenStatusMessageExtensions
+    public static class UserStatusMessageExtensions
     {
-        public static string toString(this CitizenStatusMessage me)
+        public static string toString(this UserStatusMessage me)
         {
             switch (me)
             {
-                case CitizenStatusMessage.Approve:
+                case UserStatusMessage.Approve:
                     return "Depois de avaliarmos o seu pedido, decidimos <span style='font-weight: bold;'>aceitar o pedido de inscrição</span> na nossa plataforma.";
-                case CitizenStatusMessage.Deny:
+                case UserStatusMessage.Deny:
                     return "Depois de avaliarmos o seu pedido, decidimos <span style='font-weight: bold;'>recusar o pedido de inscrição</span> na nossa plataforma.";
-                case CitizenStatusMessage.Block:
+                case UserStatusMessage.Block:
                     return "Decidimos <span style='font-weight: bold;'>bloquear a sua conta</span> na nossa plataforma, disponha dos meios de contacto para qualquer dúvida.";
-                case CitizenStatusMessage.Remove:
+                case UserStatusMessage.Remove:
                     return "Decidimos <span style='font-weight: bold;'>remover a sua conta</span> da nossa plataforma, disponha dos meios de contacto para qualquer dúvida.";
-                case CitizenStatusMessage.Unblock:
+                case UserStatusMessage.Unblock:
                     return "Decidimos <span style='font-weight: bold;'>desbloquear a sua conta</span> na nossa plataforma.";
 
                 default:

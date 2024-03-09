@@ -231,6 +231,9 @@ namespace Municip.io.Server.Controllers
 
 
                     await _userManager.AddToRoleAsync(user, "Municipal");
+                    municipalAdministrator.status = MunicipalAdministratorStatus.Pending;
+                    municipalAdministrator.date = DateOnly.FromDateTime(DateTime.Now);
+
                     //add citizen to database
                     _context.MunicipalAdministrators.Add(municipalAdministrator);
                     await _context.SaveChangesAsync();
