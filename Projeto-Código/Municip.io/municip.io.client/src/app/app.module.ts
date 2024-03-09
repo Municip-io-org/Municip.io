@@ -97,6 +97,7 @@ import { DatePickerComponent } from './utils/input/date-picker/date-picker.compo
 import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component';
 import { MatSelectCountryModule } from "@angular-material-extensions/select-country";
 import { CountryPickerComponent } from './utils/input/country-picker/country-picker.component';
+import { AccessBlockedComponent } from './access-blocked/access-blocked.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -179,6 +180,7 @@ registerLocaleData(localePt, 'pt-PT');
     DatePickerComponent,
     DocsHomepageComponent,
     CountryPickerComponent,
+    AccessBlockedComponent,
     
   ],
   imports: [

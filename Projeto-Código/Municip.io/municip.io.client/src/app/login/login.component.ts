@@ -25,6 +25,7 @@ export class LoginComponent {
   constructor(private citizenAuthService: CitizenAuthService, private userAuthService: UserAuthService,
       private router: Router) { }
 
+  newUser: any;
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -39,17 +40,44 @@ export class LoginComponent {
      this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
        res => {
          this.error = "";
+       
 
-         this.userAuthService.getUserRole().subscribe(
+         this.userAuthService.getUserData().subscribe(
            res => {
+             this.user = res;
+             var emailToParse = this.user.email;
+             var emailParsed = emailToParse.replace('@', '%40');
+             this.userAuthService.getInfoByEmail(emailParsed).subscribe(
+               res => {
+                 this.newUser = res;
 
-             this.role = res.role;
-             console.log("role", this.role);
-             if (this.role == "Citizen") {
-               this.router.navigateByUrl('/citizen/homePage');
-             } else {
-               this.router.navigateByUrl('/municipal/homePage');
-             }
+
+                 this.userAuthService.getUserRole().subscribe(
+                   res => {
+                     console.log("res", this.newUser);
+                     this.role = res.role;
+                     console.log("role", this.role );
+                     if (this.role == "Citizen") {
+                       if (this.newUser.status == 'Approved') {
+                         this.router.navigateByUrl('/citizen/homePage');
+                       } else {
+                         this.router.navigateByUrl('/acessBlocked');
+                       } 
+                     } else {
+                       this.router.navigateByUrl('/municipal/homePage');
+                     }
+
+                   },
+                   error => {
+                     console.error(error);
+                   }
+                 );
+               },
+               error => {
+                 console.error(error);
+
+               }
+             );
            },
            error => {
              console.error(error);

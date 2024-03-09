@@ -39,7 +39,7 @@ import { EventsListComponent } from './events/my-events/events-list/events-list.
 import { NewsPageComponent } from './news/news-page/news-page.component';
 import { NewsEditComponent } from './news/news-edit/news-edit.component';
 import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component';
-
+import { AccessBlockedComponent} from './access-blocked/access-blocked.component';
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
   {
@@ -78,7 +78,7 @@ const routes: Routes = [
   { path: 'news/:newsId', component: NewsPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [UserSameMunicipalityGuard, MunicipalAdminGuard,] },
   { path: 'documents', component: DocsHomepageComponent, data: {} },
-  
+  { path: 'acessBlocked', component: AccessBlockedComponent, data: {} }
 ];
 
 @NgModule({
