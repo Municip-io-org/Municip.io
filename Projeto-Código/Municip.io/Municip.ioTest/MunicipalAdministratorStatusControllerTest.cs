@@ -80,7 +80,6 @@ public class MunicipalAdministratorStatusControllerTest
         }
 
 
-        //test delete municipal administrator
         [Fact]
         public async Task Test_DeleteMunicipalAdministrator()
         {
@@ -94,7 +93,6 @@ public class MunicipalAdministratorStatusControllerTest
         }
 
 
-        //test block municipal administrator
         [Fact]
         public async Task Test_BlockMunicipalAdministrator()
         {
