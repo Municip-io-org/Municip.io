@@ -1,11 +1,15 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 
 namespace Municip.io.Server.Models
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class EmailSender
     {
+        [HttpPost("send")]
         public static void SendEmail(string email, string subject, string destinyName, string messageText, string filePath)
         {
             var message = new MimeMessage();

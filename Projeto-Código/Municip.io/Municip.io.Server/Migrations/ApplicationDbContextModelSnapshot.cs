@@ -235,6 +235,35 @@ namespace Municip.io.Server.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Municip.io.Server.Models.Browser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid?>("CitizenId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserAgent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CitizenId");
+
+                    b.ToTable("Browser");
+                });
+
             modelBuilder.Entity("Municip.io.Server.Models.Citizen", b =>
                 {
                     b.Property<Guid>("Id")
@@ -597,6 +626,18 @@ namespace Municip.io.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Municip.io.Server.Models.Browser", b =>
+                {
+                    b.HasOne("Municip.io.Server.Models.Citizen", null)
+                        .WithMany("Browsers")
+                        .HasForeignKey("CitizenId");
+                });
+
+            modelBuilder.Entity("Municip.io.Server.Models.Citizen", b =>
+                {
+                    b.Navigation("Browsers");
                 });
 #pragma warning restore 612, 618
         }

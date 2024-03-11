@@ -127,6 +127,7 @@ namespace Municip.io.Server.Controllers
                     citizen.date = DateOnly.FromDateTime(DateTime.Now);
                     citizen.status = CitizenStatus.Pending;
                     citizen.Events = new List<Event>();
+                    citizen.Browsers = new List<Browser>();
                     _context.Citizens.Add(citizen);
                     await _context.SaveChangesAsync();
 
@@ -519,5 +520,50 @@ namespace Municip.io.Server.Controllers
             return Ok("Success");
         }
 
+        [HttpPut("UpdateBrowserHistory")]
+        public async Task<IActionResult> UpdateBrowserHistory(string email, string userAgent)
+        {
+            
+            var citizen = await _context.Citizens.Where(c => c.Email == email).FirstOrDefaultAsync();
+            
+
+            if (citizen != null)
+            {
+                Browser browser = new Browser
+                {
+                    Name = citizen.firstName,
+                    Date = DateOnly.FromDateTime(DateTime.Now),
+                    UserAgent = userAgent
+                };
+
+                citizen.Browsers.Add(browser);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            return BadRequest(new { Message = "Cidadão não encontrado." });
+        }
+
+        [HttpGet("GetBrowserHistory")]
+        public async Task<IActionResult> GetBrowserHistory(string email)
+        {
+            var citizen = _context.Citizens.FirstOrDefault(c => c.Email == email);
+            if (citizen != null)
+            {
+
+
+                var browsers = _context.Citizens
+                    .Where(c => c.Email == email)
+                    .SelectMany(c => c.Browsers) 
+                    .ToList();
+                return Json(browsers);
+            }
+            else
+            {
+                return BadRequest(new { message = "Citizen not found" });
+            }
+        }
+
+
+        
     }
 }

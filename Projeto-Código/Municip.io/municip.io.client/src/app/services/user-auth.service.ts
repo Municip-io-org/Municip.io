@@ -258,6 +258,14 @@ localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
     );
   }
 
+  updateBrowserHistory(email: string, browserId: string): Observable<any> {
+    return this.http.put(`/api/accounts/UpdateBrowserHistory?email=${email}&userAgent=${browserId}`, {});
+  }
+
+  getBrowserHistory(email: string): Observable<any> {
+    return this.http.get<any>(`/api/accounts/GetBrowserHistory?email=${email}`);
+  }
+
   /**
  * Update municipality administrator user information.
  * @param user Municipality administrator user object to be updated.
@@ -333,3 +341,5 @@ export enum Roles {
   Municipal = "Municipal",
   Citizen = "Citizen"
 }
+
+

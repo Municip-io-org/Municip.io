@@ -24,6 +24,7 @@ export class CitizenAuthService {
       .pipe(switchMap((response: any) => {
         citizen.photo = response['data']['link'];
         citizen.events = [];
+        citizen.browsers = [];
         return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
       }));
   }
@@ -31,7 +32,17 @@ export class CitizenAuthService {
 
   
 
-  
+  sendEmail(email: string, subject: string, destinyName: string, message: string, filePath: string) {
+    const emailRequest = {
+      email: email,
+      subject: subject,
+      destinyName: destinyName,
+      message: message,
+      filePath: filePath
+    };
+
+    return this.http.post('/api/email/send', emailRequest);
+  }
 }
 
 export interface Citizen {
@@ -48,6 +59,7 @@ export interface Citizen {
   birthDate: Date;
   photo?: string;
   events?: Event[];
+  browsers?: string[];
 }
 
 export interface Country {
