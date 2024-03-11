@@ -266,6 +266,12 @@ localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
     return this.http.get<any>(`/api/accounts/GetBrowserHistory?email=${email}`);
   }
 
+  sendEmail(email: string) {
+    
+    return this.http.post<any>(`/api/accounts/SendNewLogin?email=${email}`, {});
+    
+  }
+
   /**
  * Update municipality administrator user information.
  * @param user Municipality administrator user object to be updated.

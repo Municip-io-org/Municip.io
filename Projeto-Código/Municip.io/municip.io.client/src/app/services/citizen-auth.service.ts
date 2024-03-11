@@ -28,21 +28,6 @@ export class CitizenAuthService {
         return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
       }));
   }
-
-
-  
-
-  sendEmail(email: string, subject: string, destinyName: string, message: string, filePath: string) {
-    const emailRequest = {
-      email: email,
-      subject: subject,
-      destinyName: destinyName,
-      message: message,
-      filePath: filePath
-    };
-
-    return this.http.post('/api/email/send', emailRequest);
-  }
 }
 
 export interface Citizen {

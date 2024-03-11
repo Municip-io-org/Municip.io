@@ -47,7 +47,7 @@ export class LoginComponent {
              this.role = res.role;
              this.user.email = res.email;
              
-             this.userAuthService.getInfoByEmail(res.email).subscribe(
+             this.userAuthService.getInfoByEmail(email).subscribe(
                res => {
                  
                   console.log(res);
@@ -73,10 +73,10 @@ export class LoginComponent {
 
 
                       if (!found) {
-                        this.citizenAuthService.sendEmail(res.email, "New login", res.firstName, "A new login was detected in your account. If it was not you, please contact us.", "").subscribe(
+                        this.userAuthService.sendEmail(email).subscribe(
                           res => {
                             
-                            console.log("LA VAI MAIL");
+                            console.log("LA VAI MAIL",res);
                           },
                           error => {
                             console.error(error);

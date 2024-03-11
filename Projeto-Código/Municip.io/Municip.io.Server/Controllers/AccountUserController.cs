@@ -563,6 +563,15 @@ namespace Municip.io.Server.Controllers
             }
         }
 
+        [HttpPost("SendNewLogin")]
+        public IActionResult SendNewLogin(string email)
+        {
+            EmailSender.SendEmail(email, "Novo Login", "", AccountUserEmail.NEWLOGIN.toString(), "root/html/AproveEmail.html");
+            return Ok(new { message = "Success" });
+        }
+
+
+
 
         
     }
