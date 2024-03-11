@@ -78,21 +78,21 @@ export class SignUpMunicipalAdministratorAccountComponent {
     this.municipalAdminAuthService.registerMunicipalAdmin(this.signUpMunicipalAdminForm.value as MunicipalAdministrator, this.image).subscribe(
 
 
-      (result) => {
+      (result: any) => {
         if (result) {
           this.router.navigateByUrl('/signUp-Success');
         } else {
           var municipal, municipalname;
           municipal = this.signUpMunicipalAdminForm.value as MunicipalAdministrator
           municipalname = municipal.municipality
-
+          console.log("AQUI");
      
           this.router.navigateByUrl('/signUp-Municipality/'+municipalname);
         }
       },
       (error) => {
         console.log(error.error.errors)
-
+        console.log("AQUI2");
         this.errors = error.error.errors;
 
       }
