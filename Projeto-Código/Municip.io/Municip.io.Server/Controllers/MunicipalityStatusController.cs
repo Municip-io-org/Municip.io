@@ -209,8 +209,9 @@ namespace Municip.io.Server.Controllers
             return Ok("Success");
         }
 
-
-
-
+        public static implicit operator MunicipalityStatusController(AccountUserController v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
