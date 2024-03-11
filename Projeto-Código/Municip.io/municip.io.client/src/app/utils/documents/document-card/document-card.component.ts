@@ -14,7 +14,8 @@ export class DocumentCardComponent {
     type: DocumentType.Certeficated,
     status: StatusDocument.approved,
     date: new Date(),
-    municipality: "Setúbal"
+    municipality: "Setúbal",
+RequestBy: "Ana Maria"
   }
 
   //quero dar um estilo diferente para cada status

@@ -12,6 +12,8 @@
 
         public DateTime Date { get; set; }
 
+        public string RequestBy { get; set; }
+
     }
 
 
