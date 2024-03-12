@@ -1,6 +1,6 @@
 <app-card-outline-theme>
-  <div class="flex justify-center items-center text-[2rem] p-10 pb-14 text-left space-x-16">
-    <section class="w-7/12">
+  <div class="flex justify-evenly items-center text-[2rem] p-10 pb-14 text-left space-x-16">
+    <section class="w-7/12 ">
       <span class="font-bold">Os meus dados</span>
       <div class="flex ml-11">
         <div class="flex flex-col text-[1rem] space-y-4 mt-5">
@@ -14,7 +14,7 @@
     </section>
     <section class="flex flex-col justify-center items-center w-5/12">
       <img [src]="photo" alt="Foto de perfil" class="object-cover size-32 rounded-2xl" />
-      <app-btn-municip-blue class="relative top-10">
+      <app-btn-municip-blue class="relative top-10" routerLink="/userpage">
         Perfil Completo
         <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
       </app-btn-municip-blue>

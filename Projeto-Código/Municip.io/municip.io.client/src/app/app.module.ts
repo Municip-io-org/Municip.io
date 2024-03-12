@@ -93,7 +93,18 @@ import { NewsPageComponent } from './news/news-page/news-page.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { RippleModule } from 'primeng/ripple';
 import { NewsEditComponent } from './news/news-edit/news-edit.component'
-import { DatePickerComponent } from './utils/input/date-picker/date-picker.component'
+import { DatePickerComponent } from './utils/input/date-picker/date-picker.component';
+import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component'
+import { AdminDashboardMunicipalAdminsComponent } from './administrator/admin-dashboard-municipal-admins/admin-dashboard-municipal-admins.component'
+import { MatSelectCountryModule } from "@angular-material-extensions/select-country";
+import { CountryPickerComponent } from './utils/input/country-picker/country-picker.component';
+import { RequestDocumentComponent } from './documents/request-document/request-document.component';
+import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
+import { DocumentCardComponent } from './utils/documents/document-card/document-card.component';
+import { DocumentRequestCardComponent } from './utils/documents/document-request-card/document-request-card.component';
+import { ApproveDocumentsComponent } from './documents/approve-documents/approve-documents.component';
+import { DocumentAproveCardComponent } from './utils/documents/document-aprove-card/document-aprove-card.component';
+import { DocumentApproveCardComponent } from './utils/documents/document-approve-card/document-approve-card.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -174,6 +185,16 @@ registerLocaleData(localePt, 'pt-PT');
     NewsPageComponent,
     NewsEditComponent,
     DatePickerComponent,
+    DocsHomepageComponent,
+    AdminDashboardMunicipalAdminsComponent,
+    CountryPickerComponent,
+    RequestDocumentComponent,
+    MyDocumentsComponent,
+    DocumentCardComponent,
+    DocumentRequestCardComponent,
+    ApproveDocumentsComponent,
+    DocumentAproveCardComponent,
+    DocumentApproveCardComponent,
     
   ],
   imports: [
@@ -185,7 +206,7 @@ registerLocaleData(localePt, 'pt-PT');
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-
+    MatSelectCountryModule.forRoot('pt'),
     NgxMaterialTimepickerModule.setOpts('pt-PT'),
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     InfiniteScrollModule, SelectButtonModule, RippleModule,

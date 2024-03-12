@@ -6,7 +6,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.css',
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class DatePickerComponent {
 

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MunicipalityStatusService } from '../../services/municipality-status.service';
+import { Municipality } from '../../services/municipal-admin-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admindashboard',
@@ -15,7 +17,8 @@ export class AdmindashboardComponent {
   municipalities: any[] = [];
 
 
-  constructor(private municipalityStatusService: MunicipalityStatusService) { }
+  constructor(private municipalityStatusService: MunicipalityStatusService, private router: Router,
+  ) { }
 
   ngOnInit() {
     this.municipalityStatusService.getMunicipalities().subscribe((municipalities: any) => {
@@ -33,20 +36,20 @@ export class AdmindashboardComponent {
     this.municipalityStatusService.deleteMunicipality(name).subscribe((municipalities: any) => {
       this.municipalities = municipalities;
     })
-}
+  }
 
 
   sortTable(column: string): void {
     if (this.sortType === column) {
-    
+
       this.sortReverse = !this.sortReverse;
     } else {
-    
+
       this.sortType = column;
       this.sortReverse = false;
     }
 
-  
+
     this.municipalities.sort((a: any, b: any) => {
       const valueA = a[column];
       const valueB = b[column];
@@ -69,6 +72,11 @@ export class AdmindashboardComponent {
 
   private sortNumeric(a: number, b: number): number {
     return (a - b) * (this.sortReverse ? -1 : 1);
+  }
+
+
+  sendToPage(municipality: Municipality) {
+    this.router.navigate(['/admindashboard/', municipality.name]);
   }
 }
 

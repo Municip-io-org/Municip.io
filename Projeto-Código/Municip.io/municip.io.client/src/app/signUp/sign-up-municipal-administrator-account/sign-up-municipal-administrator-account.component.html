@@ -1,44 +1,60 @@
+<div class="flex text-municip-black text-[1.2rem] font-poppins">
 
 
-<div class="flex text-municip-black text-[2vh] font-poppins">
-  <div class="h-screen grow bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center">
+  <div class="sticky top-0 h-screen grow bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center">
     <div class=" flex justify-center text-white">
       <img alt="logo" src="/assets/images/logos/logo-white-right.png" class="size-8/12 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
     </div>
   </div>
-  <div class="h-screen w-[65%] mx-10 flex items-center justify-center ">
-    <div class="flex flex-col w-full h-full">
-      <div>
-        <h1 class="font-black text-[3vh] text-left text-black  my-2">Registo de Administrador Municipal</h1>
-        <h3 class="font-medium text-left text-[2.2vh] text-municip-normal-black mb-2">Insira os seus dados</h3>
-      </div>
+
+
+
+  <section class=" w-[62.5rem] mx-[3rem] my-10 flex items-center justify-center ">
+    <div class="flex grow flex-col ">
+
+        <h1 class="font-black text-[2.4rem] text-left text-black  my-2">Registo de Administrador Municipal</h1>
+        <h3 class="font-medium text-left text-municip-normal-black mb-2">Insira os seus dados</h3>
+     
+
+
       <form [formGroup]="signUpMunicipalAdminForm" (ngSubmit)="onSubmit()" class="h-full">
-        <div class="h-24">
+        
           <div *ngIf="errors" class="text-red-500 text-sm font-bold space-y-2 text-start">
             <div *ngFor="let error of errors">
               <p>{{error}}</p>
             </div>
           </div>
-        </div>
-        <div class="py-[1vh] flex flex-row h-fit">
+        
+
+
+
+        <div class="py-[2rem] flex justify-around max-lg:flex-col max-lg:items-center">
           <section class="w-full flex flex-col text-left h-fit">
-            <div class="h-full flex flex-col justify-center">
-              <div class="flex justify-around">
-                <div class="h-32">
-                  <app-input-title class="text-[2.4vh]">Primeiro Nome</app-input-title>
+            <div class="flex flex-col justify-center">
+
+
+              <div class="flex justify-around max-lg:flex-col max-lg:items-center">
+
+
+                <div class="h-32 ">
+                  <app-input-title class="text-[1.4rem]">Primeiro Nome</app-input-title>
                   <div class="flex items-center">
-                    <input required placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="municipalAdministrator.firstName" class="input w-[35.2vh]" />
+                    <input required placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="municipalAdministrator.firstName"
+                           class="input w-[21rem]" />
                     <app-tooltip [tooltipText]="'De acordo com o Documento de Identificação.'"></app-tooltip>
                   </div>
                   <div class="text-red-500 font-bold py-2" *ngIf="firstName?.touched && firstName?.invalid ">
                     <div *ngIf="firstName?.errors?.['required'] ">Primeiro Nome Obrigatório</div>
                   </div>
                 </div>
+
+
+
                 <div class="h-32">
-                  <app-input-title class="text-[2.4vh]">Apelido</app-input-title>
+                  <app-input-title class="text-[1.4rem]">Apelido</app-input-title>
                   <div class="flex items-center">
                     <input required placeholder="Introduza o seu apelido" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="municipalAdministrator.surname"
-                           class="input w-[35.2vh]" />
+                           class="input w-[21rem]" />
                     <app-tooltip [tooltipText]="'De acordo com o Documento de Identificação.'"></app-tooltip>
                   </div>
                   <div class="text-red-500 font-bold py-2" *ngIf="surname?.touched && surname?.invalid ">
@@ -46,58 +62,77 @@
                   </div>
                 </div>
               </div>
-              <div class="flex justify-around">
+
+
+              <div class="flex justify-around max-lg:flex-col  max-lg:items-center">
+
+
                 <div class="h-32">
-                  <app-input-title class="text-[2.4vh]">Email</app-input-title>
+                  <app-input-title class="text-[1.4rem]">Email</app-input-title>
                   <input required placeholder="Introduza o seu email" type="email" id="email" formControlName="email" name="email" [(ngModel)]="municipalAdministrator.email"
-                         class="input w-[35.2vh]" />
+                         class="input w-[21rem]" />
                   <div class="text-red-500 font-bold py-2" *ngIf="email?.touched && email?.invalid ">
                     <div *ngIf="email?.errors?.['required'] ">Email Obrigatório</div>
                     <div *ngIf="email?.errors?.['email'] ">Email Inválido</div>
                   </div>
                 </div>
-                <div class="flex flex-col h-32">
-                  <app-input-title class="text-[2.4vh]">Palavra-Passe</app-input-title>
+
+
+                <div class="h-40">
+                  <app-input-title class="text-[1.4rem]">Palavra-Passe</app-input-title>
                   <div class="flex items-center">
                     <input required placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="municipalAdministrator.password"
-                           class="input w-[35.2vh]">
+                           class="input w-[21rem]">
                     <app-tooltip [tooltipText]="'A password deverá ter letras maiúsculas, minúsculas, números e símbolos'"></app-tooltip>
                   </div>
-                  <div class="text-red-500 font-bold py-2" *ngIf="password?.touched && password?.invalid ">
-                    <div *ngIf="password?.errors?.['required'] ">Password Obrigatório</div>
+                  <div class="text-red-500 font-bold py-2" *ngIf="password?.touched && password?.invalid">
+                    <div *ngIf="password?.errors?.['required'] ">Palavra-Passe Obrigatório</div>
+                    <div *ngIf="password?.errors?.['invalidPassword'] ">Palavra-Passe Inválida</div>
                   </div>
                 </div>
               </div>
-              <div class="flex justify-around h-32">
-                <div>
-                  <app-input-title class="text-[2.4vh]">Município</app-input-title>
-                  <div class="flex items-center">
-                    <select required id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="municipalAdministrator.municipality"
-                            class="input w-[35.2vh]">
-                      <option value="">Escolha o seu munícipio</option>
-                      <option [value]="value" *ngFor="let value of getValues()">{{ value }}</option>
 
-                    </select>
+
+              <div class="flex justify-around max-lg:flex-col max-lg:items-center">
+
+
+                <div>
+                  <app-input-title class="text-[1.4rem]">Município</app-input-title>
+                  <div class="flex items-center">
+
+                    <input required id="municipality" formControlName="municipality" name="municipality" [(ngModel)]="municipalAdministrator.municipality"
+                           class="input w-[21rem] h-12" list="municipalities" [placeholder]="defaultMunicipalityOption">
+
+                    <datalist id="municipalities" *ngIf="getMunicipalities().length > 0">
+                      <option *ngFor="let municipality of getMunicipalities()" [value]="municipality">{{ municipality }}</option>
+                    </datalist>
+                   
                     <app-tooltip [tooltipText]="'Selecione o seu município de residência'"></app-tooltip>
                   </div>
                   <div class="text-red-500 font-bold py-2" *ngIf="municipality?.touched && municipality?.invalid ">
                     <div *ngIf="municipality?.errors?.['required'] ">Município Obrigatório</div>
+                    <div *ngIf="municipality?.errors?.['invalidMunicipality']">Município Inválido</div>
                   </div>
                 </div>
+
+
                 <div class="h-32">
-                  <app-input-title class="text-[2.4vh]">Foto</app-input-title>
+                  <app-input-title class="text-[1.4rem]">Foto</app-input-title>
                   <div class="flex items-center">
                     <input type="file" #filePicker id="photo" formControlName="photo" name="photo"
                            [(ngModel)]="municipalAdministrator.photo" (change)="onImagePicked($event)" accept="image/*"
-                           class="input w-[35.2vh]">
+                           class="input w-[21rem]">
                     <app-tooltip [tooltipText]="'Utilize o seletor para encontrar a sua foto'"></app-tooltip>
                   </div>
                 </div>
               </div>
             </div>
+
+
+
             <div class="flex flex-col justify-end space-y-4">
               <button type="submit" [disabled]="!signUpMunicipalAdminForm.valid" class="relative top-[1rem] self-end h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue
-border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out disabled:cursor-not-allowed">
                 Continuar
                 <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
               </button>
@@ -106,11 +141,13 @@ border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounde
                 <div class="text-right font-medium text-municip-normal-black ">Já tem conta? <a routerLink="/login" class="cursor-pointer font-bold  text-black ml-2 hover:underline">Faça login</a></div>
               </div>
             </div>
+
+
           </section>
         </div>
       </form>
     </div>
-  </div>
+  </section>
 </div>
 
 

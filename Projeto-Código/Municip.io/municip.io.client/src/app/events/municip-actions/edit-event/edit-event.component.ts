@@ -6,6 +6,9 @@ import { Event, EventsService } from '../../../services/events/events.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { format } from 'date-fns';
 
+/**
+ * Componente responsável por editar um evento.
+ */
 @Component({
   selector: 'app-edit-event',
   templateUrl: './edit-event.component.html',
@@ -28,6 +31,14 @@ export class EditEventComponent implements OnInit {
 
   isDialogOpen: boolean = false;
 
+  /**
+     * Construtor do componente.
+     * @param dateAdapter
+     * @param authService
+     * @param eventService
+     * @param route
+     * @param router
+     */
   constructor(private dateAdapter: DateAdapter<Date>, private authService: UserAuthService,
     private eventService: EventsService, private route: ActivatedRoute, private router: Router,
   ) {
@@ -54,6 +65,9 @@ export class EditEventComponent implements OnInit {
   }
 
 
+  /**
+   * Obtém o evento selecionado.
+   */
   getEventSelected() {
 
     let eventId = this.route.snapshot.params['eventId'];
@@ -65,7 +79,10 @@ export class EditEventComponent implements OnInit {
       }
     });
   }
-
+  /**
+   * Recebe um evento e coloca os valores nos campos do formulário.
+   * @param event
+   */
   setForm(event: Event) {
     this.eventForm.setValue({
       title: event.title,
@@ -177,7 +194,9 @@ export class EditEventComponent implements OnInit {
     return this.eventForm.get('description');
   }
 
-
+  /**
+   * Método responsavel pela submissão do formulário
+   */
   OnSubmit() {
     if (this.eventForm.valid) {
 
@@ -221,7 +240,12 @@ export class EditEventComponent implements OnInit {
 
   }
 
-
+  /**
+   * Cria um objeto do tipo date 
+   * @param date
+   * @param time
+   * @returns
+   */
   createDateTime(date: Date, time: string): Date {
     let partTime = time.split(':');
     let startHour = parseInt(partTime[0]);
@@ -237,7 +261,10 @@ export class EditEventComponent implements OnInit {
 
 
 
-
+  /**
+   * Evento dispultado aquando do selecionamento de uma imagem
+   * @param event
+   */
   onImagePicked(event: any) {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0]; // Use optional chaining here
@@ -255,13 +282,17 @@ export class EditEventComponent implements OnInit {
   }
 
 
-
+  /**
+  * Método responsável pelo cancelamento do evento
+  */
   cancel() {
     this.router.navigate(['/events']);
   }
 
 
-
+  /**
+  * Método responsável por fechar o diálogo
+  */
   closeDialog() {
     this.isDialogOpen = false;
 

@@ -102,6 +102,11 @@ export class MunicipalAdminAuthService {
     );
   }
 
+
+  getApprovedMunicipalities() {
+    return this.http.get<Municipality>('api/municipalitystatus/approvedMunicipalities');
+  }
+
 }
 
 

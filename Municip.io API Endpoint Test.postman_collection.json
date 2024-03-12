@@ -1,0 +1,666 @@
+{
+	"info": {
+		"_postman_id": "d3821584-e7a1-4641-a0b5-308c04183160",
+		"name": "Municip.io API Endpoint Test",
+		"description": "Teste de API Endpoints para as API utilizadas no projeto Municip.io",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32883693"
+	},
+	"item": [
+		{
+			"name": "GeoAPI",
+			"item": [
+				{
+					"name": "Get municipalities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Response contains municipalities\", function () {",
+									"    pm.expect(pm.response.json()).to.include('Abrantes');",
+									"    pm.expect(pm.response.json()).to.include('Montijo');",
+									"    pm.expect(pm.response.json()).to.include('Alcochete');",
+									"    pm.expect(pm.response.json()).to.include('Almada');",
+									"    pm.expect(pm.response.json()).to.include('Porto');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "json.geoapi.pt/municipio",
+							"host": [
+								"json",
+								"geoapi",
+								"pt"
+							],
+							"path": [
+								"municipio"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "This request uses the saved `token` collection variable to access a secret 'name' stored against that token.\n\nIn this request, we used the `token` collection variable as a query param to fetch the name generated for that token. We have added a test to check that a name is correctly returned."
+					},
+					"response": []
+				},
+				{
+					"name": "Get info from Municipality",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Todas as info do município são retornadas\", () => {",
+									"    pm.expect(pm.response.json()).to.have.property('codigo');",
+									"    pm.expect(pm.response.json()).to.have.property('nome').that.is.a('string');",
+									"    pm.expect(pm.response.json()).to.have.property('nif');",
+									"    pm.expect(pm.response.json()).to.have.property('rua');",
+									"    pm.expect(pm.response.json()).to.have.property('localidade');",
+									"    pm.expect(pm.response.json()).to.have.property('codigopostal');",
+									"    pm.expect(pm.response.json()).to.have.property('descrpostal');",
+									"    pm.expect(pm.response.json()).to.have.property('email');",
+									"    pm.expect(pm.response.json()).to.have.property('telefone');",
+									"    pm.expect(pm.response.json()).to.have.property('fax');",
+									"    pm.expect(pm.response.json()).to.have.property('sitio');",
+									"    pm.expect(pm.response.json()).to.have.property('areaha');",
+									"    pm.expect(pm.response.json()).to.have.property('populacao');",
+									"    pm.expect(pm.response.json()).to.have.property('eleitores');",
+									"    pm.expect(pm.response.json()).to.have.property('codigoine');",
+									"    pm.expect(pm.response.json()).to.have.property('distrito');",
+									"    pm.expect(pm.response.json()).to.have.property('geojsons');",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "json.geoapi.pt/municipio/Montijo",
+							"host": [
+								"json",
+								"geoapi",
+								"pt"
+							],
+							"path": [
+								"municipio",
+								"Montijo"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "This request uses the saved `token` collection variable to access a secret 'name' stored against that token.\n\nIn this request, we used the `token` collection variable as a query param to fetch the name generated for that token. We have added a test to check that a name is correctly returned."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Maps API",
+			"item": [
+				{
+					"name": "Test if mapsGeocode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has results property and it is an array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('results').that.is.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has status property\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('status');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://maps.googleapis.com/maps/api/geocode/json?address=Montijo&key=AIzaSyDNwbIjZzCxVDfVZBvwpJ8WyX-DUb--44s",
+							"protocol": "https",
+							"host": [
+								"maps",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"maps",
+								"api",
+								"geocode",
+								"json"
+							],
+							"query": [
+								{
+									"key": "address",
+									"value": "Montijo"
+								},
+								{
+									"key": "key",
+									"value": "AIzaSyDNwbIjZzCxVDfVZBvwpJ8WyX-DUb--44s"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Reverse Geocode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an object with results property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('results');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has plus_code property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('plus_code');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has status property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('status');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response content type is application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://maps.googleapis.com/maps/api/geocode/json?latlng=38.7055652,-8.97411829999&key=AIzaSyDNwbIjZzCxVDfVZBvwpJ8WyX-DUb--44s",
+							"protocol": "https",
+							"host": [
+								"maps",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"maps",
+								"api",
+								"geocode",
+								"json"
+							],
+							"query": [
+								{
+									"key": "latlng",
+									"value": "38.7055652,-8.97411829999"
+								},
+								{
+									"key": "key",
+									"value": "AIzaSyDNwbIjZzCxVDfVZBvwpJ8WyX-DUb--44s"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carris Metropolitana",
+			"item": [
+				{
+					"name": "Get info stop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has the required properties\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.expect(jsonData).to.have.property('name');\r",
+									"    pm.expect(jsonData).to.have.property('lat');\r",
+									"    pm.expect(jsonData).to.have.property('lon');\r",
+									"    pm.expect(jsonData).to.have.property('locality');\r",
+									"    pm.expect(jsonData).to.have.property('municipality_id');\r",
+									"    pm.expect(jsonData).to.have.property('municipality_name');\r",
+									"    pm.expect(jsonData).to.have.property('district_id');\r",
+									"    pm.expect(jsonData).to.have.property('district_name');\r",
+									"    pm.expect(jsonData).to.have.property('region_id');\r",
+									"    pm.expect(jsonData).to.have.property('region_name');\r",
+									"    pm.expect(jsonData).to.have.property('wheelchair_boarding');\r",
+									"    pm.expect(jsonData).to.have.property('facilities');\r",
+									"    pm.expect(jsonData).to.have.property('lines');\r",
+									"    pm.expect(jsonData).to.have.property('routes');\r",
+									"    pm.expect(jsonData).to.have.property('patterns');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.carrismetropolitana.pt/stops/010001",
+							"host": [
+								"api",
+								"carrismetropolitana",
+								"pt"
+							],
+							"path": [
+								"stops",
+								"010001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get info line",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has all the required properties and in the correct format\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('id').that.is.a('string');\r",
+									"    pm.expect(jsonData).to.have.property('short_name').that.is.a('string');\r",
+									"    pm.expect(jsonData).to.have.property('long_name').that.is.a('string');\r",
+									"    pm.expect(jsonData).to.have.property('color').that.is.a('string');\r",
+									"    pm.expect(jsonData).to.have.property('text_color').that.is.a('string');\r",
+									"    pm.expect(jsonData).to.have.property('routes').that.is.an('array');\r",
+									"    pm.expect(jsonData).to.have.property('patterns').that.is.an('array');\r",
+									"    pm.expect(jsonData).to.have.property('municipalities').that.is.an('array');\r",
+									"    pm.expect(jsonData).to.have.property('localities').that.is.an('array');\r",
+									"    pm.expect(jsonData).to.have.property('facilities').that.is.an('array');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.carrismetropolitana.pt/lines/1001",
+							"protocol": "https",
+							"host": [
+								"api",
+								"carrismetropolitana",
+								"pt"
+							],
+							"path": [
+								"lines",
+								"1001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get info municipalities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an array of municipalities\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('array');\r",
+									"    jsonData.forEach(function(municipality) {\r",
+									"        pm.expect(municipality).to.be.an('object').that.has.all.keys('id', 'name', 'prefix', 'district_id', 'district_name', 'region_id', 'region_name');\r",
+									"    });\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.carrismetropolitana.pt/municipalities",
+							"protocol": "https",
+							"host": [
+								"api",
+								"carrismetropolitana",
+								"pt"
+							],
+							"path": [
+								"municipalities"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Internal",
+			"item": [
+				{
+					"name": "GetMunicipalities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an array of municipalities\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('array');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7008/api/municipalitystatus/municipalities",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7008",
+							"path": [
+								"api",
+								"municipalitystatus",
+								"municipalities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ApproveMunicipalAdministrator",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"    url: 'https://localhost:7008/api/accounts/registerMunicipalAdministrator',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': '*/*',\r",
+									"        'Content-Type': 'application/json'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"firstName\": \"test\",\r",
+									"            \"surname\": \"test\",\r",
+									"            \"email\": \"test10@gmail.com\",\r",
+									"            \"password\": \"1qaz!WSX\",\r",
+									"            \"municipality\": \"Montijo\",\r",
+									"            \"status\": 0\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, response) {\r",
+									"    console.log(response.json());\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content type is application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"// Retrieve the saved \"email\" value from the variable\r",
+									"pm.test(\"Find the entry with the right email and check if status is approved\", function () {\r",
+									"    var responseBody = pm.response.json();\r",
+									"    var emailToFind = \"test10@gmail.com\";\r",
+									"\r",
+									"    var userWithRightEmail = responseBody.find(function(user) {\r",
+									"        return user.email === emailToFind;\r",
+									"    });\r",
+									"\r",
+									"    pm.expect(userWithRightEmail.status).to.equal(\"Approved\");\r",
+									"});\r",
+									"// Stores the email in an environment or global variable\r",
+									"var responseBody = pm.response.json();\r",
+									"var email = responseBody[0].email;\r",
+									"pm.globals.set(\"email\", email);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7008/api/municipalAdministratorStatus/approveMunicipalAdministrator?email=test10@gmail.com",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7008",
+							"path": [
+								"api",
+								"municipalAdministratorStatus",
+								"approveMunicipalAdministrator"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "test10@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BlockMunicipalAdministrator",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"\\\"\"+pm.collectionVariables.get(\"email\")+\"\\\"\")\r",
+									"pm.sendRequest({\r",
+									"    url: 'https://localhost:7008/api/accounts/registerMunicipalAdministrator',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': '*/*',\r",
+									"        'Content-Type': 'application/json'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"firstName\": \"test\",\r",
+									"            \"surname\": \"test\",\r",
+									"            \"email\": \"test10@gmail.com\",\r",
+									"            \"password\": \"1qaz!WSX\",\r",
+									"            \"municipality\": \"Montijo\",\r",
+									"            \"status\": 0\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, response) {\r",
+									"    console.log(response.json());\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"// Retrieve the saved \"email\" value from the variable",
+									"pm.test(\"Find the entry with the right email and check if status is blocked\", function () {",
+									"    var responseBody = pm.response.json();",
+									"    var emailToFind = \"test10@gmail.com\";",
+									"",
+									"    var userWithRightEmail = responseBody.find(function(user) {",
+									"        return user.email === emailToFind;",
+									"    });",
+									"",
+									"    pm.expect(userWithRightEmail.status).to.equal(\"Blocked\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7008/api/municipalAdministratorStatus/blockMunicipalAdministrator?email=test10%40gmail.com",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7008",
+							"path": [
+								"api",
+								"municipalAdministratorStatus",
+								"blockMunicipalAdministrator"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "test10%40gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://postman-integration-testing.glitch.me/"
+		},
+		{
+			"key": "municipio",
+			"value": "municip.io",
+			"type": "string"
+		}
+	]
+}
