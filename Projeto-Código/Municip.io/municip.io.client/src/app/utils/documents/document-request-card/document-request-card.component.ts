@@ -15,6 +15,7 @@ export class DocumentRequestCardComponent {
     type: DocumentType.Other,
     status: StatusDocument.rejected,
     date: new Date(),
-    municipality: "Sem Município"
+    municipality: "Sem Município",
+    RequestBy: "Sem Requerente"
   }
 }

@@ -40,7 +40,7 @@ export class SignUpMunicipalAdministratorAccountComponent {
     firstName: new FormControl("", [Validators.required]),
     surname: new FormControl("",[Validators.required]),
     email: new FormControl("", [Validators.required, Validators.email]),
-    password: new FormControl("",[Validators.required]),
+    password: new FormControl("", [Validators.required, this.validatePassword.bind(this)]),
     municipality: new FormControl("", [Validators.required, this.validateMunicipality.bind(this)]),
     photo: new FormControl(null, [Validators.required])
   });
@@ -52,27 +52,47 @@ export class SignUpMunicipalAdministratorAccountComponent {
     return { 'invalidMunicipality': true };
   }
 
+  validatePassword(control: FormControl): { [key: string]: boolean } | null {
+    const value: string = control.value;
+
+
+    const upperCaseRegex = /[A-Z]/;
+    const lowerCaseRegex = /[a-z]/;
+    const digitRegex = /[0-9]/;
+    const symbolRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+
+    const hasUpperCase = upperCaseRegex.test(value);
+    const hasLowerCase = lowerCaseRegex.test(value);
+    const hasDigit = digitRegex.test(value);
+    const hasSymbol = symbolRegex.test(value);
+
+
+    const isValid = hasUpperCase && hasLowerCase && hasDigit && hasSymbol;
+
+    return isValid ? null : { 'invalidPassword': true };
+  }
+
 
   onSubmit() {
 
     this.municipalAdminAuthService.registerMunicipalAdmin(this.signUpMunicipalAdminForm.value as MunicipalAdministrator, this.image).subscribe(
 
 
-      (result) => {
+      (result: any) => {
         if (result) {
           this.router.navigateByUrl('/signUp-Success');
         } else {
           var municipal, municipalname;
           municipal = this.signUpMunicipalAdminForm.value as MunicipalAdministrator
           municipalname = municipal.municipality
-
+          console.log("AQUI");
      
           this.router.navigateByUrl('/signUp-Municipality/'+municipalname);
         }
       },
       (error) => {
         console.log(error.error.errors)
-
+        console.log("AQUI2");
         this.errors = error.error.errors;
 
       }

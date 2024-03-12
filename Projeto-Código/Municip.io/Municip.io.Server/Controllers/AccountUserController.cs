@@ -86,6 +86,24 @@ namespace Municip.io.Server.Controllers
         public async Task<IActionResult> RegisterCitizen(Citizen citizen)
 
         {
+            if (!IsAgeValid(citizen.birthDate))
+            {
+                ModelState.AddModelError(string.Empty, "A idade do cidadão deve estar entre 18 e 120 anos.");
+                return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+            }
+
+            if (!IsMunicipalityValid(citizen.Municipality))
+            {
+                ModelState.AddModelError(string.Empty, "O município fornecido não é válido.");
+                return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+            }
+
+            if (!IsNifValid(citizen.Nif))
+            {
+                ModelState.AddModelError(string.Empty, "O formato do NIF fornecido não é válido.");
+                return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser
@@ -94,25 +112,7 @@ namespace Municip.io.Server.Controllers
                     Email = citizen.Email
                 };
 
-                if (!IsAgeValid(citizen.birthDate))
-                {
-                    ModelState.AddModelError(string.Empty, "A idade do cidadão deve estar entre 18 e 120 anos.");
-                    return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
-                }
-
-                if (!IsMunicipalityValid(citizen.Municipality))
-                {
-                    ModelState.AddModelError(string.Empty, "O município fornecido não é válido.");
-                    return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
-                }
-
-                if (!IsNifValid(citizen.Nif))
-                {
-                    ModelState.AddModelError(string.Empty, "O formato do NIF fornecido não é válido.");
-                    return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
-                }
-
-
+      
                 // Store user data in AspNetUsers database table
                 var result = await _userManager.CreateAsync(user, citizen.Password);
 

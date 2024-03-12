@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { Document, DocumentType, StatusDocument } from '../../../services/documents.service';
 
 @Component({
-  selector: 'app-document-card',
-  templateUrl: './document-card.component.html',
-  styleUrl: './document-card.component.css'
+  selector: 'app-document-approve-card',
+  templateUrl: './document-approve-card.component.html',
+  styleUrl: './document-approve-card.component.css'
 })
-export class DocumentCardComponent {
+export class DocumentApproveCardComponent {
   @Input() document: Document = {
     id: 0,
     name: 'Certeficado De Residência',
@@ -15,7 +15,8 @@ export class DocumentCardComponent {
     status: StatusDocument.approved,
     date: new Date(),
     municipality: "Setúbal",
-RequestBy: "Ana Maria"
+    RequestBy: "Ana Maria"
+    
   }
 
   //quero dar um estilo diferente para cada status
@@ -28,6 +29,4 @@ RequestBy: "Ana Maria"
       return 'bg-[#FF0000] text-[#B02121]';
     }
   }
-
-
 }
