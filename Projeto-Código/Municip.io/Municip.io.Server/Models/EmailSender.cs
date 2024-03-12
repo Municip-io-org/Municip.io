@@ -24,10 +24,10 @@ namespace Municip.io.Server.Models
 
             using (var client = new SmtpClient())
             {
-                client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                client.Authenticate("iomunicip@gmail.com", "gxhn wjic sqsn gjsa");
-                client.Send(message);
-                client.Disconnect(true);
+                client.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                client.AuthenticateAsync("iomunicip@gmail.com", "gxhn wjic sqsn gjsa");
+                client.SendAsync(message);
+                client.DisconnectAsync(true);
             }
         }
     }

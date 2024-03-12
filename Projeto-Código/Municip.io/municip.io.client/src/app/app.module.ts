@@ -103,6 +103,9 @@ import { RequestDocumentComponent } from './documents/request-document/request-d
 import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
 import { DocumentCardComponent } from './utils/documents/document-card/document-card.component';
 import { DocumentRequestCardComponent } from './utils/documents/document-request-card/document-request-card.component';
+import { ApproveDocumentsComponent } from './documents/approve-documents/approve-documents.component';
+import { DocumentAproveCardComponent } from './utils/documents/document-aprove-card/document-aprove-card.component';
+import { DocumentApproveCardComponent } from './utils/documents/document-approve-card/document-approve-card.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -191,6 +194,9 @@ registerLocaleData(localePt, 'pt-PT');
     MyDocumentsComponent,
     DocumentCardComponent,
     DocumentRequestCardComponent,
+    ApproveDocumentsComponent,
+    DocumentAproveCardComponent,
+    DocumentApproveCardComponent,
     
   ],
   imports: [

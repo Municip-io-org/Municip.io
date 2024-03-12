@@ -1,9 +1,9 @@
 <app-header-loggedin></app-header-loggedin>
 <app-big-banner [image]="municipality.landscapePhoto!" title="Município de {{municipality.name}}"
                 text={{municipality.description}}></app-big-banner>
-<div class="flex flex-col my-[4rem] mx-32 space-y-20">
+<div class="flex flex-col my-[4rem] mx-60 space-y-20">
   <div class="flex">
-    <section class="flex flex-col space-y-20 w-[140rem]">
+    <section class="flex flex-col space-y-20 w-[120rem]">
       <app-my-municipality-card [district]="municipality.distrito"
                                 [nPopulation]="municipality.populacao"
                                 [email]="municipality.email"
@@ -21,8 +21,8 @@
       </app-my-data-card>
 
     </section>
-    <div class="w-1 bg-gradient-to-tl from-municip-light-blue to-municip-blue rounded mx-[5vw] "></div>
-    <section class="flex flex-col grow space-y-7 justify-center items-center">
+    <div class="w-1 bg-gradient-to-tl from-municip-light-blue to-municip-blue rounded mx-[5rem] "></div>
+    <section class="flex flex-col grow space-y-7 justify-center items-center min-w-[20rem]">
       <div class="flex items-center font-open-sans text-[1.5rem] font-extrabold">
         <img src="/assets/images/icons/newspaper-folded.png" alt="Notícias" class="size-10 mr-5 " />
         NOTÍCIAS DE {{ municipality.name | uppercase }}

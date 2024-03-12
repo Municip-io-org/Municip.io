@@ -44,6 +44,7 @@ import { RequestDocumentComponent } from './documents/request-document/request-d
 import { AdminDashboardMunicipalAdminsComponent } from './administrator/admin-dashboard-municipal-admins/admin-dashboard-municipal-admins.component';
 import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
 import { AdministratorGuard } from './utils/guard/administrator.guard';
+import { ApproveDocumentsComponent } from './documents/approve-documents/approve-documents.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -55,7 +56,9 @@ const routes: Routes = [
   { path: 'userpage', component: UserpageComponent, data: {}, canActivate: [AuthGuardService] },
   { path: 'signUp-Citizen', component: SignUpCitizenAccountComponent, data: {} },
   { path: 'signUp-MunicipalAdministrator', component: SignUpMunicipalAdministratorAccountComponent, data: {} },
-  { path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {}, canActivate: [MunicipalityGuard] },
+  {
+    path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {}, canActivate:[MunicipalityGuard]
+  },
   { path: 'signUp-Success', component: SignUpSuccessComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
   { path: 'admindashboard', component: AdmindashboardComponent, data: {}, canActivate: [AdministratorGuard] },
@@ -85,8 +88,8 @@ const routes: Routes = [
   { path: 'documents', component: DocsHomepageComponent, data: {} },
   { path: 'acessBlocked', component: AccessBlockedComponent, data: {} },
   { path: 'documents/request', component: RequestDocumentComponent, data: {} },
-  { path: 'documents/my', component: MyDocumentsComponent }
-  
+  { path: 'documents/my', component: MyDocumentsComponent },
+  { path: 'documents/approve', component: ApproveDocumentsComponent, data: {}, canActivate: [MunicipalAdminGuard] },
 ];
 
 @NgModule({
