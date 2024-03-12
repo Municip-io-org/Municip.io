@@ -14,6 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginComponent {
 
+  role: string = "";
   user: Login = {
     
     email: '',
@@ -38,7 +39,24 @@ export class LoginComponent {
      this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
        res => {
          this.error = "";
-        this.router.navigateByUrl('/userpage');
+
+         this.userAuthService.getUserRole().subscribe(
+           res => {
+
+             this.role = res.role;
+             console.log("role", this.role);
+             if (this.role == "Citizen") {
+               this.router.navigateByUrl('/citizen/homePage');
+             } else {
+               this.router.navigateByUrl('/municipal/homePage');
+             }
+           },
+           error => {
+             console.error(error);
+           }
+         );
+
+         
       },
        error => {
          console.log(error);

@@ -29,7 +29,7 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
 
-       
+
 
         /// <summary>
         /// Obtém os dados do utilizador autenticado.
@@ -86,6 +86,24 @@ namespace Municip.io.Server.Controllers
         public async Task<IActionResult> RegisterCitizen(Citizen citizen)
 
         {
+            if (!IsAgeValid(citizen.birthDate))
+            {
+                ModelState.AddModelError(string.Empty, "A idade do cidadão deve estar entre 18 e 120 anos.");
+                return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+            }
+
+            if (!IsMunicipalityValid(citizen.Municipality))
+            {
+                ModelState.AddModelError(string.Empty, "O município fornecido não é válido.");
+                return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+            }
+
+            if (!IsNifValid(citizen.Nif))
+            {
+                ModelState.AddModelError(string.Empty, "O formato do NIF fornecido não é válido.");
+                return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser
@@ -94,7 +112,7 @@ namespace Municip.io.Server.Controllers
                     Email = citizen.Email
                 };
 
-
+      
                 // Store user data in AspNetUsers database table
                 var result = await _userManager.CreateAsync(user, citizen.Password);
 
@@ -111,6 +129,9 @@ namespace Municip.io.Server.Controllers
                     citizen.Events = new List<Event>();
                     _context.Citizens.Add(citizen);
                     await _context.SaveChangesAsync();
+
+                    SendRegister(citizen.Email, citizen.firstName);
+
                     return Ok();
                 }
 
@@ -130,6 +151,54 @@ namespace Municip.io.Server.Controllers
             return BadRequest(new { Message = "O modelo do cidadão é inválido.", ModelState = ModelState });
 
         }
+
+        private bool IsAgeValid(DateTime birthDate)
+        {
+            DateTime now = DateTime.Now;
+            int age = now.Year - birthDate.Year;
+            if (now.Month < birthDate.Month || (now.Month == birthDate.Month && now.Day < birthDate.Day))
+            {
+                age--;
+            }
+
+            return age >= 18 && age < 120;
+        }
+
+        private bool IsMunicipalityValid(string municipality)
+        {
+            var approvedMunicipality = _context.Municipalities
+                .Any(m => m.status == MunicipalityStatus.Approved && m.name == municipality);
+
+            return approvedMunicipality;
+        }
+
+
+        // Verifica se o formato do NIF é válido
+        private bool IsNifValid(string nif)
+        {
+            
+            if (nif.Length != 11)
+            {
+                return false;
+            }
+
+           
+            if (!char.IsUpper(nif[0]) || !char.IsUpper(nif[1]))
+            {
+                return false;
+            }
+
+           
+            if (!nif.Substring(2).All(char.IsDigit))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+
+
         /// <summary>
         ///Registo de um administrador municipal (conta + base de dados) 
         /// </summary>
@@ -158,9 +227,13 @@ namespace Municip.io.Server.Controllers
 
                 if (result.Succeeded)
                 {
+                    this.SendRegister(municipalAdministrator.Email, municipalAdministrator.firstName);
 
 
                     await _userManager.AddToRoleAsync(user, "Municipal");
+                    municipalAdministrator.status = MunicipalAdministratorStatus.Pending;
+                    municipalAdministrator.date = DateOnly.FromDateTime(DateTime.Now);
+
                     //add citizen to database
                     _context.MunicipalAdministrators.Add(municipalAdministrator);
                     await _context.SaveChangesAsync();
@@ -288,14 +361,14 @@ namespace Municip.io.Server.Controllers
             return Json(false);
 
         }
-        
+
         [HttpPut("UpdateUserInfo")]
         public async Task<IActionResult> UpdateUserInfo(Citizen updatedCitizen, string passwordConfirmation)
         {
             if (ModelState.IsValid)
             {
                 var existingCitizen = await _context.Citizens.FindAsync(updatedCitizen.Id);
-               
+
 
                 if (existingCitizen == null)
                 {
@@ -304,7 +377,7 @@ namespace Municip.io.Server.Controllers
 
                 if (!ValidadePassword(updatedCitizen.Password))
                 {
-                   updatedCitizen.Password = null;
+                    updatedCitizen.Password = null;
                 }
 
 
@@ -312,15 +385,16 @@ namespace Municip.io.Server.Controllers
                 {
                     return BadRequest(new { Message = "A senha de confirmação não corresponde à senha antiga." });
                 }
-                else {
+                else
+                {
 
 
                     if (updatedCitizen.Password != null && !await _userManager.CheckPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), updatedCitizen.Password))
-                    { 
-                      await _userManager.RemovePasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
+                    {
+                        await _userManager.RemovePasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
 
-                      await  _userManager.AddPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), updatedCitizen.Password);
-                      await  _userManager.UpdateAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
+                        await _userManager.AddPasswordAsync(await _userManager.FindByEmailAsync(existingCitizen.Email), updatedCitizen.Password);
+                        await _userManager.UpdateAsync(await _userManager.FindByEmailAsync(existingCitizen.Email));
                     }
 
 
@@ -407,7 +481,7 @@ namespace Municip.io.Server.Controllers
             {
                 var validationErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
                 return BadRequest(new { Message = "Erro de Validação", Errors = validationErrors });
-               
+
             }
 
             var existingMunicipality = await _context.Municipalities.FindAsync(updatedMunicipality.Id);
@@ -430,5 +504,20 @@ namespace Municip.io.Server.Controllers
 
             return Json(await _context.Municipalities.Where(m => m.name == existingMunicipality.name).FirstOrDefaultAsync());
         }
+
+
+        /// <summary>
+        /// Esta função envia um email de aprovação para um cidadão.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [HttpPost("SendRegister")]
+        public IActionResult SendRegister(string email, string name)
+        {
+            EmailSender.SendEmail(email, "Inscrito Com Sucesso", name, AccountUserEmail.REGISTER.toString(), "root/html/AproveEmail.html");
+            return Ok("Success");
+        }
+
     }
 }

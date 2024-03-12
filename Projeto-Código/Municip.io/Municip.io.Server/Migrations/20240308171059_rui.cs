@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Municip.io.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class rui : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,6 +75,23 @@ namespace Municip.io.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Document",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RequestBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Document", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Events",
                 columns: table => new
                 {
@@ -106,7 +123,9 @@ namespace Municip.io.Server.Migrations
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    photo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    status = table.Column<int>(type: "int", nullable: false),
+                    date = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -361,6 +380,9 @@ namespace Municip.io.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "CitizenEvent");
+
+            migrationBuilder.DropTable(
+                name: "Document");
 
             migrationBuilder.DropTable(
                 name: "MunicipalAdministrators");

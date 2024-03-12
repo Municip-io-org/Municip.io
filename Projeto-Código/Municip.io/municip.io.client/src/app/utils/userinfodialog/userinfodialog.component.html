@@ -7,8 +7,8 @@
     <p class="mb-2"><strong>Data de Registo:</strong> {{ user.date | date: 'dd/MM/yyyy' }}</p>
     <p class="mb-2"><strong>Estado:</strong> {{ user.status }}</p>
     <p class="mb-2"><strong>Município:</strong> {{ user.municipality}}</p>
-    <p class="mb-2"><strong>Código Postal:</strong> {{ user.postalCode1}}-{{user.postalCode2}}</p>
-    <p class="mb-2"><strong>NIF:</strong> {{ user.nif}}</p>
+    <p *ngIf="user.postalCode1 && user.postalCode2" class="mb-2"><strong>Código Postal:</strong> {{ user.postalCode1}}-{{user.postalCode2}}</p>
+    <p *ngIf="user.nif" class="mb-2"><strong>NIF:</strong> {{ user.nif}}</p>
     <div class="mt-auto">
       <button class="bg-red-500 text-white px-4 py-2 my-4 rounded-md" (click)="onClose()">Fechar</button>
     </div>

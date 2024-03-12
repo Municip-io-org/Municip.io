@@ -23,6 +23,8 @@ namespace Municip.io.Server.Data
             { }
    
 public DbSet<Municip.io.Server.Models.News> News { get; set; } = default!;
+   
+public DbSet<Municip.io.Server.Models.Document> Document { get; set; } = default!;
         }
 
 

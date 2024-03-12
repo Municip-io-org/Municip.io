@@ -11,11 +11,13 @@ export class ShowStopComponent {
   @Input() stopName: string = "";
   @Input() stopTime: string = "";
   @Input() stopId : string = "";
-
+  @Input() stopMunicipality: string = "";
+  @Input() userMunicipality: string = "";
 
 
   constructor(private router: Router) { }
 
+  
 
   calculateTimeRemaining(stopTime: string): string {
     const currentTime = new Date();

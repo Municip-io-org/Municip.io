@@ -45,7 +45,15 @@ export interface Citizen {
   address: string;
   postalCode1: string;
   postalCode2: string;
-  birthDate: Date
+  birthDate: Date;
   photo?: string;
   events?: Event[];
+}
+
+export interface Country {
+  name: string;
+  alpha2Code: string;
+  alpha3Code: string;
+  numericCode: string;
+  callingCode: string;
 }
