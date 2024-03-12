@@ -34,70 +34,62 @@ export class LoginComponent {
 
   error: string = "";
 
-   onSubmit() {
-    
-     //nao esta a ter o user e pass (null) e falta fazer a navigation apenas quando for autenticado
-     this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
-       res => {
-         this.error = "";
-       
+  onSubmit() {
+    // Ensure user and pass are not null, and navigate only when authenticated
+    this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
+      res => {
+        this.error = "";
 
-         this.userAuthService.getUserData().subscribe(
-           res => {
-             this.user = res;
-             var emailToParse = this.user.email;
-             var emailParsed = emailToParse.replace('@', '%40');
-             this.userAuthService.getInfoByEmail(emailParsed).subscribe(
-               res => {
-                 this.newUser = res;
+        this.userAuthService.getUserData().subscribe(
+          userRes => {
+            this.user = userRes;
+            var emailToParse = this.user.email;
+            var emailParsed = emailToParse.replace('@', '%40');
 
+            this.userAuthService.getUserRole().subscribe(
+              roleRes => {
+                console.log("roleRes", roleRes);
+                this.role = roleRes.role;
 
-                 this.userAuthService.getUserRole().subscribe(
-                   res => {
-                     console.log("res", this.newUser);
-                     this.role = res.role;
-                     console.log("role", this.role);
+                if (this.role == 'Admin') {
+                  this.router.navigateByUrl('/admindashboard');
+                } else {
+                  this.userAuthService.getInfoByEmail(emailParsed).subscribe(
+                    infoRes => {
+                      this.newUser = infoRes;
 
-                     if (this.role == 'Administrator') {
-
-                        this.router.navigateByUrl('/municipal/homePage');
-
-                     } else if (this.newUser.status == 'Approved') {
-
-                       if (this.role == "Citizen") {
-
-                         this.router.navigateByUrl('/citizen/homePage');
-
-                       } else {
-                         this.router.navigateByUrl('/municipal/homePage');
-                       } 
-                     } else {
-                       this.router.navigateByUrl('/acessBlocked')
-                     }
-
-                   },
-                   error => {
-                     console.error(error);
-                   }
-                 );
-               },
-               error => {
-                 console.error(error);
-
-               }
-             );
-           },
-           error => {
-             console.error(error);
-           }
-         );
-
-         
+                      if (this.newUser.status == 'Approved') {
+                        if (this.role == "Citizen") {
+                          this.router.navigateByUrl('/citizen/homePage');
+                        } else {
+                          this.router.navigateByUrl('/municipal/homePage');
+                        }
+                      } else {
+                        this.router.navigateByUrl('/acessBlocked');
+                      }
+                    },
+                    infoError => {
+                      console.error(infoError);
+                    }
+                  );
+                }
+              },
+              roleError => {
+                console.error(roleError);
+              }
+            );
+          },
+          userError => {
+            console.error(userError);
+          }
+        );
       },
-       error => {
-         console.log(error);
-         this.error = "Erro de autenticação";
+      error => {
+        console.log(error);
+        this.error = "Erro de autenticação";
       }
     );
   }
+
 }
+
