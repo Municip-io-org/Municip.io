@@ -34,7 +34,8 @@ export class LoginComponent {
 
   error: string = "";
   browserId: string = "";
-  ngOnInit(){
+  ngOnInit(): void {
+
     localStorage.clear();
   }
   //onSubmit()
