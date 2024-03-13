@@ -3,17 +3,17 @@
 
 </head>
 <app-header-loggedin />
-<app-smaller-banner title="Meus Eventos"
+<app-smaller-banner title="Meus Documentos"
                     image={{municipalityImage}}></app-smaller-banner>
 <div class="min-h-80 bg-municip-blank">
   <div class=" flex items-center justify-between space-x-4 mx-20 pt-10">
     <div class="relative w-[50rem] ">
-      <label for="nameSearch" class="sr-only">Procurar por eventos</label>
+      <label for="nameSearch" class="sr-only">Procurar por documentos</label>
       <div class="flex items-center">
         <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
           <span class="fas fa-search"></span>
         </i>
-        <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por eventos"
+        <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por documentos"
                class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300  hover:border-black">
       </div>
     </div>

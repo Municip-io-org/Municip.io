@@ -1,8 +1,5 @@
 <section class="flex flex-col grow space-y-7 justify-center items-center">
-  <div class="flex items-center font-open-sans text-[1.5rem] font-extrabold">
-    <img src="/assets/images/icons/newspaper-folded.png" alt="Notícias" class="size-10 mr-5" />
-    NOTÍCIAS DE {{ municipalityName | uppercase }}
-  </div>
+  
   <div *ngIf="newsList.length === 0"
        class="flex text-center justify-center items-center text-municip-normal-black grow text-[1.5rem] ">
     <p class="font-semibold">Não há notícias.</p>

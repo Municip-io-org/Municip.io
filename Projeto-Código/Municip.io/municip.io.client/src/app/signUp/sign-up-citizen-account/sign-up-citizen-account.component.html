@@ -1,22 +1,31 @@
 
 <div class="flex text-municip-black text-[1.2rem] font-poppins">
 
-  <div class=" grow bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center">
+  <div class="sticky top-0 h-screen grow bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center ">
     <div class=" flex justify-center text-white">
       <img alt="logo" src="/assets/images/logos/logo-white-right.png" class="size-8/12 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
     </div>
   </div>
-  <div class=" mx-[3rem] w-[120rem] flex items-center justify-center ">
+
+
+
+  <section class=" mx-[3rem] w-[62.5rem] flex items-center justify-center  ">
     <div class="flex grow flex-col">
       <h1 class="font-black text-[2.4rem] text-left text-black my-2">Registo de Munícipe</h1>
       <h3 class="font-medium text-left text-municip-normal-black mb-2">Insira os seus dados</h3>
+
+
+
+
       <form [formGroup]="signUpCitizenForm" (ngSubmit)="onSubmit()">
         <div *ngIf="errors" class=" text-red-500 text-sm font-bold space-y-2 text-start">
           <div *ngFor="let error of errors">
             <p>{{error}}</p>
           </div>
         </div>
-        <div class="py-[2rem] flex justify-around">
+
+
+        <div class="py-[2rem] flex justify-around max-lg:flex-col max-lg:items-center">
           <section class=" flex flex-col text-left space-y-2 ">
             <div class="h-32">
               <app-input-title class="text-[1.4rem]">Primeiro Nome</app-input-title>
@@ -106,6 +115,8 @@
               </div>
             </div>
 
+
+
           </section>
           <section class="flex flex-col text-left space-y-2 w-[21rem]">
             <div class="h-32">
@@ -141,7 +152,6 @@
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="birthDate?.touched && birthDate?.invalid">
                 <div *ngIf="birthDate?.errors?.['required'] ">Data de Nascimento Obrigatória</div>
-                <div *ngIf="birthDate?.errors?.['underage']">Tem que ter +18 anos</div>
                 <div *ngIf="birthDate?.errors?.['over120']">É velhinho demais, né?</div>
               </div>
             </div>
@@ -187,12 +197,14 @@
           </section>
         </div>
       </form>
+
+
       <div class="pb-5">
         <hr class="rounded-3xl border-t-[#ECECF0] my-4" />
         <div class="text-right font-medium text-municip-normal-black ">Já tem conta? <a routerLink="/login" class="cursor-pointer font-bold text-black ml-2 hover:underline">Faça login</a></div>
       </div>
     </div>
-  </div>
+  </section>
 </div>
 
 

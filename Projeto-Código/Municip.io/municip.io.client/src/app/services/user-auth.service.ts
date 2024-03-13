@@ -309,10 +309,14 @@ localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
           this.setUserDataToStorage(null);
           this.setUserMunicipalityToStorage(null);
           this.setUserRoleToStorage(null);
+          
+          
+          
           localStorage.removeItem(this.LOCAL_STORAGE_KEY);
           localStorage.removeItem(this.MUNICIPALITY_STORAGE_KEY);
           localStorage.removeItem(this.ROLE_STORAGE_KEY);
           localStorage.removeItem(this.INFO_STORAGE_KEY);
+          localStorage.removeItem("infoByEmail");
 
           return true;
         }

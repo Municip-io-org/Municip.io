@@ -86,6 +86,24 @@ namespace Municip.io.Server.Controllers
         public async Task<IActionResult> RegisterCitizen(Citizen citizen)
 
         {
+            if (!IsAgeValid(citizen.birthDate))
+            {
+                ModelState.AddModelError(string.Empty, "A idade do cidadão deve ser menor que 120 anos.");
+                return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+            }
+
+            if (!IsMunicipalityValid(citizen.Municipality))
+            {
+                ModelState.AddModelError(string.Empty, "O município fornecido não é válido.");
+                return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+            }
+
+            if (!IsNifValid(citizen.Nif))
+            {
+                ModelState.AddModelError(string.Empty, "O formato do NIF fornecido não é válido.");
+                return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser
@@ -94,25 +112,7 @@ namespace Municip.io.Server.Controllers
                     Email = citizen.Email
                 };
 
-                if (!IsAgeValid(citizen.birthDate))
-                {
-                    ModelState.AddModelError(string.Empty, "A idade do cidadão deve estar entre 18 e 120 anos.");
-                    return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
-                }
-
-                if (!IsMunicipalityValid(citizen.Municipality))
-                {
-                    ModelState.AddModelError(string.Empty, "O município fornecido não é válido.");
-                    return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
-                }
-
-                if (!IsNifValid(citizen.Nif))
-                {
-                    ModelState.AddModelError(string.Empty, "O formato do NIF fornecido não é válido.");
-                    return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
-                }
-
-
+      
                 // Store user data in AspNetUsers database table
                 var result = await _userManager.CreateAsync(user, citizen.Password);
 
@@ -162,7 +162,7 @@ namespace Municip.io.Server.Controllers
                 age--;
             }
 
-            return age >= 18 && age < 120;
+            return age < 120;
         }
 
         private bool IsMunicipalityValid(string municipality)
@@ -333,6 +333,9 @@ namespace Municip.io.Server.Controllers
             else if (_context.MunicipalAdministrators.Any(m => m.Email == email))
             {
                 return Json(await _context.MunicipalAdministrators.Where(m => m.Email == email).FirstOrDefaultAsync());
+            }
+            else {
+              return Json(await _userManager.FindByEmailAsync(email));
             }
             return BadRequest(new { Message = "Não existe nenhum utilizador com esse email." });
         }
