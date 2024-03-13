@@ -2,7 +2,7 @@
   "id": "8b864d39-9231-4e16-8a7c-fecaeef7ee09",
   "version": "2.0",
   "name": "Municip.io Test",
-  "url": "https://municip.io:4200",
+  "url": "https://municipio:4200/",
   "tests": [{
     "id": "13345bfd-82bd-45c0-852b-404ee0d246ae",
     "name": "Create municipality",
@@ -392,19 +392,12 @@
     }]
   }, {
     "id": "c2d8ee1f-c1b2-4f15-9b53-eb4e5683916e",
-    "name": "CreateCitizen",
+    "name": "CitizenFormForeignNif",
     "commands": [{
       "id": "f5c90535-3053-416c-91c9-69f67d77aa86",
       "comment": "",
       "command": "open",
       "target": "/",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "e9241d0c-930d-4e85-a10e-9bb810a5f787",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "1936x1056",
       "targets": [],
       "value": ""
     }, {
@@ -529,10 +522,10 @@
     }, {
       "id": "aee00213-d0b1-4d01-a30c-5440e776c66e",
       "comment": "",
-      "command": "select",
+      "command": "type",
       "target": "id=municipality",
       "targets": [],
-      "value": "label=Almada"
+      "value": "Setúbal"
     }, {
       "id": "4e943364-3958-4f51-a5b6-9b5fab5b93ec",
       "comment": "",
@@ -586,72 +579,70 @@
       ],
       "value": "1qaz\"WSX"
     }, {
-      "id": "ea40bcf0-a158-4986-a4f5-086d1421fe4d",
+      "id": "e7214e36-60ef-418f-9949-f06610c0ce6c",
       "comment": "",
       "command": "click",
-      "target": "id=birthDate",
+      "target": "css=.w-full",
       "targets": [
-        ["id=birthDate", "id"],
-        ["name=birthDate", "name"],
-        ["css=#birthDate", "css:finder"],
-        ["xpath=//input[@id='birthDate']", "xpath:attributes"],
-        ["xpath=//section[2]/div[3]/div/input", "xpath:position"]
+        ["css=.w-full", "css:finder"],
+        ["xpath=//app-date-picker[@name='birthDate']", "xpath:attributes"],
+        ["xpath=//app-date-picker", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "25db93ee-881a-4b19-9f6f-649c9b604255",
+      "id": "91f37341-9cc4-40c2-a94c-185992852d9f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.h-36",
+      "targets": [
+        ["css=.h-36", "css:finder"],
+        ["xpath=//section[2]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1159b342-68b4-4c4e-a4b9-1e50b2e8feb5",
+      "comment": "",
+      "command": "click",
+      "target": "id=postalCode1",
+      "targets": [
+        ["id=postalCode1", "id"],
+        ["name=postalCode1", "name"],
+        ["css=#postalCode1", "css:finder"],
+        ["xpath=//input[@id='postalCode1']", "xpath:attributes"],
+        ["xpath=//div[4]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "59a03b55-e193-42eb-9705-b26bda34f601",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-full",
+      "targets": [
+        ["css=.w-full", "css:finder"],
+        ["xpath=//app-date-picker[@name='birthDate']", "xpath:attributes"],
+        ["xpath=//app-date-picker", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fea84a6c-a96f-45ba-96ec-f07d07a6c13d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-full",
+      "targets": [
+        ["css=.w-full", "css:finder"],
+        ["xpath=//app-date-picker[@name='birthDate']", "xpath:attributes"],
+        ["xpath=//app-date-picker", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ad27e31c-0078-4859-bab4-a9e641dc9f02",
       "comment": "",
       "command": "type",
-      "target": "id=birthDate",
-      "targets": [
-        ["id=birthDate", "id"],
-        ["name=birthDate", "name"],
-        ["css=#birthDate", "css:finder"],
-        ["xpath=//input[@id='birthDate']", "xpath:attributes"],
-        ["xpath=//section[2]/div[3]/div/input", "xpath:position"]
-      ],
-      "value": "0002-07-08"
+      "target": "css=.w-full",
+      "targets": [],
+      "value": "08/07/2002"
     }, {
-      "id": "c7dc06d3-6aad-48a1-bb2e-0b6750a49cdc",
-      "comment": "",
-      "command": "type",
-      "target": "id=birthDate",
-      "targets": [
-        ["id=birthDate", "id"],
-        ["name=birthDate", "name"],
-        ["css=#birthDate", "css:finder"],
-        ["xpath=//input[@id='birthDate']", "xpath:attributes"],
-        ["xpath=//section[2]/div[3]/div/input", "xpath:position"]
-      ],
-      "value": "0020-07-08"
-    }, {
-      "id": "61ed855c-5af1-45fd-87c3-124ed7325431",
-      "comment": "",
-      "command": "type",
-      "target": "id=birthDate",
-      "targets": [
-        ["id=birthDate", "id"],
-        ["name=birthDate", "name"],
-        ["css=#birthDate", "css:finder"],
-        ["xpath=//input[@id='birthDate']", "xpath:attributes"],
-        ["xpath=//section[2]/div[3]/div/input", "xpath:position"]
-      ],
-      "value": "0200-07-08"
-    }, {
-      "id": "c40d8d29-9636-4c23-824c-c7773df7ee8a",
-      "comment": "",
-      "command": "type",
-      "target": "id=birthDate",
-      "targets": [
-        ["id=birthDate", "id"],
-        ["name=birthDate", "name"],
-        ["css=#birthDate", "css:finder"],
-        ["xpath=//input[@id='birthDate']", "xpath:attributes"],
-        ["xpath=//section[2]/div[3]/div/input", "xpath:position"]
-      ],
-      "value": "2002-07-08"
-    }, {
-      "id": "e64f47a0-4b43-4917-920e-b4267aa8b256",
+      "id": "cf2e0370-d4f9-4f3d-962f-93e22d6b51a5",
       "comment": "",
       "command": "type",
       "target": "id=postalCode1",
@@ -702,31 +693,100 @@
         ["xpath=//section[2]/div[5]/input", "xpath:position"]
       ],
       "value": "C:\\Users\\Utilizador\\Desktop\\4fE6Ncm.jpeg"
+    }]
+  }, {
+    "id": "803772c8-4944-4ce6-8cab-a980d1eb1e09",
+    "name": "Authguard Block Admin",
+    "commands": [{
+      "id": "65523570-eb6c-45e8-9391-a369b0d58656",
+      "comment": "",
+      "command": "open",
+      "target": "",
+      "targets": [],
+      "value": ""
     }, {
-      "id": "5b0b32d1-cb42-4fdd-b364-732874c6d97b",
+      "id": "28d41e2b-1973-4774-91ac-a59cf51448e2",
       "comment": "",
       "command": "click",
-      "target": "css=.self-end",
+      "target": "id=password",
       "targets": [
-        ["css=.self-end", "css:finder"],
-        ["xpath=//button[@type='submit']", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Registar')]", "xpath:innerText"]
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "bdcb9ca1-2157-4b83-a328-00bc43ff63f2",
+      "id": "08732adf-0124-4f93-abf7-8ed69b34fe57",
       "comment": "",
       "command": "click",
-      "target": "css=.w-\\[13rem\\]",
+      "target": "id=email",
       "targets": [
-        ["css=.w-\\[13rem\\]", "css:finder"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Continuar')]", "xpath:innerText"]
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "6538c8a9-e33a-4f9b-a058-4d477b643d46",
+    "name": "Authguard Block Munadmin~",
+    "commands": [{
+      "id": "f0cfdbb0-60db-45cf-ab60-0aef58aee241",
+      "comment": "",
+      "command": "open",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7427ba81-04be-4f84-adfc-75aa97b7756b",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "a047b8ea-f769-45bf-954d-c8f3003efed5",
+      "id": "57c2e47e-5044-4b00-8642-a8626eda3522",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "cf7bd4b4-6fdf-4de8-9928-072374061712",
+    "name": "Not Validated",
+    "commands": [{
+      "id": "9379bfca-53cb-461f-92a3-27daf2a7dea6",
+      "comment": "",
+      "command": "open",
+      "target": "https://municipio:4200/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ecb8337a-029a-4288-ab53-5fa4055d3db4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "784x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b2cf6a86-3f8f-4a58-baf2-7699f91ca0a2",
       "comment": "",
       "command": "click",
       "target": "css=.bg-black",
@@ -737,7 +797,7 @@
       ],
       "value": ""
     }, {
-      "id": "eb600b45-31d4-4121-b105-3f9644df112c",
+      "id": "6a7554f0-2e02-4255-a780-fdda80138c81",
       "comment": "",
       "command": "click",
       "target": "id=email",
@@ -750,7 +810,7 @@
       ],
       "value": ""
     }, {
-      "id": "5fa65cd8-e268-4933-ae2f-3953e74fe818",
+      "id": "b412d4af-8e51-4704-980c-bd3e8f3eaef3",
       "comment": "",
       "command": "type",
       "target": "id=email",
@@ -761,9 +821,9 @@
         ["xpath=//input[@id='email']", "xpath:attributes"],
         ["xpath=//input", "xpath:position"]
       ],
-      "value": "userteste@teste.com"
+      "value": "naovalidado@test.com"
     }, {
-      "id": "5a8f3996-74f9-482f-a221-4bcaeb801481",
+      "id": "73145ed3-27f7-43ba-a8a5-8f0610fdc391",
       "comment": "",
       "command": "type",
       "target": "id=password",
@@ -776,15 +836,27 @@
       ],
       "value": "1qaz\"WSX"
     }, {
-      "id": "f96d5b9b-fc76-4a44-94ee-69177176c162",
+      "id": "2c08d38f-998a-4711-bf4d-e662353f0d59",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "c0649b0e-8de3-4bf5-93b2-4284239f1825",
       "comment": "",
       "command": "click",
-      "target": "css=.h-auto",
+      "target": "css=.w-\\[13rem\\]",
       "targets": [
-        ["css=.h-auto", "css:finder"],
-        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["css=.w-\\[13rem\\]", "css:finder"],
         ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Entrar')]", "xpath:innerText"]
+        ["xpath=//button[contains(.,'Continuar')]", "xpath:innerText"]
       ],
       "value": ""
     }]
@@ -797,6 +869,6 @@
     "timeout": 300,
     "tests": ["13345bfd-82bd-45c0-852b-404ee0d246ae"]
   }],
-  "urls": ["https://municip.io:4200/"],
+  "urls": ["https://municip.io:4200/", "https://municipio:4200/", "https://municipio:4200/admindashboard", "https://municipio:4200/munadmin-dashboard"],
   "plugins": []
 }
