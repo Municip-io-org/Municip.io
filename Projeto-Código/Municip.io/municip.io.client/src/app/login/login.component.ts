@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { CitizenAuthService} from '../services/citizen-auth.service';
+import { CitizenAuthService } from '../services/citizen-auth.service';
 import { Router } from '@angular/router';
 import { Login, UserAuthService } from '../services/user-auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -16,108 +16,112 @@ export class LoginComponent {
 
   role: string = "";
   user: Login = {
-    
+
     email: '',
     password: '',
     twoFactorCode: "",
-    twoFactorRecoveryCode :""
+    twoFactorRecoveryCode: ""
   };
   constructor(private citizenAuthService: CitizenAuthService, private userAuthService: UserAuthService,
-      private router: Router) { }
+    private router: Router) { }
 
 
   loginForm = new FormGroup({
     email: new FormControl(''),
-    password : new FormControl('')
+    password: new FormControl('')
   });
-  
+
   error: string = "";
   browserId: string = "";
-   onSubmit() {
+  onSubmit() {
     var email = this.loginForm.value.email || "";
-     //nao esta a ter o user e pass (null) e falta fazer a navigation apenas quando for autenticado
-     this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
-       res => {
-         this.error = "";
-         
-         this.userAuthService.getUserRole().subscribe(
-           res => {
-             var userAgent = navigator.userAgent;
-             console.log('User-Agent:', userAgent);
-             this.role = res.role;
-             this.user.email = res.email;
-             
-             this.userAuthService.getInfoByEmail(email).subscribe(
-               res => {
-                 
-                  console.log(res);
-                  this.browserId = this.hashString(userAgent);
-                  console.log('Browser ID:', this.browserId);
+    //nao esta a ter o user e pass (null) e falta fazer a navigation apenas quando for autenticado
+    this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
+      res => {
+        this.error = "";
 
-                 //send email if browser id is not in the list
-                 //utiliza o servico para get
+        this.userAuthService.getUserRole().subscribe(
+          res => {
+            var userAgent = navigator.userAgent;
+            console.log('User-Agent:', userAgent);
+            this.role = res.role;
+            this.user.email = res.email;
 
-                 this.userAuthService.getBrowserHistory(email).subscribe(
-                   
-                   res => {
-                     console.log(res);
-                     //se nao existir envia email
+            this.userAuthService.getInfoByEmail(email).subscribe(
+              res => {
 
-                     var found = false;
-                      for (var i = 0; i < res.length; i++) {
-                        if (res[i].browserId == this.browserId) {
-                          found = true;
-                          break;
-                        }
-                     }
+                console.log(res);
+                this.browserId = this.hashString(userAgent);
+                console.log('Browser ID:', this.browserId);
 
+                //send email if browser id is not in the list
+                //utiliza o servico para get
 
-                      if (!found) {
-                        this.userAuthService.sendEmail(email).subscribe(
-                          res => {
-                            
-                            console.log("LA VAI MAIL",res);
-                          },
-                          error => {
-                            console.error(error);
-                          }
-                        );
-                     }
-                   }
-                 );
+                this.userAuthService.getBrowserHistory(email).subscribe(
 
+                  res => {
+                    console.log(res);
+                    //se nao existir envia email
 
-                 this.userAuthService.updateBrowserHistory(email,this.browserId).subscribe(
-                    res => {
-                      console.log(res);
-                    },
-                    error => {
-                      console.error(error);
+                    var found = false;
+                    for (var i = 0; i < res.length; i++) {
+                      console.log(res[i].userAgent, this.browserId)
+
+                      if (res[i].userAgent == this.browserId) {
+                        found = true;
+                        break;
+                      }
                     }
-                  );
-                  
-                  if (this.role == "Citizen") {
-                    this.router.navigateByUrl('/citizen/homePage');
-                  } else {
-                    this.router.navigateByUrl('/municipal/homePage');
-                  }
-                },
-                error => {
-                  console.error(error);
-                }
-              );
-             
-           },
-           error => {
-             console.error(error);
-           }
-         );
 
-         
+
+                    this.userAuthService.updateBrowserHistory(email, this.browserId).subscribe(
+                      res => {
+                        console.log(res);
+                      },
+                      error => {
+                        console.error(error);
+                      }
+                    );
+
+
+                    if (!found) {
+                      this.userAuthService.sendEmail(email).subscribe(
+                        res => {
+
+                          console.log("LA VAI MAIL", res);
+                        },
+                        error => {
+                          console.error(error);
+                        }
+                      );
+                    }
+                  }
+                );
+
+
+
+                if (this.role == "Citizen") {
+                  this.router.navigateByUrl('/citizen/homePage');
+                } else {
+                  this.router.navigateByUrl('/municipal/homePage');
+                }
+              },
+              error => {
+                console.error(error);
+              }
+            );
+
+          },
+          error => {
+            console.error(error);
+          }
+        );
+
+
       },
-       error => {
-         console.log(error);
-         this.error = "Erro de autenticação";
+      error => {
+        console.log(error);
+        this.error = "Erro de autenticação";
       }
     );
   }
