@@ -16,80 +16,149 @@ export class LoginComponent {
 
   role: string = "";
   user: Login = {
-    
+
     email: '',
     password: '',
     twoFactorCode: "",
-    twoFactorRecoveryCode :""
+    twoFactorRecoveryCode: ""
   };
   constructor(private citizenAuthService: CitizenAuthService, private userAuthService: UserAuthService,
-      private router: Router) { }
+    private router: Router) { }
 
   newUser: any;
 
   loginForm = new FormGroup({
     email: new FormControl(''),
-    password : new FormControl('')
+    password: new FormControl('')
   });
 
   error: string = "";
 
   onSubmit() {
-    // Ensure user and pass are not null, and navigate only when authenticated
-    this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
+    //this.userAuthService.getUserData().subscribe(
+    //      userRes => {
+    //        this.user = userRes;
+    //        var emailToParse = this.user.email;
+    //        var emailParsed = emailToParse.replace('@', '%40');
+
+    //        this.userAuthService.getUserRole().subscribe(
+    //          roleRes => {
+    //            console.log("roleRes", roleRes);
+    //            this.role = roleRes.role;
+
+    //            if (this.role == 'Admin') {
+    //              this.router.navigateByUrl('/admindashboard');
+    //              this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
+    //                res => {
+    //                  this.error = "";
+
+    //                },
+    //                  error => {
+    //                  console.log(error);
+    //                  this.error = "Erro de autenticação";
+    //                }
+    //              );
+    //            } else {
+    //              this.userAuthService.getInfoByEmail(emailParsed).subscribe(
+    //                infoRes => {
+    //                  this.newUser = infoRes;
+
+    //                  if (this.newUser.status == 'Approved') {
+    //                    if (this.role == "Citizen") {
+    //                      this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
+    //                        res => {
+    //                          this.error = "";
+
+    //                        },
+    //                        error => {
+    //                          console.log(error);
+    //                          this.error = "Erro de autenticação";
+    //                        }
+    //                      );
+    //                      this.router.navigateByUrl('/citizen/homePage');
+    //                    } else {
+    //                      this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
+    //                        res => {
+    //                          this.error = "";
+
+    //                        },
+    //                        error => {
+    //                          console.log(error);
+    //                          this.error = "Erro de autenticação";
+    //                        }
+    //                      );
+    //                      this.router.navigateByUrl('/municipal/homePage');
+    //                    }
+    //                  } else {
+    //                    this.router.navigateByUrl('/acessBlocked');
+    //                  }
+    //                },
+    //                infoError => {
+    //                  console.error(infoError);
+    //                }
+    //              );
+    //            }
+    //          },
+    //          roleError => {
+    //            console.error(roleError);
+    //          }
+    //        );
+    //      },
+    //      userError => {
+    //        console.error(userError);
+    //      }
+    //    );
+    //  }
+    var email = this.loginForm.value.email || "";
+    var emailToParse = email;
+    var emailParsed = emailToParse.replace('@', '%40');
+    this.userAuthService.getInfoByEmail(emailParsed).subscribe(
       res => {
-        this.error = "";
+        this.newUser = res;
 
-        this.userAuthService.getUserData().subscribe(
-          userRes => {
-            this.user = userRes;
-            var emailToParse = this.user.email;
-            var emailParsed = emailToParse.replace('@', '%40');
+        if (this.newUser.status == 'Approved' || this.newUser.status == undefined) {
 
-            this.userAuthService.getUserRole().subscribe(
-              roleRes => {
-                console.log("roleRes", roleRes);
-                this.role = roleRes.role;
-
-                if (this.role == 'Admin') {
-                  this.router.navigateByUrl('/admindashboard');
-                } else {
-                  this.userAuthService.getInfoByEmail(emailParsed).subscribe(
-                    infoRes => {
-                      this.newUser = infoRes;
-
-                      if (this.newUser.status == 'Approved') {
-                        if (this.role == "Citizen") {
-                          this.router.navigateByUrl('/citizen/homePage');
-                        } else {
-                          this.router.navigateByUrl('/municipal/homePage');
-                        }
-                      } else {
-                        this.router.navigateByUrl('/acessBlocked');
-                      }
-                    },
-                    infoError => {
-                      console.error(infoError);
-                    }
-                  );
+          this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
+            res => {
+              this.error = "";
+              this.userAuthService.getUserRole().subscribe(
+                roleRes => {
+                  this.role = roleRes.role;
+                  console.log("A ROLE É", this.role);
+                  if (this.role == 'Admin') {
+                    this.router.navigateByUrl('/admindashboard');
+                  } else if (this.role == 'Municipal') {
+                    this.router.navigateByUrl('/municipal/homePage');
+                  } else {
+                    this.router.navigateByUrl('/citizen/homePage');
+                  }
+                },
+                roleError => {
+                  console.error(roleError);
                 }
-              },
-              roleError => {
-                console.error(roleError);
-              }
-            );
-          },
-          userError => {
-            console.error(userError);
-          }
-        );
+              );
+              //role check
+              
+            },
+            error => {
+              console.log(error);
+              this.error = "Erro de autenticação";
+            }
+          );
+
+
+        } else {
+          this.router.navigateByUrl('/acessBlocked');
+        }
       },
+
       error => {
-        console.log(error);
-        this.error = "Erro de autenticação";
+        console.error(error);
       }
     );
-  }
 
+
+
+  }
 }
 
