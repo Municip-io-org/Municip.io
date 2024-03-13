@@ -88,7 +88,7 @@ namespace Municip.io.Server.Controllers
         {
             if (!IsAgeValid(citizen.birthDate))
             {
-                ModelState.AddModelError(string.Empty, "A idade do cidadão deve estar entre 18 e 120 anos.");
+                ModelState.AddModelError(string.Empty, "A idade do cidadão deve ser menor que 120 anos.");
                 return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
             }
 
@@ -161,7 +161,7 @@ namespace Municip.io.Server.Controllers
                 age--;
             }
 
-            return age >= 18 && age < 120;
+            return age < 120;
         }
 
         private bool IsMunicipalityValid(string municipality)
