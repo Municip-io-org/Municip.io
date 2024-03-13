@@ -34,7 +34,14 @@ export class LoginComponent {
 
   error: string = "";
 
+  ngOnInit(): void {
+
+    localStorage.clear();
+  }
+
   onSubmit() {
+
+    localStorage.clear();
     //this.userAuthService.getUserData().subscribe(
     //      userRes => {
     //        this.user = userRes;
@@ -118,6 +125,7 @@ export class LoginComponent {
 
         if (this.newUser.status == 'Approved' || this.newUser.status == undefined) {
 
+          localStorage.clear();
           this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
             res => {
               this.error = "";
