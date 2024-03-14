@@ -258,6 +258,20 @@ localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
     );
   }
 
+  updateBrowserHistory(email: string, browserId: string): Observable<any> {
+    return this.http.put(`/api/accounts/UpdateBrowserHistory?email=${email}&userAgent=${browserId}`, {});
+  }
+
+  getBrowserHistory(email: string): Observable<any> {
+    return this.http.get<any>(`/api/accounts/GetBrowserHistory?email=${email}`);
+  }
+
+  sendEmail(email: string) {
+    
+    return this.http.post<any>(`/api/accounts/SendNewLogin?email=${email}`, {});
+    
+  }
+
   /**
  * Update municipality administrator user information.
  * @param user Municipality administrator user object to be updated.
@@ -295,10 +309,14 @@ localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
           this.setUserDataToStorage(null);
           this.setUserMunicipalityToStorage(null);
           this.setUserRoleToStorage(null);
+          
+          
+          
           localStorage.removeItem(this.LOCAL_STORAGE_KEY);
           localStorage.removeItem(this.MUNICIPALITY_STORAGE_KEY);
           localStorage.removeItem(this.ROLE_STORAGE_KEY);
           localStorage.removeItem(this.INFO_STORAGE_KEY);
+          localStorage.removeItem("infoByEmail");
 
           return true;
         }
@@ -333,3 +351,5 @@ export enum Roles {
   Municipal = "Municipal",
   Citizen = "Citizen"
 }
+
+

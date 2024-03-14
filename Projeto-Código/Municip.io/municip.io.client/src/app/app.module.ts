@@ -98,6 +98,7 @@ import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.c
 import { AdminDashboardMunicipalAdminsComponent } from './administrator/admin-dashboard-municipal-admins/admin-dashboard-municipal-admins.component'
 import { MatSelectCountryModule } from "@angular-material-extensions/select-country";
 import { CountryPickerComponent } from './utils/input/country-picker/country-picker.component';
+import { AccessBlockedComponent } from './access-blocked/access-blocked.component';
 import { RequestDocumentComponent } from './documents/request-document/request-document.component';
 import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
 import { DocumentCardComponent } from './utils/documents/document-card/document-card.component';
@@ -188,6 +189,7 @@ registerLocaleData(localePt, 'pt-PT');
     DocsHomepageComponent,
     AdminDashboardMunicipalAdminsComponent,
     CountryPickerComponent,
+    AccessBlockedComponent,
     RequestDocumentComponent,
     MyDocumentsComponent,
     DocumentCardComponent,

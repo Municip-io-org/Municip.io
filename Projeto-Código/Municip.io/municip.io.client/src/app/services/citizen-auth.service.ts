@@ -24,14 +24,10 @@ export class CitizenAuthService {
       .pipe(switchMap((response: any) => {
         citizen.photo = response['data']['link'];
         citizen.events = [];
+        citizen.browsers = [];
         return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
       }));
   }
-
-
-  
-
-  
 }
 
 export interface Citizen {
@@ -48,6 +44,7 @@ export interface Citizen {
   birthDate: Date;
   photo?: string;
   events?: Event[];
+  browsers?: string[];
 }
 
 export interface Country {

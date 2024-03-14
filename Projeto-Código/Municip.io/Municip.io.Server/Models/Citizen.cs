@@ -41,6 +41,6 @@ namespace Municip.io.Server.Models
 
         public List<Event>? Events { get; set; }
 
-
+        public ICollection<Browser> Browsers { get; set; } = new List<Browser>();
     }
 }
