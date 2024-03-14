@@ -34,10 +34,10 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(754eee0b-9c0d-4602-a21c-2fa698539883)'
-    appType: 'webApp'
-    WebAppName: 'MunicipioServer'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+# - task: AzureRmWebAppDeployment@4
+#   inputs:
+#     ConnectionType: 'AzureRM'
+#     azureSubscription: 'Azure subscription 1(754eee0b-9c0d-4602-a21c-2fa698539883)'
+#     appType: 'webApp'
+#     WebAppName: 'MunicipioServer'
+#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
