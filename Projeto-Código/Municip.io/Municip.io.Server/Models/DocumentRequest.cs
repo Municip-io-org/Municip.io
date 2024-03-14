@@ -6,7 +6,7 @@
         
         public int DocumentTemplateId { get; set; }
 
-        public Guid CitizenId { get; set; }
+        public string CitizenId { get; set; }
 
         public string Municipality { get; set; }
 
