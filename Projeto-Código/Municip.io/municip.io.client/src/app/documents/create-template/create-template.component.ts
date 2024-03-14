@@ -6,6 +6,7 @@ import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { EventsService, Event } from '../../services/events/events.service';
+import { DocsService } from '../../services/documents/docs.service';
 
 @Component({
   selector: 'app-create-template',
@@ -32,7 +33,7 @@ export class CreateTemplateComponent {
    * @param router
    */
   constructor( private authService: UserAuthService,
-    private eventService: EventsService, private router: Router,
+    private docsService : DocsService, private router: Router,
   ) {
     // Set the locale to pt in the calendar
 
@@ -88,10 +89,21 @@ export class CreateTemplateComponent {
   }
 
 
+OnSubmit() {
+  if (this.templateForm.valid) {
+    const template: Template = {
+      Name: this.templateForm?.get('name')?.value || "",
+      Type: this.templateForm?.get('type')?.value || "",
+      Price: Number(this.templateForm?.get('price')?.value) || 0,
+      TextTemplate: this.templateForm?.get('templatetext')?.value || '', // Provide a default value if FormControl value is null
+      Municipality: this.municipalityName || "vazio"
+    };
 
-  OnSubmit() {
-
+    this.docsService.createTemplate(template).subscribe((template: any) => {
+      this.isDialogOpen = true;
+    });
   }
+}
   /**
    * Método responsável por fechar o diálogo
    */
@@ -111,4 +123,14 @@ export class CreateTemplateComponent {
 
 
 
+
+
+}
+
+export interface Template  {
+  Name: string,
+    Type: string,
+      Price: number,
+        TextTemplate: string
+  Municipality: string
 }

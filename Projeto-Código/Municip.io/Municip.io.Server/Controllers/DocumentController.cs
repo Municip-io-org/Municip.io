@@ -5,6 +5,9 @@ using Municip.io.Server.Models;
 
 namespace Municip.io.Server.Controllers
 {
+    [ApiController]
+    [Route("api/documents")]
+
     public class DocumentController : Controller
     {
 
@@ -14,6 +17,7 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
         //create Document
+        [HttpPost("CreateTemplate")]
         [HttpPost]
         public async Task<IActionResult> CreateDocumentTemplateAsync(DocumentTemplate template)
         {
