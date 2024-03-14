@@ -1,0 +1,104 @@
+
+<app-header-loggedin></app-header-loggedin>
+<app-smaller-banner [title]="'Criar Modelo de Documento'" [image]="municipalityImage"
+                    class="font-inter" />
+
+
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-message (confirm)="closeDialog()" title="Sucesso" message="Operação realizada com sucesso"
+                      [isConfirm]=true></app-dialog-message>
+</ng-container>
+
+
+<form [formGroup]="templateForm" (ngSubmit)="OnSubmit()" class="px-32 mb-32 mt-10">
+  <div *ngIf="error" class=" text-red-500 text-xl font-bold space-y-2 text-start mb-5">
+    <p>{{error}}</p>
+  </div>
+
+
+  <div class="flex items-center justify-between">
+    <div class="w-full lg:w-5/12 mb-4 h-32">
+      <app-input-title class="text-[2.6vh]">Nome</app-input-title>
+      <div class="flex items-center">
+        <input required placeholder="Nome do documento" type="text" id="name" formControlName="name" name="name"
+               class="input w-full h-12 lg:h-14" />
+      </div>
+      <div class="text-red-500 font-bold py-2" *ngIf="name?.touched && name?.invalid ">
+        <div *ngIf="name?.errors?.['required'] ">Nome Obrigatório</div>
+      </div>
+    </div>
+    <div class="w-full lg:w-5/12 mb-4 h-32">
+      <app-input-title class="text-[2.6vh]">Tipo de documento</app-input-title>
+      <div class="flex items-center">
+        <input required placeholder="Tipo de documento" type="text" id="type" formControlName="type" name="type"
+               class="input w-full h-12 lg:h-14 " />
+      </div>
+      <div class="text-red-500 font-bold py-2" *ngIf="type?.touched && type?.invalid">
+        <div *ngIf="type?.errors?.['required'] ">Tipo obrigatório</div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="flex items-center justify-between ">
+    <div class="w-full lg:w-5/12 mb-4 h-32">
+      <app-input-title class="text-[2.6vh]">Preço</app-input-title>
+      <div class="flex items-center">
+        <input required placeholder="Preço do documento" type="number" min="1" step="any" id="price" formControlName="price" name="price"
+               class="input w-full h-12 lg:h-14 " />
+      </div>
+      <div class="text-red-500 font-bold py-2" *ngIf="price?.touched && price?.invalid ">
+        <div *ngIf="price?.errors?.['required'] ">Preço Obrigatório</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="w-64">
+    <label for="propriedade" class="block text-sm font-medium text-gray-700">Adicione uma propriedade ao modelo:</label>
+    <select id="propriedade" class="mt-1 block w-full pl-3 pr-10 py-2 bg-white border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+      <option *ngFor="let propriedade of propriedades" [value]="propriedade.toLowerCase()">{{ propriedade }}</option>
+    </select>
+
+
+    <button class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="adicionarPropriedade()">Adicionar</button>
+
+  </div>
+
+
+
+
+  <div class="w-full mb-4 h-72">
+    <app-input-title class="text-[2.6vh]">Corpo do documento</app-input-title>
+    <div class="flex items-center">
+      <textarea required placeholder="Corpo do documento" id="templatetext" formControlName="templatetext" name="templatetext"
+                class="input w-full h-30 lg:h-60
+                resize-none">
+      </textarea>
+    </div>
+    <div class="text-red-500 font-bold py-2" *ngIf="templatetext?.touched && templatetext?.invalid ">
+      <div *ngIf="templatetext?.errors?.['required'] ">Obrigatório preencher o corpo do documento</div>
+    </div>
+  </div>
+  <div class="flex mt-12">
+
+
+    <div class="flex flex-1 justify-end ">
+      <app-btn-municip-blue [disabled]="!templateForm.valid" buttonClass="disabled:!cursor-not-allowed"
+                            type="submit">
+        Criar Evento
+        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+      </app-btn-municip-blue>
+    </div>
+
+  </div>
+</form>
+<app-footer />
+
+
+
