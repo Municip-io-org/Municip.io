@@ -1,11 +1,14 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
+
 using MimeKit;
 
 namespace Municip.io.Server.Models
 {
+   
     public class EmailSender
     {
+        
         public static void SendEmail(string email, string subject, string destinyName, string messageText, string filePath)
         {
             var message = new MimeMessage();
@@ -24,10 +27,10 @@ namespace Municip.io.Server.Models
 
             using (var client = new SmtpClient())
             {
-                client.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                client.AuthenticateAsync("iomunicip@gmail.com", "gxhn wjic sqsn gjsa");
-                client.SendAsync(message);
-                client.DisconnectAsync(true);
+                client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                client.Authenticate("iomunicip@gmail.com", "gxhn wjic sqsn gjsa");
+                client.Send(message);
+                client.Disconnect(true);
             }
         }
     }

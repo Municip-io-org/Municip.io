@@ -152,7 +152,6 @@
               </div>
               <div class="text-red-500 font-bold py-2" *ngIf="birthDate?.touched && birthDate?.invalid">
                 <div *ngIf="birthDate?.errors?.['required'] ">Data de Nascimento Obrigatória</div>
-                <div *ngIf="birthDate?.errors?.['underage']">Tem que ter +18 anos</div>
                 <div *ngIf="birthDate?.errors?.['over120']">É velhinho demais, né?</div>
               </div>
             </div>

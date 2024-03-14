@@ -15,7 +15,8 @@ export class NewsSmallComponent {
 
   constructor(private router: Router) { }
 
-goToNewsPage() {
+  goToNewsPage() {
+ 
     this.router.navigateByUrl(`news/${this.newsId}`);
   }
 }

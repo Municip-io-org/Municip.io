@@ -88,7 +88,7 @@ namespace Municip.io.Server.Controllers
         {
             if (!IsAgeValid(citizen.birthDate))
             {
-                ModelState.AddModelError(string.Empty, "A idade do cidadão deve estar entre 18 e 120 anos.");
+                ModelState.AddModelError(string.Empty, "A idade do cidadão deve ser menor que 120 anos.");
                 return BadRequest(new { Message = "Falha no registro do cidadão.", ModelState = ModelState });
             }
 
@@ -127,6 +127,7 @@ namespace Municip.io.Server.Controllers
                     citizen.date = DateOnly.FromDateTime(DateTime.Now);
                     citizen.status = CitizenStatus.Pending;
                     citizen.Events = new List<Event>();
+                    citizen.Browsers = new List<Browser>();
                     _context.Citizens.Add(citizen);
                     await _context.SaveChangesAsync();
 
@@ -161,7 +162,7 @@ namespace Municip.io.Server.Controllers
                 age--;
             }
 
-            return age >= 18 && age < 120;
+            return age < 120;
         }
 
         private bool IsMunicipalityValid(string municipality)
@@ -332,6 +333,9 @@ namespace Municip.io.Server.Controllers
             else if (_context.MunicipalAdministrators.Any(m => m.Email == email))
             {
                 return Json(await _context.MunicipalAdministrators.Where(m => m.Email == email).FirstOrDefaultAsync());
+            }
+            else {
+              return Json(await _userManager.FindByEmailAsync(email));
             }
             return BadRequest(new { Message = "Não existe nenhum utilizador com esse email." });
         }
@@ -519,5 +523,59 @@ namespace Municip.io.Server.Controllers
             return Ok("Success");
         }
 
+        [HttpPut("UpdateBrowserHistory")]
+        public async Task<IActionResult> UpdateBrowserHistory(string email, string userAgent)
+        {
+            
+            var citizen = await _context.Citizens.Where(c => c.Email == email).FirstOrDefaultAsync();
+            
+
+            if (citizen != null)
+            {
+                Browser browser = new Browser
+                {
+                    Name = citizen.firstName,
+                    Date = DateOnly.FromDateTime(DateTime.Now),
+                    UserAgent = userAgent
+                };
+
+                citizen.Browsers.Add(browser);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            return BadRequest(new { Message = "Cidadão não encontrado." });
+        }
+
+        [HttpGet("GetBrowserHistory")]
+        public async Task<IActionResult> GetBrowserHistory(string email)
+        {
+            var citizen = _context.Citizens.FirstOrDefault(c => c.Email == email);
+            if (citizen != null)
+            {
+
+
+                var browsers = _context.Citizens
+                    .Where(c => c.Email == email)
+                    .SelectMany(c => c.Browsers) 
+                    .ToList();
+                return Json(browsers);
+            }
+            else
+            {
+                return BadRequest(new { message = "Citizen not found" });
+            }
+        }
+
+        [HttpPost("SendNewLogin")]
+        public IActionResult SendNewLogin(string email)
+        {
+            EmailSender.SendEmail(email, "Novo Login", "", AccountUserEmail.NEWLOGIN.toString(), "root/html/AproveEmail.html");
+            return Ok(new { message = "Success" });
+        }
+
+
+
+
+        
     }
 }

@@ -85,9 +85,7 @@ export class SignUpCitizenAccountComponent {
     const today: Date = new Date();
     const age: number = today.getFullYear() - birthDate.getFullYear();
 
-    if (age < 18) {
-      return { 'underage': true };
-    } else if (age > 120) {
+    if (age > 120) {
       return { 'over120': true };
     }
 
