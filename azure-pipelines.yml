@@ -9,11 +9,20 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@1
-
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(754eee0b-9c0d-4602-a21c-2fa698539883)'
+    appType: 'webApp'
+    WebAppName: 'MunicipioServer'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'MunicipioServerResourceGroup'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
