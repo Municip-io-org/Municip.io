@@ -9,32 +9,39 @@ import { RequestDocument, StatusDocument } from '../../../services/documents/doc
 })
 export class DocumentApproveCardComponent {
   @Input() document: RequestDocument = {
-      Id: 0,
-      Name: 'Certeficado De Residência',
-      DocumentStatus: StatusDocument.rejected,
-      Date: new Date(),
-      Municipality: "",
-      DocumentTemplateId: 0,
-    Citizen: {
-        firstName: '',
-        surname: '',
-        email: '',
-        password: '',
-        nif: '',
-        gender: '',
-        municipality: '',
-        address: '',
-        postalCode1: '',
-        postalCode2: '',
-        birthDate: new Date
+      id: 0,
+      name: 'Certeficado De Residência',
+      documentStatus: StatusDocument.rejected,
+      date: new Date(),
+      municipality: "",
+      citizen: {
+          firstName: '',
+          surname: '',
+          email: '',
+          password: '',
+          nif: '',
+          gender: '',
+          municipality: '',
+          address: '',
+          postalCode1: '',
+          postalCode2: '',
+          birthDate: new Date
+      },
+    documentTemplate: {
+      name: 'Sem Título',
+      description: 'Sem descrição',
+      type: 'Sem Tipo',
+      price: 0,
+      textTemplate: 'Sem template',
+      municipality: 'Sem município'
     }
   }
 
   //quero dar um estilo diferente para cada status
   getStatusClass(): string {
-    if (this.document.DocumentStatus === StatusDocument.approved) {
+    if (this.document.documentStatus === StatusDocument.approved) {
       return 'bg-[#08BC25] text-[#1D8702]';
-    } else if (this.document.DocumentStatus === StatusDocument.pending) {
+    } else if (this.document.documentStatus === StatusDocument.pending) {
       return 'bg-[#F4A42C] text-[#9B4F08]';
     } else {
       return 'bg-[#FF0000] text-[#B02121]';

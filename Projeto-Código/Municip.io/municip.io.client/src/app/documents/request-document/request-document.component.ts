@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router';
 import { Municipality } from '../../services/municipal-admin-auth.service';
-import { DocsService, Template } from '../../services/documents/docs.service';
+import { DocsService, DocumentTemplate } from '../../services/documents/docs.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { DocsService, Template } from '../../services/documents/docs.service';
 })
 export class RequestDocumentComponent {
 
-  templates: Template[] = [];
+  templates: DocumentTemplate[] = [];
 
   user: any;
   isMunAdmin: boolean = false;
@@ -69,7 +69,7 @@ export class RequestDocumentComponent {
                 this.documentsService.getTemplatesFromMunicipality(this.municipality.name).subscribe(
                   (docRes: any) => {
 
-                    this.templates = docRes as Template[];            
+                    this.templates = docRes as DocumentTemplate[];            
               
                   },
                   error => {
@@ -97,6 +97,6 @@ export class RequestDocumentComponent {
   }
 
   get filteredDocuments() {
-    return this.templates.filter(template => template.Name.toLowerCase().includes(this.nameSearch.toLowerCase()));
+    return this.templates.filter(template => template.name.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }
 }

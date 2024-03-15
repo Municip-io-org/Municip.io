@@ -45,7 +45,7 @@ export class ApproveDocumentsComponent {
   }
 
   get filteredDocuments() {
-    return this.documents.filter(e => e.Name.toLowerCase().includes(this.nameSearch.toLowerCase()));
+    return this.documents.filter(e => e.name.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }
 
   toggleSortOrder() {
@@ -57,9 +57,9 @@ export class ApproveDocumentsComponent {
     //sort events by date
     this.documents.sort((a, b) => {
       if (this.ascendingOrder) {
-        return new Date(a.Date).getTime() - new Date(b.Date).getTime();
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
       } else {
-        return new Date(b.Date).getTime() - new Date(a.Date).getTime();
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
       }
     });
   }

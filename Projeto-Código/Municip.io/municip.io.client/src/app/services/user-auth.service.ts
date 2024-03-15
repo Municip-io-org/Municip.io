@@ -100,6 +100,7 @@ export class UserAuthService {
     let params = new HttpParams()
       .set('useCookies', useCookies.toString())
       .set('useSessionCookies', useSessionCookies.toString());
+
     return this.http.post('/login/', login, {
       params,
       observe: 'response',

@@ -6,7 +6,7 @@ import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { EventsService, Event } from '../../services/events/events.service';
-import { DocsService, Template } from '../../services/documents/docs.service';
+import { DocsService, DocumentTemplate } from '../../services/documents/docs.service';
 
 @Component({
   selector: 'app-create-template',
@@ -96,13 +96,13 @@ export class CreateTemplateComponent {
 
 OnSubmit() {
   if (this.templateForm.valid) {
-    const template: Template = {
-      Name: this.templateForm?.get('name')?.value || "",
-      Description: this.templateForm?.get('description')?.value || "",
-      Type: this.templateForm?.get('type')?.value || "",
-      Price: Number(this.templateForm?.get('price')?.value) || 0,
-      TextTemplate: this.templateForm?.get('templatetext')?.value || '', // Provide a default value if FormControl value is null
-      Municipality: this.municipalityName || "vazio"
+    const template: DocumentTemplate = {
+      name: this.templateForm?.get('name')?.value || "",
+      description: this.templateForm?.get('description')?.value || "",
+      type: this.templateForm?.get('type')?.value || "",
+      price: Number(this.templateForm?.get('price')?.value) || 0,
+      textTemplate: this.templateForm?.get('templatetext')?.value || '', // Provide a default value if FormControl value is null
+      municipality: this.municipalityName || "vazio"
     };
 
     this.docsService.createTemplate(template).subscribe((template: any) => {

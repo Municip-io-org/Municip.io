@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
 import { Observable, of } from 'rxjs';
@@ -13,9 +13,9 @@ export class DocsService {
   constructor(private http : HttpClient) { }
 
   //get all documents
-  getTemplatesFromMunicipality(municipality : string): Observable<Template[]> {
+  getTemplatesFromMunicipality(municipality : string): Observable<DocumentTemplate[]> {
     const params = { municipality: municipality };
-    return this.http.get<Template[]>('api/documents/GetTemplatesFromMunicipality', { params: params });
+    return this.http.get<DocumentTemplate[]>('api/documents/GetTemplatesFromMunicipality', { params: params });
   }
 
   //get all request documents
@@ -25,7 +25,7 @@ export class DocsService {
   }
 
   //get all request documents
-  GetRequestsFromCitizen(email: string): Observable<RequestDocument[]> {
+  getRequestsFromCitizen(email: string): Observable<RequestDocument[]> {
     const params = { email: email };
     return this.http.get<RequestDocument[]>('api/documents/GetRequestsFromCitizen', { params: params });
   }
@@ -39,16 +39,28 @@ export class DocsService {
 
 
   }
+
+  createRequest(email: string, documentRequest: RequestDocument): Observable<any> {
+    let params = new HttpParams()
+      .set('email', email.toString())
+      
+      
+
+
+    
+    return this.http.post<any>('api/documents/CreateRequest', documentRequest, { params: params });
+  }
+
 }
 
 export interface RequestDocument {
-  Id: number,
-  DocumentTemplateId: number,
-  Name: string,
-  Citizen: Citizen,
-  Municipality: string,
-  DocumentStatus: StatusDocument,
-  Date: Date,
+  id?: number,
+  documentTemplate: DocumentTemplate,
+  name: string,
+  citizen: Citizen,
+  municipality: string,
+  documentStatus: StatusDocument,
+  date: Date,
 }
 
  
@@ -65,12 +77,12 @@ export enum DocumentType {
   Other = 'Outro'
 }
 
-export interface Template {
-  Name: string,
-  Description: string,
-  Type: string,
-  Price: number,
-  TextTemplate: string
-  Municipality: string
+export interface DocumentTemplate {
+  name: string,
+  description: string,
+  type: string,
+  price: number,
+  textTemplate: string
+  municipality: string
 }
 
