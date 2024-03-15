@@ -29,6 +29,8 @@ export class UserpageComponent {
   role: string = "";
 
   ngOnInit() {
+    
+    
     this.userAuthService.getUserData().subscribe(
       res => {
         this.user = res;
@@ -61,6 +63,7 @@ export class UserpageComponent {
         console.error(error);
       }
     );
+    this.profileEdit.disable();
   }
 
   profileEdit = new FormGroup({

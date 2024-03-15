@@ -168,29 +168,27 @@
               </div>
             </div>
             <div class="flex justify-end">
-              <button type="submit" [disabled]="passwordConfirmation?.invalid" class="relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank
-          bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 focus:outline-none
-          hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out"
-                      [attr.title]="passwordConfirmation?.invalid ? 'Confirme a sua password' : ''">
+              <button type="submit" [disabled]="!editMode || passwordConfirmation?.invalid" class="relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out disabled:cursor-not-allowed" [attr.title]="passwordConfirmation?.invalid ? 'Confirme a sua password' : ''">
                 Atualizar Dados
                 <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
               </button>
+
             </div>
 
-            <div *ngIf="!editMode" class="absolute top-[16.3rem] right-[25rem] text-[1.063rem]">
-              <app-black-btn-icon-text altImage="editar munícipio"
-                                       image="/assets/images/icons/pencil-white.png"
-                                       (buttonClick)="toggleEditMode()">
-                Editar Munícipio
-              </app-black-btn-icon-text>
-            </div>
-            <div *ngIf="editMode" class="absolute top-[15.3rem] right-[25rem] text-[1.063rem]">
-              <app-black-btn-icon-text altImage="Cancelar"
-                                       image="/assets/images/icons/pencil-white.png"
-                                       (buttonClick)="cancelEditMode()">
-                Cancelar Edição
-              </app-black-btn-icon-text>
-            </div>
+              <div *ngIf="!editMode" class="absolute top-[16.3rem] right-[25rem] text-[1.063rem]">
+                <app-black-btn-icon-text altImage="editar munícipio"
+                                         image="/assets/images/icons/pencil-white.png"
+                                         (buttonClick)="toggleEditMode()">
+                  Editar Munícipio
+                </app-black-btn-icon-text>
+              </div>
+              <div *ngIf="editMode" class="absolute top-[15.3rem] right-[25rem] text-[1.063rem]">
+                <app-black-btn-icon-text altImage="Cancelar"
+                                         image="/assets/images/icons/pencil-white.png"
+                                         (buttonClick)="cancelEditMode()">
+                  Cancelar Edição
+                </app-black-btn-icon-text>
+              </div>
           </section>
 
         </div>
