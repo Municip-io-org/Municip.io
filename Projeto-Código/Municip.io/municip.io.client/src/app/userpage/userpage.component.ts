@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { UserAuthService} from '../services/user-auth.service';
+import { UserAuthService } from '../services/user-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Country } from '../services/citizen-auth.service';
-
 
 @Component({
   selector: 'app-userpage',
@@ -16,10 +15,10 @@ export class UserpageComponent {
   dialogTitle = '';
   dialogMessage = '';
   isConfirm: boolean = false;
-
-
+  editMode: boolean = false;
 
   newUser: any;
+  editedUser: any; 
   errors: string[] | null = null;
   originalName: string = "";
   originalPhoto: string = "";
@@ -33,22 +32,16 @@ export class UserpageComponent {
     this.userAuthService.getUserData().subscribe(
       res => {
         this.user = res;
-        var emailToParse = this.user.email;
-        var emailParsed = emailToParse.replace('@', '%40');
-        this.userAuthService.getInfoByEmail(emailParsed).subscribe(
+        this.userAuthService.getInfoByEmail(this.user.email).subscribe(
           res => {
             this.newUser = res;
-            console.log("dasdasdas", this.newUser);
+            this.editedUser = { ...this.newUser }; 
             this.originalName = this.newUser.firstName;
             this.originalPhoto = this.newUser.photo;
             this.formatBirthDate();
-            
             this.userAuthService.getUserRole().subscribe(
               res => {
-
                 this.role = res.role;
-                console.log("role", this.role);
-
                 if (this.role == "Citizen") {
                   this.country.setValue({ alpha2Code: this.newUser.nif.slice(0, 2) });
                   this.nif.setValue(this.newUser.nif.slice(2));
@@ -61,7 +54,6 @@ export class UserpageComponent {
           },
           error => {
             console.error(error);
-
           }
         );
       },
@@ -69,10 +61,7 @@ export class UserpageComponent {
         console.error(error);
       }
     );
-
-    
   }
-
 
   profileEdit = new FormGroup({
     firstName: new FormControl("", [Validators.required]),
@@ -86,11 +75,9 @@ export class UserpageComponent {
     postalCode1: new FormControl("", [Validators.required, Validators.pattern(/^\d{4}$/)]),
     postalCode2: new FormControl("", [Validators.required, Validators.pattern(/^\d{3}$/)]),
     password: new FormControl("", [
-
       Validators.pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/)
     ]),
     passwordConfirmation: new FormControl("", [Validators.required]),
-
   });
 
   get firstName() {
@@ -112,6 +99,7 @@ export class UserpageComponent {
   get country() {
     return this.profileEdit.get('country') as FormControl;
   }
+
   get nif() {
     return this.profileEdit.get('nif') as FormControl;
   }
@@ -139,8 +127,10 @@ export class UserpageComponent {
   get passwordConfirmation() {
     return this.profileEdit.get('passwordConfirmation');
   }
+
   OnSubmit() {
 
+    this.toggleEditMode();
     const formValues = this.profileEdit.value;
     this.newUser.name = formValues.firstName || this.newUser.name;
     this.newUser.surname = formValues.surname || this.newUser.surname;
@@ -164,7 +154,7 @@ export class UserpageComponent {
           this.originalName = this.newUser.firstName;
           this.originalPhoto = this.newUser.photo;
 
-         
+
           this.isDialogOpen = true;
           this.dialogTitle = 'Atualização bem-sucedida';
           this.dialogMessage = 'Os seus dados foram atualizados com sucesso';
@@ -174,7 +164,7 @@ export class UserpageComponent {
           console.log("erro " + error.error.errors)
           this.errors = error.error.errors;
 
-          
+
           this.isDialogOpen = true;
           this.dialogTitle = 'Erro na Atualização de dados';
           this.dialogMessage = error.error.message;
@@ -194,7 +184,7 @@ export class UserpageComponent {
         }
       );
     }
-
+    this.initForm();
 
   }
 
@@ -202,12 +192,10 @@ export class UserpageComponent {
     if (!this.newUser) {
       return [];
     }
-
     return Object.keys(this.newUser).map(key => ({ key, value: this.newUser[key] }));
   }
 
   formatBirthDate() {
-
     const dateString = this.newUser.birthDate;
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -220,7 +208,6 @@ export class UserpageComponent {
   onImagePicked(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0];
-
     if (file) {
       this.image = file;
       this.newUser.photo = this.image;
@@ -229,9 +216,41 @@ export class UserpageComponent {
     }
   }
 
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+    if (this.editMode) {
+      this.profileEdit.enable();
+    } else {
+      this.profileEdit.disable();
+    }
+  }
+
+  cancelEditMode() {
+    this.toggleEditMode();
+    this.initForm();
+  }
+
+  initForm() {
+    this.profileEdit.patchValue({
+      firstName: this.editedUser.firstName || '',
+      surname: this.editedUser.surname || '',
+      email: this.editedUser.email || '',
+      birthDate: this.editedUser.birthDate || '',
+      address: this.editedUser.address || '',
+      country: this.editedUser.country || '',
+      nif: this.editedUser.nif || '',
+      postalCode1: this.editedUser.postalCode1 || '',
+      postalCode2: this.editedUser.postalCode2 || '',
+      password: '',
+      passwordConfirmation: ''
+    });
+
+    
+    this.newUser.photo = this.originalPhoto; 
+  }
+
   closeDialog() {
     this.isDialogOpen = false;
     window.location.reload();
   }
-
 }

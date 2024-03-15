@@ -24,65 +24,74 @@
         <div class="py-[1vh] w-full">
           <section class="flex flex-col text-left space-y-7 ">
             <div class="flex items-center justify-between">
-              <div class="w-full lg:w-5/12 mb-4 ml-1/3">
+              <div class="w-full lg:w-5/12 mb-4 ml-1/3 relative">
                 <app-input-title class="text-[2.6vh] ml-1/4">Nome</app-input-title>
                 <div class="flex items-center">
                   <input required placeholder="{{newUser.firstName}}" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="newUser.firstName"
                          class="input w-full h-12 lg:h-14" />
+                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-15" />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="firstName?.touched && firstName?.invalid ">
                   <div *ngIf="firstName?.errors?.['required'] ">Primeiro Nome Obrigatório</div>
                 </div>
               </div>
-              <div class="w-full lg:w-5/12 mb-4">
+              <div class="w-full lg:w-5/12 mb-4 relative">
                 <app-input-title class="text-[2.6vh]">Apelido</app-input-title>
                 <div class="flex items-center">
                   <input required placeholder="{{newUser.surname}}" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="newUser.surname"
                          class="input w-full h-12 lg:h-14" />
+                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-15" />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="surname?.touched && surname?.invalid">
                   <div *ngIf="surname?.errors?.['required'] ">Apelido Obrigatório</div>
                 </div>
               </div>
+
             </div>
             <div class="flex flex-wrap items-start justify-between mb-8">
-              <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
+              <div class="w-full lg:w-5/12 mb-8 ml-1/3 relative">
                 <app-input-title class="text-[2.6vh]">Email</app-input-title>
                 <div class="flex items-center">
                   <input required placeholder="{{newUser.email}}" type="text" id="email" formControlName="email" name="email" [(ngModel)]="newUser.email"
                          class="input w-full h-12 lg:h-14" />
+                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-15" />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="email?.touched && email?.invalid ">
                   <div *ngIf="email?.errors?.['required'] ">Email Obrigatório</div>
                   <div *ngIf="email?.errors?.['email']">Email Inválido</div>
                 </div>
               </div>
-              <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
+
+              <div class="w-full lg:w-5/12 mb-8 ml-1/3 relative">
                 <app-input-title class="text-[2.6vh]">Password</app-input-title>
                 <div class="flex items-center">
                   <input required placeholder="Introduza nova password" type="password" id="password" formControlName="password" name="password" [(ngModel)]="newUser.password"
                          class="input w-full h-12 lg:h-14" />
                   <app-tooltip [tooltipText]="'A password deverá ter letras maiúsculas, minúsculas, números e símbolos'"></app-tooltip>
+                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-15" />
                 </div>
 
                 <div class="text-red-500 font-bold py-2" *ngIf="password?.touched && password?.invalid && password?.errors?.['pattern']">
                   <div *ngIf="password?.errors?.['pattern'] ">Formato de Palavra-Passe inválido</div>
                 </div>
               </div>
+
             </div>
 
             <div *ngIf="role !='Municipal'" class="flex flex-wrap items-start justify-between mb-8">
-              <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
+              <div class="w-full lg:w-5/12 mb-8 ml-1/3 relative">
                 <app-input-title class="text-[2.6vh]">Morada</app-input-title>
                 <div class="flex items-center">
                   <input required placeholder="{{newUser.address}}" type="text" id="address" formControlName="address" name="address" [(ngModel)]="newUser.address"
                          class="input w-full h-12 lg:h-14" />
+                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="address?.touched && address?.invalid">
                   <div *ngIf="address?.errors?.['required'] ">Morada Obrigatório</div>
                 </div>
               </div>
-              <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4">
+
+              <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4 relative">
                 <app-input-title class="text-[2.6vh]">Código Postal</app-input-title>
                 <div class="flex gap-x-2 items-center">
                   <input required placeholder="{{newUser.postalCode1}}" type="text" id="postalCode1" formControlName="postalCode1" name="postalCode1" [(ngModel)]="newUser.postalCode1"
@@ -90,6 +99,7 @@
                   <div class="text-[2rem] font-semibold">-</div>
                   <input required placeholder="{{newUser.postalCode2}}" type="text" id="postalCode2" formControlName="postalCode2" name="postalCode2" [(ngModel)]="newUser.postalCode2"
                          class="input w-[8rem] text-center" />
+                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="(postalCode1?.touched && postalCode1?.invalid) || (postalCode2?.touched && postalCode2?.invalid) ">
                   <div *ngIf="postalCode1?.errors?.['required'] || postalCode2?.errors?.['required'] ">Código Postal Obrigatório</div>
@@ -97,10 +107,11 @@
                   <div *ngIf="postalCode2?.errors?.['pattern']">Segundo código inválido</div>
                 </div>
               </div>
+
             </div>
 
             <div *ngIf="role !='Municipal'" class="flex flex-wrap items-start justify-between mb-8">
-              <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
+              <div class="w-full lg:w-5/12 mb-8 ml-1/3 relative">
                 <app-input-title class="text-[2.6vh]">NIF</app-input-title>
                 <div class="h-24">
                   <div class="flex items-center">
@@ -108,29 +119,33 @@
                     </app-country-picker>
                   </div>
 
-                  <div class="text-red-500 font-bold relative bottom-[0.7rem] " *ngIf="country.touched && country?.invalid">
+                  <div class="text-red-500 font-bold relative bottom-[0.7rem]" *ngIf="country.touched && country?.invalid">
                     <div *ngIf="country?.errors?.['required']">País obrigatório</div>
                   </div>
                 </div>
                 <div class="flex items-center">
                   <input required placeholder="{{ newUser.nif.substring(2) }}" type="text" id="nif" formControlName="nif" name="nif"
                          class="input w-full h-12 lg:h-14 " />
+                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="nif?.touched && nif?.invalid">
                   <div *ngIf="nif?.errors?.['required']">Nif obrigatório</div>
                   <div *ngIf="nif?.errors?.['pattern']">Nif inválido</div>
                 </div>
               </div>
-              <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4">
+
+              <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4 relative">
                 <app-input-title class="text-[2.6vh]">Data de Nascimento</app-input-title>
                 <div class="flex items-center">
                   <input required placeholder="{{newUser.birthDate}}" type="date" id="birthDate" formControlName="birthDate" name="birthDate" [(ngModel)]="newUser.birthDate"
                          class="input w-full h-12 lg:h-14" />
+                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="birthDate?.touched && birthDate?.invalid">
                   <div *ngIf="birthDate?.errors?.['required'] ">Data de Nascimento Obrigatório</div>
                 </div>
               </div>
+
             </div>
             <div class="flex flex-wrap items-start justify-between mb-8">
               <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
@@ -154,34 +169,38 @@
             </div>
             <div class="flex justify-end">
               <button type="submit" [disabled]="passwordConfirmation?.invalid" class="relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank
-                      bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none
-                      hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out disabled:cursor-not-allowed">
+          bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 focus:outline-none
+          hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out"
+                      [attr.title]="passwordConfirmation?.invalid ? 'Confirme a sua password' : ''">
                 Atualizar Dados
                 <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
               </button>
             </div>
+
+            <div *ngIf="!editMode" class="absolute top-[16.3rem] right-[25rem] text-[1.063rem]">
+              <app-black-btn-icon-text altImage="editar munícipio"
+                                       image="/assets/images/icons/pencil-white.png"
+                                       (buttonClick)="toggleEditMode()">
+                Editar Munícipio
+              </app-black-btn-icon-text>
+            </div>
+            <div *ngIf="editMode" class="absolute top-[15.3rem] right-[25rem] text-[1.063rem]">
+              <app-black-btn-icon-text altImage="Cancelar"
+                                       image="/assets/images/icons/pencil-white.png"
+                                       (buttonClick)="cancelEditMode()">
+                Cancelar Edição
+              </app-black-btn-icon-text>
+            </div>
           </section>
+
         </div>
+
       </form>
+
     </div>
+
   </div>
-  </div>
-
-<app-footer />
-
-
-<!--<div *ngIf="user">
-  <h2>User Information</h2>
-  <ul>
-    <li *ngFor="let keyValuePair of getUserAttributes()">
-      <strong>{{ keyValuePair.key }}:</strong> {{ keyValuePair.value }}
-    </li>
-  </ul>
+  
 </div>
 
-<p>{{role}}</p>
-
-
-<div *ngIf="!user">
-  <p>No user information available.</p>
-</div>-->
+<app-footer />
