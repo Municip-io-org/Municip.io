@@ -75,29 +75,13 @@ namespace Municip.io.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DocumentRequests",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DocumentTemplateId = table.Column<int>(type: "int", nullable: false),
-                    CitizenId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DocumentRequests", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DocumentTemplates",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TextTemplate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
@@ -330,6 +314,30 @@ namespace Municip.io.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DocumentRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DocumentTemplateId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CitizenId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DocumentRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DocumentRequests_Citizens_CitizenId",
+                        column: x => x.CitizenId,
+                        principalTable: "Citizens",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CitizenEvent",
                 columns: table => new
                 {
@@ -401,6 +409,11 @@ namespace Municip.io.Server.Migrations
                 name: "IX_CitizenEvent_EventsId",
                 table: "CitizenEvent",
                 column: "EventsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DocumentRequests_CitizenId",
+                table: "DocumentRequests",
+                column: "CitizenId");
         }
 
         /// <inheritdoc />
@@ -449,10 +462,10 @@ namespace Municip.io.Server.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Citizens");
+                name: "Events");
 
             migrationBuilder.DropTable(
-                name: "Events");
+                name: "Citizens");
         }
     }
 }

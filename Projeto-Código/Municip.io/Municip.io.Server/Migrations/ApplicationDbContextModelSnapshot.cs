@@ -335,10 +335,16 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CitizenId");
 
                     b.ToTable("DocumentRequests");
                 });
@@ -350,6 +356,10 @@ namespace Municip.io.Server.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Municipality")
                         .IsRequired()
@@ -650,6 +660,17 @@ namespace Municip.io.Server.Migrations
                     b.HasOne("Municip.io.Server.Models.Citizen", null)
                         .WithMany("Browsers")
                         .HasForeignKey("CitizenId");
+                });
+
+            modelBuilder.Entity("Municip.io.Server.Models.DocumentRequest", b =>
+                {
+                    b.HasOne("Municip.io.Server.Models.Citizen", "Citizen")
+                        .WithMany()
+                        .HasForeignKey("CitizenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Citizen");
                 });
 
             modelBuilder.Entity("Municip.io.Server.Models.Citizen", b =>

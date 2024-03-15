@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DocumentsService, Document } from '../../services/documents.service';
 import { UserAuthService } from '../../services/user-auth.service';
+import { DocsService, RequestDocument } from '../../services/documents/docs.service';
 @Component({
   selector: 'app-approve-documents',
   templateUrl: './approve-documents.component.html',
@@ -8,14 +8,14 @@ import { UserAuthService } from '../../services/user-auth.service';
 })
 export class ApproveDocumentsComponent {
 
-  documents: Document[] = [];
+  documents: RequestDocument[] = [];
   municipalityImage: string = '';
   nameSearch: string = '';
   orderOptions: any[] = [{ label: 'Pedidos Antigos', value: true }, { label: 'Pedidos Recentes', value: false }];
   ascendingOrder: boolean = true;
 
-  constructor(private service: DocumentsService, private authService: UserAuthService) {
-    this.documents = this.service.documents;
+  constructor(private service: DocsService, private authService: UserAuthService) {
+    
   }
 
 
@@ -25,6 +25,18 @@ export class ApproveDocumentsComponent {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
           this.municipalityImage = municipality.landscapePhoto;
+
+         
+
+          this.service.getRequestsFromMunicipality(municipality.name).subscribe(
+            (res: RequestDocument[]) => {
+              this.documents = res;
+
+            },
+            error => {
+              console.error(error);
+            }
+          );
         });
       });
 
@@ -33,7 +45,7 @@ export class ApproveDocumentsComponent {
   }
 
   get filteredDocuments() {
-    return this.documents.filter(e => e.name.toLowerCase().includes(this.nameSearch.toLowerCase()));
+    return this.documents.filter(e => e.Name.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }
 
   toggleSortOrder() {
@@ -45,9 +57,9 @@ export class ApproveDocumentsComponent {
     //sort events by date
     this.documents.sort((a, b) => {
       if (this.ascendingOrder) {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
+        return new Date(a.Date).getTime() - new Date(b.Date).getTime();
       } else {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
+        return new Date(b.Date).getTime() - new Date(a.Date).getTime();
       }
     });
   }

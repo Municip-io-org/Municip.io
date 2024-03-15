@@ -18,7 +18,6 @@ namespace Municip.io.Server.Controllers
         }
         //create Document
         [HttpPost("CreateTemplate")]
-        [HttpPost]
         public async Task<IActionResult> CreateDocumentTemplateAsync(DocumentTemplate template)
         {
             
@@ -53,11 +52,17 @@ namespace Municip.io.Server.Controllers
 
         //create Document Request
         [HttpPost("CreateRequest")]
-        public async Task<IActionResult> CreateDocumentRequestAsync(DocumentRequest request)
+        public async Task<IActionResult> CreateDocumentRequestAsync(string email, DocumentRequest request)
         {
             if (ModelState.IsValid)
             {
                 Console.WriteLine(request);
+                var citizen = _context.Citizens.FirstOrDefault(c => c.Email == email);
+
+                if(citizen == null) return BadRequest(new { message = "O não existe nenhum cidadão", ModelState });
+
+
+                request.Citizen = citizen;
                 _context.DocumentRequests.Add(request);
                 await _context.SaveChangesAsync();
                 return Ok();
@@ -80,14 +85,19 @@ namespace Municip.io.Server.Controllers
         }
 
         //get requests from a citizen
-        public IActionResult GetRequestsFromCitizen(string citizen)
+        [HttpGet("GetRequestsFromCitizen")]
+        public IActionResult GetRequestsFromCitizen(string email)
         {
+            var citizen = _context.Citizens.FirstOrDefault(c => c.Email == email);
+
+            if (citizen == null) return BadRequest(new { message = "O não existe nenhum cidadão", ModelState });
+
             var requests = _context.DocumentRequests;
-            var citizenRequests = requests.Where(r => r.CitizenId == citizen);
+            var citizenRequests = requests.Where(r => r.Citizen.Email == email);
             return Json(citizenRequests);
         }
 
-
+        [HttpGet("GetTemplatesFromMunicipality")]
         public IActionResult GetTemplatesFromMunicipality(string municipality)
         {
             var templates = _context.DocumentTemplates;

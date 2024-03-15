@@ -27,6 +27,7 @@
         <div *ngIf="name?.errors?.['required'] ">Nome Obrigatório</div>
       </div>
     </div>
+
     <div class="w-full lg:w-5/12 mb-4 h-32">
       <app-input-title class="text-[2.6vh]">Tipo de documento</app-input-title>
       <div class="flex items-center">
@@ -55,8 +56,23 @@
         <div *ngIf="price?.errors?.['required'] ">Preço Obrigatório</div>
       </div>
     </div>
+    <div class="flex items-center justify-between ">
+      <div class="min-w-[20rem] lg:w-full mb-4 h-32">
+        <app-input-title class="text-[2.6vh]">Descrição</app-input-title>
+        <div class="flex items-center">
+          <textarea required placeholder="Insira a descrição do modelo de documento" id="description" formControlName="description" name="description"
+                    class="input w-full h-24 lg:h-28 "></textarea>
+        </div>
+        <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">
+          <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatória</div>
+        </div>
+      </div>
 
+    </div>
   </div>
+
+  
+
 
 
   <div class="w-64">
@@ -66,7 +82,7 @@
     </select>
 
 
-    <button class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="adicionarPropriedade()">Adicionar</button>
+    <button type="button" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="adicionarPropriedade()">Adicionar</button>
 
   </div>
 

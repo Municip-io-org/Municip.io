@@ -6,7 +6,7 @@ import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { EventsService, Event } from '../../services/events/events.service';
-import { DocsService } from '../../services/documents/docs.service';
+import { DocsService, Template } from '../../services/documents/docs.service';
 
 @Component({
   selector: 'app-create-template',
@@ -64,6 +64,7 @@ export class CreateTemplateComponent {
 
   templateForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
     price: new FormControl('', [Validators.required]),
     templatetext: new FormControl('', [Validators.required])
@@ -74,6 +75,10 @@ export class CreateTemplateComponent {
 
   get name() {
     return this.templateForm.get('name');
+  }
+
+  get description() {
+    return this.templateForm.get('description');
   }
 
   get type() {
@@ -93,6 +98,7 @@ OnSubmit() {
   if (this.templateForm.valid) {
     const template: Template = {
       Name: this.templateForm?.get('name')?.value || "",
+      Description: this.templateForm?.get('description')?.value || "",
       Type: this.templateForm?.get('type')?.value || "",
       Price: Number(this.templateForm?.get('price')?.value) || 0,
       TextTemplate: this.templateForm?.get('templatetext')?.value || '', // Provide a default value if FormControl value is null
@@ -127,10 +133,4 @@ OnSubmit() {
 
 }
 
-export interface Template  {
-  Name: string,
-    Type: string,
-      Price: number,
-        TextTemplate: string
-  Municipality: string
-}
+

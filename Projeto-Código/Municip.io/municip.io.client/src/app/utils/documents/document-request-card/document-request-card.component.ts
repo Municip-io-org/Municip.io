@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Document, DocumentType, StatusDocument } from '../../../services/documents.service';
+
+import { Template, StatusDocument } from '../../../services/documents/docs.service';
 
 @Component({
   selector: 'app-document-request-card',
@@ -8,14 +9,12 @@ import { Document, DocumentType, StatusDocument } from '../../../services/docume
 })
 export class DocumentRequestCardComponent {
 
-  @Input() document: Document = {
-    id: 0,
-    name: 'Sem Título',
-    subTitle: "Sem legenda",
-    type: DocumentType.Other,
-    status: StatusDocument.rejected,
-    date: new Date(),
-    municipality: "Sem Município",
-    RequestBy: "Sem Requerente"
+  @Input() template: Template = {
+      Name: 'Sem Título',
+      Description: "Sem legenda",
+      Type: "",
+      Municipality: "Sem Município",
+      Price: 0,
+      TextTemplate: ''
   }
 }

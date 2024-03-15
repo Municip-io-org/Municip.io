@@ -2,14 +2,14 @@
   <div class="flex flex-col space-y-10">
     <div>
       <h1 class="text-3xl font-roboto font-semibold text-municip-highlight-black">
-        {{document.name}}
+        {{document.Name}}
       </h1>
 
       <div class="flex items-center pt-5 space-x-3">
         <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
           <img src="your-image-url.jpg" alt="Document Type Icon" class="w-6 h-6">
         </div>
-        <p class="font-roboto font-extralight text-lg text-municip-highlight-black">{{document.RequestBy}}</p>
+        <p class="font-roboto font-extralight text-lg text-municip-highlight-black">{{document.Citizen.firstName}}</p>
       </div>
     </div>
 
@@ -18,12 +18,12 @@
 
   <div class="flex justify-between">
     <div class="flex flex-col w-fit space-y-2">
-      <p class="font-inter">Pedido a: {{document.date | date:'dd/MM/yy'}}</p>
+      <p class="font-inter">Pedido a: {{document.Date | date:'dd/MM/yy'}}</p>
       <div class="flex justify-center rounded-md bg-opacity-35 {{getStatusClass()}}">
-        <p class="font-inter font-semibold">{{document.status}}</p>
+        <p class="font-inter font-semibold">{{document.DocumentStatus}}</p>
 
       </div>
-      <div *ngIf="document.status == 'Pendente'" class="flex flex-wrap justify-center pt-5 space-x-10">
+      <div *ngIf="document.DocumentStatus == 'Pendente'" class="flex flex-wrap justify-center pt-5 space-x-10">
         <div class="relative h-10 w-[2.5rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl bg-green-500 border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-green-800 rounded text-lg transition duration-700 ease-in-out mr-2">
           <img alt="delete" src="/assets/images/icons/check-green (2).png" class="size-3" />
         </div>
