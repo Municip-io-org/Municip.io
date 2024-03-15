@@ -4,20 +4,25 @@
 
     <div class="flex items-baseline space-x-4">
       <h1 class="text-4xl font-roboto font-semibold text-municip-highlight-black">
-        {{document.name}} <span class="font-roboto font-normal text-lg pl-4">{{document.type}}</span>
+        {{template.name}} <span class="font-roboto font-normal text-lg pl-4">{{template.type}}</span>
       </h1>
     </div>
 
 
-     <h3 class="text-[1rem] font-inter font-bold">
-        {{document.subTitle}}
-     </h3>
-      
+    <h3 class="text-[1rem] font-inter font-bold">
+      {{template.description}}
+    </h3>
+
+    <h3 class="text-[1rem] font-inter font-bold">
+      {{template.price}}
+    </h3>
+
   </div>
   <div class="flex justify-between">
     <button type="button"
             class=" text-3xl text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 rounded-2xl w-[10rem] h-[9rem]
-        transition duration-300 hover:bg-black">
+        transition duration-300 hover:bg-black"
+            (click)="sendRequest()">
       Pedir
       <img src="assets/images/arrows/right-arrow.png" alt="Pedir documento" class="size-10" />
       

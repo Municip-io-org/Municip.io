@@ -104,9 +104,10 @@ import { MyDocumentsComponent } from './documents/my-documents/my-documents.comp
 import { DocumentCardComponent } from './utils/documents/document-card/document-card.component';
 import { DocumentRequestCardComponent } from './utils/documents/document-request-card/document-request-card.component';
 import { ApproveDocumentsComponent } from './documents/approve-documents/approve-documents.component';
-import { DocumentAproveCardComponent } from './utils/documents/document-aprove-card/document-aprove-card.component';
+
 import { DocumentApproveCardComponent } from './utils/documents/document-approve-card/document-approve-card.component';
 import { EventsmapComponent } from './maps/eventsmap/eventsmap.component';
+import { CreateTemplateComponent } from './documents/create-template/create-template.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -196,9 +197,9 @@ registerLocaleData(localePt, 'pt-PT');
     DocumentCardComponent,
     DocumentRequestCardComponent,
     ApproveDocumentsComponent,
-    DocumentAproveCardComponent,
     DocumentApproveCardComponent,
     EventsmapComponent,
+    CreateTemplateComponent,
     
   ],
   imports: [

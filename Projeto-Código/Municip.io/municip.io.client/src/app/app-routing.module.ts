@@ -45,6 +45,7 @@ import { AdminDashboardMunicipalAdminsComponent } from './administrator/admin-da
 import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
 import { AdministratorGuard } from './utils/guard/administrator.guard';
 import { ApproveDocumentsComponent } from './documents/approve-documents/approve-documents.component';
+import { CreateTemplateComponent } from './documents/create-template/create-template.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -91,6 +92,7 @@ const routes: Routes = [
   { path: 'documents/request', component: RequestDocumentComponent, data: {} },
   { path: 'documents/my', component: MyDocumentsComponent },
   { path: 'documents/approve', component: ApproveDocumentsComponent, data: {}, canActivate: [MunicipalAdminGuard] },
+  { path: 'documents/createtemplate', component: CreateTemplateComponent, data: {} }
 ];
 
 @NgModule({
