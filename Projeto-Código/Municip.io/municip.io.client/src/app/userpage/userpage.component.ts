@@ -27,6 +27,7 @@ export class UserpageComponent {
   constructor(private userAuthService: UserAuthService) { }
   user: any;
   role: string = "";
+ 
 
   ngOnInit() {
     
@@ -41,6 +42,7 @@ export class UserpageComponent {
             this.originalName = this.newUser.firstName;
             this.originalPhoto = this.newUser.photo;
             this.formatBirthDate();
+            
             this.userAuthService.getUserRole().subscribe(
               res => {
                 this.role = res.role;
@@ -64,6 +66,7 @@ export class UserpageComponent {
       }
     );
     this.profileEdit.disable();
+    this.initForm();
   }
 
   profileEdit = new FormGroup({
@@ -238,7 +241,7 @@ export class UserpageComponent {
       firstName: this.editedUser.firstName || '',
       surname: this.editedUser.surname || '',
       email: this.editedUser.email || '',
-      birthDate: this.editedUser.birthDate || '',
+      birthDate: this.newUser.birthDate || '',
       address: this.editedUser.address || '',
       country: this.editedUser.country || '',
       nif: this.editedUser.nif || '',
@@ -248,7 +251,7 @@ export class UserpageComponent {
       passwordConfirmation: ''
     });
 
-    
+    this.formatBirthDate();
     this.newUser.photo = this.originalPhoto; 
   }
 

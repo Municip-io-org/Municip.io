@@ -84,7 +84,7 @@
                 <div class="flex items-center">
                   <input required placeholder="{{newUser.address}}" type="text" id="address" formControlName="address" name="address" [(ngModel)]="newUser.address"
                          class="input w-full h-12 lg:h-14" />
-                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />
+                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-15" />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="address?.touched && address?.invalid">
                   <div *ngIf="address?.errors?.['required'] ">Morada Obrigatório</div>
@@ -99,7 +99,7 @@
                   <div class="text-[2rem] font-semibold">-</div>
                   <input required placeholder="{{newUser.postalCode2}}" type="text" id="postalCode2" formControlName="postalCode2" name="postalCode2" [(ngModel)]="newUser.postalCode2"
                          class="input w-[8rem] text-center" />
-                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />
+                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-3 top-14" />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="(postalCode1?.touched && postalCode1?.invalid) || (postalCode2?.touched && postalCode2?.invalid) ">
                   <div *ngIf="postalCode1?.errors?.['required'] || postalCode2?.errors?.['required'] ">Código Postal Obrigatório</div>
@@ -118,7 +118,7 @@
                     <app-country-picker [country]="country" class="w-[12rem] h-[4rem]">
                     </app-country-picker>
                   </div>
-
+                  
                   <div class="text-red-500 font-bold relative bottom-[0.7rem]" *ngIf="country.touched && country?.invalid">
                     <div *ngIf="country?.errors?.['required']">País obrigatório</div>
                   </div>
@@ -126,7 +126,7 @@
                 <div class="flex items-center">
                   <input required placeholder="{{ newUser.nif.substring(2) }}" type="text" id="nif" formControlName="nif" name="nif"
                          class="input w-full h-12 lg:h-14 " />
-                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />
+                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-8 top-15" />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="nif?.touched && nif?.invalid">
                   <div *ngIf="nif?.errors?.['required']">Nif obrigatório</div>
@@ -139,7 +139,7 @@
                 <div class="flex items-center">
                   <input required placeholder="{{newUser.birthDate}}" type="date" id="birthDate" formControlName="birthDate" name="birthDate" [(ngModel)]="newUser.birthDate"
                          class="input w-full h-12 lg:h-14" />
-                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />
+                  
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="birthDate?.touched && birthDate?.invalid">
                   <div *ngIf="birthDate?.errors?.['required'] ">Data de Nascimento Obrigatório</div>
@@ -182,7 +182,7 @@
                   Editar Munícipio
                 </app-black-btn-icon-text>
               </div>
-              <div *ngIf="editMode" class="absolute top-[15.3rem] right-[25rem] text-[1.063rem]">
+              <div *ngIf="editMode" class="absolute top-[16.3rem] right-[25rem] text-[1.063rem]">
                 <app-black-btn-icon-text altImage="Cancelar"
                                          image="/assets/images/icons/pencil-white.png"
                                          (buttonClick)="cancelEditMode()">
