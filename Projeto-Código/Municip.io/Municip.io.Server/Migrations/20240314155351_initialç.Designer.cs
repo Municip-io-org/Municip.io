@@ -12,8 +12,8 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240313221757_initial")]
-    partial class initial
+    [Migration("20240314155351_initialç")]
+    partial class initialç
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

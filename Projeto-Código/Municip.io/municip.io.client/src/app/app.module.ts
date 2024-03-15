@@ -106,6 +106,7 @@ import { DocumentRequestCardComponent } from './utils/documents/document-request
 import { ApproveDocumentsComponent } from './documents/approve-documents/approve-documents.component';
 import { DocumentAproveCardComponent } from './utils/documents/document-aprove-card/document-aprove-card.component';
 import { DocumentApproveCardComponent } from './utils/documents/document-approve-card/document-approve-card.component';
+import { EventsmapComponent } from './maps/eventsmap/eventsmap.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -197,6 +198,7 @@ registerLocaleData(localePt, 'pt-PT');
     ApproveDocumentsComponent,
     DocumentAproveCardComponent,
     DocumentApproveCardComponent,
+    EventsmapComponent,
     
   ],
   imports: [

@@ -43,4 +43,27 @@ const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${muni
     return this.http.get(apiUrl);
   }
 
+
+  getBoundsFromAddress(address: string): Observable<any> {
+    //get bounds from address
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDNwbIjZzCxVDfVZBvwpJ8WyX-DUb--44s`;
+    return this.http.get(apiUrl).pipe(
+      map((data: any) => {
+        if (data.status === 'ZERO_RESULTS') {
+          throw new Error('ERRO');
+        }
+        if (data.results && data.results.length > 0) {
+          const geometry = data.results[0].geometry;
+          if (geometry && geometry.location) {
+            const location = geometry.location;
+            return {
+              lat: location.lat,
+              lng: location.lng
+            };
+          }
+        }
+        throw new Error('Erro - não se obteve as bounds.');
+      })
+    );
+  }
 }
