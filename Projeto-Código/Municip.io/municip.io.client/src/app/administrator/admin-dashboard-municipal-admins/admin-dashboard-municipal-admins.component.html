@@ -12,8 +12,8 @@
   </div>
 </header>
 <app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
-                    [title]="'Gestão de Munícipes de ' + municipalName"
-                    [text]="'Efetue a gestão dos munícipes do ' + municipalName +' gerindo a presença dos mesmos na nossa aplicação'" />
+                    [title]="'Gestão de Administradores Municipais de ' + municipalName"
+                    [text]="'Efetue a gestão dos administradores municipais de ' + municipalName +' gerindo a presença dos mesmos na nossa aplicação'" />
 <ng-container *ngIf="isDialogOpen">
   <app-userinfodialog [user]="selectedUser" (close)="closeDialog()"></app-userinfodialog>
 </ng-container>
@@ -37,7 +37,7 @@
             <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
               <span class="fas fa-search"></span>
             </i>
-            <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por cidadão"
+            <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por administrador municipal"
                    class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300 hover:border-black">
           </div>
         </div>

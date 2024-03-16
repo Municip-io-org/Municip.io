@@ -117,5 +117,14 @@ namespace Municip.io.Server.Controllers
             return Json(municipalTemplates);
         }
 
+        [HttpGet("GetDistinctDocumentTypesFromMunicipality")]
+        public IActionResult GetDistinctDocumentTypesFromMunicipality(string municipality)
+        {
+            var templates = _context.DocumentTemplates;
+            var municipalTemplates = templates.Where(t => t.Municipality == municipality);
+            var distinctTypes = municipalTemplates.Select(t => t.Type).Distinct();
+            return Json(distinctTypes);
+        }
+
     }
 }
