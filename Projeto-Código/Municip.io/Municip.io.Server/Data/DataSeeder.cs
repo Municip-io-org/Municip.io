@@ -10,7 +10,7 @@ namespace ESTEvents.Data
         public static async Task SeedData(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             await SeedRoles(roleManager);
-            await SeedAdminUser(userManager);
+            await SeedAdminUser(userManager);        
         }
 
         private static async Task SeedRoles(RoleManager<IdentityRole> roleManager)

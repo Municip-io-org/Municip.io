@@ -20,12 +20,13 @@ namespace Municip.io.Server.Data
         public DbSet<Municipality> Municipalities { get; set; }
 
         public DbSet<Event> Events { get; set; }
+        public DbSet<AppFeature> AppFeatures { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
                 base(options)
             { }
    
-public DbSet<Municip.io.Server.Models.News> News { get; set; } = default!;
+        public DbSet<Municip.io.Server.Models.News> News { get; set; } = default!;
    
         }
 
