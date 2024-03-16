@@ -45,7 +45,7 @@ export class DocumentRequestCardComponent {
                 name: this.template.name,
                 citizen: user as Citizen,
                 municipality: this.template.municipality,
-                documentStatus: StatusDocument.pending,
+                status: StatusDocument.pending,
                 date: new Date(),
               };
 

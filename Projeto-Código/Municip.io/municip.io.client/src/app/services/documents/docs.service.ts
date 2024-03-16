@@ -64,16 +64,33 @@ export interface RequestDocument {
   name: string,
   citizen: Citizen,
   municipality: string,
-  documentStatus: StatusDocument,
+  status: StatusDocument,
   date: Date,
 }
 
  
 export enum StatusDocument {
-  pending = 'Pendente',
-  approved = 'Aprovado',
-  rejected = 'Rejeitado'
+  pending = 'Pending',
+  approved = 'Approved',
+  rejected = 'Rejeitado',
+  waitingForPayment = 'WaitingForPayment',
 }
+
+
+//create a to string for the enum
+export function statusToString(status: StatusDocument): string {
+  switch (status) {
+    case StatusDocument.pending:
+      return "Pendente";
+    case StatusDocument.approved:
+      return "Aprovado";
+    case StatusDocument.rejected:
+      return "Rejeitado";
+    case StatusDocument.waitingForPayment:
+      return "À espera de pagamento";
+  }
+}
+
 
 export enum DocumentType {
   Requirement = "Requerimento",
