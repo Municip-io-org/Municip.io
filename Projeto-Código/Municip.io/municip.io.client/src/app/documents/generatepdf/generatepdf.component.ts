@@ -59,7 +59,7 @@ export class GeneratepdfComponent implements OnInit {
 
     this.document = this.documentService.document || {
       name: '',
-      documentStatus: StatusDocument.pending,
+      status: StatusDocument.pending,
       date: new Date(),
       municipality: "",
       citizen: {

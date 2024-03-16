@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { StatusDocument, DocumentType, RequestDocument } from '../../../services/documents/docs.service';
+import { StatusDocument, DocumentType, RequestDocument, statusToString } from '../../../services/documents/docs.service';
 import { Router } from '@angular/router';
 import { DocsDataService } from '../../../documents/docs-data.service';
 
@@ -11,30 +11,30 @@ import { DocsDataService } from '../../../documents/docs-data.service';
 })
 export class DocumentCardComponent {
   @Input() document: RequestDocument = {
-      name: 'Certeficado De Residência',
-      documentStatus: StatusDocument.rejected,
-      date: new Date(),
-      municipality: "",
-      citizen: {
-          firstName: '',
-          surname: '',
-          email: '',
-          password: '',
-          nif: '',
-          gender: '',
-          municipality: '',
-          address: '',
-          postalCode1: '',
-          postalCode2: '',
-          birthDate: new Date
-      },
+    name: 'Certeficado De Residência',
+    status: StatusDocument.rejected,
+    date: new Date(),
+    municipality: "",
+    citizen: {
+      firstName: '',
+      surname: '',
+      email: '',
+      password: '',
+      nif: '',
+      gender: '',
+      municipality: '',
+      address: '',
+      postalCode1: '',
+      postalCode2: '',
+      birthDate: new Date
+    },
     documentTemplate: {
-        name: 'Sem Título',
-        description: 'Sem descrição',
-        type: 'Sem Tipo',
-        price: 0,
-        textTemplate: 'Sem template',
-        municipality: 'Sem município'
+      name: 'Sem Título',
+      description: 'Sem descrição',
+      type: 'Sem Tipo',
+      price: 0,
+      textTemplate: 'Sem template',
+      municipality: 'Sem município'
     }
   }
 
@@ -46,14 +46,21 @@ export class DocumentCardComponent {
 
   //quero dar um estilo diferente para cada status
   getStatusClass(): string {
-    if (this.document.documentStatus === StatusDocument.approved) {
+
+    if (this.document.status === StatusDocument.approved) {
       return 'bg-[#08BC25] text-[#1D8702]';
-    } else if (this.document.documentStatus === StatusDocument.pending) {
+    } else if (this.document.status === StatusDocument.pending) {
       return 'bg-[#F4A42C] text-[#9B4F08]';
     } else {
       return 'bg-[#FF0000] text-[#B02121]';
     }
   }
+
+
+  getStatusString(): string {
+    return statusToString(this.document.status);
+  }
+
 
   generatePDF() {
     this.documentService.document = this.document;

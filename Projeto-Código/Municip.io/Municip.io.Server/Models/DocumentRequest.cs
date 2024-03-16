@@ -1,4 +1,7 @@
-﻿namespace Municip.io.Server.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
+namespace Municip.io.Server.Models
 {
     public class DocumentRequest
     {
@@ -11,6 +14,7 @@
 
         public string? Municipality { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public DocumentStatus Status { get; set; }
 
         public DateTime Date { get; set; }

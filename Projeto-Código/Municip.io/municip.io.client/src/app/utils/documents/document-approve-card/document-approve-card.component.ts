@@ -11,7 +11,7 @@ export class DocumentApproveCardComponent {
   @Input() document: RequestDocument = {
       id: 0,
       name: 'Certeficado De Residência',
-      documentStatus: StatusDocument.rejected,
+      status: StatusDocument.rejected,
       date: new Date(),
       municipality: "",
       citizen: {
@@ -39,9 +39,9 @@ export class DocumentApproveCardComponent {
 
   //quero dar um estilo diferente para cada status
   getStatusClass(): string {
-    if (this.document.documentStatus === StatusDocument.approved) {
+    if (this.document.status === StatusDocument.approved) {
       return 'bg-[#08BC25] text-[#1D8702]';
-    } else if (this.document.documentStatus === StatusDocument.pending) {
+    } else if (this.document.status=== StatusDocument.pending) {
       return 'bg-[#F4A42C] text-[#9B4F08]';
     } else {
       return 'bg-[#FF0000] text-[#B02121]';
