@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppFeaturesService {
 
+  appFeatures: AppFeature[] = [];
   constructor(private http: HttpClient) { }
 
   /**
@@ -15,7 +16,17 @@ export class AppFeaturesService {
   * @returns Observable of app features of municipality.
   */
   getAppFeaturesByMunicipality(municipalityName: string): Observable<AppFeature[]> {
-    return this.http.get<AppFeature[]>(`api/appFeature/GetAppFeatures?municipalityName=${municipalityName}`);
+    if (this.appFeatures.length === 0) {
+
+      return this.http.get<AppFeature[]>(`api/appFeature/GetAppFeatures?municipalityName=${municipalityName}`).pipe(
+        tap((features: AppFeature[]) => {
+          this.appFeatures = features; 
+        })
+      );
+    } else {
+      console.log("BUSCAR FEATURES EM CACHE")
+      return of(this.appFeatures);
+    }
   }
 
   /**
@@ -23,8 +34,7 @@ export class AppFeaturesService {
    * @param appFeatures Array of appFeatures to change.
    * @returns Observable of app features modified.
    */
-  updateAppFeatures(appFeatures: AppFeature[]) {
-    
+  updateAppFeatures(appFeatures: AppFeature[]): Observable<AppFeature[]> {
     const appFeaturesToSubmit: AppFeatureToSubmit[] = appFeatures.map(feature => {
       return {
         id: feature.id,
@@ -33,7 +43,11 @@ export class AppFeaturesService {
         municipality: feature.municipality
       };
     });
-    return this.http.put<AppFeature[]>('api/appFeature/UpdateAppFeatures', appFeaturesToSubmit);
+    return this.http.put<AppFeature[]>('api/appFeature/UpdateAppFeatures', appFeaturesToSubmit).pipe(
+      tap(() => {
+        this.appFeatures = appFeatures;
+      })
+    );
   }
 
   // Função para mapear as strings de categoria para enum
