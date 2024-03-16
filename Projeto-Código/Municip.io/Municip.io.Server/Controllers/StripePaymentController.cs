@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Municip.io.Server.Models;
 using Stripe;
 using Stripe.Checkout;
@@ -11,10 +12,21 @@ namespace Municip.io.Server.Controllers
     [ApiController]
     public class StripePaymentController : ControllerBase
     {
+
+        private readonly IOptions<StripeModel> appSettings;
+
+        public StripePaymentController(IOptions<StripeModel> app)
+        {
+            appSettings = app;
+
+            StripeConfiguration.ApiKey = appSettings.Value.SecretKey;
+        }
+
+
         [HttpPost]
         public ActionResult Create([FromBody] string email)
         {
-            StripeConfiguration.ApiKey = "sk_test_51OuXzxP2EBv6AKDvatVzGyyqukIMntPmnsT67WMRWkzgbNluAoxnlH4okVTPXKRtriLWUiWJS2EuWNxGiifuV79700Vbj1wZUi";
+            //StripeConfiguration.ApiKey = "sk_test_51OuXzxP2EBv6AKDvatVzGyyqukIMntPmnsT67WMRWkzgbNluAoxnlH4okVTPXKRtriLWUiWJS2EuWNxGiifuV79700Vbj1wZUi";
             var domain = "http://localhost:4242";
             var options = new SessionCreateOptions
             {
@@ -23,14 +35,14 @@ namespace Municip.io.Server.Controllers
                     new SessionLineItemOptions
                     {
 
-                        Price =  "price_1OuZ0eP2EBv6AKDvsLRT6YlD",
+                        Price =  "price_1OuvBoP2EBv6AKDvIVRFmIzl",
                         Quantity = 1,
                     },
                 },
                 Mode = "payment",
                 SuccessUrl = domain + "/success.html",
                 CancelUrl = domain + "/cancel.html",
-                
+
                 //associate the session with the user
                 CustomerEmail = email,
 
@@ -45,20 +57,40 @@ namespace Municip.io.Server.Controllers
 
 
 
-        //check if the payment was successful
-        [HttpPost("verify")]
-        public ActionResult Verify(string pi)
+        [HttpPost("createPriceProduct")]
+        public ActionResult CreatePrice()
         {
-            StripeConfiguration.ApiKey = "sk_test_51OuXzxP2EBv6AKDvatVzGyyqukIMntPmnsT67WMRWkzgbNluAoxnlH4okVTPXKRtriLWUiWJS2EuWNxGiifuV79700Vbj1wZUi";
-            var service = new PaymentIntentService();
-            var paymentIntent = service.Get(pi);
+            //StripeConfiguration.ApiKey = "sk_test_51OuXzxP2EBv6AKDvatVzGyyqukIMntPmnsT67WMRWkzgbNluAoxnlH4okVTPXKRtriLWUiWJS2EuWNxGiifuV79700Vbj1wZUi";
 
-            return Content(JsonSerializer.Serialize(paymentIntent.Status), "application/json");
+            // Create a product
+            var options = new ProductCreateOptions
+            {
+                Name = "Requerimento",
+                Images = new List<string> { "https://example.com/t-shirt.png" },
+                Description = "Municip.io Documento"
+            };
+            var service = new ProductService();
+            var newProduct = service.Create(options);
 
+
+
+
+            // Create a price of the product
+            var optionsPrice = new PriceCreateOptions
+            {
+                Currency = "eur",
+                UnitAmount = 1000,
+                Product = newProduct.Id,
+            };
+            var servicePrice = new PriceService();
+            servicePrice.Create(optionsPrice);
+
+
+            return Ok(newProduct.Id);
         }
 
 
-       
+
     }
 
 
