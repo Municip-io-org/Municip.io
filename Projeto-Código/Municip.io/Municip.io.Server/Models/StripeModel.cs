@@ -4,5 +4,7 @@
     {
         public string SecretKey { get; set; }
 
+        public string WebHookSecret { get; set; }
+
     }
 }

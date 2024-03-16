@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Municip.io.Server.Models;
+using Org.BouncyCastle.Bcpg.OpenPgp;
 using Stripe;
 using Stripe.Checkout;
 using System.Text.Json;
@@ -23,11 +24,18 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult Create(string email)
+        //criar o produto e preco
+        // criar a sessao
+        //enviar o email com sessão
+       //    [HttpPost("Payment")]
+        
+
+
+        [HttpPost("CreateSession")]
+        public ActionResult Create(string email, string successUrl, string cancelUrl, string priceId)
         {
-          
-            var domain = "http://localhost:4242";
+
+
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>
@@ -35,14 +43,14 @@ namespace Municip.io.Server.Controllers
                     new SessionLineItemOptions
                     {
 
-                        Price =  "price_1Ouv3HP2EBv6AKDvvIk6Nonk",
+                        Price =  priceId,
                         Quantity = 1,
                     },
                 },
                 Mode = "payment",
-                SuccessUrl = domain + "/success.html",
-                CancelUrl = domain + "/cancel.html",
-
+                SuccessUrl = successUrl,
+                CancelUrl = cancelUrl,
+                ExpiresAt = DateTime.Now.AddDays(1),
                 //associate the session with the user
                 CustomerEmail = email,
 
@@ -56,16 +64,16 @@ namespace Municip.io.Server.Controllers
 
 
         [HttpPost("createPriceProduct")]
-        public ActionResult CreatePrice()
+        public ActionResult CreatePrice(string name, string description, string image, int amount)
         {
-         
+
 
             // Create a product
             var options = new ProductCreateOptions
             {
-                Name = "Requerimento",
-                Images = new List<string> { "https://example.com/t-shirt.png" },
-                Description = "Municip.io Documento"
+                Name = name,
+                Images = new List<string> { image },
+                Description = description
             };
             var service = new ProductService();
             var newProduct = service.Create(options);
@@ -77,15 +85,57 @@ namespace Municip.io.Server.Controllers
             var optionsPrice = new PriceCreateOptions
             {
                 Currency = "eur",
-                UnitAmount = 1000,
+                UnitAmount = amount,
                 Product = newProduct.Id,
             };
             var servicePrice = new PriceService();
-            servicePrice.Create(optionsPrice);
+            var price = servicePrice.Create(optionsPrice);
 
 
-            return Ok(newProduct.Id);
+            return Ok(price.Id);
         }
+
+
+        //arquivar um price e um product
+        [HttpPost("archivePriceProduct")]
+        public ActionResult ArchivePrice(string priceId)
+        {
+            try
+            {
+                //get price
+                var priceService = new PriceService();
+                var price = priceService.Get(priceId);
+
+                string productId = price.ProductId;
+
+
+                //archive product
+                var productService = new ProductService();
+                var optionsProduct = new ProductUpdateOptions
+                {
+                    Active = false,
+                };
+                productService.Update(productId, optionsProduct);
+
+                //archive price
+                var optionsPrice = new PriceUpdateOptions
+                {
+                    Active = false,
+                };
+                priceService.Update(priceId, optionsPrice);
+
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            return Ok();
+
+        }
+
+
+
 
 
         //send email 
@@ -93,7 +143,7 @@ namespace Municip.io.Server.Controllers
         public IActionResult SendPayment(string email, string name, string url, string amount)
         {
             EmailSender.SendEmailPayment(email, "Pagamento de Documento", name, "Por favor, realize o pagamento para a emissão do documento.", "root/html/PaymentEmail.html", url, amount);
-            return Ok("Success");
+            return Ok();
         }
 
 

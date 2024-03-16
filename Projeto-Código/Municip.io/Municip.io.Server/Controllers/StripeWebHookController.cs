@@ -5,13 +5,27 @@ using System;
 using System.IO;
 
 using Stripe.Checkout;
+using Microsoft.Extensions.Options;
+using Municip.io.Server.Models;
 namespace Municip.io.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class StripeWebHookController : ControllerBase
     {
-        const string endpointSecret = "whsec_604da9682838b3059bdcf61fc84de1b923f84f15e3d2841fe1c89c609ce66448";
+
+
+        private string endpointSecret;
+
+        private readonly IOptions<StripeModel> appSettings;
+
+        public StripeWebHookController(IOptions<StripeModel> app)
+        {
+            appSettings = app;
+
+            endpointSecret = appSettings.Value.WebHookSecret;
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Index()
@@ -52,6 +66,14 @@ namespace Municip.io.Server.Controllers
 
         private void FulfillOrder(StripeList<LineItem> lineItems)
         {
+            var item = lineItems.Data[0];
+            var price = item.Price;
+            var product = price.Product;
+            
+
+            var stripePayment = new StripePaymentController(appSettings);
+            stripePayment.ArchivePrice(price.Id);
+
 
             Console.WriteLine(lineItems);
         }
