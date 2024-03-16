@@ -8,12 +8,12 @@ import { Citizen } from '../citizen-auth.service';
   providedIn: 'root'
 })
 export class DocsService {
- 
 
-  constructor(private http : HttpClient) { }
+
+  constructor(private http: HttpClient) { }
 
   //get all documents
-  getTemplatesFromMunicipality(municipality : string): Observable<DocumentTemplate[]> {
+  getTemplatesFromMunicipality(municipality: string): Observable<DocumentTemplate[]> {
     const params = { municipality: municipality };
     return this.http.get<DocumentTemplate[]>('api/documents/GetTemplatesFromMunicipality', { params: params });
   }
@@ -43,12 +43,21 @@ export class DocsService {
   createRequest(email: string, documentRequest: RequestDocument): Observable<any> {
     let params = new HttpParams()
       .set('email', email.toString())
-      
-      
 
 
-    
+
+
+
     return this.http.post<any>('api/documents/CreateRequest', documentRequest, { params: params });
+  }
+
+
+
+  //create payment
+  createPayment(email: string, documentRequest: RequestDocument) {
+    //criar o produto e preco
+    // criar a sessao
+    //enviar o email com sessão
   }
 
 }
@@ -61,13 +70,14 @@ export interface RequestDocument {
   municipality: string,
   status: StatusDocument,
   date: Date,
+  paymentUrl?: string,
 }
 
- 
+
 export enum StatusDocument {
   pending = 'Pending',
   approved = 'Approved',
-  rejected = 'Rejeitado',
+  rejected = 'Rejected',
   waitingForPayment = 'WaitingForPayment',
 }
 
@@ -82,7 +92,7 @@ export function statusToString(status: StatusDocument): string {
     case StatusDocument.rejected:
       return "Rejeitado";
     case StatusDocument.waitingForPayment:
-      return "À espera de pagamento";
+      return "Por Pagar";
   }
 }
 

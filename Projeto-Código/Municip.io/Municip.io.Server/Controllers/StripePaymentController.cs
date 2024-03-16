@@ -24,10 +24,6 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        //criar o produto e preco
-        // criar a sessao
-        //enviar o email com sessão
-       //    [HttpPost("Payment")]
         
 
 

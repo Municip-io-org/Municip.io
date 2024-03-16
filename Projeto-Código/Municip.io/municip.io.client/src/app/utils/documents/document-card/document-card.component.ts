@@ -41,7 +41,10 @@ export class DocumentCardComponent {
   constructor(private router: Router, private documentService: DocsDataService) { }
 
   ngOnInit() {
-    console.log(this.document)
+
+
+
+
   }
 
   //quero dar um estilo diferente para cada status
@@ -49,7 +52,7 @@ export class DocumentCardComponent {
 
     if (this.document.status === StatusDocument.approved) {
       return 'bg-[#08BC25] text-[#1D8702]';
-    } else if (this.document.status === StatusDocument.pending) {
+    } else if (this.document.status === StatusDocument.pending || this.document.status === StatusDocument.waitingForPayment) {
       return 'bg-[#F4A42C] text-[#9B4F08]';
     } else {
       return 'bg-[#FF0000] text-[#B02121]';
@@ -57,8 +60,12 @@ export class DocumentCardComponent {
   }
 
 
-  getStatusString(): string {
-    return statusToString(this.document.status);
+  getStatusString(status: StatusDocument): string {
+    return statusToString(status)
+  }
+
+  StatusDocument() {
+    return StatusDocument;
   }
 
 
@@ -67,6 +74,12 @@ export class DocumentCardComponent {
 
     this.router.navigate(['/documents/generate-pdf']);
 
+  }
+
+
+  //criar um método para ir para O URL
+  goToPayment() {
+    window.open(this.document.paymentUrl, '_blank');
   }
 
 }

@@ -16,16 +16,22 @@
     <div class="flex flex-col w-fit space-y-2">
       <p class="font-inter">Pedido em: {{ document.date | date:'dd/MM/yy' }}</p>
       <div class="flex justify-center rounded-md bg-opacity-35 {{ getStatusClass() }}">
-        <p class="font-inter font-semibold">{{ getStatusString() }}</p>
+        <p class="font-inter font-semibold">{{ getStatusString(this.document.status) }}</p>
       </div>
     </div>
   </div>
   <div class="flex items-center">
-    <button (click)="generatePDF()" class="flex items-center justify-center h-12 rounded-full bg-municip-blue text-white px-4 transition duration-300 ease-in-out hover:bg-blue-700 hover:text-gray-200">
+    <button *ngIf="this.document.status === StatusDocument().waitingForPayment" (click)="goToPayment()" class="flex items-center justify-center h-12 rounded-full bg-municip-blue text-white px-4 transition duration-300 ease-in-out hover:bg-blue-700 hover:text-gray-200">
+      <span class="font-inter font-semibold text-sm">Realizar Pagamento</span>
+    
+    </button>
+    <button *ngIf="this.document.status === StatusDocument().approved" (click)="generatePDF()" class="flex items-center justify-center h-12 rounded-full bg-municip-blue text-white px-4 transition duration-300 ease-in-out hover:bg-blue-700 hover:text-gray-200">
       <span class="font-inter font-semibold text-sm">Transferir PDF</span>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3M6 4v16a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2z" />
       </svg>
     </button>
+
+
   </div>
 </div>

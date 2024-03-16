@@ -56,7 +56,7 @@ namespace Municip.io.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                Console.WriteLine(request);
+                
                 var  citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
                 
 
@@ -64,13 +64,13 @@ namespace Municip.io.Server.Controllers
 
                
                 var documentTemplate = await _context.DocumentTemplates.FirstOrDefaultAsync(c => c.Id == request.DocumentTemplate.Id);
-                Console.WriteLine(documentTemplate.Name + "FUI À BDDD");
+                
 
                 if (documentTemplate == null) return BadRequest(new { message = "Não foi encontrado nenhum modelo de documento", ModelState });
                 
                 request.Citizen = citizen;
                 request.DocumentTemplate = documentTemplate;
-                Console.WriteLine(request.DocumentTemplate.Name + "AQUIUIQUAIQUIAUQIAUQIU");
+               
                 
                 _context.DocumentRequests.Add(request);
                 await _context.SaveChangesAsync();
