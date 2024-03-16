@@ -18,6 +18,11 @@ export class DocsService {
     return this.http.get<DocumentTemplate[]>('api/documents/GetTemplatesFromMunicipality', { params: params });
   }
 
+  GetDistinctDocumentTypesFromMunicipality(municipality : string): Observable<string[]> {
+  console.log(municipality+'dasd');
+    return this.http.get<string[]>(`api/documents/GetDistinctDocumentTypesFromMunicipality?municipality=${municipality}`);
+  }
+
   //get all request documents
   getRequestsFromMunicipality(municipality: string): Observable<RequestDocument[]> {
     const params = { municipality: municipality };
