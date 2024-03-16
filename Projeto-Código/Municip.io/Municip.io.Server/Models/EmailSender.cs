@@ -1,25 +1,21 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
-
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MimeKit;
 
 namespace Municip.io.Server.Models
 {
-   
+
     public class EmailSender
     {
-        
-        public static void SendEmail(string email, string subject, string destinyName, string messageText, string filePath)
+
+        public static void SendEmail(string email, string subject, string destinyName, string messageText, BodyBuilder bodyBuilder)
         {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Municip.io Team", "iomunicip@gmail.com"));
             message.To.Add(new MailboxAddress("", email));
             message.Subject = subject;
 
-            var bodyBuilder = new BodyBuilder();
-
-
-            bodyBuilder.HtmlBody = System.IO.File.ReadAllText(filePath).Replace("{{destinyName}}", destinyName).Replace("{{message}}", messageText);
 
 
 
@@ -33,6 +29,24 @@ namespace Municip.io.Server.Models
                 client.Disconnect(true);
             }
         }
+
+        public static void SendEmailAproveDeny(string email, string subject, string destinyName, string messageText, string filePath)
+        {
+            var bodyBuilder = new BodyBuilder();
+            bodyBuilder.HtmlBody = System.IO.File.ReadAllText(filePath).Replace("{{destinyName}}", destinyName).Replace("{{message}}", messageText);
+
+            SendEmail(email, subject, destinyName, messageText, bodyBuilder);
+        }
+
+        public static void SendEmailPayment(string email, string subject, string destinyName, string messageText, string filePath, string url, string amount)
+        {
+            var bodyBuilder = new BodyBuilder();
+            bodyBuilder.HtmlBody = System.IO.File.ReadAllText(filePath).Replace("{{destinyName}}", destinyName).Replace("{{message}}", messageText).
+                Replace("{{urlButton}}", url).Replace("{{amount}}", amount);
+
+            SendEmail(email, subject, destinyName, messageText, bodyBuilder);
+        }
+
     }
 
 

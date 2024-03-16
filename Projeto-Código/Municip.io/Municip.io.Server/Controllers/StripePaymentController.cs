@@ -24,7 +24,7 @@ namespace Municip.io.Server.Controllers
 
 
         [HttpPost]
-        public ActionResult Create([FromBody] string email)
+        public ActionResult Create(string email)
         {
           
             var domain = "http://localhost:4242";
@@ -35,7 +35,7 @@ namespace Municip.io.Server.Controllers
                     new SessionLineItemOptions
                     {
 
-                        Price =  "price_1OuvBoP2EBv6AKDvIVRFmIzl",
+                        Price =  "price_1Ouv3HP2EBv6AKDvvIk6Nonk",
                         Quantity = 1,
                     },
                 },
@@ -50,9 +50,7 @@ namespace Municip.io.Server.Controllers
             var service = new SessionService();
             Session session = service.Create(options);
 
-            var json = JsonSerializer.Serialize(session.Url);
-
-            return Content(json, "application/json");
+            return Ok(session.Url);
         }
 
 
@@ -87,6 +85,15 @@ namespace Municip.io.Server.Controllers
 
 
             return Ok(newProduct.Id);
+        }
+
+
+        //send email 
+        [HttpPost("SendPayment")]
+        public IActionResult SendPayment(string email, string name, string url, string amount)
+        {
+            EmailSender.SendEmailPayment(email, "Pagamento de Documento", name, "Por favor, realize o pagamento para a emissão do documento.", "root/html/PaymentEmail.html", url, amount);
+            return Ok("Success");
         }
 
 
