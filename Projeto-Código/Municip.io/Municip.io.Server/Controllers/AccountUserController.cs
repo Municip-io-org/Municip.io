@@ -334,10 +334,16 @@ namespace Municip.io.Server.Controllers
             {
                 return Json(await _context.MunicipalAdministrators.Where(m => m.Email == email).FirstOrDefaultAsync());
             }
-            else {
-              return Json(await _userManager.FindByEmailAsync(email));
+            else
+            {
+                var user = await _userManager.FindByEmailAsync(email);
+
+                if (user != null)
+                {
+                    return Json(user);
+                }
+                return NotFound(new { Message = "Não existe nenhum utilizador com esse email." });
             }
-            return BadRequest(new { Message = "Não existe nenhum utilizador com esse email." });
         }
 
         [HttpGet("InfoMunicipality")]

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Municip.io.Server.Models;
+using System.Reflection.Metadata;
 
 namespace Municip.io.Server.Data
 {
@@ -9,7 +10,9 @@ namespace Municip.io.Server.Data
         public class ApplicationDbContext : IdentityDbContext<IdentityUser>
         {
 
-            
+       public DbSet<DocumentTemplate> DocumentTemplates { get; set; }
+
+        public DbSet<DocumentRequest> DocumentRequests { get; set; }
         public DbSet<Citizen> Citizens { get; set; }
 
         public DbSet<MunicipalAdministrator> MunicipalAdministrators { get; set; }
@@ -24,7 +27,6 @@ namespace Municip.io.Server.Data
    
 public DbSet<Municip.io.Server.Models.News> News { get; set; } = default!;
    
-public DbSet<Municip.io.Server.Models.Document> Document { get; set; } = default!;
         }
 
 
