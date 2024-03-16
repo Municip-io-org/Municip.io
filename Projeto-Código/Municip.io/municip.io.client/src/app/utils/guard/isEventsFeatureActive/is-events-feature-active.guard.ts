@@ -7,15 +7,15 @@ import { AppFeaturesService } from '../../../services/appFeatures/app-features.s
   providedIn: 'root'
 })
 
-export class IsDocumentFeatureActive implements CanActivate {
+export class IsEventsFeatureActive implements CanActivate {
 
   constructor(private appFeaturesService: AppFeaturesService, private router: Router) { }
 
   async canActivate(): Promise<boolean> {
     try {
-      const isEnabled = await this.appFeaturesService.appFeatures.find(a => a.appFeatureCategory == "Documents")?.isEnabled;
+      const isEnabled = await this.appFeaturesService.appFeatures.find(a => a.appFeatureCategory == "Events")?.isEnabled;
       if (isEnabled) {
-        return true; 
+        return true;
       } else {
 
         this.router.navigateByUrl("/accessDenied");
@@ -23,7 +23,7 @@ export class IsDocumentFeatureActive implements CanActivate {
       }
     } catch (error) {
       console.error('Erro ao verificar a funcionalidade:', error);
-      return false; 
+      return false;
     }
   }
 }
