@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StatusDocument, DocumentType, RequestDocument } from '../../../services/documents/docs.service';
+import { Router } from '@angular/router';
+import { DocsDataService } from '../../../documents/docs-data.service';
 
 
 @Component({
@@ -36,6 +38,8 @@ export class DocumentCardComponent {
     }
   }
 
+  constructor(private router: Router, private documentService: DocsDataService) { }
+
   ngOnInit() {
     console.log(this.document)
   }
@@ -51,5 +55,11 @@ export class DocumentCardComponent {
     }
   }
 
+  generatePDF() {
+    this.documentService.document = this.document;
+
+    this.router.navigate(['/documents/generate-pdf']);
+
+  }
 
 }

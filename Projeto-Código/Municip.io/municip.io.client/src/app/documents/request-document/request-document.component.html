@@ -39,8 +39,8 @@
   </div>
 
 
-  <app-card-outline-theme *ngIf="filteredDocuments.length > 0">
-    <section class="flex flex-col justify-around gap-y-16 px-20 pt-16 pb-5">
+  <div *ngIf="filteredDocuments.length > 0">
+    <section class="flex flex-col justify-around gap-y-16 bx-20 bt-16 bb-5">
 
       <ng-container *ngFor="let document of filteredDocuments">
 
@@ -48,7 +48,7 @@
 
       </ng-container>
     </section>
-  </app-card-outline-theme>
+  </div>
 </div>
 
 
