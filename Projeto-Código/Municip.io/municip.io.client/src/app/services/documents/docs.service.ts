@@ -8,18 +8,18 @@ import { Citizen } from '../citizen-auth.service';
   providedIn: 'root'
 })
 export class DocsService {
- 
 
-  constructor(private http : HttpClient) { }
+
+  constructor(private http: HttpClient) { }
 
   //get all documents
-  getTemplatesFromMunicipality(municipality : string): Observable<DocumentTemplate[]> {
+  getTemplatesFromMunicipality(municipality: string): Observable<DocumentTemplate[]> {
     const params = { municipality: municipality };
     return this.http.get<DocumentTemplate[]>('api/documents/GetTemplatesFromMunicipality', { params: params });
   }
 
-  GetDistinctDocumentTypesFromMunicipality(municipality : string): Observable<string[]> {
-  console.log(municipality+'dasd');
+  GetDistinctDocumentTypesFromMunicipality(municipality: string): Observable<string[]> {
+    console.log(municipality + 'dasd');
     return this.http.get<string[]>(`api/documents/GetDistinctDocumentTypesFromMunicipality?municipality=${municipality}`);
   }
 
@@ -48,11 +48,11 @@ export class DocsService {
   createRequest(email: string, documentRequest: RequestDocument): Observable<any> {
     let params = new HttpParams()
       .set('email', email.toString())
-      
-      
 
 
-    
+
+
+
     return this.http.post<any>('api/documents/CreateRequest', documentRequest, { params: params });
   }
 
@@ -66,9 +66,10 @@ export interface RequestDocument {
   municipality: string,
   status: StatusDocument,
   date: Date,
+  payUrl?: string
 }
 
- 
+
 export enum StatusDocument {
   pending = 'Pending',
   approved = 'Approved',
@@ -100,11 +101,17 @@ export enum DocumentType {
 }
 
 export interface DocumentTemplate {
+  id?: number,
   name: string,
   description: string,
   type: string,
   price: number,
   textTemplate: string
-  municipality: string
+  municipality: string,
+  status?: DocumentTemplateStatus,
 }
 
+export enum DocumentTemplateStatus {
+  active = 'Active',
+  inactive = 'Inactive'
+}

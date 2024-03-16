@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { StatusDocument, DocumentType, RequestDocument, statusToString } from '../../../services/documents/docs.service';
+import { StatusDocument, DocumentType, RequestDocument, statusToString, DocumentTemplateStatus } from '../../../services/documents/docs.service';
 import { Router } from '@angular/router';
 import { DocsDataService } from '../../../documents/docs-data.service';
 
@@ -34,7 +34,8 @@ export class DocumentCardComponent {
       type: 'Sem Tipo',
       price: 0,
       textTemplate: 'Sem template',
-      municipality: 'Sem município'
+      municipality: 'Sem município',
+      status: DocumentTemplateStatus.active
     }
   }
 
@@ -68,5 +69,8 @@ export class DocumentCardComponent {
     this.router.navigate(['/documents/generate-pdf']);
 
   }
+
+
+
 
 }

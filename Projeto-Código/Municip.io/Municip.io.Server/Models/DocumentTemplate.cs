@@ -18,5 +18,7 @@ namespace Municip.io.Server.Models
 
         public string Municipality { get; set; }
 
+        public DocumentTemplateStatus Status { get; set; }
+
     }
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { RequestDocument, StatusDocument } from '../../../services/documents/docs.service';
+import { DocumentTemplateStatus, RequestDocument, StatusDocument } from '../../../services/documents/docs.service';
 
 
 @Component({
@@ -33,7 +33,8 @@ export class DocumentApproveCardComponent {
       type: 'Sem Tipo',
       price: 0,
       textTemplate: 'Sem template',
-      municipality: 'Sem município'
+      municipality: 'Sem município',
+      status: DocumentTemplateStatus.active
     }
   }
 

@@ -8,4 +8,10 @@
         WaitingForPayment,
 
     }
+
+    public enum DocumentTemplateStatus
+    {
+        Active,
+        Inactive
+    }
 }

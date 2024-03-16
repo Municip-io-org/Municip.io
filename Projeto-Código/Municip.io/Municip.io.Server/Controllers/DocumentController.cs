@@ -24,6 +24,7 @@ namespace Municip.io.Server.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    template.Status = DocumentTemplateStatus.Active;
                     Console.WriteLine(template);
                     _context.DocumentTemplates.Add(template);
 

@@ -372,6 +372,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<string>("TextTemplate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
