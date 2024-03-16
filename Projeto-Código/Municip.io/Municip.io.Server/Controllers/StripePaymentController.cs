@@ -26,7 +26,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost]
         public ActionResult Create([FromBody] string email)
         {
-            //StripeConfiguration.ApiKey = "sk_test_51OuXzxP2EBv6AKDvatVzGyyqukIMntPmnsT67WMRWkzgbNluAoxnlH4okVTPXKRtriLWUiWJS2EuWNxGiifuV79700Vbj1wZUi";
+          
             var domain = "http://localhost:4242";
             var options = new SessionCreateOptions
             {
@@ -60,7 +60,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("createPriceProduct")]
         public ActionResult CreatePrice()
         {
-            //StripeConfiguration.ApiKey = "sk_test_51OuXzxP2EBv6AKDvatVzGyyqukIMntPmnsT67WMRWkzgbNluAoxnlH4okVTPXKRtriLWUiWJS2EuWNxGiifuV79700Vbj1wZUi";
+         
 
             // Create a product
             var options = new ProductCreateOptions
