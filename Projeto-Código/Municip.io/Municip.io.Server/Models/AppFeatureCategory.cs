@@ -15,15 +15,15 @@
             switch (me)
             {
                 case AppFeatureCategory.Documents:
-                    return "Documentos";
+                    return "Documents";
                 case AppFeatureCategory.Events:
-                    return "Eventos";
+                    return "Events";
                 case AppFeatureCategory.News:
-                    return "Notícias";
+                    return "News";
                 case AppFeatureCategory.Transports:
-                    return "Transportes";
+                    return "Transports";
                 default:
-                    return "Desconhecido";
+                    return "Unknown";
             }
         }
     }

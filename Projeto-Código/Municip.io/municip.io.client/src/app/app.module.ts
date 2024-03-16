@@ -109,6 +109,7 @@ import { DocumentApproveCardComponent } from './utils/documents/document-approve
 import { EventsmapComponent } from './maps/eventsmap/eventsmap.component';
 import { CreateTemplateComponent } from './documents/create-template/create-template.component';
 import { GeneratepdfComponent } from './documents/generatepdf/generatepdf.component';
+import { ManageAppFeaturesComponent } from './munadministrator/manage-app-features/manage-app-features.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -202,6 +203,7 @@ registerLocaleData(localePt, 'pt-PT');
     EventsmapComponent,
     CreateTemplateComponent,
     GeneratepdfComponent,
+    ManageAppFeaturesComponent,
     
   ],
   imports: [
