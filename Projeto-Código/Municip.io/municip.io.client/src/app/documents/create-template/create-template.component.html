@@ -56,18 +56,15 @@
         <div *ngIf="price?.errors?.['required'] ">Preço Obrigatório</div>
       </div>
     </div>
-    <div class="flex items-center justify-between ">
-      <div class="min-w-[20rem] lg:w-full mb-4 h-32">
-        <app-input-title class="text-[2.6vh]">Descrição</app-input-title>
-        <div class="flex items-center">
-          <textarea required placeholder="Insira a descrição do modelo de documento" id="description" formControlName="description" name="description"
-                    class="input w-full h-24 lg:h-28 "></textarea>
-        </div>
-        <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">
-          <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatória</div>
-        </div>
+    <div class="w-full lg:w-5/12 mb-4 h-32">
+      <app-input-title class="text-[2.6vh]">Descrição</app-input-title>
+      <div class="flex items-center">
+        <textarea required placeholder="Insira a descrição do modelo de documento" id="description" formControlName="description" name="description"
+                  class="input w-full h-24 lg:h-28"></textarea> 
       </div>
-
+      <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">
+        <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatória</div>
+      </div>
     </div>
   </div>
 
@@ -78,8 +75,9 @@
   <div class="w-64">
     <label for="propriedade" class="block text-sm font-medium text-gray-700">Adicione uma propriedade ao modelo:</label>
     <select id="propriedade" class="mt-1 block w-full pl-3 pr-10 py-2 bg-white border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-      <option *ngFor="let propriedade of propriedades" [value]="propriedade.toLowerCase()">{{ propriedade }}</option>
+      <option *ngFor="let propriedade of propriedades" [value]="propriedade.value">{{ propriedade.name }}</option>
     </select>
+
 
 
     <button type="button" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="adicionarPropriedade()">Adicionar</button>
@@ -107,7 +105,7 @@
     <div class="flex flex-1 justify-end ">
       <app-btn-municip-blue [disabled]="!templateForm.valid" buttonClass="disabled:!cursor-not-allowed"
                             type="submit">
-        Criar Evento
+        Criar Modelo
         <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
       </app-btn-municip-blue>
     </div>

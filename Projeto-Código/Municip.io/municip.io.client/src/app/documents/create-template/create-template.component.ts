@@ -17,7 +17,18 @@ export class CreateTemplateComponent {
 
   municipalityImage: string = "";
   municipalityName: string = "";
-  propriedades: string[] = ["Primeiro Nome", "Apelido", "Email","Password","Nif","Género","Município","Endereço","CodigoPostal1","CodigoPostal2","DataNascimento"];
+  propriedades: { name: string, value: string }[] = [
+    { name: "Primeiro Nome", value: "firstName" },
+    { name: "Apelido", value: "surname" },
+    { name: "Email", value: "email" },
+    { name: "NIF", value: "nif" },
+    { name: "Género", value: "gender" },
+    { name: "Município", value: "municipality" },
+    { name: "Endereço", value: "address" },
+    { name: "Codigo Postal (CP4)", value: "postalCode1" },
+    { name: "Codigo Postal (CP3)", value: "postalCode2" },
+    { name: "Data Nascimento", value: "birthDate" }
+  ];
 
 
   error: string | null = null;
@@ -121,8 +132,12 @@ OnSubmit() {
   adicionarPropriedade() {
     const propriedadeSelecionada = (document.getElementById('propriedade') as HTMLSelectElement).value;
     const textArea = (document.getElementById('templatetext') as HTMLTextAreaElement);
-    textArea.value += `[ ${propriedadeSelecionada} ]`;
+    const propriedadeReal = this.propriedades.find(prop => prop.value === propriedadeSelecionada);
+    if (propriedadeReal) {
+      textArea.value += `[${propriedadeReal.value}]`;
+    }
   }
+
 
 
 
