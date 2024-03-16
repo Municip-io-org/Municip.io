@@ -3,6 +3,7 @@ import { NewsService } from '../../services/news/news.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-news-edit',
@@ -18,14 +19,20 @@ export class NewsEditComponent {
   subtitleCharacterCount = 0;
   mainTextCharacterCount = 0;
   isDialogOpen: boolean = false;
-
+  editor = new Editor();
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
   constructor(private newsService: NewsService, private activatedRoute: ActivatedRoute,private router :Router, private userAuthService: UserAuthService) { }
 
-  ngOnInit() {
-    this.news = this.activatedRoute.snapshot.data['news'];
-    console.log("EVENTO SELECIONADO");
-
-  }
+  
 
   newsEditForm = new FormGroup({
     title: new FormControl("", [Validators.required]),
@@ -35,6 +42,15 @@ export class NewsEditComponent {
     date: new FormControl(new Date(), [Validators.required]),
   });
 
+  ngOnInit() {
+    this.editor = new Editor();
+    this.news = this.activatedRoute.snapshot.data['news'];
+    console.log("EVENTO SELECIONADO");
+    this.newsEditForm.controls['title'].setValue(this.news.title);
+    this.newsEditForm.controls['subtitle'].setValue(this.news.subtitle);
+    this.newsEditForm.controls['date'].setValue(this.news.date);
+    this.newsEditForm.controls['mainText'].setValue(this.news.mainText);
+  }
 
   get title() {
     return this.newsEditForm.get('title');
@@ -70,6 +86,10 @@ export class NewsEditComponent {
         this.errors = error.error;
       }
     );
+  }
+
+  ngDestroy() {
+    this.editor.destroy();
   }
 
 

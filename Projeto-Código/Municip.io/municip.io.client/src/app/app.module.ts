@@ -109,6 +109,7 @@ import { DocumentApproveCardComponent } from './utils/documents/document-approve
 import { EventsmapComponent } from './maps/eventsmap/eventsmap.component';
 import { CreateTemplateComponent } from './documents/create-template/create-template.component';
 import { GeneratepdfComponent } from './documents/generatepdf/generatepdf.component';
+import { NgxEditorModule} from 'ngx-editor';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -203,8 +204,10 @@ registerLocaleData(localePt, 'pt-PT');
     CreateTemplateComponent,
     GeneratepdfComponent,
     
+    
   ],
   imports: [
+    NgxEditorModule,
     BrowserModule, HttpClientModule,
     AppRoutingModule, BrowserAnimationsModule,
     FormsModule,
