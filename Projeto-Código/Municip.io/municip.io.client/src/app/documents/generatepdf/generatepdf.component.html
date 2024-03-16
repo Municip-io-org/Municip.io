@@ -16,7 +16,7 @@
           </svg>
         </button>
         <br />
-        <div class="mx-auto border-black overflow-hidden border-solid border-4 min-h-[50rem] max-w-[40rem]" style="line-height: 1.9;">
+        <div class="mx-auto border-black overflow-hidden border-solid border-4 min-h-[50rem] max-w-[40rem]" style="line-height: 1.9; box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.5);">
           <div id="contentToConvert" class="p-16">
             <div class="flex items-center justify-between mb-8 px-3">
               <div>
@@ -24,7 +24,7 @@
                 <span>Data</span>:  {{ document?.date | date:'dd-MM-yyyy' }}<br />
               </div>
               <div class="text-right">
-                <!--<img [src]="municipalityInfo?.emblemPhoto" style="width: 70px; height: 70px;" />-->
+                <img [src]="municipalityInfo.emblemPhoto" style="width: 70px; height: 70px;" />
               </div>
             </div>
 
@@ -62,3 +62,5 @@
     </div>
   </div>
 </div>
+
+

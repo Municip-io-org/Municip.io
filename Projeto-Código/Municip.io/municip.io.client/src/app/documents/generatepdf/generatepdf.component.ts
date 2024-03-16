@@ -91,21 +91,10 @@ export class GeneratepdfComponent implements OnInit {
 
       this.userAuthService.getInfoMunicipality(documentCopy.municipality).subscribe(async municipality => {
         this.municipalityInfo = municipality;
-
-
-
         this.replacedText = this.replaceProperties(documentCopy.citizen);
+        this.documentService.emblemPhoto = this.municipalityInfo.emblemPhoto;
 
-        if (municipality != null) {
-
-
-
-          //setTimeout(async () => {
-          //  await this.downloadPDFAndNavigate();
-          //}, 1000); 
-
-
-        }
+     
 
       });
     }
@@ -139,10 +128,10 @@ export class GeneratepdfComponent implements OnInit {
 
   async downloadPDFAndNavigate(): Promise<void> {
     const data = document.getElementById('contentToConvert');
-    if (data) {
-      const canvas = await html2canvas(data, { scale: 2 }); 
 
-      await this.documentService.downloadPDF(canvas, 'new-file.pdf');
+    if (data) {
+      const canvas = await html2canvas(data, { scale: 2 });
+      await this.documentService.downloadPDF(canvas, this.document?.name+'_'+this.document?.citizen.firstName+this.document?.citizen.surname);
     } else {
       console.error('Sem conteúdo.');
     }
