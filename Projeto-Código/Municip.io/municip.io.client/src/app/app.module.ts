@@ -108,6 +108,7 @@ import { ApproveDocumentsComponent } from './documents/approve-documents/approve
 import { DocumentApproveCardComponent } from './utils/documents/document-approve-card/document-approve-card.component';
 import { EventsmapComponent } from './maps/eventsmap/eventsmap.component';
 import { CreateTemplateComponent } from './documents/create-template/create-template.component';
+import { GeneratepdfComponent } from './documents/generatepdf/generatepdf.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -200,6 +201,7 @@ registerLocaleData(localePt, 'pt-PT');
     DocumentApproveCardComponent,
     EventsmapComponent,
     CreateTemplateComponent,
+    GeneratepdfComponent,
     
   ],
   imports: [

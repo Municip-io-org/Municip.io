@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Municip.io.Server.Data;
 
@@ -12,11 +11,9 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240314155351_initialç")]
-    partial class initialç
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,7 +314,42 @@ namespace Municip.io.Server.Migrations
                     b.ToTable("Citizens");
                 });
 
-            modelBuilder.Entity("Municip.io.Server.Models.Document", b =>
+            modelBuilder.Entity("Municip.io.Server.Models.DocumentRequest", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<Guid?>("CitizenId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DocumentTemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Municipality")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CitizenId");
+
+                    b.HasIndex("DocumentTemplateId");
+
+                    b.ToTable("DocumentRequests");
+                });
+
+            modelBuilder.Entity("Municip.io.Server.Models.DocumentTemplate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -325,26 +357,32 @@ namespace Municip.io.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Municipality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RequestBy")
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<string>("TextTemplate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Document");
+                    b.ToTable("DocumentTemplates");
                 });
 
             modelBuilder.Entity("Municip.io.Server.Models.Event", b =>
@@ -622,6 +660,21 @@ namespace Municip.io.Server.Migrations
                     b.HasOne("Municip.io.Server.Models.Citizen", null)
                         .WithMany("Browsers")
                         .HasForeignKey("CitizenId");
+                });
+
+            modelBuilder.Entity("Municip.io.Server.Models.DocumentRequest", b =>
+                {
+                    b.HasOne("Municip.io.Server.Models.Citizen", "Citizen")
+                        .WithMany()
+                        .HasForeignKey("CitizenId");
+
+                    b.HasOne("Municip.io.Server.Models.DocumentTemplate", "DocumentTemplate")
+                        .WithMany()
+                        .HasForeignKey("DocumentTemplateId");
+
+                    b.Navigation("Citizen");
+
+                    b.Navigation("DocumentTemplate");
                 });
 
             modelBuilder.Entity("Municip.io.Server.Models.Citizen", b =>

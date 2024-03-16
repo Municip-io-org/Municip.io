@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Municip.io.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class initialç : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,20 +75,21 @@ namespace Municip.io.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Document",
+                name: "DocumentTemplates",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RequestBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TextTemplate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Document", x => x.Id);
+                    table.PrimaryKey("PK_DocumentTemplates", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -313,6 +314,34 @@ namespace Municip.io.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DocumentRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DocumentTemplateId = table.Column<int>(type: "int", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CitizenId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DocumentRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DocumentRequests_Citizens_CitizenId",
+                        column: x => x.CitizenId,
+                        principalTable: "Citizens",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_DocumentRequests_DocumentTemplates_DocumentTemplateId",
+                        column: x => x.DocumentTemplateId,
+                        principalTable: "DocumentTemplates",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CitizenEvent",
                 columns: table => new
                 {
@@ -384,6 +413,16 @@ namespace Municip.io.Server.Migrations
                 name: "IX_CitizenEvent_EventsId",
                 table: "CitizenEvent",
                 column: "EventsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DocumentRequests_CitizenId",
+                table: "DocumentRequests",
+                column: "CitizenId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DocumentRequests_DocumentTemplateId",
+                table: "DocumentRequests",
+                column: "DocumentTemplateId");
         }
 
         /// <inheritdoc />
@@ -411,7 +450,7 @@ namespace Municip.io.Server.Migrations
                 name: "CitizenEvent");
 
             migrationBuilder.DropTable(
-                name: "Document");
+                name: "DocumentRequests");
 
             migrationBuilder.DropTable(
                 name: "MunicipalAdministrators");
@@ -429,10 +468,13 @@ namespace Municip.io.Server.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Events");
+
+            migrationBuilder.DropTable(
                 name: "Citizens");
 
             migrationBuilder.DropTable(
-                name: "Events");
+                name: "DocumentTemplates");
         }
     }
 }
