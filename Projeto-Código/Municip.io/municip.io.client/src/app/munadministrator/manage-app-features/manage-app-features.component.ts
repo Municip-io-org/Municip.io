@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AppFeature, AppFeaturesService, AppFeatureCategory } from '../../services/appFeatures/app-features.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-manage-app-features',
   templateUrl: './manage-app-features.component.html',
