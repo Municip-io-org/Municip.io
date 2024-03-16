@@ -37,7 +37,8 @@ namespace Municip.io.Server.Controllers
                 {
                     Id = e.Id,
                     AppFeatureCategory = e.AppFeatureCategory.toString(),
-                    IsEnabled = e.IsEnabled
+                    IsEnabled = e.IsEnabled,
+                    Municipality = e.Municipality
                 })
                 .ToList();
 

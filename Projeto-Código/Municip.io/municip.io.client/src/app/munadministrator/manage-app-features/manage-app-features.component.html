@@ -1,1 +1,73 @@
-<p>manage-app-features works!</p>
+<app-header-loggedin />
+
+
+<app-smaller-banner title="Alterar Funcionalidades"
+                    image={{municipality.landscapePhoto}}></app-smaller-banner>
+
+
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-message (confirm)="closeDialog()" title="Sucesso" message="Operação realizada com sucesso"
+                      [isConfirm]=true></app-dialog-message>
+</ng-container>
+
+<div class="relative flex flex-col bg-municip-blank pt-[3rem] pb-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
+  <div class="text-[1.8rem] ">
+    Clique nos botões para ativar/desativar as funcionalidades que deseja utilizar
+  </div>
+
+
+  <form [formGroup]="appFeatureEditForm" (ngSubmit)="onSubmit()" class="pt-[1rem] relative flex flex-col pb-[5rem]">
+
+
+    <section class="flex text-left justify-around mb-4">
+
+      <div>
+        Documentos
+        <input type="checkbox" formControlName="documents" id="documents" name="documents">
+
+      </div>
+
+      <div>
+        Eventos
+        <input type="checkbox" formControlName="events" id="events" name="events">
+
+      </div>
+
+      <div>
+        Notícias
+        <input type="checkbox" formControlName="news" id="news" name="news">
+
+      </div>
+
+      <div>
+        Transportes
+        <input type="checkbox" formControlName="transports" id="transports" name="transports">
+
+      </div>
+
+
+
+    </section>
+
+
+
+
+
+    <button type="submit" [disabled]="!appFeatureEditForm.valid"
+            class="absolute -bottom-[0rem] right-[2rem] h-auto w-[15rem] flex justify-center
+            items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue
+            to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600
+            rounded text-lg transition duration-700 ease-in-out">
+      Gravar Alterações
+      <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+    </button>
+
+  </form>
+
+
+
+</div>
+
+
+
+<app-footer />

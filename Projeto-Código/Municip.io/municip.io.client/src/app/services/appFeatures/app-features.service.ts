@@ -19,27 +19,36 @@ export class AppFeaturesService {
   }
 
   /**
-  * Update app features of municipality.
-  * @param appFeatures Array of appFeatures to change.
-  * @returns Observable of app features modified.
-  */
-  updateAppFeatures(appFeatures: AppFeature[]): Observable<AppFeature[]> {
-    return this.http.get<AppFeature[]>(`api/appFeature/UpdateAppFeatures?appFeatures=${appFeatures}`);
+   * Update app features of municipality.
+   * @param appFeatures Array of appFeatures to change.
+   * @returns Observable of app features modified.
+   */
+  updateAppFeatures(appFeatures: AppFeature[]) {
+    
+    const appFeaturesToSubmit: AppFeatureToSubmit[] = appFeatures.map(feature => {
+      return {
+        id: feature.id,
+        appFeatureCategory: this.mapCategoryStringToNumber(feature.appFeatureCategory),
+        isEnabled: feature.isEnabled,
+        municipality: feature.municipality
+      };
+    });
+    return this.http.put<AppFeature[]>('api/appFeature/UpdateAppFeatures', appFeaturesToSubmit);
   }
 
   // Função para mapear as strings de categoria para enum
-  mapCategoryStringToEnum(categoryString: string): AppFeatureCategory {
+  mapCategoryStringToNumber(categoryString: string): number {
     switch (categoryString) {
       case 'Documents':
-        return AppFeatureCategory.Documents;
+        return 0;
       case 'Events':
-        return AppFeatureCategory.Events;
+        return 1;
       case 'News':
-        return AppFeatureCategory.News;
+        return 2;
       case 'Transports':
-        return AppFeatureCategory.Transports;
+        return 3;
       default:
-        return AppFeatureCategory.Unknown;
+        return -1;
     }
   }
 }
@@ -49,6 +58,13 @@ export interface AppFeature {
    appFeatureCategory : AppFeatureCategory,
    isEnabled : boolean,
    municipality : string,
+}
+
+ interface AppFeatureToSubmit {
+  id: number,
+  appFeatureCategory: number,
+  isEnabled: boolean,
+  municipality: string,
 }
 
 export enum AppFeatureCategory {

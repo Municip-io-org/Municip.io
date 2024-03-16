@@ -47,6 +47,7 @@ import { AdministratorGuard } from './utils/guard/administrator.guard';
 import { ApproveDocumentsComponent } from './documents/approve-documents/approve-documents.component';
 import { CreateTemplateComponent } from './documents/create-template/create-template.component';
 import { GeneratepdfComponent } from './documents/generatepdf/generatepdf.component';
+import { ManageAppFeaturesComponent } from './munadministrator/manage-app-features/manage-app-features.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -69,6 +70,7 @@ const routes: Routes = [
   { path: 'transports', component: TransportsMainComponent, data: {} },
   { path: 'transports/schedules', component: SchedulesComponent, data: {} },
   { path: 'munadmin-dashboard', component: MunAdmindashboardComponent, data: {}, canActivate: [MunicipalAdminGuard] },
+  { path: 'manageAppFeatures', component: ManageAppFeaturesComponent, data: {} },
   { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} },
   { path: 'transports/stops', component: StopsPageComponent, data: {} },
   { path: 'transports/stops/:selectedStop', component: StopsPageComponent, data: {} },
@@ -94,7 +96,8 @@ const routes: Routes = [
   { path: 'documents/my', component: MyDocumentsComponent },
   { path: 'documents/approve', component: ApproveDocumentsComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'documents/createtemplate', component: CreateTemplateComponent, data: {} },
-  {path : 'documents/generate-pdf', component: GeneratepdfComponent, data: {}}
+  { path: 'documents/generate-pdf', component: GeneratepdfComponent, data: {} },
+
 ];
 
 @NgModule({
