@@ -90,10 +90,10 @@ namespace Municip.io.Server.Controllers
         public IActionResult GetRequestsFromMunicipality(string municipality)
         {
             var requests = _context.DocumentRequests;
-            var municipalRequests = requests.Where(r => r.Municipality == municipality);
+            var municipalRequests = requests.Include(r => r.Citizen).Include(r => r.DocumentTemplate).Where(r => r.Municipality == municipality);
             return Json(municipalRequests);
         }
-
+        
         //get requests from a citizen
         [HttpGet("GetRequestsFromCitizen")]
         public IActionResult GetRequestsFromCitizen(string email)
@@ -125,6 +125,45 @@ namespace Municip.io.Server.Controllers
             var distinctTypes = municipalTemplates.Select(t => t.Type).Distinct();
             return Json(distinctTypes);
         }
+
+        //change status to approved
+        [HttpPost("ApproveRequest")]
+        public async Task<IActionResult> ApproveRequest(int id)
+        {
+            var request = await _context.DocumentRequests.FirstOrDefaultAsync(r => r.Id == id);
+            if (request == null) return BadRequest(new { message = "Não foi encontrado nenhum pedido", ModelState });
+
+            request.Status = DocumentStatus.Approved;
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        //change status to waiting for payment
+        [HttpPost("WaitingForPayment")] 
+        public async Task<IActionResult> WaitingForPayment(int id)
+        {
+            var request = await _context.DocumentRequests.FirstOrDefaultAsync(r => r.Id == id);
+            if (request == null) return BadRequest(new { message = "Não foi encontrado nenhum pedido", ModelState });
+
+            request.Status = DocumentStatus.WaitingForPayment;
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        //change status to rejected
+        [HttpPost("RejectRequest")]
+        public async Task<IActionResult> RejectRequest(int id)
+        {
+            var request = await _context.DocumentRequests.FirstOrDefaultAsync(r => r.Id == id);
+            if (request == null) return BadRequest(new { message = "Não foi encontrado nenhum pedido", ModelState });
+
+            request.Status = DocumentStatus.Rejected;
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        
+        
 
     }
 }
