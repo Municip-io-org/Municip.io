@@ -42,6 +42,38 @@ namespace Municip.io.Server.Controllers
 
         }
 
+
+        //edit template 
+        [HttpPost("EditTemplate")]
+        public async Task<IActionResult> EditDocumentTemplateAsync(DocumentTemplate template)
+        {
+            if (ModelState.IsValid)
+            {
+                var templateToEdit = await _context.DocumentTemplates.FirstOrDefaultAsync(t => t.Id == template.Id);
+                if (templateToEdit == null) return BadRequest(new { message = "Não foi encontrado nenhum modelo de documento", ModelState });
+
+
+                templateToEdit.Name = template.Name;
+                templateToEdit.Description = template.Description;
+                templateToEdit.Type = template.Type;
+                templateToEdit.TextTemplate = template.TextTemplate;
+                templateToEdit.Price = template.Price;
+
+
+
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(new { message = "Template inválido", ModelState });
+            }
+        }
+
+
+
+
+
         //get documents from a municipality
         [HttpGet("GetDocuments")]
         public IActionResult GetDocuments(string municipality)

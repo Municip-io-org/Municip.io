@@ -48,6 +48,7 @@ import { ApproveDocumentsComponent } from './documents/approve-documents/approve
 import { CreateTemplateComponent } from './documents/create-template/create-template.component';
 import { GeneratepdfComponent } from './documents/generatepdf/generatepdf.component';
 import { TemplateListComponent } from './documents/template-list/template-list.component';
+import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -95,6 +96,7 @@ const routes: Routes = [
   { path: 'documents/my', component: MyDocumentsComponent },
   { path: 'documents/approve', component: ApproveDocumentsComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'documents/createtemplate', component: CreateTemplateComponent, data: {} },
+  {path: 'documents/edit-template/:templateId', component: EditTemplateComponent, data: {} },
   { path: 'documents/generate-pdf', component: GeneratepdfComponent, data: {} },
   { path: 'documents/template-list', component: TemplateListComponent }
 ];

@@ -63,16 +63,20 @@
 
               </td>
 
-              <td class="px-5 py-5 ">
-                <button *ngIf="d.status === DocumentTemplateStatus().inactive" (click)="activeDocument(d); $event.stopPropagation()" class="bg-green-500 text-white px-3 py-1 rounded-md mr-2">
+              <td class="px-5 py-5 space-x-2">
+                <button (click)="editDocument(d); $event.stopPropagation()" class="bg-municip-blue text-white px-3 py-1 rounded-md">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button *ngIf="d.status === DocumentTemplateStatus().inactive" (click)="activeDocument(d); $event.stopPropagation()" class="bg-green-500 text-white px-3 py-1 rounded-md">
                   <i class="fas fa-check"></i>
                 </button>
-                <button *ngIf="d.status === DocumentTemplateStatus().active" (click)="desactiveDocument(d); $event.stopPropagation()" class="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2">
+                <button *ngIf="d.status === DocumentTemplateStatus().active" (click)="desactiveDocument(d); $event.stopPropagation()" class="bg-yellow-500 text-white px-3 py-1 rounded-md">
                   <i class="fas fa-lock"></i>
                 </button>
                 <button (click)="deleteDocument(d); $event.stopPropagation()" class="bg-red-500 text-white px-3 py-1 rounded-md">
                   <i class="fas fa-trash-alt"></i>
                 </button>
+
               </td>
             </tr>
           </tbody>

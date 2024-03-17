@@ -110,6 +110,7 @@ import { EventsmapComponent } from './maps/eventsmap/eventsmap.component';
 import { CreateTemplateComponent } from './documents/create-template/create-template.component';
 import { GeneratepdfComponent } from './documents/generatepdf/generatepdf.component';
 import { TemplateListComponent } from './documents/template-list/template-list.component';
+import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -204,6 +205,7 @@ registerLocaleData(localePt, 'pt-PT');
     CreateTemplateComponent,
     GeneratepdfComponent,
     TemplateListComponent,
+    EditTemplateComponent,
     
   ],
   imports: [
