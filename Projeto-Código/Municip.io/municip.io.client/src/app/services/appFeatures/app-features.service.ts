@@ -16,14 +16,17 @@ export class AppFeaturesService {
   * @returns Observable of app features of municipality.
   */
   getAppFeaturesByMunicipality(municipalityName: string): Observable<AppFeature[]> {
+    console.log(this.appFeatures)
     if (this.appFeatures.length === 0) {
 
       return this.http.get<AppFeature[]>(`api/appFeature/GetAppFeatures?municipalityName=${municipalityName}`).pipe(
         tap((features: AppFeature[]) => {
-          this.appFeatures = features; 
+          this.appFeatures = features;
+
         })
       );
     } else {
+      
       console.log("BUSCAR FEATURES EM CACHE")
       return of(this.appFeatures);
     }
