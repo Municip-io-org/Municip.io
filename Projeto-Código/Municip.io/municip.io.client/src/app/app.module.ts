@@ -109,6 +109,12 @@ import { DocumentApproveCardComponent } from './utils/documents/document-approve
 import { EventsmapComponent } from './maps/eventsmap/eventsmap.component';
 import { CreateTemplateComponent } from './documents/create-template/create-template.component';
 import { GeneratepdfComponent } from './documents/generatepdf/generatepdf.component';
+import { NgxEditorModule} from 'ngx-editor';
+import { ManageAppFeaturesComponent } from './munadministrator/manage-app-features/manage-app-features.component';
+import { CheckboxModule } from 'primeng/checkbox';
+import { FileDragDropDirective } from './directives/fileDragDrop/file-drag-drop.directive';
+import { TemplateListComponent } from './documents/template-list/template-list.component';
+import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -202,9 +208,14 @@ registerLocaleData(localePt, 'pt-PT');
     EventsmapComponent,
     CreateTemplateComponent,
     GeneratepdfComponent,
+    ManageAppFeaturesComponent,
+    FileDragDropDirective,
+    TemplateListComponent,
+    EditTemplateComponent,
     
   ],
   imports: [
+    NgxEditorModule,
     BrowserModule, HttpClientModule,
     AppRoutingModule, BrowserAnimationsModule,
     FormsModule,
@@ -217,6 +228,7 @@ registerLocaleData(localePt, 'pt-PT');
     NgxMaterialTimepickerModule.setOpts('pt-PT'),
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     InfiniteScrollModule, SelectButtonModule, RippleModule,
+    CheckboxModule
   ],
   providers: [
     MunicipalityGuard,

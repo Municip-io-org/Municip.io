@@ -3,14 +3,26 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { News, NewsService } from '../../services/news/news.service';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-news-create',
   templateUrl: './news-create.component.html',
-  styleUrl: './news-create.component.css'
+  styleUrl: './news-create.component.css',
 })
 export class NewsCreateComponent {
 
+  editor = new Editor();
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
   news = {
     title: '',
     subtitle: '',
@@ -28,9 +40,10 @@ newUser: any;
 
   isDialogOpen: boolean = false;
 
-  constructor(private newsService: NewsService, private router: Router, private userAuthService: UserAuthService) { }
+  constructor(private newsService: NewsService, private router: Router, private userAuthService: UserAuthService ) { }
 
   ngOnInit() {
+    this.editor = new Editor();
     this.userAuthService.getUserData().subscribe(
       res => {
         this.user = res;
@@ -52,14 +65,14 @@ newUser: any;
     );
     }
 
-
+    
   newsCreateForm = new FormGroup({
     title: new FormControl("", [Validators.required]),
     subtitle: new FormControl("", [Validators.email, Validators.required]),
     mainText: new FormControl("", [Validators.required]),
     photo: new FormControl(null, [Validators.required]),
     date: new FormControl(new Date(), [Validators.required]),
-    
+
   });
 
   get title() {
@@ -76,6 +89,10 @@ newUser: any;
   }
   get date() {
     return this.newsCreateForm.get('date');
+  }
+
+  ngDestroy() {
+    this.editor.destroy();
   }
 
   OnSubmit() {

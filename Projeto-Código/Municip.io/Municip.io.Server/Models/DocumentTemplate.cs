@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Municip.io.Server.Models
 {
@@ -17,6 +18,11 @@ namespace Municip.io.Server.Models
         public float Price { get; set; }
 
         public string Municipality { get; set; }
+
+
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public DocumentTemplateStatus Status { get; set; }
 
     }
 }

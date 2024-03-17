@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DocumentTemplate, RequestDocument, StatusDocument } from '../../services/documents/docs.service';
+import { DocumentTemplate, DocumentTemplateStatus, RequestDocument, StatusDocument } from '../../services/documents/docs.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocsDataService } from '../docs-data.service';
 import { Citizen } from '../../services/citizen-auth.service';
@@ -81,7 +81,8 @@ export class GeneratepdfComponent implements OnInit {
         type: '',
         price: 0,
         textTemplate: '',
-        municipality: ''
+        municipality: '',
+        status: DocumentTemplateStatus.active
       }
     };
 

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
 import { Observable, of } from 'rxjs';
@@ -18,6 +18,11 @@ export class DocsService {
     return this.http.get<DocumentTemplate[]>('api/documents/GetTemplatesFromMunicipality', { params: params });
   }
 
+  GetDistinctDocumentTypesFromMunicipality(municipality: string): Observable<string[]> {
+    console.log(municipality + 'dasd');
+    return this.http.get<string[]>(`api/documents/GetDistinctDocumentTypesFromMunicipality?municipality=${municipality}`);
+  }
+
   //get all request documents
   getRequestsFromMunicipality(municipality: string): Observable<RequestDocument[]> {
     const params = { municipality: municipality };
@@ -31,14 +36,13 @@ export class DocsService {
   }
 
   createTemplate(template: any): Observable<any> {
-
-
-
     return this.http.post<any>('/api/documents/CreateTemplate', template);
-
-
-
   }
+
+  editTemplate(template: DocumentTemplate, id: number): Observable<any> {
+    return this.http.post<any>('/api/documents/EditTemplate', template, { params: { id: id.toString() } });
+  }
+
 
   createRequest(email: string, documentRequest: RequestDocument): Observable<any> {
     let params = new HttpParams()
@@ -58,6 +62,39 @@ export class DocsService {
     //criar o produto e preco
     // criar a sessao
     //enviar o email com sessão
+  }
+  waitingForPayment(id: number): Observable<any> {
+    const params = new HttpParams().set('id', id.toString());
+    return this.http.post<any>('api/documents/WaitingForPayment', {}, { params });
+  }
+
+  approveDocument(id: number): Observable<any> {  
+    const params = new HttpParams().set('id', id.toString()); 
+    return this.http.post<any>('api/documents/ApproveDocument', {}, { params });
+  }
+
+  rejectDocument(id: number): Observable<any> {
+    const params = new HttpParams().set('id', id.toString());
+    return this.http.post<any>('api/documents/RejectRequest', {}, { params });
+  }
+
+
+  getTemplateById(id: number): Observable<DocumentTemplate> {
+    return this.http.get<DocumentTemplate>(`api/documents/GetTemplateById?id=${id}`);
+  }
+
+
+
+  activeTemplate(id: number): Observable<any> {
+    return this.http.put(`api/DocumentTemplateStatus/activate?id=${id}`, id);
+  }
+
+  desactiveTemplate(id: number): Observable<any> {
+    return this.http.put(`api/DocumentTemplateStatus/deactivate?id=${id}`, id);
+  }
+
+  removeTemplate(id: number): Observable<any> {
+    return this.http.delete(`api/DocumentTemplateStatus/remove/${id}`);
   }
 
 }
@@ -105,11 +142,18 @@ export enum DocumentType {
 }
 
 export interface DocumentTemplate {
+  id?: number,
   name: string,
   description: string,
   type: string,
   price: number,
   textTemplate: string
-  municipality: string
+  municipality: string,
+  status?: DocumentTemplateStatus,
 }
 
+export enum DocumentTemplateStatus {
+  active = 'Active',
+  inactive = 'Inactive',
+  notListed = 'NotListed'
+}

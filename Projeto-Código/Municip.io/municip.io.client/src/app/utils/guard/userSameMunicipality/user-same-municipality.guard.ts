@@ -4,6 +4,7 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { EventsService, Event } from '../../../services/events/events.service';
 import { UserAuthService } from '../../../services/user-auth.service';
 import { NewsService } from '../../../services/news/news.service';
+import { DocsService } from '../../../services/documents/docs.service';
 
 
 @Injectable({
@@ -11,7 +12,9 @@ import { NewsService } from '../../../services/news/news.service';
 })
 export class UserSameMunicipalityGuard implements CanActivate {
 
-  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router, private newsService: NewsService) { }
+  constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router, private newsService: NewsService,
+    private docService: DocsService
+  ) { }
   async canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> {
@@ -27,8 +30,10 @@ export class UserSameMunicipalityGuard implements CanActivate {
 
     // Obtém os parâmetros 'eventId' e 'newsId' da rota atual
     const eventId = next.params['eventId'];
-    
+
     const newsId = next.params['newsId'];
+
+    const documentId = next.params['templateId'];
 
     if (eventId) {
       const event = await this.eventsService.getEventById(eventId).toPromise();
@@ -44,7 +49,7 @@ export class UserSameMunicipalityGuard implements CanActivate {
       const news = await this.newsService.getNewsById(newsId).toPromise();
       console.log("DADHAUDBAUDBAUI", news?.municipality);
       if (userMunicipality == news!.municipality) {
-       
+
         next.data = { news: news! };
         return true;
       } else {
@@ -53,7 +58,17 @@ export class UserSameMunicipalityGuard implements CanActivate {
 
         return false;
       }
-    } else {
+    } else if (documentId) {
+      const document = await this.docService.getTemplateById(documentId).toPromise();
+      if (userMunicipality == document!.municipality) {
+        next.data = { document: document! };
+        return true;
+      } else {
+        this.router.navigateByUrl('/accessDenied');
+        return false;
+      }
+    }
+    else {
       this.router.navigateByUrl('/accessDenied');
       return false;
     }

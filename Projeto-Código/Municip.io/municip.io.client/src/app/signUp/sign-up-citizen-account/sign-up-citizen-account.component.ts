@@ -33,7 +33,7 @@ export class SignUpCitizenAccountComponent {
   defaultMunicipalityOption = 'Escolha o seu município';
   municipalities: Municipality[] = [];
 
-  image!: File;
+  
 
   signUpCitizenForm = new FormGroup({
     firstName: new FormControl("", [Validators.required]),
@@ -50,6 +50,12 @@ export class SignUpCitizenAccountComponent {
     birthDate: new FormControl(new Date(), [Validators.required, this.adultAgeValidator.bind(this)]),
     photo: new FormControl(null, [Validators.required])
   });
+
+  image!: File;
+  imageUrl: string | ArrayBuffer | null = null;
+
+  files: any[] = [];
+   
 
   validateMunicipality(control: FormControl): { [key: string]: boolean } | null {
     if (!control.value || this.municipalities.find(municipality => municipality.name === control.value)) {
@@ -176,10 +182,42 @@ export class SignUpCitizenAccountComponent {
 
     if (file) {
       this.image = file;
+      console.log(this.image);
     } else {
       console.error('No file selected');
     }
   }
+
+
+  onFileChange(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    const fileList: FileList | null = fileInput?.files;
+
+    if (fileList && fileList.length > 0) {
+      this.image = fileList[0];
+      this.imageUrl = URL.createObjectURL(this.image);
+    } else {
+      console.error('Nenhuma imagem selecionada');
+    }
+  }
+
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    const files: FileList | null = event.dataTransfer?.files || null;
+    if (files && files.length > 0) {
+      // Execute ações com os arquivos aqui
+      this.image = files[0];
+      this.imageUrl = URL.createObjectURL(this.image);
+      console.log(files);
+    }
+  }
+
+
 
   onSubmit() {
 

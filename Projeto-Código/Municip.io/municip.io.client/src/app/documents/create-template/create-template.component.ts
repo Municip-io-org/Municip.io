@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
@@ -15,6 +15,7 @@ import { DocsService, DocumentTemplate } from '../../services/documents/docs.ser
 })
 export class CreateTemplateComponent {
 
+
   municipalityImage: string = "";
   municipalityName: string = "";
   propriedades: { name: string, value: string }[] = [
@@ -30,6 +31,9 @@ export class CreateTemplateComponent {
     { name: "Data Nascimento", value: "birthDate" }
   ];
 
+  options: string[] = [];
+  selectedItem: string = '';
+  showDropdown: boolean = false;
 
   error: string | null = null;
 
@@ -43,8 +47,8 @@ export class CreateTemplateComponent {
    * @param eventService
    * @param router
    */
-  constructor( private authService: UserAuthService,
-    private docsService : DocsService, private router: Router,
+  constructor(private authService: UserAuthService,
+    private docsService: DocsService, private router: Router,
   ) {
     // Set the locale to pt in the calendar
 
@@ -57,19 +61,44 @@ export class CreateTemplateComponent {
    * Método onInit 
    */
 
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.dropdown')) {
+      this.showDropdown = false;
+    }
+  }
+
+
   ngOnInit(): void {
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
           this.municipalityImage = municipality.landscapePhoto;
           this.municipalityName = municipality.name;
+          this.docsService.GetDistinctDocumentTypesFromMunicipality(this.municipalityName).subscribe((types) => {
+            this.options = types;
+            console.log(this.options);
+          });
+
         });
       });
 
     });
 
+ 
+
+    
+
+   
+   
+  }
 
 
+  selectOption(option: string) {
+    this.selectedItem = option;
+    this.showDropdown = false;
   }
 
 

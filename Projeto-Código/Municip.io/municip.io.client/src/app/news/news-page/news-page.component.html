@@ -19,7 +19,7 @@
 <div class="bg-municip-blank">
   <div class="container mx-auto pb-5 w-[70%]">
     <p class="text-s text-gray-500 pb-5">{{news.date}}</p>
-    <p class="text-center text-justify break-words text-municip-normal-black text-[1.2rem] whitespace-pre-line">{{news.mainText}}</p>
+    <p [innerHTML]="news.mainText" class="text-center text-justify break-words text-municip-normal-black text-[1.2rem] whitespace-pre-line"></p>
   </div>
 </div>
 
