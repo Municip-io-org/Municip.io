@@ -16,9 +16,7 @@ export class UserpageComponent {
   dialogMessage = '';
   isConfirm: boolean = false;
   editMode: boolean = false;
-
-  newUser: any;
-  editedUser: any; 
+  newUser: any; 
   errors: string[] | null = null;
   originalName: string = "";
   originalPhoto: string = "";
@@ -38,7 +36,7 @@ export class UserpageComponent {
         this.userAuthService.getInfoByEmail(this.user.email).subscribe(
           res => {
             this.newUser = res;
-            this.editedUser = { ...this.newUser }; 
+            
             this.originalName = this.newUser.firstName;
             this.originalPhoto = this.newUser.photo;
             this.formatBirthDate();
@@ -50,6 +48,7 @@ export class UserpageComponent {
                   this.country.setValue({ alpha2Code: this.newUser.nif.slice(0, 2) });
                   this.nif.setValue(this.newUser.nif.slice(2));
                 }
+                this.initForm();
               },
               error => {
                 console.error(error);
@@ -66,7 +65,7 @@ export class UserpageComponent {
       }
     );
     this.profileEdit.disable();
-    this.initForm();
+    
   }
 
   profileEdit = new FormGroup({
@@ -138,7 +137,7 @@ export class UserpageComponent {
 
     this.toggleEditMode();
     const formValues = this.profileEdit.value;
-    this.newUser.name = formValues.firstName || this.newUser.name;
+    this.newUser.firstName = formValues.firstName || this.newUser.firstName;
     this.newUser.surname = formValues.surname || this.newUser.surname;
     this.newUser.email = formValues.email || this.newUser.email;
     this.newUser.birthDate = formValues.birthDate || this.newUser.birthDate;
@@ -159,7 +158,7 @@ export class UserpageComponent {
 
           this.originalName = this.newUser.firstName;
           this.originalPhoto = this.newUser.photo;
-
+          this.initForm();
 
           this.isDialogOpen = true;
           this.dialogTitle = 'Atualização bem-sucedida';
@@ -183,6 +182,7 @@ export class UserpageComponent {
         res => {
           this.originalName = this.newUser.firstName;
           this.originalPhoto = this.newUser.photo;
+          this.initForm();
         },
         (error) => {
           console.log("erro " + error.error.errors)
@@ -190,16 +190,16 @@ export class UserpageComponent {
         }
       );
     }
-    this.initForm();
+   
 
   }
 
-  getUserAttributes(): { key: string, value: any }[] {
-    if (!this.newUser) {
-      return [];
-    }
-    return Object.keys(this.newUser).map(key => ({ key, value: this.newUser[key] }));
-  }
+  //getUserAttributes(): { key: string, value: any }[] {
+  //  if (!this.newUser) {
+  //    return [];
+  //  }
+  //  return Object.keys(this.newUser).map(key => ({ key, value: this.newUser[key] }));
+  //}
 
   formatBirthDate() {
     const dateString = this.newUser.birthDate;
@@ -237,16 +237,17 @@ export class UserpageComponent {
   }
 
   initForm() {
+    console.log("isiodjasdnoasin",this.newUser);
     this.profileEdit.patchValue({
-      firstName: this.editedUser.firstName || '',
-      surname: this.editedUser.surname || '',
-      email: this.editedUser.email || '',
+      firstName: this.newUser.firstName || '',
+      surname: this.newUser.surname || '',
+      email: this.newUser.email || '',
       birthDate: this.newUser.birthDate || '',
-      address: this.editedUser.address || '',
-      country: this.editedUser.country || '',
-      nif: this.editedUser.nif || '',
-      postalCode1: this.editedUser.postalCode1 || '',
-      postalCode2: this.editedUser.postalCode2 || '',
+      address: this.newUser.address || '',
+      country: this.newUser.country || '',
+      nif: this.newUser.nif || '',
+      postalCode1: this.newUser.postalCode1 || '',
+      postalCode2: this.newUser.postalCode2 || '',
       password: '',
       passwordConfirmation: ''
     });
