@@ -21,8 +21,9 @@ export class UserpageComponent {
   editedUser: any; 
   errors: string[] | null = null;
   originalName: string = "";
-  originalPhoto: string = "";
   image!: File;
+  imageUrl: string | null = null;
+  files: any[] = [];
 
   constructor(private userAuthService: UserAuthService) { }
   user: any;
@@ -40,7 +41,7 @@ export class UserpageComponent {
             this.newUser = res;
             this.editedUser = { ...this.newUser }; 
             this.originalName = this.newUser.firstName;
-            this.originalPhoto = this.newUser.photo;
+            this.imageUrl = this.newUser.photo;
             this.formatBirthDate();
             
             this.userAuthService.getUserRole().subscribe(
@@ -76,8 +77,7 @@ export class UserpageComponent {
     birthDate: new FormControl(new Date(), [Validators.required]),
     address: new FormControl("", [Validators.required]),
     country: new FormControl("", [Validators.required]),
-    nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
-    photo: new FormControl(null, [Validators.required]),
+    nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]), 
     postalCode1: new FormControl("", [Validators.required, Validators.pattern(/^\d{4}$/)]),
     postalCode2: new FormControl("", [Validators.required, Validators.pattern(/^\d{3}$/)]),
     password: new FormControl("", [
@@ -126,10 +126,6 @@ export class UserpageComponent {
     return this.profileEdit.get('birthDate');
   }
 
-  get photo() {
-    return this.profileEdit.get('photo');
-  }
-
   get passwordConfirmation() {
     return this.profileEdit.get('passwordConfirmation');
   }
@@ -144,7 +140,7 @@ export class UserpageComponent {
     this.newUser.birthDate = formValues.birthDate || this.newUser.birthDate;
     this.newUser.address = formValues.address || this.newUser.address;
     this.newUser.country = formValues.country || this.newUser.country;
-
+    this.newUser.photo = this.imageUrl!; 
     this.newUser.nif = `${(this.country!.value! as Country).alpha2Code}${this.nif!.value!}` || this.newUser.nif;
 
     this.newUser.postalCode1 = formValues.postalCode1 || this.newUser.postalCode1;
@@ -152,13 +148,16 @@ export class UserpageComponent {
     this.newUser.password = formValues.password ? formValues.password : "";
     var passConfirm = formValues.passwordConfirmation || "";
     this.newUser.events = [];
+
+
+
     if (this.role == 'Citizen') {
-      this.userAuthService.updateUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
+      this.userAuthService.updateUser(this.newUser, this.image, passConfirm).subscribe(
         res => {
 
 
           this.originalName = this.newUser.firstName;
-          this.originalPhoto = this.newUser.photo;
+          this.imageUrl = this.newUser.photo;
 
 
           this.isDialogOpen = true;
@@ -179,10 +178,10 @@ export class UserpageComponent {
       );
     }
     else {
-      this.userAuthService.updateMunicipAdminUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
+      this.userAuthService.updateMunicipAdminUser(this.newUser, this.image, passConfirm).subscribe(
         res => {
           this.originalName = this.newUser.firstName;
-          this.originalPhoto = this.newUser.photo;
+          this.imageUrl = this.newUser.photo;
         },
         (error) => {
           console.log("erro " + error.error.errors)
@@ -209,17 +208,6 @@ export class UserpageComponent {
     const day = ('0' + date.getDate()).slice(-2);
     const formattedDate = `${year}-${month}-${day}`;
     this.newUser.birthDate = formattedDate;
-  }
-
-  onImagePicked(event: Event) {
-    const fileInput = event.target as HTMLInputElement;
-    const file = fileInput?.files?.[0];
-    if (file) {
-      this.image = file;
-      this.newUser.photo = this.image;
-    } else {
-      console.error('No file selected');
-    }
   }
 
   toggleEditMode() {
@@ -252,7 +240,50 @@ export class UserpageComponent {
     });
 
     this.formatBirthDate();
-    this.newUser.photo = this.originalPhoto; 
+    this.imageUrl = this.newUser.photo; 
+  }
+
+  onFileChange(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    const fileList: FileList | null = fileInput?.files;
+
+    if (fileList && fileList.length > 0) {
+      this.image = fileList[0];
+      this.imageUrl = URL.createObjectURL(this.image);
+
+      console.log("ON FILE CHANGE");
+    } else {
+      console.error('Nenhuma imagem selecionada');
+    }
+  }
+
+  isValidImageFile(file: File): boolean {
+    // Adicione aqui a lógica para validar se o arquivo é uma imagem
+    // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
+    return file.type.startsWith('image/');
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent) {
+    if (!this.editMode) return;
+
+    event.preventDefault();
+    const files: FileList | null = event.dataTransfer?.files || null;
+    if (files && files.length > 0) {
+      const file = files[0];
+      if (file && this.isValidImageFile(file)) { 
+        this.image = file;
+        this.imageUrl = URL.createObjectURL(this.image);
+
+      } else {
+        console.error('Por favor, solte uma imagem válida.');
+      }
+    } else {
+      console.error('Nenhuma imagem solta.');
+    }
   }
 
   closeDialog() {
