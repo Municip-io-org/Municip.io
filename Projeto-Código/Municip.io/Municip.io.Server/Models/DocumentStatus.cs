@@ -6,6 +6,7 @@
         Pending,
         Approved,
         WaitingForPayment,
+        Rejected
 
     }
 }

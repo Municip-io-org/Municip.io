@@ -24,8 +24,8 @@
        mt-16">
     <p class="font-semibold">Sem Documentos.</p>
   </div>
-  <div class="mx-32 py-10" *ngFor="let doc of filteredDocuments">
-    <app-document-approve-card [document]="doc" />
+  <div class="mx-32 py-10" *ngFor="let doc of documents">
+    <app-document-approve-card [document]="doc" (deleteDoc)="rejectDocument($event)" (waitPayment)="waitPayment($event)"/>
   </div>
 
 </div>

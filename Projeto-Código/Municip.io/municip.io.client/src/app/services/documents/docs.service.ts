@@ -56,6 +56,21 @@ export class DocsService {
     return this.http.post<any>('api/documents/CreateRequest', documentRequest, { params: params });
   }
 
+  waitingForPayment(id: number): Observable<any> {
+    const params = new HttpParams().set('id', id.toString());
+    return this.http.post<any>('api/documents/WaitingForPayment', {}, { params });
+  }
+
+  approveDocument(id: number): Observable<any> {  
+    const params = new HttpParams().set('id', id.toString()); 
+    return this.http.post<any>('api/documents/ApproveDocument', {}, { params });
+  }
+
+  rejectDocument(id: number): Observable<any> {
+    const params = new HttpParams().set('id', id.toString());
+    return this.http.post<any>('api/documents/RejectRequest', {}, { params });
+  }
+
 }
 
 export interface RequestDocument {
