@@ -16,52 +16,22 @@ export class IsDocumentFeatureActive implements CanActivate {
 
   async canActivate(): Promise<boolean> {
     try {
-      this.userAuthService.getUserData().subscribe(
-        res => {
-          var anyUser = res;
-          this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
-            res => {
-              var user = res;
 
-              this.userAuthService.getInfoMunicipality(user.municipality).subscribe(
-                async res => {
-                  this.municipality = res.name;
+      const appFeatures = await this.appFeaturesService.getAppFeatures().toPromise();
 
-                  await this.appFeaturesService.getAppFeaturesByMunicipality(this.municipality).toPromise(); // Como fiz a promessa, ele agora espera 
-                  const isEnabled = this.appFeaturesService.appFeatures.find(a => a.appFeatureCategory === "Documents")?.isEnabled;
-
-                  console.log('isEnabled', isEnabled);
-                  if (isEnabled) {
-                    return true;
-                  } else {
-                    this.router.navigateByUrl("/accessDenied");
-                    return false;
-                  }
-           
-            
-
-                },
-                error => {
-                  console.error(error);
-                }
-              )
-            });
-        },
-        error => {
-          console.error(error);
-        }
-      );
+      const isEnabled = appFeatures!.find(a => a.appFeatureCategory === "Documents")?.isEnabled;
 
 
-
-
-
-
+      if (isEnabled) {
+        return true;
+      } else {
+        this.router.navigateByUrl("/accessDenied");
+        return false;
+      }
+    } catch (error) {
+      console.error('Erro ao verificar a funcionalidade:', error);
+      return false;
     }
-    catch (error) {
-      console.error(error);
-    }
-    return true;
   }
 }
 

@@ -13,11 +13,15 @@ export class IsEventsFeatureActive implements CanActivate {
 
   async canActivate(): Promise<boolean> {
     try {
-      const isEnabled = await this.appFeaturesService.appFeatures.find(a => a.appFeatureCategory == "Events")?.isEnabled;
+
+      const appFeatures = await this.appFeaturesService.getAppFeatures().toPromise();
+
+      const isEnabled = appFeatures!.find(a => a.appFeatureCategory === "Events")?.isEnabled;
+
+
       if (isEnabled) {
         return true;
       } else {
-
         this.router.navigateByUrl("/accessDenied");
         return false;
       }
