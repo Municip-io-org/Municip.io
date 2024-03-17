@@ -177,28 +177,22 @@
 
 
 
-            <div class="h-32">
+            <div>
               <app-input-title class="text-[1.4rem]">Foto</app-input-title>
-              <div class="flex items-center">
-                <input type="file" #filePicker id="photo" formControlName="photo" name="photo"
-                       [(ngModel)]="citizen.photo" (change)="onImagePicked($event)" accept="image/*"
-                       class="input w-[21rem] h-14">
-                <app-tooltip [tooltipText]="'Utilize o seletor para encontrar a sua foto'"></app-tooltip>
-              </div>
-            </div>
+              <div class="h-20 table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc]" (dragover)="onDragOver($event)"
+                   (drop)="onDrop($event)" (click)="filePicker.click()">
 
-            <div class="h-20 table w-full bg-blue-500 border-dotted border-emerald-500" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
-              <div class="table-cell align-middle">
-                <div class="text-center">
-                  <input type="file" (change)="onFileChange($event)" accept="image/*" capture>
+                <div class="table-cell align-middle">
+                  <div class="text-center">
+                    <input type="file" #filePicker formControlName="photo" (change)="onFileChange($event)" accept="image/*" capture class="hidden">
 
-                  <label for="file"><span class="bg-[#f45r61] text-[#fff] p-5 rounded drop-shadow-sm">Select your file</span> or Drag and Drop it here!</label>
+                    <label for="file" class="flex justify-center items-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
 
-                  <div *ngIf="image">
-                    <p>Imagem carregada com sucesso!</p>
-                    <img [src]="imageUrl" alt="Imagem carregada">
+                    <div *ngIf="image" class="flex items-center justify-center pb-2">
+                      <img [src]="imageUrl" alt="Imagem carregada" class="w-[10rem] h-[10rem] object-cover ">
+                    </div>
+
                   </div>
-
                 </div>
               </div>
             </div>
@@ -208,8 +202,9 @@
 
 
 
+
             <div class="h-32 flex justify-end items-center">
-              <button type="submit" [disabled]="!signUpCitizenForm.valid"
+              <button type="submit" [disabled]="!signUpCitizenForm.valid && !image"
                       class="flex relative h-auto w-[10rem] text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-3 px-8
                focus:outline-none rounded text-lg justify-center items-center
                bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%]

@@ -99,6 +99,8 @@ export class SignUpCitizenAccountComponent {
   };
 
 
+
+
   constructor(private citizenAuthService: CitizenAuthService, private router: Router, private municipalityService: MunicipalAdminAuthService,
     private dateAdapter: DateAdapter<Date>) {
     this.dateAdapter.setLocale('pt');
@@ -176,17 +178,7 @@ export class SignUpCitizenAccountComponent {
     return this.signUpCitizenForm.get('photo');
   }
 
-  onImagePicked(event: Event) {
-    const fileInput = event.target as HTMLInputElement;
-    const file = fileInput?.files?.[0];
-
-    if (file) {
-      this.image = file;
-      console.log(this.image);
-    } else {
-      console.error('No file selected');
-    }
-  }
+  
 
 
   onFileChange(event: Event) {
@@ -196,11 +188,21 @@ export class SignUpCitizenAccountComponent {
     if (fileList && fileList.length > 0) {
       this.image = fileList[0];
       this.imageUrl = URL.createObjectURL(this.image);
+      console.log(this.photo);
+      console.log("ON FILE CHANGE");
     } else {
       console.error('Nenhuma imagem selecionada');
     }
   }
 
+
+  
+
+  isValidImageFile(file: File): boolean {
+    // Adicione aqui a lógica para validar se o arquivo é uma imagem
+    // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
+    return file.type.startsWith('image/');
+  }
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -210,12 +212,22 @@ export class SignUpCitizenAccountComponent {
     event.preventDefault();
     const files: FileList | null = event.dataTransfer?.files || null;
     if (files && files.length > 0) {
-      // Execute ações com os arquivos aqui
-      this.image = files[0];
-      this.imageUrl = URL.createObjectURL(this.image);
-      console.log(files);
+      const file = files[0];
+      if (file && this.isValidImageFile(file)) { // Verifique se file não é null ou undefined
+        this.image = file;
+        this.imageUrl = URL.createObjectURL(this.image);
+
+      } else {
+        console.error('Por favor, solte uma imagem válida.');
+      }
+    } else {
+      console.error('Nenhuma imagem solta.');
     }
   }
+
+
+
+  
 
 
 
