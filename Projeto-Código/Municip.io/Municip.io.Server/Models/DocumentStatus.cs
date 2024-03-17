@@ -4,7 +4,8 @@
     public enum DocumentStatus
     {
         Pending,
-        Approved
-        
+        Approved,
+        WaitingForPayment,
+
     }
 }

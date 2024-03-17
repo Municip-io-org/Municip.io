@@ -110,6 +110,8 @@ import { EventsmapComponent } from './maps/eventsmap/eventsmap.component';
 import { CreateTemplateComponent } from './documents/create-template/create-template.component';
 import { GeneratepdfComponent } from './documents/generatepdf/generatepdf.component';
 import { NgxEditorModule} from 'ngx-editor';
+import { ManageAppFeaturesComponent } from './munadministrator/manage-app-features/manage-app-features.component';
+import { CheckboxModule } from 'primeng/checkbox';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -203,6 +205,7 @@ registerLocaleData(localePt, 'pt-PT');
     EventsmapComponent,
     CreateTemplateComponent,
     GeneratepdfComponent,
+    ManageAppFeaturesComponent,
     
     
   ],
@@ -220,6 +223,7 @@ registerLocaleData(localePt, 'pt-PT');
     NgxMaterialTimepickerModule.setOpts('pt-PT'),
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     InfiniteScrollModule, SelectButtonModule, RippleModule,
+    CheckboxModule
   ],
   providers: [
     MunicipalityGuard,
