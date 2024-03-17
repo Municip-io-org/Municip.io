@@ -119,6 +119,15 @@
             <li>
               <a routerLink="/documents/my" class="block px-4 py-2 hover:bg-gray-100">Os meus documentos</a>
             </li>
+            <span *ngIf="role===Roles.Municipal">
+
+            <li>
+              <a routerLink="/documents/template-list" class="block px-4 py-2 hover:bg-gray-100">Lista Templates</a>
+            </li>
+
+            </span>
+
+
           </ul>
         </div>
       </li>
@@ -193,7 +202,7 @@
               </li>
               <li>
                 <a routerLink="/userpage" class="block px-4 py-2 hover:bg-gray-100">O meu Perfil</a>
-               
+
 
                 <div *ngIf="role===Roles.Municipal">
                   <a routerLink="/municipal/profile" class="block px-4 py-2 hover:bg-gray-100">Perfil Administração</a>
