@@ -20,7 +20,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("CreateTemplate")]
         public async Task<IActionResult> CreateDocumentTemplateAsync(DocumentTemplate template)
         {
-            
+
             {
                 if (ModelState.IsValid)
                 {
@@ -45,21 +45,18 @@ namespace Municip.io.Server.Controllers
 
         //edit template 
         [HttpPost("EditTemplate")]
-        public async Task<IActionResult> EditDocumentTemplateAsync(DocumentTemplate template)
+        public async Task<IActionResult> EditDocumentTemplateAsync(DocumentTemplate template, int id)
         {
             if (ModelState.IsValid)
             {
-                var templateToEdit = await _context.DocumentTemplates.FirstOrDefaultAsync(t => t.Id == template.Id);
+                var templateToEdit = await _context.DocumentTemplates.FirstOrDefaultAsync(t => t.Id == id);
                 if (templateToEdit == null) return BadRequest(new { message = "Não foi encontrado nenhum modelo de documento", ModelState });
-
 
                 templateToEdit.Name = template.Name;
                 templateToEdit.Description = template.Description;
                 templateToEdit.Type = template.Type;
                 templateToEdit.TextTemplate = template.TextTemplate;
                 templateToEdit.Price = template.Price;
-
-
 
                 await _context.SaveChangesAsync();
                 return Ok();
@@ -90,21 +87,21 @@ namespace Municip.io.Server.Controllers
             if (ModelState.IsValid)
             {
                 Console.WriteLine(request);
-                var  citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
-                
+                var citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
+
 
                 if (citizen == null) return BadRequest(new { message = "Não foi encontrado nenhum cidadão", ModelState });
 
-               
+
                 var documentTemplate = await _context.DocumentTemplates.FirstOrDefaultAsync(c => c.Id == request.DocumentTemplate.Id);
                 Console.WriteLine(documentTemplate.Name + "FUI À BDDD");
 
                 if (documentTemplate == null) return BadRequest(new { message = "Não foi encontrado nenhum modelo de documento", ModelState });
-                
+
                 request.Citizen = citizen;
                 request.DocumentTemplate = documentTemplate;
                 Console.WriteLine(request.DocumentTemplate.Name + "AQUIUIQUAIQUIAUQIAUQIU");
-                
+
                 _context.DocumentRequests.Add(request);
                 await _context.SaveChangesAsync();
 
@@ -157,6 +154,15 @@ namespace Municip.io.Server.Controllers
             var municipalTemplates = templates.Where(t => t.Municipality == municipality);
             var distinctTypes = municipalTemplates.Select(t => t.Type).Distinct();
             return Json(distinctTypes);
+        }
+
+
+
+        [HttpGet("GetTemplateById")]
+        public IActionResult GetTemplateById(int id)
+        {
+            var template = _context.DocumentTemplates.FirstOrDefault(t => t.Id == id);
+            return Json(template);
         }
 
     }

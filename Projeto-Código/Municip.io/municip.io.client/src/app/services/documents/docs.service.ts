@@ -36,14 +36,13 @@ export class DocsService {
   }
 
   createTemplate(template: any): Observable<any> {
-
-
-
     return this.http.post<any>('/api/documents/CreateTemplate', template);
-
-
-
   }
+
+  editTemplate(template: DocumentTemplate, id: number): Observable<any> {
+    return this.http.post<any>('/api/documents/EditTemplate', template, { params: { id: id.toString() } });
+  }
+
 
   createRequest(email: string, documentRequest: RequestDocument): Observable<any> {
     let params = new HttpParams()
@@ -58,13 +57,18 @@ export class DocsService {
 
 
 
+  getTemplateById(id: number): Observable<DocumentTemplate> {
+    return this.http.get<DocumentTemplate>(`api/documents/GetTemplateById?id=${id}`);
+  }
+
+
 
   activeTemplate(id: number): Observable<any> {
     return this.http.put(`api/DocumentTemplateStatus/activate?id=${id}`, id);
   }
 
   desactiveTemplate(id: number): Observable<any> {
-    return this.http.put(`api/DocumentTemplateStatus/deactivate?id=${id}`,id);
+    return this.http.put(`api/DocumentTemplateStatus/deactivate?id=${id}`, id);
   }
 
   removeTemplate(id: number): Observable<any> {

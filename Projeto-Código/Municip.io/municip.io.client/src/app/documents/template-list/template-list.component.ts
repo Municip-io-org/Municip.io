@@ -103,7 +103,7 @@ export class TemplateListComponent {
 
   editDocument(document: DocumentTemplate) {
     //redirect to edit page documents/edit-template/:templateId
-    this.router.navigate(['documents/edit-template', document.id]);
+    this.router.navigateByUrl(`documents/edit-template/${document.id}`);
   }
 
 

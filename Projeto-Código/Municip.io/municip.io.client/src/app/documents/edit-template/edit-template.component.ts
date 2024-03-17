@@ -3,7 +3,7 @@ import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { EventsService, Event } from '../../services/events/events.service';
 import { DocsService, DocumentTemplate } from '../../services/documents/docs.service';
@@ -40,6 +40,8 @@ export class EditTemplateComponent {
   isDialogOpen: boolean = false;
 
 
+  documentTemplate!: DocumentTemplate;
+
   /**
    * Construtor do componente.
    * @param authService
@@ -48,6 +50,7 @@ export class EditTemplateComponent {
    */
   constructor(private authService: UserAuthService,
     private docsService: DocsService, private router: Router,
+    private route: ActivatedRoute
   ) {
     // Set the locale to pt in the calendar
 
@@ -84,15 +87,26 @@ export class EditTemplateComponent {
         });
       });
 
+      this.documentTemplate = this.route.snapshot.data['document'];
+      this.setForm(this.documentTemplate);
     });
+  }
 
 
-
-
-
-
+  setForm(template: DocumentTemplate) {
+    console.log(template)
+    this.templateForm.setValue({
+      name: template.name,
+      description: template.description,
+      type: template.type,
+      price: template.price.toString(),
+      templatetext: template.textTemplate
+    });
+    this.selectedItem = template.type;
+    console.log(this.templateForm.value)
 
   }
+
 
 
   selectOption(option: string) {
@@ -144,7 +158,7 @@ export class EditTemplateComponent {
         municipality: this.municipalityName || "vazio"
       };
 
-      this.docsService.createTemplate(template).subscribe((template: any) => {
+      this.docsService.editTemplate(template, this.documentTemplate.id!).subscribe((template: any) => {
         this.isDialogOpen = true;
       });
     }
@@ -154,7 +168,7 @@ export class EditTemplateComponent {
    */
   closeDialog() {
     this.isDialogOpen = false;
-    this.router.navigate(['/events']);
+    this.router.navigate(['/documents/template-list']);
   }
 
   adicionarPropriedade() {

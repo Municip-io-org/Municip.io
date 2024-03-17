@@ -24,7 +24,7 @@ import { CitizenGuard } from './utils/guard/citizen.guard';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
 import { MunicipalAdminGuard } from './utils/guard/municipal-admin.guard';
-import {NewsListComponent } from './news/news-list/news-list.component';
+import { NewsListComponent } from './news/news-list/news-list.component';
 import { NewsCreateComponent } from './news/news-create/news-create.component';
 import { MunicipalProfileComponent } from './munadministrator/municipal-profile/municipal-profile.component';
 import { CitizenOrMunicipalAdminGuard } from './utils/guard/citizen-or-municipal-admin.guard';
@@ -39,7 +39,7 @@ import { EventsListComponent } from './events/my-events/events-list/events-list.
 import { NewsPageComponent } from './news/news-page/news-page.component';
 import { NewsEditComponent } from './news/news-edit/news-edit.component';
 import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component';
-import { AccessBlockedComponent} from './access-blocked/access-blocked.component';
+import { AccessBlockedComponent } from './access-blocked/access-blocked.component';
 import { RequestDocumentComponent } from './documents/request-document/request-document.component';
 import { AdminDashboardMunicipalAdminsComponent } from './administrator/admin-dashboard-municipal-admins/admin-dashboard-municipal-admins.component';
 import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
@@ -61,12 +61,12 @@ const routes: Routes = [
   { path: 'signUp-Citizen', component: SignUpCitizenAccountComponent, data: {} },
   { path: 'signUp-MunicipalAdministrator', component: SignUpMunicipalAdministratorAccountComponent, data: {} },
   {
-    path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {}, canActivate:[MunicipalityGuard]
+    path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {}, canActivate: [MunicipalityGuard]
   },
   { path: 'signUp-Success', component: SignUpSuccessComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
   { path: 'admindashboard', component: AdmindashboardComponent, data: {}, canActivate: [AdministratorGuard] },
-  { path: 'admindashboard/:municipalName', component: AdminDashboardMunicipalAdminsComponent, data: {},canActivate:[AdministratorGuard] },
+  { path: 'admindashboard/:municipalName', component: AdminDashboardMunicipalAdminsComponent, data: {}, canActivate: [AdministratorGuard] },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
   { path: 'transports', component: TransportsMainComponent, data: {} },
   { path: 'transports/schedules', component: SchedulesComponent, data: {} },
@@ -78,7 +78,7 @@ const routes: Routes = [
   { path: 'municipal/profile', component: MunicipalProfileComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'municipal/edit', component: MunicipalEditComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'citizen/homePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
-  { path: 'events/create', component: CreateEventComponent, data: {}, canActivate:[MunicipalAdminGuard] },
+  { path: 'events/create', component: CreateEventComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'events/edit/:eventId', component: EditEventComponent, data: {}, canActivate: [MunicipalAdminGuard, UserSameMunicipalityGuard] },
   { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'events/myEvents', component: EventsListComponent, data: {}, canActivate: [CitizenGuard] },
@@ -86,7 +86,7 @@ const routes: Routes = [
   { path: 'events/:eventId', component: EventPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} },
   { path: 'news', component: NewsListComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
-  { path: 'news/news-create', component: NewsCreateComponent, data: {}, canActivate: [MunicipalAdminGuard]  },
+  { path: 'news/news-create', component: NewsCreateComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [CitizenGuard] },
   { path: 'news/:newsId', component: NewsPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [UserSameMunicipalityGuard, MunicipalAdminGuard,] },
@@ -96,7 +96,7 @@ const routes: Routes = [
   { path: 'documents/my', component: MyDocumentsComponent },
   { path: 'documents/approve', component: ApproveDocumentsComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'documents/createtemplate', component: CreateTemplateComponent, data: {} },
-  {path: 'documents/edit-template/:templateId', component: EditTemplateComponent, data: {} },
+  { path: 'documents/edit-template/:templateId', component: EditTemplateComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'documents/generate-pdf', component: GeneratepdfComponent, data: {} },
   { path: 'documents/template-list', component: TemplateListComponent }
 ];
