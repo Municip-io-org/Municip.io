@@ -9,4 +9,11 @@
         Rejected
 
     }
+
+    public enum DocumentTemplateStatus
+    {
+        Active,
+        Inactive,
+        NotListed
+    }
 }

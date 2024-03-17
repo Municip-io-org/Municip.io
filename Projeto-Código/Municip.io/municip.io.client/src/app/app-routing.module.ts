@@ -24,7 +24,7 @@ import { CitizenGuard } from './utils/guard/citizen.guard';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { MunAdminHomePageComponent } from './munadministrator/mun-admin-home-page/mun-admin-home-page.component';
 import { MunicipalAdminGuard } from './utils/guard/municipal-admin.guard';
-import {NewsListComponent } from './news/news-list/news-list.component';
+import { NewsListComponent } from './news/news-list/news-list.component';
 import { NewsCreateComponent } from './news/news-create/news-create.component';
 import { MunicipalProfileComponent } from './munadministrator/municipal-profile/municipal-profile.component';
 import { CitizenOrMunicipalAdminGuard } from './utils/guard/citizen-or-municipal-admin.guard';
@@ -39,7 +39,7 @@ import { EventsListComponent } from './events/my-events/events-list/events-list.
 import { NewsPageComponent } from './news/news-page/news-page.component';
 import { NewsEditComponent } from './news/news-edit/news-edit.component';
 import { DocsHomepageComponent } from './documents/docs-homepage/docs-homepage.component';
-import { AccessBlockedComponent} from './access-blocked/access-blocked.component';
+import { AccessBlockedComponent } from './access-blocked/access-blocked.component';
 import { RequestDocumentComponent } from './documents/request-document/request-document.component';
 import { AdminDashboardMunicipalAdminsComponent } from './administrator/admin-dashboard-municipal-admins/admin-dashboard-municipal-admins.component';
 import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
@@ -52,6 +52,8 @@ import { IsDocumentFeatureActive } from './utils/guard/isDocumentsFeatureActive/
 import { IsEventsFeatureActive } from './utils/guard/isEventsFeatureActive/is-events-feature-active.guard';
 import { IsNewsFeatureActive } from './utils/guard/isNewsFeaturesActive/is-news-features-active.guard';
 import { IsTransportFeatureActive } from './utils/guard/isTransportFeatureActive/is-transport-feature-active.guard';
+import { TemplateListComponent } from './documents/template-list/template-list.component';
+import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -64,12 +66,12 @@ const routes: Routes = [
   { path: 'signUp-Citizen', component: SignUpCitizenAccountComponent, data: {} },
   { path: 'signUp-MunicipalAdministrator', component: SignUpMunicipalAdministratorAccountComponent, data: {} },
   {
-    path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {}, canActivate:[MunicipalityGuard]
+    path: 'signUp-Municipality/:municipalName', component: SignUpMunicipalityComponent, data: {}, canActivate: [MunicipalityGuard]
   },
   { path: 'signUp-Success', component: SignUpSuccessComponent, data: {} },
   { path: 'aboutus', component: AboutusComponent, data: {} },
   { path: 'admindashboard', component: AdmindashboardComponent, data: {}, canActivate: [AdministratorGuard] },
-  { path: 'admindashboard/:municipalName', component: AdminDashboardMunicipalAdminsComponent, data: {},canActivate:[AdministratorGuard] },
+  { path: 'admindashboard/:municipalName', component: AdminDashboardMunicipalAdminsComponent, data: {}, canActivate: [AdministratorGuard] },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
   { path: 'transports', component: TransportsMainComponent, data: {}, canActivate: [IsTransportFeatureActive] },
   { path: 'transports/schedules', component: SchedulesComponent, data: {}, canActivate: [IsTransportFeatureActive] },
@@ -100,7 +102,9 @@ const routes: Routes = [
   { path: 'documents/my', component: MyDocumentsComponent, canActivate: [IsDocumentFeatureActive] },
   { path: 'documents/approve', component: ApproveDocumentsComponent, data: {}, canActivate: [IsDocumentFeatureActive,MunicipalAdminGuard] },
   { path: 'documents/createtemplate', component: CreateTemplateComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
+  { path: 'documents/edit-template/:templateId', component: EditTemplateComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'documents/generate-pdf', component: GeneratepdfComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
+  { path: 'documents/template-list', component: TemplateListComponent }
 
 ];
 
