@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
 import { Observable, of } from 'rxjs';
@@ -54,6 +54,21 @@ export class DocsService {
 
 
     return this.http.post<any>('api/documents/CreateRequest', documentRequest, { params: params });
+  }
+
+
+
+
+  activeTemplate(id: number): Observable<any> {
+    return this.http.put(`api/DocumentTemplateStatus/activate?id=${id}`, id);
+  }
+
+  desactiveTemplate(id: number): Observable<any> {
+    return this.http.put(`api/DocumentTemplateStatus/deactivate?id=${id}`,id);
+  }
+
+  removeTemplate(id: number): Observable<any> {
+    return this.http.delete(`api/DocumentTemplateStatus/remove/${id}`);
   }
 
 }
@@ -113,5 +128,6 @@ export interface DocumentTemplate {
 
 export enum DocumentTemplateStatus {
   active = 'Active',
-  inactive = 'Inactive'
+  inactive = 'Inactive',
+  notListed = 'NotListed'
 }

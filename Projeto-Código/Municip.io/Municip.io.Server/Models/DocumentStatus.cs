@@ -12,6 +12,7 @@
     public enum DocumentTemplateStatus
     {
         Active,
-        Inactive
+        Inactive,
+        NotListed
     }
 }

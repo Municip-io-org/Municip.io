@@ -29,7 +29,6 @@ export class TemplateListComponent {
           this.municipalityImage = municipality.landscapePhoto;
           this.service.getTemplatesFromMunicipality(account.municipality).subscribe((templates) => {
             this.documents = templates;
-            console.log(this.documents)
           });
         });
       });
@@ -68,14 +67,37 @@ export class TemplateListComponent {
   }
 
   activeDocument(document: DocumentTemplate) {
-
+    this.service.activeTemplate(document.id!).subscribe(
+      (response) => {
+        document.status = DocumentTemplateStatus.active
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   desactiveDocument(document: DocumentTemplate) {
+    this.service.desactiveTemplate(document.id!).subscribe(
+      (response) => {
+        document.status = DocumentTemplateStatus.inactive
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
 
   }
 
   deleteDocument(document: DocumentTemplate) {
+    this.service.removeTemplate(document.id!).subscribe(
+      (response) => {
+        this.documents = this.documents.filter(d => d.id !== document.id);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
 
   }
 
@@ -89,7 +111,7 @@ export class TemplateListComponent {
    * Filtra os documentos com base no nome.
    */
   get filteredDocuments() {
-    return this.documents.filter(d => d.name.toLowerCase().includes(this.nameSearch.toLowerCase()));
+    return this.documents.filter(d => d.name.toLowerCase().includes(this.nameSearch.toLowerCase()) && d.status !== DocumentTemplateStatus.notListed);
   }
 
   /**

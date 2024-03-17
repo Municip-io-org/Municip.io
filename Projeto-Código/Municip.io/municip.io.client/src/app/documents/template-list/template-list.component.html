@@ -15,12 +15,12 @@
 
         <!-- Add a search input for name -->
         <div class="mb-4 relative">
-          <label for="nameSearch" class="sr-only">Procurar por município</label>
+          <label for="nameSearch" class="sr-only">Procurar por documento</label>
           <div class="flex items-center">
             <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
               <span class="fas fa-search"></span>
             </i>
-            <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por administrador municipal"
+            <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por documento"
                    class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300 hover:border-black">
           </div>
         </div>
@@ -64,10 +64,10 @@
               </td>
 
               <td class="px-5 py-5 ">
-                <button *ngIf="d.status === DocumentTemplateStatus().active" (click)="activeDocument(d); $event.stopPropagation()" class="bg-green-500 text-white px-3 py-1 rounded-md mr-2">
+                <button *ngIf="d.status === DocumentTemplateStatus().inactive" (click)="activeDocument(d); $event.stopPropagation()" class="bg-green-500 text-white px-3 py-1 rounded-md mr-2">
                   <i class="fas fa-check"></i>
                 </button>
-                <button *ngIf="d.status === DocumentTemplateStatus().inactive" (click)="desactiveDocument(d); $event.stopPropagation()" class="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2">
+                <button *ngIf="d.status === DocumentTemplateStatus().active" (click)="desactiveDocument(d); $event.stopPropagation()" class="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2">
                   <i class="fas fa-lock"></i>
                 </button>
                 <button (click)="deleteDocument(d); $event.stopPropagation()" class="bg-red-500 text-white px-3 py-1 rounded-md">
