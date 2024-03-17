@@ -52,7 +52,6 @@ export class SignUpCitizenAccountComponent {
 
   image!: File;
   imageUrl: string | null = null;
-
   files: any[] = [];
    
 

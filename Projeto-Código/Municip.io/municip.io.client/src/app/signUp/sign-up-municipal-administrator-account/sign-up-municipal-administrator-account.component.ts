@@ -29,6 +29,8 @@ export class SignUpMunicipalAdministratorAccountComponent {
   municipalities = Municipalities;
 
   image!: File;
+  imageUrl: string | null = null;
+  files: any[] = [];
 
   getMunicipalities() {
     return Object.values(this.municipalities)
@@ -41,8 +43,7 @@ export class SignUpMunicipalAdministratorAccountComponent {
     surname: new FormControl("",[Validators.required]),
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required, this.validatePassword.bind(this)]),
-    municipality: new FormControl("", [Validators.required, this.validateMunicipality.bind(this)]),
-    photo: new FormControl(null, [Validators.required])
+    municipality: new FormControl("", [Validators.required, this.validateMunicipality.bind(this)])
   });
 
   validateMunicipality(control: FormControl): { [key: string]: boolean } | null {
@@ -71,6 +72,48 @@ export class SignUpMunicipalAdministratorAccountComponent {
 
     return isValid ? null : { 'invalidPassword': true };
   }
+
+  onFileChange(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    const fileList: FileList | null = fileInput?.files;
+
+    if (fileList && fileList.length > 0) {
+      this.image = fileList[0];
+      this.imageUrl = URL.createObjectURL(this.image);
+
+      console.log("ON FILE CHANGE");
+    } else {
+      console.error('Nenhuma imagem selecionada');
+    }
+  }
+
+  isValidImageFile(file: File): boolean {
+    // Adicione aqui a lógica para validar se o arquivo é uma imagem
+    // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
+    return file.type.startsWith('image/');
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    const files: FileList | null = event.dataTransfer?.files || null;
+    if (files && files.length > 0) {
+      const file = files[0];
+      if (file && this.isValidImageFile(file)) { // Verifique se file não é null ou undefined
+        this.image = file;
+        this.imageUrl = URL.createObjectURL(this.image);
+
+      } else {
+        console.error('Por favor, solte uma imagem válida.');
+      }
+    } else {
+      console.error('Nenhuma imagem solta.');
+    }
+  }
+
 
 
   onSubmit() {
@@ -128,25 +171,7 @@ export class SignUpMunicipalAdministratorAccountComponent {
   }
 
 
-  get photo() {
-
-    return this.signUpMunicipalAdminForm.get('photo');
-
-
-  }
-
-  onImagePicked(event: Event) {
-    const fileInput = event.target as HTMLInputElement;
-    const file = fileInput?.files?.[0]; // Use optional chaining here
-
-    if (file) {
-      this.image = file;
-
-
-    } else {
-      console.error('No file selected');
-    }
-  }
+  
 
 
 
