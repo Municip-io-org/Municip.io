@@ -184,7 +184,7 @@
 
                 <div class="table-cell align-middle">
                   <div class="text-center">
-                    <input type="file" #filePicker formControlName="photo" (change)="onFileChange($event)" accept="image/*" capture class="hidden">
+                    <input type="file" #filePicker (change)="onFileChange($event)" accept="image/*" capture class="hidden">
 
                     <label for="file" class="flex justify-center items-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
 
@@ -204,7 +204,7 @@
 
 
             <div class="h-32 flex justify-end items-center">
-              <button type="submit" [disabled]="!signUpCitizenForm.valid && !image"
+              <button type="submit" [disabled]="!signUpCitizenForm.valid || !image"
                       class="flex relative h-auto w-[10rem] text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-3 px-8
                focus:outline-none rounded text-lg justify-center items-center
                bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%]
