@@ -112,6 +112,7 @@ import { GeneratepdfComponent } from './documents/generatepdf/generatepdf.compon
 import { NgxEditorModule} from 'ngx-editor';
 import { ManageAppFeaturesComponent } from './munadministrator/manage-app-features/manage-app-features.component';
 import { CheckboxModule } from 'primeng/checkbox';
+import { FileDragDropDirective } from './directives/fileDragDrop/file-drag-drop.directive';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -206,6 +207,7 @@ registerLocaleData(localePt, 'pt-PT');
     CreateTemplateComponent,
     GeneratepdfComponent,
     ManageAppFeaturesComponent,
+    FileDragDropDirective,
     
     
   ],

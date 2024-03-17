@@ -55,12 +55,12 @@
                     <app-country-picker [country]="country" class="w-[12rem] h-[4rem]">
                     </app-country-picker>
                   </div>
-                 
+
                   <div class="text-red-500 font-bold relative bottom-[0.7rem] " *ngIf="country.touched && country?.invalid">
                     <div *ngIf="country?.errors?.['required']">País obrigatório</div>
                   </div>
                 </div>
-                
+
                 <div class="h-20">
                   <div class="flex items-center">
                     <input required placeholder="Introduza o seu NIF" type="text" id="nif" formControlName="nif" name="nif" [(ngModel)]="citizen.nif"
@@ -174,6 +174,9 @@
                 <div *ngIf="postalCode2?.errors?.['pattern']">Secundo código Inválido</div>
               </div>
             </div>
+
+
+
             <div class="h-32">
               <app-input-title class="text-[1.4rem]">Foto</app-input-title>
               <div class="flex items-center">
@@ -183,11 +186,33 @@
                 <app-tooltip [tooltipText]="'Utilize o seletor para encontrar a sua foto'"></app-tooltip>
               </div>
             </div>
+
+            <div class="h-20 table w-full bg-blue-500 border-dotted border-emerald-500" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+              <div class="table-cell align-middle">
+                <div class="text-center">
+                  <input type="file" (change)="onFileChange($event)" accept="image/*" capture>
+
+                  <label for="file"><span class="bg-[#f45r61] text-[#fff] p-5 rounded drop-shadow-sm">Select your file</span> or Drag and Drop it here!</label>
+
+                  <div *ngIf="image">
+                    <p>Imagem carregada com sucesso!</p>
+                    <img [src]="imageUrl" alt="Imagem carregada">
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
             <div class="h-32 flex justify-end items-center">
               <button type="submit" [disabled]="!signUpCitizenForm.valid"
                       class="flex relative h-auto w-[10rem] text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-3 px-8
                focus:outline-none rounded text-lg justify-center items-center
-               bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%]  
+               bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%]
                transition-all duration-300 disabled:cursor-not-allowed">
                 Registar
                 <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
