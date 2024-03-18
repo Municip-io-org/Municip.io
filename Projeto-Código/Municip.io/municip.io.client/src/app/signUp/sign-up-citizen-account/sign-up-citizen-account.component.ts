@@ -48,12 +48,10 @@ export class SignUpCitizenAccountComponent {
     postalCode1: new FormControl("", [Validators.required, Validators.pattern(/^\d{4}$/)]),
     postalCode2: new FormControl("", [Validators.required, Validators.pattern(/^\d{3}$/)]),
     birthDate: new FormControl(new Date(), [Validators.required, this.adultAgeValidator.bind(this)]),
-    photo: new FormControl(null, [Validators.required])
   });
 
   image!: File;
-  imageUrl: string | ArrayBuffer | null = null;
-
+  imageUrl: string | null = null;
   files: any[] = [];
    
 
@@ -97,6 +95,8 @@ export class SignUpCitizenAccountComponent {
 
     return null;
   };
+
+
 
 
   constructor(private citizenAuthService: CitizenAuthService, private router: Router, private municipalityService: MunicipalAdminAuthService,
@@ -172,21 +172,9 @@ export class SignUpCitizenAccountComponent {
     return this.signUpCitizenForm.get('birthDate') as FormControl;
   }
 
-  get photo() {
-    return this.signUpCitizenForm.get('photo');
-  }
 
-  onImagePicked(event: Event) {
-    const fileInput = event.target as HTMLInputElement;
-    const file = fileInput?.files?.[0];
 
-    if (file) {
-      this.image = file;
-      console.log(this.image);
-    } else {
-      console.error('No file selected');
-    }
-  }
+  
 
 
   onFileChange(event: Event) {
@@ -196,11 +184,21 @@ export class SignUpCitizenAccountComponent {
     if (fileList && fileList.length > 0) {
       this.image = fileList[0];
       this.imageUrl = URL.createObjectURL(this.image);
+
+      console.log("ON FILE CHANGE");
     } else {
       console.error('Nenhuma imagem selecionada');
     }
   }
 
+
+  
+
+  isValidImageFile(file: File): boolean {
+    // Adicione aqui a lógica para validar se o arquivo é uma imagem
+    // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
+    return file.type.startsWith('image/');
+  }
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -210,12 +208,22 @@ export class SignUpCitizenAccountComponent {
     event.preventDefault();
     const files: FileList | null = event.dataTransfer?.files || null;
     if (files && files.length > 0) {
-      // Execute ações com os arquivos aqui
-      this.image = files[0];
-      this.imageUrl = URL.createObjectURL(this.image);
-      console.log(files);
+      const file = files[0];
+      if (file && this.isValidImageFile(file)) { // Verifique se file não é null ou undefined
+        this.image = file;
+        this.imageUrl = URL.createObjectURL(this.image);
+
+      } else {
+        console.error('Por favor, solte uma imagem válida.');
+      }
+    } else {
+      console.error('Nenhuma imagem solta.');
     }
   }
+
+
+
+  
 
 
 
@@ -232,8 +240,7 @@ export class SignUpCitizenAccountComponent {
       address: this.address!.value!,
       postalCode1: this.postalCode1!.value!,
       postalCode2: this.postalCode2!.value!,
-      birthDate: this.birthDate!.value!,
-      photo: this.photo!.value!
+      birthDate: this.birthDate!.value!
     };
 
 

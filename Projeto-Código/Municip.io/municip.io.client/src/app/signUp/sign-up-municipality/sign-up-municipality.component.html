@@ -46,29 +46,47 @@
 
 
           <div class="flex text-left justify-around gap-5 mb-4 max-lg:flex-col max-lg:items-center">
-            <div class="h-32 ">
+
+            <div class="w-[21rem]">
               <app-input-title class="text-[1.4rem]">Foto do Brasão</app-input-title>
-              <input type="file" #emblemPicker id="emblemPhoto" formControlName="emblemPhoto" name="emblemPhoto"
-                     (change)="onEmblemImagePicked($event)"
-                     [(ngModel)]="municipality.emblemPhoto" accept="image/*"
-                     class="input w-[21rem]">
-              
-              <div class="text-red-500 font-bold py-2" *ngIf="emblemPhoto?.touched && emblemPhoto?.invalid ">
-                <div *ngIf="emblemPhoto?.errors?.['required'] ">Foto do Brasão Obrigatória</div>
+              <div class="h-20 table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc]" (dragover)="onDragOver($event)"
+                   (drop)="onDropEmblem($event)" (click)="emblemPicker.click()">
+
+                <div class="table-cell align-middle">
+                  <div class="text-center">
+                    <input type="file" id="emblem" #emblemPicker (change)="onEmblemChange($event)" accept="image/*" capture class="hidden">
+
+                    <label for="emblem" class="flex justify-center items-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
+
+                    <div *ngIf="emblemImg" class="flex items-center justify-center pb-2">
+                      <img [src]="emblemUrl" alt="Imagem carregada" class="w-[10rem] h-[10rem] object-cover ">
+                    </div>
+
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div class="h-32 ">
-              <app-input-title class="text-[1.4rem]">Foto da Paisagem</app-input-title>
-              <input type="file" #landscapePicker id="landscapePhoto" formControlName="landscapePhoto"
-                     name="landscapePhoto" (change)="onLandscapeImagePicked($event)"
-                     [(ngModel)]="municipality.landscapePhoto" accept="image/*"
-                     class="input w-[21rem]">
-              <div class="text-red-500 font-bold py-2" *ngIf="contact?.touched && contact?.invalid ">
-                <div *ngIf="contact?.errors?.['required'] ">Foto da Paisagem Obrigatória</div>
+            <div class="w-[21rem]">
+              <app-input-title class="text-[1.4rem]">Foto do Paisagem</app-input-title>
+              <div class="h-20 table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc]" (dragover)="onDragOver($event)"
+                   (drop)="onDropLandscape($event)" (click)="landscapePicker.click()">
+
+                <div class="table-cell align-middle">
+                  <div class="text-center">
+                    <input type="file" id="landscape" #landscapePicker (change)="onLandscapeChange($event)" accept="image/*" capture class="hidden">
+
+                    <label for="landscape" class="flex justify-center items-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
+
+                    <div *ngIf="landscapeImg" class="flex items-center justify-center pb-2">
+                      <img [src]="landscapeUrl" alt="Imagem carregada" class="w-[18rem] h-[10rem] object-cover ">
+                    </div>
+
+                  </div>
+                </div>
               </div>
-              
             </div>
+
           </div>
 
 
@@ -89,7 +107,7 @@ Sugestão: Esta irá aparecer no perfil do município. Pode fornecer informaçõ
 
 
 
-          <button type="submit" [disabled]="!signUpMunicipalityForm.valid"
+          <button type="submit" [disabled]="!signUpMunicipalityForm.valid || !emblemImg  || !landscapeImg"
                   class="relative top-[1rem] self-end h-auto w-[10rem] flex text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-3 px-8
                focus:outline-none rounded text-lg justify-center items-center
                bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%]  
