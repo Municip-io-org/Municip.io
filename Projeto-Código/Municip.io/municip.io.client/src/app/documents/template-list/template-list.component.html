@@ -7,7 +7,13 @@
 <app-smaller-banner title="Documentos do Município"
                     image={{municipalityImage}}></app-smaller-banner>
 <div class="container mx-auto px-4 sm:px-8">
-
+  <div class="w-44 mt-10">
+    <app-black-btn-icon-text altImage="Voltar"
+                             image="/assets/images/icons/plus-white.png"
+                             (buttonClick)="goCreateTemplate()">
+      Criar Documento
+    </app-black-btn-icon-text>
+  </div>
   <div class="py-8">
 
     <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
