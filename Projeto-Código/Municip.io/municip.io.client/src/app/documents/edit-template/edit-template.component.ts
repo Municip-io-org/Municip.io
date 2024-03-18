@@ -92,7 +92,10 @@ export class EditTemplateComponent {
     });
   }
 
-
+  /**
+   * Coloca os valores do template no formulário
+   * @param template
+   */
   setForm(template: DocumentTemplate) {
     console.log(template)
     this.templateForm.setValue({
@@ -108,7 +111,10 @@ export class EditTemplateComponent {
   }
 
 
-
+  /**
+   * Selecionar um opção
+   * @param option
+   */
   selectOption(option: string) {
     this.selectedItem = option;
     this.showDropdown = false;
@@ -170,7 +176,9 @@ export class EditTemplateComponent {
     this.isDialogOpen = false;
     this.router.navigate(['/documents/template-list']);
   }
-
+  /**
+   * Adicionar propriedades
+   */
   adicionarPropriedade() {
     const propriedadeSelecionada = (document.getElementById('propriedade') as HTMLSelectElement).value;
     const textArea = (document.getElementById('templatetext') as HTMLTextAreaElement);

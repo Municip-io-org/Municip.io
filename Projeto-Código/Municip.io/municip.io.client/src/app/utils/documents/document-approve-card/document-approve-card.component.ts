@@ -13,23 +13,31 @@ export class DocumentApproveCardComponent {
   @Output() waitPayment = new EventEmitter<number>();
   
 
-  //quero dar um estilo diferente para cada status
+  /**
+   * Estilos diferentes para cada estado do documento
+   * @returns
+   */
   getStatusClass(): string {
     if (this.document.status === StatusDocument.approved) {
       return 'bg-[#08BC25] text-[#1D8702]';
     } else if (this.document.status === StatusDocument.pending) {
-      console.log(this.document);
       return 'bg-[#F4A42C] text-[#9B4F08]';
     } else {
       return 'bg-[#FF0000] text-[#B02121]';
     }
   }
-
+  /**
+   * Colocar o documento em estado de espera de pagamento
+   * @param doc
+   */
   waitingPayment(doc: any) {
     
     this.waitPayment.emit(doc);
   }
-
+  /**
+   * Rejeitar documento
+   * @param doc
+   */
   rejectDocument(doc: any) {
     this.deleteDoc.emit(doc);
 

@@ -65,7 +65,10 @@ export class TemplateListComponent {
       }
     });
   }
-
+  /**
+   * Atiav um template
+   * @param document
+   */
   activeDocument(document: DocumentTemplate) {
     this.service.activeTemplate(document.id!).subscribe(
       (response) => {
@@ -76,7 +79,10 @@ export class TemplateListComponent {
       }
     );
   }
-
+  /**
+   * Desactiva um template
+   * @param document
+   */
   desactiveDocument(document: DocumentTemplate) {
     this.service.desactiveTemplate(document.id!).subscribe(
       (response) => {
@@ -88,7 +94,10 @@ export class TemplateListComponent {
     );
 
   }
-
+  /**
+   * Elimina um template
+   * @param document
+   */
   deleteDocument(document: DocumentTemplate) {
     this.service.removeTemplate(document.id!).subscribe(
       (response) => {
@@ -100,7 +109,10 @@ export class TemplateListComponent {
     );
 
   }
-
+  /**
+   * Editar um template
+   * @param document
+   */
   editDocument(document: DocumentTemplate) {
     //redirect to edit page documents/edit-template/:templateId
     this.router.navigateByUrl(`documents/edit-template/${document.id}`);

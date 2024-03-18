@@ -69,6 +69,21 @@ namespace Municip.io.Server.Controllers
 
 
 
+        [HttpPost("SendLinkPayment")]
+        public async Task<IActionResult> SendLinkPayment(int id, string link)
+        {
+            var request = await _context.DocumentRequests.FirstOrDefaultAsync(r => r.Id == id);
+            if (request == null) return BadRequest(new { message = "Não foi encontrado nenhum pedido", ModelState });
+
+            request.PaymentUrl = link;
+            await _context.SaveChangesAsync();
+            return Ok();
+
+        }
+
+
+
+
 
 
         //get documents from a municipality
@@ -86,22 +101,22 @@ namespace Municip.io.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                var  citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
-                
+
+                var citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
+
 
                 if (citizen == null) return BadRequest(new { message = "Não foi encontrado nenhum cidadão", ModelState });
 
 
                 var documentTemplate = await _context.DocumentTemplates.FirstOrDefaultAsync(c => c.Id == request.DocumentTemplate.Id);
-                
+
 
                 if (documentTemplate == null) return BadRequest(new { message = "Não foi encontrado nenhum modelo de documento", ModelState });
 
                 request.Citizen = citizen;
                 request.DocumentTemplate = documentTemplate;
-               
-                
+
+
                 _context.DocumentRequests.Add(request);
                 await _context.SaveChangesAsync();
 
@@ -123,7 +138,7 @@ namespace Municip.io.Server.Controllers
             var municipalRequests = requests.Include(r => r.Citizen).Include(r => r.DocumentTemplate).Where(r => r.Municipality == municipality);
             return Json(municipalRequests);
         }
-        
+
         //get requests from a citizen
         [HttpGet("GetRequestsFromCitizen")]
         public IActionResult GetRequestsFromCitizen(string email)
@@ -169,7 +184,7 @@ namespace Municip.io.Server.Controllers
         }
 
         //change status to waiting for payment
-        [HttpPost("WaitingForPayment")] 
+        [HttpPost("WaitingForPayment")]
         public async Task<IActionResult> WaitingForPayment(int id)
         {
             var request = await _context.DocumentRequests.FirstOrDefaultAsync(r => r.Id == id);
@@ -192,8 +207,8 @@ namespace Municip.io.Server.Controllers
             return Ok();
         }
 
-        
-        
+
+
 
 
 

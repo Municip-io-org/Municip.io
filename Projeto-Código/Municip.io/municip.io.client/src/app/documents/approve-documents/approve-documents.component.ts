@@ -44,7 +44,6 @@ export class ApproveDocumentsComponent {
 
 
 
-
     //this.sortEventsByDate();
     //this.authService.getUserData().subscribe((user) => {
     //  this.authService.getInfoByEmail(user.email).subscribe((account) => {
@@ -90,7 +89,14 @@ export class ApproveDocumentsComponent {
   }
 
   waitPayment(doc: any) {
-    
+
+    var documentRequest = doc.document as RequestDocument;
+
+
+    var baseUrl = location.origin;
+
+    this.docsService.createPayment(documentRequest, this.municipalityImage, `${baseUrl}/documents/my`, `${baseUrl}/documents/my`);
+
     this.docsService.waitingForPayment(doc.document.id).subscribe(
       (res) => {
        this.ngOnInit(); 

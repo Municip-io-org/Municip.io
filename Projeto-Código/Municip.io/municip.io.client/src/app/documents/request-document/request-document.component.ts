@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router';
 import { Municipality } from '../../services/municipal-admin-auth.service';
-import { DocsService, DocumentTemplate } from '../../services/documents/docs.service';
+import { DocsService, DocumentTemplate, DocumentTemplateStatus } from '../../services/documents/docs.service';
 
 
 @Component({
@@ -97,6 +97,6 @@ export class RequestDocumentComponent {
   }
 
   get filteredDocuments() {
-    return this.templates.filter(template => template.name.toLowerCase().includes(this.nameSearch.toLowerCase()));
+    return this.templates.filter(template => template.name.toLowerCase().includes(this.nameSearch.toLowerCase()) && template.status == DocumentTemplateStatus.active);
   }
 }

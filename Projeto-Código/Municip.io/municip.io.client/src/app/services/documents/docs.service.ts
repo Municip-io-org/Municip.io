@@ -57,19 +57,116 @@ export class DocsService {
 
 
 
-  //create payment
-  createPayment(email: string, documentRequest: RequestDocument) {
+  /**
+   *
+   * Cria o pagamento
+   * @param documentRequest
+   * @param municipalityImage
+   * @param successUrl
+   * @param cancelUrl
+   * @returns
+   */
+  createPayment(documentRequest: RequestDocument, municipalityImage: string, successUrl: string, cancelUrl: string) {
     //criar o produto e preco
     // criar a sessao
     //enviar o email com sessão
+    var citizen = documentRequest.citizen;
+    var documentTemplate = documentRequest.documentTemplate;
+
+    return this.createPriceProduct(documentTemplate.name, documentTemplate.description, municipalityImage, documentTemplate.price).subscribe((priceId) => {
+      this.createSessionPayment(citizen.email, successUrl, cancelUrl, priceId.toString(), documentRequest.id!).subscribe((sessionUrl) => {
+        this.sendPaymentEmail(citizen.email, citizen.firstName, sessionUrl, documentTemplate.price.toString()).subscribe((res) => {
+          console.log(res);
+        })
+        this.sendLinkPaymentDocumentRequest(documentRequest.id!, sessionUrl).subscribe((res) => {
+          console.log(res);
+        });
+      })
+    })
   }
+  /**
+   * Insere o link de pagamento na base de daods
+   * @param id
+   * @param link
+   * @returns
+   */
+  sendLinkPaymentDocumentRequest(id: number, link: string): Observable<any> {
+    const params = new HttpParams()
+      .set('id', id.toString())
+      .set('link', link);
+
+    return this.http.post<any>('api/documents/SendLinkPayment', {}, { params });
+
+  }
+
+
+  /**
+   * Cria a sessão de pagamento
+   * @param email
+   * @param successUrl
+   * @param cancelUrl
+   * @param priceId
+   * @param documentRequestId
+   * @returns
+   */
+  createSessionPayment(email: string, successUrl: string, cancelUrl: string, priceId: string, documentRequestId: number): Observable<string> {
+    const params = new HttpParams()
+      .set('email', email)
+      .set('successUrl', successUrl)
+      .set('cancelUrl', cancelUrl)
+      .set('priceId', priceId)
+      .set('documentRequestId', documentRequestId);
+
+    return this.http.post<string>('api/StripePayment/createSession', {}, { params });
+  }
+
+  /**
+   * Cria o preço e produto na api stipe
+   * @param name
+   * @param description
+   * @param image
+   * @param amount
+   * @returns
+   */
+  createPriceProduct(name: string, description: string, image: string, amount: number): Observable<number> {
+
+    const params = new HttpParams()
+      .set('name', name)
+      .set('description', description)
+      .set('image', image)
+      .set('amount', amount.toString());
+
+    return this.http.post<number>('api/StripePayment/createPriceProduct', {}, { params });
+  }
+
+  /**
+   * Envia um email para realizar o pagamento
+   * @param email
+   * @param name
+   * @param url
+   * @param amount
+   * @returns
+   */
+  sendPaymentEmail(email: string, name: string, url: string, amount: string): Observable<any> {
+    const params = new HttpParams()
+      .set('email', email)
+      .set('name', name)
+      .set('url', url)
+      .set('amount', amount);
+
+    return this.http.post<any>('api/StripePayment/sendPayment', {}, { params });
+  }
+
+
+
+
   waitingForPayment(id: number): Observable<any> {
     const params = new HttpParams().set('id', id.toString());
     return this.http.post<any>('api/documents/WaitingForPayment', {}, { params });
   }
 
-  approveDocument(id: number): Observable<any> {  
-    const params = new HttpParams().set('id', id.toString()); 
+  approveDocument(id: number): Observable<any> {
+    const params = new HttpParams().set('id', id.toString());
     return this.http.post<any>('api/documents/ApproveDocument', {}, { params });
   }
 
@@ -84,15 +181,27 @@ export class DocsService {
   }
 
 
-
+  /**
+   * Ativa o template
+   * @param id
+   * @returns
+   */
   activeTemplate(id: number): Observable<any> {
     return this.http.put(`api/DocumentTemplateStatus/activate?id=${id}`, id);
   }
-
+  /**
+   * Desactiva o template
+   * @param id
+   * @returns
+   */
   desactiveTemplate(id: number): Observable<any> {
     return this.http.put(`api/DocumentTemplateStatus/deactivate?id=${id}`, id);
   }
-
+  /**
+   * Elimina o template
+   * @param id
+   * @returns
+   */
   removeTemplate(id: number): Observable<any> {
     return this.http.delete(`api/DocumentTemplateStatus/remove/${id}`);
   }

@@ -56,7 +56,7 @@ namespace Municip.io.Server.Controllers
                 return NotFound();
             }
             //if there is not one document request with this template, then remove it
-            if (_context.DocumentRequests.Find(id) == null)
+            if (_context.DocumentRequests.Where(dr => dr.DocumentTemplate.Id == id) == null)
             {
                 _context.Remove(documentTemplate);
                 _context.SaveChanges();

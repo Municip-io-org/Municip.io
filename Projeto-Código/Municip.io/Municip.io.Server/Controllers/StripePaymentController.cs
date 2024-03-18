@@ -24,11 +24,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        
 
 
-        [HttpPost("CreateSession")]
-        public ActionResult Create(string email, string successUrl, string cancelUrl, string priceId)
+
+        [HttpPost("createSession")]
+        public ActionResult Create(string email, string successUrl, string cancelUrl, string priceId, int documentRequestId)
         {
 
 
@@ -49,18 +49,25 @@ namespace Municip.io.Server.Controllers
                 ExpiresAt = DateTime.Now.AddDays(1),
                 //associate the session with the user
                 CustomerEmail = email,
+                //ad more data to the session
+                Metadata = new Dictionary<string, string>
+                {
+                    { "documentRequestId", documentRequestId.ToString() },
+                }
 
             };
             var service = new SessionService();
             Session session = service.Create(options);
 
-            return Ok(session.Url);
+
+            var sessionUrlJson = JsonSerializer.Serialize(session.Url);
+            return Ok(sessionUrlJson);
         }
 
 
 
         [HttpPost("createPriceProduct")]
-        public ActionResult CreatePrice(string name, string description, string image, int amount)
+        public ActionResult CreatePrice(string name, string description, string image, float amount)
         {
 
 
@@ -75,20 +82,26 @@ namespace Municip.io.Server.Controllers
             var newProduct = service.Create(options);
 
 
+            //the amount will be like 10€ or 10.03€, so chnage it to cents
 
 
             // Create a price of the product
             var optionsPrice = new PriceCreateOptions
             {
                 Currency = "eur",
-                UnitAmount = amount,
+                UnitAmount = Convert.ToInt64(amount * 100),
                 Product = newProduct.Id,
             };
             var servicePrice = new PriceService();
             var price = servicePrice.Create(optionsPrice);
 
 
-            return Ok(price.Id);
+
+            //send in "" the id of the price in json
+            var priceIdJson = JsonSerializer.Serialize(price.Id);
+            return Ok(priceIdJson);
+
+
         }
 
 
@@ -135,7 +148,7 @@ namespace Municip.io.Server.Controllers
 
 
         //send email 
-        [HttpPost("SendPayment")]
+        [HttpPost("sendPayment")]
         public IActionResult SendPayment(string email, string name, string url, string amount)
         {
             EmailSender.SendEmailPayment(email, "Pagamento de Documento", name, "Por favor, realize o pagamento para a emissão do documento.", "root/html/PaymentEmail.html", url, amount);
