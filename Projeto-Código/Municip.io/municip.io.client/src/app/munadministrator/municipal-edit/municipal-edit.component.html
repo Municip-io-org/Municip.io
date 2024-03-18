@@ -66,10 +66,11 @@
 
     <div class="flex flex-col text-left w-full mt-6 mb-4 relative">
       <app-input-title class="text-[2.4vh]">Texto Informativo</app-input-title>
-      <textarea required id="description" formControlName="description" name="description"
-                class="input font-poppins box-border h-[20rem] resize-none grow
-                  decoration-sky-500">
-        </textarea>
+      <ngx-editor [editor]="editor" formControlName="description" placeholder="Introduza uma descrição da Câmara.">
+        <div class="bg-gray-100 border border-gray-300">
+          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+        </div>
+      </ngx-editor>
       <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />
       <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">
         <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatório</div>

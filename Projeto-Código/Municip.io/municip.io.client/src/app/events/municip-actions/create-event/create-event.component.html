@@ -98,10 +98,12 @@
   <div class="w-full mb-4 h-72">
     <app-input-title class="text-[2.6vh]">Descrição</app-input-title>
     <div class="flex items-center">
-      <textarea required placeholder="Descrição do evento" id="description" formControlName="description" name="description"
-                class="input w-full h-30 lg:h-60
-                resize-none">
-      </textarea>
+      
+      <ngx-editor [editor]="editor" formControlName="description" class="w-full">
+        <div class="bg-gray-100 border border-gray-300">
+          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+        </div>
+      </ngx-editor>
     </div>
     <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">
       <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatório</div>
