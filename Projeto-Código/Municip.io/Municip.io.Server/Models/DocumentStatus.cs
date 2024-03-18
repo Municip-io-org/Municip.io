@@ -6,6 +6,14 @@
         Pending,
         Approved,
         WaitingForPayment,
+        Rejected
 
+    }
+
+    public enum DocumentTemplateStatus
+    {
+        Active,
+        Inactive,
+        NotListed
     }
 }

@@ -3953,6 +3953,10 @@ video {
   display: table;
 }
 
+.table-cell{
+  display: table-cell;
+}
+
 .grid{
   display: grid;
 }
@@ -3973,6 +3977,11 @@ video {
 .size-12{
   width: 3rem;
   height: 3rem;
+}
+
+.size-24{
+  width: 6rem;
+  height: 6rem;
 }
 
 .size-3{
@@ -4023,11 +4032,6 @@ video {
 .size-\[3rem\]{
   width: 3rem;
   height: 3rem;
-}
-
-.size-24{
-  width: 6rem;
-  height: 6rem;
 }
 
 .h-0{
@@ -4375,6 +4379,10 @@ video {
   width: 160rem;
 }
 
+.w-\[16rem\]{
+  width: 16rem;
+}
+
 .w-\[180rem\]{
   width: 180rem;
 }
@@ -4405,10 +4413,6 @@ video {
 
 .w-\[30rem\]{
   width: 30rem;
-}
-
-.w-\[35\.2vh\]{
-  width: 35.2vh;
 }
 
 .w-\[35rem\]{
@@ -4666,6 +4670,15 @@ video {
        column-gap: 0.5rem;
 }
 
+.gap-x-5{
+  -moz-column-gap: 1.25rem;
+       column-gap: 1.25rem;
+}
+
+.gap-y-10{
+  row-gap: 2.5rem;
+}
+
 .gap-y-16{
   row-gap: 4rem;
 }
@@ -4680,15 +4693,6 @@ video {
 
 .gap-y-5{
   row-gap: 1.25rem;
-}
-
-.gap-y-10{
-  row-gap: 2.5rem;
-}
-
-.gap-x-5{
-  -moz-column-gap: 1.25rem;
-       column-gap: 1.25rem;
 }
 
 .space-x-10 > :not([hidden]) ~ :not([hidden]){
@@ -4885,6 +4889,10 @@ video {
   border-radius: 1.5rem;
 }
 
+.rounded-\[0\.375rem\]{
+  border-radius: 0.375rem;
+}
+
 .rounded-\[0\.5rem\]{
   border-radius: 0.5rem;
 }
@@ -4958,6 +4966,15 @@ video {
 
 .border-solid{
   border-style: solid;
+}
+
+.border-dotted{
+  border-style: dotted;
+}
+
+.border-\[\#bbbabc\]{
+  --tw-border-opacity: 1;
+  border-color: rgb(187 186 188 / var(--tw-border-opacity));
 }
 
 .border-black{
@@ -5153,6 +5170,11 @@ video {
 .bg-yellow-500{
   --tw-bg-opacity: 1;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#1E90FF\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 144 255 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-35{
@@ -5543,6 +5565,10 @@ video {
   text-align: start;
 }
 
+.align-middle{
+  vertical-align: middle;
+}
+
 .font-inter{
   font-family: Inter;
 }
@@ -5889,6 +5915,11 @@ video {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[\#0E4F71\]{
+  --tw-text-opacity: 1;
+  color: rgb(14 79 113 / var(--tw-text-opacity));
 }
 
 .underline{

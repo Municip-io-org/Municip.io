@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, catchError, of, switchMap, tap } from 'rxjs';
+import { UserAuthService } from '../user-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,9 @@ import { Observable, of, tap } from 'rxjs';
 export class AppFeaturesService {
 
   appFeatures: AppFeature[] = [];
-  constructor(private http: HttpClient) { }
+
+
+  constructor(private http: HttpClient, private userAuthService: UserAuthService) { }
 
   /**
   *  Get app features of municipality.
@@ -16,7 +19,7 @@ export class AppFeaturesService {
   * @returns Observable of app features of municipality.
   */
   getAppFeaturesByMunicipality(municipalityName: string): Observable<AppFeature[]> {
-    console.log(this.appFeatures)
+   
     if (this.appFeatures.length === 0) {
 
       return this.http.get<AppFeature[]>(`api/appFeature/GetAppFeatures?municipalityName=${municipalityName}`).pipe(
@@ -31,6 +34,37 @@ export class AppFeaturesService {
       return of(this.appFeatures);
     }
   }
+
+  /**
+  *  Get app features of current municipality.
+  * @returns Observable of app features of municipality.
+  */
+  getAppFeatures(): Observable<AppFeature[]> {
+    if (this.appFeatures.length === 0) {
+      return this.userAuthService.getMunicipality().pipe(
+        switchMap(municipalityName =>
+          this.http.get<AppFeature[]>(`api/appFeature/GetAppFeatures?municipalityName=${municipalityName}`).pipe(
+            tap((features: AppFeature[]) => {
+              this.appFeatures = features;
+            })
+          )
+        ),
+        catchError(error => {
+          console.error(error);
+          // Handle error and return a default value
+          return this.http.get<AppFeature[]>(`api/appFeature/GetAppFeatures?municipalityName=${"Setúbal"}`).pipe(
+            tap((features: AppFeature[]) => {
+              this.appFeatures = features;
+            })
+          );
+        })
+      );
+    } else {
+      console.log("BUSCAR FEATURES EM CACHE")
+      return of(this.appFeatures);
+    }
+  }
+
 
   /**
    * Update app features of municipality.

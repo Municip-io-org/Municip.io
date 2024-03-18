@@ -7,6 +7,9 @@ using System.IO;
 using Stripe.Checkout;
 using Microsoft.Extensions.Options;
 using Municip.io.Server.Models;
+using Municip.io.Server.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
 namespace Municip.io.Server.Controllers
 {
     [Route("api/[controller]")]
@@ -14,16 +17,24 @@ namespace Municip.io.Server.Controllers
     public class StripeWebHookController : ControllerBase
     {
 
+        private readonly ApplicationDbContext _context;
 
         private string endpointSecret;
 
         private readonly IOptions<StripeModel> appSettings;
 
-        public StripeWebHookController(IOptions<StripeModel> app)
+
+        private HttpClient client = new HttpClient();
+
+        public StripeWebHookController(IOptions<StripeModel> app, ApplicationDbContext context)
         {
             appSettings = app;
 
             endpointSecret = appSettings.Value.WebHookSecret;
+
+            _context = context;
+
+
         }
 
 
@@ -53,7 +64,7 @@ namespace Municip.io.Server.Controllers
                     StripeList<LineItem> lineItems = sessionWithLineItems.LineItems;
 
                     // Fulfill the purchase...
-                    this.FulfillOrder(lineItems);
+                    this.FulfillOrder(lineItems, session);
                 }
 
                 return Ok();
@@ -64,19 +75,31 @@ namespace Municip.io.Server.Controllers
             }
         }
 
-        private void FulfillOrder(StripeList<LineItem> lineItems)
+        private async Task FulfillOrder(StripeList<LineItem> lineItems, Session session)
         {
             var item = lineItems.Data[0];
             var price = item.Price;
             var product = price.Product;
-            
+
 
             var stripePayment = new StripePaymentController(appSettings);
             stripePayment.ArchivePrice(price.Id);
 
 
-            Console.WriteLine(lineItems);
+
+            var id = session.Metadata["documentRequestId"];
+
+            var baseUrl = $"{this.Request.Scheme}://{this.Request.Host}";
+            var url = baseUrl + $"/api/Documents/ApproveRequest?id={id}";
+
+
+            await client.PostAsJsonAsync(url, id);
+
         }
+
+
+
+
     }
 }
 

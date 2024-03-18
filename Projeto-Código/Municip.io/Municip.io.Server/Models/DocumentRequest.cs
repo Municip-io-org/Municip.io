@@ -18,5 +18,7 @@ namespace Municip.io.Server.Models
         public DocumentStatus Status { get; set; }
 
         public DateTime Date { get; set; }
+
+        public string? PaymentUrl { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import {DocsService, RequestDocument, DocumentTemplate, StatusDocument } from '../../../services/documents/docs.service';
+import {DocsService, RequestDocument, DocumentTemplate, StatusDocument, DocumentTemplateStatus } from '../../../services/documents/docs.service';
 import { Citizen } from '../../../services/citizen-auth.service';
 import { Roles, UserAuthService } from '../../../services/user-auth.service';
 import { Router } from '@angular/router';
@@ -18,7 +18,8 @@ export class DocumentRequestCardComponent {
     type: "",
     municipality: "Sem Município",
     price: 0,
-    textTemplate: ''
+    textTemplate: '',
+    status: DocumentTemplateStatus.active
   }
 
 
