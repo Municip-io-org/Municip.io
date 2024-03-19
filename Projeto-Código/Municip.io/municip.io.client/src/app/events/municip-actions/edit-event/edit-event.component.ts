@@ -5,6 +5,7 @@ import { UserAuthService } from '../../../services/user-auth.service';
 import { Event, EventsService } from '../../../services/events/events.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { format } from 'date-fns';
+import { Editor, Toolbar } from 'ngx-editor';
 
 /**
  * Componente responsável por editar um evento.
@@ -24,7 +25,17 @@ export class EditEventComponent implements OnInit {
 
   error: string | null = null;
   photo?: File;
-
+  editor = new Editor();
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
   imagePreview: string = "";
 
   eventSelected!: Event;
@@ -49,6 +60,7 @@ export class EditEventComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.editor = new Editor();
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
@@ -62,6 +74,10 @@ export class EditEventComponent implements OnInit {
     this.eventSelected = this.route.snapshot.data['event'];
     this.setForm(this.eventSelected);
 
+  }
+
+  ngOnDestroy() {
+    this.editor.destroy();
   }
 
 

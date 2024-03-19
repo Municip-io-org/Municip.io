@@ -1,1 +1,1 @@
-search_result['261']=["topic_000000000000007A.html","Event.StartRegistration Property",""];
+search_result['261']=["topic_0000000000000063.html","NewsController.DeleteNews Method","esta função remove uma notícia. Recebe como parâmetro o id da notícia."];

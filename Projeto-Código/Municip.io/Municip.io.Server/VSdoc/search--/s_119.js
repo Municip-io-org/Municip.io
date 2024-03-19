@@ -1,1 +1,1 @@
-search_result['119']=["topic_0000000000000034_vars--.html","NewsController Fields",""];
+search_result['119']=["topic_000000000000002F.html","DocumentController.WaitingForPayment Method","Method to change the status of a document request to waiting for payment"];

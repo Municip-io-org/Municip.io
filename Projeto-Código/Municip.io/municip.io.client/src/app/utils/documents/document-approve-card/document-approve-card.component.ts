@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Document, DocumentType, StatusDocument } from '../../../services/documents.service';
+import { Component, EventEmitter, Input, Output, output } from '@angular/core';
+import { RequestDocument, StatusDocument } from '../../../services/documents/docs.service';
+
 
 @Component({
   selector: 'app-document-approve-card',
@@ -7,19 +8,15 @@ import { Document, DocumentType, StatusDocument } from '../../../services/docume
   styleUrl: './document-approve-card.component.css'
 })
 export class DocumentApproveCardComponent {
-  @Input() document: Document = {
-    id: 0,
-    name: 'Certeficado De Residência',
-    subTitle: "Este requerimento de passaporte é sua porta de entrada para o mundo. Ao preencher este formulário, você está iniciando o processo que permitirá explorar novas culturas, conhecer novas pessoas e criar memórias inesquecíveis.",
-    type: DocumentType.Certeficated,
-    status: StatusDocument.approved,
-    date: new Date(),
-    municipality: "Setúbal",
-    RequestBy: "Ana Maria"
-    
-  }
+  @Input() document!: RequestDocument;
+  @Output() deleteDoc = new EventEmitter<number>();
+  @Output() waitPayment = new EventEmitter<number>();
+  
 
-  //quero dar um estilo diferente para cada status
+  /**
+   * Estilos diferentes para cada estado do documento
+   * @returns
+   */
   getStatusClass(): string {
     if (this.document.status === StatusDocument.approved) {
       return 'bg-[#08BC25] text-[#1D8702]';
@@ -29,4 +26,22 @@ export class DocumentApproveCardComponent {
       return 'bg-[#FF0000] text-[#B02121]';
     }
   }
+  /**
+   * Colocar o documento em estado de espera de pagamento
+   * @param doc
+   */
+  waitingPayment(doc: any) {
+    
+    this.waitPayment.emit(doc);
+  }
+  /**
+   * Rejeitar documento
+   * @param doc
+   */
+  rejectDocument(doc: any) {
+    this.deleteDoc.emit(doc);
+
+  }
+
+  
 }

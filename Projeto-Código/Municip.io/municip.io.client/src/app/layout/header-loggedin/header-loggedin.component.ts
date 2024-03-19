@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router';
+import { AppFeature, AppFeaturesService } from '../../services/appFeatures/app-features.service';
 
 @Component({
   selector: 'app-header-loggedin',
@@ -13,6 +14,10 @@ export class HeaderLoggedinComponent {
   firstName: string = '';
   photo: string = '';
   role: string = '';
+
+  appFeatures: AppFeature[] = [];
+
+
   showDropdownAgenda: boolean = false;
   showDropdownBiblioteca: boolean = false;
   showDropdownDocumentos: boolean = false;
@@ -21,7 +26,7 @@ export class HeaderLoggedinComponent {
   showSignOutDropdown: boolean = false;
   showDropdownMunicipality: boolean = false;
 
-  constructor(private auth: UserAuthService, private router: Router) { }
+  constructor(private auth: UserAuthService, private appFeaturesService: AppFeaturesService, private router: Router) { }
 
   ngOnInit() {
     this.auth.onStateChanged().forEach((state: any) => {
@@ -38,6 +43,19 @@ export class HeaderLoggedinComponent {
             this.user = res;
             this.firstName = this.user.firstName;
             this.photo = this.user.photo;
+
+           
+            this.appFeaturesService.getAppFeaturesByMunicipality(this.user.municipality).subscribe(
+              (appFeaturesRes: AppFeature[]) => {
+
+                this.appFeatures = appFeaturesRes;
+
+              },
+              error => {
+                console.error(error);
+              }
+            );
+
 
           },
           error => {
@@ -140,6 +158,22 @@ export class HeaderLoggedinComponent {
     if (this.role === 'Municipal') {
       this.router.navigateByUrl(`/municipal/homePage`)
     }
+  }
+
+  isDocumentsFeatureActive() {
+    return this.appFeatures.find(a => a.appFeatureCategory == "Documents")?.isEnabled;
+  }
+
+  isEventsFeatureActive() {
+    return this.appFeatures.find(a => a.appFeatureCategory == "Events")?.isEnabled;
+  }
+
+  isNewsFeatureActive() {
+    return this.appFeatures.find(a => a.appFeatureCategory == "News")?.isEnabled;
+  }
+
+  isTransportsFeatureActive() {
+    return this.appFeatures.find(a => a.appFeatureCategory == "Transports")?.isEnabled;
   }
 }
 

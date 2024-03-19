@@ -1,1 +1,1 @@
-search_result['136']=["topic_000000000000003B.html","Municip.io.Server.Data Namespace",""];
+search_result['136']=["topic_0000000000000036.html","DocumentTemplateStatusController.Remove Method","Method to remove the document template"];

@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Event, EventsService } from '../../../services/events/events.service';
+import { Event as AppEvent, EventsService } from '../../../services/events/events.service';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 import { UserAuthService } from '../../../services/user-auth.service';
 import { Router } from '@angular/router';
+import { Editor, Toolbar } from 'ngx-editor';
 
 
 /**
@@ -28,10 +29,22 @@ export class CreateEventComponent implements OnInit {
 
 
   error: string | null = null;
-  photo!: File;
+  image!: File;
+  imageUrl: string | null = null;
+  files: any[] = [];
 
   isDialogOpen: boolean = false;
-
+  editor = new Editor();
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
 
   /**
    * Construtor do componente.
@@ -55,6 +68,7 @@ export class CreateEventComponent implements OnInit {
    * Método onInit 
    */
   ngOnInit(): void {
+    this.editor = new Editor();
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
@@ -67,6 +81,9 @@ export class CreateEventComponent implements OnInit {
 
   }
 
+  ngDestroy() {
+    this.editor.destroy();
+  }
 
 
   eventForm = new FormGroup({
@@ -85,7 +102,6 @@ export class CreateEventComponent implements OnInit {
       endHour: new FormControl('', [Validators.required]),
     }),
     local: new FormControl('', [Validators.required]),
-    image: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
 
   })
@@ -140,16 +156,8 @@ export class CreateEventComponent implements OnInit {
     return this.eventRegistration.get('endHour');
   }
 
-
-
-
-
   get local() {
     return this.eventForm.get('local');
-  }
-
-  get image() {
-    return this.eventForm.get('image');
   }
 
   get description() {
@@ -169,7 +177,7 @@ export class CreateEventComponent implements OnInit {
 
 
 
-      const newEvent: Event = {
+      const newEvent: AppEvent = {
         title: this.title?.value || "",
         capacity: parseInt(this.capacity?.value || "10"),
         nRegistrations: 0,
@@ -184,7 +192,7 @@ export class CreateEventComponent implements OnInit {
         image: '',
       }
 
-      this.eventService.createEvent(newEvent, this.photo).subscribe(
+      this.eventService.createEvent(newEvent, this.image).subscribe(
         (event) => {
           this.error = null;
           this.isDialogOpen = true;
@@ -225,16 +233,47 @@ export class CreateEventComponent implements OnInit {
    * Evento dispultado aquando do selecionamento de uma imagem
    * @param event
    */
-  onImagePicked(event: any) {
+  onFileChange(event: Event) {
     const fileInput = event.target as HTMLInputElement;
-    const file = fileInput?.files?.[0]; // Use optional chaining here
+    const fileList: FileList | null = fileInput?.files;
 
-    if (file) {
-      this.photo = file;
+    if (fileList && fileList.length > 0) {
+      this.image = fileList[0];
+      this.imageUrl = URL.createObjectURL(this.image);
 
-
+      console.log("ON FILE CHANGE");
     } else {
-      console.error('No file selected');
+      console.error('Nenhuma imagem selecionada');
+    }
+  }
+
+
+
+
+  isValidImageFile(file: File): boolean {
+    // Adicione aqui a lógica para validar se o arquivo é uma imagem
+    // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
+    return file.type.startsWith('image/');
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    const files: FileList | null = event.dataTransfer?.files || null;
+    if (files && files.length > 0) {
+      const file = files[0];
+      if (file && this.isValidImageFile(file)) { // Verifique se file não é null ou undefined
+        this.image = file;
+        this.imageUrl = URL.createObjectURL(this.image);
+
+      } else {
+        console.error('Por favor, solte uma imagem válida.');
+      }
+    } else {
+      console.error('Nenhuma imagem solta.');
     }
   }
 

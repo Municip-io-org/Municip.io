@@ -7,9 +7,9 @@
 
       <div class="flex items-center pt-5 space-x-3">
         <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-          <img src="your-image-url.jpg" alt="Document Type Icon" class="w-6 h-6">
+          <img src="{{document.citizen.photo}}" alt="Document Type Icon" class="w-10 h-10 rounded-full">
         </div>
-        <p class="font-roboto font-extralight text-lg text-municip-highlight-black">{{document.RequestBy}}</p>
+        <p class="font-roboto font-extralight text-lg text-municip-highlight-black">{{document.citizen.firstName}}</p>
       </div>
     </div>
 
@@ -23,11 +23,11 @@
         <p class="font-inter font-semibold">{{document.status}}</p>
 
       </div>
-      <div *ngIf="document.status == 'Pendente'" class="flex flex-wrap justify-center pt-5 space-x-10">
-        <div class="relative h-10 w-[2.5rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl bg-green-500 border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-green-800 rounded text-lg transition duration-700 ease-in-out mr-2">
-          <img alt="delete" src="/assets/images/icons/check-green (2).png" class="size-3" />
+      <div *ngIf="document.status == 'Pending'" class="flex flex-wrap justify-center pt-5 space-x-10">
+        <div (click)="waitingPayment(this)" class="relative h-10 w-[2.5rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl bg-green-500 border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-green-800 rounded text-lg transition duration-700 ease-in-out mr-2">
+          <img alt="check" src="/assets/images/icons/check-green (2).png" class="size-3" />
         </div>
-        <div class="relative h-10 w-[2.5rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl bg-red-500 border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-red-800 rounded text-lg transition duration-700 ease-in-out mr-2">
+        <div (click)="rejectDocument(this)" class="relative h-10 w-[2.5rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl bg-red-500 border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-red-800 rounded text-lg transition duration-700 ease-in-out mr-2">
           <img alt="delete" src="/assets/images/icons/delete.png" class="size-3.5" />
         </div>
       </div>

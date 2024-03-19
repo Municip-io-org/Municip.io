@@ -1,1 +1,1 @@
-search_result['75']=["topic_000000000000001C.html","EventsController.CreateEvent Method","Esta chamada permite criar um evento no sistema, passando omo parâmetro um objeto do tipo Event"];
+search_result['75']=["topic_000000000000001A_events--.html","EventsController Events",""];

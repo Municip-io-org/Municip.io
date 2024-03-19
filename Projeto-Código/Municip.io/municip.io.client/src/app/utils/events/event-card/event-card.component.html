@@ -21,7 +21,7 @@
     <p class="text-[0.96rem] text-right font-open-sans font-semibold">De {{event.startDate | date: "d/MM/yyyy"}} a {{event.endDate | date: "d/MM/yyyy"}}</p>
     <section class="flex flex-col text-municip-highlight-black ">
       <p class="font-bold text-center text-[2rem] text-ellipsis overflow-hidden line-clamp-2">{{event.title}}</p>
-      <p class=" font-bold text-ellipsis overflow-hidden line-clamp-3 ">{{event.description}}</p>
+      <p innerHTML="{{event.description}}" class=" font-bold text-ellipsis overflow-hidden line-clamp-3 "></p>
     </section>
     <div class="flex justify-between items-center font-open-sans font-extrabold pt-4">
       <div class="flex items-center">

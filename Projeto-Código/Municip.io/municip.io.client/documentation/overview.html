@@ -8,1115 +8,1185 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	   <link rel="stylesheet" href="./styles/style.css">
-        <link rel="stylesheet" href="./styles/dark.css">
+	    <link rel="stylesheet" href="./styles/style.css">
     </head>
     <body>
-          <script>
-               // Blocking script to avaoid flickering dark mode
-               // Dark mode toggle button
-               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
-               var darkModeState = useDark.matches;
-               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
-               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
-               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-               function checkToggle(check) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].checked = check;
-                    }
-               }
-
-               function toggleDarkMode(state) {
-                    if (window.localStorage) {
-                         localStorage.setItem('compodoc_darkmode-state', state);
-                    }
-
-                    checkToggle(state);
-
-                    const hasClass = document.body.classList.contains('dark');
-
-                    if (state) {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.add('dark');
-                         }
-                         if (!hasClass) {
-                              document.body.classList.add('dark');
-                         }
-                    } else {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.remove('dark');
-                         }
-                         if (hasClass) {
-                              document.body.classList.remove('dark');
-                         }
-                    }
-               }
-
-               useDark.addEventListener('change', function (evt) {
-                    toggleDarkMode(evt.matches);
-               });
-               if (darkModeStateLocal) {
-                    darkModeState = darkModeStateLocal === 'true';
-               }
-               toggleDarkMode(darkModeState);
-
-               if ($darkModeToggles.length > 0) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
-                              darkModeState = !darkModeState;
-                              toggleDarkMode(darkModeState);
-                         });
-                    }
-               }
-          </script>
-
-        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
             <a href="./" class="navbar-brand">municip.io.client documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="./">municip.io.client documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                         href="./overview.html" 
+                                        
+                                         href="./overview.html" 
+                                         class="active" >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="modules/AppModule.html" >AppModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="components/AboutusComponent.html" >AboutusComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AccessBlockedComponent.html" >AccessBlockedComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AccessDeniedComponent.html" >AccessDeniedComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminDashboardMunicipalAdminsComponent.html" >AdminDashboardMunicipalAdminsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ApproveDocumentsComponent.html" >ApproveDocumentsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/BannerComponent.html" >BannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/BigBannerComponent.html" >BigBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/BlackBtnIconTextComponent.html" >BlackBtnIconTextComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/BtnMunicipBlueComponent.html" >BtnMunicipBlueComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CalendarComponent.html" >CalendarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CalendarHeaderComponent.html" >CalendarHeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CalendarPageComponent.html" >CalendarPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CardComponent.html" >CardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CardOutlineThemeComponent.html" >CardOutlineThemeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CardOutlineWhiteComponent.html" >CardOutlineWhiteComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CardTeamComponent.html" >CardTeamComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CitizenHomePageComponent.html" >CitizenHomePageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CountryPickerComponent.html" >CountryPickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CreateEventComponent.html" >CreateEventComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CreateTemplateComponent.html" >CreateTemplateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DatePickerComponent.html" >DatePickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DatetimepickerComponent.html" >DatetimepickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DialogMessageComponent.html" >DialogMessageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DocsHomepageComponent.html" >DocsHomepageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DocumentApproveCardComponent.html" >DocumentApproveCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DocumentCardComponent.html" >DocumentCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DocumentRequestCardComponent.html" >DocumentRequestCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EditEventComponent.html" >EditEventComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EditTemplateComponent.html" >EditTemplateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EventCardComponent.html" >EventCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EventPageComponent.html" >EventPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EventsListComponent.html" >EventsListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EventsSmallComponent.html" >EventsSmallComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EventsmapComponent.html" >EventsmapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/FooterComponent.html" >FooterComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/GeneralInfoComponent.html" >GeneralInfoComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/GeneratepdfComponent.html" >GeneratepdfComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/HeaderComponent.html" >HeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/HeaderLoggedinComponent.html" >HeaderLoggedinComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/InputTitleComponent.html" >InputTitleComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/LandingComponent.html" >LandingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/LoginComponent.html" >LoginComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ManageAppFeaturesComponent.html" >ManageAppFeaturesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunAdminHomePageComponent.html" >MunAdminHomePageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunAdmindashboardComponent.html" >MunAdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunicipalEditComponent.html" >MunicipalEditComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunicipalEventsComponent.html" >MunicipalEventsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunicipalProfileComponent.html" >MunicipalProfileComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunicipalitymapComponent.html" >MunicipalitymapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MyDataCardComponent.html" >MyDataCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MyDocumentsComponent.html" >MyDocumentsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MyMunicipalityCardComponent.html" >MyMunicipalityCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsCardComponent.html" >NewsCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsCreateComponent.html" >NewsCreateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsEditComponent.html" >NewsEditComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsListComponent.html" >NewsListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsPageComponent.html" >NewsPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsSmallComponent.html" >NewsSmallComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NextEventsComponent.html" >NextEventsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NextNewsComponent.html" >NextNewsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ProfileBannerComponent.html" >ProfileBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/RequestDocumentComponent.html" >RequestDocumentComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SchedulesComponent.html" >SchedulesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SelectAccountTypeComponent.html" >SelectAccountTypeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ShowHidePasswordComponent.html" >ShowHidePasswordComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ShowStopComponent.html" >ShowStopComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SignUpCitizenAccountComponent.html" >SignUpCitizenAccountComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SignUpMunicipalAdministratorAccountComponent.html" >SignUpMunicipalAdministratorAccountComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SignUpMunicipalityComponent.html" >SignUpMunicipalityComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SignUpSuccessComponent.html" >SignUpSuccessComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SmallerBannerComponent.html" >SmallerBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SpinnerComponent.html" >SpinnerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/StatisticalHomePageCardComponent.html" >StatisticalHomePageCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/StopsMapComponent.html" >StopsMapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/StopsPageComponent.html" >StopsPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/TemplateListComponent.html" >TemplateListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/TermsconditionsComponent.html" >TermsconditionsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/TooltipComponent.html" >TooltipComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/TransportsMainComponent.html" >TransportsMainComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/UserinfodialogComponent.html" >UserinfodialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/UserpageComponent.html" >UserpageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VerticalCardComponent.html" >VerticalCardComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-code"></span>
+                            <span>Directives</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-directives-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-directives-links"
+                            >
+                                <li class="link">
+                                    <a href="directives/FileDragDropDirective.html" >FileDragDropDirective</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="injectables/AdministratorGuard.html" >AdministratorGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/AppFeaturesService.html" >AppFeaturesService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/AuthGuardService.html" >AuthGuardService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/BoundsService.html" >BoundsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CitizenAuthService.html" >CitizenAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CitizenGuard.html" >CitizenGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CitizenOrMunicipalAdminGuard.html" >CitizenOrMunicipalAdminGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CitizenStatusService.html" >CitizenStatusService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CustomDateFormatterService.html" >CustomDateFormatterService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CustomEventTitleFormatterService.html" >CustomEventTitleFormatterService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/DocsDataService.html" >DocsDataService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/DocsService.html" >DocsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/EncryptionService.html" >EncryptionService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/EventsService.html" >EventsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/IsDocumentFeatureActive.html" >IsDocumentFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/IsEventsFeatureActive.html" >IsEventsFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/IsNewsFeatureActive.html" >IsNewsFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/IsTransportFeatureActive.html" >IsTransportFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/LoaderService.html" >LoaderService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/LoadingInterceptor.html" >LoadingInterceptor</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MunicipalAdminAuthService.html" >MunicipalAdminAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MunicipalAdminGuard.html" >MunicipalAdminGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MunicipalityGuard.html" >MunicipalityGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MunicipalityStatusService.html" >MunicipalityStatusService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/NewsService.html" >NewsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/TransportsService.html" >TransportsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/UserAuthService.html" >UserAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/UserSameMunicipalityGuard.html" >UserSameMunicipalityGuard</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="interfaces/AppFeature.html" >AppFeature</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/AppFeatureToSubmit.html" >AppFeatureToSubmit</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Citizen.html" >Citizen</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Country.html" >Country</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/DocumentTemplate.html" >DocumentTemplate</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Event.html" >Event</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Login.html" >Login</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/MunicipalAdministrator.html" >MunicipalAdministrator</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Municipality.html" >Municipality</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/News.html" >News</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/RequestDocument.html" >RequestDocument</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/formSchedule.html" >formSchedule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/line.html" >line</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/municipalityTransport.html" >municipalityTransport</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/pattern.html" >pattern</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/route.html" >route</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/stop.html" >stop</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/stopInfo.html" >stopInfo</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/stopTime.html" >stopTime</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/trip.html" >trip</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-plus"></span>
+                            <span>Pipes</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-pipes-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-pipes-links"
+                            >
+                                <li class="link">
+                                    <a href="pipes/FirstLetterUpperCasePipe.html" >FirstLetterUpperCasePipe</a>
+                                </li>
+                                <li class="link">
+                                    <a href="pipes/FormatNumber3By3Pipe.html" >FormatNumber3By3Pipe</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
                <div class="hidden-xs menu">
-                   <compodoc-menu mode="normal"></compodoc-menu>
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="./">municip.io.client documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                                href="./overview.html" 
+                                               
+                                                href="./overview.html" 
+                                                class="active" >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="modules/AppModule.html" >AppModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="components/AboutusComponent.html" >AboutusComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AccessBlockedComponent.html" >AccessBlockedComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AccessDeniedComponent.html" >AccessDeniedComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminDashboardMunicipalAdminsComponent.html" >AdminDashboardMunicipalAdminsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ApproveDocumentsComponent.html" >ApproveDocumentsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/BannerComponent.html" >BannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/BigBannerComponent.html" >BigBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/BlackBtnIconTextComponent.html" >BlackBtnIconTextComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/BtnMunicipBlueComponent.html" >BtnMunicipBlueComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CalendarComponent.html" >CalendarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CalendarHeaderComponent.html" >CalendarHeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CalendarPageComponent.html" >CalendarPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CardComponent.html" >CardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CardOutlineThemeComponent.html" >CardOutlineThemeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CardOutlineWhiteComponent.html" >CardOutlineWhiteComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CardTeamComponent.html" >CardTeamComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CitizenHomePageComponent.html" >CitizenHomePageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CountryPickerComponent.html" >CountryPickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CreateEventComponent.html" >CreateEventComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CreateTemplateComponent.html" >CreateTemplateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DatePickerComponent.html" >DatePickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DatetimepickerComponent.html" >DatetimepickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DialogMessageComponent.html" >DialogMessageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DocsHomepageComponent.html" >DocsHomepageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DocumentApproveCardComponent.html" >DocumentApproveCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DocumentCardComponent.html" >DocumentCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DocumentRequestCardComponent.html" >DocumentRequestCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EditEventComponent.html" >EditEventComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EditTemplateComponent.html" >EditTemplateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EventCardComponent.html" >EventCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EventPageComponent.html" >EventPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EventsListComponent.html" >EventsListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EventsSmallComponent.html" >EventsSmallComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EventsmapComponent.html" >EventsmapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/FooterComponent.html" >FooterComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/GeneralInfoComponent.html" >GeneralInfoComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/GeneratepdfComponent.html" >GeneratepdfComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/HeaderComponent.html" >HeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/HeaderLoggedinComponent.html" >HeaderLoggedinComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/InputTitleComponent.html" >InputTitleComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/LandingComponent.html" >LandingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/LoginComponent.html" >LoginComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ManageAppFeaturesComponent.html" >ManageAppFeaturesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunAdminHomePageComponent.html" >MunAdminHomePageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunAdmindashboardComponent.html" >MunAdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunicipalEditComponent.html" >MunicipalEditComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunicipalEventsComponent.html" >MunicipalEventsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunicipalProfileComponent.html" >MunicipalProfileComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunicipalitymapComponent.html" >MunicipalitymapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MyDataCardComponent.html" >MyDataCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MyDocumentsComponent.html" >MyDocumentsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MyMunicipalityCardComponent.html" >MyMunicipalityCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsCardComponent.html" >NewsCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsCreateComponent.html" >NewsCreateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsEditComponent.html" >NewsEditComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsListComponent.html" >NewsListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsPageComponent.html" >NewsPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsSmallComponent.html" >NewsSmallComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NextEventsComponent.html" >NextEventsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NextNewsComponent.html" >NextNewsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ProfileBannerComponent.html" >ProfileBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/RequestDocumentComponent.html" >RequestDocumentComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SchedulesComponent.html" >SchedulesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SelectAccountTypeComponent.html" >SelectAccountTypeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ShowHidePasswordComponent.html" >ShowHidePasswordComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ShowStopComponent.html" >ShowStopComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SignUpCitizenAccountComponent.html" >SignUpCitizenAccountComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SignUpMunicipalAdministratorAccountComponent.html" >SignUpMunicipalAdministratorAccountComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SignUpMunicipalityComponent.html" >SignUpMunicipalityComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SignUpSuccessComponent.html" >SignUpSuccessComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SmallerBannerComponent.html" >SmallerBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SpinnerComponent.html" >SpinnerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/StatisticalHomePageCardComponent.html" >StatisticalHomePageCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/StopsMapComponent.html" >StopsMapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/StopsPageComponent.html" >StopsPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/TemplateListComponent.html" >TemplateListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/TermsconditionsComponent.html" >TermsconditionsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/TooltipComponent.html" >TooltipComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/TransportsMainComponent.html" >TransportsMainComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/UserinfodialogComponent.html" >UserinfodialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/UserpageComponent.html" >UserpageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VerticalCardComponent.html" >VerticalCardComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-code"></span>
+                                   <span>Directives</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#directives-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="directives-links"
+                   >
+                                       <li class="link">
+                                           <a href="directives/FileDragDropDirective.html" >FileDragDropDirective</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="injectables/AdministratorGuard.html" >AdministratorGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/AppFeaturesService.html" >AppFeaturesService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/AuthGuardService.html" >AuthGuardService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/BoundsService.html" >BoundsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CitizenAuthService.html" >CitizenAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CitizenGuard.html" >CitizenGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CitizenOrMunicipalAdminGuard.html" >CitizenOrMunicipalAdminGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CitizenStatusService.html" >CitizenStatusService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CustomDateFormatterService.html" >CustomDateFormatterService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CustomEventTitleFormatterService.html" >CustomEventTitleFormatterService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/DocsDataService.html" >DocsDataService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/DocsService.html" >DocsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/EncryptionService.html" >EncryptionService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/EventsService.html" >EventsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/IsDocumentFeatureActive.html" >IsDocumentFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/IsEventsFeatureActive.html" >IsEventsFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/IsNewsFeatureActive.html" >IsNewsFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/IsTransportFeatureActive.html" >IsTransportFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/LoaderService.html" >LoaderService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/LoadingInterceptor.html" >LoadingInterceptor</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/MunicipalAdminAuthService.html" >MunicipalAdminAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/MunicipalAdminGuard.html" >MunicipalAdminGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/MunicipalityGuard.html" >MunicipalityGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/MunicipalityStatusService.html" >MunicipalityStatusService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/NewsService.html" >NewsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/TransportsService.html" >TransportsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/UserAuthService.html" >UserAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/UserSameMunicipalityGuard.html" >UserSameMunicipalityGuard</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="interfaces/AppFeature.html" >AppFeature</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/AppFeatureToSubmit.html" >AppFeatureToSubmit</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Citizen.html" >Citizen</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Country.html" >Country</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/DocumentTemplate.html" >DocumentTemplate</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Event.html" >Event</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Login.html" >Login</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/MunicipalAdministrator.html" >MunicipalAdministrator</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Municipality.html" >Municipality</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/News.html" >News</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/RequestDocument.html" >RequestDocument</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/formSchedule.html" >formSchedule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/line.html" >line</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/municipalityTransport.html" >municipalityTransport</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/pattern.html" >pattern</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/route.html" >route</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/stop.html" >stop</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/stopInfo.html" >stopInfo</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/stopTime.html" >stopTime</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/trip.html" >trip</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-plus"></span>
+                                   <span>Pipes</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#pipes-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="pipes-links"
+                   >
+                                       <li class="link">
+                                           <a href="pipes/FirstLetterUpperCasePipe.html" >FirstLetterUpperCasePipe</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="pipes/FormatNumber3By3Pipe.html" >FormatNumber3By3Pipe</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
                </div>
-               <!-- START CONTENT -->
                <div class="content overview">
                    <div class="content-data">
-
-
-<ol class="breadcrumb">
-    <li class="breadcrumb-item">Overview</li>
-</ol>
-  
-<div class="text-center module-graph-container">
-    <div id="module-graph-svg">
-        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
- "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Generated by graphviz version 2.47.0 (20210316.0004)
- -->
-<!-- Title: dependencies Pages: 1 -->
-<svg width="12739pt" height="284pt"
- viewBox="0.00 0.00 12739.00 284.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 280)">
-<title>dependencies</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-280 12735,-280 12735,4 -4,4"/>
-<text text-anchor="start" x="6344.51" y="-42.4" font-family="Times-12" font-weight="bold" font-size="14.00">Legend</text>
-<polygon fill="#ffffb3" stroke="transparent" points="6131.5,-10 6131.5,-30 6151.5,-30 6151.5,-10 6131.5,-10"/>
-<text text-anchor="start" x="6155.13" y="-15.4" font-family="Times-12" font-size="14.00"> &#160;Declarations</text>
-<polygon fill="#8dd3c7" stroke="transparent" points="6244.5,-10 6244.5,-30 6264.5,-30 6264.5,-10 6244.5,-10"/>
-<text text-anchor="start" x="6268.23" y="-15.4" font-family="Times-12" font-size="14.00"> &#160;Module</text>
-<polygon fill="#80b1d3" stroke="transparent" points="6330.5,-10 6330.5,-30 6350.5,-30 6350.5,-10 6330.5,-10"/>
-<text text-anchor="start" x="6354.28" y="-15.4" font-family="Times-12" font-size="14.00"> &#160;Bootstrap</text>
-<polygon fill="#fdb462" stroke="transparent" points="6427.5,-10 6427.5,-30 6447.5,-30 6447.5,-10 6427.5,-10"/>
-<text text-anchor="start" x="6451.17" y="-15.4" font-family="Times-12" font-size="14.00"> &#160;Providers</text>
-<polygon fill="#fb8072" stroke="transparent" points="6523.5,-10 6523.5,-30 6543.5,-30 6543.5,-10 6523.5,-10"/>
-<text text-anchor="start" x="6547.23" y="-15.4" font-family="Times-12" font-size="14.00"> &#160;Exports</text>
-<g id="clust1" class="cluster">
-<title>cluster_AppModule</title>
-<polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-70 8,-268 12723,-268 12723,-70 8,-70"/>
-</g>
-<g id="clust2" class="cluster">
-<title>cluster_AppModule_declarations</title>
-<polygon fill="none" stroke="black" points="364,-78 364,-130 12715,-130 12715,-78 364,-78"/>
-</g>
-<g id="clust73" class="cluster">
-<title>cluster_AppModule_imports</title>
-<polygon fill="none" stroke="black" points="212,-78 212,-130 356,-130 356,-78 212,-78"/>
-</g>
-<g id="clust75" class="cluster">
-<title>cluster_AppModule_bootstrap</title>
-<polygon fill="none" stroke="black" points="6529,-208 6529,-260 6653,-260 6653,-208 6529,-208"/>
-</g>
-<g id="clust76" class="cluster">
-<title>cluster_AppModule_providers</title>
-<polygon fill="none" stroke="black" points="16,-78 16,-130 204,-130 204,-78 16,-78"/>
-</g>
-<!-- AboutusComponent -->
-<g id="node1" class="node">
-<title>AboutusComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="12707.27,-122 12578.73,-122 12578.73,-86 12707.27,-86 12707.27,-122"/>
-<text text-anchor="middle" x="12643" y="-99.8" font-family="Times,serif" font-size="14.00">AboutusComponent</text>
-</g>
-<!-- AppModule -->
-<g id="node71" class="node">
-<title>AppModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="6632.66,-187 6629.66,-191 6608.66,-191 6605.66,-187 6549.34,-187 6549.34,-151 6632.66,-151 6632.66,-187"/>
-<text text-anchor="middle" x="6591" y="-164.8" font-family="Times,serif" font-size="14.00">AppModule</text>
-</g>
-<!-- AboutusComponent&#45;&gt;AppModule -->
-<g id="edge1" class="edge">
-<title>AboutusComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M12643,-122.01C12643,-146.42 12643,-187 12643,-187 12643,-187 6642.88,-187 6642.88,-187"/>
-<polygon fill="black" stroke="black" points="6642.88,-183.5 6632.88,-187 6642.88,-190.5 6642.88,-183.5"/>
-</g>
-<!-- AccessDeniedComponent -->
-<g id="node2" class="node">
-<title>AccessDeniedComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="12560.9,-122 12399.1,-122 12399.1,-86 12560.9,-86 12560.9,-122"/>
-<text text-anchor="middle" x="12480" y="-99.8" font-family="Times,serif" font-size="14.00">AccessDeniedComponent</text>
-</g>
-<!-- AccessDeniedComponent&#45;&gt;AppModule -->
-<g id="edge2" class="edge">
-<title>AccessDeniedComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M12480,-122.2C12480,-146.36 12480,-186 12480,-186 12480,-186 6642.96,-186 6642.96,-186"/>
-<polygon fill="black" stroke="black" points="6642.96,-182.5 6632.96,-186 6642.96,-189.5 6642.96,-182.5"/>
-</g>
-<!-- AdmindashboardComponent -->
-<g id="node3" class="node">
-<title>AdmindashboardComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="12380.75,-122 12203.25,-122 12203.25,-86 12380.75,-86 12380.75,-122"/>
-<text text-anchor="middle" x="12292" y="-99.8" font-family="Times,serif" font-size="14.00">AdmindashboardComponent</text>
-</g>
-<!-- AdmindashboardComponent&#45;&gt;AppModule -->
-<g id="edge3" class="edge">
-<title>AdmindashboardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M12292,-122.38C12292,-146.28 12292,-185 12292,-185 12292,-185 6642.81,-185 6642.81,-185"/>
-<polygon fill="black" stroke="black" points="6642.81,-181.5 6632.81,-185 6642.81,-188.5 6642.81,-181.5"/>
-</g>
-<!-- AppComponent -->
-<g id="node4" class="node">
-<title>AppComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="12184.94,-122 12079.06,-122 12079.06,-86 12184.94,-86 12184.94,-122"/>
-<text text-anchor="middle" x="12132" y="-99.8" font-family="Times,serif" font-size="14.00">AppComponent</text>
-</g>
-<!-- AppComponent&#45;&gt;AppModule -->
-<g id="edge4" class="edge">
-<title>AppComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M12132,-122.15C12132,-145.76 12132,-184 12132,-184 12132,-184 6642.81,-184 6642.81,-184"/>
-<polygon fill="black" stroke="black" points="6642.81,-180.5 6632.81,-184 6642.81,-187.5 6642.81,-180.5"/>
-</g>
-<!-- BannerComponent -->
-<g id="node5" class="node">
-<title>BannerComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="12060.76,-122 11939.24,-122 11939.24,-86 12060.76,-86 12060.76,-122"/>
-<text text-anchor="middle" x="12000" y="-99.8" font-family="Times,serif" font-size="14.00">BannerComponent</text>
-</g>
-<!-- BannerComponent&#45;&gt;AppModule -->
-<g id="edge5" class="edge">
-<title>BannerComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M12000,-122.32C12000,-145.66 12000,-183 12000,-183 12000,-183 6642.97,-183 6642.97,-183"/>
-<polygon fill="black" stroke="black" points="6642.97,-179.5 6632.97,-183 6642.97,-186.5 6642.97,-179.5"/>
-</g>
-<!-- BigBannerComponent -->
-<g id="node6" class="node">
-<title>BigBannerComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="11920.99,-122 11779.01,-122 11779.01,-86 11920.99,-86 11920.99,-122"/>
-<text text-anchor="middle" x="11850" y="-99.8" font-family="Times,serif" font-size="14.00">BigBannerComponent</text>
-</g>
-<!-- BigBannerComponent&#45;&gt;AppModule -->
-<g id="edge6" class="edge">
-<title>BigBannerComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M11850,-122.09C11850,-145.13 11850,-182 11850,-182 11850,-182 6642.95,-182 6642.95,-182"/>
-<polygon fill="black" stroke="black" points="6642.95,-178.5 6632.95,-182 6642.95,-185.5 6642.95,-178.5"/>
-</g>
-<!-- BlackBtnIconTextComponent -->
-<g id="node7" class="node">
-<title>BlackBtnIconTextComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="11761.25,-122 11576.75,-122 11576.75,-86 11761.25,-86 11761.25,-122"/>
-<text text-anchor="middle" x="11669" y="-99.8" font-family="Times,serif" font-size="14.00">BlackBtnIconTextComponent</text>
-</g>
-<!-- BlackBtnIconTextComponent&#45;&gt;AppModule -->
-<g id="edge7" class="edge">
-<title>BlackBtnIconTextComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M11669,-122.25C11669,-145.02 11669,-181 11669,-181 11669,-181 6643,-181 6643,-181"/>
-<polygon fill="black" stroke="black" points="6643,-177.5 6633,-181 6643,-184.5 6643,-177.5"/>
-</g>
-<!-- BtnMunicipBlueComponent -->
-<g id="node8" class="node">
-<title>BtnMunicipBlueComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="11558.94,-122 11383.06,-122 11383.06,-86 11558.94,-86 11558.94,-122"/>
-<text text-anchor="middle" x="11471" y="-99.8" font-family="Times,serif" font-size="14.00">BtnMunicipBlueComponent</text>
-</g>
-<!-- BtnMunicipBlueComponent&#45;&gt;AppModule -->
-<g id="edge8" class="edge">
-<title>BtnMunicipBlueComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M11471,-122.01C11471,-144.49 11471,-180 11471,-180 11471,-180 6642.82,-180 6642.82,-180"/>
-<polygon fill="black" stroke="black" points="6642.82,-176.5 6632.82,-180 6642.82,-183.5 6642.82,-176.5"/>
-</g>
-<!-- CalendarComponent -->
-<g id="node9" class="node">
-<title>CalendarComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="11364.86,-122 11233.14,-122 11233.14,-86 11364.86,-86 11364.86,-122"/>
-<text text-anchor="middle" x="11299" y="-99.8" font-family="Times,serif" font-size="14.00">CalendarComponent</text>
-</g>
-<!-- CalendarComponent&#45;&gt;AppModule -->
-<g id="edge9" class="edge">
-<title>CalendarComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M11299,-122.16C11299,-144.35 11299,-179 11299,-179 11299,-179 6642.78,-179 6642.78,-179"/>
-<polygon fill="black" stroke="black" points="6642.78,-175.5 6632.78,-179 6642.78,-182.5 6642.78,-175.5"/>
-</g>
-<!-- CalendarHeaderComponent -->
-<g id="node10" class="node">
-<title>CalendarHeaderComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="11215.28,-122 11042.72,-122 11042.72,-86 11215.28,-86 11215.28,-122"/>
-<text text-anchor="middle" x="11129" y="-99.8" font-family="Times,serif" font-size="14.00">CalendarHeaderComponent</text>
-</g>
-<!-- CalendarHeaderComponent&#45;&gt;AppModule -->
-<g id="edge10" class="edge">
-<title>CalendarHeaderComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M11129,-122.29C11129,-144.21 11129,-178 11129,-178 11129,-178 6642.67,-178 6642.67,-178"/>
-<polygon fill="black" stroke="black" points="6642.67,-174.5 6632.67,-178 6642.67,-181.5 6642.67,-174.5"/>
-</g>
-<!-- CalendarPageComponent -->
-<g id="node11" class="node">
-<title>CalendarPageComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="11024.58,-122 10865.42,-122 10865.42,-86 11024.58,-86 11024.58,-122"/>
-<text text-anchor="middle" x="10945" y="-99.8" font-family="Times,serif" font-size="14.00">CalendarPageComponent</text>
-</g>
-<!-- CalendarPageComponent&#45;&gt;AppModule -->
-<g id="edge11" class="edge">
-<title>CalendarPageComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M10918.49,-122.17C10918.49,-143.5 10918.49,-176 10918.49,-176 10918.49,-176 6642.79,-176 6642.79,-176"/>
-<polygon fill="black" stroke="black" points="6642.79,-172.5 6632.79,-176 6642.79,-179.5 6642.79,-172.5"/>
-</g>
-<!-- CalendarPageComponent&#45;&gt;AppModule -->
-<g id="edge12" class="edge">
-<title>CalendarPageComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M10971.51,-122.04C10971.51,-143.66 10971.51,-177 10971.51,-177 10971.51,-177 6642.95,-177 6642.95,-177"/>
-<polygon fill="black" stroke="black" points="6642.95,-173.5 6632.95,-177 6642.95,-180.5 6642.95,-173.5"/>
-</g>
-<!-- CardComponent -->
-<g id="node12" class="node">
-<title>CardComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="10847.05,-122 10738.95,-122 10738.95,-86 10847.05,-86 10847.05,-122"/>
-<text text-anchor="middle" x="10793" y="-99.8" font-family="Times,serif" font-size="14.00">CardComponent</text>
-</g>
-<!-- CardComponent&#45;&gt;AppModule -->
-<g id="edge13" class="edge">
-<title>CardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M10793,-122.28C10793,-143.32 10793,-175 10793,-175 10793,-175 6642.93,-175 6642.93,-175"/>
-<polygon fill="black" stroke="black" points="6642.93,-171.5 6632.93,-175 6642.93,-178.5 6642.93,-171.5"/>
-</g>
-<!-- CardOutlineThemeComponent -->
-<g id="node13" class="node">
-<title>CardOutlineThemeComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="10720.91,-122 10531.09,-122 10531.09,-86 10720.91,-86 10720.91,-122"/>
-<text text-anchor="middle" x="10626" y="-99.8" font-family="Times,serif" font-size="14.00">CardOutlineThemeComponent</text>
-</g>
-<!-- CardOutlineThemeComponent&#45;&gt;AppModule -->
-<g id="edge14" class="edge">
-<title>CardOutlineThemeComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M10626,-122.03C10626,-142.77 10626,-174 10626,-174 10626,-174 6642.91,-174 6642.91,-174"/>
-<polygon fill="black" stroke="black" points="6642.91,-170.5 6632.91,-174 6642.91,-177.5 6642.91,-170.5"/>
-</g>
-<!-- CardOutlineWhiteComponent -->
-<g id="node14" class="node">
-<title>CardOutlineWhiteComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="10513.25,-122 10328.75,-122 10328.75,-86 10513.25,-86 10513.25,-122"/>
-<text text-anchor="middle" x="10421" y="-99.8" font-family="Times,serif" font-size="14.00">CardOutlineWhiteComponent</text>
-</g>
-<!-- CardOutlineWhiteComponent&#45;&gt;AppModule -->
-<g id="edge15" class="edge">
-<title>CardOutlineWhiteComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M10421,-122.13C10421,-142.57 10421,-173 10421,-173 10421,-173 6642.71,-173 6642.71,-173"/>
-<polygon fill="black" stroke="black" points="6642.71,-169.5 6632.71,-173 6642.71,-176.5 6642.71,-169.5"/>
-</g>
-<!-- CardTeamComponent -->
-<g id="node15" class="node">
-<title>CardTeamComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="10310.42,-122 10169.58,-122 10169.58,-86 10310.42,-86 10310.42,-122"/>
-<text text-anchor="middle" x="10240" y="-99.8" font-family="Times,serif" font-size="14.00">CardTeamComponent</text>
-</g>
-<!-- CardTeamComponent&#45;&gt;AppModule -->
-<g id="edge16" class="edge">
-<title>CardTeamComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M10240,-122.22C10240,-142.37 10240,-172 10240,-172 10240,-172 6642.92,-172 6642.92,-172"/>
-<polygon fill="black" stroke="black" points="6642.92,-168.5 6632.92,-172 6642.92,-175.5 6642.92,-168.5"/>
-</g>
-<!-- CitizenHomePageComponent -->
-<g id="node16" class="node">
-<title>CitizenHomePageComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="10151.69,-122 9968.31,-122 9968.31,-86 10151.69,-86 10151.69,-122"/>
-<text text-anchor="middle" x="10060" y="-99.8" font-family="Times,serif" font-size="14.00">CitizenHomePageComponent</text>
-</g>
-<!-- CitizenHomePageComponent&#45;&gt;AppModule -->
-<g id="edge17" class="edge">
-<title>CitizenHomePageComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M10060,-122.31C10060,-142.15 10060,-171 10060,-171 10060,-171 6642.68,-171 6642.68,-171"/>
-<polygon fill="black" stroke="black" points="6642.68,-167.5 6632.68,-171 6642.68,-174.5 6642.68,-167.5"/>
-</g>
-<!-- CreateEventComponent -->
-<g id="node17" class="node">
-<title>CreateEventComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="9950.02,-122 9799.98,-122 9799.98,-86 9950.02,-86 9950.02,-122"/>
-<text text-anchor="middle" x="9875" y="-99.8" font-family="Times,serif" font-size="14.00">CreateEventComponent</text>
-</g>
-<!-- CreateEventComponent&#45;&gt;AppModule -->
-<g id="edge18" class="edge">
-<title>CreateEventComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M9875,-122.03C9875,-141.58 9875,-170 9875,-170 9875,-170 6642.82,-170 6642.82,-170"/>
-<polygon fill="black" stroke="black" points="6642.82,-166.5 6632.82,-170 6642.82,-173.5 6642.82,-166.5"/>
-</g>
-<!-- DatePickerComponent -->
-<g id="node18" class="node">
-<title>DatePickerComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="9781.52,-122 9638.48,-122 9638.48,-86 9781.52,-86 9781.52,-122"/>
-<text text-anchor="middle" x="9710" y="-99.8" font-family="Times,serif" font-size="14.00">DatePickerComponent</text>
-</g>
-<!-- DatePickerComponent&#45;&gt;AppModule -->
-<g id="edge19" class="edge">
-<title>DatePickerComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M9710,-122.11C9710,-141.34 9710,-169 9710,-169 9710,-169 6642.73,-169 6642.73,-169"/>
-<polygon fill="black" stroke="black" points="6642.73,-165.5 6632.73,-169 6642.73,-172.5 6642.73,-165.5"/>
-</g>
-<!-- DatetimepickerComponent -->
-<g id="node19" class="node">
-<title>DatetimepickerComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="9619.63,-122 9452.37,-122 9452.37,-86 9619.63,-86 9619.63,-122"/>
-<text text-anchor="middle" x="9536" y="-99.8" font-family="Times,serif" font-size="14.00">DatetimepickerComponent</text>
-</g>
-<!-- DatetimepickerComponent&#45;&gt;AppModule -->
-<g id="edge20" class="edge">
-<title>DatetimepickerComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M9536,-122.17C9536,-141.09 9536,-168 9536,-168 9536,-168 6642.91,-168 6642.91,-168"/>
-<polygon fill="black" stroke="black" points="6642.91,-164.5 6632.91,-168 6642.91,-171.5 6642.91,-164.5"/>
-</g>
-<!-- DialogMessageComponent -->
-<g id="node20" class="node">
-<title>DialogMessageComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="9434.41,-122 9265.59,-122 9265.59,-86 9434.41,-86 9434.41,-122"/>
-<text text-anchor="middle" x="9350" y="-99.8" font-family="Times,serif" font-size="14.00">DialogMessageComponent</text>
-</g>
-<!-- DialogMessageComponent&#45;&gt;AppModule -->
-<g id="edge21" class="edge">
-<title>DialogMessageComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M9350,-122.22C9350,-140.83 9350,-167 9350,-167 9350,-167 6642.69,-167 6642.69,-167"/>
-<polygon fill="black" stroke="black" points="6642.69,-163.5 6632.69,-167 6642.69,-170.5 6642.69,-163.5"/>
-</g>
-<!-- EditEventComponent -->
-<g id="node21" class="node">
-<title>EditEventComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="9247.82,-122 9110.18,-122 9110.18,-86 9247.82,-86 9247.82,-122"/>
-<text text-anchor="middle" x="9179" y="-99.8" font-family="Times,serif" font-size="14.00">EditEventComponent</text>
-</g>
-<!-- EditEventComponent&#45;&gt;AppModule -->
-<g id="edge22" class="edge">
-<title>EditEventComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M9179,-122.27C9179,-140.56 9179,-166 9179,-166 9179,-166 6642.7,-166 6642.7,-166"/>
-<polygon fill="black" stroke="black" points="6642.7,-162.5 6632.7,-166 6642.7,-169.5 6642.7,-162.5"/>
-</g>
-<!-- EventCardComponent -->
-<g id="node22" class="node">
-<title>EventCardComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="9092.7,-122 8951.3,-122 8951.3,-86 9092.7,-86 9092.7,-122"/>
-<text text-anchor="middle" x="9022" y="-99.8" font-family="Times,serif" font-size="14.00">EventCardComponent</text>
-</g>
-<!-- EventCardComponent&#45;&gt;AppModule -->
-<g id="edge23" class="edge">
-<title>EventCardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M9022,-122.3C9022,-140.27 9022,-165 9022,-165 9022,-165 6642.68,-165 6642.68,-165"/>
-<polygon fill="black" stroke="black" points="6642.68,-161.5 6632.68,-165 6642.68,-168.5 6642.68,-161.5"/>
-</g>
-<!-- EventPageComponent -->
-<g id="node23" class="node">
-<title>EventPageComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="8933.7,-122 8792.3,-122 8792.3,-86 8933.7,-86 8933.7,-122"/>
-<text text-anchor="middle" x="8863" y="-99.8" font-family="Times,serif" font-size="14.00">EventPageComponent</text>
-</g>
-<!-- EventPageComponent&#45;&gt;AppModule -->
-<g id="edge24" class="edge">
-<title>EventPageComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M8863,-122C8863,-139.68 8863,-164 8863,-164 8863,-164 6642.87,-164 6642.87,-164"/>
-<polygon fill="black" stroke="black" points="6642.87,-160.5 6632.87,-164 6642.87,-167.5 6642.87,-160.5"/>
-</g>
-<!-- EventsListComponent -->
-<g id="node24" class="node">
-<title>EventsListComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="8774.71,-122 8633.29,-122 8633.29,-86 8774.71,-86 8774.71,-122"/>
-<text text-anchor="middle" x="8704" y="-99.8" font-family="Times,serif" font-size="14.00">EventsListComponent</text>
-</g>
-<!-- EventsListComponent&#45;&gt;AppModule -->
-<g id="edge25" class="edge">
-<title>EventsListComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M8704,-122.02C8704,-139.37 8704,-163 8704,-163 8704,-163 6642.73,-163 6642.73,-163"/>
-<polygon fill="black" stroke="black" points="6642.73,-159.5 6632.73,-163 6642.73,-166.5 6642.73,-159.5"/>
-</g>
-<!-- EventsSmallComponent -->
-<g id="node25" class="node">
-<title>EventsSmallComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="8615.1,-122 8462.9,-122 8462.9,-86 8615.1,-86 8615.1,-122"/>
-<text text-anchor="middle" x="8539" y="-99.8" font-family="Times,serif" font-size="14.00">EventsSmallComponent</text>
-</g>
-<!-- EventsSmallComponent&#45;&gt;AppModule -->
-<g id="edge26" class="edge">
-<title>EventsSmallComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M8539,-122.03C8539,-139.06 8539,-162 8539,-162 8539,-162 6643.04,-162 6643.04,-162"/>
-<polygon fill="black" stroke="black" points="6643.04,-158.5 6633.04,-162 6643.04,-165.5 6643.04,-158.5"/>
-</g>
-<!-- FirstLetterUpperCasePipe -->
-<g id="node26" class="node">
-<title>FirstLetterUpperCasePipe</title>
-<polygon fill="#ffffb3" stroke="black" points="8445.17,-122 8282.83,-122 8282.83,-86 8445.17,-86 8445.17,-122"/>
-<text text-anchor="middle" x="8364" y="-99.8" font-family="Times,serif" font-size="14.00">FirstLetterUpperCasePipe</text>
-</g>
-<!-- FirstLetterUpperCasePipe&#45;&gt;AppModule -->
-<g id="edge27" class="edge">
-<title>FirstLetterUpperCasePipe&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M8364,-122.04C8364,-138.73 8364,-161 8364,-161 8364,-161 6643.08,-161 6643.08,-161"/>
-<polygon fill="black" stroke="black" points="6643.08,-157.5 6633.08,-161 6643.08,-164.5 6643.08,-157.5"/>
-</g>
-<!-- FooterComponent -->
-<g id="node27" class="node">
-<title>FooterComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="8264.88,-122 8147.12,-122 8147.12,-86 8264.88,-86 8264.88,-122"/>
-<text text-anchor="middle" x="8206" y="-99.8" font-family="Times,serif" font-size="14.00">FooterComponent</text>
-</g>
-<!-- FooterComponent&#45;&gt;AppModule -->
-<g id="edge28" class="edge">
-<title>FooterComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M8206,-122.03C8206,-138.4 8206,-160 8206,-160 8206,-160 6642.95,-160 6642.95,-160"/>
-<polygon fill="black" stroke="black" points="6642.95,-156.5 6632.95,-160 6642.95,-163.5 6642.95,-156.5"/>
-</g>
-<!-- FormatNumber3By3Pipe -->
-<g id="node28" class="node">
-<title>FormatNumber3By3Pipe</title>
-<polygon fill="#ffffb3" stroke="black" points="8128.54,-122 7971.46,-122 7971.46,-86 8128.54,-86 8128.54,-122"/>
-<text text-anchor="middle" x="8050" y="-99.8" font-family="Times,serif" font-size="14.00">FormatNumber3By3Pipe</text>
-</g>
-<!-- FormatNumber3By3Pipe&#45;&gt;AppModule -->
-<g id="edge29" class="edge">
-<title>FormatNumber3By3Pipe&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M8050,-122.01C8050,-138.05 8050,-159 8050,-159 8050,-159 6642.7,-159 6642.7,-159"/>
-<polygon fill="black" stroke="black" points="6642.7,-155.5 6632.7,-159 6642.7,-162.5 6642.7,-155.5"/>
-</g>
-<!-- GeneralInfoComponent -->
-<g id="node29" class="node">
-<title>GeneralInfoComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7953.46,-122 7804.54,-122 7804.54,-86 7953.46,-86 7953.46,-122"/>
-<text text-anchor="middle" x="7879" y="-99.8" font-family="Times,serif" font-size="14.00">GeneralInfoComponent</text>
-</g>
-<!-- GeneralInfoComponent&#45;&gt;AppModule -->
-<g id="edge30" class="edge">
-<title>GeneralInfoComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7879,-122.28C7879,-137.95 7879,-158 7879,-158 7879,-158 6642.76,-158 6642.76,-158"/>
-<polygon fill="black" stroke="black" points="6642.76,-154.5 6632.76,-158 6642.76,-161.5 6642.76,-154.5"/>
-</g>
-<!-- HeaderComponent -->
-<g id="node30" class="node">
-<title>HeaderComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7786.74,-122 7665.26,-122 7665.26,-86 7786.74,-86 7786.74,-122"/>
-<text text-anchor="middle" x="7726" y="-99.8" font-family="Times,serif" font-size="14.00">HeaderComponent</text>
-</g>
-<!-- HeaderComponent&#45;&gt;AppModule -->
-<g id="edge31" class="edge">
-<title>HeaderComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7726,-122.24C7726,-137.57 7726,-157 7726,-157 7726,-157 6642.74,-157 6642.74,-157"/>
-<polygon fill="black" stroke="black" points="6642.74,-153.5 6632.74,-157 6642.74,-160.5 6642.74,-153.5"/>
-</g>
-<!-- HeaderLoggedinComponent -->
-<g id="node31" class="node">
-<title>HeaderLoggedinComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7646.9,-122 7471.1,-122 7471.1,-86 7646.9,-86 7646.9,-122"/>
-<text text-anchor="middle" x="7559" y="-99.8" font-family="Times,serif" font-size="14.00">HeaderLoggedinComponent</text>
-</g>
-<!-- HeaderLoggedinComponent&#45;&gt;AppModule -->
-<g id="edge32" class="edge">
-<title>HeaderLoggedinComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7559,-122.19C7559,-137.18 7559,-156 7559,-156 7559,-156 6642.9,-156 6642.9,-156"/>
-<polygon fill="black" stroke="black" points="6642.9,-152.5 6632.9,-156 6642.9,-159.5 6642.9,-152.5"/>
-</g>
-<!-- InputTitleComponent -->
-<g id="node32" class="node">
-<title>InputTitleComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7453.82,-122 7316.18,-122 7316.18,-86 7453.82,-86 7453.82,-122"/>
-<text text-anchor="middle" x="7385" y="-99.8" font-family="Times,serif" font-size="14.00">InputTitleComponent</text>
-</g>
-<!-- InputTitleComponent&#45;&gt;AppModule -->
-<g id="edge33" class="edge">
-<title>InputTitleComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7385,-122.12C7385,-136.78 7385,-155 7385,-155 7385,-155 6642.85,-155 6642.85,-155"/>
-<polygon fill="black" stroke="black" points="6642.85,-151.5 6632.85,-155 6642.85,-158.5 6642.85,-151.5"/>
-</g>
-<!-- LandingComponent -->
-<g id="node33" class="node">
-<title>LandingComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7297.99,-122 7170.01,-122 7170.01,-86 7297.99,-86 7297.99,-122"/>
-<text text-anchor="middle" x="7234" y="-99.8" font-family="Times,serif" font-size="14.00">LandingComponent</text>
-</g>
-<!-- LandingComponent&#45;&gt;AppModule -->
-<g id="edge34" class="edge">
-<title>LandingComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7234,-122.05C7234,-136.37 7234,-154 7234,-154 7234,-154 6642.69,-154 6642.69,-154"/>
-<polygon fill="black" stroke="black" points="6642.69,-150.5 6632.69,-154 6642.69,-157.5 6642.69,-150.5"/>
-</g>
-<!-- LoginComponent -->
-<g id="node34" class="node">
-<title>LoginComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7152.28,-122 7037.72,-122 7037.72,-86 7152.28,-86 7152.28,-122"/>
-<text text-anchor="middle" x="7095" y="-99.8" font-family="Times,serif" font-size="14.00">LoginComponent</text>
-</g>
-<!-- LoginComponent&#45;&gt;AppModule -->
-<g id="edge35" class="edge">
-<title>LoginComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M7095,-122.25C7095,-136.18 7095,-153 7095,-153 7095,-153 6642.67,-153 6642.67,-153"/>
-<polygon fill="black" stroke="black" points="6642.67,-149.5 6632.67,-153 6642.67,-156.5 6642.67,-149.5"/>
-</g>
-<!-- MunAdminHomePageComponent -->
-<g id="node35" class="node">
-<title>MunAdminHomePageComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="7020.09,-122 6811.91,-122 6811.91,-86 7020.09,-86 7020.09,-122"/>
-<text text-anchor="middle" x="6916" y="-99.8" font-family="Times,serif" font-size="14.00">MunAdminHomePageComponent</text>
-</g>
-<!-- MunAdminHomePageComponent&#45;&gt;AppModule -->
-<g id="edge36" class="edge">
-<title>MunAdminHomePageComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M6916,-122.15C6916,-135.74 6916,-152 6916,-152 6916,-152 6642.82,-152 6642.82,-152"/>
-<polygon fill="black" stroke="black" points="6642.82,-148.5 6632.82,-152 6642.82,-155.5 6642.82,-148.5"/>
-</g>
-<!-- MunAdmindashboardComponent -->
-<g id="node36" class="node">
-<title>MunAdmindashboardComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="6794.2,-122 6589.8,-122 6589.8,-86 6794.2,-86 6794.2,-122"/>
-<text text-anchor="middle" x="6692" y="-99.8" font-family="Times,serif" font-size="14.00">MunAdmindashboardComponent</text>
-</g>
-<!-- MunAdmindashboardComponent&#45;&gt;AppModule -->
-<g id="edge37" class="edge">
-<title>MunAdmindashboardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M6611.36,-122.11C6611.36,-122.11 6611.36,-140.99 6611.36,-140.99"/>
-<polygon fill="black" stroke="black" points="6607.86,-140.99 6611.36,-150.99 6614.86,-140.99 6607.86,-140.99"/>
-</g>
-<!-- MunicipalEditComponent -->
-<g id="node37" class="node">
-<title>MunicipalEditComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="6572.21,-122 6409.79,-122 6409.79,-86 6572.21,-86 6572.21,-122"/>
-<text text-anchor="middle" x="6491" y="-99.8" font-family="Times,serif" font-size="14.00">MunicipalEditComponent</text>
-</g>
-<!-- MunicipalEditComponent&#45;&gt;AppModule -->
-<g id="edge38" class="edge">
-<title>MunicipalEditComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M6560.64,-122.11C6560.64,-122.11 6560.64,-140.99 6560.64,-140.99"/>
-<polygon fill="black" stroke="black" points="6557.14,-140.99 6560.64,-150.99 6564.14,-140.99 6557.14,-140.99"/>
-</g>
-<!-- MunicipalEventsComponent -->
-<g id="node38" class="node">
-<title>MunicipalEventsComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="6391.48,-122 6214.52,-122 6214.52,-86 6391.48,-86 6391.48,-122"/>
-<text text-anchor="middle" x="6303" y="-99.8" font-family="Times,serif" font-size="14.00">MunicipalEventsComponent</text>
-</g>
-<!-- MunicipalEventsComponent&#45;&gt;AppModule -->
-<g id="edge39" class="edge">
-<title>MunicipalEventsComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M6303,-122.15C6303,-135.74 6303,-152 6303,-152 6303,-152 6539.12,-152 6539.12,-152"/>
-<polygon fill="black" stroke="black" points="6539.12,-155.5 6549.12,-152 6539.12,-148.5 6539.12,-155.5"/>
-</g>
-<!-- MunicipalProfileComponent -->
-<g id="node39" class="node">
-<title>MunicipalProfileComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="6196.48,-122 6019.52,-122 6019.52,-86 6196.48,-86 6196.48,-122"/>
-<text text-anchor="middle" x="6108" y="-99.8" font-family="Times,serif" font-size="14.00">MunicipalProfileComponent</text>
-</g>
-<!-- MunicipalProfileComponent&#45;&gt;AppModule -->
-<g id="edge40" class="edge">
-<title>MunicipalProfileComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M6108,-122.25C6108,-136.18 6108,-153 6108,-153 6108,-153 6538.98,-153 6538.98,-153"/>
-<polygon fill="black" stroke="black" points="6538.98,-156.5 6548.98,-153 6538.98,-149.5 6538.98,-156.5"/>
-</g>
-<!-- MunicipalitymapComponent -->
-<g id="node40" class="node">
-<title>MunicipalitymapComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="6001.76,-122 5824.24,-122 5824.24,-86 6001.76,-86 6001.76,-122"/>
-<text text-anchor="middle" x="5913" y="-99.8" font-family="Times,serif" font-size="14.00">MunicipalitymapComponent</text>
-</g>
-<!-- MunicipalitymapComponent&#45;&gt;AppModule -->
-<g id="edge41" class="edge">
-<title>MunicipalitymapComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M5913,-122.05C5913,-136.37 5913,-154 5913,-154 5913,-154 6539.1,-154 6539.1,-154"/>
-<polygon fill="black" stroke="black" points="6539.1,-157.5 6549.1,-154 6539.1,-150.5 6539.1,-157.5"/>
-</g>
-<!-- MyDataCardComponent -->
-<g id="node41" class="node">
-<title>MyDataCardComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="5806.42,-122 5651.58,-122 5651.58,-86 5806.42,-86 5806.42,-122"/>
-<text text-anchor="middle" x="5729" y="-99.8" font-family="Times,serif" font-size="14.00">MyDataCardComponent</text>
-</g>
-<!-- MyDataCardComponent&#45;&gt;AppModule -->
-<g id="edge42" class="edge">
-<title>MyDataCardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M5729,-122.12C5729,-136.78 5729,-155 5729,-155 5729,-155 6539.13,-155 6539.13,-155"/>
-<polygon fill="black" stroke="black" points="6539.13,-158.5 6549.13,-155 6539.13,-151.5 6539.13,-158.5"/>
-</g>
-<!-- MyMunicipalityCardComponent -->
-<g id="node42" class="node">
-<title>MyMunicipalityCardComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="5634.32,-122 5433.68,-122 5433.68,-86 5634.32,-86 5634.32,-122"/>
-<text text-anchor="middle" x="5534" y="-99.8" font-family="Times,serif" font-size="14.00">MyMunicipalityCardComponent</text>
-</g>
-<!-- MyMunicipalityCardComponent&#45;&gt;AppModule -->
-<g id="edge43" class="edge">
-<title>MyMunicipalityCardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M5534,-122.19C5534,-137.18 5534,-156 5534,-156 5534,-156 6539.24,-156 6539.24,-156"/>
-<polygon fill="black" stroke="black" points="6539.24,-159.5 6549.24,-156 6539.24,-152.5 6539.24,-159.5"/>
-</g>
-<!-- NewsCardComponent -->
-<g id="node43" class="node">
-<title>NewsCardComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="5416.42,-122 5275.58,-122 5275.58,-86 5416.42,-86 5416.42,-122"/>
-<text text-anchor="middle" x="5346" y="-99.8" font-family="Times,serif" font-size="14.00">NewsCardComponent</text>
-</g>
-<!-- NewsCardComponent&#45;&gt;AppModule -->
-<g id="edge44" class="edge">
-<title>NewsCardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M5346,-122.24C5346,-137.57 5346,-157 5346,-157 5346,-157 6539.22,-157 6539.22,-157"/>
-<polygon fill="black" stroke="black" points="6539.22,-160.5 6549.22,-157 6539.22,-153.5 6539.22,-160.5"/>
-</g>
-<!-- NewsCreateComponent -->
-<g id="node44" class="node">
-<title>NewsCreateComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="5257.74,-122 5108.26,-122 5108.26,-86 5257.74,-86 5257.74,-122"/>
-<text text-anchor="middle" x="5183" y="-99.8" font-family="Times,serif" font-size="14.00">NewsCreateComponent</text>
-</g>
-<!-- NewsCreateComponent&#45;&gt;AppModule -->
-<g id="edge45" class="edge">
-<title>NewsCreateComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M5183,-122.28C5183,-137.95 5183,-158 5183,-158 5183,-158 6539.24,-158 6539.24,-158"/>
-<polygon fill="black" stroke="black" points="6539.24,-161.5 6549.24,-158 6539.24,-154.5 6539.24,-161.5"/>
-</g>
-<!-- NewsEditComponent -->
-<g id="node45" class="node">
-<title>NewsEditComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="5090.04,-122 4953.96,-122 4953.96,-86 5090.04,-86 5090.04,-122"/>
-<text text-anchor="middle" x="5022" y="-99.8" font-family="Times,serif" font-size="14.00">NewsEditComponent</text>
-</g>
-<!-- NewsEditComponent&#45;&gt;AppModule -->
-<g id="edge46" class="edge">
-<title>NewsEditComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M5022,-122.01C5022,-138.05 5022,-159 5022,-159 5022,-159 6539.03,-159 6539.03,-159"/>
-<polygon fill="black" stroke="black" points="6539.03,-162.5 6549.03,-159 6539.03,-155.5 6539.03,-162.5"/>
-</g>
-<!-- NewsListComponent -->
-<g id="node46" class="node">
-<title>NewsListComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="4935.48,-122 4800.52,-122 4800.52,-86 4935.48,-86 4935.48,-122"/>
-<text text-anchor="middle" x="4868" y="-99.8" font-family="Times,serif" font-size="14.00">NewsListComponent</text>
-</g>
-<!-- NewsListComponent&#45;&gt;AppModule -->
-<g id="edge47" class="edge">
-<title>NewsListComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M4868,-122.03C4868,-138.4 4868,-160 4868,-160 4868,-160 6539.26,-160 6539.26,-160"/>
-<polygon fill="black" stroke="black" points="6539.26,-163.5 6549.26,-160 6539.26,-156.5 6539.26,-163.5"/>
-</g>
-<!-- NewsPageComponent -->
-<g id="node47" class="node">
-<title>NewsPageComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="4782.42,-122 4641.58,-122 4641.58,-86 4782.42,-86 4782.42,-122"/>
-<text text-anchor="middle" x="4712" y="-99.8" font-family="Times,serif" font-size="14.00">NewsPageComponent</text>
-</g>
-<!-- NewsPageComponent&#45;&gt;AppModule -->
-<g id="edge48" class="edge">
-<title>NewsPageComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M4712,-122.04C4712,-138.73 4712,-161 4712,-161 4712,-161 6539.12,-161 6539.12,-161"/>
-<polygon fill="black" stroke="black" points="6539.12,-164.5 6549.12,-161 6539.12,-157.5 6539.12,-164.5"/>
-</g>
-<!-- NewsSmallComponent -->
-<g id="node48" class="node">
-<title>NewsSmallComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="4623.87,-122 4478.13,-122 4478.13,-86 4623.87,-86 4623.87,-122"/>
-<text text-anchor="middle" x="4551" y="-99.8" font-family="Times,serif" font-size="14.00">NewsSmallComponent</text>
-</g>
-<!-- NewsSmallComponent&#45;&gt;AppModule -->
-<g id="edge49" class="edge">
-<title>NewsSmallComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M4551,-122.03C4551,-139.06 4551,-162 4551,-162 4551,-162 6539.33,-162 6539.33,-162"/>
-<polygon fill="black" stroke="black" points="6539.33,-165.5 6549.33,-162 6539.33,-158.5 6539.33,-165.5"/>
-</g>
-<!-- NextEventsComponent -->
-<g id="node49" class="node">
-<title>NextEventsComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="4460.15,-122 4313.85,-122 4313.85,-86 4460.15,-86 4460.15,-122"/>
-<text text-anchor="middle" x="4387" y="-99.8" font-family="Times,serif" font-size="14.00">NextEventsComponent</text>
-</g>
-<!-- NextEventsComponent&#45;&gt;AppModule -->
-<g id="edge50" class="edge">
-<title>NextEventsComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M4387,-122.02C4387,-139.37 4387,-163 4387,-163 4387,-163 6538.94,-163 6538.94,-163"/>
-<polygon fill="black" stroke="black" points="6538.94,-166.5 6548.94,-163 6538.94,-159.5 6538.94,-166.5"/>
-</g>
-<!-- NextNewsComponent -->
-<g id="node50" class="node">
-<title>NextNewsComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="4295.42,-122 4154.58,-122 4154.58,-86 4295.42,-86 4295.42,-122"/>
-<text text-anchor="middle" x="4225" y="-99.8" font-family="Times,serif" font-size="14.00">NextNewsComponent</text>
-</g>
-<!-- NextNewsComponent&#45;&gt;AppModule -->
-<g id="edge51" class="edge">
-<title>NextNewsComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M4225,-122C4225,-139.68 4225,-164 4225,-164 4225,-164 6539.18,-164 6539.18,-164"/>
-<polygon fill="black" stroke="black" points="6539.18,-167.5 6549.18,-164 6539.18,-160.5 6539.18,-167.5"/>
-</g>
-<!-- ProfileBannerComponent -->
-<g id="node51" class="node">
-<title>ProfileBannerComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="4136.86,-122 3977.14,-122 3977.14,-86 4136.86,-86 4136.86,-122"/>
-<text text-anchor="middle" x="4057" y="-99.8" font-family="Times,serif" font-size="14.00">ProfileBannerComponent</text>
-</g>
-<!-- ProfileBannerComponent&#45;&gt;AppModule -->
-<g id="edge52" class="edge">
-<title>ProfileBannerComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M4057,-122.3C4057,-140.27 4057,-165 4057,-165 4057,-165 6539.13,-165 6539.13,-165"/>
-<polygon fill="black" stroke="black" points="6539.13,-168.5 6549.13,-165 6539.13,-161.5 6539.13,-168.5"/>
-</g>
-<!-- SchedulesComponent -->
-<g id="node52" class="node">
-<title>SchedulesComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="3959.09,-122 3820.91,-122 3820.91,-86 3959.09,-86 3959.09,-122"/>
-<text text-anchor="middle" x="3890" y="-99.8" font-family="Times,serif" font-size="14.00">SchedulesComponent</text>
-</g>
-<!-- SchedulesComponent&#45;&gt;AppModule -->
-<g id="edge53" class="edge">
-<title>SchedulesComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M3890,-122.27C3890,-140.56 3890,-166 3890,-166 3890,-166 6539.12,-166 6539.12,-166"/>
-<polygon fill="black" stroke="black" points="6539.12,-169.5 6549.12,-166 6539.12,-162.5 6539.12,-169.5"/>
-</g>
-<!-- SelectAccountTypeComponent -->
-<g id="node53" class="node">
-<title>SelectAccountTypeComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="3802.73,-122 3611.27,-122 3611.27,-86 3802.73,-86 3802.73,-122"/>
-<text text-anchor="middle" x="3707" y="-99.8" font-family="Times,serif" font-size="14.00">SelectAccountTypeComponent</text>
-</g>
-<!-- SelectAccountTypeComponent&#45;&gt;AppModule -->
-<g id="edge54" class="edge">
-<title>SelectAccountTypeComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M3675.04,-122.17C3675.04,-141.09 3675.04,-168 3675.04,-168 3675.04,-168 6539.22,-168 6539.22,-168"/>
-<polygon fill="black" stroke="black" points="6539.22,-171.5 6549.22,-168 6539.22,-164.5 6539.22,-171.5"/>
-</g>
-<!-- SelectAccountTypeComponent&#45;&gt;AppModule -->
-<g id="edge55" class="edge">
-<title>SelectAccountTypeComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M3738.96,-122.22C3738.96,-140.83 3738.96,-167 3738.96,-167 3738.96,-167 6539.31,-167 6539.31,-167"/>
-<polygon fill="black" stroke="black" points="6539.31,-170.5 6549.31,-167 6539.31,-163.5 6539.31,-170.5"/>
-</g>
-<!-- ShowHidePasswordComponent -->
-<g id="node54" class="node">
-<title>ShowHidePasswordComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="3593.09,-122 3398.91,-122 3398.91,-86 3593.09,-86 3593.09,-122"/>
-<text text-anchor="middle" x="3496" y="-99.8" font-family="Times,serif" font-size="14.00">ShowHidePasswordComponent</text>
-</g>
-<!-- ShowHidePasswordComponent&#45;&gt;AppModule -->
-<g id="edge56" class="edge">
-<title>ShowHidePasswordComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M3496,-122.11C3496,-141.34 3496,-169 3496,-169 3496,-169 6539.3,-169 6539.3,-169"/>
-<polygon fill="black" stroke="black" points="6539.3,-172.5 6549.3,-169 6539.3,-165.5 6539.3,-172.5"/>
-</g>
-<!-- ShowStopComponent -->
-<g id="node55" class="node">
-<title>ShowStopComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="3381.39,-122 3242.61,-122 3242.61,-86 3381.39,-86 3381.39,-122"/>
-<text text-anchor="middle" x="3312" y="-99.8" font-family="Times,serif" font-size="14.00">ShowStopComponent</text>
-</g>
-<!-- ShowStopComponent&#45;&gt;AppModule -->
-<g id="edge57" class="edge">
-<title>ShowStopComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M3312,-122.03C3312,-141.58 3312,-170 3312,-170 3312,-170 6539.24,-170 6539.24,-170"/>
-<polygon fill="black" stroke="black" points="6539.24,-173.5 6549.24,-170 6539.24,-166.5 6539.24,-173.5"/>
-</g>
-<!-- SignUpCitizenAccountComponent -->
-<g id="node56" class="node">
-<title>SignUpCitizenAccountComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="3224.98,-122 3013.02,-122 3013.02,-86 3224.98,-86 3224.98,-122"/>
-<text text-anchor="middle" x="3119" y="-99.8" font-family="Times,serif" font-size="14.00">SignUpCitizenAccountComponent</text>
-</g>
-<!-- SignUpCitizenAccountComponent&#45;&gt;AppModule -->
-<g id="edge58" class="edge">
-<title>SignUpCitizenAccountComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M3119,-122.31C3119,-142.15 3119,-171 3119,-171 3119,-171 6539.28,-171 6539.28,-171"/>
-<polygon fill="black" stroke="black" points="6539.28,-174.5 6549.28,-171 6539.28,-167.5 6539.28,-174.5"/>
-</g>
-<!-- SignUpMunicipalAdministratorAccountComponent -->
-<g id="node57" class="node">
-<title>SignUpMunicipalAdministratorAccountComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="2994.62,-122 2687.38,-122 2687.38,-86 2994.62,-86 2994.62,-122"/>
-<text text-anchor="middle" x="2841" y="-99.8" font-family="Times,serif" font-size="14.00">SignUpMunicipalAdministratorAccountComponent</text>
-</g>
-<!-- SignUpMunicipalAdministratorAccountComponent&#45;&gt;AppModule -->
-<g id="edge59" class="edge">
-<title>SignUpMunicipalAdministratorAccountComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M2841,-122.22C2841,-142.37 2841,-172 2841,-172 2841,-172 6539.21,-172 6539.21,-172"/>
-<polygon fill="black" stroke="black" points="6539.21,-175.5 6549.21,-172 6539.21,-168.5 6539.21,-175.5"/>
-</g>
-<!-- SignUpMunicipalityComponent -->
-<g id="node58" class="node">
-<title>SignUpMunicipalityComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="2669.44,-122 2472.56,-122 2472.56,-86 2669.44,-86 2669.44,-122"/>
-<text text-anchor="middle" x="2571" y="-99.8" font-family="Times,serif" font-size="14.00">SignUpMunicipalityComponent</text>
-</g>
-<!-- SignUpMunicipalityComponent&#45;&gt;AppModule -->
-<g id="edge60" class="edge">
-<title>SignUpMunicipalityComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M2571,-122.13C2571,-142.57 2571,-173 2571,-173 2571,-173 6539.24,-173 6539.24,-173"/>
-<polygon fill="black" stroke="black" points="6539.24,-176.5 6549.24,-173 6539.24,-169.5 6539.24,-176.5"/>
-</g>
-<!-- SignUpSuccessComponent -->
-<g id="node59" class="node">
-<title>SignUpSuccessComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="2455.43,-122 2286.57,-122 2286.57,-86 2455.43,-86 2455.43,-122"/>
-<text text-anchor="middle" x="2371" y="-99.8" font-family="Times,serif" font-size="14.00">SignUpSuccessComponent</text>
-</g>
-<!-- SignUpSuccessComponent&#45;&gt;AppModule -->
-<g id="edge61" class="edge">
-<title>SignUpSuccessComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M2371,-122.03C2371,-142.77 2371,-174 2371,-174 2371,-174 6539.23,-174 6539.23,-174"/>
-<polygon fill="black" stroke="black" points="6539.23,-177.5 6549.23,-174 6539.23,-170.5 6539.23,-177.5"/>
-</g>
-<!-- SmallerBannerComponent -->
-<g id="node60" class="node">
-<title>SmallerBannerComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="2268.8,-122 2103.2,-122 2103.2,-86 2268.8,-86 2268.8,-122"/>
-<text text-anchor="middle" x="2186" y="-99.8" font-family="Times,serif" font-size="14.00">SmallerBannerComponent</text>
-</g>
-<!-- SmallerBannerComponent&#45;&gt;AppModule -->
-<g id="edge62" class="edge">
-<title>SmallerBannerComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M2186,-122.28C2186,-143.32 2186,-175 2186,-175 2186,-175 6539.16,-175 6539.16,-175"/>
-<polygon fill="black" stroke="black" points="6539.16,-178.5 6549.16,-175 6539.16,-171.5 6539.16,-178.5"/>
-</g>
-<!-- SpinnerComponent -->
-<g id="node61" class="node">
-<title>SpinnerComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="2085.38,-122 1960.62,-122 1960.62,-86 2085.38,-86 2085.38,-122"/>
-<text text-anchor="middle" x="2023" y="-99.8" font-family="Times,serif" font-size="14.00">SpinnerComponent</text>
-</g>
-<!-- SpinnerComponent&#45;&gt;AppModule -->
-<g id="edge63" class="edge">
-<title>SpinnerComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M2023,-122.17C2023,-143.5 2023,-176 2023,-176 2023,-176 6539.05,-176 6539.05,-176"/>
-<polygon fill="black" stroke="black" points="6539.05,-179.5 6549.05,-176 6539.05,-172.5 6539.05,-179.5"/>
-</g>
-<!-- StatisticalHomePageCardComponent -->
-<g id="node62" class="node">
-<title>StatisticalHomePageCardComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="1942.68,-122 1717.32,-122 1717.32,-86 1942.68,-86 1942.68,-122"/>
-<text text-anchor="middle" x="1830" y="-99.8" font-family="Times,serif" font-size="14.00">StatisticalHomePageCardComponent</text>
-</g>
-<!-- StatisticalHomePageCardComponent&#45;&gt;AppModule -->
-<g id="edge64" class="edge">
-<title>StatisticalHomePageCardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M1830,-122.04C1830,-143.66 1830,-177 1830,-177 1830,-177 6539.12,-177 6539.12,-177"/>
-<polygon fill="black" stroke="black" points="6539.12,-180.5 6549.12,-177 6539.12,-173.5 6539.12,-180.5"/>
-</g>
-<!-- StopsMapComponent -->
-<g id="node63" class="node">
-<title>StopsMapComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="1699.11,-122 1560.89,-122 1560.89,-86 1699.11,-86 1699.11,-122"/>
-<text text-anchor="middle" x="1630" y="-99.8" font-family="Times,serif" font-size="14.00">StopsMapComponent</text>
-</g>
-<!-- StopsMapComponent&#45;&gt;AppModule -->
-<g id="edge65" class="edge">
-<title>StopsMapComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M1630,-122.29C1630,-144.21 1630,-178 1630,-178 1630,-178 6539.23,-178 6539.23,-178"/>
-<polygon fill="black" stroke="black" points="6539.23,-181.5 6549.23,-178 6539.23,-174.5 6539.23,-181.5"/>
-</g>
-<!-- StopsPageComponent -->
-<g id="node64" class="node">
-<title>StopsPageComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="1542.66,-122 1403.34,-122 1403.34,-86 1542.66,-86 1542.66,-122"/>
-<text text-anchor="middle" x="1473" y="-99.8" font-family="Times,serif" font-size="14.00">StopsPageComponent</text>
-</g>
-<!-- StopsPageComponent&#45;&gt;AppModule -->
-<g id="edge66" class="edge">
-<title>StopsPageComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M1473,-122.16C1473,-144.35 1473,-179 1473,-179 1473,-179 6539.05,-179 6539.05,-179"/>
-<polygon fill="black" stroke="black" points="6539.05,-182.5 6549.05,-179 6539.05,-175.5 6539.05,-182.5"/>
-</g>
-<!-- TermsconditionsComponent -->
-<g id="node65" class="node">
-<title>TermsconditionsComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="1384.93,-122 1209.07,-122 1209.07,-86 1384.93,-86 1384.93,-122"/>
-<text text-anchor="middle" x="1297" y="-99.8" font-family="Times,serif" font-size="14.00">TermsconditionsComponent</text>
-</g>
-<!-- TermsconditionsComponent&#45;&gt;AppModule -->
-<g id="edge67" class="edge">
-<title>TermsconditionsComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M1297,-122.01C1297,-144.49 1297,-180 1297,-180 1297,-180 6539.16,-180 6539.16,-180"/>
-<polygon fill="black" stroke="black" points="6539.16,-183.5 6549.16,-180 6539.16,-176.5 6539.16,-183.5"/>
-</g>
-<!-- TooltipComponent -->
-<g id="node66" class="node">
-<title>TooltipComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="1191.06,-122 1068.94,-122 1068.94,-86 1191.06,-86 1191.06,-122"/>
-<text text-anchor="middle" x="1130" y="-99.8" font-family="Times,serif" font-size="14.00">TooltipComponent</text>
-</g>
-<!-- TooltipComponent&#45;&gt;AppModule -->
-<g id="edge68" class="edge">
-<title>TooltipComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M1130,-122.25C1130,-145.02 1130,-181 1130,-181 1130,-181 6539.02,-181 6539.02,-181"/>
-<polygon fill="black" stroke="black" points="6539.02,-184.5 6549.02,-181 6539.02,-177.5 6539.02,-184.5"/>
-</g>
-<!-- TransportsMainComponent -->
-<g id="node67" class="node">
-<title>TransportsMainComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="1050.25,-122 879.75,-122 879.75,-86 1050.25,-86 1050.25,-122"/>
-<text text-anchor="middle" x="965" y="-99.8" font-family="Times,serif" font-size="14.00">TransportsMainComponent</text>
-</g>
-<!-- TransportsMainComponent&#45;&gt;AppModule -->
-<g id="edge69" class="edge">
-<title>TransportsMainComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M965,-122.09C965,-145.13 965,-182 965,-182 965,-182 6538.95,-182 6538.95,-182"/>
-<polygon fill="black" stroke="black" points="6538.95,-185.5 6548.95,-182 6538.95,-178.5 6538.95,-185.5"/>
-</g>
-<!-- UserinfodialogComponent -->
-<g id="node68" class="node">
-<title>UserinfodialogComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="861.81,-122 696.19,-122 696.19,-86 861.81,-86 861.81,-122"/>
-<text text-anchor="middle" x="779" y="-99.8" font-family="Times,serif" font-size="14.00">UserinfodialogComponent</text>
-</g>
-<!-- UserinfodialogComponent&#45;&gt;AppModule -->
-<g id="edge70" class="edge">
-<title>UserinfodialogComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M779,-122.32C779,-145.66 779,-183 779,-183 779,-183 6539.19,-183 6539.19,-183"/>
-<polygon fill="black" stroke="black" points="6539.19,-186.5 6549.19,-183 6539.19,-179.5 6539.19,-186.5"/>
-</g>
-<!-- UserpageComponent -->
-<g id="node69" class="node">
-<title>UserpageComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="678.19,-122 543.81,-122 543.81,-86 678.19,-86 678.19,-122"/>
-<text text-anchor="middle" x="611" y="-99.8" font-family="Times,serif" font-size="14.00">UserpageComponent</text>
-</g>
-<!-- UserpageComponent&#45;&gt;AppModule -->
-<g id="edge71" class="edge">
-<title>UserpageComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M611,-122.15C611,-145.76 611,-184 611,-184 611,-184 6539.21,-184 6539.21,-184"/>
-<polygon fill="black" stroke="black" points="6539.21,-187.5 6549.21,-184 6539.21,-180.5 6539.21,-187.5"/>
-</g>
-<!-- VerticalCardComponent -->
-<g id="node70" class="node">
-<title>VerticalCardComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="525.63,-122 372.37,-122 372.37,-86 525.63,-86 525.63,-122"/>
-<text text-anchor="middle" x="449" y="-99.8" font-family="Times,serif" font-size="14.00">VerticalCardComponent</text>
-</g>
-<!-- VerticalCardComponent&#45;&gt;AppModule -->
-<g id="edge72" class="edge">
-<title>VerticalCardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M449,-122.38C449,-146.28 449,-185 449,-185 449,-185 6539.33,-185 6539.33,-185"/>
-<polygon fill="black" stroke="black" points="6539.33,-188.5 6549.33,-185 6539.33,-181.5 6539.33,-188.5"/>
-</g>
-<!-- AppComponent  -->
-<g id="node73" class="node">
-<title>AppComponent </title>
-<polygon fill="#80b1d3" stroke="black" points="6645.44,-252 6536.56,-252 6536.56,-216 6645.44,-216 6645.44,-252"/>
-<text text-anchor="middle" x="6591" y="-229.8" font-family="Times,serif" font-size="14.00">AppComponent </text>
-</g>
-<!-- AppModule&#45;&gt;AppComponent  -->
-<g id="edge74" class="edge">
-<title>AppModule&#45;&gt;AppComponent </title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M6591,-187.11C6591,-187.11 6591,-205.99 6591,-205.99"/>
-<polygon fill="black" stroke="black" points="6587.5,-205.99 6591,-215.99 6594.5,-205.99 6587.5,-205.99"/>
-</g>
-<!-- AppRoutingModule -->
-<g id="node72" class="node">
-<title>AppRoutingModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="348.27,-122 345.27,-126 324.27,-126 321.27,-122 219.73,-122 219.73,-86 348.27,-86 348.27,-122"/>
-<text text-anchor="middle" x="284" y="-99.8" font-family="Times,serif" font-size="14.00">AppRoutingModule</text>
-</g>
-<!-- AppRoutingModule&#45;&gt;AppModule -->
-<g id="edge73" class="edge">
-<title>AppRoutingModule&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M284,-122.2C284,-146.36 284,-186 284,-186 284,-186 6539.06,-186 6539.06,-186"/>
-<polygon fill="black" stroke="black" points="6539.06,-189.5 6549.06,-186 6539.06,-182.5 6539.06,-189.5"/>
-</g>
-<!-- LoadingInterceptor -->
-<g id="node74" class="node">
-<title>LoadingInterceptor</title>
-<ellipse fill="#fdb462" stroke="black" cx="110" cy="-104" rx="85.66" ry="18"/>
-<text text-anchor="middle" x="110" y="-99.8" font-family="Times,serif" font-size="14.00">LoadingInterceptor</text>
-</g>
-<!-- LoadingInterceptor&#45;&gt;AppModule -->
-<g id="edge75" class="edge">
-<title>LoadingInterceptor&#45;&gt;AppModule</title>
-<path fill="none" stroke="black" d="M110,-122.01C110,-146.42 110,-187 110,-187 110,-187 6539.19,-187 6539.19,-187"/>
-<polygon fill="black" stroke="black" points="6539.19,-190.5 6549.19,-187 6539.19,-183.5 6539.19,-190.5"/>
-</g>
-</g>
-</svg>
-
-    </div>
-    <i id="fullscreen" class="icon ion-ios-resize module-graph-fullscreen-btn" aria-hidden="true"></i>
-    <div class="btn-group size-buttons">
+<h3>Overview</h3>
+<div class="text-center">
+    <object id="demo-svg" type="image/svg+xml" data="graph/dependencies.svg" style="width: 100%; height: 250px;">
+            Your browser does not support SVG
+    </object>
+    <div class="btn-group">
         <button id="zoom-in" class="btn btn-default btn-sm">Zoom in</button>
         <button id="reset" class="btn btn-default btn-sm">Reset</button>
         <button id="zoom-out" class="btn btn-default btn-sm">Zoom out</button>
     </div>
 </div>
-  
-<div class="tab-content overview">
+<div class="container-fluid overview">
     <div class="row">
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-ios-archive"></span></h4>
-                    <p class="card-text">
-                        <a href="./modules.html">2 Modules</a>
-                    </p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-archive"></span></h4>
+                        <p class="card-text">
+                            <a href="./modules.html">1 module</a>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-md-cog"></span></h4>
-                    <p class="card-text">69 Components</p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-cogs"></span></h4>
+                        <p class="card-text">85 components</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-md-arrow-round-down"></span></h4>
-                    <p class="card-text">12 Injectables</p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-code"></span></h4>
+                        <p class="card-text">1 directive</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-md-add"></span></h4>
-                    <p class="card-text">2 Pipes</p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-code-fork"></span></h4>
+                        <p class="card-text">28 injectables</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-ios-lock"></span></h4>
-                    <p class="card-text">6 Guards</p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-plus"></span></h4>
+                        <p class="card-text">2 pipes</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-md-information-circle-outline"></span></h4>
-                    <p class="card-text">15 Interfaces</p>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-info"></span></h4>
+                        <p class="card-text">20 interfaces</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-ios-git-branch"></span></h4>
-                    <p class="card-text">
-                        <a href="./routes.html">33 Routes</a>
-                    </p>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <script src="js/libs/svg-pan-zoom.min.js"></script>
-<script src="js/svg-pan-zoom.controls.js"></script> 
-
-
-
-
-
-
-
+<script src="js/svg-pan-zoom.controls.js"></script>
 
 
 
@@ -1138,31 +1208,8 @@
     </div>
 </div>
 </div>
-               <!-- END CONTENT -->
            </div>
        </div>
-
-          <label class="dark-mode-switch">
-               <input type="checkbox">
-               <span class="slider">
-                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-                    </svg>
-               </span>
-          </label>
-
-       <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'overview';
-            var COMPODOC_CURRENT_PAGE_URL = 'overview.html';
-            var MAX_SEARCH_RESULTS = 15;
-       </script>
-
-       <script src="./js/libs/custom-elements.min.js"></script>
-       <script src="./js/libs/lit-html.js"></script>
-
-       <script src="./js/menu-wc.js" defer></script>
-       <script nomodule src="./js/menu-wc_es5.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 
@@ -1173,17 +1220,20 @@
 
        <script src="./js/compodoc.js"></script>
 
-       <script src="./js/tabs.js"></script>
-       <script src="./js/menu.js"></script>
-       <script src="./js/libs/clipboard.min.js"></script>
-       <script src="./js/libs/prism.js"></script>
-       <script src="./js/sourceCode.js"></script>
-          <script src="./js/search/search.js"></script>
-          <script src="./js/search/lunr.min.js"></script>
-          <script src="./js/search/search-lunr.js"></script>
-          <script src="./js/search/search_index.js"></script>
-       <script src="./js/lazy-load-graphs.js"></script>
+       <script src="./js/search/search.js"></script>
+       <script src="./js/search/lunr.min.js"></script>
+       <script src="./js/search/search-lunr.js"></script>
 
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/highlight.pack.js"></script>
+       <script src="./js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="./js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
 
     </body>
 </html>

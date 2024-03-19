@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DocumentsService, Document } from '../../services/documents.service';
 import { UserAuthService } from '../../services/user-auth.service';
+import { DocsService, RequestDocument } from '../../services/documents/docs.service';
 @Component({
   selector: 'app-approve-documents',
   templateUrl: './approve-documents.component.html',
@@ -8,14 +8,15 @@ import { UserAuthService } from '../../services/user-auth.service';
 })
 export class ApproveDocumentsComponent {
 
-  documents: Document[] = [];
+  documents: RequestDocument[] = [];
   municipalityImage: string = '';
   nameSearch: string = '';
   orderOptions: any[] = [{ label: 'Pedidos Antigos', value: true }, { label: 'Pedidos Recentes', value: false }];
   ascendingOrder: boolean = true;
+  municipalityName: string = '';
 
-  constructor(private service: DocumentsService, private authService: UserAuthService) {
-    this.documents = this.service.documents;
+  constructor(private docsService: DocsService, private authService: UserAuthService) {
+
   }
 
 
@@ -25,10 +26,45 @@ export class ApproveDocumentsComponent {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
           this.municipalityImage = municipality.landscapePhoto;
+          this.municipalityName = municipality.name;
+          this.docsService.getRequestsFromMunicipality(municipality.name).subscribe(
+            (res: RequestDocument[]) => {
+              this.documents = res;
+              console.log("bidsbca cia s", this.documents);
+            },
+            error => {
+              console.error(error);
+            }
+          );
+
         });
       });
 
     });
+
+
+
+    //this.sortEventsByDate();
+    //this.authService.getUserData().subscribe((user) => {
+    //  this.authService.getInfoByEmail(user.email).subscribe((account) => {
+    //    this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
+    //      this.municipalityImage = municipality.landscapePhoto;
+
+
+
+    //      this.service.getRequestsFromMunicipality(municipality.name).subscribe(
+    //        (res: RequestDocument[]) => {
+    //          this.documents = res;
+
+    //        },
+    //        error => {
+    //          console.error(error);
+    //        }
+    //      );
+    //    });
+    //  });
+
+    //});
 
   }
 
@@ -52,4 +88,33 @@ export class ApproveDocumentsComponent {
     });
   }
 
+  waitPayment(doc: any) {
+
+    var documentRequest = doc.document as RequestDocument;
+
+
+    var baseUrl = location.origin;
+
+    this.docsService.createPayment(documentRequest, this.municipalityImage, `${baseUrl}/documents/my`, `${baseUrl}/documents/my`);
+
+    this.docsService.waitingForPayment(doc.document.id).subscribe(
+      (res) => {
+       this.ngOnInit(); 
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+
+  rejectDocument(doc: any) {
+    this.docsService.rejectDocument(doc.document.id).subscribe(
+      (res) => {
+        this.ngOnInit();
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
 }

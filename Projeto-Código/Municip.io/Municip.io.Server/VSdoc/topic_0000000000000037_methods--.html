@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="GENERATOR" content="VSdocman - documentation generator; https://www.helixoft.com" />
 	<link rel="icon" href="favicon.ico">
-	<title>MunicipalAdministrator Methods</title>
+	<title>EventsController Methods</title>
 
 	<link rel="stylesheet" type="text/css" href="msdn2019/toc.css" />
 	<script src="msdn2019/toc.js"></script>
@@ -75,13 +75,342 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
   </div>
 
 <div id="mainBody">
-		<h1 class="title">MunicipalAdministrator Methods</h1>
+		<h1 class="title">EventsController Methods</h1>
         <p />
         <p>
           The following tables list the members exposed by the  
-              <a href="topic_0000000000000037.html">MunicipalAdministrator</a>
+              <a href="topic_0000000000000037.html">EventsController</a>
              type.
         </p>
+
+
+
+
+
+<div class="section_container">
+	<div class="section_heading">
+		<span><a href="javascript:void(0)" title="Collapse" onclick="toggleSection(this);">Methods</a></span>
+		<div>&nbsp;</div>
+	</div>
+
+	<div id="MethodsSection" class="section">	
+  <table class="memberListTable">
+    <tr>
+      <th></th>
+      <th>
+        Name
+      </th>
+      <th>
+        Description
+      </th>
+    </tr>
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_0000000000000039.html">CreateEvent(Event)</a>
+
+	</td>
+	<td>
+
+Esta chamada permite criar um evento no sistema, passando omo parâmetro um objeto do tipo Event
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000003F.html">DropOutCitizen(int, string)</a>
+
+	</td>
+	<td>
+
+Esta chamada permite desinscrever um cidadão num evento passando o id do evento e o email do cidadão como parâmetros
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000003E.html">EnrollCitizen(int, string)</a>
+
+	</td>
+	<td>
+
+Esta chamada permite inscrever um cidadão num evento passando o id do evento e o email do cidadão como parâmetros
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000003D.html">GetEventById(int)</a>
+
+	</td>
+	<td>
+
+Esta chamada permite obter um evento por id passando o id do evento como parâmetro e retorna um objeto do tipo Event
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000003B.html">GetEvents()</a>
+
+	</td>
+	<td>
+
+Esta chamada permite obter todos os eventos no sistema
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_0000000000000041.html">GetEventsByCitizen(string)</a>
+
+	</td>
+	<td>
+
+Esta chamada permite obter todos os eventos de um determinado cidadão passando o email do cidadão como parâmetro
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000003C.html">GetEventsByMunicipality(string)</a>
+
+	</td>
+	<td>
+
+Esta chamada permite obter todos os eventos de um determinado município passando o nome do município como parâmetro e retorna um objeto do tipo Event
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_0000000000000040.html">RemoveCitizen(int, string)</a>
+
+	</td>
+	<td>
+
+Esta chamada permite remover um cidadão de um evento passando o id do evento e o email do cidadão como parâmetros
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_0000000000000042.html">RemoveEvent(int)</a>
+
+	</td>
+	<td>
+
+esta chamada permite remover um evento do sistema passando o id do evento como parâmetro, retornando ok ou bad request
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000003A.html">UpdateEvent(Event)</a>
+
+	</td>
+	<td>
+
+Esta chamada permite atualizar um evento no sistema, passando omo parâmetro um objeto do tipo Event
+
+	</td>
+</tr>
+
+
+
+
+
+
+  </table>
+
+  <a href="#mainBody">
+    Top
+  </a>
+
+	</div>					
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -95,8 +424,8 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	<div id="seeAlsoSection" class="section">	
 		<div>
-			<a href="topic_0000000000000037.html">MunicipalAdministrator Class</a><br />
-	<a href="topic_0000000000000018.html">Municip.io.Server.Models Namespace</a><br />
+			<a href="topic_0000000000000037.html">EventsController Class</a><br />
+	<a href="topic_0000000000000000.html">Municip.io.Server.Controllers Namespace</a><br />
 
 
 			

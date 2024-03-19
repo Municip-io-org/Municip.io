@@ -30,13 +30,16 @@
             <li>
               <a routerLink="/municipal/edit" class="block px-4 py-2 hover:bg-gray-100">Editar Município</a>
             </li>
+            <li>
+              <a routerLink="/manageAppFeatures" class="block px-4 py-2 hover:bg-gray-100">Editar Funcionalidades</a>
+            </li>
             </span>
 
           </ul>
         </div>
       </li>
 
-      <li class="relative group" (click)="setActiveDropdown(Dropdowns.Events)">
+      <li *ngIf="isEventsFeatureActive()" class="relative group" (click)="setActiveDropdown(Dropdowns.Events)">
         <button class="transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Agenda
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,7 +50,7 @@
         <div *ngIf="showDropdownAgenda" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
             <li>
-              <a routerLink="/events/" class="block px-4 py-2 hover:bg-gray-100">Eventos</a>
+              <a routerLink="/events/" class="block px-4 py-2 hover:bg-gray-100">Ver Eventos</a>
             </li>
 
             <span *ngIf="role===Roles.Citizen">
@@ -62,7 +65,7 @@
 
             <span *ngIf="role===Roles.Municipal">
             <li>
-              <a routerLink="/events/create" class="block px-4 py-2 hover:bg-gray-100">Criar</a>
+              <a routerLink="/events/create" class="block px-4 py-2 hover:bg-gray-100">Criar Evento</a>
             </li>
             </span>
           </ul>
@@ -97,7 +100,7 @@
         </div>
       </li>
 
-      <li class="relative group" (click)="setActiveDropdown(Dropdowns.Documents)">
+      <li *ngIf="isDocumentsFeatureActive()" class="relative group" (click)="setActiveDropdown(Dropdowns.Documents)">
         <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Documentos
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -108,19 +111,36 @@
         <div *ngIf="showDropdownDocumentos" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
             <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 1</a>
+              <a routerLink="/documents/" class="block px-4 py-2 hover:bg-gray-100">Página Principal</a>
+            </li>
+            <li *ngIf="role ===Roles.Citizen">
+              <a routerLink="/documents/request" class="block px-4 py-2 hover:bg-gray-100">Pedir Documentos</a>
+            </li>
+            <li *ngIf="role ===Roles.Citizen">
+              <a routerLink="/documents/my" class="block px-4 py-2 hover:bg-gray-100">Os Meus Documentos</a>
+            </li>
+            <li *ngIf="role ===Roles.Municipal">
+              <a routerLink="/documents/approve" class="block px-4 py-2 hover:bg-gray-100">Aprovar Documentos</a>
+            </li>
+
+            <span *ngIf="role===Roles.Municipal">
+
+            <li>
+              <a routerLink="/documents/template-list" class="block px-4 py-2 hover:bg-gray-100">Lista Templates</a>
             </li>
             <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 2</a>
+              <a routerLink="/documents/createtemplate" class="block px-4 py-2 hover:bg-gray-100">Criar Template</a>
+
             </li>
-            <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 3</a>
-            </li>
+
+            </span>
+
+
           </ul>
         </div>
       </li>
 
-      <li class="relative group" (click)="setActiveDropdown(Dropdowns.News)">
+      <li *ngIf="isNewsFeatureActive()" class="relative group" (click)="setActiveDropdown(Dropdowns.News)">
         <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Notícias
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,7 +161,7 @@
         </div>
       </li>
 
-      <li class="relative group" (click)="setActiveDropdown(Dropdowns.Transports)">
+      <li *ngIf="isTransportsFeatureActive()" class="relative group" (click)="setActiveDropdown(Dropdowns.Transports)">
         <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Transportes
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -190,7 +210,7 @@
               </li>
               <li>
                 <a routerLink="/userpage" class="block px-4 py-2 hover:bg-gray-100">O meu Perfil</a>
-               
+
 
                 <div *ngIf="role===Roles.Municipal">
                   <a routerLink="/municipal/profile" class="block px-4 py-2 hover:bg-gray-100">Perfil Administração</a>

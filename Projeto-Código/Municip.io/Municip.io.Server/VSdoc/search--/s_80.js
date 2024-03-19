@@ -1,1 +1,1 @@
-search_result['80']=["topic_000000000000001C_vars--.html","Citizen Fields",""];
+search_result['80']=["topic_000000000000001C.html","CitizenStatusController.blockCitizen Method","Esta função bloqueia um cidadão. Recebe como parâmetro o email do cidadão ."];

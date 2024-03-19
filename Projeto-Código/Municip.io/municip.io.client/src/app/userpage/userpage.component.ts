@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { UserAuthService} from '../services/user-auth.service';
+import { UserAuthService } from '../services/user-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Country } from '../services/citizen-auth.service';
-
 
 @Component({
   selector: 'app-userpage',
@@ -16,43 +15,41 @@ export class UserpageComponent {
   dialogTitle = '';
   dialogMessage = '';
   isConfirm: boolean = false;
-
-
-
-  newUser: any;
+  editMode: boolean = false;
+  newUser: any; 
   errors: string[] | null = null;
   originalName: string = "";
-  originalPhoto: string = "";
   image!: File;
+  imageUrl: string | null = null;
+  files: any[] = [];
 
   constructor(private userAuthService: UserAuthService) { }
   user: any;
   role: string = "";
+ 
 
   ngOnInit() {
+    
+    
     this.userAuthService.getUserData().subscribe(
       res => {
         this.user = res;
-        var emailToParse = this.user.email;
-        var emailParsed = emailToParse.replace('@', '%40');
-        this.userAuthService.getInfoByEmail(emailParsed).subscribe(
+        this.userAuthService.getInfoByEmail(this.user.email).subscribe(
           res => {
             this.newUser = res;
-            console.log("dasdasdas", this.newUser);
+            
             this.originalName = this.newUser.firstName;
-            this.originalPhoto = this.newUser.photo;
+            this.imageUrl = this.newUser.photo;
             this.formatBirthDate();
             
             this.userAuthService.getUserRole().subscribe(
               res => {
-
                 this.role = res.role;
-                console.log("role", this.role);
-
                 if (this.role == "Citizen") {
                   this.country.setValue({ alpha2Code: this.newUser.nif.slice(0, 2) });
                   this.nif.setValue(this.newUser.nif.slice(2));
                 }
+                this.initForm();
               },
               error => {
                 console.error(error);
@@ -61,7 +58,6 @@ export class UserpageComponent {
           },
           error => {
             console.error(error);
-
           }
         );
       },
@@ -69,10 +65,9 @@ export class UserpageComponent {
         console.error(error);
       }
     );
-
+    this.profileEdit.disable();
     
   }
-
 
   profileEdit = new FormGroup({
     firstName: new FormControl("", [Validators.required]),
@@ -81,16 +76,13 @@ export class UserpageComponent {
     birthDate: new FormControl(new Date(), [Validators.required]),
     address: new FormControl("", [Validators.required]),
     country: new FormControl("", [Validators.required]),
-    nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
-    photo: new FormControl(null, [Validators.required]),
+    nif: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]), 
     postalCode1: new FormControl("", [Validators.required, Validators.pattern(/^\d{4}$/)]),
     postalCode2: new FormControl("", [Validators.required, Validators.pattern(/^\d{3}$/)]),
     password: new FormControl("", [
-
       Validators.pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/)
     ]),
     passwordConfirmation: new FormControl("", [Validators.required]),
-
   });
 
   get firstName() {
@@ -112,6 +104,7 @@ export class UserpageComponent {
   get country() {
     return this.profileEdit.get('country') as FormControl;
   }
+
   get nif() {
     return this.profileEdit.get('nif') as FormControl;
   }
@@ -132,23 +125,21 @@ export class UserpageComponent {
     return this.profileEdit.get('birthDate');
   }
 
-  get photo() {
-    return this.profileEdit.get('photo');
-  }
-
   get passwordConfirmation() {
     return this.profileEdit.get('passwordConfirmation');
   }
+
   OnSubmit() {
 
+    this.toggleEditMode();
     const formValues = this.profileEdit.value;
-    this.newUser.name = formValues.firstName || this.newUser.name;
+    this.newUser.firstName = formValues.firstName || this.newUser.firstName;
     this.newUser.surname = formValues.surname || this.newUser.surname;
     this.newUser.email = formValues.email || this.newUser.email;
     this.newUser.birthDate = formValues.birthDate || this.newUser.birthDate;
     this.newUser.address = formValues.address || this.newUser.address;
     this.newUser.country = formValues.country || this.newUser.country;
-
+    this.newUser.photo = this.imageUrl!; 
     this.newUser.nif = `${(this.country!.value! as Country).alpha2Code}${this.nif!.value!}` || this.newUser.nif;
 
     this.newUser.postalCode1 = formValues.postalCode1 || this.newUser.postalCode1;
@@ -156,15 +147,18 @@ export class UserpageComponent {
     this.newUser.password = formValues.password ? formValues.password : "";
     var passConfirm = formValues.passwordConfirmation || "";
     this.newUser.events = [];
+
+
+
     if (this.role == 'Citizen') {
-      this.userAuthService.updateUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
+      this.userAuthService.updateUser(this.newUser, this.image, passConfirm).subscribe(
         res => {
 
 
           this.originalName = this.newUser.firstName;
-          this.originalPhoto = this.newUser.photo;
+          this.imageUrl = this.newUser.photo;
+          this.initForm();
 
-         
           this.isDialogOpen = true;
           this.dialogTitle = 'Atualização bem-sucedida';
           this.dialogMessage = 'Os seus dados foram atualizados com sucesso';
@@ -174,7 +168,7 @@ export class UserpageComponent {
           console.log("erro " + error.error.errors)
           this.errors = error.error.errors;
 
-          
+
           this.isDialogOpen = true;
           this.dialogTitle = 'Erro na Atualização de dados';
           this.dialogMessage = error.error.message;
@@ -183,10 +177,11 @@ export class UserpageComponent {
       );
     }
     else {
-      this.userAuthService.updateMunicipAdminUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
+      this.userAuthService.updateMunicipAdminUser(this.newUser, this.image, passConfirm).subscribe(
         res => {
           this.originalName = this.newUser.firstName;
-          this.originalPhoto = this.newUser.photo;
+          this.imageUrl = this.newUser.photo;
+          this.initForm();
         },
         (error) => {
           console.log("erro " + error.error.errors)
@@ -194,20 +189,18 @@ export class UserpageComponent {
         }
       );
     }
-
+   
 
   }
 
-  getUserAttributes(): { key: string, value: any }[] {
-    if (!this.newUser) {
-      return [];
-    }
-
-    return Object.keys(this.newUser).map(key => ({ key, value: this.newUser[key] }));
-  }
+  //getUserAttributes(): { key: string, value: any }[] {
+  //  if (!this.newUser) {
+  //    return [];
+  //  }
+  //  return Object.keys(this.newUser).map(key => ({ key, value: this.newUser[key] }));
+  //}
 
   formatBirthDate() {
-
     const dateString = this.newUser.birthDate;
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -217,15 +210,80 @@ export class UserpageComponent {
     this.newUser.birthDate = formattedDate;
   }
 
-  onImagePicked(event: Event) {
-    const fileInput = event.target as HTMLInputElement;
-    const file = fileInput?.files?.[0];
-
-    if (file) {
-      this.image = file;
-      this.newUser.photo = this.image;
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+    if (this.editMode) {
+      this.profileEdit.enable();
     } else {
-      console.error('No file selected');
+      this.profileEdit.disable();
+    }
+  }
+
+  cancelEditMode() {
+    this.toggleEditMode();
+    this.initForm();
+  }
+
+  initForm() {
+    console.log("isiodjasdnoasin",this.newUser);
+    this.profileEdit.patchValue({
+      firstName: this.newUser.firstName || '',
+      surname: this.newUser.surname || '',
+      email: this.newUser.email || '',
+      birthDate: this.newUser.birthDate || '',
+      address: this.newUser.address || '',
+      country: this.newUser.country || '',
+      nif: this.newUser.nif || '',
+      postalCode1: this.newUser.postalCode1 || '',
+      postalCode2: this.newUser.postalCode2 || '',
+      password: '',
+      passwordConfirmation: ''
+    });
+
+    this.formatBirthDate();
+    this.imageUrl = this.newUser.photo; 
+  }
+
+  onFileChange(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    const fileList: FileList | null = fileInput?.files;
+
+    if (fileList && fileList.length > 0) {
+      this.image = fileList[0];
+      this.imageUrl = URL.createObjectURL(this.image);
+
+      console.log("ON FILE CHANGE");
+    } else {
+      console.error('Nenhuma imagem selecionada');
+    }
+  }
+
+  isValidImageFile(file: File): boolean {
+    // Adicione aqui a lógica para validar se o arquivo é uma imagem
+    // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
+    return file.type.startsWith('image/');
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent) {
+    if (!this.editMode) return;
+
+    event.preventDefault();
+    const files: FileList | null = event.dataTransfer?.files || null;
+    if (files && files.length > 0) {
+      const file = files[0];
+      if (file && this.isValidImageFile(file)) { 
+        this.image = file;
+        this.imageUrl = URL.createObjectURL(this.image);
+
+      } else {
+        console.error('Por favor, solte uma imagem válida.');
+      }
+    } else {
+      console.error('Nenhuma imagem solta.');
     }
   }
 
@@ -233,5 +291,4 @@ export class UserpageComponent {
     this.isDialogOpen = false;
     window.location.reload();
   }
-
 }

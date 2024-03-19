@@ -1,1 +1,1 @@
-search_result['168']=["topic_0000000000000047.html","initial Class",""];
+search_result['168']=["topic_0000000000000042.html","EventsController.RemoveEvent Method","esta chamada permite remover um evento do sistema passando o id do evento como parâmetro, retornando ok ou bad request"];

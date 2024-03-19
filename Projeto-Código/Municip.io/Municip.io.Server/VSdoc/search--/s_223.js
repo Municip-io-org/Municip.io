@@ -1,1 +1,1 @@
-search_result['223']=["topic_0000000000000061_props--.html","CitizenStatusExtensions Properties",""];
+search_result['223']=["topic_0000000000000056.html","MunicipalityStatusController.approveMunicipality Method","Esta função aprova um município. Recebe como parâmetro o nome do município."];

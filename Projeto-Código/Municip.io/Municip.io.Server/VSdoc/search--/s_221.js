@@ -1,1 +1,1 @@
-search_result['221']=["topic_0000000000000061_events--.html","CitizenStatusExtensions Events",""];
+search_result['221']=["topic_0000000000000054.html","MunicipalityStatusController.getMunicipalities Method","Esta função retorna todos os municípios como json."];

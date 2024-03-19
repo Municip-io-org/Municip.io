@@ -1,1 +1,1 @@
-search_result['91']=["topic_0000000000000026_attached_props--.html","GeoAPIController Attached Properties",""];
+search_result['91']=["topic_0000000000000022.html","CitizenStatusController.SendUnblock Method","Esta função envia um email de desbloqueio para um cidadão."];

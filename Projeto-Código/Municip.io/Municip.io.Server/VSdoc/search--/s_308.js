@@ -1,1 +1,1 @@
-search_result['308']=["topic_000000000000009D_events--.html","Municipality Events",""];
+search_result['308']=["topic_0000000000000073_attached_props--.html","Event Attached Properties",""];

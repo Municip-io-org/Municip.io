@@ -1,0 +1,93 @@
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+</head>
+<app-header-loggedin />
+<app-smaller-banner title="Documentos do Município"
+                    image={{municipalityImage}}></app-smaller-banner>
+<div class="container mx-auto px-4 sm:px-8">
+  <div class="w-44 mt-10">
+    <app-black-btn-icon-text altImage="Voltar"
+                             image="/assets/images/icons/plus-white.png"
+                             (buttonClick)="goCreateTemplate()">
+      Criar Documento
+    </app-black-btn-icon-text>
+  </div>
+  <div class="py-8">
+
+    <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+      <div class="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
+
+        <!-- Add a search input for name -->
+        <div class="mb-4 relative">
+          <label for="nameSearch" class="sr-only">Procurar por documento</label>
+          <div class="flex items-center">
+            <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+              <span class="fas fa-search"></span>
+            </i>
+            <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por documento"
+                   class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300 hover:border-black">
+          </div>
+        </div>
+        <table class="min-w-full leading-normal">
+          <thead>
+            <tr>
+              <th (click)="sortTable('name')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Nome
+                <span [class]="sortType === 'name' ? (sortReverse ? 'fas fa-caret-up' : 'fas fa-caret-down') : ''"></span>
+              </th>
+              <th (click)="sortTable('type')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Tipo
+                <span [class]="sortType === 'type' ? (sortReverse ? 'fas fa-caret-up' : 'fas fa-caret-down') : ''"></span>
+              </th>
+              <th (click)="sortTable('price')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Preço
+                <span [class]="sortType === 'price' ? (sortReverse ? 'fas fa-caret-up' : 'fas fa-caret-down') : ''"></span>
+              </th>
+              <th (click)="sortTable('status')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Estado
+                <span [class]="sortType === 'status' ? (sortReverse ? 'fas fa-caret-up' : 'fas fa-caret-down') : ''"></span>
+              </th>
+              <th (click)="sortTable('status')" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Ação
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let d of filteredDocuments" [class]="(filteredDocuments.indexOf(d) % 2 === 0 ? 'bg-white' : 'bg-gray-100')">
+              <td class="px-5 py-5 text-left">{{ d.name }}</td>
+              <td class="px-5 py-5 text-left">{{ d.type }} </td>
+              <td class="px-5 py-5 text-left">{{ d.price }}</td>
+              <td class="px-5 py-5 text-left">
+                <span *ngIf="d.status === DocumentTemplateStatus().active" class="inline-block p-1.5 bg-green-500 text-white rounded-full text-xs">
+                  {{ d.status }}
+                </span>
+                <span *ngIf="d.status === DocumentTemplateStatus().inactive" class="inline-block p-1.5 bg-yellow-500 text-white rounded-full text-xs">
+                  {{ d.status }}
+                </span>
+
+              </td>
+
+              <td class="px-5 py-5 space-x-2">
+                <button (click)="editDocument(d); $event.stopPropagation()" class="bg-municip-blue text-white px-3 py-1 rounded-md">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button *ngIf="d.status === DocumentTemplateStatus().inactive" (click)="activeDocument(d); $event.stopPropagation()" class="bg-green-500 text-white px-3 py-1 rounded-md">
+                  <i class="fas fa-check"></i>
+                </button>
+                <button *ngIf="d.status === DocumentTemplateStatus().active" (click)="desactiveDocument(d); $event.stopPropagation()" class="bg-yellow-500 text-white px-3 py-1 rounded-md">
+                  <i class="fas fa-lock"></i>
+                </button>
+                <button (click)="deleteDocument(d); $event.stopPropagation()" class="bg-red-500 text-white px-3 py-1 rounded-md">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

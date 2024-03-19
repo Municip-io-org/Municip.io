@@ -1,1 +1,1 @@
-search_result['210']=["topic_000000000000005C_attached_props--.html","WeatherForecast Attached Properties",""];
+search_result['210']=["topic_000000000000004E.html","MunicipalAdministratorStatusController.SendDeny Method","Esta função envia um email de reprovação para um administrador."];

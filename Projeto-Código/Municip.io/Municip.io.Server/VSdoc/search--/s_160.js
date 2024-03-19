@@ -1,1 +1,1 @@
-search_result['160']=["topic_0000000000000044.html","DataSeeder Class",""];
+search_result['160']=["topic_000000000000003F.html","EventsController.DropOutCitizen Method","Esta chamada permite desinscrever um cidadão num evento passando o id do evento e o email do cidadão como parâmetros"];

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 using System.Text.Json.Serialization;
+using Municip.io.Server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +42,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
+
+
+
+builder.Services.Configure<StripeModel>(builder.Configuration.GetSection("Stripe"));
+
 
 var app = builder.Build();
 

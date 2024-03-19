@@ -1,1 +1,1 @@
-search_result['278']=["topic_0000000000000086.html","InformacoesMunicipio.rua Property",""];
+search_result['278']=["topic_000000000000006A.html","StripePaymentController.ArchivePrice Method","method to archive a price and a product"];

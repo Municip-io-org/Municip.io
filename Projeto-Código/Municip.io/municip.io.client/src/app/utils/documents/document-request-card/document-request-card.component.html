@@ -1,26 +1,25 @@
-<div class="border-b-2 border-municip-blue px-20 pb-16
-     flex justify-between items-center gap-10 ">
-  <div class="flex flex-col space-y-10">
+<div class="px-12 py-8 flex justify-between items-center gap-8 bg-white rounded-xl shadow-2xl hover:shadow-xl">
+  <div class="flex flex-col space-y-2">
 
-    <div class="flex items-baseline space-x-4">
-      <h1 class="text-4xl font-roboto font-semibold text-municip-highlight-black">
-        {{document.name}} <span class="font-roboto font-normal text-lg pl-4">{{document.type}}</span>
+    <div class="flex items-baseline space-x-2">
+      <h1 class="text-3xl font-bold text-gray-800">
+        {{ template.name }} <span class="text-lg text-gray-500">{{ template.type }}</span>
       </h1>
     </div>
 
+    <h3 class="text-base font-medium text-gray-500">
+      {{ template.description }}
+    </h3>
 
-     <h3 class="text-[1rem] font-inter font-bold">
-        {{document.subTitle}}
-     </h3>
-      
+    <h3 class="text-base font-medium text-gray-500">
+      {{ template.price }}
+    </h3>
+
   </div>
-  <div class="flex justify-between">
-    <button type="button"
-            class=" text-3xl text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 rounded-2xl w-[10rem] h-[9rem]
-        transition duration-300 hover:bg-black">
-      Pedir
-      <img src="assets/images/arrows/right-arrow.png" alt="Pedir documento" class="size-10" />
-      
+  <div class="flex items-center">
+    <button (click)="sendRequest()" type="button" class="text-lg text-white bg-blue-500 flex justify-center items-center gap-x-2 rounded-full px-6 py-3 transition duration-300 hover:bg-blue-600 hover:text-gray-100 shadow-md">
+      <span>Pedir</span>
+      <img src="assets/images/arrows/right-arrow.png" alt="Pedir documento" class="w-6 h-6" />
     </button>
   </div>
 </div>
