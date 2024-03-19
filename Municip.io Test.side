@@ -1688,18 +1688,36 @@
       ],
       "value": ""
     }, {
-      "id": "c8d5bc05-269a-432b-bda5-fb4fd31f8341",
+      "id": "1f768ecd-f561-4c3b-b397-c732a83c8a36",
       "comment": "",
-      "command": "type",
-      "target": "id=templatetext",
+      "command": "click",
+      "target": "css=.inline-flex",
       "targets": [
-        ["id=templatetext", "id"],
-        ["name=templatetext", "name"],
-        ["css=#templatetext", "css:finder"],
-        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
-        ["xpath=//div[4]/div/textarea", "xpath:position"]
+        ["css=.inline-flex", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//app-btn-municip-blue/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Criar Modelo')]", "xpath:innerText"]
       ],
-      "value": "Município de Setúbal\\n\\nEmail: geral@mun-setúbal.pt\\nTelefone: 265541500\\nMorada: Praça de Bocage, 2900-866 Setúbal\\n\\nJONH DOE, PRESIDENTE, da Câmara de Setúbal----------\\nNo uso da competência que lhe é conferida pela alínea I, do nº1 do artº18º da Lei nº75/2013, de 12 de Setembro, e dos poderes delegados pelo Município por deliberação tomada na Reunião extraordinária de 25 de Outubro de 2013.-------\\nATESTA, conforma declarações prestadas pela requerente e em documentos arquivados na Junta que: [firstName][surname], que reside em [address].\\nPor ser verdade e me ter sido pedido, para efeito de ser presente nos serviços de Estrangeiros e Fronteiras, mandei passar o presente atestado que vai assinado sob o selo branco"
+      "value": ""
+    }, {
+      "id": "e28a4f14-674a-4be1-abff-f3ee2b652660",
+      "comment": "",
+      "command": "click",
+      "target": "css=.shadow-sm",
+      "targets": [
+        ["css=.shadow-sm", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Proceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5d1c035a-cd52-4399-bf9d-c5b324e6b2a3",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
     }]
   }, {
     "id": "2486e8fc-5101-46e6-8c64-72fe000612bc",
