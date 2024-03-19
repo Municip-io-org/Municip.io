@@ -1,1 +1,1 @@
-search_result['90']=["topic_0000000000000026.html","GeoAPIController Class","Controlador para interação com a API"];
+search_result['90']=["topic_0000000000000021.html","CitizenStatusController.SendBlock Method","Esta função envia um email de bloqueio para um cidadão."];

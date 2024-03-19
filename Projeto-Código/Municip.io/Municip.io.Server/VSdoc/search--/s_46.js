@@ -1,1 +1,1 @@
-search_result['46']=["topic_0000000000000013.html","CitizenStatusController.blockCitizen Method","Esta função bloqueia um cidadão. Recebe como parâmetro o email do cidadão ."];
+search_result['46']=["topic_0000000000000013.html","AppFeatureController Class",""];

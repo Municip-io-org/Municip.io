@@ -1,1 +1,1 @@
-search_result['121']=["topic_0000000000000036.html","NewsController.CreateNews Method","Esta função cria uma notícia. Recebe como parâmetro a notícia."];
+search_result['121']=["topic_0000000000000031.html","DocumentController.GetTemplateById Method","method to change the status of a document request to rejected"];

@@ -1,1 +1,1 @@
-search_result['99']=["topic_0000000000000029_attached_props--.html","MunicipalityStatusController Attached Properties",""];
+search_result['99']=["topic_0000000000000025.html","DocumentController.CreateDocumentTemplateAsync Method","Method to create a document template"];

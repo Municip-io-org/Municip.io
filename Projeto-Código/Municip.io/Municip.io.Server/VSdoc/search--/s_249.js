@@ -1,1 +1,1 @@
-search_result['249']=["topic_0000000000000073.html","Event Class",""];
+search_result['249']=["topic_000000000000005F_events--.html","NewsController Events",""];

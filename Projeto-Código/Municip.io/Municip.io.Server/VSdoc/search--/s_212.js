@@ -1,1 +1,1 @@
-search_result['212']=["topic_000000000000005C_methods--.html","WeatherForecast Methods",""];
+search_result['212']=["topic_0000000000000050.html","MunicipalAdministratorStatusController.SendBlock Method","Esta função envia um email de bloqueio para um administrador."];

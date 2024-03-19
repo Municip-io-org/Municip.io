@@ -1,1 +1,1 @@
-search_result['201']=["topic_0000000000000059.html","Citizen.photo Property",""];
+search_result['201']=["topic_000000000000004A.html","MunicipalAdministratorStatusController.deleteMunicipalAdministrator Method","Esta função remove um administrador. Recebe como parâmetro o email do administrador ."];

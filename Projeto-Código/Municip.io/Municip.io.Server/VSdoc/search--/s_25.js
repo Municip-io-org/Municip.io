@@ -1,1 +1,1 @@
-search_result['25']=["topic_000000000000000D.html","AccountUserController.UpdateMunicipality Method",""];
+search_result['25']=["topic_000000000000000D.html","AccountUserController.UpdateAdmMunicipalInfo Method",""];

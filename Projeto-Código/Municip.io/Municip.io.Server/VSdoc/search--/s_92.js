@@ -1,1 +1,1 @@
-search_result['92']=["topic_0000000000000026_events--.html","GeoAPIController Events",""];
+search_result['92']=["topic_0000000000000023.html","DocumentController Class","Controller to manage the documents"];

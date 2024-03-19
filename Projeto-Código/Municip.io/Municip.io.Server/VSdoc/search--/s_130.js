@@ -1,1 +1,1 @@
-search_result['130']=["topic_000000000000003A.html","NewsController.GetNewsById Method","esta função retorna uma notícia. Recebe como parâmetro o id da notícia."];
+search_result['130']=["topic_0000000000000034_attached_props--.html","NewsController Attached Properties",""];

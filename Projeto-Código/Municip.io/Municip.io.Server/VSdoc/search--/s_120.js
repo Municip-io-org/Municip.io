@@ -1,1 +1,1 @@
-search_result['120']=["topic_0000000000000035.html","NewsController Constructor",""];
+search_result['120']=["topic_0000000000000030.html","DocumentController.RejectRequest Method","method to change the status of a document request to rejected"];

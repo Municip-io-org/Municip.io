@@ -1,1 +1,1 @@
-search_result['238']=["topic_000000000000006B_props--.html","CitizenStatusMessageExtensions Properties",""];
+search_result['238']=["topic_000000000000005B.html","MunicipalityStatusController.SendAprove Method","Esta função envia um email para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município."];

@@ -1,1 +1,1 @@
-search_result['47']=["topic_0000000000000014.html","CitizenStatusController.pendingCitizen Method","Esta função desbloqueia um cidadão. Recebe como parâmetro o email do cidadão ."];
+search_result['47']=["topic_0000000000000013_attached_props--.html","AppFeatureController Attached Properties",""];

@@ -4,6 +4,9 @@ using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 namespace Municip.io.Server.Controllers
 {
+    /// <summary>
+    /// Controller to manage the status of the document templates
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class DocumentTemplateStatusController : ControllerBase
@@ -16,7 +19,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        //put the state of the document template active
+        /// <summary>
+        /// Method to activate the document template
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPut("activate")]
         public IActionResult Activate(int id)
         {
@@ -31,7 +38,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        //put the state of the document template inactive
+        /// <summary>
+        /// Method to deactivate the document template
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPut("deactivate")]
         public IActionResult Deactivate(int id)
         {
@@ -46,7 +57,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        // remove the document template from the list
+        /// <summary>
+        /// Method to remove the document template
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("remove/{id}")]
         public IActionResult Remove(int id)
         {
@@ -55,7 +70,6 @@ namespace Municip.io.Server.Controllers
             {
                 return NotFound();
             }
-            //if there is not one document request with this template, then remove it
             if (_context.DocumentRequests.Where(dr => dr.DocumentTemplate.Id == id) == null)
             {
                 _context.Remove(documentTemplate);
@@ -63,7 +77,6 @@ namespace Municip.io.Server.Controllers
                 return Ok();
 
             }
-            //if there is one or more document request with this template, then set the status to NotListed
             documentTemplate.Status = DocumentTemplateStatus.NotListed;
             _context.SaveChanges();
             return Ok();

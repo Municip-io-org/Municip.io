@@ -1,1 +1,1 @@
-search_result['89']=["topic_0000000000000025.html","EventsController.RemoveEvent Method","esta chamada permite remover um evento do sistema passando o id do evento como parâmetro, retornando ok ou bad request"];
+search_result['89']=["topic_0000000000000020.html","CitizenStatusController.SendRemove Method","Esta função envia um email de remoção para um cidadão."];

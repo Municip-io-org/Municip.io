@@ -1,1 +1,1 @@
-search_result['109']=["topic_000000000000002F.html","MunicipalityStatusController.deleteAllAccountsByMunicipality Method","Esta função remove todas as contas de administradores de um município. Recebe como parâmetro o nome do município. Não é uma ação passível de ser chamada via API"];
+search_result['109']=["topic_0000000000000029_attached_props--.html","MunicipalityStatusController Attached Properties",""];
