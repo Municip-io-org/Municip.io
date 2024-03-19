@@ -4,6 +4,7 @@ import { Event as AppEvent, EventsService } from '../../../services/events/event
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 import { UserAuthService } from '../../../services/user-auth.service';
 import { Router } from '@angular/router';
+import { Editor, Toolbar } from 'ngx-editor';
 
 
 /**
@@ -33,7 +34,17 @@ export class CreateEventComponent implements OnInit {
   files: any[] = [];
 
   isDialogOpen: boolean = false;
-
+  editor = new Editor();
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
 
   /**
    * Construtor do componente.
@@ -57,6 +68,7 @@ export class CreateEventComponent implements OnInit {
    * Método onInit 
    */
   ngOnInit(): void {
+    this.editor = new Editor();
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
@@ -69,6 +81,9 @@ export class CreateEventComponent implements OnInit {
 
   }
 
+  ngDestroy() {
+    this.editor.destroy();
+  }
 
 
   eventForm = new FormGroup({

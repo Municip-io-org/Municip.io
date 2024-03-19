@@ -94,10 +94,15 @@
 
           <div class="flex flex-col text-left w-full h-[30rem] mt-6 mb-4 max-lg:flex-col max-lg:items-center">
             <app-input-title class="text-[1.4rem]">Texto Informativo</app-input-title>
-            <textarea required placeholder="Introduza uma descrição da Câmara.
+            <!--<textarea required placeholder="Introduza uma descrição da Câmara.
 
-Sugestão: Esta irá aparecer no perfil do município. Pode fornecer informações úteis da história da localidade, horários relevantes, e outros." id="description" formControlName="description" name="description" [(ngModel)]="municipality.description"
-                      class="input box-border w-full resize-none grow"></textarea>
+  Sugestão: Esta irá aparecer no perfil do município. Pode fornecer informações úteis da história da localidade, horários relevantes, e outros." id="description" formControlName="description" name="description" [(ngModel)]="municipality.description"
+                        class="input box-border w-full resize-none grow"></textarea>-->
+            <ngx-editor [editor]="editor" formControlName="description" placeholder="Introduza uma descrição da Câmara.">
+              <div class="bg-gray-100 border border-gray-300">
+                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+              </div>
+            </ngx-editor>
 
             <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">
               <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatório</div>

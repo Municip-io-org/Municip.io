@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MunicipalAdminAuthService, Municipality } from '../../services/municipal-admin-auth.service';
 import { UserAuthService } from '../../services/user-auth.service';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-municipal-edit',
@@ -34,6 +35,17 @@ export class MunicipalEditComponent {
     landscapePhoto: '',
   };
 
+  editor = new Editor();
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
   currentEmblemPhoto!: string;
   currentLandscapePhoto!: string;
 
@@ -55,6 +67,7 @@ export class MunicipalEditComponent {
   constructor(private userAuthService: UserAuthService, private municipalAdminAuthService :MunicipalAdminAuthService) { }
 
   ngOnInit(): void {
+    this.editor = new Editor();
     this.userAuthService.getUserData().subscribe(
       res => {
         let anyUser = res;
@@ -84,6 +97,10 @@ export class MunicipalEditComponent {
         console.error(error);
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
 
   initForm() {

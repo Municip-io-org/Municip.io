@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Municipality, MunicipalAdminAuthService } from '../../services/municipal-admin-auth.service';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-sign-up-municipality',
@@ -35,6 +36,17 @@ export class SignUpMunicipalityComponent {
     landscapePhoto: ''
   };
 
+  editor = new Editor();
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
   emblemImg!: File;
   landscapeImg!: File;
 
@@ -50,6 +62,14 @@ export class SignUpMunicipalityComponent {
     description: new FormControl("", [Validators.required]),
   });
 
+
+  ngOnInit() {
+    this.editor = new Editor();
+  }
+
+  ngOnDestroy() {
+    this.editor.destroy();
+  }
 
   get president() {
     return this.signUpMunicipalityForm.get('president');
