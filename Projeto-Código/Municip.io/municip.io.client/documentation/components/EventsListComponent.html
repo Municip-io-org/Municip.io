@@ -8,118 +8,1137 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css">
+	    <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
-          <script>
-               // Blocking script to avaoid flickering dark mode
-               // Dark mode toggle button
-               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
-               var darkModeState = useDark.matches;
-               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
-               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
-               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-               function checkToggle(check) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].checked = check;
-                    }
-               }
-
-               function toggleDarkMode(state) {
-                    if (window.localStorage) {
-                         localStorage.setItem('compodoc_darkmode-state', state);
-                    }
-
-                    checkToggle(state);
-
-                    const hasClass = document.body.classList.contains('dark');
-
-                    if (state) {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.add('dark');
-                         }
-                         if (!hasClass) {
-                              document.body.classList.add('dark');
-                         }
-                    } else {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.remove('dark');
-                         }
-                         if (hasClass) {
-                              document.body.classList.remove('dark');
-                         }
-                    }
-               }
-
-               useDark.addEventListener('change', function (evt) {
-                    toggleDarkMode(evt.matches);
-               });
-               if (darkModeStateLocal) {
-                    darkModeState = darkModeStateLocal === 'true';
-               }
-               toggleDarkMode(darkModeState);
-
-               if ($darkModeToggles.length > 0) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
-                              darkModeState = !darkModeState;
-                              toggleDarkMode(darkModeState);
-                         });
-                    }
-               }
-          </script>
-
-        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
             <a href="../" class="navbar-brand">municip.io.client documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="../">municip.io.client documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="../overview.html" 
+                                         href="../overview.html" 
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="../modules/AppModule.html" >AppModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="../components/AboutusComponent.html" >AboutusComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AccessBlockedComponent.html" >AccessBlockedComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AccessDeniedComponent.html" >AccessDeniedComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminDashboardMunicipalAdminsComponent.html" >AdminDashboardMunicipalAdminsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ApproveDocumentsComponent.html" >ApproveDocumentsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/BannerComponent.html" >BannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/BigBannerComponent.html" >BigBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/BlackBtnIconTextComponent.html" >BlackBtnIconTextComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/BtnMunicipBlueComponent.html" >BtnMunicipBlueComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CalendarComponent.html" >CalendarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CalendarHeaderComponent.html" >CalendarHeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CalendarPageComponent.html" >CalendarPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CardComponent.html" >CardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CardOutlineThemeComponent.html" >CardOutlineThemeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CardOutlineWhiteComponent.html" >CardOutlineWhiteComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CardTeamComponent.html" >CardTeamComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CitizenHomePageComponent.html" >CitizenHomePageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CountryPickerComponent.html" >CountryPickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CreateEventComponent.html" >CreateEventComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CreateTemplateComponent.html" >CreateTemplateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DatePickerComponent.html" >DatePickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DatetimepickerComponent.html" >DatetimepickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DialogMessageComponent.html" >DialogMessageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DocsHomepageComponent.html" >DocsHomepageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DocumentApproveCardComponent.html" >DocumentApproveCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DocumentCardComponent.html" >DocumentCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DocumentRequestCardComponent.html" >DocumentRequestCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EditEventComponent.html" >EditEventComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EditTemplateComponent.html" >EditTemplateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EventCardComponent.html" >EventCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EventPageComponent.html" >EventPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EventsListComponent.html"  class="active" >EventsListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EventsSmallComponent.html" >EventsSmallComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EventsmapComponent.html" >EventsmapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/FooterComponent.html" >FooterComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/GeneralInfoComponent.html" >GeneralInfoComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/GeneratepdfComponent.html" >GeneratepdfComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/HeaderComponent.html" >HeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/HeaderLoggedinComponent.html" >HeaderLoggedinComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/InputTitleComponent.html" >InputTitleComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/LandingComponent.html" >LandingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/LoginComponent.html" >LoginComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ManageAppFeaturesComponent.html" >ManageAppFeaturesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunAdminHomePageComponent.html" >MunAdminHomePageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunAdmindashboardComponent.html" >MunAdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunicipalEditComponent.html" >MunicipalEditComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunicipalEventsComponent.html" >MunicipalEventsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunicipalProfileComponent.html" >MunicipalProfileComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunicipalitymapComponent.html" >MunicipalitymapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MyDataCardComponent.html" >MyDataCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MyDocumentsComponent.html" >MyDocumentsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MyMunicipalityCardComponent.html" >MyMunicipalityCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsCardComponent.html" >NewsCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsCreateComponent.html" >NewsCreateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsEditComponent.html" >NewsEditComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsListComponent.html" >NewsListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsPageComponent.html" >NewsPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsSmallComponent.html" >NewsSmallComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NextEventsComponent.html" >NextEventsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NextNewsComponent.html" >NextNewsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ProfileBannerComponent.html" >ProfileBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/RequestDocumentComponent.html" >RequestDocumentComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SchedulesComponent.html" >SchedulesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SelectAccountTypeComponent.html" >SelectAccountTypeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ShowHidePasswordComponent.html" >ShowHidePasswordComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ShowStopComponent.html" >ShowStopComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SignUpCitizenAccountComponent.html" >SignUpCitizenAccountComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SignUpMunicipalAdministratorAccountComponent.html" >SignUpMunicipalAdministratorAccountComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SignUpMunicipalityComponent.html" >SignUpMunicipalityComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SignUpSuccessComponent.html" >SignUpSuccessComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SmallerBannerComponent.html" >SmallerBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SpinnerComponent.html" >SpinnerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/StatisticalHomePageCardComponent.html" >StatisticalHomePageCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/StopsMapComponent.html" >StopsMapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/StopsPageComponent.html" >StopsPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TemplateListComponent.html" >TemplateListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TermsconditionsComponent.html" >TermsconditionsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TooltipComponent.html" >TooltipComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TransportsMainComponent.html" >TransportsMainComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/UserinfodialogComponent.html" >UserinfodialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/UserpageComponent.html" >UserpageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VerticalCardComponent.html" >VerticalCardComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-code"></span>
+                            <span>Directives</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-directives-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-directives-links"
+                            >
+                                <li class="link">
+                                    <a href="../directives/FileDragDropDirective.html" >FileDragDropDirective</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="../injectables/AdministratorGuard.html" >AdministratorGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AppFeaturesService.html" >AppFeaturesService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AuthGuardService.html" >AuthGuardService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/BoundsService.html" >BoundsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CitizenAuthService.html" >CitizenAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CitizenGuard.html" >CitizenGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CitizenOrMunicipalAdminGuard.html" >CitizenOrMunicipalAdminGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CitizenStatusService.html" >CitizenStatusService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CustomDateFormatterService.html" >CustomDateFormatterService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CustomEventTitleFormatterService.html" >CustomEventTitleFormatterService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/DocsDataService.html" >DocsDataService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/DocsService.html" >DocsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/EncryptionService.html" >EncryptionService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/EventsService.html" >EventsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/IsDocumentFeatureActive.html" >IsDocumentFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/IsEventsFeatureActive.html" >IsEventsFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/IsNewsFeatureActive.html" >IsNewsFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/IsTransportFeatureActive.html" >IsTransportFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/LoaderService.html" >LoaderService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/LoadingInterceptor.html" >LoadingInterceptor</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/MunicipalAdminAuthService.html" >MunicipalAdminAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/MunicipalAdminGuard.html" >MunicipalAdminGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/MunicipalityGuard.html" >MunicipalityGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/MunicipalityStatusService.html" >MunicipalityStatusService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/NewsService.html" >NewsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/TransportsService.html" >TransportsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/UserAuthService.html" >UserAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/UserSameMunicipalityGuard.html" >UserSameMunicipalityGuard</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/AppFeature.html" >AppFeature</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/AppFeatureToSubmit.html" >AppFeatureToSubmit</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Citizen.html" >Citizen</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Country.html" >Country</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/DocumentTemplate.html" >DocumentTemplate</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Event.html" >Event</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Login.html" >Login</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/MunicipalAdministrator.html" >MunicipalAdministrator</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Municipality.html" >Municipality</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/News.html" >News</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/RequestDocument.html" >RequestDocument</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/formSchedule.html" >formSchedule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/line.html" >line</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/municipalityTransport.html" >municipalityTransport</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/pattern.html" >pattern</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/route.html" >route</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/stop.html" >stop</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/stopInfo.html" >stopInfo</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/stopTime.html" >stopTime</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/trip.html" >trip</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-plus"></span>
+                            <span>Pipes</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-pipes-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-pipes-links"
+                            >
+                                <li class="link">
+                                    <a href="../pipes/FirstLetterUpperCasePipe.html" >FirstLetterUpperCasePipe</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../pipes/FormatNumber3By3Pipe.html" >FormatNumber3By3Pipe</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
                <div class="hidden-xs menu">
-                   <compodoc-menu mode="normal"></compodoc-menu>
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="../">municip.io.client documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="../overview.html" 
+                                                href="../overview.html" 
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="../modules/AppModule.html" >AppModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="../components/AboutusComponent.html" >AboutusComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AccessBlockedComponent.html" >AccessBlockedComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AccessDeniedComponent.html" >AccessDeniedComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminDashboardMunicipalAdminsComponent.html" >AdminDashboardMunicipalAdminsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ApproveDocumentsComponent.html" >ApproveDocumentsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/BannerComponent.html" >BannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/BigBannerComponent.html" >BigBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/BlackBtnIconTextComponent.html" >BlackBtnIconTextComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/BtnMunicipBlueComponent.html" >BtnMunicipBlueComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CalendarComponent.html" >CalendarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CalendarHeaderComponent.html" >CalendarHeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CalendarPageComponent.html" >CalendarPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CardComponent.html" >CardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CardOutlineThemeComponent.html" >CardOutlineThemeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CardOutlineWhiteComponent.html" >CardOutlineWhiteComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CardTeamComponent.html" >CardTeamComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CitizenHomePageComponent.html" >CitizenHomePageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CountryPickerComponent.html" >CountryPickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CreateEventComponent.html" >CreateEventComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CreateTemplateComponent.html" >CreateTemplateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DatePickerComponent.html" >DatePickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DatetimepickerComponent.html" >DatetimepickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DialogMessageComponent.html" >DialogMessageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DocsHomepageComponent.html" >DocsHomepageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DocumentApproveCardComponent.html" >DocumentApproveCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DocumentCardComponent.html" >DocumentCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DocumentRequestCardComponent.html" >DocumentRequestCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EditEventComponent.html" >EditEventComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EditTemplateComponent.html" >EditTemplateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EventCardComponent.html" >EventCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EventPageComponent.html" >EventPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EventsListComponent.html"  class="active" >EventsListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EventsSmallComponent.html" >EventsSmallComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EventsmapComponent.html" >EventsmapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/FooterComponent.html" >FooterComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/GeneralInfoComponent.html" >GeneralInfoComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/GeneratepdfComponent.html" >GeneratepdfComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/HeaderComponent.html" >HeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/HeaderLoggedinComponent.html" >HeaderLoggedinComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/InputTitleComponent.html" >InputTitleComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/LandingComponent.html" >LandingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/LoginComponent.html" >LoginComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ManageAppFeaturesComponent.html" >ManageAppFeaturesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunAdminHomePageComponent.html" >MunAdminHomePageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunAdmindashboardComponent.html" >MunAdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunicipalEditComponent.html" >MunicipalEditComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunicipalEventsComponent.html" >MunicipalEventsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunicipalProfileComponent.html" >MunicipalProfileComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunicipalitymapComponent.html" >MunicipalitymapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MyDataCardComponent.html" >MyDataCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MyDocumentsComponent.html" >MyDocumentsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MyMunicipalityCardComponent.html" >MyMunicipalityCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsCardComponent.html" >NewsCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsCreateComponent.html" >NewsCreateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsEditComponent.html" >NewsEditComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsListComponent.html" >NewsListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsPageComponent.html" >NewsPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsSmallComponent.html" >NewsSmallComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NextEventsComponent.html" >NextEventsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NextNewsComponent.html" >NextNewsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ProfileBannerComponent.html" >ProfileBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/RequestDocumentComponent.html" >RequestDocumentComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SchedulesComponent.html" >SchedulesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SelectAccountTypeComponent.html" >SelectAccountTypeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ShowHidePasswordComponent.html" >ShowHidePasswordComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ShowStopComponent.html" >ShowStopComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SignUpCitizenAccountComponent.html" >SignUpCitizenAccountComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SignUpMunicipalAdministratorAccountComponent.html" >SignUpMunicipalAdministratorAccountComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SignUpMunicipalityComponent.html" >SignUpMunicipalityComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SignUpSuccessComponent.html" >SignUpSuccessComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SmallerBannerComponent.html" >SmallerBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SpinnerComponent.html" >SpinnerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/StatisticalHomePageCardComponent.html" >StatisticalHomePageCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/StopsMapComponent.html" >StopsMapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/StopsPageComponent.html" >StopsPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TemplateListComponent.html" >TemplateListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TermsconditionsComponent.html" >TermsconditionsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TooltipComponent.html" >TooltipComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TransportsMainComponent.html" >TransportsMainComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/UserinfodialogComponent.html" >UserinfodialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/UserpageComponent.html" >UserpageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VerticalCardComponent.html" >VerticalCardComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-code"></span>
+                                   <span>Directives</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#directives-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="directives-links"
+                   >
+                                       <li class="link">
+                                           <a href="../directives/FileDragDropDirective.html" >FileDragDropDirective</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="../injectables/AdministratorGuard.html" >AdministratorGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AppFeaturesService.html" >AppFeaturesService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AuthGuardService.html" >AuthGuardService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/BoundsService.html" >BoundsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CitizenAuthService.html" >CitizenAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CitizenGuard.html" >CitizenGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CitizenOrMunicipalAdminGuard.html" >CitizenOrMunicipalAdminGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CitizenStatusService.html" >CitizenStatusService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CustomDateFormatterService.html" >CustomDateFormatterService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CustomEventTitleFormatterService.html" >CustomEventTitleFormatterService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/DocsDataService.html" >DocsDataService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/DocsService.html" >DocsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/EncryptionService.html" >EncryptionService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/EventsService.html" >EventsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/IsDocumentFeatureActive.html" >IsDocumentFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/IsEventsFeatureActive.html" >IsEventsFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/IsNewsFeatureActive.html" >IsNewsFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/IsTransportFeatureActive.html" >IsTransportFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/LoaderService.html" >LoaderService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/LoadingInterceptor.html" >LoadingInterceptor</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/MunicipalAdminAuthService.html" >MunicipalAdminAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/MunicipalAdminGuard.html" >MunicipalAdminGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/MunicipalityGuard.html" >MunicipalityGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/MunicipalityStatusService.html" >MunicipalityStatusService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/NewsService.html" >NewsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/TransportsService.html" >TransportsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/UserAuthService.html" >UserAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/UserSameMunicipalityGuard.html" >UserSameMunicipalityGuard</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/AppFeature.html" >AppFeature</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/AppFeatureToSubmit.html" >AppFeatureToSubmit</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Citizen.html" >Citizen</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Country.html" >Country</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/DocumentTemplate.html" >DocumentTemplate</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Event.html" >Event</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Login.html" >Login</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/MunicipalAdministrator.html" >MunicipalAdministrator</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Municipality.html" >Municipality</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/News.html" >News</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/RequestDocument.html" >RequestDocument</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/formSchedule.html" >formSchedule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/line.html" >line</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/municipalityTransport.html" >municipalityTransport</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/pattern.html" >pattern</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/route.html" >route</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/stop.html" >stop</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/stopInfo.html" >stopInfo</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/stopTime.html" >stopTime</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/trip.html" >trip</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-plus"></span>
+                                   <span>Pipes</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#pipes-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="pipes-links"
+                   >
+                                       <li class="link">
+                                           <a href="../pipes/FirstLetterUpperCasePipe.html" >FirstLetterUpperCasePipe</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../pipes/FormatNumber3By3Pipe.html" >FormatNumber3By3Pipe</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
                </div>
-               <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
 
 
-
-
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Components</li>
-  <li class="breadcrumb-item"
-  >
-  EventsListComponent</li>
+  <li>Components</li>
+  <li>EventsListComponent</li>
 </ol>
 
-<ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-            <a href="#info" class="nav-link active"
-                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
-        </li>
-        <li class="nav-item">
-            <a href="#source" class="nav-link"
-                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
-        </li>
-        <li class="nav-item">
-            <a href="#templateData" class="nav-link"
-                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
-        </li>
-        <li class="nav-item">
-            <a href="#tree" class="nav-link"
-                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
-        </li>
-</ul>
 
-<div class="tab-content">
-    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#infos" id="infos-tab" role="tab" data-toggle="tab">Infos</a>
+        </li>
+        <li>
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab">Source</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="infos"><p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
@@ -128,12 +1147,9 @@
 
 
 
-
-
-
-<section data-compodoc="block-metadata">
+<section>
     <h3>Metadata</h3>
-    <table class="table table-sm table-hover metadata">
+    <table class="table table-sm table-hover">
         <tbody>
 
 
@@ -155,809 +1171,347 @@
 
 
 
-
-
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./events-list.component.html</code></td>
+                <td class="col-md-9"><code>events-list.component.html</code></td>
             </tr>
-
-
-
-            <tr>
-                <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./events-list.component.css</code></td>
-            </tr>
-
-
-
 
 
         </tbody>
     </table>
 </section>
 
-    <section data-compodoc="block-index">
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#ascendingOrder" >ascendingOrder</a>
-                            </li>
-                            <li>
-                                <a href="#currentPage" >currentPage</a>
-                            </li>
-                            <li>
-                                <a href="#events" >events</a>
-                            </li>
-                            <li>
-                                <a href="#isLoading" >isLoading</a>
-                            </li>
-                            <li>
-                                <a href="#itemsPerPage" >itemsPerPage</a>
-                            </li>
-                            <li>
-                                <a href="#municipality" >municipality</a>
-                            </li>
-                            <li>
-                                <a href="#nameSearch" >nameSearch</a>
-                            </li>
-                            <li>
-                                <a href="#orderOptions" >orderOptions</a>
-                            </li>
-                            <li>
-                                <a href="#showEvents" >showEvents</a>
-                            </li>
-                            <li>
-                                <a href="#user" >user</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#loadData" >loadData</a>
-                            </li>
-                            <li>
-                                <a href="#ngOnInit" >ngOnInit</a>
-                            </li>
-                            <li>
-                                <a href="#onScrollDown" >onScrollDown</a>
-                            </li>
-                            <li>
-                                <a href="#sortEventsByDate" >sortEventsByDate</a>
-                            </li>
-                            <li>
-                                <a href="#toggleLoading" >toggleLoading</a>
-                            </li>
-                            <li>
-                                <a href="#toggleSortOrder" >toggleSortOrder</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
 
-
-
-
+    <section>
+        <h3 id="constructor">Constructor</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <h6><b>Accessors</b></h6>
+                            <code>constructor(userAuthService: <a href="../injectables/UserAuthService.html" >UserAuthService</a>, eventsService: <a href="../injectables/EventsService.html" >EventsService</a>, router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank" >Router</a>)</code>
+                        </td>
+                    </tr>
+    
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3 id="methods">Methods</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> toggleLoading</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>toggleLoading()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> loadData</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>loadData()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> onScrollDown</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>onScrollDown()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> toggleSortOrder</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>toggleSortOrder()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> sortEventsByDate</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>sortEventsByDate()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> ascendingOrder</b>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <ul class="index-list">
-                                <li>
-                                    <a href="#filteredEvents" >filteredEvents</a>
-                                </li>
-                            </ul>
+                            <code>ascendingOrder:     <code>boolean</code>
+    </bcode>
                         </td>
                     </tr>
-        </tbody>
-    </table>
-</section>
-
-    <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(userAuthService: <a href="../injectables/UserAuthService.html" target="_self">UserAuthService</a>, eventsService: <a href="../injectables/EventsService.html" target="_self">EventsService</a>, router: Router)</code>
-                    </td>
-                </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:61</a></div>
+                                <i>Default value: </i><code>true</code>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>userAuthService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserAuthService.html" target="_self" >UserAuthService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>eventsService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/EventsService.html" target="_self" >EventsService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>router</td>
-                                                  
-                                                        <td>
-                                                                    <code>Router</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
-
-
-
-
-
-    <section data-compodoc="block-methods">
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loadData"></a>
-                    <span class="name">
-                        <span ><b>loadData</b></span>
-                        <a href="#loadData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>loadData()</code>
-                </td>
-            </tr>
-
-
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:105</a></div>
+                            <b> currentPage</b>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnInit"></a>
-                    <span class="name">
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnInit()</code>
-                </td>
-            </tr>
-
-
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:66</a></div>
+                            <code>currentPage:     <code>number</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="onScrollDown"></a>
-                    <span class="name">
-                        <span ><b>onScrollDown</b></span>
-                        <a href="#onScrollDown"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>onScrollDown()</code>
-                </td>
-            </tr>
-
-
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value: </i><code>1</code>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="125"
-                                    class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:125</a></div>
+                            <b> events</b>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="sortEventsByDate"></a>
-                    <span class="name">
-                        <span ><b>sortEventsByDate</b></span>
-                        <a href="#sortEventsByDate"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>sortEventsByDate()</code>
-                </td>
-            </tr>
-
-
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="145"
-                                    class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:145</a></div>
+                            <code>events:     <code>Event[]</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="toggleLoading"></a>
-                    <span class="name">
-                        <span ><b>toggleLoading</b></span>
-                        <a href="#toggleLoading"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>toggleLoading()</code>
-                </td>
-            </tr>
-
-
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:103</a></div>
+                            <b> filteredEvents</b>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="toggleSortOrder"></a>
-                    <span class="name">
-                        <span ><b>toggleSortOrder</b></span>
-                        <a href="#toggleSortOrder"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>toggleSortOrder()</code>
-                </td>
-            </tr>
-
-
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="140"
-                                    class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:140</a></div>
+                            <code>filteredEvents:     <code>Event[]</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-    <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ascendingOrder"></a>
-                    <span class="name">
-                        <span ><b>ascendingOrder</b></span>
-                        <a href="#ascendingOrder"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>true</code>
-                    </td>
-                </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:56</a></div>
+                            <b> isLoading</b>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="currentPage"></a>
-                    <span class="name">
-                        <span ><b>currentPage</b></span>
-                        <a href="#currentPage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>1</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:60</a></div>
+                            <code>isLoading:     <code>boolean</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="events"></a>
-                    <span class="name">
-                        <span ><b>events</b></span>
-                        <a href="#events"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Event.html" target="_self" >Event[]</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[]</code>
-                    </td>
-                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value: </i><code>false</code>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:53</a></div>
+                            <b> itemsPerPage</b>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="isLoading"></a>
-                    <span class="name">
-                        <span ><b>isLoading</b></span>
-                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:59</a></div>
+                            <code>itemsPerPage:     <code>number</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="itemsPerPage"></a>
-                    <span class="name">
-                        <span ><b>itemsPerPage</b></span>
-                        <a href="#itemsPerPage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>6</code>
-                    </td>
-                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value: </i><code>6</code>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:61</a></div>
+                            <b> municipality</b>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="municipality"></a>
-                    <span class="name">
-                        <span ><b>municipality</b></span>
-                        <a href="#municipality"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Municipality.html" target="_self" >Municipality</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>{
-    name: &#x27;&#x27;,
-    president: &#x27;&#x27;,
-    contact: &#x27;&#x27;,
-    description: &#x27;&#x27;,
-    areaha: &#x27;&#x27;,
-    codigo: &#x27;&#x27;,
-    codigopostal: &#x27;&#x27;,
-    codigoine: &#x27;&#x27;,
-    descpstal: &#x27;&#x27;,
-    distrito: &#x27;&#x27;,
-    eleitores: &#x27;&#x27;,
-    email: &#x27;&#x27;,
-    fax: &#x27;&#x27;,
-    localidade: &#x27;&#x27;,
-    nif: &#x27;&#x27;,
-    populacao: &#x27;&#x27;,
-    rua: &#x27;&#x27;,
-    sitio: &#x27;&#x27;,
-    telefone: &#x27;&#x27;,
-    emblemPhoto: &#x27;&#x27;,
-    landscapePhoto: &#x27;&#x27;,
-  }</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:14</a></div>
+                            <code>municipality:     <code>Municipality</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="nameSearch"></a>
-                    <span class="name">
-                        <span ><b>nameSearch</b></span>
-                        <a href="#nameSearch"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;&#x27;</code>
-                    </td>
-                </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:55</a></div>
+                            <b> nameSearch</b>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="orderOptions"></a>
-                    <span class="name">
-                        <span ><b>orderOptions</b></span>
-                        <a href="#orderOptions"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>any[]</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[{ label: &#x27;Brevemente&#x27;, value: true }, { label: &#x27;Mais Distantes&#x27;, value: false }]</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:57</a></div>
+                            <code>nameSearch:     <code>string</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="showEvents"></a>
-                    <span class="name">
-                        <span ><b>showEvents</b></span>
-                        <a href="#showEvents"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Event.html" target="_self" >Event[]</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[]</code>
-                    </td>
-                </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:54</a></div>
+                            <b> orderOptions</b>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="user"></a>
-                    <span class="name">
-                        <span ><b>user</b></span>
-                        <a href="#user"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Citizen.html" target="_self" >Citizen</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>{
-    firstName: &#x27;Sem Nome&#x27;,
-    surname: &#x27;Sem Apelido&#x27;,
-    email: &#x27;Sem email&#x27;,
-    password: &#x27;&#x27;,
-    nif: &#x27;Sem nif&#x27;,
-    gender: &#x27;&#x27;,
-    municipality: &#x27;Sem município&#x27;,
-    address: &#x27;Sem endereço&#x27;,
-    postalCode1: &#x27;0000-000&#x27;,
-    postalCode2: &#x27;000&#x27;,
-    birthDate: new Date(),
-    photo: &quot;/assets/images/maria.jpg&quot;
-  }</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:38</a></div>
+                            <code>orderOptions:     <code>any[]</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-</section>
-
-    <section data-compodoc="block-accessors">
-    <h3 id="accessors">
-        Accessors
-    </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="filteredEvents"></a>
-                        <span class="name"><b>filteredEvents</b><a href="#filteredEvents"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>filteredEvents()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/events/my-events/events-list/events-list.component.ts:134</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-</section>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> showEvents</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>showEvents:     <code>Event[]</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> user</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>user:     <code>Citizen</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
 </div>
-
-
-    <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+        <div class="tab-pane fade tab-source-code" id="source">
+            <pre><code class="hljs javascript">import { Component } from &#x27;@angular/core&#x27;;
 import { UserAuthService } from &#x27;../../../services/user-auth.service&#x27;;
 import { EventsService, Event } from &#x27;../../../services/events/events.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
@@ -1115,105 +1669,8 @@ export class EventsListComponent {
 
 }
 </code></pre>
-    </div>
-
-    <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;head&gt;
-  &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css&quot; integrity&#x3D;&quot;sha512-...&quot; crossorigin&#x3D;&quot;anonymous&quot; /&gt;
-
-&lt;/head&gt;
-&lt;app-header-loggedin&gt;&lt;/app-header-loggedin&gt;
-&lt;app-smaller-banner title&#x3D;&quot;Eventos Inscritos&quot;
-                    image&#x3D;{{municipality.landscapePhoto}}&gt;&lt;/app-smaller-banner&gt;
-&lt;div class&#x3D;&quot;relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]&quot;&gt;
-  &lt;div class&#x3D;&quot; flex items-center justify-between space-x-4 -mt-[3rem]&quot;&gt;
-    &lt;div class&#x3D;&quot;relative w-[50rem] &quot;&gt;
-      &lt;label for&#x3D;&quot;nameSearch&quot; class&#x3D;&quot;sr-only&quot;&gt;Procurar por eventos&lt;/label&gt;
-      &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
-        &lt;i class&#x3D;&quot;absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400&quot;&gt;
-          &lt;span class&#x3D;&quot;fas fa-search&quot;&gt;&lt;/span&gt;
-        &lt;/i&gt;
-        &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;nameSearch&quot; [(ngModel)]&#x3D;&quot;nameSearch&quot; placeholder&#x3D;&quot;Procurar por eventos&quot;
-               class&#x3D;&quot;pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300  hover:border-black&quot;&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;p-selectButton [options]&#x3D;&quot;orderOptions&quot; [(ngModel)]&#x3D;&quot;ascendingOrder&quot; optionLabel&#x3D;&quot;label&quot; optionValue&#x3D;&quot;value&quot; [unselectable]&#x3D;&quot;true&quot;
-                    (onChange)&#x3D;&quot;toggleSortOrder()&quot;
-                    styleClass&#x3D;&quot;orderOptions&quot;&gt;
-    &lt;/p-selectButton&gt;
-  &lt;/div&gt;
-  &lt;div *ngIf&#x3D;&quot;showEvents.length &#x3D;&#x3D;&#x3D; 0&quot;
-       class&#x3D;&quot;flex justify-center items-center text-municip-normal-black grow &quot;&gt;
-    &lt;p class&#x3D;&quot;text-[3rem] font-semibold&quot;&gt;Não está inscrito a nenhum evento.&lt;/p&gt;
-  &lt;/div&gt;
-  &lt;div *ngIf&#x3D;&quot;showEvents.length &gt; 0&quot;
-       infiniteScroll
-       [infiniteScrollDistance]&#x3D;&quot;10&quot;
-       [infiniteScrollThrottle]&#x3D;&quot;500&quot;
-       (scrolled)&#x3D;&quot;onScrollDown()&quot;
-       [alwaysCallback]&#x3D;&quot;true&quot;&gt;
-    &lt;section class&#x3D;&quot;flex flex-wrap justify-around gap-y-16&quot;&gt;
-      &lt;div *ngIf&#x3D;&quot;filteredEvents.length &#x3D;&#x3D;&#x3D; 0&quot;
-           class&#x3D;&quot;flex flex-col justify-center items-center text-municip-normal-black grow space-y-4 text-[2rem] &quot;&gt;
-        &lt;p class&#x3D;&quot; font-semibold&quot;&gt;A sua pesquisa - “{{nameSearch}}” - não encontrou nenhum evento.&lt;/p&gt;
-        &lt;div class&#x3D;&quot;text-[1.3rem]&quot;&gt;
-          Sugestões:
-          &lt;ul&gt;
-            &lt;li&gt;&amp;#8226; Certifique-se de que nenhuma palavra contém erros ortográficos.&lt;/li&gt;
-            &lt;li&gt;&amp;#8226; Tente utilizar outras palavras-chave.&lt;/li&gt;
-          &lt;/ul&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;ng-container *ngFor&#x3D;&quot;let event of filteredEvents&quot;&gt;
-
-        &lt;app-event-card [event]&#x3D;&quot;event&quot;&gt;&lt;/app-event-card&gt;
-      &lt;/ng-container&gt;
-    &lt;/section&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;app-footer class&#x3D;&quot;flex-shrink-0&quot;&gt;&lt;/app-footer&gt;
-</code></pre>
-    </div>
-
-
-    <div class="tab-pane fade " id="tree">
-        <div id="tree-container"></div>
-        <div class="tree-legend">
-            <div class="title">
-                <b>Legend</b>
-            </div>
-            <div>
-                <div class="color htmlelement"></div><span>Html element</span>
-            </div>
-            <div>
-                <div class="color component"></div><span>Component</span>
-            </div>
-            <div>
-                <div class="color directive"></div><span>Html element with directive</span>
-            </div>
         </div>
     </div>
-
-    
-</div>
-
-<script src="../js/libs/vis.min.js"></script>
-<script src="../js/libs/htmlparser.js"></script>
-<script src="../js/libs/deep-iterator.js"></script>
-<script>
-        var COMPONENT_TEMPLATE = '<div><head>  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" /></head><app-header-loggedin></app-header-loggedin><app-smaller-banner title="Eventos Inscritos"                    image={{municipality.landscapePhoto}}></app-smaller-banner><div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]">  <div class=" flex items-center justify-between space-x-4 -mt-[3rem]">    <div class="relative w-[50rem] ">      <label for="nameSearch" class="sr-only">Procurar por eventos</label>      <div class="flex items-center">        <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">          <span class="fas fa-search"></span>        </i>        <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por eventos"               class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300  hover:border-black">      </div>    </div>    <p-selectButton [options]="orderOptions" [(ngModel)]="ascendingOrder" optionLabel="label" optionValue="value" [unselectable]="true"                    (onChange)="toggleSortOrder()"                    styleClass="orderOptions">    </p-selectButton>  </div>  <div *ngIf="showEvents.length === 0"       class="flex justify-center items-center text-municip-normal-black grow ">    <p class="text-[3rem] font-semibold">Não está inscrito a nenhum evento.</p>  </div>  <div *ngIf="showEvents.length > 0"       infiniteScroll       [infiniteScrollDistance]="10"       [infiniteScrollThrottle]="500"       (scrolled)="onScrollDown()"       [alwaysCallback]="true">    <section class="flex flex-wrap justify-around gap-y-16">      <div *ngIf="filteredEvents.length === 0"           class="flex flex-col justify-center items-center text-municip-normal-black grow space-y-4 text-[2rem] ">        <p class=" font-semibold">A sua pesquisa - “{{nameSearch}}” - não encontrou nenhum evento.</p>        <div class="text-[1.3rem]">          Sugestões:          <ul>            <li>&#8226; Certifique-se de que nenhuma palavra contém erros ortográficos.</li>            <li>&#8226; Tente utilizar outras palavras-chave.</li>          </ul>        </div>      </div>      <ng-container *ngFor="let event of filteredEvents">        <app-event-card [event]="event"></app-event-card>      </ng-container>    </section>  </div></div><app-footer class="flex-shrink-0"></app-footer></div>'
-    var COMPONENTS = [{'name': 'AboutusComponent', 'selector': 'app-aboutus'},{'name': 'AccessDeniedComponent', 'selector': 'app-access-denied'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BannerComponent', 'selector': 'app-banner'},{'name': 'BigBannerComponent', 'selector': 'app-big-banner'},{'name': 'BlackBtnIconTextComponent', 'selector': 'app-black-btn-icon-text'},{'name': 'BtnMunicipBlueComponent', 'selector': 'app-btn-municip-blue'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarHeaderComponent', 'selector': 'app-calendar-header'},{'name': 'CalendarPageComponent', 'selector': 'app-calendar-page'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardOutlineThemeComponent', 'selector': 'app-card-outline-theme'},{'name': 'CardOutlineWhiteComponent', 'selector': 'app-card-outline-white'},{'name': 'CardTeamComponent', 'selector': 'app-card-team'},{'name': 'CitizenHomePageComponent', 'selector': 'app-citizen-home-page'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DatetimepickerComponent', 'selector': 'app-datetimepicker'},{'name': 'DialogMessageComponent', 'selector': 'app-dialog-message'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EventCardComponent', 'selector': 'app-event-card'},{'name': 'EventPageComponent', 'selector': 'app-event-page'},{'name': 'EventsListComponent', 'selector': 'app-events-list'},{'name': 'EventsSmallComponent', 'selector': 'app-events-small'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GeneralInfoComponent', 'selector': 'app-general-info'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderLoggedinComponent', 'selector': 'app-header-loggedin'},{'name': 'InputTitleComponent', 'selector': 'app-input-title'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MunAdmindashboardComponent', 'selector': 'app-munadmindashboard'},{'name': 'MunAdminHomePageComponent', 'selector': 'app-mun-admin-home-page'},{'name': 'MunicipalEditComponent', 'selector': 'app-municipal-edit'},{'name': 'MunicipalEventsComponent', 'selector': 'app-municipal-events'},{'name': 'MunicipalitymapComponent', 'selector': 'app-municipalitymap'},{'name': 'MunicipalProfileComponent', 'selector': 'app-municipal-profile'},{'name': 'MyDataCardComponent', 'selector': 'app-my-data-card'},{'name': 'MyMunicipalityCardComponent', 'selector': 'app-my-municipality-card'},{'name': 'NewsCardComponent', 'selector': 'app-news-card'},{'name': 'NewsCreateComponent', 'selector': 'app-news-create'},{'name': 'NewsEditComponent', 'selector': 'app-news-edit'},{'name': 'NewsListComponent', 'selector': 'app-news-list'},{'name': 'NewsPageComponent', 'selector': 'app-news-page'},{'name': 'NewsSmallComponent', 'selector': 'app-news-small'},{'name': 'NextEventsComponent', 'selector': 'app-next-events'},{'name': 'NextNewsComponent', 'selector': 'app-next-news'},{'name': 'ProfileBannerComponent', 'selector': 'app-profile-banner'},{'name': 'SchedulesComponent', 'selector': 'app-schedules'},{'name': 'SelectAccountTypeComponent', 'selector': 'app-select-account-type'},{'name': 'ShowHidePasswordComponent', 'selector': 'app-show-hide-password'},{'name': 'ShowStopComponent', 'selector': 'app-show-stop'},{'name': 'SignUpCitizenAccountComponent', 'selector': 'app-sign-up-citizen-account'},{'name': 'SignUpMunicipalAdministratorAccountComponent', 'selector': 'app-sign-up-municipal-administrator-account'},{'name': 'SignUpMunicipalityComponent', 'selector': 'app-sign-up-municipality'},{'name': 'SignUpSuccessComponent', 'selector': 'app-sign-up-success'},{'name': 'SmallerBannerComponent', 'selector': 'app-smaller-banner'},{'name': 'SpinnerComponent', 'selector': 'app-spinner'},{'name': 'StatisticalHomePageCardComponent', 'selector': 'app-statistical-home-page-card'},{'name': 'StopsMapComponent', 'selector': 'app-stops-map'},{'name': 'StopsPageComponent', 'selector': 'app-stops-page'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'TooltipComponent', 'selector': 'app-tooltip'},{'name': 'TransportsMainComponent', 'selector': 'app-transports-main'},{'name': 'UserinfodialogComponent', 'selector': 'app-userinfodialog'},{'name': 'UserpageComponent', 'selector': 'app-userpage'},{'name': 'VerticalCardComponent', 'selector': 'app-vertical-card'}];
-    var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'EventsListComponent'};
-</script>
-<script src="../js/tree.js"></script>
-
-
-
-
-
-
-
 
 
 
@@ -1234,31 +1691,8 @@ export class EventsListComponent {
     </div>
 </div>
 </div>
-               <!-- END CONTENT -->
            </div>
        </div>
-
-          <label class="dark-mode-switch">
-               <input type="checkbox">
-               <span class="slider">
-                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-                    </svg>
-               </span>
-          </label>
-
-       <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'EventsListComponent.html';
-            var MAX_SEARCH_RESULTS = 15;
-       </script>
-
-       <script src="../js/libs/custom-elements.min.js"></script>
-       <script src="../js/libs/lit-html.js"></script>
-
-       <script src="../js/menu-wc.js" defer></script>
-       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
@@ -1269,17 +1703,20 @@ export class EventsListComponent {
 
        <script src="../js/compodoc.js"></script>
 
-       <script src="../js/tabs.js"></script>
-       <script src="../js/menu.js"></script>
-       <script src="../js/libs/clipboard.min.js"></script>
-       <script src="../js/libs/prism.js"></script>
-       <script src="../js/sourceCode.js"></script>
-          <script src="../js/search/search.js"></script>
-          <script src="../js/search/lunr.min.js"></script>
-          <script src="../js/search/search-lunr.js"></script>
-          <script src="../js/search/search_index.js"></script>
-       <script src="../js/lazy-load-graphs.js"></script>
+       <script src="../js/search/search.js"></script>
+       <script src="../js/search/lunr.min.js"></script>
+       <script src="../js/search/search-lunr.js"></script>
 
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/highlight.pack.js"></script>
+       <script src="../js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="../js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
 
     </body>
 </html>

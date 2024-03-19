@@ -8,84 +8,1116 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	   <link rel="stylesheet" href="./styles/style.css">
-        <link rel="stylesheet" href="./styles/dark.css">
+	    <link rel="stylesheet" href="./styles/style.css">
     </head>
     <body>
-          <script>
-               // Blocking script to avaoid flickering dark mode
-               // Dark mode toggle button
-               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
-               var darkModeState = useDark.matches;
-               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
-               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
-               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-               function checkToggle(check) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].checked = check;
-                    }
-               }
-
-               function toggleDarkMode(state) {
-                    if (window.localStorage) {
-                         localStorage.setItem('compodoc_darkmode-state', state);
-                    }
-
-                    checkToggle(state);
-
-                    const hasClass = document.body.classList.contains('dark');
-
-                    if (state) {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.add('dark');
-                         }
-                         if (!hasClass) {
-                              document.body.classList.add('dark');
-                         }
-                    } else {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.remove('dark');
-                         }
-                         if (hasClass) {
-                              document.body.classList.remove('dark');
-                         }
-                    }
-               }
-
-               useDark.addEventListener('change', function (evt) {
-                    toggleDarkMode(evt.matches);
-               });
-               if (darkModeStateLocal) {
-                    darkModeState = darkModeStateLocal === 'true';
-               }
-               toggleDarkMode(darkModeState);
-
-               if ($darkModeToggles.length > 0) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
-                              darkModeState = !darkModeState;
-                              toggleDarkMode(darkModeState);
-                         });
-                    }
-               }
-          </script>
-
-        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
             <a href="./" class="navbar-brand">municip.io.client documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="./">municip.io.client documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="./overview.html" 
+                                         href="./overview.html" 
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="modules/AppModule.html" >AppModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="components/AboutusComponent.html" >AboutusComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AccessBlockedComponent.html" >AccessBlockedComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AccessDeniedComponent.html" >AccessDeniedComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminDashboardMunicipalAdminsComponent.html" >AdminDashboardMunicipalAdminsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ApproveDocumentsComponent.html" >ApproveDocumentsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/BannerComponent.html" >BannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/BigBannerComponent.html" >BigBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/BlackBtnIconTextComponent.html" >BlackBtnIconTextComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/BtnMunicipBlueComponent.html" >BtnMunicipBlueComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CalendarComponent.html" >CalendarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CalendarHeaderComponent.html" >CalendarHeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CalendarPageComponent.html" >CalendarPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CardComponent.html" >CardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CardOutlineThemeComponent.html" >CardOutlineThemeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CardOutlineWhiteComponent.html" >CardOutlineWhiteComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CardTeamComponent.html" >CardTeamComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CitizenHomePageComponent.html" >CitizenHomePageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CountryPickerComponent.html" >CountryPickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CreateEventComponent.html" >CreateEventComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CreateTemplateComponent.html" >CreateTemplateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DatePickerComponent.html" >DatePickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DatetimepickerComponent.html" >DatetimepickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DialogMessageComponent.html" >DialogMessageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DocsHomepageComponent.html" >DocsHomepageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DocumentApproveCardComponent.html" >DocumentApproveCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DocumentCardComponent.html" >DocumentCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DocumentRequestCardComponent.html" >DocumentRequestCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EditEventComponent.html" >EditEventComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EditTemplateComponent.html" >EditTemplateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EventCardComponent.html" >EventCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EventPageComponent.html" >EventPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EventsListComponent.html" >EventsListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EventsSmallComponent.html" >EventsSmallComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/EventsmapComponent.html" >EventsmapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/FooterComponent.html" >FooterComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/GeneralInfoComponent.html" >GeneralInfoComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/GeneratepdfComponent.html" >GeneratepdfComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/HeaderComponent.html" >HeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/HeaderLoggedinComponent.html" >HeaderLoggedinComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/InputTitleComponent.html" >InputTitleComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/LandingComponent.html" >LandingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/LoginComponent.html" >LoginComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ManageAppFeaturesComponent.html" >ManageAppFeaturesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunAdminHomePageComponent.html" >MunAdminHomePageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunAdmindashboardComponent.html" >MunAdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunicipalEditComponent.html" >MunicipalEditComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunicipalEventsComponent.html" >MunicipalEventsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunicipalProfileComponent.html" >MunicipalProfileComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MunicipalitymapComponent.html" >MunicipalitymapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MyDataCardComponent.html" >MyDataCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MyDocumentsComponent.html" >MyDocumentsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MyMunicipalityCardComponent.html" >MyMunicipalityCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsCardComponent.html" >NewsCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsCreateComponent.html" >NewsCreateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsEditComponent.html" >NewsEditComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsListComponent.html" >NewsListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsPageComponent.html" >NewsPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NewsSmallComponent.html" >NewsSmallComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NextEventsComponent.html" >NextEventsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/NextNewsComponent.html" >NextNewsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ProfileBannerComponent.html" >ProfileBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/RequestDocumentComponent.html" >RequestDocumentComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SchedulesComponent.html" >SchedulesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SelectAccountTypeComponent.html" >SelectAccountTypeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ShowHidePasswordComponent.html" >ShowHidePasswordComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ShowStopComponent.html" >ShowStopComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SignUpCitizenAccountComponent.html" >SignUpCitizenAccountComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SignUpMunicipalAdministratorAccountComponent.html" >SignUpMunicipalAdministratorAccountComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SignUpMunicipalityComponent.html" >SignUpMunicipalityComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SignUpSuccessComponent.html" >SignUpSuccessComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SmallerBannerComponent.html" >SmallerBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SpinnerComponent.html" >SpinnerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/StatisticalHomePageCardComponent.html" >StatisticalHomePageCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/StopsMapComponent.html" >StopsMapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/StopsPageComponent.html" >StopsPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/TemplateListComponent.html" >TemplateListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/TermsconditionsComponent.html" >TermsconditionsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/TooltipComponent.html" >TooltipComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/TransportsMainComponent.html" >TransportsMainComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/UserinfodialogComponent.html" >UserinfodialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/UserpageComponent.html" >UserpageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VerticalCardComponent.html" >VerticalCardComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-code"></span>
+                            <span>Directives</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-directives-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-directives-links"
+                            >
+                                <li class="link">
+                                    <a href="directives/FileDragDropDirective.html" >FileDragDropDirective</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="injectables/AdministratorGuard.html" >AdministratorGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/AppFeaturesService.html" >AppFeaturesService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/AuthGuardService.html" >AuthGuardService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/BoundsService.html" >BoundsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CitizenAuthService.html" >CitizenAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CitizenGuard.html" >CitizenGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CitizenOrMunicipalAdminGuard.html" >CitizenOrMunicipalAdminGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CitizenStatusService.html" >CitizenStatusService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CustomDateFormatterService.html" >CustomDateFormatterService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CustomEventTitleFormatterService.html" >CustomEventTitleFormatterService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/DocsDataService.html" >DocsDataService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/DocsService.html" >DocsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/EncryptionService.html" >EncryptionService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/EventsService.html" >EventsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/IsDocumentFeatureActive.html" >IsDocumentFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/IsEventsFeatureActive.html" >IsEventsFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/IsNewsFeatureActive.html" >IsNewsFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/IsTransportFeatureActive.html" >IsTransportFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/LoaderService.html" >LoaderService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/LoadingInterceptor.html" >LoadingInterceptor</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MunicipalAdminAuthService.html" >MunicipalAdminAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MunicipalAdminGuard.html" >MunicipalAdminGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MunicipalityGuard.html" >MunicipalityGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MunicipalityStatusService.html" >MunicipalityStatusService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/NewsService.html" >NewsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/TransportsService.html" >TransportsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/UserAuthService.html" >UserAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/UserSameMunicipalityGuard.html" >UserSameMunicipalityGuard</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="interfaces/AppFeature.html" >AppFeature</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/AppFeatureToSubmit.html" >AppFeatureToSubmit</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Citizen.html" >Citizen</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Country.html" >Country</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/DocumentTemplate.html" >DocumentTemplate</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Event.html" >Event</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Login.html" >Login</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/MunicipalAdministrator.html" >MunicipalAdministrator</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/Municipality.html" >Municipality</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/News.html" >News</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/RequestDocument.html" >RequestDocument</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/formSchedule.html" >formSchedule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/line.html" >line</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/municipalityTransport.html" >municipalityTransport</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/pattern.html" >pattern</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/route.html" >route</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/stop.html" >stop</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/stopInfo.html" >stopInfo</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/stopTime.html" >stopTime</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/trip.html" >trip</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-plus"></span>
+                            <span>Pipes</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-pipes-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-pipes-links"
+                            >
+                                <li class="link">
+                                    <a href="pipes/FirstLetterUpperCasePipe.html" >FirstLetterUpperCasePipe</a>
+                                </li>
+                                <li class="link">
+                                    <a href="pipes/FormatNumber3By3Pipe.html" >FormatNumber3By3Pipe</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./coverage.html"  class="active" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
                <div class="hidden-xs menu">
-                   <compodoc-menu mode="normal"></compodoc-menu>
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="./">municip.io.client documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="./overview.html" 
+                                                href="./overview.html" 
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="modules/AppModule.html" >AppModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="components/AboutusComponent.html" >AboutusComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AccessBlockedComponent.html" >AccessBlockedComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AccessDeniedComponent.html" >AccessDeniedComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminDashboardMunicipalAdminsComponent.html" >AdminDashboardMunicipalAdminsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ApproveDocumentsComponent.html" >ApproveDocumentsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/BannerComponent.html" >BannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/BigBannerComponent.html" >BigBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/BlackBtnIconTextComponent.html" >BlackBtnIconTextComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/BtnMunicipBlueComponent.html" >BtnMunicipBlueComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CalendarComponent.html" >CalendarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CalendarHeaderComponent.html" >CalendarHeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CalendarPageComponent.html" >CalendarPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CardComponent.html" >CardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CardOutlineThemeComponent.html" >CardOutlineThemeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CardOutlineWhiteComponent.html" >CardOutlineWhiteComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CardTeamComponent.html" >CardTeamComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CitizenHomePageComponent.html" >CitizenHomePageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CountryPickerComponent.html" >CountryPickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CreateEventComponent.html" >CreateEventComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CreateTemplateComponent.html" >CreateTemplateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DatePickerComponent.html" >DatePickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DatetimepickerComponent.html" >DatetimepickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DialogMessageComponent.html" >DialogMessageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DocsHomepageComponent.html" >DocsHomepageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DocumentApproveCardComponent.html" >DocumentApproveCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DocumentCardComponent.html" >DocumentCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DocumentRequestCardComponent.html" >DocumentRequestCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EditEventComponent.html" >EditEventComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EditTemplateComponent.html" >EditTemplateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EventCardComponent.html" >EventCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EventPageComponent.html" >EventPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EventsListComponent.html" >EventsListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EventsSmallComponent.html" >EventsSmallComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/EventsmapComponent.html" >EventsmapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/FooterComponent.html" >FooterComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/GeneralInfoComponent.html" >GeneralInfoComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/GeneratepdfComponent.html" >GeneratepdfComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/HeaderComponent.html" >HeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/HeaderLoggedinComponent.html" >HeaderLoggedinComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/InputTitleComponent.html" >InputTitleComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/LandingComponent.html" >LandingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/LoginComponent.html" >LoginComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ManageAppFeaturesComponent.html" >ManageAppFeaturesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunAdminHomePageComponent.html" >MunAdminHomePageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunAdmindashboardComponent.html" >MunAdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunicipalEditComponent.html" >MunicipalEditComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunicipalEventsComponent.html" >MunicipalEventsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunicipalProfileComponent.html" >MunicipalProfileComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MunicipalitymapComponent.html" >MunicipalitymapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MyDataCardComponent.html" >MyDataCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MyDocumentsComponent.html" >MyDocumentsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MyMunicipalityCardComponent.html" >MyMunicipalityCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsCardComponent.html" >NewsCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsCreateComponent.html" >NewsCreateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsEditComponent.html" >NewsEditComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsListComponent.html" >NewsListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsPageComponent.html" >NewsPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NewsSmallComponent.html" >NewsSmallComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NextEventsComponent.html" >NextEventsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/NextNewsComponent.html" >NextNewsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ProfileBannerComponent.html" >ProfileBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/RequestDocumentComponent.html" >RequestDocumentComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SchedulesComponent.html" >SchedulesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SelectAccountTypeComponent.html" >SelectAccountTypeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ShowHidePasswordComponent.html" >ShowHidePasswordComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ShowStopComponent.html" >ShowStopComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SignUpCitizenAccountComponent.html" >SignUpCitizenAccountComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SignUpMunicipalAdministratorAccountComponent.html" >SignUpMunicipalAdministratorAccountComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SignUpMunicipalityComponent.html" >SignUpMunicipalityComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SignUpSuccessComponent.html" >SignUpSuccessComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SmallerBannerComponent.html" >SmallerBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SpinnerComponent.html" >SpinnerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/StatisticalHomePageCardComponent.html" >StatisticalHomePageCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/StopsMapComponent.html" >StopsMapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/StopsPageComponent.html" >StopsPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/TemplateListComponent.html" >TemplateListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/TermsconditionsComponent.html" >TermsconditionsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/TooltipComponent.html" >TooltipComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/TransportsMainComponent.html" >TransportsMainComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/UserinfodialogComponent.html" >UserinfodialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/UserpageComponent.html" >UserpageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VerticalCardComponent.html" >VerticalCardComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-code"></span>
+                                   <span>Directives</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#directives-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="directives-links"
+                   >
+                                       <li class="link">
+                                           <a href="directives/FileDragDropDirective.html" >FileDragDropDirective</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="injectables/AdministratorGuard.html" >AdministratorGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/AppFeaturesService.html" >AppFeaturesService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/AuthGuardService.html" >AuthGuardService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/BoundsService.html" >BoundsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CitizenAuthService.html" >CitizenAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CitizenGuard.html" >CitizenGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CitizenOrMunicipalAdminGuard.html" >CitizenOrMunicipalAdminGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CitizenStatusService.html" >CitizenStatusService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CustomDateFormatterService.html" >CustomDateFormatterService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CustomEventTitleFormatterService.html" >CustomEventTitleFormatterService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/DocsDataService.html" >DocsDataService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/DocsService.html" >DocsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/EncryptionService.html" >EncryptionService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/EventsService.html" >EventsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/IsDocumentFeatureActive.html" >IsDocumentFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/IsEventsFeatureActive.html" >IsEventsFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/IsNewsFeatureActive.html" >IsNewsFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/IsTransportFeatureActive.html" >IsTransportFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/LoaderService.html" >LoaderService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/LoadingInterceptor.html" >LoadingInterceptor</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/MunicipalAdminAuthService.html" >MunicipalAdminAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/MunicipalAdminGuard.html" >MunicipalAdminGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/MunicipalityGuard.html" >MunicipalityGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/MunicipalityStatusService.html" >MunicipalityStatusService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/NewsService.html" >NewsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/TransportsService.html" >TransportsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/UserAuthService.html" >UserAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/UserSameMunicipalityGuard.html" >UserSameMunicipalityGuard</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="interfaces/AppFeature.html" >AppFeature</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/AppFeatureToSubmit.html" >AppFeatureToSubmit</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Citizen.html" >Citizen</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Country.html" >Country</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/DocumentTemplate.html" >DocumentTemplate</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Event.html" >Event</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Login.html" >Login</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/MunicipalAdministrator.html" >MunicipalAdministrator</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/Municipality.html" >Municipality</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/News.html" >News</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/RequestDocument.html" >RequestDocument</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/formSchedule.html" >formSchedule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/line.html" >line</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/municipalityTransport.html" >municipalityTransport</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/pattern.html" >pattern</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/route.html" >route</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/stop.html" >stop</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/stopInfo.html" >stopInfo</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/stopTime.html" >stopTime</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/trip.html" >trip</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-plus"></span>
+                                   <span>Pipes</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#pipes-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="pipes-links"
+                   >
+                                       <li class="link">
+                                           <a href="pipes/FirstLetterUpperCasePipe.html" >FirstLetterUpperCasePipe</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="pipes/FormatNumber3By3Pipe.html" >FormatNumber3By3Pipe</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./coverage.html"  class="active" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
                </div>
-               <!-- START CONTENT -->
                <div class="content coverage">
                    <div class="content-data">
 
@@ -98,1313 +1130,2052 @@
 
 
 
-
-
-
-
-
-
-
-
-
 <ol class="breadcrumb">
-    <li class="breadcrumb-item">Documentation coverage</li>
+  <li>Documentation coverage</li> 
 </ol>
 
-<div>
-    <img src="./images/coverage-badge-documentation.svg">
+<div class="coverage-badge">
+    <span>Project</span>
+    <span class="count low">6%</span>
 </div>
 
-<table class="table table-bordered coverage" id="coverage-table">
+<table class="table table-bordered coverage">
     <thead class="coverage-header">
         <tr>
             <th>File</th>
             <th>Type</th>
             <th>Identifier</th>
-            <th style="text-align:right" class="statements" data-sort-default>Statements</th>
+            <th style="text-align:right">Statements</th>
         </tr>
     </thead>
     <tbody>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/AboutusComponent.html">src/app/aboutus/aboutus/aboutus.component.ts</a>
             </td>
-            <td>component</td>
-            <td>AboutusComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                AboutusComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/CardTeamComponent.html">src/app/aboutus/card-team/card-team.component.ts</a>
             </td>
-            <td>component</td>
-            <td>CardTeamComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                CardTeamComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/4)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/AccessDeniedComponent.html">src/app/access-denied/access-denied.component.ts</a>
+                <a href="./components/AccessBlockedComponent.html">src/app/access-blocked/access-blocked.component.ts</a>
             </td>
-            <td>component</td>
-            <td>AccessDeniedComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                AccessBlockedComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
+                <a href="./components/AccessDeniedComponent.html">src/app/access-denied/access-denied.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AccessDeniedComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <a href="./components/AdminDashboardMunicipalAdminsComponent.html">src/app/administrator/admin-dashboard-municipal-admins/admin-dashboard-municipal-admins.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminDashboardMunicipalAdminsComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">61 %</span>
+                <span class="coverage-count">(11/18)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
                 <a href="./components/AdmindashboardComponent.html">src/app/administrator/admindashboard/admindashboard.component.ts</a>
             </td>
-            <td>component</td>
-            <td>AdmindashboardComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                AdmindashboardComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/12)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/AdmindashboardComponent.html">src/app/administrator/admindashboard/copy.ts</a>
             </td>
-            <td>component</td>
-            <td>AdmindashboardComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/8)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/AppComponent.html">src/app/app.component.ts</a>
+                component
             </td>
-            <td>component</td>
-            <td>AppComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/CitizenHomePageComponent.html">src/app/citizen/citizen-home-page/citizen-home-page.component.ts</a>
+                AdmindashboardComponent
             </td>
-            <td>component</td>
-            <td>CitizenHomePageComponent</td>
-            <td align="right" data-sort="0">
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/9)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/EventPageComponent.html">src/app/events/event-page/event-page.component.ts</a>
+                <a href="./components/AppComponent.html">src/app/app.component.ts</a>
             </td>
-            <td>component</td>
-            <td>EventPageComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/24)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/CreateEventComponent.html">src/app/events/municip-actions/create-event/create-event.component.ts</a>
+                component
             </td>
-            <td>component</td>
-            <td>CreateEventComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/EditEventComponent.html">src/app/events/municip-actions/edit-event/edit-event.component.ts</a>
+                AppComponent
             </td>
-            <td>component</td>
-            <td>EditEventComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/18)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/MunicipalEventsComponent.html">src/app/events/municipal-events/municipal-events.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>MunicipalEventsComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/29)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/CalendarHeaderComponent.html">src/app/events/my-events/calendar-header/calendar-header.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>CalendarHeaderComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/10)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/CalendarPageComponent.html">src/app/events/my-events/calendar-page/calendar-page.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>CalendarPageComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/CalendarComponent.html">src/app/events/my-events/calendar/calendar.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>CalendarComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/12)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/EventsListComponent.html">src/app/events/my-events/events-list/events-list.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>EventsListComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/18)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/BannerComponent.html">src/app/landingpage/banner/banner.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>BannerComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/CardComponent.html">src/app/landingpage/card/card.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>CardComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/LandingComponent.html">src/app/landingpage/landing/landing.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>LandingComponent</td>
-            <td align="right" data-sort="0">
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/2)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/FooterComponent.html">src/app/layout/footer/footer.component.ts</a>
+                <a href="./components/CitizenHomePageComponent.html">src/app/citizen/citizen-home-page/citizen-home-page.component.ts</a>
             </td>
-            <td>component</td>
-            <td>FooterComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/HeaderLoggedinComponent.html">src/app/layout/header-loggedin/header-loggedin.component.ts</a>
+                component
             </td>
-            <td>component</td>
-            <td>HeaderLoggedinComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/19)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/HeaderComponent.html">src/app/layout/header/header.component.ts</a>
+                CitizenHomePageComponent
             </td>
-            <td>component</td>
-            <td>HeaderComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/LoginComponent.html">src/app/login/login.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>LoginComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/BoundsService.html">src/app/maps/bounds.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>BoundsService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/MunicipalitymapComponent.html">src/app/maps/municipalitymap/municipalitymap.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>MunicipalitymapComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/12)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/MunAdminHomePageComponent.html">src/app/munadministrator/mun-admin-home-page/mun-admin-home-page.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>MunAdminHomePageComponent</td>
-            <td align="right" data-sort="0">
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/8)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/MunAdmindashboardComponent.html">src/app/munadministrator/mun-admindashboard/mun-admindashboard.component.ts</a>
+                <a href="./components/ApproveDocumentsComponent.html">src/app/documents/approve-documents/approve-documents.component.ts</a>
             </td>
-            <td>component</td>
-            <td>MunAdmindashboardComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/18)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/MunicipalEditComponent.html">src/app/munadministrator/municipal-edit/municipal-edit.component.ts</a>
+                component
             </td>
-            <td>component</td>
-            <td>MunicipalEditComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/17)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/MunicipalProfileComponent.html">src/app/munadministrator/municipal-profile/municipal-profile.component.ts</a>
+                ApproveDocumentsComponent
             </td>
-            <td>component</td>
-            <td>MunicipalProfileComponent</td>
-            <td align="right" data-sort="0">
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/12)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/NewsCardComponent.html">src/app/news/news-card/news-card.component.ts</a>
+                <a href="./components/CreateTemplateComponent.html">src/app/documents/create-template/create-template.component.ts</a>
             </td>
-            <td>component</td>
-            <td>NewsCardComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/11)</span>
+            <td>
+                component
+            </td>
+            <td>
+                CreateTemplateComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">10 %</span>
+                <span class="coverage-count">(2/20)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/NewsCreateComponent.html">src/app/news/news-create/news-create.component.ts</a>
+                <a href="./injectables/DocsDataService.html">src/app/documents/docs-data.service.ts</a>
             </td>
-            <td>component</td>
-            <td>NewsCreateComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                injectable
+            </td>
+            <td>
+                DocsDataService
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/15)</span>
+                <span class="coverage-count">(0/3)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/NewsEditComponent.html">src/app/news/news-edit/news-edit.component.ts</a>
+                <a href="./components/DocsHomepageComponent.html">src/app/documents/docs-homepage/docs-homepage.component.ts</a>
             </td>
-            <td>component</td>
-            <td>NewsEditComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                DocsHomepageComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
+                <span class="coverage-count">(0/2)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/NewsListComponent.html">src/app/news/news-list/news-list.component.ts</a>
+                <a href="./components/EditTemplateComponent.html">src/app/documents/edit-template/edit-template.component.ts</a>
             </td>
-            <td>component</td>
-            <td>NewsListComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/16)</span>
+            <td>
+                component
+            </td>
+            <td>
+                EditTemplateComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">21 %</span>
+                <span class="coverage-count">(5/23)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/NewsPageComponent.html">src/app/news/news-page/news-page.component.ts</a>
+                <a href="./components/GeneratepdfComponent.html">src/app/documents/generatepdf/generatepdf.component.ts</a>
             </td>
-            <td>component</td>
-            <td>NewsPageComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                GeneratepdfComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/8)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./pipes/FirstLetterUpperCasePipe.html">src/app/pipes/first-letter-upper-case.pipe.ts</a>
+                <a href="./components/MyDocumentsComponent.html">src/app/documents/my-documents/my-documents.component.ts</a>
             </td>
-            <td>pipe</td>
-            <td>FirstLetterUpperCasePipe</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                MyDocumentsComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
+                <span class="coverage-count">(0/9)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./pipes/FormatNumber3By3Pipe.html">src/app/pipes/format-number3-by3.pipe.ts</a>
+                <a href="./components/RequestDocumentComponent.html">src/app/documents/request-document/request-document.component.ts</a>
             </td>
-            <td>pipe</td>
-            <td>FormatNumber3By3Pipe</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#slideInAnimation">src/app/route-animation.ts</a>
+                component
             </td>
-            <td>variable</td>
-            <td>slideInAnimation</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/CitizenAuthService.html">src/app/services/citizen-auth.service.ts</a>
+                RequestDocumentComponent
             </td>
-            <td>injectable</td>
-            <td>CitizenAuthService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/Citizen.html">src/app/services/citizen-auth.service.ts</a>
-            </td>
-            <td>interface</td>
-            <td>Citizen</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/CitizenStatusService.html">src/app/services/citizen-status.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>CitizenStatusService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/CustomDateFormatterService.html">src/app/services/custom-date-formatter.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>CustomDateFormatterService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/CustomEventTitleFormatterService.html">src/app/services/custom-event-title-formatter.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>CustomEventTitleFormatterService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/EventsService.html">src/app/services/events/events.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>EventsService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/13)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/Event.html">src/app/services/events/events.service.ts</a>
-            </td>
-            <td>interface</td>
-            <td>Event</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/MunicipalAdminAuthService.html">src/app/services/municipal-admin-auth.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>MunicipalAdminAuthService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/MunicipalAdministrator.html">src/app/services/municipal-admin-auth.service.ts</a>
-            </td>
-            <td>interface</td>
-            <td>MunicipalAdministrator</td>
-            <td align="right" data-sort="0">
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/7)</span>
             </td>
         </tr>
+        <tr class="medium">
+            <td>
+                <a href="./components/TemplateListComponent.html">src/app/documents/template-list/template-list.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                TemplateListComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(9/18)</span>
+            </td>
+        </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/Municipality.html">src/app/services/municipal-admin-auth.service.ts</a>
+                <a href="./components/EventPageComponent.html">src/app/events/event-page/event-page.component.ts</a>
             </td>
-            <td>interface</td>
-            <td>Municipality</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                EventPageComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/22)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/MunicipalityStatusService.html">src/app/services/municipality-status.service.ts</a>
+                <a href="./components/CreateEventComponent.html">src/app/events/municip-actions/create-event/create-event.component.ts</a>
             </td>
-            <td>injectable</td>
-            <td>MunicipalityStatusService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
+            <td>
+                component
+            </td>
+            <td>
+                CreateEventComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">18 %</span>
+                <span class="coverage-count">(6/32)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/NewsService.html">src/app/services/news/news.service.ts</a>
+                <a href="./components/EditEventComponent.html">src/app/events/municip-actions/edit-event/edit-event.component.ts</a>
             </td>
-            <td>injectable</td>
-            <td>NewsService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/7)</span>
+            <td>
+                component
+            </td>
+            <td>
+                EditEventComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">25 %</span>
+                <span class="coverage-count">(8/32)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/News.html">src/app/services/news/news.service.ts</a>
+                <a href="./components/MunicipalEventsComponent.html">src/app/events/municipal-events/municipal-events.component.ts</a>
             </td>
-            <td>interface</td>
-            <td>News</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                MunicipalEventsComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/7)</span>
+                <span class="coverage-count">(0/28)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/TransportsService.html">src/app/services/transports.service.ts</a>
+                <a href="./components/CalendarHeaderComponent.html">src/app/events/my-events/calendar-header/calendar-header.component.ts</a>
             </td>
-            <td>injectable</td>
-            <td>TransportsService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/11)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/line.html">src/app/services/transports.service.ts</a>
+                component
             </td>
-            <td>interface</td>
-            <td>line</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/11)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/municipalityTransport.html">src/app/services/transports.service.ts</a>
+                CalendarHeaderComponent
             </td>
-            <td>interface</td>
-            <td>municipalityTransport</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/pattern.html">src/app/services/transports.service.ts</a>
-            </td>
-            <td>interface</td>
-            <td>pattern</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/16)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/route.html">src/app/services/transports.service.ts</a>
-            </td>
-            <td>interface</td>
-            <td>route</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/11)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/stop.html">src/app/services/transports.service.ts</a>
-            </td>
-            <td>interface</td>
-            <td>stop</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/stopInfo.html">src/app/services/transports.service.ts</a>
-            </td>
-            <td>interface</td>
-            <td>stopInfo</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/21)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/stopTime.html">src/app/services/transports.service.ts</a>
-            </td>
-            <td>interface</td>
-            <td>stopTime</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/trip.html">src/app/services/transports.service.ts</a>
-            </td>
-            <td>interface</td>
-            <td>trip</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/UserAuthService.html">src/app/services/user-auth.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>UserAuthService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/25)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/Login.html">src/app/services/user-auth.service.ts</a>
-            </td>
-            <td>interface</td>
-            <td>Login</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/SelectAccountTypeComponent.html">src/app/signUp/select-account-type/select-account-type.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>SelectAccountTypeComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/SignUpCitizenAccountComponent.html">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>SignUpCitizenAccountComponent</td>
-            <td align="right" data-sort="0">
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/10)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/SignUpMunicipalAdministratorAccountComponent.html">src/app/signUp/sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component.ts</a>
+                <a href="./components/CalendarPageComponent.html">src/app/events/my-events/calendar-page/calendar-page.component.ts</a>
             </td>
-            <td>component</td>
-            <td>SignUpMunicipalAdministratorAccountComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                CalendarPageComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/10)</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <a href="./components/CalendarComponent.html">src/app/events/my-events/calendar/calendar.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                CalendarComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(10/10)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/SignUpMunicipalityComponent.html">src/app/signUp/sign-up-municipality/sign-up-municipality.component.ts</a>
+                <a href="./components/EventsListComponent.html">src/app/events/my-events/events-list/events-list.component.ts</a>
             </td>
-            <td>component</td>
-            <td>SignUpMunicipalityComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                EventsListComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
+                <span class="coverage-count">(0/17)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/SignUpSuccessComponent.html">src/app/signUp/sign-up-success/sign-up-success.component.ts</a>
+                <a href="./components/BannerComponent.html">src/app/landingpage/banner/banner.component.ts</a>
             </td>
-            <td>component</td>
-            <td>SignUpSuccessComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                BannerComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/TermsconditionsComponent.html">src/app/termsconditions/termsconditions.component.ts</a>
+                <a href="./components/CardComponent.html">src/app/landingpage/card/card.component.ts</a>
             </td>
-            <td>component</td>
-            <td>TermsconditionsComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/SchedulesComponent.html">src/app/transports/schedules/schedules.component.ts</a>
+                component
             </td>
-            <td>component</td>
-            <td>SchedulesComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/29)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/formSchedule.html">src/app/transports/schedules/schedules.component.ts</a>
+                CardComponent
             </td>
-            <td>interface</td>
-            <td>formSchedule</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/ShowStopComponent.html">src/app/transports/show-stop/show-stop.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>ShowStopComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/7)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/StopsMapComponent.html">src/app/transports/stops-map/stops-map.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>StopsMapComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/23)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/StopsPageComponent.html">src/app/transports/stops-page/stops-page.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>StopsPageComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/TransportsMainComponent.html">src/app/transports/transports-main/transports-main.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>TransportsMainComponent</td>
-            <td align="right" data-sort="0">
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/4)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/UserpageComponent.html">src/app/userpage/userpage.component.ts</a>
+                <a href="./components/LandingComponent.html">src/app/landingpage/landing/landing.component.ts</a>
             </td>
-            <td>component</td>
-            <td>UserpageComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/15)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/BigBannerComponent.html">src/app/utils/big-banner/big-banner.component.ts</a>
+                component
             </td>
-            <td>component</td>
-            <td>BigBannerComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/BlackBtnIconTextComponent.html">src/app/utils/buttons/black-btn-icon-text/black-btn-icon-text.component.ts</a>
+                LandingComponent
             </td>
-            <td>component</td>
-            <td>BlackBtnIconTextComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/BtnMunicipBlueComponent.html">src/app/utils/buttons/btn-municip-blue/btn-municip-blue.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>BtnMunicipBlueComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/8)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/CardOutlineThemeComponent.html">src/app/utils/card-outline-theme/card-outline-theme.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>CardOutlineThemeComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/CardOutlineWhiteComponent.html">src/app/utils/card-outline-white/card-outline-white.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>CardOutlineWhiteComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/DialogMessageComponent.html">src/app/utils/dialog/dialog-message/dialog-message.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>DialogMessageComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/13)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/EventsSmallComponent.html">src/app/utils/events-small/events-small.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>EventsSmallComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/7)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/DatetimepickerComponent.html">src/app/utils/events/datetimepicker/datetimepicker.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>DatetimepickerComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/EventCardComponent.html">src/app/utils/events/event-card/event-card.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>EventCardComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/8)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/GeneralInfoComponent.html">src/app/utils/general-info/general-info.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>GeneralInfoComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./guards/AuthGuardService.html">src/app/utils/guard/auth.guard.ts</a>
-            </td>
-            <td>guard</td>
-            <td>AuthGuardService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./guards/CitizenOrMunicipalAdminGuard.html">src/app/utils/guard/citizen-or-municipal-admin.guard.ts</a>
-            </td>
-            <td>guard</td>
-            <td>CitizenOrMunicipalAdminGuard</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./guards/CitizenGuard.html">src/app/utils/guard/citizen.guard.ts</a>
-            </td>
-            <td>guard</td>
-            <td>CitizenGuard</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./guards/MunicipalAdminGuard.html">src/app/utils/guard/municipal-admin.guard.ts</a>
-            </td>
-            <td>guard</td>
-            <td>MunicipalAdminGuard</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./guards/MunicipalityGuard.html">src/app/utils/guard/municipality.guard.ts</a>
-            </td>
-            <td>guard</td>
-            <td>MunicipalityGuard</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./guards/UserSameMunicipalityGuard.html">src/app/utils/guard/userSameMunicipality/user-same-municipality.guard.ts</a>
-            </td>
-            <td>guard</td>
-            <td>UserSameMunicipalityGuard</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/DatePickerComponent.html">src/app/utils/input/date-picker/date-picker.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>DatePickerComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/InputTitleComponent.html">src/app/utils/input/input-title/input-title.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>InputTitleComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/LoaderService.html">src/app/utils/loader.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>LoaderService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./interceptors/LoadingInterceptor.html">src/app/utils/loading.interceptor.ts</a>
-            </td>
-            <td>interceptor</td>
-            <td>LoadingInterceptor</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/MyDataCardComponent.html">src/app/utils/my-data-card/my-data-card.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>MyDataCardComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/8)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/MyMunicipalityCardComponent.html">src/app/utils/my-municipality-card/my-municipality-card.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>MyMunicipalityCardComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/NewsSmallComponent.html">src/app/utils/news-small/news-small.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>NewsSmallComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/NextEventsComponent.html">src/app/utils/next-events/next-events.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>NextEventsComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/NextNewsComponent.html">src/app/utils/next-news/next-news.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>NextNewsComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/ProfileBannerComponent.html">src/app/utils/profile-banner/profile-banner.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>ProfileBannerComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/ShowHidePasswordComponent.html">src/app/utils/show-hide-password/show-hide-password.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>ShowHidePasswordComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/12)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/SmallerBannerComponent.html">src/app/utils/smaller-banner/smaller-banner.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>SmallerBannerComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/SpinnerComponent.html">src/app/utils/spinner/spinner.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>SpinnerComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/StatisticalHomePageCardComponent.html">src/app/utils/statistical-home-page-card/statistical-home-page-card.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>StatisticalHomePageCardComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/8)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/TooltipComponent.html">src/app/utils/tooltip/tooltip.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>TooltipComponent</td>
-            <td align="right" data-sort="0">
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/2)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/UserinfodialogComponent.html">src/app/utils/userinfodialog/userinfodialog.component.ts</a>
+                <a href="./components/FooterComponent.html">src/app/layout/footer/footer.component.ts</a>
             </td>
-            <td>component</td>
-            <td>UserinfodialogComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                FooterComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/HeaderLoggedinComponent.html">src/app/layout/header-loggedin/header-loggedin.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                HeaderLoggedinComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/24)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/HeaderComponent.html">src/app/layout/header/header.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                HeaderComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/LoginComponent.html">src/app/login/login.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                LoginComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/9)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/BoundsService.html">src/app/maps/bounds.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                BoundsService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/EventsmapComponent.html">src/app/maps/eventsmap/eventsmap.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                EventsmapComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/MunicipalitymapComponent.html">src/app/maps/municipalitymap/municipalitymap.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                MunicipalitymapComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/ManageAppFeaturesComponent.html">src/app/munadministrator/manage-app-features/manage-app-features.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                ManageAppFeaturesComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">6 %</span>
+                <span class="coverage-count">(1/16)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/MunAdminHomePageComponent.html">src/app/munadministrator/mun-admin-home-page/mun-admin-home-page.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                MunAdminHomePageComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/MunAdmindashboardComponent.html">src/app/munadministrator/mun-admindashboard/mun-admindashboard.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                MunAdmindashboardComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/17)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/MunicipalEditComponent.html">src/app/munadministrator/municipal-edit/municipal-edit.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                MunicipalEditComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/24)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/MunicipalProfileComponent.html">src/app/munadministrator/municipal-profile/municipal-profile.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                MunicipalProfileComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/NewsCardComponent.html">src/app/news/news-card/news-card.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                NewsCardComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/9)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/NewsCreateComponent.html">src/app/news/news-create/news-create.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                NewsCreateComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/26)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/NewsEditComponent.html">src/app/news/news-edit/news-edit.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                NewsEditComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/23)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/NewsListComponent.html">src/app/news/news-list/news-list.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                NewsListComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/16)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/NewsPageComponent.html">src/app/news/news-page/news-page.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                NewsPageComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./pipes/FirstLetterUpperCasePipe.html">src/app/pipes/first-letter-upper-case.pipe.ts</a>
+            </td>
+            <td>
+                pipe
+            </td>
+            <td>
+                FirstLetterUpperCasePipe
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./pipes/FormatNumber3By3Pipe.html">src/app/pipes/format-number3-by3.pipe.ts</a>
+            </td>
+            <td>
+                pipe
+            </td>
+            <td>
+                FormatNumber3By3Pipe
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <a href="./injectables/AppFeaturesService.html">src/app/services/appFeatures/app-features.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                AppFeaturesService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">60 %</span>
+                <span class="coverage-count">(3/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/AppFeature.html">src/app/services/appFeatures/app-features.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                AppFeature
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/4)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
+                <a href="./interfaces/AppFeatureToSubmit.html">src/app/services/appFeatures/app-features.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                AppFeatureToSubmit
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/CitizenAuthService.html">src/app/services/citizen-auth.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                CitizenAuthService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/Citizen.html">src/app/services/citizen-auth.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                Citizen
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/14)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/Country.html">src/app/services/citizen-auth.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                Country
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/CitizenStatusService.html">src/app/services/citizen-status.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                CitizenStatusService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <a href="./injectables/EncryptionService.html">src/app/services/crypto/encryption.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                EncryptionService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">66 %</span>
+                <span class="coverage-count">(2/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/CustomDateFormatterService.html">src/app/services/custom-date-formatter.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                CustomDateFormatterService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/CustomEventTitleFormatterService.html">src/app/services/custom-event-title-formatter.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                CustomEventTitleFormatterService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <a href="./injectables/DocsService.html">src/app/services/documents/docs.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                DocsService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">42 %</span>
+                <span class="coverage-count">(8/19)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/DocumentTemplate.html">src/app/services/documents/docs.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                DocumentTemplate
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/RequestDocument.html">src/app/services/documents/docs.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                RequestDocument
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/EventsService.html">src/app/services/events/events.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                EventsService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/11)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/Event.html">src/app/services/events/events.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                Event
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/13)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/MunicipalAdminAuthService.html">src/app/services/municipal-admin-auth.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                MunicipalAdminAuthService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/MunicipalAdministrator.html">src/app/services/municipal-admin-auth.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                MunicipalAdministrator
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/Municipality.html">src/app/services/municipal-admin-auth.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                Municipality
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/21)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <a href="./injectables/MunicipalityStatusService.html">src/app/services/municipality-status.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                MunicipalityStatusService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(7/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/NewsService.html">src/app/services/news/news.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                NewsService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/News.html">src/app/services/news/news.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                News
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/TransportsService.html">src/app/services/transports.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                TransportsService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/9)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/line.html">src/app/services/transports.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                line
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/municipalityTransport.html">src/app/services/transports.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                municipalityTransport
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/pattern.html">src/app/services/transports.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                pattern
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/15)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/route.html">src/app/services/transports.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                route
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/stop.html">src/app/services/transports.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                stop
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/stopInfo.html">src/app/services/transports.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                stopInfo
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/20)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/stopTime.html">src/app/services/transports.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                stopTime
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/trip.html">src/app/services/transports.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                trip
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <a href="./injectables/UserAuthService.html">src/app/services/user-auth.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                UserAuthService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">70 %</span>
+                <span class="coverage-count">(19/27)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/Login.html">src/app/services/user-auth.service.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                Login
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/SelectAccountTypeComponent.html">src/app/signUp/select-account-type/select-account-type.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                SelectAccountTypeComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/SignUpCitizenAccountComponent.html">src/app/signUp/sign-up-citizen-account/sign-up-citizen-account.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                SignUpCitizenAccountComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/30)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/SignUpMunicipalAdministratorAccountComponent.html">src/app/signUp/sign-up-municipal-administrator-account/sign-up-municipal-administrator-account.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                SignUpMunicipalAdministratorAccountComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/23)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/SignUpMunicipalityComponent.html">src/app/signUp/sign-up-municipality/sign-up-municipality.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                SignUpMunicipalityComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/20)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/SignUpSuccessComponent.html">src/app/signUp/sign-up-success/sign-up-success.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                SignUpSuccessComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/TermsconditionsComponent.html">src/app/termsconditions/termsconditions.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                TermsconditionsComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/SchedulesComponent.html">src/app/transports/schedules/schedules.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                SchedulesComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/32)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/formSchedule.html">src/app/transports/schedules/schedules.component.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                formSchedule
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/ShowStopComponent.html">src/app/transports/show-stop/show-stop.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                ShowStopComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/StopsMapComponent.html">src/app/transports/stops-map/stops-map.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                StopsMapComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/20)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/StopsPageComponent.html">src/app/transports/stops-page/stops-page.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                StopsPageComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/TransportsMainComponent.html">src/app/transports/transports-main/transports-main.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                TransportsMainComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/UserpageComponent.html">src/app/userpage/userpage.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                UserpageComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/38)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/BigBannerComponent.html">src/app/utils/big-banner/big-banner.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                BigBannerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/BlackBtnIconTextComponent.html">src/app/utils/buttons/black-btn-icon-text/black-btn-icon-text.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                BlackBtnIconTextComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/BtnMunicipBlueComponent.html">src/app/utils/buttons/btn-municip-blue/btn-municip-blue.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                BtnMunicipBlueComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/CardOutlineThemeComponent.html">src/app/utils/card-outline-theme/card-outline-theme.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                CardOutlineThemeComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/CardOutlineWhiteComponent.html">src/app/utils/card-outline-white/card-outline-white.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                CardOutlineWhiteComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/DialogMessageComponent.html">src/app/utils/dialog/dialog-message/dialog-message.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                DialogMessageComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/11)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <a href="./components/DocumentApproveCardComponent.html">src/app/utils/documents/document-approve-card/document-approve-card.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                DocumentApproveCardComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">37 %</span>
+                <span class="coverage-count">(3/8)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <a href="./components/DocumentCardComponent.html">src/app/utils/documents/document-card/document-card.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                DocumentCardComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">28 %</span>
+                <span class="coverage-count">(2/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/DocumentRequestCardComponent.html">src/app/utils/documents/document-request-card/document-request-card.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                DocumentRequestCardComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/EventsSmallComponent.html">src/app/utils/events-small/events-small.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                EventsSmallComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/DatetimepickerComponent.html">src/app/utils/events/datetimepicker/datetimepicker.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                DatetimepickerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/12)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/EventCardComponent.html">src/app/utils/events/event-card/event-card.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                EventCardComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/GeneralInfoComponent.html">src/app/utils/general-info/general-info.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                GeneralInfoComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/AdministratorGuard.html">src/app/utils/guard/administrator.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                AdministratorGuard
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <a href="./injectables/AuthGuardService.html">src/app/utils/guard/auth.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                AuthGuardService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">66 %</span>
+                <span class="coverage-count">(2/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/CitizenOrMunicipalAdminGuard.html">src/app/utils/guard/citizen-or-municipal-admin.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                CitizenOrMunicipalAdminGuard
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/CitizenGuard.html">src/app/utils/guard/citizen.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                CitizenGuard
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/IsDocumentFeatureActive.html">src/app/utils/guard/isDocumentsFeatureActive/is-documents-feature-active.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                IsDocumentFeatureActive
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/IsEventsFeatureActive.html">src/app/utils/guard/isEventsFeatureActive/is-events-feature-active.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                IsEventsFeatureActive
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/IsNewsFeatureActive.html">src/app/utils/guard/isNewsFeaturesActive/is-news-features-active.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                IsNewsFeatureActive
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/IsTransportFeatureActive.html">src/app/utils/guard/isTransportFeatureActive/is-transport-feature-active.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                IsTransportFeatureActive
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/MunicipalAdminGuard.html">src/app/utils/guard/municipal-admin.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                MunicipalAdminGuard
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/MunicipalityGuard.html">src/app/utils/guard/municipality.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                MunicipalityGuard
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/UserSameMunicipalityGuard.html">src/app/utils/guard/userSameMunicipality/user-same-municipality.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                UserSameMunicipalityGuard
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/CountryPickerComponent.html">src/app/utils/input/country-picker/country-picker.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                CountryPickerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/DatePickerComponent.html">src/app/utils/input/date-picker/date-picker.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                DatePickerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/InputTitleComponent.html">src/app/utils/input/input-title/input-title.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                InputTitleComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/LoaderService.html">src/app/utils/loader.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                LoaderService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/LoadingInterceptor.html">src/app/utils/loading.interceptor.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                LoadingInterceptor
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/MyDataCardComponent.html">src/app/utils/my-data-card/my-data-card.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                MyDataCardComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/MyMunicipalityCardComponent.html">src/app/utils/my-municipality-card/my-municipality-card.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                MyMunicipalityCardComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/NewsSmallComponent.html">src/app/utils/news-small/news-small.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                NewsSmallComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/NextEventsComponent.html">src/app/utils/next-events/next-events.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                NextEventsComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/NextNewsComponent.html">src/app/utils/next-news/next-news.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                NextNewsComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/ProfileBannerComponent.html">src/app/utils/profile-banner/profile-banner.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                ProfileBannerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/ShowHidePasswordComponent.html">src/app/utils/show-hide-password/show-hide-password.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                ShowHidePasswordComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/SmallerBannerComponent.html">src/app/utils/smaller-banner/smaller-banner.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                SmallerBannerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <a href="./components/SpinnerComponent.html">src/app/utils/spinner/spinner.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                SpinnerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(1/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/StatisticalHomePageCardComponent.html">src/app/utils/statistical-home-page-card/statistical-home-page-card.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                StatisticalHomePageCardComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/TooltipComponent.html">src/app/utils/tooltip/tooltip.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                TooltipComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/UserinfodialogComponent.html">src/app/utils/userinfodialog/userinfodialog.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                UserinfodialogComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
                 <a href="./components/VerticalCardComponent.html">src/app/utils/vertical-card/vertical-card.component.ts</a>
             </td>
-            <td>component</td>
-            <td>VerticalCardComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                VerticalCardComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/4)</span>
             </td>
         </tr>
     </tbody>
 </table>
-
-<script src="js/libs/tablesort.min.js"></script>
-<script src="js/libs/tablesort.number.min.js"></script>
-<script>
-    new Tablesort(document.getElementById('coverage-table'));
-</script>
 
                    </div><div class="search-results">
     <div class="has-results">
@@ -1416,31 +3187,8 @@
     </div>
 </div>
 </div>
-               <!-- END CONTENT -->
            </div>
        </div>
-
-          <label class="dark-mode-switch">
-               <input type="checkbox">
-               <span class="slider">
-                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-                    </svg>
-               </span>
-          </label>
-
-       <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'coverage';
-            var COMPODOC_CURRENT_PAGE_URL = 'coverage.html';
-            var MAX_SEARCH_RESULTS = 15;
-       </script>
-
-       <script src="./js/libs/custom-elements.min.js"></script>
-       <script src="./js/libs/lit-html.js"></script>
-
-       <script src="./js/menu-wc.js" defer></script>
-       <script nomodule src="./js/menu-wc_es5.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 
@@ -1451,17 +3199,20 @@
 
        <script src="./js/compodoc.js"></script>
 
-       <script src="./js/tabs.js"></script>
-       <script src="./js/menu.js"></script>
-       <script src="./js/libs/clipboard.min.js"></script>
-       <script src="./js/libs/prism.js"></script>
-       <script src="./js/sourceCode.js"></script>
-          <script src="./js/search/search.js"></script>
-          <script src="./js/search/lunr.min.js"></script>
-          <script src="./js/search/search-lunr.js"></script>
-          <script src="./js/search/search_index.js"></script>
-       <script src="./js/lazy-load-graphs.js"></script>
+       <script src="./js/search/search.js"></script>
+       <script src="./js/search/lunr.min.js"></script>
+       <script src="./js/search/search-lunr.js"></script>
 
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/highlight.pack.js"></script>
+       <script src="./js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="./js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
 
     </body>
 </html>
