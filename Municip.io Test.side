@@ -2,7 +2,7 @@
   "id": "8b864d39-9231-4e16-8a7c-fecaeef7ee09",
   "version": "2.0",
   "name": "Municip.io Test",
-  "url": "https://municipio:4200/",
+  "url": "https://municip.io:4200/",
   "tests": [{
     "id": "13345bfd-82bd-45c0-852b-404ee0d246ae",
     "name": "Create municipality",
@@ -857,6 +857,1434 @@
         ["css=.w-\\[13rem\\]", "css:finder"],
         ["xpath=//button", "xpath:position"],
         ["xpath=//button[contains(.,'Continuar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "498d1fdb-b768-4adf-8450-2db6c20b13a8",
+    "name": "VerifyDocumentPayment",
+    "commands": [{
+      "id": "365718e3-2896-42ba-89b2-93aa028d533c",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/userpage",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a6b16c91-eefb-4f0a-bcf0-e733ac4733e6",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x860",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "27fd5bdd-d716-43bb-af6e-573ee5b83825",
+      "comment": "",
+      "command": "click",
+      "target": "css=.relative:nth-child(5) > .duration-700",
+      "targets": [
+        ["css=.relative:nth-child(5) > .duration-700", "css:finder"],
+        ["xpath=//li[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b1fd1d42-57c7-4deb-ac6d-245a2e7edcfc",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Os meus documentos",
+      "targets": [
+        ["linkText=Os meus documentos", "linkText"],
+        ["css=li:nth-child(3) > .block", "css:finder"],
+        ["xpath=//a[contains(text(),'Os meus documentos')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/documents/my')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Os meus documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "295dafd1-7802-4a5b-87e1-1d3d48bc4b84",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.p-ripple:nth-child(2) > .p-button-label",
+      "targets": [
+        ["css=.p-ripple:nth-child(2) > .p-button-label", "css:finder"],
+        ["xpath=//div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Mais Recente')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "27037e4c-410b-42f7-b7af-454092bb2495",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=.p-ink-active",
+      "targets": [
+        ["css=.p-ink-active", "css:finder"],
+        ["xpath=//div[2]/span[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0510ad2b-bc3d-436f-a6d8-a454c6f56db1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.p-ripple:nth-child(2)",
+      "targets": [
+        ["css=.p-ripple:nth-child(2)", "css:finder"],
+        ["xpath=//div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "38e70bdf-0d55-46ab-bb52-79b194cff7a5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mx-32:nth-child(2) .px-12 > .flex:nth-child(2) .font-inter",
+      "targets": [
+        ["css=.mx-32:nth-child(2) .px-12 > .flex:nth-child(2) .font-inter", "css:finder"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Realizar Pagamento')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bea545c3-6f56-439c-a1a5-4da9a25a8fd7",
+      "comment": "",
+      "command": "click",
+      "target": "id=cardNumber",
+      "targets": [
+        ["id=cardNumber", "id"],
+        ["name=cardNumber", "name"],
+        ["css=#cardNumber", "css:finder"],
+        ["xpath=//input[@id='cardNumber']", "xpath:attributes"],
+        ["xpath=//div[@id='cardNumber-fieldset-inner']/div/div/div/span/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "647b9810-e26e-42e3-a45c-4274d715572e",
+      "comment": "",
+      "command": "type",
+      "target": "id=cardNumber",
+      "targets": [
+        ["id=cardNumber", "id"],
+        ["name=cardNumber", "name"],
+        ["css=#cardNumber", "css:finder"],
+        ["xpath=//input[@id='cardNumber']", "xpath:attributes"],
+        ["xpath=//div[@id='cardNumber-fieldset-inner']/div/div/div/span/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "4242 4242 4242 4242"
+    }, {
+      "id": "e36b72bb-2560-4a70-ac8f-585ee78aa413",
+      "comment": "",
+      "command": "click",
+      "target": "id=cardExpiry",
+      "targets": [
+        ["id=cardExpiry", "id"],
+        ["name=cardExpiry", "name"],
+        ["css=#cardExpiry", "css:finder"],
+        ["xpath=//input[@id='cardExpiry']", "xpath:attributes"],
+        ["xpath=//div[@id='cardNumber-fieldset-inner']/div[2]/div/div/span/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/span/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c0f5f233-bae8-48a9-8fd6-87761fb3e331",
+      "comment": "",
+      "command": "type",
+      "target": "id=cardExpiry",
+      "targets": [
+        ["id=cardExpiry", "id"],
+        ["name=cardExpiry", "name"],
+        ["css=#cardExpiry", "css:finder"],
+        ["xpath=//input[@id='cardExpiry']", "xpath:attributes"],
+        ["xpath=//div[@id='cardNumber-fieldset-inner']/div[2]/div/div/span/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/span/input", "xpath:position"]
+      ],
+      "value": "09 / 26"
+    }, {
+      "id": "d9d59408-4d5d-4449-91e9-a0bfcfe37417",
+      "comment": "",
+      "command": "click",
+      "target": "id=cardCvc",
+      "targets": [
+        ["id=cardCvc", "id"],
+        ["name=cardCvc", "name"],
+        ["css=#cardCvc", "css:finder"],
+        ["xpath=//input[@id='cardCvc']", "xpath:attributes"],
+        ["xpath=//div[@id='cardNumber-fieldset-inner']/div[3]/div/div/span/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/span/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1e21bd8a-ca92-438b-9906-253ce0611f61",
+      "comment": "",
+      "command": "type",
+      "target": "id=cardCvc",
+      "targets": [
+        ["id=cardCvc", "id"],
+        ["name=cardCvc", "name"],
+        ["css=#cardCvc", "css:finder"],
+        ["xpath=//input[@id='cardCvc']", "xpath:attributes"],
+        ["xpath=//div[@id='cardNumber-fieldset-inner']/div[3]/div/div/span/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/span/input", "xpath:position"]
+      ],
+      "value": "232"
+    }, {
+      "id": "7a7bd286-80d6-4002-a960-9b2524a82277",
+      "comment": "",
+      "command": "click",
+      "target": "id=billingName",
+      "targets": [
+        ["id=billingName", "id"],
+        ["name=billingName", "name"],
+        ["css=#billingName", "css:finder"],
+        ["xpath=//input[@id='billingName']", "xpath:attributes"],
+        ["xpath=//div[@id='billingName-fieldset-inner']/div/div/div/span/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/span/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "95595522-2296-4a9a-9e58-88a6b4fd9473",
+      "comment": "",
+      "command": "type",
+      "target": "id=billingName",
+      "targets": [
+        ["id=billingName", "id"],
+        ["name=billingName", "name"],
+        ["css=#billingName", "css:finder"],
+        ["xpath=//input[@id='billingName']", "xpath:attributes"],
+        ["xpath=//div[@id='billingName-fieldset-inner']/div/div/div/span/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/span/input", "xpath:position"]
+      ],
+      "value": "Jonh Doe"
+    }, {
+      "id": "ada3187f-f634-4bdb-8b36-ff68c72475c8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.SubmitButton-IconContainer",
+      "targets": [
+        ["css=.SubmitButton-IconContainer", "css:finder"],
+        ["xpath=//div[@id='root']/div/div/div[2]/main/div/div[2]/form/div/div/div/div[3]/div/div[2]/button/div[3]", "xpath:idRelative"],
+        ["xpath=//button/div[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "453d6a0e-cf6f-4c4f-ab7a-e191ff9eb190",
+      "comment": "",
+      "command": "click",
+      "target": "css=.min-h-80",
+      "targets": [
+        ["css=.min-h-80", "css:finder"],
+        ["xpath=//app-my-documents/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ac52e232-cfbe-452c-be72-73604c345fc8",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.p-ripple:nth-child(2) > .p-button-label",
+      "targets": [
+        ["css=.p-ripple:nth-child(2) > .p-button-label", "css:finder"],
+        ["xpath=//div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Mais Recente')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e982c1c2-cfca-493b-bb08-eb62299c344c",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=.p-ink-active",
+      "targets": [
+        ["css=.p-ink-active", "css:finder"],
+        ["xpath=//div[2]/span[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c6e53119-7e51-4e00-ad46-76ddfd3854b6",
+      "comment": "",
+      "command": "click",
+      "target": "css=.p-ripple:nth-child(2)",
+      "targets": [
+        ["css=.p-ripple:nth-child(2)", "css:finder"],
+        ["xpath=//div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "e3c60492-45bf-441e-b189-250666506826",
+    "name": "RequestDocument",
+    "commands": [{
+      "id": "237a094d-aa22-4b45-a9ce-207c6c136518",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/userpage",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3dfa7d52-37b4-4034-8fac-896981bcb161",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bac0139d-a23a-47bb-a2bc-6ba4be9a0f5c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.relative:nth-child(5) > .duration-700",
+      "targets": [
+        ["css=.relative:nth-child(5) > .duration-700", "css:finder"],
+        ["xpath=//li[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3e1659fc-5a7e-46d0-8d25-d3286673c02e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Pedir Documentos",
+      "targets": [
+        ["linkText=Pedir Documentos", "linkText"],
+        ["css=li:nth-child(2) > .block", "css:finder"],
+        ["xpath=//a[contains(text(),'Pedir Documentos')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/documents/request')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Pedir Documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d3c4ed72-d531-4d55-bb81-81554831ce53",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ng-star-inserted:nth-child(1) .flex > .text-lg",
+      "targets": [
+        ["css=.ng-star-inserted:nth-child(1) .flex > .text-lg", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Pedir')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae003947-f71f-439a-aa33-fdb054e4c907",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.p-ripple:nth-child(2) > .p-button-label",
+      "targets": [
+        ["css=.p-ripple:nth-child(2) > .p-button-label", "css:finder"],
+        ["xpath=//div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Mais Recente')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "70ebda10-0e9f-4b64-aabd-aaf9f197f801",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=.p-ink-active",
+      "targets": [
+        ["css=.p-ink-active", "css:finder"],
+        ["xpath=//div[2]/span[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9e6ca71e-72d8-4d40-a5da-8f3e5bdcba48",
+      "comment": "",
+      "command": "click",
+      "target": "css=.p-ripple:nth-child(2)",
+      "targets": [
+        ["css=.p-ripple:nth-child(2)", "css:finder"],
+        ["xpath=//div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "baa9f93b-0f0b-43d4-9a0d-b06063df64d6",
+    "name": "Authorize Documents",
+    "commands": [{
+      "id": "66860144-d929-46b1-9196-fa800bdec869",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/userpage",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4af4e306-b854-409e-ae1d-4c2172133ed1",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e9f20086-d5c5-44a4-ae41-b6bed8ae3b76",
+      "comment": "",
+      "command": "click",
+      "target": "css=.relative:nth-child(5) > .duration-700",
+      "targets": [
+        ["css=.relative:nth-child(5) > .duration-700", "css:finder"],
+        ["xpath=//li[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4eadebcd-798e-4e92-8286-c1289101622f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Aprovar Documentos",
+      "targets": [
+        ["linkText=Aprovar Documentos", "linkText"],
+        ["css=.ng-star-inserted > .block", "css:finder"],
+        ["xpath=//a[contains(text(),'Aprovar Documentos')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/documents/approve')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Aprovar Documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c84263b7-0a0b-4b0e-a937-d1c506d0efb3",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.p-ripple:nth-child(2) > .p-button-label",
+      "targets": [
+        ["css=.p-ripple:nth-child(2) > .p-button-label", "css:finder"],
+        ["xpath=//div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Pedidos Recentes')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7706cc57-eb3f-4b35-b28e-18cb53421f80",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=.p-ink-active",
+      "targets": [
+        ["css=.p-ink-active", "css:finder"],
+        ["xpath=//div[2]/span[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7048dce9-0fd8-4dfd-a2c4-2d3c0a631612",
+      "comment": "",
+      "command": "click",
+      "target": "css=.p-ripple:nth-child(2)",
+      "targets": [
+        ["css=.p-ripple:nth-child(2)", "css:finder"],
+        ["xpath=//div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "75dfe9a9-e2d4-485f-9252-df914853089c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mx-32:nth-child(2) .size-3",
+      "targets": [
+        ["css=.mx-32:nth-child(2) .size-3", "css:finder"],
+        ["xpath=//img[@alt='check']", "xpath:img"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "66b5d798-c008-41b9-a91a-2b82608ef158",
+    "name": "Create Document Template",
+    "commands": [{
+      "id": "5675b4b9-b04a-423f-877b-121e62c732d6",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/userpage",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1b3975b8-b0cb-453b-8d83-ee1f5972bd48",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6439d8aa-5b7b-4902-a6ec-879b0084ea74",
+      "comment": "",
+      "command": "click",
+      "target": "css=.relative:nth-child(5) > .duration-700",
+      "targets": [
+        ["css=.relative:nth-child(5) > .duration-700", "css:finder"],
+        ["xpath=//li[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "32782b61-2e6d-49bf-93e9-1038771d35f9",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Criar Template",
+      "targets": [
+        ["linkText=Criar Template", "linkText"],
+        ["css=.ng-star-inserted > li:nth-child(2) > .block", "css:finder"],
+        ["xpath=//a[contains(text(),'Criar Template')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/documents/createtemplate')]", "xpath:href"],
+        ["xpath=//span/li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Criar Template')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e68b4c79-631c-4309-a35f-c15462140e90",
+      "comment": "",
+      "command": "click",
+      "target": "id=name",
+      "targets": [
+        ["id=name", "id"],
+        ["name=name", "name"],
+        ["css=#name", "css:finder"],
+        ["xpath=//input[@id='name']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2b922d71-d0cd-4404-975f-93d60d813868",
+      "comment": "",
+      "command": "type",
+      "target": "id=name",
+      "targets": [
+        ["id=name", "id"],
+        ["name=name", "name"],
+        ["css=#name", "css:finder"],
+        ["xpath=//input[@id='name']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Certidão de Residência"
+    }, {
+      "id": "0a652aff-ee7f-42b0-9239-d428e1b7bd0b",
+      "comment": "",
+      "command": "click",
+      "target": "id=type",
+      "targets": [
+        ["id=type", "id"],
+        ["name=type", "name"],
+        ["css=#type", "css:finder"],
+        ["xpath=//input[@id='type']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6ca6036a-8ad6-4248-a67c-44e11ea04d64",
+      "comment": "",
+      "command": "type",
+      "target": "id=type",
+      "targets": [
+        ["id=type", "id"],
+        ["name=type", "name"],
+        ["css=#type", "css:finder"],
+        ["xpath=//input[@id='type']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "Certidão"
+    }, {
+      "id": "b074d0e4-98a8-4ad3-88a1-9d757cdaddf8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.justify-between:nth-child(2)",
+      "targets": [
+        ["css=.justify-between:nth-child(2)", "css:finder"],
+        ["xpath=//form/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "05549e3c-0fc3-46f5-8cac-9decd87c597f",
+      "comment": "",
+      "command": "click",
+      "target": "id=price",
+      "targets": [
+        ["id=price", "id"],
+        ["name=price", "name"],
+        ["css=#price", "css:finder"],
+        ["xpath=//input[@id='price']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7e4a59e1-941b-45fc-b33c-0fbbd9554686",
+      "comment": "",
+      "command": "type",
+      "target": "id=price",
+      "targets": [
+        ["id=price", "id"],
+        ["name=price", "name"],
+        ["css=#price", "css:finder"],
+        ["xpath=//input[@id='price']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "25"
+    }, {
+      "id": "8a8d03b3-905a-4025-b913-7409e0a69f41",
+      "comment": "",
+      "command": "click",
+      "target": "css=.justify-between:nth-child(2)",
+      "targets": [
+        ["css=.justify-between:nth-child(2)", "css:finder"],
+        ["xpath=//form/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "61e76860-767a-47c3-b1fb-d800e6a92a9b",
+      "comment": "",
+      "command": "click",
+      "target": "id=description",
+      "targets": [
+        ["id=description", "id"],
+        ["name=description", "name"],
+        ["css=#description", "css:finder"],
+        ["xpath=//textarea[@id='description']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c9c5d163-53ff-4365-a525-d6bb35c947a4",
+      "comment": "",
+      "command": "type",
+      "target": "id=description",
+      "targets": [
+        ["id=description", "id"],
+        ["name=description", "name"],
+        ["css=#description", "css:finder"],
+        ["xpath=//textarea[@id='description']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Isto é uma certidão de residência"
+    }, {
+      "id": "fd8bf940-b675-4b65-886f-addf3a816a29",
+      "comment": "",
+      "command": "click",
+      "target": "id=propriedade",
+      "targets": [
+        ["id=propriedade", "id"],
+        ["css=#propriedade", "css:finder"],
+        ["xpath=//select[@id='propriedade']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0a78c448-d0bb-4ec2-84fb-2c992cb69486",
+      "comment": "",
+      "command": "click",
+      "target": "id=propriedade",
+      "targets": [
+        ["id=propriedade", "id"],
+        ["css=#propriedade", "css:finder"],
+        ["xpath=//select[@id='propriedade']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d54c5b8d-1f29-4b4e-857e-486a525f3dae",
+      "comment": "",
+      "command": "click",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "29b9487c-46df-4a2d-ad74-02643f1de6cd",
+      "comment": "",
+      "command": "type",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": "Município de Setúbal\\n\\n"
+    }, {
+      "id": "1c454148-837b-4c61-8c43-845ac4cc6e58",
+      "comment": "",
+      "command": "click",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d420a813-e269-420c-962b-ac0cb9a4dd64",
+      "comment": "",
+      "command": "type",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": "Município de Setúbal\\n\\nEmail: geral@mun-setúbal.pt\\nTelefone: 265541500\\nMorada: Praça de Bocage, 2900-866 Setúbal\\n\\n"
+    }, {
+      "id": "ffedb494-25e5-4c51-88d5-715a332dd1b5",
+      "comment": "",
+      "command": "click",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "eef6ca57-b08e-463b-928d-4948ef0328c7",
+      "comment": "",
+      "command": "type",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": "Município de Setúbal\\n\\nEmail: geral@mun-setúbal.pt\\nTelefone: 265541500\\nMorada: Praça de Bocage, 2900-866 Setúbal\\n\\nJONH DOE, PRESIDENTE, da Câmara de Setúbal----------\\nNo uso da competência que lhe é conferida pela alínea I, do nº1 do artº18º da Lei nº75/2013, de 12 de Setembro, e dos poderes delegados pelo Município por deliberação tomada na Reunião extraordinária de 25 de Outubro de 2013.-------\\nATESTA, conforma declarações prestadas pela requerente e em documentos arquivados na Junta que: "
+    }, {
+      "id": "9b2f1071-57cc-4703-9c25-e49a8da08af8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mt-2",
+      "targets": [
+        ["css=.mt-2", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Adicionar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "711b156f-60e1-4deb-acf3-9356c4e2bc84",
+      "comment": "",
+      "command": "click",
+      "target": "id=propriedade",
+      "targets": [
+        ["id=propriedade", "id"],
+        ["css=#propriedade", "css:finder"],
+        ["xpath=//select[@id='propriedade']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "892935e2-964f-4e6f-81aa-c7b52dcd1f2b",
+      "comment": "",
+      "command": "select",
+      "target": "id=propriedade",
+      "targets": [],
+      "value": "label=Apelido"
+    }, {
+      "id": "ef7d5521-8794-469b-9cff-106662be7dc8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mt-2",
+      "targets": [
+        ["css=.mt-2", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Adicionar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a9de1dd-45d0-4574-8a03-0d90e1116e51",
+      "comment": "",
+      "command": "click",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "99581467-157f-4acb-9c3c-488e2acdd12a",
+      "comment": "",
+      "command": "type",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": "Município de Setúbal\\n\\nEmail: geral@mun-setúbal.pt\\nTelefone: 265541500\\nMorada: Praça de Bocage, 2900-866 Setúbal\\n\\nJONH DOE, PRESIDENTE, da Câmara de Setúbal----------\\nNo uso da competência que lhe é conferida pela alínea I, do nº1 do artº18º da Lei nº75/2013, de 12 de Setembro, e dos poderes delegados pelo Município por deliberação tomada na Reunião extraordinária de 25 de Outubro de 2013.-------\\nATESTA, conforma declarações prestadas pela requerente e em documentos arquivados na Junta que: [firstName][surname], que reside em "
+    }, {
+      "id": "ec2f7f17-cd9f-4970-8a4f-19b688abbf0d",
+      "comment": "",
+      "command": "click",
+      "target": "id=propriedade",
+      "targets": [
+        ["id=propriedade", "id"],
+        ["css=#propriedade", "css:finder"],
+        ["xpath=//select[@id='propriedade']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "85f3c533-6d88-4c26-aec5-ac0abda875b9",
+      "comment": "",
+      "command": "select",
+      "target": "id=propriedade",
+      "targets": [],
+      "value": "label=Endereço"
+    }, {
+      "id": "7be03d36-102d-4684-9380-d89e94f2c138",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mt-2",
+      "targets": [
+        ["css=.mt-2", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Adicionar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "af63a7a9-1a5d-44a0-8ed7-d37e97cd418a",
+      "comment": "",
+      "command": "click",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2569b0cf-b822-49ab-8c9c-3d9ed52d4b4e",
+      "comment": "",
+      "command": "type",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": "Município de Setúbal\\n\\nEmail: geral@mun-setúbal.pt\\nTelefone: 265541500\\nMorada: Praça de Bocage, 2900-866 Setúbal\\n\\nJONH DOE, PRESIDENTE, da Câmara de Setúbal----------\\nNo uso da competência que lhe é conferida pela alínea I, do nº1 do artº18º da Lei nº75/2013, de 12 de Setembro, e dos poderes delegados pelo Município por deliberação tomada na Reunião extraordinária de 25 de Outubro de 2013.-------\\nATESTA, conforma declarações prestadas pela requerente e em documentos arquivados na Junta que: [firstName][surname], que reside em [address].\\n"
+    }, {
+      "id": "e8a8f5d8-cb0e-4454-b528-cd14c1035d53",
+      "comment": "",
+      "command": "click",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8d5bc05-269a-432b-bda5-fb4fd31f8341",
+      "comment": "",
+      "command": "type",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": "Município de Setúbal\\n\\nEmail: geral@mun-setúbal.pt\\nTelefone: 265541500\\nMorada: Praça de Bocage, 2900-866 Setúbal\\n\\nJONH DOE, PRESIDENTE, da Câmara de Setúbal----------\\nNo uso da competência que lhe é conferida pela alínea I, do nº1 do artº18º da Lei nº75/2013, de 12 de Setembro, e dos poderes delegados pelo Município por deliberação tomada na Reunião extraordinária de 25 de Outubro de 2013.-------\\nATESTA, conforma declarações prestadas pela requerente e em documentos arquivados na Junta que: [firstName][surname], que reside em [address].\\nPor ser verdade e me ter sido pedido, para efeito de ser presente nos serviços de Estrangeiros e Fronteiras, mandei passar o presente atestado que vai assinado sob o selo branco"
+    }]
+  }, {
+    "id": "2486e8fc-5101-46e6-8c64-72fe000612bc",
+    "name": "Edit Document Template",
+    "commands": [{
+      "id": "f5fa4606-9e92-420a-bd17-12f739186abf",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/userpage",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "483975de-33a3-4dad-9c00-262a6328c892",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d9eb1afc-6cf5-4097-8171-e3aec1fb745a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.relative:nth-child(5) > .duration-700",
+      "targets": [
+        ["css=.relative:nth-child(5) > .duration-700", "css:finder"],
+        ["xpath=//li[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a4e4bd6b-222a-452e-9d89-8daf1acf79e5",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.relative:nth-child(5) > .duration-700",
+      "targets": [
+        ["css=.relative:nth-child(5) > .duration-700", "css:finder"],
+        ["xpath=//li[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1ee2347a-58b8-4cbc-9a53-da57d046a94c",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.relative:nth-child(5) > .duration-700",
+      "targets": [
+        ["css=.relative:nth-child(5) > .duration-700", "css:finder"],
+        ["xpath=//li[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5cd9927d-9407-4e6c-8989-6bd67139ab18",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Lista Templates",
+      "targets": [
+        ["linkText=Lista Templates", "linkText"],
+        ["css=.ng-star-inserted > li:nth-child(1) > .block", "css:finder"],
+        ["xpath=//a[contains(text(),'Lista Templates')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/documents/template-list')]", "xpath:href"],
+        ["xpath=//span/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Lista Templates')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cdfad47f-ce3b-45b8-bf5a-62e407c104d2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-white:nth-child(1) .bg-municip-blue > .fas",
+      "targets": [
+        ["css=.bg-white:nth-child(1) .bg-municip-blue > .fas", "css:finder"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8969198d-8011-4b20-a15d-13c263a8d138",
+      "comment": "",
+      "command": "click",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "21ee2a34-62b8-4aac-ae1b-bfd6b624fffe",
+      "comment": "",
+      "command": "type",
+      "target": "id=templatetext",
+      "targets": [
+        ["id=templatetext", "id"],
+        ["name=templatetext", "name"],
+        ["css=#templatetext", "css:finder"],
+        ["xpath=//textarea[@id='templatetext']", "xpath:attributes"],
+        ["xpath=//div[4]/div/textarea", "xpath:position"]
+      ],
+      "value": "Município de Setúbal\\n\\nEmail: geral@mun-setúbal.pt\\nTelefone: 265541500\\nMorada: Praça de Bocage, 2900-866 Setúbal\\n\\nJONH DOE, PRESIDENTE, da Câmara de Setúbal----------\\nNo uso da competência que lhe é conferida pela alínea I, do nº1 do artº18º da Lei nº75/2013, de 12 de Setembro, e dos poderes delegados pelo Município por deliberação tomada na Reunião extraordinária de 25 de Outubro de 2013.-------\\nATESTA, conforma declarações prestadas pela requerente e em documentos arquivados na Junta que: [firstName][surname], que reside em [address].\\n"
+    }, {
+      "id": "53375337-03a6-454b-8ae5-d77ec2636d34",
+      "comment": "",
+      "command": "click",
+      "target": "css=.inline-flex",
+      "targets": [
+        ["css=.inline-flex", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//app-btn-municip-blue/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Criar Modelo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b3fb4653-4d04-43a1-b1f0-2cf96854790a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.shadow-sm",
+      "targets": [
+        ["css=.shadow-sm", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Proceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6c3bd71c-6292-47dd-875b-69fddf611f24",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "145f667b-7e85-43b9-b2a5-a3c96ed2d52c",
+    "name": "Remove Document Template",
+    "commands": [{
+      "id": "390b82ea-87df-454f-aebb-8c3af119f257",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/userpage",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b4647801-d2e2-485f-bf61-43270b6d137d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bdaf2b98-d6db-40f0-af1b-d239c7919d52",
+      "comment": "",
+      "command": "click",
+      "target": "css=.relative:nth-child(5) > .duration-700",
+      "targets": [
+        ["css=.relative:nth-child(5) > .duration-700", "css:finder"],
+        ["xpath=//li[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3e4db96-8422-465f-bfe3-9903b125006e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Lista Templates",
+      "targets": [
+        ["linkText=Lista Templates", "linkText"],
+        ["css=.ng-star-inserted > li:nth-child(1) > .block", "css:finder"],
+        ["xpath=//a[contains(text(),'Lista Templates')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/documents/template-list')]", "xpath:href"],
+        ["xpath=//span/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Lista Templates')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "86d62d25-0cc0-4558-b241-bc51b83100b6",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-white:nth-child(1) .bg-red-500",
+      "targets": [
+        ["css=.bg-white:nth-child(1) .bg-red-500", "css:finder"],
+        ["xpath=//button[3]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "bd009a79-a03a-424f-b743-aedb46935fff",
+    "name": "Filter Documents",
+    "commands": [{
+      "id": "35d0d42e-0c3c-4c1a-a020-732858d94f1b",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/userpage",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1cff0204-11e1-4b60-86d4-6f28b8b5b992",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "766f5769-3d92-49aa-952a-c33b07dd48f9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.relative:nth-child(5) > .duration-700",
+      "targets": [
+        ["css=.relative:nth-child(5) > .duration-700", "css:finder"],
+        ["xpath=//li[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Documentos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7741be9-7f76-4b34-a580-2a23e6a02949",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Lista Templates",
+      "targets": [
+        ["linkText=Lista Templates", "linkText"],
+        ["css=.ng-star-inserted > li:nth-child(1) > .block", "css:finder"],
+        ["xpath=//a[contains(text(),'Lista Templates')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/documents/template-list')]", "xpath:href"],
+        ["xpath=//span/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Lista Templates')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8f61d6a3-28fc-421c-8670-647400f5db35",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(1)",
+      "targets": [
+        ["css=.py-3:nth-child(1)", "css:finder"],
+        ["xpath=//th", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dcf60f2a-c78d-4436-a2dc-3f39f2df4589",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(1)",
+      "targets": [
+        ["css=.py-3:nth-child(1)", "css:finder"],
+        ["xpath=//th", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f6cd47af-20a6-4e05-ac7e-aa429439c157",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.py-3:nth-child(1)",
+      "targets": [
+        ["css=.py-3:nth-child(1)", "css:finder"],
+        ["xpath=//th", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9f826dfa-4c78-494b-9298-41978fb4ad3b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(1)",
+      "targets": [
+        ["css=.py-3:nth-child(1)", "css:finder"],
+        ["xpath=//th", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "29208d9b-e690-4ac3-ad42-4066e2721e6b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(1)",
+      "targets": [
+        ["css=.py-3:nth-child(1)", "css:finder"],
+        ["xpath=//th", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f22db6a8-aaac-4896-8635-cd1073c4abb3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(2)",
+      "targets": [
+        ["css=.py-3:nth-child(2)", "css:finder"],
+        ["xpath=//th[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "607888bf-8824-4c92-9634-140c41f6a636",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(2)",
+      "targets": [
+        ["css=.py-3:nth-child(2)", "css:finder"],
+        ["xpath=//th[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8a7cf4ca-fedd-42fe-a545-d6934d668595",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.py-3:nth-child(2)",
+      "targets": [
+        ["css=.py-3:nth-child(2)", "css:finder"],
+        ["xpath=//th[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "edc67954-6b91-4a39-b817-8b921504ce33",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(2)",
+      "targets": [
+        ["css=.py-3:nth-child(2)", "css:finder"],
+        ["xpath=//th[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "49f4a8f3-f47c-42f2-95ef-b4ee847f1aab",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(2)",
+      "targets": [
+        ["css=.py-3:nth-child(2)", "css:finder"],
+        ["xpath=//th[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f0cbb11b-288a-489e-804d-245e8a3479cc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(3)",
+      "targets": [
+        ["css=.py-3:nth-child(3)", "css:finder"],
+        ["xpath=//th[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c4255f69-3df5-48a6-a537-6733633187b6",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-caret-down",
+      "targets": [
+        ["css=.fa-caret-down", "css:finder"],
+        ["xpath=//th[3]/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fc71f483-f1b0-460d-9d40-daa6d878407b",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.fa-caret-up",
+      "targets": [
+        ["css=.fa-caret-up", "css:finder"],
+        ["xpath=//th[3]/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d769c195-ba71-43d4-ac26-d40c25fcd453",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-caret-up",
+      "targets": [
+        ["css=.fa-caret-up", "css:finder"],
+        ["xpath=//th[3]/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "62ef7322-d7e3-446a-be21-b5caac824e1d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-caret-down",
+      "targets": [
+        ["css=.fa-caret-down", "css:finder"],
+        ["xpath=//th[3]/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5c344ca7-b23b-41e5-98b6-0009d23d430e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(4)",
+      "targets": [
+        ["css=.py-3:nth-child(4)", "css:finder"],
+        ["xpath=//th[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "40b5454f-f77e-45a6-84d0-ebed518ac7ad",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(4)",
+      "targets": [
+        ["css=.py-3:nth-child(4)", "css:finder"],
+        ["xpath=//th[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "440b5d38-35ae-43c9-b349-fc524feef86c",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.py-3:nth-child(4)",
+      "targets": [
+        ["css=.py-3:nth-child(4)", "css:finder"],
+        ["xpath=//th[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "54451208-8fce-4fed-8c18-22adeca3c319",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(4)",
+      "targets": [
+        ["css=.py-3:nth-child(4)", "css:finder"],
+        ["xpath=//th[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "984d9e8c-6dcd-4086-895b-d324650ad929",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(4)",
+      "targets": [
+        ["css=.py-3:nth-child(4)", "css:finder"],
+        ["xpath=//th[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1bbd9c71-2ceb-4754-a799-c0c7949e3355",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-3:nth-child(4)",
+      "targets": [
+        ["css=.py-3:nth-child(4)", "css:finder"],
+        ["xpath=//th[4]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "5eb5b693-2a62-46f2-a8fa-f2c9d2c013f7",
+    "name": "Enable/Disable Features",
+    "commands": [{
+      "id": "82b8ef9c-9d18-4ee2-8099-78029cd2fce7",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/userpage",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f15c412a-0490-4966-ae7c-7cd094d3b315",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0617d84e-fa3a-4182-a18f-2806fa572d3c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(2) > .relative:nth-child(2) .w-4",
+      "targets": [
+        ["css=.flex:nth-child(2) > .relative:nth-child(2) .w-4", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "f37fe1ca-e714-4377-b536-6c0fd0a0caf0",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Editar Funcionalidades",
+      "targets": [
+        ["linkText=Editar Funcionalidades", "linkText"],
+        ["css=li:nth-child(2) > .block", "css:finder"],
+        ["xpath=//a[contains(text(),'Editar Funcionalidades')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/manageAppFeatures')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Editar Funcionalidades')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7c448a5-d2b4-4153-b4bd-596ed81ea32b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(1) > .flex > .border-\\[\\#3a82f7\\]",
+      "targets": [
+        ["css=.flex:nth-child(1) > .flex > .border-\\[\\#3a82f7\\]", "css:finder"],
+        ["xpath=//input[@type='checkbox']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7381d212-2389-49a4-bd88-4b748b3c3315",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pt-\\[1rem\\]",
+      "targets": [
+        ["css=.pt-\\[1rem\\]", "css:finder"],
+        ["xpath=//form", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b8c779c6-f383-4139-b74c-4b4b52746541",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(2) > .flex > .border-\\[\\#3a82f7\\]",
+      "targets": [
+        ["css=.flex:nth-child(2) > .flex > .border-\\[\\#3a82f7\\]", "css:finder"],
+        ["xpath=(//input[@type='checkbox'])[2]", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6c2ae7c4-ab67-45be-94be-5ca669d9ec84",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pt-\\[1rem\\]",
+      "targets": [
+        ["css=.pt-\\[1rem\\]", "css:finder"],
+        ["xpath=//form", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a2217217-0c86-489d-a410-4697cb6cb1a2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(3) > .flex > .border-\\[\\#3a82f7\\]",
+      "targets": [
+        ["css=.flex:nth-child(3) > .flex > .border-\\[\\#3a82f7\\]", "css:finder"],
+        ["xpath=(//input[@type='checkbox'])[3]", "xpath:attributes"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5981149d-eea4-4950-a972-f32cda52672f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pt-\\[1rem\\]",
+      "targets": [
+        ["css=.pt-\\[1rem\\]", "css:finder"],
+        ["xpath=//form", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f48f4e94-3180-40fc-a752-d014b35404c9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ng-untouched",
+      "targets": [
+        ["css=.ng-untouched", "css:finder"],
+        ["xpath=(//input[@type='checkbox'])[4]", "xpath:attributes"],
+        ["xpath=//div[4]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d57bb7b7-7e37-48f9-a246-f768f9f9a7ab",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pt-\\[1rem\\]",
+      "targets": [
+        ["css=.pt-\\[1rem\\]", "css:finder"],
+        ["xpath=//form", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "65df86b8-ffe0-42cc-9d97-928269ac87a3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.-bottom-\\[0rem\\]",
+      "targets": [
+        ["css=.-bottom-\\[0rem\\]", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Gravar Alterações')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "46a88fd6-ef1d-40e5-994b-36a7935af9cb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.inline-flex",
+      "targets": [
+        ["css=.inline-flex", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Proceder')]", "xpath:innerText"]
       ],
       "value": ""
     }]
