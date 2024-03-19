@@ -1,0 +1,112 @@
+<app-header-loggedin />
+
+
+<app-smaller-banner title="Alterar Funcionalidades"
+                    image={{municipality.landscapePhoto}}></app-smaller-banner>
+
+
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-message (confirm)="closeDialog()" title="Sucesso" message="Operação realizada com sucesso"
+                      [isConfirm]=true></app-dialog-message>
+</ng-container>
+
+<div class="relative flex flex-col bg-municip-blank pt-[3rem] pb-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
+  <div class="text-[1.8rem] italic">
+    Clique nos botões para ativar/desativar as funcionalidades que deseja utilizar
+  </div>
+
+
+  <form [formGroup]="appFeatureEditForm" (ngSubmit)="onSubmit()" class="pt-[1rem] relative flex flex-col pb-[5rem]">
+
+
+    <section class="flex flex-wrap gap-y-10 gap-x-5 text-left justify-evenly mb-5">
+
+
+      <div class="flex px-6 py-6 gap-4 bg-white rounded-xl drop-shadow hover:drop-shadow-2xl transition duration-500 ease-in-out justify-center items-center">
+
+        <img src="/assets/images/documents/document-blue.png" alt="Documentos" class="size-24" />
+
+        <div class="flex flex-col items-center justify-center">
+
+          <label for="documents" class="text-municip-highlight-black text-[1.5rem] font-bold font-varela-round">Documentos</label>
+
+          <div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
+            <p-checkbox [binary]="documents!.value!" inputId="documents" formControlName="documents"></p-checkbox>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <div class="flex px-6 py-6 gap-4 bg-white rounded-xl drop-shadow hover:drop-shadow-2xl transition duration-500 ease-in-out justify-center items-center">
+
+        <img src="/assets/images/icons/event-blue.png" alt="Eventos" class="size-24" />
+
+        <div class="flex flex-col items-center justify-center">
+
+          <label for="events" class="text-municip-highlight-black text-[1.5rem] font-bold font-varela-round">Eventos</label>
+
+          <div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
+            <p-checkbox [binary]="events!.value!" inputId="events" formControlName="events"></p-checkbox>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="flex px-6 py-6 gap-4 bg-white rounded-xl drop-shadow hover:drop-shadow-2xl transition duration-500 ease-in-out justify-center items-center">
+
+        <img src="/assets/images/icons/newspaper-folded-blue.png" alt="Notícias" class="size-24" />
+
+        <div class="flex flex-col items-center justify-center">
+
+          <label for="news" class="text-municip-highlight-black text-[1.5rem] font-bold font-varela-round">Notícias</label>
+
+          <div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
+            <p-checkbox [binary]="news!.value!" inputId="news" formControlName="news"></p-checkbox>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="flex px-6 py-6 gap-4 bg-white rounded-xl drop-shadow hover:drop-shadow-2xl transition duration-500 ease-in-out justify-center items-center">
+
+        <img src="/assets/images/icons/bus-blue.png" alt="Transportes" class="size-24" />
+
+        <div class="flex flex-col items-center justify-center">
+
+          <label for="transports" class="text-municip-highlight-black text-[1.5rem] font-bold font-varela-round">Transportes</label>
+
+          <div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
+            <p-checkbox [binary]="transports!.value!" inputId="transports" formControlName="transports"></p-checkbox>
+          </div>
+
+        </div>
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <button type="submit" [disabled]="!appFeatureEditForm.valid"
+            class="absolute -bottom-[0rem] right-[2rem] h-auto w-[15rem] flex text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-3 px-8
+               focus:outline-none rounded text-lg justify-center items-center
+               bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%]  
+               transition-all duration-300">
+      Gravar Alterações
+      <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+    </button>
+
+  </form>
+
+
+
+</div>
+
+
+
+<app-footer />

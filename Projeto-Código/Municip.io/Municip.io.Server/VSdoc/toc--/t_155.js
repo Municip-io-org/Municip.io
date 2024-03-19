@@ -1,1 +1,1 @@
-c['155']=[['156',"DecrementRegistrations Method","topic_0000000000000082.html",0],['157',"IncrementRegistrations Method","topic_0000000000000081.html",0]];
+c['155']=[['156',"ApplicationDbContext Class","topic_0000000000000070.html",1]];

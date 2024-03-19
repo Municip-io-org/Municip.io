@@ -67,7 +67,7 @@ export class EventPageComponent {
   currentPage = 1;
   itemsPerPage = 6;
 
-
+  
 
   constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router, private EventsService: EventsService) { }
 

@@ -1,1 +1,1 @@
-search_result['133']=["topic_000000000000003A_methods--.html","MunicipalAdministrator Methods",""];
+search_result['133']=["topic_0000000000000034_props--.html","NewsController Properties",""];

@@ -1,1 +1,1 @@
-search_result['118']=["topic_0000000000000034_props--.html","NewsController Properties",""];
+search_result['118']=["topic_000000000000002E.html","DocumentController.ApproveRequest Method","Method to get the distinct document types from a municipality"];

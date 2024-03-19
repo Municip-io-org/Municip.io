@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="GENERATOR" content="VSdocman - documentation generator; https://www.helixoft.com" />
 	<link rel="icon" href="favicon.ico">
-	<title>initial Methods</title>
+	<title>CitizenStatusController Methods</title>
 
 	<link rel="stylesheet" type="text/css" href="msdn2019/toc.css" />
 	<script src="msdn2019/toc.js"></script>
@@ -75,11 +75,11 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
   </div>
 
 <div id="mainBody">
-		<h1 class="title">initial Methods</h1>
+		<h1 class="title">CitizenStatusController Methods</h1>
         <p />
         <p>
           The following tables list the members exposed by the  
-              <a href="topic_0000000000000017.html">initial</a>
+              <a href="topic_0000000000000017.html">CitizenStatusController</a>
              type.
         </p>
 
@@ -113,21 +113,18 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 ">
 	<td>
-   <img alt="Protected method" title="Protected method" src="msdn2019/protmethod.png"></img>
-
-    
-	  
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
 
 
     
 	</td>
 	<td>
-	<a href="topic_000000000000001A.html">BuildTargetModel(ModelBuilder)</a>
+	<a href="topic_000000000000001E.html">SendAprove(string, string)</a>
 
 	</td>
 	<td>
 
-
+Esta função envia um email de aprovação para um cidadão.
 
 	</td>
 </tr>
@@ -144,21 +141,18 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 ">
 	<td>
-   <img alt="Protected method" title="Protected method" src="msdn2019/protmethod.png"></img>
-
-    
-	  
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
 
 
     
 	</td>
 	<td>
-	<a href="topic_0000000000000019.html">Down(MigrationBuilder)</a>
+	<a href="topic_0000000000000021.html">SendBlock(string, string)</a>
 
 	</td>
 	<td>
 
-
+Esta função envia um email de bloqueio para um cidadão.
 
 	</td>
 </tr>
@@ -175,21 +169,214 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 ">
 	<td>
-   <img alt="Protected method" title="Protected method" src="msdn2019/protmethod.png"></img>
-
-    
-	  
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
 
 
     
 	</td>
 	<td>
-	<a href="topic_0000000000000018.html">Up(MigrationBuilder)</a>
+	<a href="topic_000000000000001F.html">SendDeny(string, string)</a>
 
 	</td>
 	<td>
 
+Esta função envia um email de reprovação para um cidadão.
 
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_0000000000000020.html">SendRemove(string, string)</a>
+
+	</td>
+	<td>
+
+Esta função envia um email de remoção para um cidadão.
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_0000000000000022.html">SendUnblock(string, string)</a>
+
+	</td>
+	<td>
+
+Esta função envia um email de desbloqueio para um cidadão.
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000001A.html">approveCitizen(string)</a>
+
+	</td>
+	<td>
+
+Esta função aprova um cidadão. Recebe como parâmetro o email do cidadão .
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000001C.html">blockCitizen(string)</a>
+
+	</td>
+	<td>
+
+Esta função bloqueia um cidadão. Recebe como parâmetro o email do cidadão .
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000001B.html">deleteCitizen(string)</a>
+
+	</td>
+	<td>
+
+Esta função remove um cidadão. Recebe como parâmetro o email do cidadão .
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_0000000000000019.html">getCitizens(string)</a>
+
+	</td>
+	<td>
+
+Esta função retorna todos os cidadãos de um município. Recebe como parâmetro o nome do município.
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000001D.html">pendingCitizen(string)</a>
+
+	</td>
+	<td>
+
+Esta função desbloqueia um cidadão. Recebe como parâmetro o email do cidadão .
 
 	</td>
 </tr>
@@ -222,6 +409,13 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 
 
+
+
+
+
+
+
+
 <div class="section_container">
 	<div class="section_heading">
 		<span><a href="javascript:void(0)" title="Collapse" onclick="toggleSection(this);">See Also</a></span>
@@ -230,8 +424,8 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
 
 	<div id="seeAlsoSection" class="section">	
 		<div>
-			<a href="topic_0000000000000017.html">initial Class</a><br />
-	<a href="topic_0000000000000016.html">Municip.io.Server.Migrations Namespace</a><br />
+			<a href="topic_0000000000000017.html">CitizenStatusController Class</a><br />
+	<a href="topic_0000000000000000.html">Municip.io.Server.Controllers Namespace</a><br />
 
 
 			

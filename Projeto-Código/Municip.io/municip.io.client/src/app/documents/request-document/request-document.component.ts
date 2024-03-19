@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router';
 import { Municipality } from '../../services/municipal-admin-auth.service';
-import { DocumentsService, Document } from '../../services/documents.service';
+import { DocsService, DocumentTemplate, DocumentTemplateStatus } from '../../services/documents/docs.service';
+
 
 @Component({
   selector: 'app-request-document',
@@ -11,7 +12,7 @@ import { DocumentsService, Document } from '../../services/documents.service';
 })
 export class RequestDocumentComponent {
 
-  documents: Document[] = [];
+  templates: DocumentTemplate[] = [];
 
   user: any;
   isMunAdmin: boolean = false;
@@ -43,7 +44,7 @@ export class RequestDocumentComponent {
   nameSearch: string = '';
 
 
-  constructor(private userAuthService: UserAuthService, private router: Router, private documentsService: DocumentsService) {
+  constructor(private userAuthService: UserAuthService, private router: Router, private documentsService: DocsService) {
    
   }
 
@@ -65,11 +66,11 @@ export class RequestDocumentComponent {
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: Municipality) => {
                 this.municipality = municipalityRes;
-
-                this.documentsService.getDocuments().subscribe(
+                this.documentsService.getTemplatesFromMunicipality(this.municipality.name).subscribe(
                   (docRes: any) => {
-                    this.documents = docRes as Document[];
-                    
+
+                    this.templates = docRes as DocumentTemplate[];            
+              
                   },
                   error => {
                     console.error(error);
@@ -96,6 +97,6 @@ export class RequestDocumentComponent {
   }
 
   get filteredDocuments() {
-    return this.documents.filter(doc => doc.name.toLowerCase().includes(this.nameSearch.toLowerCase()));
+    return this.templates.filter(template => template.name.toLowerCase().includes(this.nameSearch.toLowerCase()) && template.status == DocumentTemplateStatus.active);
   }
 }

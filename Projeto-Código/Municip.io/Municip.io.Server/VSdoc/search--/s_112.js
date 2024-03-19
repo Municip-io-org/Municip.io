@@ -1,1 +1,1 @@
-search_result['112']=["topic_0000000000000032.html","MunicipalityStatusController.SendDeny Method","esta função envia um email de negação para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município."];
+search_result['112']=["topic_0000000000000029_props--.html","MunicipalityStatusController Properties",""];

@@ -1,1 +1,1 @@
-search_result['166']=["topic_0000000000000045.html","DataSeeder.SeedData Method",""];
+search_result['166']=["topic_0000000000000040.html","EventsController.RemoveCitizen Method","Esta chamada permite remover um cidadão de um evento passando o id do evento e o email do cidadão como parâmetros"];

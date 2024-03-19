@@ -1,1 +1,1 @@
-search_result['211']=["topic_000000000000005C_events--.html","WeatherForecast Events",""];
+search_result['211']=["topic_000000000000004F.html","MunicipalAdministratorStatusController.SendRemove Method","Esta função envia um email de remoção para um administrador."];

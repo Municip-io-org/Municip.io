@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Municipality, MunicipalAdminAuthService } from '../../services/municipal-admin-auth.service';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-sign-up-municipality',
@@ -35,8 +36,23 @@ export class SignUpMunicipalityComponent {
     landscapePhoto: ''
   };
 
+  editor = new Editor();
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
   emblemImg!: File;
   landscapeImg!: File;
+
+  emblemUrl: string | null = null;
+  landscapeUrl: string | null = null;
+  files: any[] = [];
   
   constructor(private municipalAdminAuthService: MunicipalAdminAuthService, private router: Router, private route: ActivatedRoute) { }
 
@@ -44,10 +60,16 @@ export class SignUpMunicipalityComponent {
     president: new FormControl("", [Validators.required]),
     contact: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
     description: new FormControl("", [Validators.required]),
-    emblemPhoto: new FormControl(null, [Validators.required]),
-    landscapePhoto: new FormControl(null, [Validators.required]) 
   });
 
+
+  ngOnInit() {
+    this.editor = new Editor();
+  }
+
+  ngOnDestroy() {
+    this.editor.destroy();
+  }
 
   get president() {
     return this.signUpMunicipalityForm.get('president');
@@ -61,31 +83,85 @@ export class SignUpMunicipalityComponent {
     return this.signUpMunicipalityForm.get('description');
   }
 
-  get emblemPhoto() {
-    return this.signUpMunicipalityForm.get('emblemPhoto');
-  }
 
-  get landscapePhoto() {
-    return this.signUpMunicipalityForm.get('landscapePhoto');
-  }
+ 
 
-  onEmblemImagePicked(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      this.emblemImg = file;
+
+  onEmblemChange(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    const fileList: FileList | null = fileInput?.files;
+
+    if (fileList && fileList.length > 0) {
+      this.emblemImg = fileList[0];
+      this.emblemUrl = URL.createObjectURL(this.emblemImg);
+
+      console.log("ON FILE CHANGE");
     } else {
-      console.error('No file selected');
+      console.error('Nenhuma imagem selecionada');
     }
   }
 
-  onLandscapeImagePicked(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      this.landscapeImg = file;
+  onDropEmblem(event: DragEvent) {
+    event.preventDefault();
+    const files: FileList | null = event.dataTransfer?.files || null;
+    if (files && files.length > 0) {
+      const file = files[0];
+      if (file && this.isValidImageFile(file)) { // Verifique se file não é null ou undefined
+        this.emblemImg = file;
+        this.emblemUrl = URL.createObjectURL(this.emblemImg);
+
+      } else {
+        console.error('Por favor, solte uma imagem válida.');
+      }
     } else {
-      console.error('No file selected');
+      console.error('Nenhuma imagem solta.');
     }
   }
+
+  onLandscapeChange(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    const fileList: FileList | null = fileInput?.files;
+
+    if (fileList && fileList.length > 0) {
+      this.landscapeImg = fileList[0];
+      this.landscapeUrl = URL.createObjectURL(this.landscapeImg);
+
+      console.log("ON FILE CHANGE");
+    } else {
+      console.error('Nenhuma imagem selecionada');
+    }
+  }
+
+  onDropLandscape(event: DragEvent) {
+    event.preventDefault();
+    const files: FileList | null = event.dataTransfer?.files || null;
+    if (files && files.length > 0) {
+      const file = files[0];
+      if (file && this.isValidImageFile(file)) { // Verifique se file não é null ou undefined
+        this.landscapeImg = file;
+        this.landscapeUrl = URL.createObjectURL(this.landscapeImg);
+
+      } else {
+        console.error('Por favor, solte uma imagem válida.');
+      }
+    } else {
+      console.error('Nenhuma imagem solta.');
+    }
+  }
+
+  
+
+  isValidImageFile(file: File): boolean {
+    // Adicione aqui a lógica para validar se o arquivo é uma imagem
+    // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
+    return file.type.startsWith('image/');
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  
 
 
   onSubmit() {

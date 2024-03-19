@@ -1,1 +1,1 @@
-search_result['222']=["topic_0000000000000061_methods--.html","CitizenStatusExtensions Methods",""];
+search_result['222']=["topic_0000000000000055.html","MunicipalityStatusController.GetApprovedMunicipalities Method","Esta função retorna todos os municípios aprovados como json."];

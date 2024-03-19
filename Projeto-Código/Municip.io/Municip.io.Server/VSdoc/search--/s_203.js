@@ -1,1 +1,1 @@
-search_result['203']=["topic_0000000000000059_events--.html","WeatherForecast Events",""];
+search_result['203']=["topic_000000000000004C.html","MunicipalAdministratorStatusController.pendingMunicipalAdministrator Method","Esta função desbloqueia um administrador. Recebe como parâmetro o email do administrador ."];

@@ -1,1 +1,1 @@
-search_result['114']=["topic_0000000000000034.html","NewsController Class","Este controlador é responsável por gerir as notícias."];
+search_result['114']=["topic_000000000000002A.html","DocumentController.GetRequestsFromMunicipality Method","Method to get the requests from a municipality"];

@@ -1,1 +1,1 @@
-search_result['117']=["topic_0000000000000034_methods--.html","NewsController Methods",""];
+search_result['117']=["topic_000000000000002D.html","DocumentController.GetDistinctDocumentTypesFromMunicipality Method","Method to get the distinct document types from a municipality"];

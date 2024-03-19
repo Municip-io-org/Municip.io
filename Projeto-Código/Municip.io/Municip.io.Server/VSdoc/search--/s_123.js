@@ -1,1 +1,1 @@
-search_result['123']=["topic_0000000000000037_attached_props--.html","MunicipalAdministrator Attached Properties",""];
+search_result['123']=["topic_0000000000000032_attached_props--.html","DocumentTemplateStatusController Attached Properties",""];

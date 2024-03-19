@@ -1,1 +1,1 @@
-search_result['145']=["topic_000000000000003F.html","ApplicationDbContext.Municipalities Property",""];
+search_result['145']=["topic_000000000000003A.html","EventsController.UpdateEvent Method","Esta chamada permite atualizar um evento no sistema, passando omo parâmetro um objeto do tipo Event"];

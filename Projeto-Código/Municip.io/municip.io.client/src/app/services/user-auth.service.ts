@@ -100,6 +100,7 @@ export class UserAuthService {
     let params = new HttpParams()
       .set('useCookies', useCookies.toString())
       .set('useSessionCookies', useSessionCookies.toString());
+
     return this.http.post('/login/', login, {
       params,
       observe: 'response',
@@ -251,12 +252,18 @@ localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
     formData.append('image', image);
     return this.http.post(imgurl, formData, { headers }).pipe(
       switchMap((response: any) => {
-        user.photo = response['data']['link'];
+        // Upload emblem photo to Imgur if not null
+        const photoUrl = image ? response['data']['link'] : user.photo;
+
+
         console.log(user);
+
+        user.photo = photoUrl;
         return this.http.put(`/api/accounts/UpdateUserInfo?passwordConfirmation=${passConfirm}`, user );
       })
     );
   }
+
 
   updateBrowserHistory(email: string, browserId: string): Observable<any> {
     return this.http.put(`/api/accounts/UpdateBrowserHistory?email=${email}&userAgent=${browserId}`, {});
@@ -284,10 +291,22 @@ localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
     const imgurl = "https://api.imgur.com/3/image";
     const formData = new FormData();
     formData.append('image', image);
+
+    
+
+
     return this.http.post(imgurl, formData, { headers }).pipe(
       switchMap((response: any) => {
-        user.photo = response['data']['link'];
+
+
+        // Upload emblem photo to Imgur if not null
+        const photoUrl = image ? response['data']['link'] : user.photo;
+
+
         console.log(user);
+
+        user.photo = photoUrl;
+
         return this.http.put(`/api/accounts/UpdateAdmMunicipalInfo?passwordConfirmation=${passConfirm}`, user);
       })
     );

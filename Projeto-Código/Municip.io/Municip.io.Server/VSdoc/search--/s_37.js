@@ -1,1 +1,1 @@
-search_result['37']=["topic_000000000000000F.html","CitizenStatusController Constructor",""];
+search_result['37']=["topic_000000000000000F.html","AccountUserController.SendRegister Method","Esta função envia um email de aprovação para um cidadão."];

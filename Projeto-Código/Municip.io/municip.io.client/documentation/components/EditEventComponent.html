@@ -8,138 +8,1155 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css">
+	    <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
-          <script>
-               // Blocking script to avaoid flickering dark mode
-               // Dark mode toggle button
-               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
-               var darkModeState = useDark.matches;
-               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
-               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
-               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-               function checkToggle(check) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].checked = check;
-                    }
-               }
-
-               function toggleDarkMode(state) {
-                    if (window.localStorage) {
-                         localStorage.setItem('compodoc_darkmode-state', state);
-                    }
-
-                    checkToggle(state);
-
-                    const hasClass = document.body.classList.contains('dark');
-
-                    if (state) {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.add('dark');
-                         }
-                         if (!hasClass) {
-                              document.body.classList.add('dark');
-                         }
-                    } else {
-                         for (var i = 0; i < $darkModeToggles.length; i++) {
-                              $darkModeToggles[i].classList.remove('dark');
-                         }
-                         if (hasClass) {
-                              document.body.classList.remove('dark');
-                         }
-                    }
-               }
-
-               useDark.addEventListener('change', function (evt) {
-                    toggleDarkMode(evt.matches);
-               });
-               if (darkModeStateLocal) {
-                    darkModeState = darkModeStateLocal === 'true';
-               }
-               toggleDarkMode(darkModeState);
-
-               if ($darkModeToggles.length > 0) {
-                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
-                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
-                              darkModeState = !darkModeState;
-                              toggleDarkMode(darkModeState);
-                         });
-                    }
-               }
-          </script>
-
-        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
             <a href="../" class="navbar-brand">municip.io.client documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="../">municip.io.client documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="../overview.html" 
+                                         href="../overview.html" 
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="../modules/AppModule.html" >AppModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="../components/AboutusComponent.html" >AboutusComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AccessBlockedComponent.html" >AccessBlockedComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AccessDeniedComponent.html" >AccessDeniedComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminDashboardMunicipalAdminsComponent.html" >AdminDashboardMunicipalAdminsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ApproveDocumentsComponent.html" >ApproveDocumentsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/BannerComponent.html" >BannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/BigBannerComponent.html" >BigBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/BlackBtnIconTextComponent.html" >BlackBtnIconTextComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/BtnMunicipBlueComponent.html" >BtnMunicipBlueComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CalendarComponent.html" >CalendarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CalendarHeaderComponent.html" >CalendarHeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CalendarPageComponent.html" >CalendarPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CardComponent.html" >CardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CardOutlineThemeComponent.html" >CardOutlineThemeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CardOutlineWhiteComponent.html" >CardOutlineWhiteComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CardTeamComponent.html" >CardTeamComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CitizenHomePageComponent.html" >CitizenHomePageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CountryPickerComponent.html" >CountryPickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CreateEventComponent.html" >CreateEventComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CreateTemplateComponent.html" >CreateTemplateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DatePickerComponent.html" >DatePickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DatetimepickerComponent.html" >DatetimepickerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DialogMessageComponent.html" >DialogMessageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DocsHomepageComponent.html" >DocsHomepageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DocumentApproveCardComponent.html" >DocumentApproveCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DocumentCardComponent.html" >DocumentCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DocumentRequestCardComponent.html" >DocumentRequestCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EditEventComponent.html"  class="active" >EditEventComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EditTemplateComponent.html" >EditTemplateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EventCardComponent.html" >EventCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EventPageComponent.html" >EventPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EventsListComponent.html" >EventsListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EventsSmallComponent.html" >EventsSmallComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EventsmapComponent.html" >EventsmapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/FooterComponent.html" >FooterComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/GeneralInfoComponent.html" >GeneralInfoComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/GeneratepdfComponent.html" >GeneratepdfComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/HeaderComponent.html" >HeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/HeaderLoggedinComponent.html" >HeaderLoggedinComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/InputTitleComponent.html" >InputTitleComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/LandingComponent.html" >LandingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/LoginComponent.html" >LoginComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ManageAppFeaturesComponent.html" >ManageAppFeaturesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunAdminHomePageComponent.html" >MunAdminHomePageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunAdmindashboardComponent.html" >MunAdmindashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunicipalEditComponent.html" >MunicipalEditComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunicipalEventsComponent.html" >MunicipalEventsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunicipalProfileComponent.html" >MunicipalProfileComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MunicipalitymapComponent.html" >MunicipalitymapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MyDataCardComponent.html" >MyDataCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MyDocumentsComponent.html" >MyDocumentsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MyMunicipalityCardComponent.html" >MyMunicipalityCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsCardComponent.html" >NewsCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsCreateComponent.html" >NewsCreateComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsEditComponent.html" >NewsEditComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsListComponent.html" >NewsListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsPageComponent.html" >NewsPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NewsSmallComponent.html" >NewsSmallComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NextEventsComponent.html" >NextEventsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NextNewsComponent.html" >NextNewsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ProfileBannerComponent.html" >ProfileBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/RequestDocumentComponent.html" >RequestDocumentComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SchedulesComponent.html" >SchedulesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SelectAccountTypeComponent.html" >SelectAccountTypeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ShowHidePasswordComponent.html" >ShowHidePasswordComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ShowStopComponent.html" >ShowStopComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SignUpCitizenAccountComponent.html" >SignUpCitizenAccountComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SignUpMunicipalAdministratorAccountComponent.html" >SignUpMunicipalAdministratorAccountComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SignUpMunicipalityComponent.html" >SignUpMunicipalityComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SignUpSuccessComponent.html" >SignUpSuccessComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SmallerBannerComponent.html" >SmallerBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SpinnerComponent.html" >SpinnerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/StatisticalHomePageCardComponent.html" >StatisticalHomePageCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/StopsMapComponent.html" >StopsMapComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/StopsPageComponent.html" >StopsPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TemplateListComponent.html" >TemplateListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TermsconditionsComponent.html" >TermsconditionsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TooltipComponent.html" >TooltipComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TransportsMainComponent.html" >TransportsMainComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/UserinfodialogComponent.html" >UserinfodialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/UserpageComponent.html" >UserpageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VerticalCardComponent.html" >VerticalCardComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-code"></span>
+                            <span>Directives</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-directives-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-directives-links"
+                            >
+                                <li class="link">
+                                    <a href="../directives/FileDragDropDirective.html" >FileDragDropDirective</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="../injectables/AdministratorGuard.html" >AdministratorGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AppFeaturesService.html" >AppFeaturesService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AuthGuardService.html" >AuthGuardService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/BoundsService.html" >BoundsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CitizenAuthService.html" >CitizenAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CitizenGuard.html" >CitizenGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CitizenOrMunicipalAdminGuard.html" >CitizenOrMunicipalAdminGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CitizenStatusService.html" >CitizenStatusService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CustomDateFormatterService.html" >CustomDateFormatterService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CustomEventTitleFormatterService.html" >CustomEventTitleFormatterService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/DocsDataService.html" >DocsDataService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/DocsService.html" >DocsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/EncryptionService.html" >EncryptionService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/EventsService.html" >EventsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/IsDocumentFeatureActive.html" >IsDocumentFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/IsEventsFeatureActive.html" >IsEventsFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/IsNewsFeatureActive.html" >IsNewsFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/IsTransportFeatureActive.html" >IsTransportFeatureActive</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/LoaderService.html" >LoaderService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/LoadingInterceptor.html" >LoadingInterceptor</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/MunicipalAdminAuthService.html" >MunicipalAdminAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/MunicipalAdminGuard.html" >MunicipalAdminGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/MunicipalityGuard.html" >MunicipalityGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/MunicipalityStatusService.html" >MunicipalityStatusService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/NewsService.html" >NewsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/TransportsService.html" >TransportsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/UserAuthService.html" >UserAuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/UserSameMunicipalityGuard.html" >UserSameMunicipalityGuard</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/AppFeature.html" >AppFeature</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/AppFeatureToSubmit.html" >AppFeatureToSubmit</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Citizen.html" >Citizen</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Country.html" >Country</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/DocumentTemplate.html" >DocumentTemplate</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Event.html" >Event</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Login.html" >Login</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/MunicipalAdministrator.html" >MunicipalAdministrator</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Municipality.html" >Municipality</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/News.html" >News</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/RequestDocument.html" >RequestDocument</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/formSchedule.html" >formSchedule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/line.html" >line</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/municipalityTransport.html" >municipalityTransport</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/pattern.html" >pattern</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/route.html" >route</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/stop.html" >stop</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/stopInfo.html" >stopInfo</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/stopTime.html" >stopTime</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/trip.html" >trip</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-plus"></span>
+                            <span>Pipes</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-pipes-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-pipes-links"
+                            >
+                                <li class="link">
+                                    <a href="../pipes/FirstLetterUpperCasePipe.html" >FirstLetterUpperCasePipe</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../pipes/FormatNumber3By3Pipe.html" >FormatNumber3By3Pipe</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
                <div class="hidden-xs menu">
-                   <compodoc-menu mode="normal"></compodoc-menu>
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="../">municip.io.client documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="../overview.html" 
+                                                href="../overview.html" 
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="../modules/AppModule.html" >AppModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="../components/AboutusComponent.html" >AboutusComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AccessBlockedComponent.html" >AccessBlockedComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AccessDeniedComponent.html" >AccessDeniedComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminDashboardMunicipalAdminsComponent.html" >AdminDashboardMunicipalAdminsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdmindashboardComponent.html" >AdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ApproveDocumentsComponent.html" >ApproveDocumentsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/BannerComponent.html" >BannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/BigBannerComponent.html" >BigBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/BlackBtnIconTextComponent.html" >BlackBtnIconTextComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/BtnMunicipBlueComponent.html" >BtnMunicipBlueComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CalendarComponent.html" >CalendarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CalendarHeaderComponent.html" >CalendarHeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CalendarPageComponent.html" >CalendarPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CardComponent.html" >CardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CardOutlineThemeComponent.html" >CardOutlineThemeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CardOutlineWhiteComponent.html" >CardOutlineWhiteComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CardTeamComponent.html" >CardTeamComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CitizenHomePageComponent.html" >CitizenHomePageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CountryPickerComponent.html" >CountryPickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CreateEventComponent.html" >CreateEventComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CreateTemplateComponent.html" >CreateTemplateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DatePickerComponent.html" >DatePickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DatetimepickerComponent.html" >DatetimepickerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DialogMessageComponent.html" >DialogMessageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DocsHomepageComponent.html" >DocsHomepageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DocumentApproveCardComponent.html" >DocumentApproveCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DocumentCardComponent.html" >DocumentCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DocumentRequestCardComponent.html" >DocumentRequestCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EditEventComponent.html"  class="active" >EditEventComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EditTemplateComponent.html" >EditTemplateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EventCardComponent.html" >EventCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EventPageComponent.html" >EventPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EventsListComponent.html" >EventsListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EventsSmallComponent.html" >EventsSmallComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EventsmapComponent.html" >EventsmapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/FooterComponent.html" >FooterComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/GeneralInfoComponent.html" >GeneralInfoComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/GeneratepdfComponent.html" >GeneratepdfComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/HeaderComponent.html" >HeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/HeaderLoggedinComponent.html" >HeaderLoggedinComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/InputTitleComponent.html" >InputTitleComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/LandingComponent.html" >LandingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/LoginComponent.html" >LoginComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ManageAppFeaturesComponent.html" >ManageAppFeaturesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunAdminHomePageComponent.html" >MunAdminHomePageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunAdmindashboardComponent.html" >MunAdmindashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunicipalEditComponent.html" >MunicipalEditComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunicipalEventsComponent.html" >MunicipalEventsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunicipalProfileComponent.html" >MunicipalProfileComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MunicipalitymapComponent.html" >MunicipalitymapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MyDataCardComponent.html" >MyDataCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MyDocumentsComponent.html" >MyDocumentsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MyMunicipalityCardComponent.html" >MyMunicipalityCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsCardComponent.html" >NewsCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsCreateComponent.html" >NewsCreateComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsEditComponent.html" >NewsEditComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsListComponent.html" >NewsListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsPageComponent.html" >NewsPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NewsSmallComponent.html" >NewsSmallComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NextEventsComponent.html" >NextEventsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NextNewsComponent.html" >NextNewsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ProfileBannerComponent.html" >ProfileBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/RequestDocumentComponent.html" >RequestDocumentComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SchedulesComponent.html" >SchedulesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SelectAccountTypeComponent.html" >SelectAccountTypeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ShowHidePasswordComponent.html" >ShowHidePasswordComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ShowStopComponent.html" >ShowStopComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SignUpCitizenAccountComponent.html" >SignUpCitizenAccountComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SignUpMunicipalAdministratorAccountComponent.html" >SignUpMunicipalAdministratorAccountComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SignUpMunicipalityComponent.html" >SignUpMunicipalityComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SignUpSuccessComponent.html" >SignUpSuccessComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SmallerBannerComponent.html" >SmallerBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SpinnerComponent.html" >SpinnerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/StatisticalHomePageCardComponent.html" >StatisticalHomePageCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/StopsMapComponent.html" >StopsMapComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/StopsPageComponent.html" >StopsPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TemplateListComponent.html" >TemplateListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TermsconditionsComponent.html" >TermsconditionsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TooltipComponent.html" >TooltipComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TransportsMainComponent.html" >TransportsMainComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/UserinfodialogComponent.html" >UserinfodialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/UserpageComponent.html" >UserpageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VerticalCardComponent.html" >VerticalCardComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-code"></span>
+                                   <span>Directives</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#directives-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="directives-links"
+                   >
+                                       <li class="link">
+                                           <a href="../directives/FileDragDropDirective.html" >FileDragDropDirective</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="../injectables/AdministratorGuard.html" >AdministratorGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AppFeaturesService.html" >AppFeaturesService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AuthGuardService.html" >AuthGuardService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/BoundsService.html" >BoundsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CitizenAuthService.html" >CitizenAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CitizenGuard.html" >CitizenGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CitizenOrMunicipalAdminGuard.html" >CitizenOrMunicipalAdminGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CitizenStatusService.html" >CitizenStatusService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CustomDateFormatterService.html" >CustomDateFormatterService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CustomEventTitleFormatterService.html" >CustomEventTitleFormatterService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/DocsDataService.html" >DocsDataService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/DocsService.html" >DocsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/EncryptionService.html" >EncryptionService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/EventsService.html" >EventsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/IsDocumentFeatureActive.html" >IsDocumentFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/IsEventsFeatureActive.html" >IsEventsFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/IsNewsFeatureActive.html" >IsNewsFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/IsTransportFeatureActive.html" >IsTransportFeatureActive</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/LoaderService.html" >LoaderService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/LoadingInterceptor.html" >LoadingInterceptor</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/MunicipalAdminAuthService.html" >MunicipalAdminAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/MunicipalAdminGuard.html" >MunicipalAdminGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/MunicipalityGuard.html" >MunicipalityGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/MunicipalityStatusService.html" >MunicipalityStatusService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/NewsService.html" >NewsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/TransportsService.html" >TransportsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/UserAuthService.html" >UserAuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/UserSameMunicipalityGuard.html" >UserSameMunicipalityGuard</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/AppFeature.html" >AppFeature</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/AppFeatureToSubmit.html" >AppFeatureToSubmit</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Citizen.html" >Citizen</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Country.html" >Country</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/DocumentTemplate.html" >DocumentTemplate</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Event.html" >Event</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Login.html" >Login</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/MunicipalAdministrator.html" >MunicipalAdministrator</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Municipality.html" >Municipality</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/News.html" >News</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/RequestDocument.html" >RequestDocument</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/formSchedule.html" >formSchedule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/line.html" >line</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/municipalityTransport.html" >municipalityTransport</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/pattern.html" >pattern</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/route.html" >route</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/stop.html" >stop</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/stopInfo.html" >stopInfo</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/stopTime.html" >stopTime</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/trip.html" >trip</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-plus"></span>
+                                   <span>Pipes</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#pipes-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="pipes-links"
+                   >
+                                       <li class="link">
+                                           <a href="../pipes/FirstLetterUpperCasePipe.html" >FirstLetterUpperCasePipe</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../pipes/FormatNumber3By3Pipe.html" >FormatNumber3By3Pipe</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
                </div>
-               <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
 
 
-
-
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Components</li>
-  <li class="breadcrumb-item"
-  >
-  EditEventComponent</li>
+  <li>Components</li>
+  <li>EditEventComponent</li>
 </ol>
 
-<ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-            <a href="#info" class="nav-link active"
-                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
-        </li>
-        <li class="nav-item">
-            <a href="#source" class="nav-link"
-                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
-        </li>
-        <li class="nav-item">
-            <a href="#templateData" class="nav-link"
-                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
-        </li>
-        <li class="nav-item">
-            <a href="#tree" class="nav-link"
-                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
-        </li>
-</ul>
 
-<div class="tab-content">
-    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#infos" id="infos-tab" role="tab" data-toggle="tab">Infos</a>
+        </li>
+        <li>
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab">Source</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="infos"><p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
     <code>src/app/events/municip-actions/edit-event/edit-event.component.ts</code>
 </p>
 
-
-
-
     <p class="comment">
-        <h3>Implements</h3>
+        <h3>Description</h3>
     </p>
     <p class="comment">
-                <code>OnInit</code>
+        <p>Componente responsável por editar um evento.</p>
+
     </p>
 
 
-<section data-compodoc="block-metadata">
+<section>
     <h3>Metadata</h3>
-    <table class="table table-sm table-hover metadata">
+    <table class="table table-sm table-hover">
         <tbody>
 
 
@@ -158,7 +1175,9 @@
             <tr>
                 <td class="col-md-3">providers</td>
                 <td class="col-md-9">
-                            <code>provideNativeDateAdapter()</code>
+                    <code>
+                        provideNativeDateAdapter.()
+                    </code>
                 </td>
             </tr>
 
@@ -171,1273 +1190,696 @@
 
 
 
-
-
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./edit-event.component.html</code></td>
+                <td class="col-md-9"><code>edit-event.component.html</code></td>
             </tr>
-
-
-
-            <tr>
-                <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./edit-event.component.css</code></td>
-            </tr>
-
-
-
 
 
         </tbody>
     </table>
 </section>
 
-    <section data-compodoc="block-index">
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#error" >error</a>
-                            </li>
-                            <li>
-                                <a href="#eventForm" >eventForm</a>
-                            </li>
-                            <li>
-                                <a href="#eventSelected" >eventSelected</a>
-                            </li>
-                            <li>
-                                <a href="#imagePreview" >imagePreview</a>
-                            </li>
-                            <li>
-                                <a href="#isDialogOpen" >isDialogOpen</a>
-                            </li>
-                            <li>
-                                <a href="#municipalityImage" >municipalityImage</a>
-                            </li>
-                            <li>
-                                <a href="#municipalityName" >municipalityName</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#photo" >photo</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#cancel" >cancel</a>
-                            </li>
-                            <li>
-                                <a href="#closeDialog" >closeDialog</a>
-                            </li>
-                            <li>
-                                <a href="#createDateTime" >createDateTime</a>
-                            </li>
-                            <li>
-                                <a href="#getEventSelected" >getEventSelected</a>
-                            </li>
-                            <li>
-                                <a href="#ngOnInit" >ngOnInit</a>
-                            </li>
-                            <li>
-                                <a href="#onImagePicked" >onImagePicked</a>
-                            </li>
-                            <li>
-                                <a href="#OnSubmit" >OnSubmit</a>
-                            </li>
-                            <li>
-                                <a href="#setForm" >setForm</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
 
-
-
-
+    <section>
+        <h3 id="constructor">Constructor</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <h6><b>Accessors</b></h6>
+                            <code>constructor(dateAdapter: any, authService: <a href="../injectables/UserAuthService.html" >UserAuthService</a>, eventService: <a href="../injectables/EventsService.html" >EventsService</a>, route: <a href="https://angular.io/docs/ts/latest/api/router/index/ActivatedRoute-interface.html" target="_blank" >ActivatedRoute</a>, router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank" >Router</a>)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Construtor do componente.</p>
+    </div>
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <ul class="jsdoc-params">
+                                                <li>
+                                                    <div>
+                                                        <b>dateAdapter</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <b>authService</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <b>eventService</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <b>route</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <b>router</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                        </ul>
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3 id="methods">Methods</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> getEventSelected</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>getEventSelected()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Obtém o evento selecionado.</p>
+    </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> setForm</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>setForm(event: <a href="https://angular.io/docs/ts/latest/api/router/index/Event-type-alias.html" target="_blank" >Event</a>)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Recebe um evento e coloca os valores nos campos do formulário.</p>
+    </div>
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <ul class="jsdoc-params">
+                                                <li>
+                                                    <div>
+                                                        <b>event</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                        </ul>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> OnSubmit</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>OnSubmit()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Método responsavel pela submissão do formulário</p>
+    </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> createDateTime</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>createDateTime(date: Date, time: string)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Cria um objeto do tipo date </p>
+    </div>
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <ul class="jsdoc-params">
+                                                <li>
+                                                    <div>
+                                                        <b>date</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <b>time</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                        </ul>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>Date</code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> onImagePicked</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>onImagePicked(event: any)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Evento dispultado aquando do selecionamento de uma imagem</p>
+    </div>
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <ul class="jsdoc-params">
+                                                <li>
+                                                    <div>
+                                                        <b>event</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                        </ul>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> cancel</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>cancel()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Método responsável pelo cancelamento do evento</p>
+    </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> closeDialog</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>closeDialog()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Método responsável por fechar o diálogo</p>
+    </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> capacity</b>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <ul class="index-list">
-                                <li>
-                                    <a href="#title" >title</a>
-                                </li>
-                                <li>
-                                    <a href="#capacity" >capacity</a>
-                                </li>
-                                <li>
-                                    <a href="#eventDate" >eventDate</a>
-                                </li>
-                                <li>
-                                    <a href="#eventRegistration" >eventRegistration</a>
-                                </li>
-                                <li>
-                                    <a href="#startDate" >startDate</a>
-                                </li>
-                                <li>
-                                    <a href="#startHour" >startHour</a>
-                                </li>
-                                <li>
-                                    <a href="#endDate" >endDate</a>
-                                </li>
-                                <li>
-                                    <a href="#endHour" >endHour</a>
-                                </li>
-                                <li>
-                                    <a href="#startRegistrationDate" >startRegistrationDate</a>
-                                </li>
-                                <li>
-                                    <a href="#startRegistrationHour" >startRegistrationHour</a>
-                                </li>
-                                <li>
-                                    <a href="#endRegistrationDate" >endRegistrationDate</a>
-                                </li>
-                                <li>
-                                    <a href="#endRegistrationHour" >endRegistrationHour</a>
-                                </li>
-                                <li>
-                                    <a href="#local" >local</a>
-                                </li>
-                                <li>
-                                    <a href="#image" >image</a>
-                                </li>
-                                <li>
-                                    <a href="#description" >description</a>
-                                </li>
-                            </ul>
+                            <code>capacity:     <code>any</code>
+    </bcode>
                         </td>
                     </tr>
-        </tbody>
-    </table>
-</section>
-
-    <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(dateAdapter: DateAdapter<Date>, authService: <a href="../injectables/UserAuthService.html" target="_self">UserAuthService</a>, eventService: <a href="../injectables/EventsService.html" target="_self">EventsService</a>, route: ActivatedRoute, router: Router)</code>
-                    </td>
-                </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> description</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>description:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> endDate</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>endDate:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> endHour</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>endHour:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> endRegistrationDate</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>endRegistrationDate:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> endRegistrationHour</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>endRegistrationHour:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> error</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>error:     <code>string</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> Event</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>Event:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> eventDate</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>eventDate:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> eventForm</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>eventForm:     <code>FormGroup&lt;{ title: any; capacity: any; eventDate: FormGroup&lt;{ startDate: any; startHour: any; end...</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> eventRegistration</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>eventRegistration:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> eventSelected</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>eventSelected:     <code>boolean</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> image</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>image:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> imagePreview</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>imagePreview:     <code>string</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> isDialogOpen</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>isDialogOpen:     <code>boolean</code>
+    </bcode>
+                        </td>
+                    </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:29</a></div>
+                                <i>Default value: </i><code>false</code>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>dateAdapter</td>
-                                                  
-                                                        <td>
-                                                                    <code>DateAdapter&lt;Date&gt;</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>authService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserAuthService.html" target="_self" >UserAuthService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>eventService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/EventsService.html" target="_self" >EventsService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>route</td>
-                                                  
-                                                        <td>
-                                                                    <code>ActivatedRoute</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>router</td>
-                                                  
-                                                        <td>
-                                                                    <code>Router</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
-
-
-
-
-
-    <section data-compodoc="block-methods">
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="cancel"></a>
-                    <span class="name">
-                        <span ><b>cancel</b></span>
-                        <a href="#cancel"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>cancel()</code>
-                </td>
-            </tr>
-
-
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="259"
-                                    class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:259</a></div>
+                            <b> local</b>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="closeDialog"></a>
-                    <span class="name">
-                        <span ><b>closeDialog</b></span>
-                        <a href="#closeDialog"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>closeDialog()</code>
-                </td>
-            </tr>
-
-
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="265"
-                                    class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:265</a></div>
+                            <code>local:     <code>any</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="createDateTime"></a>
-                    <span class="name">
-                        <span ><b>createDateTime</b></span>
-                        <a href="#createDateTime"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>createDateTime(date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>, time: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="225"
-                                    class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:225</a></div>
+                            <b> municipalityImage</b>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>date</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                                <td>time</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getEventSelected"></a>
-                    <span class="name">
-                        <span ><b>getEventSelected</b></span>
-                        <a href="#getEventSelected"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getEventSelected()</code>
-                </td>
-            </tr>
-
-
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:57</a></div>
+                            <code>municipalityImage:     <code>string</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnInit"></a>
-                    <span class="name">
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnInit()</code>
-                </td>
-            </tr>
-
-
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:40</a></div>
+                            <b> municipalityName</b>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="onImagePicked"></a>
-                    <span class="name">
-                        <span ><b>onImagePicked</b></span>
-                        <a href="#onImagePicked"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>onImagePicked(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="241"
-                                    class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:241</a></div>
+                            <code>municipalityName:     <code>string</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>event</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="OnSubmit"></a>
-                    <span class="name">
-                        <span ><b>OnSubmit</b></span>
-                        <a href="#OnSubmit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>OnSubmit()</code>
-                </td>
-            </tr>
-
-
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="181"
-                                    class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:181</a></div>
+                            <b> photo</b>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setForm"></a>
-                    <span class="name">
-                        <span ><b>setForm</b></span>
-                        <a href="#setForm"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>setForm(event: <a href="../interfaces/Event.html" target="_self">Event</a>)</code>
-                </td>
-            </tr>
-
-
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="69"
-                                    class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:69</a></div>
+                            <code>photo:     <code>File</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>event</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Event.html" target="_self" >Event</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-    <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="error"></a>
-                    <span class="name">
-                        <span ><b>error</b></span>
-                        <a href="#error"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>string | null</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>null</code>
-                    </td>
-                </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:22</a></div>
+                            <b> startDate</b>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="eventForm"></a>
-                    <span class="name">
-                        <span ><b>eventForm</b></span>
-                        <a href="#eventForm"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>new FormGroup({
-    title: new FormControl(&#x27;&#x27;, [Validators.required]),
-    capacity: new FormControl(&#x27;&#x27;, [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1)]),
-    eventDate: new FormGroup({
-      startDate: new FormControl(new Date(), [Validators.required]),
-      startHour: new FormControl(&#x27;&#x27;, [Validators.required]),
-      endDate: new FormControl(new Date, [Validators.required]),
-      endHour: new FormControl(&#x27;&#x27;, [Validators.required]),
-    }),
-    eventRegistration: new FormGroup({
-      startDate: new FormControl(new Date, [Validators.required]),
-      startHour: new FormControl(&#x27;&#x27;, [Validators.required]),
-      endDate: new FormControl(new Date, [Validators.required]),
-      endHour: new FormControl(&#x27;&#x27;, [Validators.required]),
-    }),
-    local: new FormControl(&#x27;&#x27;, [Validators.required]),
-    image: new FormControl(&#x27;&#x27;),
-    description: new FormControl(&#x27;&#x27;, [Validators.required]),
-
-  })</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:97</a></div>
+                            <code>startDate:     <code>any</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="eventSelected"></a>
-                    <span class="name">
-                        <span ><b>eventSelected</b></span>
-                        <a href="#eventSelected"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Event.html" target="_self" >Event</a></code>
-
-                    </td>
-                </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:27</a></div>
+                            <b> startHour</b>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="imagePreview"></a>
-                    <span class="name">
-                        <span ><b>imagePreview</b></span>
-                        <a href="#imagePreview"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;&quot;</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:25</a></div>
+                            <code>startHour:     <code>any</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="isDialogOpen"></a>
-                    <span class="name">
-                        <span ><b>isDialogOpen</b></span>
-                        <a href="#isDialogOpen"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
-                    </td>
-                </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:29</a></div>
+                            <b> startRegistrationDate</b>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="municipalityImage"></a>
-                    <span class="name">
-                        <span ><b>municipalityImage</b></span>
-                        <a href="#municipalityImage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;&quot;</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:18</a></div>
+                            <code>startRegistrationDate:     <code>any</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="municipalityName"></a>
-                    <span class="name">
-                        <span ><b>municipalityName</b></span>
-                        <a href="#municipalityName"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;&quot;</code>
-                    </td>
-                </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:19</a></div>
+                            <b> startRegistrationHour</b>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="photo"></a>
-                    <span class="name">
-                            <span class="modifier">Optional</span>
-                        <span ><b>photo</b></span>
-                        <a href="#photo"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>File</code>
-
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:23</a></div>
+                            <code>startRegistrationHour:     <code>any</code>
+    </bcode>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-</section>
-
-    <section data-compodoc="block-accessors">
-    <h3 id="accessors">
-        Accessors
-    </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="title"></a>
-                        <span class="name"><b>title</b><a href="#title"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>title()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:120</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="capacity"></a>
-                        <span class="name"><b>capacity</b><a href="#capacity"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>capacity()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:124</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="eventDate"></a>
-                        <span class="name"><b>eventDate</b><a href="#eventDate"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>eventDate()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:128</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="eventRegistration"></a>
-                        <span class="name"><b>eventRegistration</b><a href="#eventRegistration"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>eventRegistration()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:132</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="startDate"></a>
-                        <span class="name"><b>startDate</b><a href="#startDate"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>startDate()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:136</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="startHour"></a>
-                        <span class="name"><b>startHour</b><a href="#startHour"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>startHour()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:140</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="endDate"></a>
-                        <span class="name"><b>endDate</b><a href="#endDate"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>endDate()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:144</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="endHour"></a>
-                        <span class="name"><b>endHour</b><a href="#endHour"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>endHour()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="148" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:148</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="startRegistrationDate"></a>
-                        <span class="name"><b>startRegistrationDate</b><a href="#startRegistrationDate"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>startRegistrationDate()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:152</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="startRegistrationHour"></a>
-                        <span class="name"><b>startRegistrationHour</b><a href="#startRegistrationHour"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>startRegistrationHour()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:156</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="endRegistrationDate"></a>
-                        <span class="name"><b>endRegistrationDate</b><a href="#endRegistrationDate"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>endRegistrationDate()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:160</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="endRegistrationHour"></a>
-                        <span class="name"><b>endRegistrationHour</b><a href="#endRegistrationHour"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>endRegistrationHour()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="164" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:164</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="local"></a>
-                        <span class="name"><b>local</b><a href="#local"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>local()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="168" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:168</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="image"></a>
-                        <span class="name"><b>image</b><a href="#image"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>image()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:172</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="description"></a>
-                        <span class="name"><b>description</b><a href="#description"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>description()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">src/app/events/municip-actions/edit-event/edit-event.component.ts:176</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-</section>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> title</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>title:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
 </div>
-
-
-    <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewEncapsulation } from &#x27;@angular/core&#x27;;
+        <div class="tab-pane fade tab-source-code" id="source">
+            <pre><code class="hljs javascript">import { Component, OnInit, ViewEncapsulation } from &#x27;@angular/core&#x27;;
 import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
 import { DateAdapter, provideNativeDateAdapter } from &#x27;@angular/material/core&#x27;;
 import { UserAuthService } from &#x27;../../../services/user-auth.service&#x27;;
@@ -1445,6 +1887,9 @@ import { Event, EventsService } from &#x27;../../../services/events/events.servi
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
 import { format } from &#x27;date-fns&#x27;;
 
+/**
+ * Componente responsável por editar um evento.
+ */
 @Component({
   selector: &#x27;app-edit-event&#x27;,
   templateUrl: &#x27;./edit-event.component.html&#x27;,
@@ -1467,6 +1912,14 @@ export class EditEventComponent implements OnInit {
 
   isDialogOpen: boolean &#x3D; false;
 
+  /**
+     * Construtor do componente.
+     * @param dateAdapter
+     * @param authService
+     * @param eventService
+     * @param route
+     * @param router
+     */
   constructor(private dateAdapter: DateAdapter&lt;Date&gt;, private authService: UserAuthService,
     private eventService: EventsService, private route: ActivatedRoute, private router: Router,
   ) {
@@ -1493,6 +1946,9 @@ export class EditEventComponent implements OnInit {
   }
 
 
+  /**
+   * Obtém o evento selecionado.
+   */
   getEventSelected() {
 
     let eventId &#x3D; this.route.snapshot.params[&#x27;eventId&#x27;];
@@ -1504,7 +1960,10 @@ export class EditEventComponent implements OnInit {
       }
     });
   }
-
+  /**
+   * Recebe um evento e coloca os valores nos campos do formulário.
+   * @param event
+   */
   setForm(event: Event) {
     this.eventForm.setValue({
       title: event.title,
@@ -1616,7 +2075,9 @@ export class EditEventComponent implements OnInit {
     return this.eventForm.get(&#x27;description&#x27;);
   }
 
-
+  /**
+   * Método responsavel pela submissão do formulário
+   */
   OnSubmit() {
     if (this.eventForm.valid) {
 
@@ -1660,7 +2121,12 @@ export class EditEventComponent implements OnInit {
 
   }
 
-
+  /**
+   * Cria um objeto do tipo date 
+   * @param date
+   * @param time
+   * @returns
+   */
   createDateTime(date: Date, time: string): Date {
     let partTime &#x3D; time.split(&#x27;:&#x27;);
     let startHour &#x3D; parseInt(partTime[0]);
@@ -1676,7 +2142,10 @@ export class EditEventComponent implements OnInit {
 
 
 
-
+  /**
+   * Evento dispultado aquando do selecionamento de uma imagem
+   * @param event
+   */
   onImagePicked(event: any) {
     const fileInput &#x3D; event.target as HTMLInputElement;
     const file &#x3D; fileInput?.files?.[0]; // Use optional chaining here
@@ -1694,13 +2163,17 @@ export class EditEventComponent implements OnInit {
   }
 
 
-
+  /**
+  * Método responsável pelo cancelamento do evento
+  */
   cancel() {
     this.router.navigate([&#x27;/events&#x27;]);
   }
 
 
-
+  /**
+  * Método responsável por fechar o diálogo
+  */
   closeDialog() {
     this.isDialogOpen &#x3D; false;
 
@@ -1721,185 +2194,8 @@ export class EditEventComponent implements OnInit {
 
 }
 </code></pre>
-    </div>
-
-    <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">
-&lt;app-header-loggedin&gt;&lt;/app-header-loggedin&gt;
-&lt;app-smaller-banner [title]&#x3D;&quot;&#x27;Editar Evento&#x27;&quot; [image]&#x3D;&quot;municipalityImage&quot;
-                    class&#x3D;&quot;font-inter&quot; /&gt;
-
-
-&lt;ng-container *ngIf&#x3D;&quot;isDialogOpen&quot;&gt;
-  &lt;app-dialog-message (confirm)&#x3D;&quot;closeDialog()&quot; title&#x3D;&quot;Sucesso&quot; message&#x3D;&quot;Operação realizada com sucesso&quot;
-                      [isConfirm]&#x3D;true&gt;&lt;/app-dialog-message&gt;
-&lt;/ng-container&gt;
-
-&lt;form [formGroup]&#x3D;&quot;eventForm&quot; (ngSubmit)&#x3D;&quot;OnSubmit()&quot; class&#x3D;&quot;px-32 mb-32 mt-10&quot;&gt;
-  &lt;div *ngIf&#x3D;&quot;error&quot; class&#x3D;&quot; text-red-500 text-xl font-bold space-y-2 text-start mb-5&quot;&gt;
-    &lt;p&gt;{{error}}&lt;/p&gt;
-  &lt;/div&gt;
-
-
-  &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
-    &lt;div class&#x3D;&quot;w-full lg:w-5/12 mb-4 h-32&quot;&gt;
-      &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Título&lt;/app-input-title&gt;
-      &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
-        &lt;input required placeholder&#x3D;&quot;Título do evento&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;title&quot; formControlName&#x3D;&quot;title&quot; name&#x3D;&quot;title&quot;
-               class&#x3D;&quot;input w-full h-12 lg:h-14&quot; /&gt;
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;title?.touched &amp;&amp; title?.invalid &quot;&gt;
-        &lt;div *ngIf&#x3D;&quot;title?.errors?.[&#x27;required&#x27;] &quot;&gt;Título Obrigatório&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;w-full lg:w-5/12 mb-4 h-32&quot;&gt;
-      &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Número máximo de participantes&lt;/app-input-title&gt;
-      &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
-        &lt;input required placeholder&#x3D;&quot;Capacidade do evento&quot; type&#x3D;&quot;number&quot; id&#x3D;&quot;capacity&quot; formControlName&#x3D;&quot;capacity&quot; name&#x3D;&quot;capacity&quot;
-               class&#x3D;&quot;input w-full h-12 lg:h-14 &quot; /&gt;
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;capacity?.touched &amp;&amp; capacity?.invalid&quot;&gt;
-        &lt;div *ngIf&#x3D;&quot;capacity?.errors?.[&#x27;required&#x27;] &quot;&gt;Capacidade Obrigatória&lt;/div&gt;
-        &lt;div *ngIf&#x3D;&quot;capacity?.errors?.[&#x27;min&#x27;] &quot;&gt;Capacidade mínima de 1&lt;/div&gt;
-
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-
-
-  &lt;div class&#x3D;&quot;flex items-center justify-between mb-4&quot;&gt;
-    &lt;div class&#x3D;&quot;w-full lg:w-5/12 mb-4 p-6 shadow-2xl rounded-xl&quot;&gt;
-
-      &lt;app-datetimepicker [titleDate]&#x3D;&quot;&#x27;Período de Inscrição&#x27;&quot; [formGroup]&#x3D;&quot;eventForm&quot;
-                          [StartHourPlaceholder]&#x3D;&quot;&#x27;Início de Incrição&#x27;&quot; [EndHourPlaceholder]&#x3D;&quot;&#x27;Fim de Inscrição&#x27;&quot;
-                          [formReceived]&#x3D;&quot;eventRegistration&quot; /&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;w-full lg:w-5/12 mb-4 p-6 shadow-2xl rounded-xl&quot;&gt;
-
-      &lt;app-datetimepicker [titleDate]&#x3D;&quot;&#x27;Período de Evento&#x27;&quot; [formGroup]&#x3D;&quot;eventForm&quot;
-                          [StartHourPlaceholder]&#x3D;&quot;&#x27;Início do Evento&#x27;&quot; [EndHourPlaceholder]&#x3D;&quot;&#x27;Fim do Evento&#x27;&quot;
-                          [formReceived]&#x3D;&quot;eventDate&quot; /&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class&#x3D;&quot;flex items-center justify-between &quot;&gt;
-    &lt;div class&#x3D;&quot;w-full lg:w-5/12 mb-4 h-32&quot;&gt;
-      &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Localização&lt;/app-input-title&gt;
-      &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
-        &lt;input required placeholder&#x3D;&quot;Localização do evento&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;local&quot; formControlName&#x3D;&quot;local&quot; name&#x3D;&quot;local&quot;
-               class&#x3D;&quot;input w-full h-12 lg:h-14 &quot; /&gt;
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;local?.touched &amp;&amp; local?.invalid &quot;&gt;
-        &lt;div *ngIf&#x3D;&quot;local?.errors?.[&#x27;required&#x27;] &quot;&gt;Local Obrigatório&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-
-    &lt;div class&#x3D;&quot;w-full lg:w-5/12 mb-4 h-32&quot;&gt;
-
-      &lt;input type&#x3D;&quot;file&quot; #filePicker id&#x3D;&quot;image&quot; formControlName&#x3D;&quot;image&quot; name&#x3D;&quot;image&quot;
-             (change)&#x3D;&quot;onImagePicked($event)&quot; accept&#x3D;&quot;image/*&quot;
-             class&#x3D;&quot;hidden&quot;&gt;
-
-      &lt;div class&#x3D;&quot;input h-full w-full flex relative&quot;&gt;
-        &lt;img [src]&#x3D;&quot;imagePreview&quot; alt&#x3D;&quot;imagem do evento&quot; class&#x3D;&quot;object-contain w-full&quot; /&gt;
-        &lt;div class&#x3D;&quot;absolute -top-5 right-0&quot;&gt;
-          &lt;app-black-btn-icon-text altImage&#x3D;&quot;editar capa de evento&quot;
-                                   image&#x3D;&quot;/assets/images/icons/pencil-white.png&quot;
-                                   (buttonClick)&#x3D;&quot;filePicker.click()&quot;&gt;
-            Editar Capa
-          &lt;/app-black-btn-icon-text&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-
-  &lt;div class&#x3D;&quot;w-full mb-4 h-72&quot;&gt;
-    &lt;app-input-title class&#x3D;&quot;text-[2.6vh]&quot;&gt;Descrição&lt;/app-input-title&gt;
-    &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
-      &lt;textarea required placeholder&#x3D;&quot;Descrição do evento&quot; id&#x3D;&quot;description&quot; formControlName&#x3D;&quot;description&quot; name&#x3D;&quot;description&quot;
-                class&#x3D;&quot;input w-full h-30 lg:h-60
-                resize-none&quot;&gt;
-      &lt;/textarea&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;text-red-500 font-bold py-2&quot; *ngIf&#x3D;&quot;description?.touched &amp;&amp; description?.invalid &quot;&gt;
-      &lt;div *ngIf&#x3D;&quot;description?.errors?.[&#x27;required&#x27;] &quot;&gt;Descrição Obrigatório&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class&#x3D;&quot;flex mt-12&quot;&gt;
-
-    &lt;button class&#x3D;&quot;border-municip-gray border-2 rounded-md
-            hover:bg-municip-blank
-            hover:border-municip-blue text-municip-highlight-black
-            inline-flex py-3 px-8
-            focus:outline-none text-lg
-            transition duration-700 ease-in-out justify-center items-center
-            &quot;
-            (click)&#x3D;&quot;cancel()&quot;&gt;
-      Voltar
-    &lt;/button&gt;
-    &lt;div class&#x3D;&quot;flex flex-1 justify-end &quot;&gt;
-      &lt;app-btn-municip-blue [disabled]&#x3D;&quot;!eventForm.valid&quot; buttonClass&#x3D;&quot;disabled:!cursor-not-allowed&quot;
-                            type&#x3D;&quot;submit&quot;&gt;
-        Submeter Alterações
-        &lt;img alt&#x3D;&quot;arrow&quot; src&#x3D;&quot;/assets/images/arrows/right-arrow.png&quot; class&#x3D;&quot;size-3.5 ml-1&quot; /&gt;
-      &lt;/app-btn-municip-blue&gt;
-    &lt;/div&gt;
-
-  &lt;/div&gt;
-
-
-
-
-&lt;/form&gt;
-&lt;app-footer /&gt;
-
-
-
-</code></pre>
-    </div>
-
-
-    <div class="tab-pane fade " id="tree">
-        <div id="tree-container"></div>
-        <div class="tree-legend">
-            <div class="title">
-                <b>Legend</b>
-            </div>
-            <div>
-                <div class="color htmlelement"></div><span>Html element</span>
-            </div>
-            <div>
-                <div class="color component"></div><span>Component</span>
-            </div>
-            <div>
-                <div class="color directive"></div><span>Html element with directive</span>
-            </div>
         </div>
     </div>
-
-    
-</div>
-
-<script src="../js/libs/vis.min.js"></script>
-<script src="../js/libs/htmlparser.js"></script>
-<script src="../js/libs/deep-iterator.js"></script>
-<script>
-        var COMPONENT_TEMPLATE = '<div><app-header-loggedin></app-header-loggedin><app-smaller-banner [title]="\'Editar Evento\'" [image]="municipalityImage"                    class="font-inter" /><ng-container *ngIf="isDialogOpen">  <app-dialog-message (confirm)="closeDialog()" title="Sucesso" message="Operação realizada com sucesso"                      [isConfirm]=true></app-dialog-message></ng-container><form [formGroup]="eventForm" (ngSubmit)="OnSubmit()" class="px-32 mb-32 mt-10">  <div *ngIf="error" class=" text-red-500 text-xl font-bold space-y-2 text-start mb-5">    <p>{{error}}</p>  </div>  <div class="flex items-center justify-between">    <div class="w-full lg:w-5/12 mb-4 h-32">      <app-input-title class="text-[2.6vh]">Título</app-input-title>      <div class="flex items-center">        <input required placeholder="Título do evento" type="text" id="title" formControlName="title" name="title"               class="input w-full h-12 lg:h-14" />      </div>      <div class="text-red-500 font-bold py-2" *ngIf="title?.touched && title?.invalid ">        <div *ngIf="title?.errors?.[\'required\'] ">Título Obrigatório</div>      </div>    </div>    <div class="w-full lg:w-5/12 mb-4 h-32">      <app-input-title class="text-[2.6vh]">Número máximo de participantes</app-input-title>      <div class="flex items-center">        <input required placeholder="Capacidade do evento" type="number" id="capacity" formControlName="capacity" name="capacity"               class="input w-full h-12 lg:h-14 " />      </div>      <div class="text-red-500 font-bold py-2" *ngIf="capacity?.touched && capacity?.invalid">        <div *ngIf="capacity?.errors?.[\'required\'] ">Capacidade Obrigatória</div>        <div *ngIf="capacity?.errors?.[\'min\'] ">Capacidade mínima de 1</div>      </div>    </div>  </div>  <div class="flex items-center justify-between mb-4">    <div class="w-full lg:w-5/12 mb-4 p-6 shadow-2xl rounded-xl">      <app-datetimepicker [titleDate]="\'Período de Inscrição\'" [formGroup]="eventForm"                          [StartHourPlaceholder]="\'Início de Incrição\'" [EndHourPlaceholder]="\'Fim de Inscrição\'"                          [formReceived]="eventRegistration" />    </div>    <div class="w-full lg:w-5/12 mb-4 p-6 shadow-2xl rounded-xl">      <app-datetimepicker [titleDate]="\'Período de Evento\'" [formGroup]="eventForm"                          [StartHourPlaceholder]="\'Início do Evento\'" [EndHourPlaceholder]="\'Fim do Evento\'"                          [formReceived]="eventDate" />    </div>  </div>  <div class="flex items-center justify-between ">    <div class="w-full lg:w-5/12 mb-4 h-32">      <app-input-title class="text-[2.6vh]">Localização</app-input-title>      <div class="flex items-center">        <input required placeholder="Localização do evento" type="text" id="local" formControlName="local" name="local"               class="input w-full h-12 lg:h-14 " />      </div>      <div class="text-red-500 font-bold py-2" *ngIf="local?.touched && local?.invalid ">        <div *ngIf="local?.errors?.[\'required\'] ">Local Obrigatório</div>      </div>    </div>    <div class="w-full lg:w-5/12 mb-4 h-32">      <input type="file" #filePicker id="image" formControlName="image" name="image"             (change)="onImagePicked($event)" accept="image/*"             class="hidden">      <div class="input h-full w-full flex relative">        <img [src]="imagePreview" alt="imagem do evento" class="object-contain w-full" />        <div class="absolute -top-5 right-0">          <app-black-btn-icon-text altImage="editar capa de evento"                                   image="/assets/images/icons/pencil-white.png"                                   (buttonClick)="filePicker.click()">            Editar Capa          </app-black-btn-icon-text>        </div>      </div>    </div>  </div>  <div class="w-full mb-4 h-72">    <app-input-title class="text-[2.6vh]">Descrição</app-input-title>    <div class="flex items-center">      <textarea required placeholder="Descrição do evento" id="description" formControlName="description" name="description"                class="input w-full h-30 lg:h-60                resize-none">      </textarea>    </div>    <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">      <div *ngIf="description?.errors?.[\'required\'] ">Descrição Obrigatório</div>    </div>  </div>  <div class="flex mt-12">    <button class="border-municip-gray border-2 rounded-md            hover:bg-municip-blank            hover:border-municip-blue text-municip-highlight-black            inline-flex py-3 px-8            focus:outline-none text-lg            transition duration-700 ease-in-out justify-center items-center            "            (click)="cancel()">      Voltar    </button>    <div class="flex flex-1 justify-end ">      <app-btn-municip-blue [disabled]="!eventForm.valid" buttonClass="disabled:!cursor-not-allowed"                            type="submit">        Submeter Alterações        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />      </app-btn-municip-blue>    </div>  </div></form><app-footer /></div>'
-    var COMPONENTS = [{'name': 'AboutusComponent', 'selector': 'app-aboutus'},{'name': 'AccessDeniedComponent', 'selector': 'app-access-denied'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AdmindashboardComponent', 'selector': 'app-admindashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BannerComponent', 'selector': 'app-banner'},{'name': 'BigBannerComponent', 'selector': 'app-big-banner'},{'name': 'BlackBtnIconTextComponent', 'selector': 'app-black-btn-icon-text'},{'name': 'BtnMunicipBlueComponent', 'selector': 'app-btn-municip-blue'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarHeaderComponent', 'selector': 'app-calendar-header'},{'name': 'CalendarPageComponent', 'selector': 'app-calendar-page'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardOutlineThemeComponent', 'selector': 'app-card-outline-theme'},{'name': 'CardOutlineWhiteComponent', 'selector': 'app-card-outline-white'},{'name': 'CardTeamComponent', 'selector': 'app-card-team'},{'name': 'CitizenHomePageComponent', 'selector': 'app-citizen-home-page'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DatetimepickerComponent', 'selector': 'app-datetimepicker'},{'name': 'DialogMessageComponent', 'selector': 'app-dialog-message'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EventCardComponent', 'selector': 'app-event-card'},{'name': 'EventPageComponent', 'selector': 'app-event-page'},{'name': 'EventsListComponent', 'selector': 'app-events-list'},{'name': 'EventsSmallComponent', 'selector': 'app-events-small'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GeneralInfoComponent', 'selector': 'app-general-info'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderLoggedinComponent', 'selector': 'app-header-loggedin'},{'name': 'InputTitleComponent', 'selector': 'app-input-title'},{'name': 'LandingComponent', 'selector': 'app-landing'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MunAdmindashboardComponent', 'selector': 'app-munadmindashboard'},{'name': 'MunAdminHomePageComponent', 'selector': 'app-mun-admin-home-page'},{'name': 'MunicipalEditComponent', 'selector': 'app-municipal-edit'},{'name': 'MunicipalEventsComponent', 'selector': 'app-municipal-events'},{'name': 'MunicipalitymapComponent', 'selector': 'app-municipalitymap'},{'name': 'MunicipalProfileComponent', 'selector': 'app-municipal-profile'},{'name': 'MyDataCardComponent', 'selector': 'app-my-data-card'},{'name': 'MyMunicipalityCardComponent', 'selector': 'app-my-municipality-card'},{'name': 'NewsCardComponent', 'selector': 'app-news-card'},{'name': 'NewsCreateComponent', 'selector': 'app-news-create'},{'name': 'NewsEditComponent', 'selector': 'app-news-edit'},{'name': 'NewsListComponent', 'selector': 'app-news-list'},{'name': 'NewsPageComponent', 'selector': 'app-news-page'},{'name': 'NewsSmallComponent', 'selector': 'app-news-small'},{'name': 'NextEventsComponent', 'selector': 'app-next-events'},{'name': 'NextNewsComponent', 'selector': 'app-next-news'},{'name': 'ProfileBannerComponent', 'selector': 'app-profile-banner'},{'name': 'SchedulesComponent', 'selector': 'app-schedules'},{'name': 'SelectAccountTypeComponent', 'selector': 'app-select-account-type'},{'name': 'ShowHidePasswordComponent', 'selector': 'app-show-hide-password'},{'name': 'ShowStopComponent', 'selector': 'app-show-stop'},{'name': 'SignUpCitizenAccountComponent', 'selector': 'app-sign-up-citizen-account'},{'name': 'SignUpMunicipalAdministratorAccountComponent', 'selector': 'app-sign-up-municipal-administrator-account'},{'name': 'SignUpMunicipalityComponent', 'selector': 'app-sign-up-municipality'},{'name': 'SignUpSuccessComponent', 'selector': 'app-sign-up-success'},{'name': 'SmallerBannerComponent', 'selector': 'app-smaller-banner'},{'name': 'SpinnerComponent', 'selector': 'app-spinner'},{'name': 'StatisticalHomePageCardComponent', 'selector': 'app-statistical-home-page-card'},{'name': 'StopsMapComponent', 'selector': 'app-stops-map'},{'name': 'StopsPageComponent', 'selector': 'app-stops-page'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'TooltipComponent', 'selector': 'app-tooltip'},{'name': 'TransportsMainComponent', 'selector': 'app-transports-main'},{'name': 'UserinfodialogComponent', 'selector': 'app-userinfodialog'},{'name': 'UserpageComponent', 'selector': 'app-userpage'},{'name': 'VerticalCardComponent', 'selector': 'app-vertical-card'}];
-    var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'EditEventComponent'};
-</script>
-<script src="../js/tree.js"></script>
-
-
-
-
-
-
-
 
 
 
@@ -1920,31 +2216,8 @@ export class EditEventComponent implements OnInit {
     </div>
 </div>
 </div>
-               <!-- END CONTENT -->
            </div>
        </div>
-
-          <label class="dark-mode-switch">
-               <input type="checkbox">
-               <span class="slider">
-                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-                    </svg>
-               </span>
-          </label>
-
-       <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'EditEventComponent.html';
-            var MAX_SEARCH_RESULTS = 15;
-       </script>
-
-       <script src="../js/libs/custom-elements.min.js"></script>
-       <script src="../js/libs/lit-html.js"></script>
-
-       <script src="../js/menu-wc.js" defer></script>
-       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
@@ -1955,17 +2228,20 @@ export class EditEventComponent implements OnInit {
 
        <script src="../js/compodoc.js"></script>
 
-       <script src="../js/tabs.js"></script>
-       <script src="../js/menu.js"></script>
-       <script src="../js/libs/clipboard.min.js"></script>
-       <script src="../js/libs/prism.js"></script>
-       <script src="../js/sourceCode.js"></script>
-          <script src="../js/search/search.js"></script>
-          <script src="../js/search/lunr.min.js"></script>
-          <script src="../js/search/search-lunr.js"></script>
-          <script src="../js/search/search_index.js"></script>
-       <script src="../js/lazy-load-graphs.js"></script>
+       <script src="../js/search/search.js"></script>
+       <script src="../js/search/lunr.min.js"></script>
+       <script src="../js/search/search-lunr.js"></script>
 
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/highlight.pack.js"></script>
+       <script src="../js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="../js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
 
     </body>
 </html>

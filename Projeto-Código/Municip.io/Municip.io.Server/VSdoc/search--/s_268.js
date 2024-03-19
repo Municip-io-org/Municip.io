@@ -1,1 +1,1 @@
-search_result['268']=["topic_0000000000000081.html","Event.IncrementRegistrations Method",""];
+search_result['268']=["topic_0000000000000065.html","NewsController.GetNewsById Method","esta função retorna uma notícia. Recebe como parâmetro o id da notícia."];
