@@ -227,11 +227,7 @@ export class LoginComponent {
 
       error => {
         console.error(error);
-        if (error.status === 404) {
-          this.error = "Não existe nenhum utilizador com esse email.";
-        } else {
           this.error = "Erro de autenticação";
-        }
       }
     );
    
