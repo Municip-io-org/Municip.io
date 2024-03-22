@@ -1,1 +1,1 @@
-search_result['77']=["topic_000000000000001C_events--.html","Citizen Events",""];
+search_result['77']=["topic_000000000000001A_props--.html","EventsController Properties",""];

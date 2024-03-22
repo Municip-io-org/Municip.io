@@ -1,1 +1,1 @@
-search_result['86']=["topic_0000000000000022.html","EventsController.DropOutCitizen Method","Esta chamada permite desinscrever um cidadão num evento passando o id do evento e o email do cidadão como parâmetros"];
+search_result['86']=["topic_000000000000001D.html","CitizenStatusController.pendingCitizen Method","Esta função desbloqueia um cidadão. Recebe como parâmetro o email do cidadão ."];

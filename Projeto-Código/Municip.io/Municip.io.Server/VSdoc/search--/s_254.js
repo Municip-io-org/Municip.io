@@ -1,1 +1,1 @@
-search_result['254']=["topic_0000000000000073_vars--.html","Event Fields",""];
+search_result['254']=["topic_0000000000000061.html","NewsController.CreateNews Method","Esta função cria uma notícia. Recebe como parâmetro a notícia."];

@@ -28,10 +28,7 @@
         NOTÍCIAS DE {{ municipality.name | uppercase }}
       </div>
       <ul class="space-y-7">
-        <li *ngFor="let news of newsList.slice(0, 3)">
           <app-next-news [newsList]="newsList" [municipalityName]="municipality.name" ></app-next-news>
-        </li>
-        
       </ul>
     </section>
   </div>

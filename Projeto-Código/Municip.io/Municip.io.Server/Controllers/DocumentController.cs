@@ -5,6 +5,9 @@ using Municip.io.Server.Models;
 
 namespace Municip.io.Server.Controllers
 {
+    /// <summary>
+    /// Controller to manage the documents
+    /// </summary>
     [ApiController]
     [Route("api/documents")]
 
@@ -16,7 +19,12 @@ namespace Municip.io.Server.Controllers
         {
             _context = context;
         }
-        //create Document
+
+        /// <summary>
+        /// Method to create a document template
+        /// </summary>
+        /// <param name="template"></param>
+        /// <returns></returns>
         [HttpPost("CreateTemplate")]
         public async Task<IActionResult> CreateDocumentTemplateAsync(DocumentTemplate template)
         {
@@ -43,7 +51,12 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        //edit template 
+        /// <summary>
+        /// Method to edit a document template
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>        
         [HttpPost("EditTemplate")]
         public async Task<IActionResult> EditDocumentTemplateAsync(DocumentTemplate template, int id)
         {
@@ -68,7 +81,12 @@ namespace Municip.io.Server.Controllers
         }
 
 
-
+        /// <summary>
+        /// Method to change the status of a document template to active
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="link"></param>
+        /// <returns></returns>
         [HttpPost("SendLinkPayment")]
         public async Task<IActionResult> SendLinkPayment(int id, string link)
         {
@@ -86,7 +104,11 @@ namespace Municip.io.Server.Controllers
 
 
 
-        //get documents from a municipality
+        /// <summary>
+        /// Method to change the status of a document template to active
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <returns></returns>
         [HttpGet("GetDocuments")]
         public IActionResult GetDocuments(string municipality)
         {
@@ -95,7 +117,12 @@ namespace Municip.io.Server.Controllers
             return Json(municipalDocuments);
         }
 
-        //create Document Request
+        /// <summary>
+        /// Method to create a document request
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("CreateRequest")]
         public async Task<IActionResult> CreateDocumentRequestAsync(string email, DocumentRequest request)
         {
@@ -130,7 +157,11 @@ namespace Municip.io.Server.Controllers
 
         }
 
-        //get requests from a municipality
+        /// <summary>
+        /// Method to get the requests from a municipality
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <returns></returns>
         [HttpGet("GetRequestsFromMunicipality")]
         public IActionResult GetRequestsFromMunicipality(string municipality)
         {
@@ -154,6 +185,11 @@ namespace Municip.io.Server.Controllers
             return Json(citizenRequests);
         }
 
+        /// <summary>
+        /// Method to get the templates from a municipality
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <returns></returns>
         [HttpGet("GetTemplatesFromMunicipality")]
         public IActionResult GetTemplatesFromMunicipality(string municipality)
         {
@@ -162,6 +198,11 @@ namespace Municip.io.Server.Controllers
             return Json(municipalTemplates);
         }
 
+        /// <summary>
+        /// Method to get the distinct document types from a municipality
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <returns></returns>
         [HttpGet("GetDistinctDocumentTypesFromMunicipality")]
         public IActionResult GetDistinctDocumentTypesFromMunicipality(string municipality)
         {
@@ -171,7 +212,11 @@ namespace Municip.io.Server.Controllers
             return Json(distinctTypes);
         }
 
-        //change status to approved
+        /// <summary>
+        /// Method to get the distinct document types from a municipality
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost("ApproveRequest")]
         public async Task<IActionResult> ApproveRequest(int id)
         {
@@ -183,7 +228,11 @@ namespace Municip.io.Server.Controllers
             return Ok();
         }
 
-        //change status to waiting for payment
+        /// <summary>
+        /// Method to change the status of a document request to waiting for payment
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost("WaitingForPayment")]
         public async Task<IActionResult> WaitingForPayment(int id)
         {
@@ -195,7 +244,11 @@ namespace Municip.io.Server.Controllers
             return Ok();
         }
 
-        //change status to rejected
+        /// <summary>
+        /// method to change the status of a document request to rejected
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost("RejectRequest")]
         public async Task<IActionResult> RejectRequest(int id)
         {
@@ -210,7 +263,11 @@ namespace Municip.io.Server.Controllers
 
 
 
-
+        /// <summary>
+        /// method to change the status of a document request to rejected
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         [HttpGet("GetTemplateById")]
         public IActionResult GetTemplateById(int id)

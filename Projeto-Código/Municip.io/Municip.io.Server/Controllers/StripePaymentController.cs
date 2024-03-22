@@ -9,6 +9,10 @@ using System.Text.Json;
 
 namespace Municip.io.Server.Controllers
 {
+
+    /// <summary>
+    /// controller to payment 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class StripePaymentController : ControllerBase
@@ -26,7 +30,15 @@ namespace Municip.io.Server.Controllers
 
 
 
-
+        /// <summary>
+        /// method to create a session
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="successUrl"></param>
+        /// <param name="cancelUrl"></param>
+        /// <param name="priceId"></param>
+        /// <param name="documentRequestId"></param>
+        /// <returns></returns>
         [HttpPost("createSession")]
         public ActionResult Create(string email, string successUrl, string cancelUrl, string priceId, int documentRequestId)
         {
@@ -65,7 +77,14 @@ namespace Municip.io.Server.Controllers
         }
 
 
-
+        /// <summary>
+        /// method to create a price and a product
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="image"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         [HttpPost("createPriceProduct")]
         public ActionResult CreatePrice(string name, string description, string image, float amount)
         {
@@ -105,7 +124,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        //arquivar um price e um product
+        /// <summary>
+        /// method to archive a price and a product
+        /// </summary>
+        /// <param name="priceId"></param>
+        /// <returns></returns>
         [HttpPost("archivePriceProduct")]
         public ActionResult ArchivePrice(string priceId)
         {
@@ -147,7 +170,15 @@ namespace Municip.io.Server.Controllers
 
 
 
-        //send email 
+
+        /// <summary>
+        /// method to send a payment email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <param name="url"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         [HttpPost("sendPayment")]
         public IActionResult SendPayment(string email, string name, string url, string amount)
         {

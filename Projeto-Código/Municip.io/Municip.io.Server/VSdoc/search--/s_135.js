@@ -1,1 +1,1 @@
-search_result['135']=["topic_000000000000003A_vars--.html","MunicipalAdministrator Fields",""];
+search_result['135']=["topic_0000000000000035.html","DocumentTemplateStatusController.Deactivate Method","Method to deactivate the document template"];

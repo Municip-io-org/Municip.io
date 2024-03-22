@@ -30,10 +30,10 @@
 
           <label for="documents" class="text-municip-highlight-black text-[1.5rem] font-bold font-varela-round">Documentos</label>
 
-          <div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
-            <p-checkbox [binary]="documents!.value!" inputId="documents" formControlName="documents"></p-checkbox>
-          </div>
-
+          <!--<div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
+    <p-checkbox [binary]="documents!.value!" inputId="documents" formControlName="documents"></p-checkbox>
+  </div>-->
+          <input type="checkbox" formControlName="documents" class="border-[#3a82f7] border-2 size-8 rounded-full" />
         </div>
       </div>
 
@@ -47,10 +47,11 @@
 
           <label for="events" class="text-municip-highlight-black text-[1.5rem] font-bold font-varela-round">Eventos</label>
 
-          <div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
-            <p-checkbox [binary]="events!.value!" inputId="events" formControlName="events"></p-checkbox>
-          </div>
+          <!--<div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">-->
+            <!--<p-checkbox [binary]="events!.value!" inputId="events" formControlName="events"></p-checkbox>-->
 
+          <!--</div>-->
+          <input type="checkbox" formControlName="events" class="border-[#3a82f7] border-2 size-8 rounded-full" />
         </div>
       </div>
 
@@ -63,10 +64,10 @@
 
           <label for="news" class="text-municip-highlight-black text-[1.5rem] font-bold font-varela-round">Notícias</label>
 
-          <div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
+          <!--<div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
             <p-checkbox [binary]="news!.value!" inputId="news" formControlName="news"></p-checkbox>
-          </div>
-
+          </div>-->
+          <input type="checkbox" formControlName="news" class="border-[#3a82f7] border-2 size-8 rounded-full" />
         </div>
       </div>
 
@@ -78,10 +79,10 @@
 
           <label for="transports" class="text-municip-highlight-black text-[1.5rem] font-bold font-varela-round">Transportes</label>
 
-          <div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
+          <!--<div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
             <p-checkbox [binary]="transports!.value!" inputId="transports" formControlName="transports"></p-checkbox>
-          </div>
-
+          </div>-->
+          <input type="checkbox" formControlName="transports" class="border-[#3a82f7] border-2 size-8 rounded-full" />
         </div>
       </div>
 

@@ -1,1 +1,1 @@
-search_result['73']=["topic_000000000000001A_vars--.html","EventsController Fields",""];
+search_result['73']=["topic_000000000000001A.html","CitizenStatusController.approveCitizen Method","Esta função aprova um cidadão. Recebe como parâmetro o email do cidadão ."];

@@ -1,1 +1,1 @@
-search_result['60']=["topic_0000000000000017_vars--.html","initial Fields",""];
+search_result['60']=["topic_0000000000000017.html","CitizenStatusController Class","Este controlador é responsável por gerir o estado dos cidadãos."];

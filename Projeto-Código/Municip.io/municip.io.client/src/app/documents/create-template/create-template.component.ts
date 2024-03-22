@@ -155,7 +155,7 @@ OnSubmit() {
    */
   closeDialog() {
     this.isDialogOpen = false;
-    this.router.navigate(['/events']);
+    this.router.navigate(['/documents/template-list']);
   }
 
   adicionarPropriedade() {

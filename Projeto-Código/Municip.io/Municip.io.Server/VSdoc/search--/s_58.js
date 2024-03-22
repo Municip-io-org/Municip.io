@@ -1,1 +1,1 @@
-search_result['58']=["topic_0000000000000017_methods--.html","initial Methods",""];
+search_result['58']=["topic_0000000000000015.html","AppFeatureController.GetAppFeatures Method","Esta chamada permite obter todas funcionalidades da aplicação"];

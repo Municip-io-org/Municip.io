@@ -4,7 +4,7 @@
 <div class="min-h-80 bg-municip-blank">
   <div class=" flex items-center justify-between space-x-4 mx-20 pt-10">
     <div class="relative w-[50rem] ">
-      <label for="nameSearch" class="sr-only">Procurar por eventos</label>
+      <label for="nameSearch" class="sr-only">Procurar por Documentos</label>
       <div class="flex items-center">
         <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
           <span class="fas fa-search"></span>
@@ -24,7 +24,7 @@
        mt-16">
     <p class="font-semibold">Sem Documentos.</p>
   </div>
-  <div class="mx-32 py-10" *ngFor="let doc of documents">
+  <div class="mx-32 py-10" *ngFor="let doc of filteredDocuments">
     <app-document-approve-card [document]="doc" (deleteDoc)="rejectDocument($event)" (waitPayment)="waitPayment($event)"/>
   </div>
 
