@@ -2,7 +2,7 @@
   "id": "8b864d39-9231-4e16-8a7c-fecaeef7ee09",
   "version": "2.0",
   "name": "Municip.io Test",
-  "url": "https://municip.io:4200/",
+  "url": "https://municip.io:4200/documents/my",
   "tests": [{
     "id": "13345bfd-82bd-45c0-852b-404ee0d246ae",
     "name": "Create municipality",
@@ -1114,7 +1114,7 @@
     "name": "RequestDocument",
     "commands": [{
       "id": "237a094d-aa22-4b45-a9ce-207c6c136518",
-      "comment": "",
+      "comment": "Deve estar criado um template. O teste seleciona o template de documento mais recente",
       "command": "open",
       "target": "https://municip.io:4200/userpage",
       "targets": [],
@@ -1724,7 +1724,7 @@
     "name": "Edit Document Template",
     "commands": [{
       "id": "f5fa4606-9e92-420a-bd17-12f739186abf",
-      "comment": "",
+      "comment": "Deve estar criado um template. O teste seleciona o template de documento mais recente",
       "command": "open",
       "target": "https://municip.io:4200/userpage",
       "targets": [],
@@ -1856,7 +1856,7 @@
     "name": "Remove Document Template",
     "commands": [{
       "id": "390b82ea-87df-454f-aebb-8c3af119f257",
-      "comment": "",
+      "comment": "Deve estar criado um template. O teste seleciona o template de documento mais recente",
       "command": "open",
       "target": "https://municip.io:4200/userpage",
       "targets": [],
@@ -2306,6 +2306,669 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "0b5b919e-dbe0-4b88-ad5a-c72db149887d",
+    "name": "RQ1 - Funcional - Autorizar/Remover Municiio",
+    "commands": [{
+      "id": "a78c96b0-dc16-480b-8d24-d8168a080ab9",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/admindashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "96e01e6f-1c8f-4026-800e-0c8048914b54",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x860",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "556fa943-c9c6-4339-8083-6d5c82904c1a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-green-500",
+      "targets": [
+        ["css=.bg-green-500", "css:finder"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ffe8e9ad-9c4f-4381-a7de-6f6af8f85e33",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-green-500",
+      "targets": [
+        ["css=.bg-green-500", "css:finder"],
+        ["xpath=//td[5]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "36aaf163-7afe-4e99-9bf2-cb6a43c8b83b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.gap-x-2",
+      "targets": [
+        ["css=.gap-x-2", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Voltar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "85328998-b1be-4aab-adeb-186368e93d5b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-trash-alt",
+      "targets": [
+        ["css=.fa-trash-alt", "css:finder"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f4aa4a59-abc9-4eac-8abc-8fdfbff67834",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-red-500",
+      "targets": [
+        ["css=.bg-red-500", "css:finder"],
+        ["xpath=//button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "df241799-2129-43ba-8afd-a91d4f751f9c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.size-5",
+      "targets": [
+        ["css=.size-5", "css:finder"],
+        ["xpath=//img[@alt='Voltar']", "xpath:img"],
+        ["xpath=//button/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "2fb8f590-16a4-480a-a50f-6584e9bc2a5c",
+    "name": "RQ5 - Funcional - Editar perfil municípe",
+    "commands": [{
+      "id": "31a19fd6-f211-4e67-9d1a-ac2c5e95ea2b",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/userpage",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8461f6b2-8ab5-4bde-b674-e60f30a7664e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x860",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3e15ac84-18e0-475a-8801-60d3245f0bf9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.p-3",
+      "targets": [
+        ["css=.p-3", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//app-black-btn-icon-text/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Editar Munícipio')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "844631f7-cc45-43b4-b755-e95c150a6ed1",
+      "comment": "",
+      "command": "click",
+      "target": "id=firstName",
+      "targets": [
+        ["id=firstName", "id"],
+        ["name=firstName", "name"],
+        ["css=#firstName", "css:finder"],
+        ["xpath=//input[@id='firstName']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c9cbb7c6-e965-4682-919a-ec8b330cf04a",
+      "comment": "",
+      "command": "type",
+      "target": "id=firstName",
+      "targets": [
+        ["id=firstName", "id"],
+        ["name=firstName", "name"],
+        ["css=#firstName", "css:finder"],
+        ["xpath=//input[@id='firstName']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Andrédadasdasdasd"
+    }, {
+      "id": "9ce5db72-c4e4-4947-ab27-f1ca97f24fd2",
+      "comment": "",
+      "command": "click",
+      "target": "id=surname",
+      "targets": [
+        ["id=surname", "id"],
+        ["name=surname", "name"],
+        ["css=#surname", "css:finder"],
+        ["xpath=//input[@id='surname']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "56260fd9-e2fd-42de-add1-fd0ea18a8db5",
+      "comment": "",
+      "command": "type",
+      "target": "id=surname",
+      "targets": [
+        ["id=surname", "id"],
+        ["name=surname", "name"],
+        ["css=#surname", "css:finder"],
+        ["xpath=//input[@id='surname']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "Andrédasdasda"
+    }, {
+      "id": "c7ae4103-fc9c-4949-a6b5-12203bf3fefe",
+      "comment": "",
+      "command": "click",
+      "target": "id=passwordConfirmation",
+      "targets": [
+        ["id=passwordConfirmation", "id"],
+        ["name=passwordConfirmation", "name"],
+        ["css=#passwordConfirmation", "css:finder"],
+        ["xpath=//input[@id='passwordConfirmation']", "xpath:attributes"],
+        ["xpath=//div[5]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6d79ef1d-c62d-440b-8071-e4d27c5e1ecc",
+      "comment": "",
+      "command": "type",
+      "target": "id=passwordConfirmation",
+      "targets": [
+        ["id=passwordConfirmation", "id"],
+        ["name=passwordConfirmation", "name"],
+        ["css=#passwordConfirmation", "css:finder"],
+        ["xpath=//input[@id='passwordConfirmation']", "xpath:attributes"],
+        ["xpath=//div[5]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "AdminAndre1_"
+    }, {
+      "id": "676b2ed1-e8f8-4744-94ab-73d8a721223c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.h-auto",
+      "targets": [
+        ["css=.h-auto", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Atualizar Dados')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c681eb2b-28a5-4bae-94aa-e85f8d4faa73",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,675)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "247ae989-8583-4dc7-8abc-a47efaee10b3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.inline-flex",
+      "targets": [
+        ["css=.inline-flex", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Proceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "086e8237-6e30-4652-8811-041db95f3f2f",
+    "name": "RQ6 - Funcional - Aprovar/Remover Municipes",
+    "commands": [{
+      "id": "343d969b-0922-4b9f-a477-add16da31150",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/munadmin-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6dafc4b2-202f-4810-9f81-184597f72c4a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x860",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b744091c-f89b-48d1-892a-758edcf8528f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-check",
+      "targets": [
+        ["css=.fa-check", "css:finder"],
+        ["xpath=//tr[2]/td[5]/button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "aa290cad-6e0e-4048-bf91-de2246ee71e9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-gray-100 .bg-red-500 > .fas",
+      "targets": [
+        ["css=.bg-gray-100 .bg-red-500 > .fas", "css:finder"],
+        ["xpath=//tr[2]/td[5]/button[2]/i", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "eff1e50f-4f32-4bb5-b77e-c8009081e914",
+    "name": "RQ71 - Funcional - Editar Município",
+    "commands": [{
+      "id": "6bcc5769-7255-4223-9a0c-0d3c39111a66",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/userpage",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d8824360-a3de-4358-8af5-d97ecc809522",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x860",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4644c418-116e-477b-b4b1-4abecdcb336e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(2) > .relative:nth-child(2) .w-4",
+      "targets": [
+        ["css=.flex:nth-child(2) > .relative:nth-child(2) .w-4", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "f277edf5-fcd8-4900-9172-dcf865f2a3fa",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Editar Município",
+      "targets": [
+        ["linkText=Editar Município", "linkText"],
+        ["css=.ng-star-inserted > li:nth-child(1) > .block", "css:finder"],
+        ["xpath=//a[contains(text(),'Editar Município')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/municipal/edit')]", "xpath:href"],
+        ["xpath=//span/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Editar Município')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2d0701fc-8a4b-4d2f-b600-ac38027f80f3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.gap-x-2",
+      "targets": [
+        ["css=.gap-x-2", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//app-black-btn-icon-text/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Editar Munícipio')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8e2e31c8-a27d-4220-83df-621546e91a3f",
+      "comment": "",
+      "command": "click",
+      "target": "id=president",
+      "targets": [
+        ["id=president", "id"],
+        ["name=president", "name"],
+        ["css=#president", "css:finder"],
+        ["xpath=//input[@id='president']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4f4a25c2-93eb-427f-afc3-68d963a3bcf1",
+      "comment": "",
+      "command": "click",
+      "target": "id=president",
+      "targets": [
+        ["id=president", "id"],
+        ["name=president", "name"],
+        ["css=#president", "css:finder"],
+        ["xpath=//input[@id='president']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "77c084d1-017e-447c-8aad-62d03e402a21",
+      "comment": "",
+      "command": "type",
+      "target": "id=president",
+      "targets": [
+        ["id=president", "id"],
+        ["name=president", "name"],
+        ["css=#president", "css:finder"],
+        ["xpath=//input[@id='president']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Maria Luísa"
+    }, {
+      "id": "69d56bba-904a-4784-8772-0668168aab97",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-left:nth-child(1)",
+      "targets": [
+        ["css=.text-left:nth-child(1)", "css:finder"],
+        ["xpath=//section", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "072a78bd-e2c3-460e-b333-69578aef4f67",
+      "comment": "",
+      "command": "type",
+      "target": "id=contact",
+      "targets": [
+        ["id=contact", "id"],
+        ["name=contact", "name"],
+        ["css=#contact", "css:finder"],
+        ["xpath=//input[@id='contact']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "265726071"
+    }, {
+      "id": "b79061a3-6b2f-4ee0-a8a8-990a4fc2822a",
+      "comment": "",
+      "command": "editContent",
+      "target": "css=.ProseMirror",
+      "targets": [
+        ["css=.ProseMirror", "css:finder"],
+        ["xpath=//ngx-editor/div/div[2]", "xpath:position"]
+      ],
+      "value": "<p> Com a presença romana, nos séculos I a IV da nossa era, nasceu Cetóbriga, um importante núcleo urbano e industrial, principalmente ligado à salga de peixe, que se estendeu pelas duas margens do rio Sado, integrando Troia.</p><p>Durante as invasões bárbaras e a ocupação árabe, a zona habitada foi sendo progressivamente abandonada devido ao avanço das areias.</p><p>Atalaias como Palmela, portos mais abrigados, como Alcácer do Sal, e vales férteis, como Azeitão, foram os locais escolhidos pelos invasores muçulmanos para se fixarem.</p><p>Após a conquista de Palmela aos mouros e do estabelecimento da Ordem de Santiago da Espada, Setúbal foi repovoada, primeiro na colina de Santa Maria e, progressivamente, na zona baixa que se estende até ao atual bairro de Troino. Recebeu, em 1249, de D. Paio Peres Correia, mestre da Ordem, a primeira carta foral.</p><p>Setúbal, com uma extensão territorial relativamente diminuta, teve de afirmar-se, lutando com os concelhos vizinhos de Palmela, Santiago do Cacém e Alcácer do Sal, já então constituídos.</p><p>Com as dificuldades apresentadas pelos habitantes, no que diz respeito à entrada e venda de produtos trazidos de Sesimbra, Palmela e Alcácer, o mestre de Santiago, D. Garcia Peres, em 1343, deu execução a uma carta de D. Afonso IV, que delimitava o termo de Setúbal, tendo sido construída uma cortina de muralhas.</p><p>A época dos Descobrimentos trouxe um grande desenvolvimento, tendo D. Afonso V, em 1458, partido do porto de Setúbal à conquista de Alcácer Ceguer.</p><p>A construção de um aqueduto, em 1487, que conduzia a água à vila, iniciada por D. João II, terminou no reinado de D. Manuel. Este monarca reformou o foral da vila, em 1514, devido ao progresso e aumento demográfico que Setúbal tinha registado ao longo do último século.</p><p>O título de “notável villa” é concedido, em 1525, por D. João III. Foi este título que proporcionou a criação, em 1553, por carta do arcebispo de Lisboa, D. Fernando, de duas novas freguesias, a de S. Sebastião e a da Anunciada, que se juntaram às já existentes S. Julião e Santa Maria.</p><p>A cerca de dois quilómetros do centro de Setúbal, o rei D. Filipe II mandou edificar uma fortaleza – de S. Filipe –, cujos trabalhos foram iniciados em 1582. </p><p>A elevação a cidade deu-se em 1860, por carta régia, após solicitação da Câmara, dois anos antes, ao rei D. Pedro V.</p><p>Nessa altura, foi inaugurada a via-férrea Barreiro/Setúbal e, em 1863, a iluminação a gás. As obras de aterro sobre o rio iniciaram-se, fazendo nascer a Avenida Luísa Todi.</p><p>Setúbal foi elevada, em 1926, a sede de distrito e, em 1975, a cabeça de diocese.</p>"
+    }, {
+      "id": "8cee60b2-b501-435a-943f-08d2075e337f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.-top-40 .text-municip-blank",
+      "targets": [
+        ["css=.-top-40 .text-municip-blank", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//app-black-btn-icon-text/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e6ec94a6-d20e-4695-9ef9-010db793fb53",
+      "comment": "",
+      "command": "type",
+      "target": "id=emblemPhoto",
+      "targets": [
+        ["id=emblemPhoto", "id"],
+        ["name=emblemPhoto", "name"],
+        ["css=#emblemPhoto", "css:finder"],
+        ["xpath=//input[@id='emblemPhoto']", "xpath:attributes"],
+        ["xpath=//section[2]/div/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\andre\\Downloads\\check.png"
+    }, {
+      "id": "dcef450a-d001-4b8b-9c11-54c69e0d777a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-\\[1\\.063rem\\] > .text-municip-blank",
+      "targets": [
+        ["css=.text-\\[1\\.063rem\\] > .text-municip-blank", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[2]/app-black-btn-icon-text/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Editar Paisagem')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3c1d4e35-034d-41e0-ab55-4993689cf2f0",
+      "comment": "",
+      "command": "type",
+      "target": "id=landscapePhoto",
+      "targets": [
+        ["id=landscapePhoto", "id"],
+        ["name=landscapePhoto", "name"],
+        ["css=#landscapePhoto", "css:finder"],
+        ["xpath=//input[@id='landscapePhoto']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\andre\\Downloads\\check.png"
+    }, {
+      "id": "15514d15-8bc7-4c97-8cdc-a7d479ac03ef",
+      "comment": "",
+      "command": "click",
+      "target": "css=.-bottom-\\[0rem\\]",
+      "targets": [
+        ["css=.-bottom-\\[0rem\\]", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Finalizar Alterações')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "aaada6d5-47d2-491f-8de5-77a026874842",
+    "name": "RQ29 - Confiabilidade - Login com email não registado",
+    "commands": [{
+      "id": "1898b751-0424-47db-a33a-38744d2ea6cd",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d9825735-f513-4225-ba32-295c07deab0c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x860",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "65e2c3e9-9ffd-44bc-a963-98cc4c6de5d8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-black",
+      "targets": [
+        ["css=.bg-black", "css:finder"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Entrar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5653d9c2-552b-42da-bf58-b232f7516b92",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "334cf80b-45eb-4b69-b5f7-cf9313a969af",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "semEmail@teste.com"
+    }, {
+      "id": "671efc08-32dd-46fb-b16b-455be8b11a4d",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2dd217d9-9245-42cd-aea1-ae8b760c4134",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Password-123"
+    }, {
+      "id": "cc93754b-226c-40e0-bc8e-dea1dd2ae0e7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.h-auto",
+      "targets": [
+        ["css=.h-auto", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Entrar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "aee60f1a-c802-4847-bd17-f0ad0bfc43eb",
+    "name": "RQ73 - Confiabilidade - Acesso negado",
+    "commands": [{
+      "id": "908b2634-5242-4ca2-81e3-e18949540675",
+      "comment": "Deve-se testar com uma conta de Municípe",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2263af33-0424-443c-af39-b92796c8f642",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/munadmin-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e91538e4-35b4-43c0-98c3-d8e73f69845b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-\\[13rem\\]",
+      "targets": [
+        ["css=.w-\\[13rem\\]", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continuar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "8e4b1fab-f520-437d-b926-41a33c183654",
+    "name": "RQ32 - Confiabilidade - Verificar horários de uma paragem",
+    "commands": [{
+      "id": "ccb2d4bb-777e-4efe-9598-4ca541e8b628",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/transports/stops",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "57d75966-bba7-4dee-928a-56b27143eea0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x860",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ee437aca-e3c7-4957-add5-dec7e2110cfc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.gm-style > div > div:nth-child(2)",
+      "targets": [
+        ["css=.gm-style > div > div:nth-child(2)", "css:finder"],
+        ["xpath=//div[3]/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "99f5226d-687a-48f0-8fd3-065b1a52653c",
+    "name": "RQ65 - Safety - Não pagar o documento",
+    "commands": [{
+      "id": "a13831c5-7852-4006-b8b9-ceb47269c15f",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/documents/my",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e2f90191-7e74-436c-8ee0-1be6ea27ffb9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "58b1a51d-b17c-4d07-97b6-afba68b2995a",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.p-ripple:nth-child(2) > .p-button-label",
+      "targets": [
+        ["css=.p-ripple:nth-child(2) > .p-button-label", "css:finder"],
+        ["xpath=//div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Mais Recente')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b457fc6d-09bd-4b66-a1a1-c4bd2e65e9b0",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=.p-ink-active",
+      "targets": [
+        ["css=.p-ink-active", "css:finder"],
+        ["xpath=//div[2]/span[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "919ac3e3-12d4-454f-9c29-ef0fb0af9e4d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.p-ripple:nth-child(2)",
+      "targets": [
+        ["css=.p-ripple:nth-child(2)", "css:finder"],
+        ["xpath=//div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "92f43e35-1438-4813-a8bc-fd08f8673e4c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-sm:nth-child(1)",
+      "targets": [
+        ["css=.text-sm:nth-child(1)", "css:finder"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Realizar Pagamento')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "45484972-13b0-4232-8417-0ae416d0347c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.Header-backArrow > path",
+      "targets": [
+        ["css=.Header-backArrow > path", "css:finder"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "51064974-307f-4f9a-8a52-00b506e4355c",
@@ -2315,6 +2978,6 @@
     "timeout": 300,
     "tests": ["13345bfd-82bd-45c0-852b-404ee0d246ae"]
   }],
-  "urls": ["https://municip.io:4200/", "https://municipio:4200/", "https://municipio:4200/admindashboard", "https://municipio:4200/munadmin-dashboard"],
+  "urls": ["https://municip.io:4200/", "https://municipio:4200/", "https://municipio:4200/admindashboard", "https://municipio:4200/munadmin-dashboard", "https://municip.io:4200/admindashboard", "https://municip.io:4200/userpage", "https://municip.io:4200/munadmin-dashboard", "https://municip.io:4200/transports/stops", "https://municip.io:4200/documents/my"],
   "plugins": []
 }
