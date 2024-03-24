@@ -133,6 +133,11 @@ namespace Municip.io.Server.Controllers
 
                     SendRegister(citizen.Email, citizen.firstName);
 
+                    //add +1 to municipality of user
+                    var municipality = _context.Municipalities.FirstOrDefault(m => m.name == citizen.Municipality);
+                    municipality.numberOfUsers++;
+                    await _context.SaveChangesAsync();
+
                     return Ok();
                 }
 

@@ -16,4 +16,8 @@ getAllCitizens(): Observable<any> {
   getAllMunicipalAdmins(): Observable<any> {
 return this.http.get<any>('api/stats/getAllMunicipalAdmins');
   }
+
+  getAllMunicipalities(): Observable<any> {
+return this.http.get<any>('api/stats/getAllMunicipalities');
+  }
 }

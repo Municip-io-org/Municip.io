@@ -29,7 +29,7 @@
             <i class="fas fa-users "></i>
           </div>
           <div>
-            <span class="block text-2xl font-bold">62</span>
+            <span class="block text-2xl font-bold">{{numberOfCitizens}}</span>
             <span class="block text-gray-500">Cidadãos Registados</span>
           </div>
         </div>
@@ -39,7 +39,7 @@
 
           </div>
           <div>
-            <span class="block text-2xl font-bold">30</span>
+            <span class="block text-2xl font-bold">{{activeMunicipalities}}</span>
             <span class="block text-gray-500">Municípios Ativos</span>
           </div>
         </div>
@@ -50,8 +50,8 @@
             </svg>
           </div>
           <div>
-            <span class="inline-block text-2xl font-bold">9</span>
-            <span class="inline-block text-xl text-gray-500 font-semibold">(14%)</span>
+            <span class="inline-block text-2xl font-bold">{{blockedMunicipalities}}</span>
+            <span class="inline-block text-xl text-gray-500 font-semibold ml-1">({{percentageOfBlockedMunicipalities}}%)</span>
             <span class="block text-gray-500">Municípios Bloqueados</span>
           </div>
         </div>
@@ -61,7 +61,7 @@
 
           </div>
           <div>
-            <span class="block text-2xl font-bold">153</span>
+            <span class="block text-2xl font-bold">{{numberOfMunicipalAdmins}}</span>
             <span class="block text-gray-500">Administradores Municipais</span>
           </div>
         </div>
@@ -74,7 +74,7 @@
           <div class="px-6 py-5 font-semibold border-b border-gray-100">Utilizadores inscritos por mês</div>
 
 
-          <div class="  p-4 flex-grow bg-gray-100 m-6 shadow-xl rounded-xl ">
+          <div class="  p-4 flex-grow bg-gray-50 m-6 shadow-xl rounded-xl ">
         
               <app-registered-users-graph></app-registered-users-graph>
 
@@ -89,8 +89,8 @@
         <div class="row-span-3 bg-white shadow rounded-lg">
           <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
             <span>Municípios por número de utilizadores</span>
-            <button type="button" class="inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600" id="options-menu" aria-haspopup="true" aria-expanded="true">
-              Descendente
+            <button type="button" class="inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600" id="options-menu" aria-haspopup="true" aria-expanded="true" (click)="toggleSorting()">
+              {{ sortingOrder === 'asc' ? 'Ascendente' : 'Descendente' }}
               <svg class="-mr-1 ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
@@ -100,62 +100,16 @@
           <div class="overflow-y-auto" style="max-height: 24rem;">
             <ul class="p-6 space-y-6">
 
-              <li class="flex items-center">
+              <li *ngFor="let municipality of municipalities" class="flex items-center">
                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                  <img src="https://randomuser.me/api/portraits/women/82.jpg" alt="Annette Watson profile picture">
+                  <!-- Use the first user's photo for the municipality -->
+                  <img [src]="municipality.emblemPhoto" alt="{{municipality.name}} profile picture">
                 </div>
-                <span class="text-gray-600">T1</span>
-                <span class="ml-auto font-semibold">500</span>
+                <span class="text-gray-600">{{municipality.name}}</span>
+                <span class="ml-auto font-semibold">{{municipality.numberOfUsers}}</span>
               </li>
-              <li class="flex items-center">
-                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                  <img src="https://randomuser.me/api/portraits/men/81.jpg" alt="Calvin Steward profile picture">
-                </div>
-                <span class="text-gray-600">T2</span>
-                <span class="ml-auto font-semibold">475</span>
-              </li>
-              <li class="flex items-center">
-                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                  <img src="https://randomuser.me/api/portraits/men/80.jpg" alt="Ralph Richards profile picture">
-                </div>
-                <span class="text-gray-600">T3</span>
-                <span class="ml-auto font-semibold">389</span>
-              </li>
-              <li class="flex items-center">
-                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                  <img src="https://randomuser.me/api/portraits/men/79.jpg" alt="Bernard Murphy profile picture">
-                </div>
-                <span class="text-gray-600">T4</span>
-                <span class="ml-auto font-semibold">349</span>
-              </li>
-              <li class="flex items-center">
-                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                  <img src="https://randomuser.me/api/portraits/women/78.jpg" alt="Arlene Robertson profile picture">
-                </div>
-                <span class="text-gray-600">T5</span>
-                <span class="ml-auto font-semibold">345</span>
-              </li>
-              <li class="flex items-center">
-                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                  <img src="https://randomuser.me/api/portraits/women/77.jpg" alt="Jane Lane profile picture">
-                </div>
-                <span class="text-gray-600">T6</span>
-                <span class="ml-auto font-semibold">338</span>
-              </li>
-              <li class="flex items-center">
-                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                  <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Pat Mckinney profile picture">
-                </div>
-                <span class="text-gray-600">Pat Mckinney</span>
-                <span class="ml-auto font-semibold">7.9</span>
-              </li>
-              <li class="flex items-center">
-                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                  <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Norman Walters profile picture">
-                </div>
-                <span class="text-gray-600">Norman Walters</span>
-                <span class="ml-auto font-semibold">7.7</span>
-              </li>
+
+
             </ul>
           </div>
         </div>

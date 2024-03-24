@@ -25,5 +25,11 @@ namespace Municip.io.Server.Controllers
         {
             return Ok(_context.MunicipalAdministrators);
         }
+
+        [HttpGet("getAllMunicipalities")]
+        public IActionResult getAllMunicipalities()
+        {
+            return Ok(_context.Municipalities);
+        }
     }
 }
