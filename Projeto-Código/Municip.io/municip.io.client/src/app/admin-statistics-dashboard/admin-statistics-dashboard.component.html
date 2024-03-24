@@ -121,14 +121,24 @@
     </div>-->
       </section>
 
-      <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-2 xl:grid-flow-col gap-12">
+      <section class="grid sm:grid-cols-2 xl:grid-cols-4 xl:grid-rows-2 xl:grid-flow-col gap-12">
         <div class="flex flex-col md:col-span-4 md:row-span-2 bg-white shadow rounded-lg">
           <div class="px-6 py-5 font-semibold border-b border-gray-100">Análise Demográfica</div>
 
 
 
           <div class="p-4 flex-grow grid grid-cols-2 grid-rows-2 gap-16 ">
-            <div class="flex items-center justify-center px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md col-span-1 row-span-2">Chart</div>
+
+            <div class="flex flex-wrap items-center justify-center px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md col-span-1 row-span-2">
+             
+
+              <h3 class="text-2xl text-gray-500">Cidadãos por género</h3>
+
+              <app-gender-chart></app-gender-chart>
+
+            </div>
+
+
             <div class="flex items-center justify-center px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md col-span-1 row-span-2">Chart</div>
           </div>
 
