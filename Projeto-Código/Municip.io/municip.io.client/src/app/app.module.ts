@@ -116,6 +116,7 @@ import { FileDragDropDirective } from './directives/fileDragDrop/file-drag-drop.
 import { TemplateListComponent } from './documents/template-list/template-list.component';
 import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
 import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/admin-statistics-dashboard.component';
+import { RegisteredUsersGraphComponent } from './admin-statistics-dashboard/registered-users-graph/registered-users-graph.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -214,6 +215,7 @@ registerLocaleData(localePt, 'pt-PT');
     TemplateListComponent,
     EditTemplateComponent,
     AdminStatisticsDashboardComponent,
+    RegisteredUsersGraphComponent,
     
   ],
   imports: [

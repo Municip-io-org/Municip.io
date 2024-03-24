@@ -26,20 +26,17 @@
       <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
         <div class="flex items-center p-8 bg-white shadow rounded-lg">
           <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
+            <i class="fas fa-users "></i>
           </div>
           <div>
             <span class="block text-2xl font-bold">62</span>
-            <span class="block text-gray-500">Utilizadores Registados</span>
+            <span class="block text-gray-500">Cidadãos Registados</span>
           </div>
         </div>
         <div class="flex items-center p-8 bg-white shadow rounded-lg">
           <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
+            <i class="fas fa-building "></i>
+
           </div>
           <div>
             <span class="block text-2xl font-bold">30</span>
@@ -55,18 +52,17 @@
           <div>
             <span class="inline-block text-2xl font-bold">9</span>
             <span class="inline-block text-xl text-gray-500 font-semibold">(14%)</span>
-            <span class="block text-gray-500">Utilizadores Bloqueados</span>
+            <span class="block text-gray-500">Municípios Bloqueados</span>
           </div>
         </div>
         <div class="flex items-center p-8 bg-white shadow rounded-lg">
           <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
+            <i class="fas fa-user-tie "></i>
+
           </div>
           <div>
             <span class="block text-2xl font-bold">153</span>
-            <span class="block text-gray-500">Documentos emitidos</span>
+            <span class="block text-gray-500">Administradores Municipais</span>
           </div>
         </div>
       </section>
@@ -75,11 +71,15 @@
 
       <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-12">
         <div class="flex flex-col md:col-span-3 md:row-span-3 bg-white shadow rounded-lg">
-          <div class="px-6 py-5 font-semibold border-b border-gray-100">Utilizadores inscritos no último mês</div>
+          <div class="px-6 py-5 font-semibold border-b border-gray-100">Utilizadores inscritos por mês</div>
 
 
-          <div class="p-4 flex-grow">
-            <div class="flex items-center justify-center h-full px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
+          <div class="  p-4 flex-grow bg-gray-100 m-6 shadow-xl rounded-xl ">
+        
+              <app-registered-users-graph></app-registered-users-graph>
+
+
+
           </div>
 
 
@@ -104,43 +104,43 @@
                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
                   <img src="https://randomuser.me/api/portraits/women/82.jpg" alt="Annette Watson profile picture">
                 </div>
-                <span class="text-gray-600">Annette Watson</span>
-                <span class="ml-auto font-semibold">9.3</span>
+                <span class="text-gray-600">T1</span>
+                <span class="ml-auto font-semibold">500</span>
               </li>
               <li class="flex items-center">
                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
                   <img src="https://randomuser.me/api/portraits/men/81.jpg" alt="Calvin Steward profile picture">
                 </div>
-                <span class="text-gray-600">Calvin Steward</span>
-                <span class="ml-auto font-semibold">8.9</span>
+                <span class="text-gray-600">T2</span>
+                <span class="ml-auto font-semibold">475</span>
               </li>
               <li class="flex items-center">
                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
                   <img src="https://randomuser.me/api/portraits/men/80.jpg" alt="Ralph Richards profile picture">
                 </div>
-                <span class="text-gray-600">Ralph Richards</span>
-                <span class="ml-auto font-semibold">8.7</span>
+                <span class="text-gray-600">T3</span>
+                <span class="ml-auto font-semibold">389</span>
               </li>
               <li class="flex items-center">
                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
                   <img src="https://randomuser.me/api/portraits/men/79.jpg" alt="Bernard Murphy profile picture">
                 </div>
-                <span class="text-gray-600">Bernard Murphy</span>
-                <span class="ml-auto font-semibold">8.2</span>
+                <span class="text-gray-600">T4</span>
+                <span class="ml-auto font-semibold">349</span>
               </li>
               <li class="flex items-center">
                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
                   <img src="https://randomuser.me/api/portraits/women/78.jpg" alt="Arlene Robertson profile picture">
                 </div>
-                <span class="text-gray-600">Arlene Robertson</span>
-                <span class="ml-auto font-semibold">8.2</span>
+                <span class="text-gray-600">T5</span>
+                <span class="ml-auto font-semibold">345</span>
               </li>
               <li class="flex items-center">
                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
                   <img src="https://randomuser.me/api/portraits/women/77.jpg" alt="Jane Lane profile picture">
                 </div>
-                <span class="text-gray-600">Jane Lane</span>
-                <span class="ml-auto font-semibold">8.1</span>
+                <span class="text-gray-600">T6</span>
+                <span class="ml-auto font-semibold">338</span>
               </li>
               <li class="flex items-center">
                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
@@ -201,10 +201,9 @@
 
           <div class="p-4 flex-grow grid grid-cols-1 grid-rows-2 gap-4 h-1 ">
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
-              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-green-600 bg-green-100 rounded-full mr-6">
-                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 sm:h-5 sm:w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-newspaper text-xl"></i>
+
               </div>
               <div class="flex-grow">
                 <span class="block text-lg sm:text-xl font-bold">30</span>
@@ -214,10 +213,9 @@
 
 
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
-              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-green-600 bg-green-100 rounded-full mr-6">
-                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 sm:h-5 sm:w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-upload text-xl"></i>
+
               </div>
               <div class="flex-grow">
                 <span class="block text-lg sm:text-xl font-bold">30</span>
@@ -232,10 +230,9 @@
 
           <div class="p-4 flex-grow grid grid-cols-1 grid-rows-2 gap-4 h-1 ">
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
-              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-green-600 bg-green-100 rounded-full mr-6">
-                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 sm:h-5 sm:w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-calendar-check text-xl"></i>
+
               </div>
               <div class="flex-grow">
                 <span class="block text-lg sm:text-xl font-bold">30</span>
@@ -245,10 +242,9 @@
 
 
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
-              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-green-600 bg-green-100 rounded-full mr-6">
-                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 sm:h-5 sm:w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-calendar-week text-xl"></i>
+
               </div>
               <div class="flex-grow">
                 <span class="block text-lg sm:text-xl font-bold">30</span>
@@ -263,10 +259,9 @@
 
           <div class="p-4 flex-grow grid grid-cols-1 grid-rows-3 gap-4 h-1 ">
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
-              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-green-600 bg-green-100 rounded-full mr-6">
-                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 sm:h-5 sm:w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-file text-xl"></i>
+
               </div>
               <div class="flex-grow">
                 <span class="block text-lg sm:text-xl font-bold">30</span>
@@ -276,10 +271,9 @@
 
 
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
-              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-green-600 bg-green-100 rounded-full mr-6">
-                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 sm:h-5 sm:w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-file-signature text-xl"></i>
+
               </div>
               <div class="flex-grow">
                 <span class="block text-lg sm:text-xl font-bold">30</span>
@@ -289,10 +283,9 @@
 
 
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
-              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-green-600 bg-green-100 rounded-full mr-6">
-                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 sm:h-5 sm:w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-money-bill text-xl"></i>
+
               </div>
               <div class="flex-grow">
                 <span class="block text-lg sm:text-xl font-bold">30</span>
@@ -309,10 +302,9 @@
 
           <div class="p-4 flex-grow grid grid-cols-1 grid-rows-2 gap-4 h-1 ">
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
-              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-green-600 bg-green-100 rounded-full mr-6">
-                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 sm:h-5 sm:w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-book text-xl"></i>
+
               </div>
               <div class="flex-grow">
                 <span class="block text-lg sm:text-xl font-bold">574</span>
@@ -322,10 +314,9 @@
 
 
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
-              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-green-600 bg-green-100 rounded-full mr-6">
-                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 sm:h-5 sm:w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-users text-xl"></i>
+
               </div>
               <div class="flex-grow">
                 <span class="block text-lg sm:text-xl font-bold">357</span>
