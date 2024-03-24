@@ -31,5 +31,24 @@ namespace Municip.io.Server.Controllers
         {
             return Ok(_context.Municipalities);
         }
+
+        [HttpGet("getAllDocumentRequests")]
+        public IActionResult getAllDocuments()
+        {
+            return Ok(_context.DocumentRequests);
+        }
+
+        [HttpGet("getAllNews")]
+        public IActionResult getAllNews()
+        {
+            return Ok(_context.News);
+        }
+
+        [HttpGet("getAllEvents")]
+        public IActionResult getAllEvents()
+        {
+            return Ok(_context.Events);
+        }
+        
     }
 }

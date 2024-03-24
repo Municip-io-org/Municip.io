@@ -20,6 +20,16 @@ export class AdminStatisticsDashboardComponent {
   percentageOfBlockedMunicipalities: number = 0;
   sortingOrder: string = 'desc'; 
 
+  news: any[] = [];
+  events: any[] = [];
+  documentRequests: any[] = [];
+
+  newsPublished: number = 0;
+  newsPublishedToday: number = 0;
+
+  eventsRegistered: number = 0;
+eventsToday: number = 0;
+
 
   constructor(private adminStatisticsService: AdminStatisticsService) { }
 
@@ -30,17 +40,36 @@ export class AdminStatisticsDashboardComponent {
         this.municipalAdmins = datamunadmin;
 
         this.adminStatisticsService.getAllMunicipalities().subscribe((datamun: any) => {
-          this.municipalities = datamun;
-this.sortMunicipalities();
-          
-          this.generalStatistics();
+        this.municipalities = datamun;
+          this.sortMunicipalities();
 
-        });
+          this.adminStatisticsService.getAllNews().subscribe((datanews: any) => {
+            this.news = datanews;
+
+this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
+              this.events = dataevents;
+              this.adminStatisticsService.getAllDocumentRequests().subscribe((datadoc: any) => {
+                this.documentRequests = datadoc;
+                this.generateStatistics();
+              });
+}
+            );
+          }
+          );
+        }
+        );
       }
       );
     }
     );
   }
+
+
+  
+
+
+
+     
 
   toggleSorting() {
     this.sortingOrder = this.sortingOrder === 'asc' ? 'desc' : 'asc';
@@ -58,7 +87,7 @@ this.sortMunicipalities();
   }
 
 
-  generalStatistics() {
+  generateStatistics() {
     this.numberOfCitizens = this.citizens.length;
     this.numberOfMunicipalAdmins = this.municipalAdmins.length;
 
@@ -68,7 +97,21 @@ this.sortMunicipalities();
 
 this.percentageOfBlockedMunicipalities = (this.blockedMunicipalities / this.municipalities.length) * 100;
 
-console.log(this.municipalities)
-  
+    this.newsPublished = this.news.length;
+
+    this.newsPublishedToday = this.news.filter(news => new Date(news.date).toDateString() === new Date().toDateString()).length;
+
+    this.eventsRegistered = this.events.length;
+
+
+
+    this.eventsToday = this.events.filter(event => new Date(event.startDate) <= new Date() && new Date(event.endDate) >= new Date()).length;
+
+
+
+
+
+
+
   }
 }
