@@ -24,7 +24,7 @@
     <main class="p-6 sm:p-10 space-y-16">
 
       <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-        <div class="flex items-center p-8 bg-white shadow rounded-lg">
+        <div class="flex items-center p-8 bg-white shadow rounded-lg hover:shadow-2xl transition duration-300">
           <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
             <i class="fas fa-users "></i>
           </div>
@@ -33,7 +33,7 @@
             <span class="block text-gray-500">Cidadãos Registados</span>
           </div>
         </div>
-        <div class="flex items-center p-8 bg-white shadow rounded-lg">
+        <div class="flex items-center p-8 bg-white shadow rounded-lg hover:shadow-2xl transition duration-300">
           <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
             <i class="fas fa-building "></i>
 
@@ -43,7 +43,7 @@
             <span class="block text-gray-500">Municípios Ativos</span>
           </div>
         </div>
-        <div class="flex items-center p-8 bg-white shadow rounded-lg">
+        <div class="flex items-center p-8 bg-white shadow rounded-lg hover:shadow-2xl transition duration-300">
           <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
             <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
@@ -55,7 +55,7 @@
             <span class="block text-gray-500">Municípios Bloqueados</span>
           </div>
         </div>
-        <div class="flex items-center p-8 bg-white shadow rounded-lg">
+        <div class="flex items-center p-8 bg-white shadow rounded-lg hover:shadow-2xl transition duration-300">
           <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
             <i class="fas fa-user-tie "></i>
 
@@ -74,7 +74,7 @@
           <div class="px-6 py-5 font-semibold border-b border-gray-100">Utilizadores inscritos por mês</div>
 
 
-          <div class="  p-4 flex-grow bg-gray-50 m-6 shadow-xl rounded-xl ">
+          <div class="  p-4 flex-grow bg-gray-50 m-6 shadow-xl rounded-xl hover:shadow-2xl transition duration-200 ">
         
               <app-registered-users-graph></app-registered-users-graph>
 
@@ -121,7 +121,7 @@
     </div>-->
       </section>
 
-      <section class="grid sm:grid-cols-2 xl:grid-cols-4 xl:grid-rows-2 xl:grid-flow-col gap-12">
+      <section class="grid sm:grid-cols-2  xl:grid-cols-4 xl:grid-rows-2 xl:grid-flow-col gap-12">
         <div class="flex flex-col md:col-span-4 md:row-span-2 bg-white shadow rounded-lg">
           <div class="px-6 py-5 font-semibold border-b border-gray-100">Análise Demográfica</div>
 
@@ -129,8 +129,8 @@
 
           <div class="p-4 flex-grow grid grid-cols-2 grid-rows-2 gap-16 ">
 
-            <div class="flex flex-wrap items-center justify-center px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md col-span-1 row-span-2">
-             
+            <div class="flex flex-wrap items-center justify-center px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-50 border-2 border-gray-200 shadow hover:shadow-xl transition duration-200 rounded-md col-span-1 row-span-2">
+
 
               <h3 class="text-2xl text-gray-500">Cidadãos por género</h3>
 
@@ -139,7 +139,14 @@
             </div>
 
 
-            <div class="flex items-center justify-center px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md col-span-1 row-span-2">Chart</div>
+            <div class="flex flex-wrap items-center justify-center px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-50 border-2 border-gray-200 shadow hover:shadow-xl transition duration-200 rounded-md col-span-1 row-span-2">
+
+
+
+              <app-age-chart></app-age-chart>
+              <h3 class="text-2xl text-gray-500">Cidadãos por idade</h3>
+
+            </div>
           </div>
 
 

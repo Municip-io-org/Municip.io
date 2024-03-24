@@ -118,6 +118,7 @@ import { EditTemplateComponent } from './documents/edit-template/edit-template.c
 import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/admin-statistics-dashboard.component';
 import { RegisteredUsersGraphComponent } from './admin-statistics-dashboard/registered-users-graph/registered-users-graph.component';
 import { GenderChartComponent } from './admin-statistics-dashboard/gender-chart/gender-chart.component';
+import { AgeChartComponent } from './admin-statistics-dashboard/age-chart/age-chart.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -218,6 +219,7 @@ registerLocaleData(localePt, 'pt-PT');
     AdminStatisticsDashboardComponent,
     RegisteredUsersGraphComponent,
     GenderChartComponent,
+    AgeChartComponent,
     
   ],
   imports: [
