@@ -177,7 +177,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendAprove")]
         public IActionResult SendAprove(string email, string name, string municipality)
         {
-            EmailSender.SendEmailAproveDeny(email, $"Inscrição do Município de {municipality}", name, MunicipalityStatusMessage.Approve.toString(), "root/html/AproveEmail.html");
+            EmailSender.SendEmailAproveDeny(email, $"Inscrição do Município de {municipality}", name, MunicipalityStatusMessage.Approve.toString(), "wwwroot/html/AproveEmail.html");
             return Ok("Success");
         }
 
@@ -191,7 +191,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendDeny")]
         public IActionResult SendDeny(string email, string name, string municipality)
         {
-            EmailSender.SendEmailAproveDeny(email, $"Inscrição do Município de {municipality}", name, MunicipalityStatusMessage.Deny.toString(), "root/html/DenyEmail.html");
+            EmailSender.SendEmailAproveDeny(email, $"Inscrição do Município de {municipality}", name, MunicipalityStatusMessage.Deny.toString(), "wwwroot/html/DenyEmail.html");
             return Ok("Success");
         }
 
@@ -205,7 +205,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendRemove")]
         public IActionResult SendRemove(string email, string name, string municipality)
         {
-            EmailSender.SendEmailAproveDeny(email, $"Remoção Município de {municipality}", name, MunicipalityStatusMessage.Remove.toString(), "root/html/DenyEmail.html");
+            EmailSender.SendEmailAproveDeny(email, $"Remoção Município de {municipality}", name, MunicipalityStatusMessage.Remove.toString(), "wwwroot/html/DenyEmail.html");
             return Ok("Success");
         }
 
