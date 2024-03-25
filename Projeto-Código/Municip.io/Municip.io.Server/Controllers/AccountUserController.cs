@@ -112,7 +112,7 @@ namespace Municip.io.Server.Controllers
                     Email = citizen.Email
                 };
 
-      
+
                 // Store user data in AspNetUsers database table
                 var result = await _userManager.CreateAsync(user, citizen.Password);
 
@@ -177,19 +177,19 @@ namespace Municip.io.Server.Controllers
         // Verifica se o formato do NIF é válido
         private bool IsNifValid(string nif)
         {
-            
+
             if (nif.Length != 11)
             {
                 return false;
             }
 
-           
+
             if (!char.IsUpper(nif[0]) || !char.IsUpper(nif[1]))
             {
                 return false;
             }
 
-           
+
             if (!nif.Substring(2).All(char.IsDigit))
             {
                 return false;
@@ -228,25 +228,35 @@ namespace Municip.io.Server.Controllers
 
                 if (result.Succeeded)
                 {
-                    this.SendRegister(municipalAdministrator.Email, municipalAdministrator.firstName);
-
-
-                    await _userManager.AddToRoleAsync(user, "Municipal");
-                    municipalAdministrator.status = MunicipalAdministratorStatus.Pending;
-                    municipalAdministrator.date = DateOnly.FromDateTime(DateTime.Now);
-
-                    //add citizen to database
-                    _context.MunicipalAdministrators.Add(municipalAdministrator);
-                    await _context.SaveChangesAsync();
-                    if (_context.Municipalities.Any(m => m.name == municipalAdministrator.municipality))
+                    try
                     {
-                        // municipio existe
-                        //return Ok(new { Message = "NEXISTE" });
-                        return Ok(true);
+                        this.SendRegister(municipalAdministrator.Email, municipalAdministrator.firstName);
+
+
+                        await _userManager.AddToRoleAsync(user, "Municipal");
+                        municipalAdministrator.status = MunicipalAdministratorStatus.Pending;
+                        municipalAdministrator.date = DateOnly.FromDateTime(DateTime.Now);
+
+                        //add citizen to database
+                        _context.MunicipalAdministrators.Add(municipalAdministrator);
+                        await _context.SaveChangesAsync();
+                        if (_context.Municipalities.Any(m => m.name == municipalAdministrator.municipality))
+                        {
+                            // municipio existe
+                            //return Ok(new { Message = "NEXISTE" });
+                            return Ok(true);
+                        }
+                        // município nao existe
+                        return Ok(false);
                     }
-                    // município nao existe
-                    return Ok(false);
+                    catch (Exception e)
+                    {
+                        return BadRequest(new { Message = "Erro ao registar o administrador municipal.", ModelState = ModelState, Error= e.Message });
+                    }
+
+
                 }
+
 
 
                 List<string> errors = new List<string>();
@@ -302,7 +312,7 @@ namespace Municip.io.Server.Controllers
                     _context.Municipalities.Add(municipality);
                     await _context.SaveChangesAsync();
 
-                    
+
                     foreach (AppFeatureCategory category in Enum.GetValues(typeof(AppFeatureCategory)))
                     {
                         _context.AppFeatures.Add(new AppFeature
@@ -542,9 +552,9 @@ namespace Municip.io.Server.Controllers
         [HttpPut("UpdateBrowserHistory")]
         public async Task<IActionResult> UpdateBrowserHistory(string email, string userAgent)
         {
-            
+
             var citizen = await _context.Citizens.Where(c => c.Email == email).FirstOrDefaultAsync();
-            
+
 
             if (citizen != null)
             {
@@ -572,7 +582,7 @@ namespace Municip.io.Server.Controllers
 
                 var browsers = _context.Citizens
                     .Where(c => c.Email == email)
-                    .SelectMany(c => c.Browsers) 
+                    .SelectMany(c => c.Browsers)
                     .ToList();
                 return Json(browsers);
             }
@@ -592,6 +602,6 @@ namespace Municip.io.Server.Controllers
 
 
 
-        
+
     }
 }
