@@ -549,7 +549,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendRegister")]
         public IActionResult SendRegister(string email, string name)
         {
-            EmailSender.SendEmailAproveDeny(email, "Inscrito Com Sucesso", name, AccountUserEmail.REGISTER.toString(), "root/html/AproveEmail.html");
+            EmailSender.SendEmailAproveDeny(email, "Inscrito Com Sucesso", name, AccountUserEmail.REGISTER.toString(), "wwwroot/html/AproveEmail.html");
             return Ok("Success");
         }
 
@@ -599,7 +599,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendNewLogin")]
         public IActionResult SendNewLogin(string email)
         {
-            EmailSender.SendEmailAproveDeny(email, "Novo Login", "", AccountUserEmail.NEWLOGIN.toString(), "root/html/AproveEmail.html");
+            EmailSender.SendEmailAproveDeny(email, "Novo Login", "", AccountUserEmail.NEWLOGIN.toString(), "wwwroot/html/AproveEmail.html");
             return Ok(new { message = "Success" });
         }
 

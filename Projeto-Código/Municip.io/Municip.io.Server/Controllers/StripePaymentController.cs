@@ -182,7 +182,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("sendPayment")]
         public IActionResult SendPayment(string email, string name, string url, string amount)
         {
-            EmailSender.SendEmailPayment(email, "Pagamento de Documento", name, "Por favor, realize o pagamento para a emissão do documento.", "root/html/PaymentEmail.html", url, amount);
+            EmailSender.SendEmailPayment(email, "Pagamento de Documento", name, "Por favor, realize o pagamento para a emissão do documento.", "wwwroot/html/PaymentEmail.html", url, amount);
             return Ok();
         }
 
