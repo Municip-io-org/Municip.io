@@ -2,7 +2,7 @@
 
 
 <app-smaller-banner title="Alterar Funcionalidades"
-                    image={{municipality.landscapePhoto}}></app-smaller-banner>
+                   image="{{municipality.landscapePhoto}} ? {{municipality.landscapePhoto}} : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
 
 
 <ng-container *ngIf="isDialogOpen">
