@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MimeKit.Cryptography;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -251,7 +253,9 @@ namespace Municip.io.Server.Controllers
                     }
                     catch (Exception e)
                     {
-                        return BadRequest(new { Message = "Erro ao registar o administrador municipal.", ModelState = ModelState, Error= e.Message });
+                        var errorsExecption = new List<string>();
+                        errorsExecption.Add(e.Message);
+                        return BadRequest(new { Message = "Erro ao registar o administrador municipal.", ModelState = ModelState, errors = errorsExecption });
                     }
 
 
