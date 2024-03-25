@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AdminStatisticsService } from '../services/stats/admin-statistics.service';
 import { Citizen } from '../services/citizen-auth.service';
 import { MunicipalAdministrator, Municipality } from '../services/municipal-admin-auth.service';
+import { RequestDocument } from '../services/documents/docs.service';
 
 @Component({
   selector: 'app-admin-statistics-dashboard',
@@ -13,6 +14,7 @@ export class AdminStatisticsDashboardComponent {
   citizens: Citizen[] = [];
   municipalAdmins: MunicipalAdministrator[] = [];
   municipalities: any[] = [];
+  documentRequests: RequestDocument[] = [];
   numberOfCitizens: number = 0;
   activeMunicipalities: number = 0;
   numberOfMunicipalAdmins: number = 0;
@@ -22,13 +24,19 @@ export class AdminStatisticsDashboardComponent {
 
   news: any[] = [];
   events: any[] = [];
-  documentRequests: any[] = [];
 
   newsPublished: number = 0;
   newsPublishedToday: number = 0;
 
   eventsRegistered: number = 0;
-eventsToday: number = 0;
+  eventsToday: number = 0;
+
+  documentsRequested: number = 0;
+  documentsApproved: number = 0;
+  totalEarnings: number = 0;
+
+  numberOfBooks: number = 0;
+  Authors: number = 0;
 
 
   constructor(private adminStatisticsService: AdminStatisticsService) { }
@@ -48,8 +56,10 @@ eventsToday: number = 0;
 
 this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
               this.events = dataevents;
-              this.adminStatisticsService.getAllDocumentRequests().subscribe((datadoc: any) => {
-                this.documentRequests = datadoc;
+  this.adminStatisticsService.getAllDocumentRequests().subscribe((datadoc: any) => {
+
+
+    this.documentRequests = datadoc;
                 this.generateStatistics();
               });
 }
@@ -107,7 +117,12 @@ this.percentageOfBlockedMunicipalities = (this.blockedMunicipalities / this.muni
 
     this.eventsToday = this.events.filter(event => new Date(event.startDate) <= new Date() && new Date(event.endDate) >= new Date()).length;
 
+    this.documentsRequested = this.documentRequests.length;
+    this.documentsApproved = this.documentRequests.filter(doc => doc.status === 'Approved').length;
 
+this.documentRequests.forEach(doc => {
+      this.totalEarnings += doc.documentTemplate.price;
+    });
 
 
 
