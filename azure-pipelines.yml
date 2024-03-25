@@ -6,7 +6,8 @@
 trigger:
   - prod
 
-pool: Default
+pool:
+  vmImage: 'windows-latest'
 
 variables:
   solution: "**/*.sln"
@@ -40,10 +41,4 @@ steps:
       appType: "webApp"
       WebAppName: "MunicipioServer"
       packageForLinux: "$(Build.ArtifactStagingDirectory)/**/*.zip"
-# - task: AzureRmWebAppDeployment@4
-#   inputs:
-#     ConnectionType: 'AzureRM'
-#     azureSubscription: 'Azure subscription 1(754eee0b-9c0d-4602-a21c-2fa698539883)'
-#     appType: 'webApp'
-#     WebAppName: 'MunicipioServer'
-#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
