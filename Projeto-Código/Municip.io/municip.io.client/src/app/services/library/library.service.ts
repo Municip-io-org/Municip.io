@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Citizen } from '../citizen-auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class LibraryService {
     {
       id: 1,
       title: 'O Hobbit',
-      author: ['J.R.R. Tolkien'],
+      author: ['J.R.R. Tolkien', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling'],
       availableCopies: 5,
       copies: 5,
       coverImage: 'https://img.freepik.com/fotos-gratis/retrato-abstrato-do-olho-da-elegancia-das-mulheres-jovens-gerada-pela-ia_188544-9712.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1711324800&semt=sph',
@@ -66,7 +67,7 @@ export class LibraryService {
         photo: 'https://img.freepik.com/fotos-gratis/retrato-abstrato-do-olho-da-elegancia-das-mulheres-jovens-gerada-pela-ia_188544-9712.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1711324800&semt=sph'
       },
       book: this.Books[0],
-      reservedDate: new Date('2021-09-21'),
+      reservedDate: new Date(2024, 2, 26, 14, 7),
       returnDate: new Date('2021-10-21'),
       deliveredDate: new Date('2021-09-21'),
       municipality: 'Londres',
@@ -94,7 +95,31 @@ export class LibraryService {
       returnDate: new Date('2021-10-21'),
       deliveredDate: new Date('2021-09-21'),
       municipality: 'Londres',
-      status: BookRequestStatus.Reserved
+      status: BookRequestStatus.Delayed
+    }, {
+      id: 3,
+      citizen: {
+        address: 'Rua dos Alfeneiros, nº 4',
+        birthDate: new Date('1990-01-01'),
+        email: '',
+        firstName: 'Harry',
+        gender: 'M',
+        municipality: 'Londres',
+        nif: '123456789',
+        password: '',
+        postalCode1: '1234',
+        postalCode2: '123',
+        surname: 'Potter',
+        browsers: [],
+        events: [],
+        photo: 'https://img.freepik.com/fotos-gratis/retrato-abstrato-do-olho-da-elegancia-das-mulheres-jovens-gerada-pela-ia_188544-9712.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1711324800&semt=sph'
+      },
+      book: this.Books[1],
+      reservedDate: new Date('2021-09-21'),
+      returnDate: new Date('2021-10-21'),
+      deliveredDate: new Date('2021-09-21'),
+      municipality: 'Londres',
+      status: BookRequestStatus.Borrowed
     },
   ];
 
@@ -121,6 +146,11 @@ export class LibraryService {
     return this.BooksRequested;
   }
 
+
+
+  getRequests(): Observable<BookRequest[]> {
+    return this.http.get<BookRequest[]>('api/Book/GetRequests');
+  }
 
 
 

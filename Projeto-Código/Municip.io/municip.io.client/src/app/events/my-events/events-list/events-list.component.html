@@ -4,7 +4,7 @@
 </head>
 <app-header-loggedin></app-header-loggedin>
 <app-smaller-banner title="Eventos Inscritos"
-                    image={{municipality.landscapePhoto}}></app-smaller-banner>
+                    image="{{municipality.landscapePhoto}} ? {{municipality.landscapePhoto}} : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 gap-y-20 min-h-[28rem]">
   <div class=" flex items-center justify-between space-x-4 -mt-[3rem]">
     <div class="relative w-[50rem] ">

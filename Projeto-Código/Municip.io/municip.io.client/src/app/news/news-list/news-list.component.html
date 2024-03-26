@@ -1,6 +1,6 @@
 <app-header-loggedin></app-header-loggedin>
 
-<app-smaller-banner image={{municipality.landscapePhoto}}
+<app-smaller-banner image="{{municipality.landscapePhoto}} ? {{municipality.landscapePhoto}} : '/assets/images/placeholder/Landscape placeholder.jpg'"
                     title="Notícias de {{municipality.name}}">
 </app-smaller-banner>
 
@@ -36,7 +36,7 @@
           <div *ngFor="let news of filteredNews">
             <app-news-card title={{news.title}}
                            subtitle="{{news.subtitle}}"
-                           image="{{news.photo}}"
+                           image="{{news.photo}} ? {{news.photo}} : '/assets/images/placeholder/Landscape placeholder.jpg'"
                            date="{{news.date}}"
                            id="{{news.id}}"
                            (deleteid)="deleteNews($event)">

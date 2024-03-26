@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Book, BookRequest, BookRequestStatus, LibraryService } from '../../../services/library/library.service';
-import { Router } from '@angular/router';
+import { Data, Router } from '@angular/router';
 
 @Component({
   selector: 'app-requested-book-card',
@@ -44,19 +44,18 @@ export class RequestedBookCardComponent {
   }
 
 
-  //generatePDF() {
-  //  this.documentService.document = this.document;
 
-  //  this.router.navigate(['/documents/generate-pdf']);
+  getTimeLeft(date: Date) {
+    let newDate = new Date(date);
+    newDate.setHours(newDate.getHours() + 2);
+    let diff = newDate.getTime() - new Date().getTime();
+    let hours = Math.floor(diff / 1000 / 60 / 60);
+    let minutes = Math.floor(diff / 1000 / 60) - (hours * 60);
 
-  //}
-
-
-  /**
-   * Abre na mesma janela o pagamento
-   */
-  //goToPayment() {
-  //  window.open(this.document.paymentUrl, '_self');
-  //}
-
+    if (hours === 0) {
+      return `${minutes}min`;
+    } else {
+      return `${hours}h ${minutes}min`;
+    }
+  }
 }

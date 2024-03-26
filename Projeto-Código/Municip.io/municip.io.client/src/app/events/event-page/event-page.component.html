@@ -13,7 +13,7 @@
 </ng-container>
 
 <app-smaller-banner title={{event.title}}
-                    image={{municipality.landscapePhoto}}></app-smaller-banner>
+                    image="{{municipality.landscapePhoto}} ? {{municipality.landscapePhoto}} : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
   <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
     <app-black-btn-icon-text altImage="Editar Evento"
@@ -29,7 +29,7 @@
       Remover Evento
     </app-black-btn-icon-text>
   </div>
-  <img src={{event.image}} alt="Imagem do evento"
+  <img src="{{event.image}} ? {{event.image}} : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="Imagem do evento"
        class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center" />
   <section class="flex -mt-12 text-municip-gray justify-evenly text-[1.063rem] ">
     <div class="flex justify-center gap-x-2">

@@ -4,7 +4,7 @@
 </head>
 <app-header-loggedin />
 <app-smaller-banner title="Meus Documentos"
-                    image={{municipalityImage}}></app-smaller-banner>
+                   image="{{municipalityImage}} ? {{municipalityImage}} : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
 <div class="min-h-80 bg-municip-blank">
   <div class=" flex items-center justify-between space-x-4 mx-20 pt-10">
     <div class="relative w-[50rem] ">
