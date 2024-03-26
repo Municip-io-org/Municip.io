@@ -55,6 +55,7 @@ import { IsTransportFeatureActive } from './utils/guard/isTransportFeatureActive
 import { TemplateListComponent } from './documents/template-list/template-list.component';
 import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
 import { RequestsComponent } from './library/requests/requests.component';
+import { CreateBookComponent } from './library/create-book/create-book.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -106,6 +107,7 @@ const routes: Routes = [
   { path: 'documents/edit-template/:templateId', component: EditTemplateComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'documents/generate-pdf', component: GeneratepdfComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
   { path: 'documents/template-list', component: TemplateListComponent },
+  { path: 'library/create', component: CreateBookComponent, data: {} },
   { path: 'library/requests', component: RequestsComponent, data: {} }
 
 ];

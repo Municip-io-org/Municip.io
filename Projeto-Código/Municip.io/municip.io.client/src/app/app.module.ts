@@ -118,6 +118,7 @@ import { EditTemplateComponent } from './documents/edit-template/edit-template.c
 import { RequestsComponent } from './library/requests/requests.component';
 
 import { RequestedBookCardComponent } from './utils/library/requested-book-card/requested-book-card.component';
+import { CreateBookComponent } from './library/create-book/create-book.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -217,6 +218,7 @@ registerLocaleData(localePt, 'pt-PT');
     EditTemplateComponent,
     RequestsComponent,
     RequestedBookCardComponent,
+    CreateBookComponent,
     
   ],
   imports: [
