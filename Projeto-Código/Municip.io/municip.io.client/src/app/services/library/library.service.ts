@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Citizen } from '../citizen-auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LibraryService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
 
   //create mock data
@@ -24,7 +26,8 @@ export class LibraryService {
       publicationDate: new Date('1937-09-21'),
       publisher: 'HarperCollins',
       sinopsis: 'Bilbo Bolseiro é um hobbit que leva uma vida confortável e sem ambições. Mas seu contentamento é perturbado quando Gandalf, o mago, e uma companhia de anões batem à sua porta e levam-no para uma expedição. Eles têm um plano para roubar o tesouro guardado por Smaug, o Magnífico, um grande e perigoso dragão. Bilbo reluta muito em participar da aventura, mas acaba surpreendendo até a si mesmo com sua esperteza e sua habilidade como ladrão!',
-      status: BookStatus.Available
+      status: BookStatus.Available,
+      municipality: 'Londres',
     },{
       id: 2,
       title: 'O Hobbit',
@@ -38,7 +41,8 @@ export class LibraryService {
       publicationDate: new Date('1937-09-21'),
       publisher: 'HarperCollins',
       sinopsis: 'Bilbo Bolseiro é um hobbit que leva uma vida confortável e sem ambições. Mas seu contentamento é perturbado quando Gandalf, o mago, e uma companhia de anões batem à sua porta e levam-no para uma expedição. Eles têm um plano para roubar o tesouro guardado por Smaug, o Magnífico, um grande e perigoso dragão. Bilbo reluta muito em participar da aventura, mas acaba surpreendendo até a si mesmo com sua esperteza e sua habilidade como ladrão!',
-      status: BookStatus.Available
+      status: BookStatus.Available,
+      municipality: 'Londres',
     },];
 
 
@@ -94,6 +98,21 @@ export class LibraryService {
     },
   ];
 
+  createBook(book: Book, image: File) {
+    var headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    let imgurl = "https://api.imgur.com/3/image";
+
+    //upload to imgur
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post(imgurl, formData, { headers })
+      .pipe(switchMap((response: any) => {
+        book.coverImage = response['data']['link'];
+        return this.http.post<Book>('api/book/CreateBook', book);
+      }));
+
+  }
+
   getBooks(): Book[] {
     return this.Books;
   }
@@ -128,11 +147,11 @@ export class LibraryService {
 
 
 export interface Book {
-  id: number;
+  id?: number;
   title: string;
   author: string[];
   publisher: string;
-  iSBN?: string;
+  isbn?: string;
   genre: string[];
   sinopsis: string;
   coverImage: string;
@@ -142,6 +161,7 @@ export interface Book {
   copies: number;
   availableCopies: number;
   status: BookStatus;
+  municipality: string;
 }
 
 

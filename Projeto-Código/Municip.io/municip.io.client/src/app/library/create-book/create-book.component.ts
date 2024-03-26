@@ -13,21 +13,22 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class CreateBookComponent {
 
   book:Book = {
-    id: 1,
-    iSBN:'',
-    title: '',
-    author: [],
-    availableCopies: 0,
-    copies: 0,
-    coverImage: '',
-    edition: '',
-    genre: [],
-    language: '',
-    publicationDate: new Date(),
-    publisher: '',
-    sinopsis: '',
-    status: BookStatus.Available
-}
+      id: 1,
+      isbn: '',
+      title: '',
+      author: [],
+      availableCopies: 0,
+      copies: 0,
+      coverImage: '',
+      edition: '',
+      genre: [],
+      language: '',
+      publicationDate: new Date(),
+      publisher: '',
+      sinopsis: '',
+      status: BookStatus.Available,
+      municipality: ''
+  }
 
   municipalityImage: string = "";
   municipalityName: string = "";
@@ -144,6 +145,40 @@ export class CreateBookComponent {
 
   onSubmit(): void {
     console.log("SUBMIT");
+    if (this.bookForm.valid) {
+
+      this.book = {
+        isbn: this.iSBN?.value!.toString(),
+        title: this.title?.value!,
+        author: [this.author?.value!],
+        availableCopies: parseInt(this.copies?.value!),
+        copies: parseInt(this.copies?.value!),
+        coverImage: '',
+        edition: this.edition?.value!,
+        genre: [this.genre?.value!],
+        language: this.language?.value!,
+        publicationDate: this.publicationDate?.value!,
+        publisher: this.publisher?.value!,
+        sinopsis: this.sinopsis?.value!,
+        status: BookStatus.Available,
+        municipality: this.municipalityName
+      }
+
+      console.log(this.book);
+
+      this.libraryService.createBook(this.book, this.coverImage).subscribe(
+        (event) => {
+          this.error = null;
+          this.isDialogOpen = true;
+          console.log(event);
+        },
+        (error) => {
+          console.log(error)
+          this.error = error.error.message;
+          window.scrollTo(0, 0);
+        }
+      );
+    }
   }
 
   ngOnDestroy(): void {
