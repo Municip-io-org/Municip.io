@@ -30,7 +30,7 @@
   </div>
   <div class="mx-32 py-10" *ngFor="let book of filteredBooks">
     <!--<app-document-card [document]="doc" />-->
-    <app-requested-book-card [bookRequest]="book"/>
+    <app-requested-book-card [bookRequest]="book"  (update)="updateRequests()"/>
   </div>
 
 </div>

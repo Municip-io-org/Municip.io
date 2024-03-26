@@ -34,22 +34,22 @@
       </div>
     </div>
     <div class="flex items-center">
-    
+
 
       <div *ngIf="this.bookRequest.status === BookRequestStatus().Reserved" class="flex flex-col w-fit space-y-5">
         <div>
-          <p class="font-inter">Pedido em: {{ getTimeLeft(bookRequest.reservedDate!)  }}</p>
+          <p class="font-inter">Tempo Restante: {{ getTimeLeft(bookRequest.reservedDate!)  }}</p>
           <div class="flex justify-center rounded-md bg-opacity-35 {{ getStatusClass() }}">
             <p class="font-inter font-semibold">{{ getStatusString(this.bookRequest.status) }}</p>
           </div>
         </div>
         <div class="w-full flex space-x-10 justify-center">
-          <button class="bg-green-200 size-10 rounded-xl group">
+          <button (click)="borrowBook()" class="bg-green-200 size-10 rounded-xl group">
             <i class="fa-solid fa-check fa-2xl text-green-500 group-hover:text-green-700
                transition-all duration-500 ease-in-out
                "></i>
           </button>
-          <button class="bg-red-200 size-10 rounded-xl group">
+          <button (click)="denyRequest()" class="bg-red-200 size-10 rounded-xl group">
             <i class="fa-solid fa-xmark fa-2xl text-red-500 group-hover:text-red-700
                transition-all duration-500 ease-in-out"></i>
           </button>
@@ -75,7 +75,8 @@
           </div>
           <div class="flex justify-center items-center flex-col">
             <app-black-btn-icon-text altImage="Receive Book"
-                                     image="assets/images/library/ReturnBook-white.png">
+                                     image="assets/images/library/ReturnBook-white.png"
+                                     (buttonClick)="deliverBook()">
               Receber
             </app-black-btn-icon-text>
           </div>

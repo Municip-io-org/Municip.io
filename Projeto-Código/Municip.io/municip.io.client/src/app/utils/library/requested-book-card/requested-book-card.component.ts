@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Book, BookRequest, BookRequestStatus, LibraryService } from '../../../services/library/library.service';
 import { Data, Router } from '@angular/router';
 
@@ -10,12 +10,59 @@ import { Data, Router } from '@angular/router';
 export class RequestedBookCardComponent {
   @Input() bookRequest!: BookRequest;
   book!: Book;
+
+
+  @Output() update = new EventEmitter();
   constructor(private router: Router, private bookService: LibraryService) { }
 
 
   ngOnInit(): void {
     this.book = this.bookRequest.book;
+
+    if (this.bookRequest.status === BookRequestStatus.Reserved) {
+      //if it pass the 2h limit, the request is denied
+      this.isReservationExpired();
+    }
+    else if (this.bookRequest.status === BookRequestStatus.Borrowed) {
+      this.isRequestDelayed();
+    }
+
+
   }
+
+  isReservationExpired() {
+    var hoursLimit = 2 * 60 * 60 * 1000;
+    if (new Date().getTime() - new Date(this.bookRequest.reservedDate!).getTime() > hoursLimit) {
+      this.bookService.deleteRequest(this.bookRequest.id).subscribe(
+        (data) => {
+          console.log(data);
+          this.update.emit();
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+
+  isRequestDelayed() {
+    //check if the return date is expired
+    if (new Date().getTime() > new Date(this.bookRequest.returnDate!).getTime()) {
+      this.bookService.delayRequest(this.bookRequest.id).subscribe(
+        (data) => {
+          console.log(data);
+          this.update.emit();
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+
+  }
+
+
+
 
   /**
    * Estilos diferentes para cada estado do documento
@@ -44,8 +91,52 @@ export class RequestedBookCardComponent {
   }
 
 
+  borrowBook() {
+    var date = new Date(2024, 10, 10, 10, 10, 10);
+    this.bookService.borrowBook(this.bookRequest.id, date).subscribe(
+      (data) => {
+        console.log(data);
+        this.update.emit();
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+  }
 
-  getTimeLeft(date: Date) {
+
+  deliverBook() {
+    this.bookService.deliverBook(this.bookRequest.id).subscribe(
+      (data) => {
+        console.log(data);
+        this.update.emit();
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+  }
+
+  denyRequest() {
+    this.bookService.denyRequest(this.bookRequest.id).subscribe(
+
+      (data) => {
+        console.log(data);
+        this.update.emit();
+      },
+      (error) => {
+        console.error(error);
+      }
+
+    )
+  }
+
+
+
+
+
+
+  getTimeLeft(date: Date): string {
     let newDate = new Date(date);
     newDate.setHours(newDate.getHours() + 2);
     let diff = newDate.getTime() - new Date().getTime();

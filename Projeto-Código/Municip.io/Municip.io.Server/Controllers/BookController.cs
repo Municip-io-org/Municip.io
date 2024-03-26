@@ -115,14 +115,19 @@ namespace Municip.io.Server.Controllers
 
 
         [HttpPost("BorrowBook")]
-        public async Task<IActionResult> BorrowBookAsync(int requestId)
+        public async Task<IActionResult> BorrowBookAsync(int requestId, [FromBody] DateTime returnDate)
         {
+
+            //check if the return date is valid
+            if (returnDate < DateTime.Now) return BadRequest(new { message = $"Data de retorno inválida, data: {returnDate}" });
+
             var request = await _context.BookRequests.FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
 
             request.Status = BookRequestStatus.Borrowed;
             request.BorrowedDate = DateTime.Now;
+            request.ReturnDate = returnDate;
 
             //if there is no return date, set it to 15 days from now
             if (request.ReturnDate == null)
@@ -143,7 +148,15 @@ namespace Municip.io.Server.Controllers
         [HttpGet("GetRequests")]
         public IActionResult GetRequest()
         {
-            var bookRequests = _context.BookRequests.Where(b => b.Status != BookRequestStatus.Denied && b.Status != BookRequestStatus.Delivered).Include(b => b.Book).Include(b=> b.Citizen).ToList();
+            var bookRequests = _context.BookRequests.Include(b => b.Book).Include(b => b.Citizen).ToList();
+            return Ok(bookRequests);
+        }
+
+        //get requests by municipality
+        [HttpGet("GetRequestsByMunicipality")]
+        public IActionResult GetRequestsByMunicipality(string municipality)
+        {
+            var bookRequests = _context.BookRequests.Where(b => b.Book.Municipality == municipality ).Include(b => b.Book).Include(b => b.Citizen).ToList();
             return Ok(bookRequests);
         }
 
@@ -192,6 +205,21 @@ namespace Municip.io.Server.Controllers
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
 
             _context.BookRequests.Remove(request);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+
+        [HttpPost("DelayRequest")]
+        public async Task<IActionResult> DelayRequestAsync(int requestId)
+        {
+            var request = await _context.BookRequests.FirstOrDefaultAsync(r => r.Id == requestId);
+
+            if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
+
+            request.Status = BookRequestStatus.Delayed;
+
             await _context.SaveChangesAsync();
 
             return Ok();

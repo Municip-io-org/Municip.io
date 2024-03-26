@@ -134,20 +134,33 @@ export class LibraryService {
     return this.http.get<BookRequest[]>('api/Book/GetRequests');
   }
 
+  getRequestsByMunicipality(municipality: string): Observable<BookRequest[]> {
+    return this.http.get<BookRequest[]>(`api/Book/GetRequestsByMunicipality?municipality=${municipality}`);
+  }
+
   deleteRequest(requestId: number): Observable<any> {
-    return this.http.delete(`api/Book/DeleteRequest/${requestId}`);
+    return this.http.delete(`api/Book/DeleteRequest?requestId=${requestId}`);
   }
 
   denyRequest(requestId: number): Observable<any> {
-    return this.http.post(`api/Book/DenyRequest/${requestId}`, null);
+    return this.http.post(`api/Book/DenyRequest?requestId=${requestId}`, null);
   }
 
-  borrowBook(requestId: number): Observable<any> {
-    return this.http.post(`api/Book/BorrowBook/${requestId}`, null);
+  borrowBook(requestId: number, returnDate: Date): Observable<any> {
+    return this.http.post(`api/Book/BorrowBook?requestId=${requestId}`, returnDate);
+
   }
 
   createRequest(email: string, request: BookRequest): Observable<any> {
     return this.http.post(`api/Book/CreateRequest/${email}`, request);
+  }
+
+  delayRequest(requestId: number): Observable<any> {
+    return this.http.post(`api/Book/DelayRequest?requestId=${requestId}`, null);
+  }
+
+  deliverBook(requestId: number): Observable<any> {
+    return this.http.post(`api/Book/DeliverBook?requestId=${requestId}`, null);
   }
 
 
