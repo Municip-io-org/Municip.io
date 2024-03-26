@@ -1,27 +1,24 @@
-<div class=" h-50  flex">
+<div class="flex bg-white rounded-xl shadow-2xl  hover:shadow-xl h-44">
   <img [src]="book.coverImage" alt="cover"
-       class="w-[10%] h-full object-cover rounded-xl" />
+       class="w-36 h-52 object-cover rounded-xl
+       self-center shadow-2xl
+       " />
   <div class="px-12 py-8 flex justify-between items-center gap-8
-       bg-white rounded-xl shadow-2xl  hover:shadow-xl h-44
+       w-full
        ">
-    <div class="flex">
+    <div class="flex w-1/2">
 
-      <div class="flex flex-col space-y-4">
-        <div>
-          <h1 class="text-3xl font-roboto font-semibold text-municip-highlight-black">
+      <div class="flex flex-col space-y-4 w-full">
+        <div class="w-[80%]">
+          <h1 class="text-3xl font-roboto font-semibold text-municip-highlight-black truncate">
             {{ book.title }}
           </h1>
-          <h3 class="text-base font-inter font-bold text-gray-500">
+          <h3 class="text-base font-inter font-bold text-gray-500 truncate">
             {{ book.author }}
           </h3>
         </div>
 
-        <div class="flex flex-col w-fit space-y-2">
-          <p class="font-inter">Pedido em: {{ book.publicationDate | date:'dd/MM/yy' }}</p>
-          <div class="flex justify-center rounded-md bg-opacity-35 {{ getStatusClass() }}">
-            <p class="font-inter font-semibold">{{ getStatusString(this.bookRequest.status) }}</p>
-          </div>
-        </div>
+
       </div>
     </div>
     <div class="flex items-center">
@@ -36,7 +33,23 @@
         </svg>
       </button>-->
 
-
+      <div *ngIf="this.bookRequest.status === BookRequestStatus().Reserved" class="flex flex-col w-fit space-y-2">
+        <p class="font-inter">Pedido em: {{ bookRequest.reservedDate | date:'dd/MM/yy' }}</p>
+        <div class="flex justify-center rounded-md bg-opacity-35 {{ getStatusClass() }}">
+          <p class="font-inter font-semibold">{{ getStatusString(this.bookRequest.status) }}</p>
+        </div>
+        <div class="w-full flex justify-between px-5 py-5">
+          <button class="bg-green-200 size-10 rounded-xl group">
+            <i class="fa-solid fa-check fa-2xl text-green-500 group-hover:text-green-700
+               transition-all duration-500 ease-in-out
+               "></i>
+          </button>
+          <button class="bg-red-200 size-10 rounded-xl group">
+            <i class="fa-solid fa-xmark fa-2xl text-red-500 group-hover:text-red-700
+               transition-all duration-500 ease-in-out"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
