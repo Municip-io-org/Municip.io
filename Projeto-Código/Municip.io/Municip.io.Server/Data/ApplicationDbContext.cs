@@ -24,7 +24,7 @@ namespace Municip.io.Server.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<AppFeature> AppFeatures { get; set; }
 
-        public DbSet<Book> Books { get; set; }
+
 
         public DbSet<BookRequest> BookRequests { get; set; }
 
