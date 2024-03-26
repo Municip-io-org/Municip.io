@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Municip.io.Server.Data;
+using Municip.io.Server.Models;
 
 namespace Municip.io.Server.Controllers
 {
@@ -7,13 +9,14 @@ namespace Municip.io.Server.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        private readonly string _apiKey = "AIzaSyBG6nzqVZ5MjockppHITseDjF72nEKnHeQ";
 
         private readonly HttpClient _httpClient;
+        private readonly ApplicationDbContext _context;
 
-        public BookController(IHttpClientFactory httpClientFactory)
+        public BookController(IHttpClientFactory httpClientFactory, ApplicationDbContext context)
         {
             _httpClient = httpClientFactory.CreateClient();
+            _context = context;
         }
 
         [HttpGet("GetBookInfoAPI")]
@@ -30,6 +33,45 @@ namespace Municip.io.Server.Controllers
 
             return StatusCode((int)response.StatusCode, response.ReasonPhrase);
         }
+
+        [HttpPost("CreateBook")]
+        public IActionResult CreateBook(Book newBook)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (newBook == null)
+                    {
+                        return BadRequest("O objeto de livro recebido está vazio.");
+                    }
+
+                    // Verificar se já existe um livro com o mesmo ISBN e o mesmo município
+                    var existingBook = _context.Books.FirstOrDefault(b => b.ISBN == newBook.ISBN && b.Municipality == newBook.Municipality);
+                    if (existingBook != null)
+                    {
+                        // Se já existe um livro com o mesmo ISBN e município, retornar um BadRequest
+                        return BadRequest("Já existe um livro com o mesmo ISBN e Município.");
+                    }
+
+                    // Adicionar o novo livro ao contexto e salvar as alterações no banco de dados
+                    _context.Books.Add(newBook);
+                    _context.SaveChanges();
+
+                    // Retornar um Ok para indicar que o livro foi adicionado com sucesso
+                    return Ok();
+                }
+
+                return BadRequest(new { message = "Modelo inválido", ModelState });
+            }
+            catch (Exception ex)
+            {
+                // Lidar com exceções e retornar um código de status de erro
+                return StatusCode(500, $"Erro ao criar livro: {ex.Message}");
+            }
+        }
+
+
     }
 }
 

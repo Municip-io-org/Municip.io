@@ -3,17 +3,18 @@
                     class="font-inter" />
 
 
-<div class="flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 space-y-20">
-  <form [formGroup]="municipalityEditForm" (ngSubmit)="onSubmit()" class="pt-[1rem] relative flex flex-col pb-[5rem]">
+<div class="flex flex-col bg-municip-blank pb-[4rem] text-municip-normal-black pt-6 px-32 space-y-20">
 
 
 
-    <section class="flex text-left justify-around mb-4 ">
-      <div class="w-[24rem]">
-        <app-input-title class="text-[2.4rem]">ISBN</app-input-title>
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="pt-[1rem] relative flex flex-col gap-y-3 pb-[5rem]">
+
+    <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4 ">
+      <div class="w-full lg:w-5/12 mb-4 h-32">
+        <app-input-title class="text-[1.8rem]">ISBN</app-input-title>
 
         <input required type="number" id="iSBN" formControlName="iSBN" name="iSBN"
-               class="input font-poppins w-[18rem] " />
+               class="input font-poppins w-full h-12 lg:h-14" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="iSBN?.touched && iSBN?.invalid">
@@ -22,12 +23,12 @@
       </div>
 
 
-      <div class="w-[20rem]">
-        <app-input-title class="text-[2.4rem]">Editora</app-input-title>
+      <div class="w-full lg:w-5/12 mb-4 h-32">
+        <app-input-title class="text-[1.8rem]">Editora</app-input-title>
 
         <input required type="text" id="publisher"
                formControlName="publisher" name="publisher"
-               class="input font-poppins w-[18rem]" />
+               class="input font-poppins  w-full h-12 lg:h-14" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="publisher?.touched && publisher?.invalid ">
@@ -36,12 +37,12 @@
       </div>
     </section>
 
-    <section class="flex text-left justify-around mb-4 ">
-      <div class="w-[24rem]">
-        <app-input-title class="text-[2.4rem]">Título</app-input-title>
+    <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4 ">
+      <div class="w-full lg:w-5/12 mb-4 h-32">
+        <app-input-title class="text-[1.8rem]">Título</app-input-title>
 
         <input required type="text" id="title" formControlName="title" name="title"
-               class="input font-poppins w-[18rem] " />
+               class="input font-poppins  w-full h-12 lg:h-14 " />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="title?.touched && title?.invalid">
@@ -50,12 +51,12 @@
       </div>
 
 
-      <div class="w-[20rem]">
-        <app-input-title class="text-[2.4rem]">Edição</app-input-title>
+      <div class="w-full lg:w-5/12 mb-4 h-32">
+        <app-input-title class="text-[1.8rem]">Edição</app-input-title>
 
         <input required type="text" id="edition"
                formControlName="edition" name="edition"
-               class="input font-poppins w-[18rem]" />
+               class="input font-poppins  w-full h-12 lg:h-14" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="edition?.touched && edition?.invalid ">
@@ -65,12 +66,12 @@
     </section>
 
 
-    <section class="flex text-left justify-around mb-4 ">
-      <div class="w-[24rem]">
-        <app-input-title class="text-[2.4rem]">Autores</app-input-title>
+    <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4 ">
+      <div class="w-full lg:w-5/12 mb-4 h-32">
+        <app-input-title class="text-[1.8rem]">Autores</app-input-title>
 
         <input required type="text" id="author" formControlName="author" name="author"
-               class="input font-poppins w-[18rem] " />
+               class="input font-poppins w-full h-12 lg:h-14 " />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="author?.touched && author?.invalid">
@@ -79,12 +80,12 @@
       </div>
 
 
-      <div class="w-[20rem]">
-        <app-input-title class="text-[2.4rem]">Nº de exemplares</app-input-title>
+      <div class="w-full lg:w-5/12 mb-4 h-32">
+        <app-input-title class="text-[1.8rem]">Nº de exemplares</app-input-title>
 
         <input required type="date" id="publicationDate"
                formControlName="publicationDate" name="publicationDate"
-               class="input font-poppins w-[18rem]" />
+               class="input font-poppins w-full h-12 lg:h-14" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="publicationDate?.touched && publicationDate?.invalid ">
@@ -94,13 +95,13 @@
     </section>
 
 
-    <section class="relative flex text-left justify-around mb-4">
+    <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4">
 
-      <div class="w-[24rem]">
-        <app-input-title class="text-[2.4rem]">Categorias</app-input-title>
+      <div class="w-full lg:w-5/12 mb-4 h-32">
+        <app-input-title class="text-[1.8rem]">Categorias</app-input-title>
 
         <input required type="text" id="genre" formControlName="genre" name="genre"
-               class="input font-poppins w-[18rem] " />
+               class="input font-poppins w-full h-12 lg:h-14 " />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="genre?.touched && genre?.invalid">
@@ -108,10 +109,10 @@
         </div>
       </div>
 
-      <div>
-        <app-input-title class="text-[1.4rem]">Capa do livro</app-input-title>
+      <div class="flex flex-col  text-left w-full lg:w-5/12 mb-4 h-[16rem]">
+        <app-input-title class="text-[1.8rem]">Capa do livro</app-input-title>
         <div class="h-20 table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc]" (dragover)="onDragOver($event)"
-             (drop)="onDrop($event)" (click)="#coverImagePicker.click()">
+             (drop)="onDrop($event)" (click)="coverImagePicker.click()">
 
           <div class="table-cell align-middle">
             <div class="text-center">
@@ -129,12 +130,12 @@
       </div>
     </section>
 
-    <section class="flex text-left justify-around mb-4 ">
-      <div class="w-[24rem]">
-        <app-input-title class="text-[2.4rem]">Idioma</app-input-title>
+    <section class="flex flex-wrap gap-y-6 text-left justify-around  ">
+      <div class="w-full lg:w-5/12 mb-4 h-32">
+        <app-input-title class="text-[1.8rem]">Idioma</app-input-title>
 
         <input required type="text" id="language" formControlName="language" name="language"
-               class="input font-poppins w-[18rem] " />
+               class="input font-poppins  w-full h-12 lg:h-14 " />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="language?.touched && language?.invalid">
@@ -143,12 +144,12 @@
       </div>
 
 
-      <div class="w-[20rem]">
-        <app-input-title class="text-[2.4rem]">Nº de exemplares</app-input-title>
+      <div class="w-full lg:w-5/12 mb-4 h-32">
+        <app-input-title class="text-[1.8rem]">Nº de exemplares</app-input-title>
 
         <input required type="number" id="copies"
                formControlName="copies" name="copies"
-               class="input font-poppins w-[18rem]" />
+               class="input font-poppins  w-full h-12 lg:h-14" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="copies?.touched && copies?.invalid ">
@@ -161,19 +162,18 @@
     </section>
 
     <div class="flex flex-col text-left w-full mt-6 mb-4 relative">
-      <app-input-title class="text-[2.4rem]">Sinopse</app-input-title>
+      <app-input-title class="text-[1.8rem]">Sinopse</app-input-title>
       <ngx-editor [editor]="editor" formControlName="sinopsis" placeholder="Introduza a sinopse do livro">
         <div class="bg-gray-100 border border-gray-300">
           <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
         </div>
       </ngx-editor>
-      <img src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />
       <div class="text-red-500 font-bold py-2" *ngIf="sinopsis?.touched && sinopsis?.invalid ">
         <div *ngIf="sinopsis?.errors?.['required'] ">Sinopse Obrigatório</div>
       </div>
     </div>
 
-    <button type="submit" [disabled]="!bookForm.valid && coverImageUrl"
+    <button type="submit" [disabled]="!bookForm.valid || !coverImageUrl"
             class="absolute -bottom-[0rem] right-[2rem] h-auto w-[15rem] flex justify-center
               items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue
               to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600

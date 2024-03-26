@@ -55,15 +55,15 @@ export class CreateBookComponent {
 
   bookForm = new FormGroup({
     iSBN: new FormControl('',),
-    title: new FormControl('', [Validators.required]),
-    publisher: new FormControl('', [Validators.required]),
-    edition: new FormControl('', [Validators.required]),
-    author: new FormControl('', [Validators.required]),
+    title: new FormControl("", [Validators.required]),
+    publisher: new FormControl("", [Validators.required]),
+    edition: new FormControl("", [Validators.required]),
+    author: new FormControl("", [Validators.required]),
     publicationDate: new FormControl(new Date(), [Validators.required]),
-    language: new FormControl('', [Validators.required]),
-    copies: new FormControl('', [Validators.required]),
-    genre: new FormControl('', [Validators.required]),
-    sinopsis: new FormControl('', [Validators.required]),
+    language: new FormControl("", [Validators.required]),
+    copies: new FormControl("", [Validators.required]),
+    genre: new FormControl("", [Validators.required]),
+    sinopsis: new FormControl("", [Validators.required]),
   })
 
 
@@ -141,9 +141,53 @@ export class CreateBookComponent {
     }
   }
 
+
+  onSubmit(): void {
+    console.log("SUBMIT");
+  }
+
   ngOnDestroy(): void {
     this.editor.destroy();
   }
 
+  // Getter para acessar os controles do formulário
+  get iSBN() {
+    return this.bookForm.get('iSBN');
+  }
 
+  get title() {
+    return this.bookForm.get('title');
+  }
+
+  get publisher() {
+    return this.bookForm.get('publisher');
+  }
+
+  get edition() {
+    return this.bookForm.get('edition');
+  }
+
+  get author() {
+    return this.bookForm.get('author');
+  }
+
+  get publicationDate() {
+    return this.bookForm.get('publicationDate');
+  }
+
+  get language() {
+    return this.bookForm.get('language');
+  }
+
+  get copies() {
+    return this.bookForm.get('copies');
+  }
+
+  get genre() {
+    return this.bookForm.get('genre');
+  }
+
+  get sinopsis() {
+    return this.bookForm.get('sinopsis');
+  }
 }

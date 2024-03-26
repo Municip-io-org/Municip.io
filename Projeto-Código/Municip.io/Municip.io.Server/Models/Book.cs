@@ -10,7 +10,7 @@
 
         public string Publisher { get; set; }
 
-        public string ?ISBN { get; set; }
+        public string? ISBN { get; set; }
 
         public string[] Genre { get; set; }
 
@@ -29,5 +29,6 @@
         public int AvailableCopies { get; set; }
 
         public BookStatus Status { get; set; }
+        public string Municipality { get; set; }
     }
 }
