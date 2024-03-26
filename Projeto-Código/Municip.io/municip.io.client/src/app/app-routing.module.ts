@@ -54,6 +54,7 @@ import { IsNewsFeatureActive } from './utils/guard/isNewsFeaturesActive/is-news-
 import { IsTransportFeatureActive } from './utils/guard/isTransportFeatureActive/is-transport-feature-active.guard';
 import { TemplateListComponent } from './documents/template-list/template-list.component';
 import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
+import { RequestsComponent } from './library/requests/requests.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -104,7 +105,8 @@ const routes: Routes = [
   { path: 'documents/createtemplate', component: CreateTemplateComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
   { path: 'documents/edit-template/:templateId', component: EditTemplateComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'documents/generate-pdf', component: GeneratepdfComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
-  { path: 'documents/template-list', component: TemplateListComponent }
+  { path: 'documents/template-list', component: TemplateListComponent },
+  { path: 'library/requests', component: RequestsComponent, data: {} }
 
 ];
 
