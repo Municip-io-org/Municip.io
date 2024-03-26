@@ -56,6 +56,9 @@ import { TemplateListComponent } from './documents/template-list/template-list.c
 import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
 import { RequestsComponent } from './library/requests/requests.component';
 import { CreateBookComponent } from './library/create-book/create-book.component';
+import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/admin-statistics-dashboard.component';
+import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
+
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -108,7 +111,9 @@ const routes: Routes = [
   { path: 'documents/generate-pdf', component: GeneratepdfComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
   { path: 'documents/template-list', component: TemplateListComponent },
   { path: 'library/create', component: CreateBookComponent, data: {} },
-  { path: 'library/requests', component: RequestsComponent, data: {} }
+  { path: 'library/requests', component: RequestsComponent, data: {} },
+  { path: 'adminstatistics', component: AdminStatisticsDashboardComponent },
+  { path: 'munadminstatistics', component: MunadminStatisticsDashboardComponent },
 
 ];
 

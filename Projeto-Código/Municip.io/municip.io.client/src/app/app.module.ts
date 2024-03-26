@@ -119,6 +119,15 @@ import { RequestsComponent } from './library/requests/requests.component';
 
 import { RequestedBookCardComponent } from './utils/library/requested-book-card/requested-book-card.component';
 import { CreateBookComponent } from './library/create-book/create-book.component';
+import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/admin-statistics-dashboard.component';
+import { RegisteredUsersGraphComponent } from './admin-statistics-dashboard/registered-users-graph/registered-users-graph.component';
+import { GenderChartComponent } from './admin-statistics-dashboard/gender-chart/gender-chart.component';
+import { AgeChartComponent } from './admin-statistics-dashboard/age-chart/age-chart.component';
+import { DistrictsMapComponent } from './admin-statistics-dashboard/districts-map/districts-map.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { CitizensMapComponent } from './admin-statistics-dashboard/citizens-map/citizens-map.component';
+import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
+
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -219,6 +228,13 @@ registerLocaleData(localePt, 'pt-PT');
     RequestsComponent,
     RequestedBookCardComponent,
     CreateBookComponent,
+    AdminStatisticsDashboardComponent,
+    RegisteredUsersGraphComponent,
+    GenderChartComponent,
+    AgeChartComponent,
+    DistrictsMapComponent,
+    CitizensMapComponent,
+    MunadminStatisticsDashboardComponent,
     
   ],
   imports: [
@@ -235,7 +251,7 @@ registerLocaleData(localePt, 'pt-PT');
     NgxMaterialTimepickerModule.setOpts('pt-PT'),
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     InfiniteScrollModule, SelectButtonModule, RippleModule,
-    CheckboxModule
+    CheckboxModule, GoogleChartsModule
   ],
   providers: [
     MunicipalityGuard,
