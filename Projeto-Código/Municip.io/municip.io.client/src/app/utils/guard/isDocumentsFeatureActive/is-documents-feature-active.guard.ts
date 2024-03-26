@@ -10,8 +10,6 @@ import { MunicipalAdminAuthService, Municipality } from '../../../services/munic
 })
 
 export class IsDocumentFeatureActive implements CanActivate {
-
-  municipality : string = '';
   constructor(private appFeaturesService: AppFeaturesService, private router: Router, private userAuthService : UserAuthService) { }
 
   async canActivate(): Promise<boolean> {

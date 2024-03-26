@@ -20,6 +20,8 @@ namespace Municip.io.Server.Data
         public DbSet<Municipality> Municipalities { get; set; }
 
         public DbSet<Event> Events { get; set; }
+
+        public DbSet<Book> Books { get; set; }
         public DbSet<AppFeature> AppFeatures { get; set; }
 
         public DbSet<Book> Books { get; set; }
