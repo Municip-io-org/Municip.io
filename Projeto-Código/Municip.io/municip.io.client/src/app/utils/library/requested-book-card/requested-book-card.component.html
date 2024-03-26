@@ -9,7 +9,7 @@
     <div class="flex">
 
       <div class="flex flex-col space-y-4">
-        <div class="max-w-96">
+        <div class="max-w-[35rem]">
           <h1 class="text-3xl font-roboto font-semibold text-municip-highlight-black truncate">
             {{ book.title }}
           </h1>
@@ -34,16 +34,7 @@
       </div>
     </div>
     <div class="flex items-center">
-      <!--<button *ngIf="this.book.status === StatusBook().waitingForPayment"  class="flex items-center justify-center h-12 rounded-full bg-municip-blue text-white px-4 transition duration-300 ease-in-out hover:bg-blue-700 hover:text-gray-200">
-        <span class="font-inter font-semibold text-sm">Realizar Pagamento</span>
-
-      </button>
-      <button *ngIf="this.bookRequest.status === StatusBook().approved"  class="flex items-center justify-center h-12 rounded-full bg-municip-blue text-white px-4 transition duration-300 ease-in-out hover:bg-blue-700 hover:text-gray-200">
-        <span class="font-inter font-semibold text-sm">Transferir PDF</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3M6 4v16a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2z" />
-        </svg>
-      </button>-->
+    
 
       <div *ngIf="this.bookRequest.status === BookRequestStatus().Reserved" class="flex flex-col w-fit space-y-5">
         <div>

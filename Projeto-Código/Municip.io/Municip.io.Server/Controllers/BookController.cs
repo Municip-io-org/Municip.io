@@ -143,7 +143,7 @@ namespace Municip.io.Server.Controllers
         [HttpGet("GetRequests")]
         public IActionResult GetRequest()
         {
-            var bookRequests = _context.BookRequests.Where(b => b.Status != BookRequestStatus.Denied && b.Status != BookRequestStatus.Delivered).Include(b => b.Book).ToList();
+            var bookRequests = _context.BookRequests.Where(b => b.Status != BookRequestStatus.Denied && b.Status != BookRequestStatus.Delivered).Include(b => b.Book).Include(b=> b.Citizen).ToList();
             return Ok(bookRequests);
         }
 

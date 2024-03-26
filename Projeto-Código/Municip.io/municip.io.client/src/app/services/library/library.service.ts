@@ -134,6 +134,24 @@ export class LibraryService {
     return this.http.get<BookRequest[]>('api/Book/GetRequests');
   }
 
+  deleteRequest(requestId: number): Observable<any> {
+    return this.http.delete(`api/Book/DeleteRequest/${requestId}`);
+  }
+
+  denyRequest(requestId: number): Observable<any> {
+    return this.http.post(`api/Book/DenyRequest/${requestId}`, null);
+  }
+
+  borrowBook(requestId: number): Observable<any> {
+    return this.http.post(`api/Book/BorrowBook/${requestId}`, null);
+  }
+
+  createRequest(email: string, request: BookRequest): Observable<any> {
+    return this.http.post(`api/Book/CreateRequest/${email}`, request);
+  }
+
+
+
 
 
   bookRequestStatusToString(status: BookRequestStatus): string {
