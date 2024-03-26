@@ -140,7 +140,7 @@ export class UserpageComponent {
     this.newUser.address = formValues.address || this.newUser.address;
     this.newUser.country = formValues.country || this.newUser.country;
     this.newUser.photo = this.imageUrl!; 
-    this.newUser.nif = `${(this.country!.value! as Country).alpha2Code}${this.nif!.value!}` || this.newUser.nif;
+    this.newUser.nif = formValues.nif || this.newUser.nif;
 
     this.newUser.postalCode1 = formValues.postalCode1 || this.newUser.postalCode1;
     this.newUser.postalCode2 = formValues.postalCode2 || this.newUser.postalCode2;
@@ -151,7 +151,7 @@ export class UserpageComponent {
 
 
     if (this.role == 'Citizen') {
-      this.userAuthService.updateUser(this.newUser, this.image, passConfirm).subscribe(
+      this.userAuthService.updateUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
         res => {
 
 
@@ -177,7 +177,7 @@ export class UserpageComponent {
       );
     }
     else {
-      this.userAuthService.updateMunicipAdminUser(this.newUser, this.image, passConfirm).subscribe(
+      this.userAuthService.updateMunicipAdminUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
         res => {
           this.originalName = this.newUser.firstName;
           this.imageUrl = this.newUser.photo;

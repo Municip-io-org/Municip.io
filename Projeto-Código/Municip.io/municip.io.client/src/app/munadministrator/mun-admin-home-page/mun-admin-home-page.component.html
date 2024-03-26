@@ -1,5 +1,5 @@
 <app-header-loggedin></app-header-loggedin>
-<app-big-banner [image]="municipality.landscapePhoto!" title="Município de {{municipality.name}}"
+<app-big-banner image="{{municipality.landscapePhoto}} ? {{municipality.landscapePhoto}} : '/assets/images/placeholder/Landscape placeholder.jpg'" title="Município de {{municipality.name}}"
                 text={{municipality.description}}></app-big-banner>
 <div class=" my-[4rem] mx-60 space-y-20">
   <div class="flex">
