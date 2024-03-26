@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { LibraryService } from '../../services/library/library.service';
+import { Book, BookStatus, LibraryService } from '../../services/library/library.service';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
-import { Toolbar } from 'ngx-editor';
+import { Editor, Toolbar } from 'ngx-editor';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -12,6 +12,22 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateBookComponent {
 
+  book:Book = {
+    id: 1,
+    iSBN:'',
+    title: '',
+    author: [],
+    availableCopies: 0,
+    copies: 0,
+    coverImage: '',
+    edition: '',
+    genre: [],
+    language: '',
+    publicationDate: new Date(),
+    publisher: '',
+    sinopsis: '',
+    status: BookStatus.Available
+}
 
   municipalityImage: string = "";
   municipalityName: string = "";
@@ -24,6 +40,7 @@ export class CreateBookComponent {
 
   isDialogOpen: boolean = false;
 
+  editor = new Editor();
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -35,14 +52,6 @@ export class CreateBookComponent {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
-  /**
-   * Construtor do componente.
-   * @param authService
-   * @param libraryService
-   * @param router
-   */
-  constructor(private authService: UserAuthService, private libraryService: LibraryService, private router: Router) {
-  }
 
   bookForm = new FormGroup({
     iSBN: new FormControl('',),
@@ -57,10 +66,26 @@ export class CreateBookComponent {
     sinopsis: new FormControl('', [Validators.required]),
   })
 
+
+  /**
+   * Construtor do componente.
+   * @param authService
+   * @param libraryService
+   * @param router
+   */
+  constructor(private authService: UserAuthService, private libraryService: LibraryService, private router: Router) {
+
+  }
+
+ 
+
   /**
    * Método onInit 
    */
   ngOnInit(): void {
+
+    this.editor = new Editor();
+
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
@@ -72,6 +97,53 @@ export class CreateBookComponent {
   }
 
 
+
+  onCoverImagePicked(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.coverImage = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.coverImageUrl = reader.result as string; // Atribui o URL temporário à propriedade emblemPhoto
+      };
+      reader.readAsDataURL(file); // Lê o conteúdo do arquivo como um URL de dados
+    } else {
+      console.error('No file selected');
+    }
+  }
+
+
+
+  isValidImageFile(file: File): boolean {
+    // Adicione aqui a lógica para validar se o arquivo é uma imagem
+    // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
+    return file.type.startsWith('image/');
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    const files: FileList | null = event.dataTransfer?.files || null;
+    if (files && files.length > 0) {
+      const file = files[0];
+      if (file && this.isValidImageFile(file)) { // Verifique se file não é null ou undefined
+        this.coverImage = file;
+        this.coverImageUrl = URL.createObjectURL(this.coverImage);
+
+      } else {
+        console.error('Por favor, solte uma imagem válida.');
+      }
+    } else {
+      console.error('Nenhuma imagem solta.');
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
 
 
 }
