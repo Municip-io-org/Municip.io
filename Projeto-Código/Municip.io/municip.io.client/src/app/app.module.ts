@@ -115,6 +115,9 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FileDragDropDirective } from './directives/fileDragDrop/file-drag-drop.directive';
 import { TemplateListComponent } from './documents/template-list/template-list.component';
 import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
+import { RequestsComponent } from './library/requests/requests.component';
+
+import { RequestedBookCardComponent } from './utils/library/requested-book-card/requested-book-card.component';
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -212,6 +215,8 @@ registerLocaleData(localePt, 'pt-PT');
     FileDragDropDirective,
     TemplateListComponent,
     EditTemplateComponent,
+    RequestsComponent,
+    RequestedBookCardComponent,
     
   ],
   imports: [
