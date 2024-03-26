@@ -18,8 +18,8 @@ export class CreateBookComponent {
 
 
   error: string | null = null;
-  image!: File;
-  imageUrl: string | null = null;
+  coverImage!: File;
+  coverImageUrl: string | null = null;
   files: any[] = [];
 
   isDialogOpen: boolean = false;
@@ -49,6 +49,12 @@ export class CreateBookComponent {
     title: new FormControl('', [Validators.required]),
     publisher: new FormControl('', [Validators.required]),
     edition: new FormControl('', [Validators.required]),
+    author: new FormControl('', [Validators.required]),
+    publicationDate: new FormControl(new Date(), [Validators.required]),
+    language: new FormControl('', [Validators.required]),
+    copies: new FormControl('', [Validators.required]),
+    genre: new FormControl('', [Validators.required]),
+    sinopsis: new FormControl('', [Validators.required]),
   })
 
   /**
