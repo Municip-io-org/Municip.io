@@ -147,7 +147,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendAprove")]
         public IActionResult SendAprove(string email,string name)
         {
-            EmailSender.SendEmailAproveDeny(email, "Resultado de Inscrição", name, UserStatusMessage.Approve.toString(), "root/html/AproveEmail.html");
+            EmailSender.SendEmailAproveDeny(email, "Resultado de Inscrição", name, UserStatusMessage.Approve.toString(), "wwwroot/html/AproveEmail.html");
             return Ok("Success");
         }
 
@@ -161,7 +161,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendDeny")]
         public IActionResult SendDeny(string email, string name)
         {
-            EmailSender.SendEmailAproveDeny(email, "Resultado de Inscrição", name, UserStatusMessage.Deny.toString(), "root/html/DenyEmail.html");
+            EmailSender.SendEmailAproveDeny(email, "Resultado de Inscrição", name, UserStatusMessage.Deny.toString(), "wwwroot/html/DenyEmail.html");
             return Ok("Success");
         }
 
@@ -174,7 +174,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendRemove")]
         public IActionResult SendRemove(string email, string name)
         {
-            EmailSender.SendEmailAproveDeny(email, "Remoção de conta", name, UserStatusMessage.Remove.toString(), "root/html/DenyEmail.html");
+            EmailSender.SendEmailAproveDeny(email, "Remoção de conta", name, UserStatusMessage.Remove.toString(), "wwwroot/html/DenyEmail.html");
             return Ok("Success");
         }
 
@@ -188,7 +188,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendBlock")]
         public IActionResult SendBlock(string email, string name)
         {
-            EmailSender.SendEmailAproveDeny(email, "Bloqueio de Conta", name, UserStatusMessage.Block.toString(), "root/html/DenyEmail.html");
+            EmailSender.SendEmailAproveDeny(email, "Bloqueio de Conta", name, UserStatusMessage.Block.toString(), "wwwroot/html/DenyEmail.html");
             return Ok("Success");
         }
 
@@ -201,7 +201,7 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendUnblock")]
         public IActionResult SendUnblock(string email, string name)
         {
-            EmailSender.SendEmailAproveDeny(email, "Desbloqueio de Conta", name, UserStatusMessage.Unblock.toString(), "root/html/AproveEmail.html");
+            EmailSender.SendEmailAproveDeny(email, "Desbloqueio de Conta", name, UserStatusMessage.Unblock.toString(), "wwwroot/html/AproveEmail.html");
             return Ok("Success");
         }
 

@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MimeKit.Cryptography;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -112,7 +114,7 @@ namespace Municip.io.Server.Controllers
                     Email = citizen.Email
                 };
 
-      
+
                 // Store user data in AspNetUsers database table
                 var result = await _userManager.CreateAsync(user, citizen.Password);
 
@@ -132,6 +134,11 @@ namespace Municip.io.Server.Controllers
                     await _context.SaveChangesAsync();
 
                     SendRegister(citizen.Email, citizen.firstName);
+
+                    //add +1 to municipality of user
+                    var municipality = _context.Municipalities.FirstOrDefault(m => m.name == citizen.Municipality);
+                    municipality.numberOfUsers++;
+                    await _context.SaveChangesAsync();
 
                     return Ok();
                 }
@@ -177,19 +184,19 @@ namespace Municip.io.Server.Controllers
         // Verifica se o formato do NIF é válido
         private bool IsNifValid(string nif)
         {
-            
+
             if (nif.Length != 11)
             {
                 return false;
             }
 
-           
+
             if (!char.IsUpper(nif[0]) || !char.IsUpper(nif[1]))
             {
                 return false;
             }
 
-           
+
             if (!nif.Substring(2).All(char.IsDigit))
             {
                 return false;
@@ -228,25 +235,37 @@ namespace Municip.io.Server.Controllers
 
                 if (result.Succeeded)
                 {
-                    this.SendRegister(municipalAdministrator.Email, municipalAdministrator.firstName);
-
-
-                    await _userManager.AddToRoleAsync(user, "Municipal");
-                    municipalAdministrator.status = MunicipalAdministratorStatus.Pending;
-                    municipalAdministrator.date = DateOnly.FromDateTime(DateTime.Now);
-
-                    //add citizen to database
-                    _context.MunicipalAdministrators.Add(municipalAdministrator);
-                    await _context.SaveChangesAsync();
-                    if (_context.Municipalities.Any(m => m.name == municipalAdministrator.municipality))
+                    try
                     {
-                        // municipio existe
-                        //return Ok(new { Message = "NEXISTE" });
-                        return Ok(true);
+                        this.SendRegister(municipalAdministrator.Email, municipalAdministrator.firstName);
+
+
+                        await _userManager.AddToRoleAsync(user, "Municipal");
+                        municipalAdministrator.status = MunicipalAdministratorStatus.Pending;
+                        municipalAdministrator.date = DateOnly.FromDateTime(DateTime.Now);
+
+                        //add citizen to database
+                        _context.MunicipalAdministrators.Add(municipalAdministrator);
+                        await _context.SaveChangesAsync();
+                        if (_context.Municipalities.Any(m => m.name == municipalAdministrator.municipality))
+                        {
+                            // municipio existe
+                            //return Ok(new { Message = "NEXISTE" });
+                            return Ok(true);
+                        }
+                        // município nao existe
+                        return Ok(false);
                     }
-                    // município nao existe
-                    return Ok(false);
+                    catch (Exception e)
+                    {
+                        var errorsExecption = new List<string>();
+                        errorsExecption.Add(e.Message);
+                        return BadRequest(new { Message = "Erro ao registar o administrador municipal.", ModelState = ModelState, errors = errorsExecption });
+                    }
+
+
                 }
+
 
 
                 List<string> errors = new List<string>();
@@ -302,7 +321,7 @@ namespace Municip.io.Server.Controllers
                     _context.Municipalities.Add(municipality);
                     await _context.SaveChangesAsync();
 
-                    
+
                     foreach (AppFeatureCategory category in Enum.GetValues(typeof(AppFeatureCategory)))
                     {
                         _context.AppFeatures.Add(new AppFeature
@@ -535,16 +554,16 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendRegister")]
         public IActionResult SendRegister(string email, string name)
         {
-            EmailSender.SendEmailAproveDeny(email, "Inscrito Com Sucesso", name, AccountUserEmail.REGISTER.toString(), "root/html/AproveEmail.html");
+            EmailSender.SendEmailAproveDeny(email, "Inscrito Com Sucesso", name, AccountUserEmail.REGISTER.toString(), "wwwroot/html/AproveEmail.html");
             return Ok("Success");
         }
 
         [HttpPut("UpdateBrowserHistory")]
         public async Task<IActionResult> UpdateBrowserHistory(string email, string userAgent)
         {
-            
+
             var citizen = await _context.Citizens.Where(c => c.Email == email).FirstOrDefaultAsync();
-            
+
 
             if (citizen != null)
             {
@@ -572,7 +591,7 @@ namespace Municip.io.Server.Controllers
 
                 var browsers = _context.Citizens
                     .Where(c => c.Email == email)
-                    .SelectMany(c => c.Browsers) 
+                    .SelectMany(c => c.Browsers)
                     .ToList();
                 return Json(browsers);
             }
@@ -585,13 +604,13 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendNewLogin")]
         public IActionResult SendNewLogin(string email)
         {
-            EmailSender.SendEmailAproveDeny(email, "Novo Login", "", AccountUserEmail.NEWLOGIN.toString(), "root/html/AproveEmail.html");
+            EmailSender.SendEmailAproveDeny(email, "Novo Login", "", AccountUserEmail.NEWLOGIN.toString(), "wwwroot/html/AproveEmail.html");
             return Ok(new { message = "Success" });
         }
 
 
 
 
-        
+
     }
 }
