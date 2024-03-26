@@ -122,6 +122,7 @@ import { AgeChartComponent } from './admin-statistics-dashboard/age-chart/age-ch
 import { DistrictsMapComponent } from './admin-statistics-dashboard/districts-map/districts-map.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { CitizensMapComponent } from './admin-statistics-dashboard/citizens-map/citizens-map.component';
+import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -226,6 +227,7 @@ registerLocaleData(localePt, 'pt-PT');
     AgeChartComponent,
     DistrictsMapComponent,
     CitizensMapComponent,
+    MunadminStatisticsDashboardComponent,
     
   ],
   imports: [

@@ -55,6 +55,7 @@ import { IsTransportFeatureActive } from './utils/guard/isTransportFeatureActive
 import { TemplateListComponent } from './documents/template-list/template-list.component';
 import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
 import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/admin-statistics-dashboard.component';
+import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
 
 
 const routes: Routes = [
@@ -107,7 +108,8 @@ const routes: Routes = [
   { path: 'documents/edit-template/:templateId', component: EditTemplateComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'documents/generate-pdf', component: GeneratepdfComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
   { path: 'documents/template-list', component: TemplateListComponent },
-  { path: 'adminstatistics', component: AdminStatisticsDashboardComponent }
+  { path: 'adminstatistics', component: AdminStatisticsDashboardComponent },
+  { path: 'munadminstatistics', component: MunadminStatisticsDashboardComponent },
 
 ];
 
