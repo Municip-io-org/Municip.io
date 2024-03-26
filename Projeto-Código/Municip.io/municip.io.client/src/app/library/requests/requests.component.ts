@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BookRequest, LibraryService } from '../../services/library/library.service';
+import { BookRequest, BookRequestStatus, LibraryService } from '../../services/library/library.service';
 import { UserAuthService } from '../../services/user-auth.service';
 
 @Component({
@@ -22,7 +22,6 @@ export class RequestsComponent {
 
 
   ngOnInit(): void {
-    this.sortEventsByDate();
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
@@ -37,7 +36,15 @@ export class RequestsComponent {
           //    console.error(error);
           //  }
           //);
-          this.booksRequested = this.service.getRequestedBooks();
+          this.service.getRequests().subscribe(
+            (requests) => {
+              this.booksRequested = requests;
+              this.sortEventsByDate();
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
         });
       });
 
@@ -46,7 +53,8 @@ export class RequestsComponent {
   }
 
   get filteredBooks() {
-    return this.booksRequested.filter(b => b.book.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
+    return this.booksRequested.filter(b => b.book.title.toLowerCase().includes(this.nameSearch.toLowerCase()) && b.status !== BookRequestStatus.Delivered && b.status !== BookRequestStatus.Denied
+    );
   }
 
   toggleSortOrder() {
@@ -65,4 +73,6 @@ export class RequestsComponent {
       }
     });
   }
+
+
 }

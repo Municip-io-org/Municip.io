@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Citizen } from '../citizen-auth.service';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LibraryService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
 
   //create mock data
@@ -25,7 +27,7 @@ export class LibraryService {
       publisher: 'HarperCollins',
       sinopsis: 'Bilbo Bolseiro é um hobbit que leva uma vida confortável e sem ambições. Mas seu contentamento é perturbado quando Gandalf, o mago, e uma companhia de anões batem à sua porta e levam-no para uma expedição. Eles têm um plano para roubar o tesouro guardado por Smaug, o Magnífico, um grande e perigoso dragão. Bilbo reluta muito em participar da aventura, mas acaba surpreendendo até a si mesmo com sua esperteza e sua habilidade como ladrão!',
       status: BookStatus.Available
-    },{
+    }, {
       id: 2,
       title: 'O Hobbit',
       author: ['J.R.R. Tolkien'],
@@ -62,7 +64,7 @@ export class LibraryService {
         photo: 'https://img.freepik.com/fotos-gratis/retrato-abstrato-do-olho-da-elegancia-das-mulheres-jovens-gerada-pela-ia_188544-9712.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1711324800&semt=sph'
       },
       book: this.Books[0],
-      reservedDate: new Date('2021-09-21'),
+      reservedDate: new Date(2024, 2, 26, 14, 7),
       returnDate: new Date('2021-10-21'),
       deliveredDate: new Date('2021-09-21'),
       municipality: 'Londres',
@@ -90,8 +92,8 @@ export class LibraryService {
       returnDate: new Date('2021-10-21'),
       deliveredDate: new Date('2021-09-21'),
       municipality: 'Londres',
-      status: BookRequestStatus.Denied
-    },{
+      status: BookRequestStatus.Delayed
+    }, {
       id: 3,
       citizen: {
         address: 'Rua dos Alfeneiros, nº 4',
@@ -126,6 +128,11 @@ export class LibraryService {
     return this.BooksRequested;
   }
 
+
+
+  getRequests(): Observable<BookRequest[]> {
+    return this.http.get<BookRequest[]>('api/Book/GetRequests');
+  }
 
 
 
