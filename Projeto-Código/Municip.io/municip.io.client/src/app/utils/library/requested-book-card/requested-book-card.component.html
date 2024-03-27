@@ -1,3 +1,28 @@
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-content title="Requisitar o livro {{bookRequest.book.title}}"
+                      message="Insira os dados para realizar a requisição
+                    para {{bookRequest.citizen.firstName}} {{bookRequest.citizen.surname}}"
+                      confirmButtonClass="disabled:cursor-not-allowed"
+                      [confirmButtonDisabled]="!borrowForm.valid"
+                      (cancel)="closeDialog()"
+                      (confirm)="borrowBook()"
+                      >
+    <form [formGroup]="borrowForm" class="mt-5">
+      <div class="h-28 w-full">
+        <app-input-title class="">Data de Retorno</app-input-title>
+        <div class="flex items-center">
+          <app-date-picker [date]="returnDate" name="returnDate" class="w-3/5"
+                           [minDate]="minDate" />
+
+          <app-tooltip [tooltipText]="'Utilize o seletor para a inserção da data'"></app-tooltip>
+        </div>
+        <div class="text-red-500 font-bold py-2" *ngIf="returnDate?.touched && returnDate?.invalid">
+          <div *ngIf="returnDate?.errors?.['required'] ">Data Obrigatória</div>
+        </div>
+      </div>
+    </form>
+  </app-dialog-content>
+</ng-container>
 <div class="flex bg-white rounded-xl shadow-2xl  hover:shadow-xl h-44">
   <img [src]="book.coverImage" alt="cover"
        class="w-36 h-52 object-cover rounded-xl
@@ -44,7 +69,7 @@
           </div>
         </div>
         <div class="w-full flex space-x-10 justify-center">
-          <button (click)="borrowBook()" class="bg-green-200 size-10 rounded-xl group">
+          <button (click)="openDialog()" class="bg-green-200 size-10 rounded-xl group">
             <i class="fa-solid fa-check fa-2xl text-green-500 group-hover:text-green-700
                transition-all duration-500 ease-in-out
                "></i>

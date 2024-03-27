@@ -1,22 +1,47 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Book, BookRequest, BookRequestStatus, LibraryService } from '../../../services/library/library.service';
 import { Data, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { provideNativeDateAdapter, DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-requested-book-card',
   templateUrl: './requested-book-card.component.html',
-  styleUrl: './requested-book-card.component.css'
+  styleUrl: './requested-book-card.component.css',
+  providers: [provideNativeDateAdapter()],
 })
 export class RequestedBookCardComponent {
   @Input() bookRequest!: BookRequest;
   book!: Book;
 
+  isDialogOpen = false;
+
 
   @Output() update = new EventEmitter();
-  constructor(private router: Router, private bookService: LibraryService) { }
+
+  //set min date to tomorrow
+  minDate = new Date();
+
+
+  borrowForm: FormGroup = new FormGroup({
+    returnDate: new FormControl(new Date(), Validators.required)
+  });
+
+  get returnDate() {
+    return this.borrowForm.get('returnDate') as FormControl;
+  }
+
+
+  constructor(private router: Router, private bookService: LibraryService, private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('pt');
+  }
 
 
   ngOnInit(): void {
+    this.minDate.setDate(this.minDate.getDate() + 1);
+    this.borrowForm.get('returnDate')?.setValue(this.minDate);
+
+
     this.book = this.bookRequest.book;
 
     if (this.bookRequest.status === BookRequestStatus.Reserved) {
@@ -92,7 +117,7 @@ export class RequestedBookCardComponent {
 
 
   borrowBook() {
-    var date = new Date(2024, 10, 10, 10, 10, 10);
+    let date = new Date(this.borrowForm.get('returnDate')?.value);
     this.bookService.borrowBook(this.bookRequest.id, date).subscribe(
       (data) => {
         console.log(data);
@@ -132,6 +157,13 @@ export class RequestedBookCardComponent {
   }
 
 
+  closeDialog() {
+    this.isDialogOpen = false;
+  }
+
+  openDialog() {
+    this.isDialogOpen = true;
+  }
 
 
 

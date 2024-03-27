@@ -227,6 +227,16 @@ namespace Municip.io.Server.Controllers
 
 
 
+        //send email notification that the book is delayed
+        [HttpPost("SendDelayedEmail")]
+        public IActionResult SendDelayedEmail(string email, string name)
+        {
+            EmailSender.SendEmailAproveDeny(email, "Resultado de Inscrição", name, UserStatusMessage.Deny.toString(), "wwwroot/html/DenyEmail.html");
+            return Ok("Success");
+        }
+
+
+
 
 
 

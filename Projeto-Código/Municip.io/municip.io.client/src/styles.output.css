@@ -4124,6 +4124,10 @@ video {
   height: 6rem;
 }
 
+.h-28{
+  height: 7rem;
+}
+
 .h-3{
   height: 0.75rem;
 }
@@ -4548,6 +4552,18 @@ video {
 
 .w-screen{
   width: 100vw;
+}
+
+.w-\[50\%\]{
+  width: 50%;
+}
+
+.w-3\/4{
+  width: 75%;
+}
+
+.w-3\/5{
+  width: 60%;
 }
 
 .min-w-\[20rem\]{
@@ -6476,6 +6492,15 @@ body {
   cursor: not-allowed;
 }
 
+.disabled\:hover\:bg-current:hover:disabled{
+  background-color: currentColor;
+}
+
+.disabled\:hover\:bg-municip-blue:hover:disabled{
+  --tw-bg-opacity: 1;
+  background-color: rgb(88 117 246 / var(--tw-bg-opacity));
+}
+
 .group:hover .group-hover\:flex{
   display: flex;
 }
@@ -6587,6 +6612,10 @@ body {
 
   .sm\:w-full{
     width: 100%;
+  }
+
+  .sm\:max-w-2xl{
+    max-width: 42rem;
   }
 
   .sm\:max-w-lg{
