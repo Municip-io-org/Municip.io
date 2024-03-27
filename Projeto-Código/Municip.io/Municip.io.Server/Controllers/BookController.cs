@@ -49,12 +49,16 @@ namespace Municip.io.Server.Controllers
                         return BadRequest("O objeto de livro recebido está vazio.");
                     }
 
-                    // Verificar se já existe um livro com o mesmo ISBN e o mesmo município
-                    var existingBook = _context.Books.FirstOrDefault(b => b.ISBN == newBook.ISBN && b.Municipality == newBook.Municipality);
-                    if (existingBook != null)
+                    // Verificar se o ISBN não está vazio antes de realizar a verificação
+                    if (!string.IsNullOrEmpty(newBook.ISBN))
                     {
-                        // Se já existe um livro com o mesmo ISBN e município, retornar um BadRequest
-                        return BadRequest("Já existe um livro com o mesmo ISBN e Município.");
+                        // Verificar se já existe um livro com o mesmo ISBN e o mesmo município
+                        var existingBook = _context.Books.FirstOrDefault(b => b.ISBN == newBook.ISBN && b.Municipality == newBook.Municipality);
+                        if (existingBook != null)
+                        {
+                            // Se já existe um livro com o mesmo ISBN e município, retornar um BadRequest
+                            return BadRequest("Já existe um livro com o mesmo ISBN e Município.");
+                        }
                     }
 
                     // Adicionar o novo livro ao contexto e salvar as alterações no banco de dados
@@ -73,6 +77,7 @@ namespace Municip.io.Server.Controllers
                 return StatusCode(500, $"Erro ao criar livro: {ex.Message}");
             }
         }
+
 
 
         //create a new book request

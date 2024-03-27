@@ -36,7 +36,6 @@ export class CreateBookComponent {
 
   error: string | null = null;
   coverImage!: File;
-  coverImageUrl: string | null = null;
   files: any[] = [];
 
   isDialogOpen: boolean = false;
@@ -55,16 +54,18 @@ export class CreateBookComponent {
 
 
   bookForm = new FormGroup({
-    iSBN: new FormControl('',),
-    title: new FormControl("", [Validators.required]),
-    publisher: new FormControl("", [Validators.required]),
-    edition: new FormControl("", [Validators.required]),
-    author: new FormControl("", [Validators.required]),
-    publicationDate: new FormControl(new Date(), [Validators.required]),
-    language: new FormControl("", [Validators.required]),
-    copies: new FormControl("", [Validators.required]),
-    genre: new FormControl("", [Validators.required]),
-    sinopsis: new FormControl("", [Validators.required]),
+    iSBN: new FormControl('',[Validators.pattern(/^\d{10}$|^\d{13}$/)]),
+    useISBN: new FormControl(true, [Validators.required]),
+    title: new FormControl({ value: "", disabled: true }, [Validators.required]),
+    publisher: new FormControl({value: "", disabled: true }, [Validators.required]),
+    edition: new FormControl({ value: "", disabled: true }, [Validators.required]),
+    author: new FormControl({ value: "", disabled: true }, [Validators.required]),
+    publicationDate: new FormControl({ value: new Date(), disabled: true }, [Validators.required]),
+    language: new FormControl({ value: "", disabled: true }, [Validators.required]),
+    copies: new FormControl({ value: "", disabled: true }, [Validators.required]),
+    genre: new FormControl({ value: "", disabled: true }, [Validators.required]),
+    sinopsis: new FormControl({ value: "", disabled: true }, [Validators.required]),
+    coverImageUrl: new FormControl({ value: "", disabled: true }, [Validators.required])
   })
 
 
@@ -84,7 +85,6 @@ export class CreateBookComponent {
    * Método onInit 
    */
   ngOnInit(): void {
-
     this.editor = new Editor();
 
     this.authService.getUserData().subscribe((user) => {
@@ -100,20 +100,20 @@ export class CreateBookComponent {
 
 
   onCoverImagePicked(event: any) {
+    if (this.coverImageUrl?.disable) return;
+
     const file: File = event.target.files[0];
     if (file) {
       this.coverImage = file;
       const reader = new FileReader();
       reader.onload = () => {
-        this.coverImageUrl = reader.result as string; // Atribui o URL temporário à propriedade emblemPhoto
+        this.coverImageUrl?.setValue(reader.result as string); // Atribui o URL temporário à propriedade emblemPhoto
       };
       reader.readAsDataURL(file); // Lê o conteúdo do arquivo como um URL de dados
     } else {
       console.error('No file selected');
     }
   }
-
-
 
   isValidImageFile(file: File): boolean {
     // Adicione aqui a lógica para validar se o arquivo é uma imagem
@@ -126,13 +126,15 @@ export class CreateBookComponent {
   }
 
   onDrop(event: DragEvent) {
+    if (this.coverImageUrl?.disable) return;
+
     event.preventDefault();
     const files: FileList | null = event.dataTransfer?.files || null;
     if (files && files.length > 0) {
       const file = files[0];
       if (file && this.isValidImageFile(file)) { // Verifique se file não é null ou undefined
         this.coverImage = file;
-        this.coverImageUrl = URL.createObjectURL(this.coverImage);
+        this.coverImageUrl?.setValue(URL.createObjectURL(this.coverImage));
 
       } else {
         console.error('Por favor, solte uma imagem válida.');
@@ -148,7 +150,7 @@ export class CreateBookComponent {
     if (this.bookForm.valid) {
 
       this.book = {
-        isbn: this.iSBN?.value!.toString(),
+        isbn: this.iSBN?.value!.toString() || '',
         title: this.title?.value!,
         author: [this.author?.value!],
         availableCopies: parseInt(this.copies?.value!),
@@ -167,10 +169,9 @@ export class CreateBookComponent {
       console.log(this.book);
 
       this.libraryService.createBook(this.book, this.coverImage).subscribe(
-        (event) => {
+        (res) => {
           this.error = null;
           this.isDialogOpen = true;
-          console.log(event);
         },
         (error) => {
           console.log(error)
@@ -181,6 +182,57 @@ export class CreateBookComponent {
     }
   }
 
+
+  toggleControls() {
+    const useISBN = this.useISBN?.value;
+    const iSBNValid = this.iSBN?.valid;
+
+    if (useISBN) {
+      this.iSBN?.enable();
+      this.disableFormControls();
+    } else {
+      this.iSBN?.disable();
+      this.iSBN?.setValue('');
+      this.enableFormControls();
+    }
+
+    if (useISBN && iSBNValid) {
+      this.enableFormControls();
+    }
+  }
+
+
+  enableFormControls() {
+    
+
+    this.title?.enable();
+    this.publisher?.enable();
+    this.edition?.enable();
+    this.author?.enable();
+    this.publicationDate?.enable();
+    this.language?.enable();
+    this.copies?.enable();
+    this.genre?.enable();
+    this.sinopsis?.enable();
+    this.coverImageUrl?.enable();
+  }
+
+  disableFormControls() {
+    
+
+    this.title?.disable();
+    this.publisher?.disable();
+    this.edition?.disable();
+    this.author?.disable();
+    this.publicationDate?.disable();
+    this.language?.disable();
+    this.copies?.disable();
+    this.genre?.disable();
+    this.sinopsis?.disable();
+    this.coverImageUrl?.disable();
+  }
+
+
   ngOnDestroy(): void {
     this.editor.destroy();
   }
@@ -188,6 +240,10 @@ export class CreateBookComponent {
   // Getter para acessar os controles do formulário
   get iSBN() {
     return this.bookForm.get('iSBN');
+  }
+
+  get useISBN() {
+    return this.bookForm.get('useISBN');
   }
 
   get title() {
@@ -224,5 +280,9 @@ export class CreateBookComponent {
 
   get sinopsis() {
     return this.bookForm.get('sinopsis');
+  }
+
+  get coverImageUrl() {
+    return this.bookForm.get('coverImageUrl');
   }
 }
