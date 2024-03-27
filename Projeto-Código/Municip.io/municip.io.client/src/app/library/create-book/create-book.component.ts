@@ -100,14 +100,14 @@ export class CreateBookComponent {
 
 
   onCoverImagePicked(event: any) {
-    if (this.coverImageUrl?.disable) return;
+    if (this.coverImageUrl?.disabled) return;
 
     const file: File = event.target.files[0];
     if (file) {
       this.coverImage = file;
       const reader = new FileReader();
       reader.onload = () => {
-        this.coverImageUrl?.setValue(reader.result as string); // Atribui o URL temporário à propriedade emblemPhoto
+        this.coverImageUrl?.setValue(reader.result as string); // Atribui o URL temporário à propriedade coverImageUrl
       };
       reader.readAsDataURL(file); // Lê o conteúdo do arquivo como um URL de dados
     } else {
@@ -126,7 +126,7 @@ export class CreateBookComponent {
   }
 
   onDrop(event: DragEvent) {
-    if (this.coverImageUrl?.disable) return;
+    if (this.coverImageUrl?.disabled) return;
 
     event.preventDefault();
     const files: FileList | null = event.dataTransfer?.files || null;
