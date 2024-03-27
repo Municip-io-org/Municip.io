@@ -33,6 +33,8 @@ export class EventsService {
       }));
 
   }
+
+
   updateEvent(event: Event, image?: File) {
     if (!image) return this.http.put<Event>('api/events/UpdateEvent', event);
 

@@ -115,6 +115,10 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FileDragDropDirective } from './directives/fileDragDrop/file-drag-drop.directive';
 import { TemplateListComponent } from './documents/template-list/template-list.component';
 import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
+import { RequestsComponent } from './library/requests/requests.component';
+
+import { RequestedBookCardComponent } from './utils/library/requested-book-card/requested-book-card.component';
+import { CreateBookComponent } from './library/create-book/create-book.component';
 import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/admin-statistics-dashboard.component';
 import { RegisteredUsersGraphComponent } from './admin-statistics-dashboard/registered-users-graph/registered-users-graph.component';
 import { GenderChartComponent } from './admin-statistics-dashboard/gender-chart/gender-chart.component';
@@ -123,6 +127,7 @@ import { DistrictsMapComponent } from './admin-statistics-dashboard/districts-ma
 import { GoogleChartsModule } from 'angular-google-charts';
 import { CitizensMapComponent } from './admin-statistics-dashboard/citizens-map/citizens-map.component';
 import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
+import { RegisteredMunUsersGraphComponent } from './munadmin-statistics-dashboard/registered-mun-users-graph/registered-mun-users-graph.component';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -221,6 +226,9 @@ registerLocaleData(localePt, 'pt-PT');
     FileDragDropDirective,
     TemplateListComponent,
     EditTemplateComponent,
+    RequestsComponent,
+    RequestedBookCardComponent,
+    CreateBookComponent,
     AdminStatisticsDashboardComponent,
     RegisteredUsersGraphComponent,
     GenderChartComponent,
@@ -228,6 +236,7 @@ registerLocaleData(localePt, 'pt-PT');
     DistrictsMapComponent,
     CitizensMapComponent,
     MunadminStatisticsDashboardComponent,
+    RegisteredMunUsersGraphComponent,
     
   ],
   imports: [
