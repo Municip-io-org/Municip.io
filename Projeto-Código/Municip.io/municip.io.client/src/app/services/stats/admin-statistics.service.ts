@@ -31,7 +31,15 @@ return this.http.get<any>('api/stats/getAllMunicipalities');
 
   getAllEvents(): Observable<any> {
     return this.http.get<any>('api/stats/getAllEvents');
-  
+  }
+
+  getLandingPageMunicipalities(): Observable<any> {
+    return this.http.get<any>('api/stats/getLandingPageMunicipalities');
+  }
+
+  getLandingPageCitizens(): Observable<any> {
+    return this.http.get<any>('api/stats/getLandingPageCitizens');
+  }
 
 
 
@@ -42,4 +50,4 @@ return this.http.get<any>('api/stats/getAllMunicipalities');
       
     }
 
-}
+

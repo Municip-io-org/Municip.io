@@ -49,6 +49,21 @@ namespace Municip.io.Server.Controllers
         {
             return Ok(_context.Events);
         }
+
+        [HttpGet("getLandingPageCitizens")]
+        public IActionResult getLandingPageCitizens()
+        {
+            return Ok(_context.Citizens.Count());
+
+        }
+
+        [HttpGet("getLandingPageMunicipalities")]
+        public IActionResult getLandingPageMunicipalities()
+        {
+            return Ok(_context.Municipalities.Count());
+        }
+
+
         
     }
 }
