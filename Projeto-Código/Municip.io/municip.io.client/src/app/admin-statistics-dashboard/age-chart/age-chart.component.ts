@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { Citizen } from '../../services/citizen-auth.service';
 import { AdminStatisticsService } from '../../services/stats/admin-statistics.service';
 import Chart from 'chart.js/auto';
@@ -9,62 +9,54 @@ import Chart from 'chart.js/auto';
   styleUrl: './age-chart.component.css'
 })
 export class AgeChartComponent {
+  @Input() citizens: Citizen[] = [];
+  chart: Chart<'pie', number[], string> | undefined;
 
-  constructor(private adminStatisticsService: AdminStatisticsService) { }
+  constructor() { }
 
-  citizens: Citizen[] = [];
-  chart: Chart | undefined;
+  ngOnInit() {
+    this.createChart();
+  }
 
-
-
-
-  ngAfterViewInit() {
-    this.adminStatisticsService.getAllCitizens().subscribe((data: Citizen[]) => {
-      this.citizens = data;
-
-
-      console.log(this.citizens)
-      this.createChart();
-    });
-
-
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['citizens'] && !changes['citizens'].firstChange) {
+      this.updateChart();
+    }
   }
 
   createChart() {
-
-    const xValues = ["0-17", "18-29", "30-49", "50-64","65+"];
-
-
-
+    const xValues = ["0-17", "18-29", "30-49", "50-64", "65+"];
     const yValues = [this.getAgeCount(this.arrangeAges(), "0-17"), this.getAgeCount(this.arrangeAges(), "18-29"), this.getAgeCount(this.arrangeAges(), "30-49"), this.getAgeCount(this.arrangeAges(), "50-64"), this.getAgeCount(this.arrangeAges(), "65+")];
-    const barColors = [
-      "#334CFF",
-      "#FF69B4",
-      "#FFA07A",
-      "#FFD700",
-      "#FF6347"
+    const barColors = ["#334CFF", "#FF69B4", "#FFA07A", "#FFD700", "#FF6347"];
 
-
-    ];
-
-    new Chart("ageChart", {
-      type: "pie",
-      data: {
-        labels: xValues,
-        datasets: [{
-          backgroundColor: barColors,
-          data: yValues
-        }]
-      },
-      options: {
-
-      }
-    });
+    const chartElement = document.getElementById('ageChart') as HTMLCanvasElement;
+    if (chartElement) {
+      this.chart = new Chart(chartElement, {
+        type: 'pie',
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+          }]
+        },
+        options: {
+          animation: false // Ensure animation is disabled
+        }
+      });
+    }
   }
 
+  updateChart() {
+    if (this.chart) {
+      const yValues = [this.getAgeCount(this.arrangeAges(), "0-17"), this.getAgeCount(this.arrangeAges(), "18-29"), this.getAgeCount(this.arrangeAges(), "30-49"), this.getAgeCount(this.arrangeAges(), "50-64"), this.getAgeCount(this.arrangeAges(), "65+")];
+      this.chart.data.datasets[0].data = yValues;
+      this.chart.update();
+    }
+  }
 
   arrangeAges() {
-let ages = this.citizens.map(citizen => {
+    let ages = this.citizens.map(citizen => {
       let age = new Date().getFullYear() - new Date(citizen.birthDate).getFullYear();
       if (age <= 17) {
         return "0-17";
@@ -82,12 +74,7 @@ let ages = this.citizens.map(citizen => {
     return ages;
   }
 
-  //use arrangeAges () to get the ages of the citizens and then count the number of citizens in each age group
-getAgeCount(ages: string[], ageGroup: string) {
+  getAgeCount(ages: string[], ageGroup: string) {
     return ages.filter(age => age === ageGroup).length;
   }
-
-
 }
-
-

@@ -13,7 +13,7 @@
   </div>
 </header>
 
-<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" [title]="'Estatísticas de Administrador'"
+<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" [title]="'Estatísticas de Município'"
                     [text]="'Consulte os dados sobre a utilização da municip.io, monitorizando o desempenho da ferramenta junto dos municípios e utilizadores'" />
 
 
@@ -39,8 +39,8 @@
 
           </div>
           <div>
-            <span class="block text-2xl font-bold">{{activeMunicipalities}}</span>
-            <span class="block text-gray-500">Municípios Ativos</span>
+            <span class="block text-2xl font-bold">{{activeCitizens}}</span>
+            <span class="block text-gray-500">Cidadãos Aprovados</span>
           </div>
         </div>
         <div class="flex items-center p-8 bg-white shadow rounded-lg hover:shadow-2xl transition duration-300">
@@ -50,9 +50,9 @@
             </svg>
           </div>
           <div>
-            <span class="inline-block text-2xl font-bold">{{blockedMunicipalities}}</span>
-            <span class="inline-block text-xl text-gray-500 font-semibold ml-1">({{percentageOfBlockedMunicipalities}}%)</span>
-            <span class="block text-gray-500">Municípios Bloqueados</span>
+            <span class="inline-block text-2xl font-bold"></span>
+            <span class="inline-block text-xl text-gray-500 font-semibold ml-1">{{blockedCitizens}} ({{blockedCitizensPercentage}}%)</span>
+            <span class="block text-gray-500">Cidadãos Bloqueados</span>
           </div>
         </div>
         <div class="flex items-center p-8 bg-white shadow rounded-lg hover:shadow-2xl transition duration-300">
@@ -76,7 +76,7 @@
 
           <div class="  p-4 flex-grow bg-gray-50 m-6 shadow-xl rounded-xl hover:shadow-2xl transition duration-200 ">
 
-            <app-registered-users-graph></app-registered-users-graph>
+            <app-registered-mun-users-graph></app-registered-mun-users-graph>
 
 
 
@@ -239,9 +239,9 @@
             <div class="flex flex-wrap items-center justify-center px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-50 border-2 border-gray-200 shadow hover:shadow-xl transition duration-200 rounded-md col-span-1 row-span-2">
 
 
-              <h3 class="text-2xl text-gray-500">Cidadãos por género</h3>
+              <h3 class="text-2xl text-gray-500">Cidadãos registados de {{municipality}} <br />por género</h3>
 
-              <app-gender-chart></app-gender-chart>
+              <app-gender-chart [citizens]="citizens"></app-gender-chart>
 
             </div>
 
@@ -250,8 +250,8 @@
 
 
 
-              <app-age-chart></app-age-chart>
-              <h3 class="text-2xl text-gray-500">Cidadãos por idade</h3>
+              <app-age-chart [citizens]="citizens"></app-age-chart>
+              <h3 class="text-2xl text-right text-gray-500">Cidadãos registados de {{municipality}} <br /> por idade</h3>
 
             </div>
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges, input } from '@angular/core';
 import { AdminStatisticsDashboardComponent } from '../admin-statistics-dashboard.component';
 import { AdminStatisticsService } from '../../services/stats/admin-statistics.service';
 import { Citizen } from '../../services/citizen-auth.service';
@@ -10,57 +10,55 @@ import Chart from 'chart.js/auto';
   styleUrl: './gender-chart.component.css'
 })
 export class GenderChartComponent {
+  @Input() citizens: Citizen[] = [];
+  chart: Chart<"pie", number[], string> | undefined; // Adjusted chart type to explicitly specify Chart type
 
   constructor(private adminStatisticsService: AdminStatisticsService) { }
 
-  citizens: Citizen[] = [];
-  chart: Chart | undefined;
-
-  getGenderCountMale: number = 0;
-  getGenderCountFemale: number = 0;
-  getGenderCountOther: number = 0;
-
-
-
-  ngAfterViewInit() {
-    this.adminStatisticsService.getAllCitizens().subscribe((data: Citizen[]) => {
-      this.citizens = data;
-      this.getGenderCountMale = this.citizens.filter(citizen => citizen.gender === "m").length;
-      this.getGenderCountFemale = this.citizens.filter(citizen => citizen.gender === "f").length;
-this.getGenderCountOther = this.citizens.filter(citizen => citizen.gender === "o").length;
-      console.log(this.citizens)
-      this.createChart();
-    });
-
-
+  ngOnInit() {
+    this.createChart();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['citizens'] && !changes['citizens'].firstChange) {
+      this.updateChart();
+    }
+  }
+
+
   createChart() {
-
     const xValues = ["Masculino", "Feminino", "Outro"];
+    const genderCounts = this.getGenderCounts();
+    const barColors = ["#334CFF", "#FF69B4", "#FFA07A"];
 
-    console.log (this.getGenderCountMale);
+    const chartElement = document.getElementById('genderChart') as HTMLCanvasElement;
+    if (chartElement) {
+      this.chart = new Chart(chartElement, {
+        type: 'pie',
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: genderCounts
+          }]
+        },
+        options: {}
+      });
+    }
+  }
 
-    const yValues = [this.getGenderCountMale, this.getGenderCountFemale, this.getGenderCountOther];
-    const barColors = [
-      "#334CFF",
-      "#FF69B4",
-      "#FFA07A"
+  updateChart() {
+    if (this.chart) {
+      const genderCounts = this.getGenderCounts();
+      this.chart.data.datasets[0].data = genderCounts;
+      this.chart.update();
+    }
+  }
 
-    ];
-
-    new Chart("genderChart", {
-      type: "pie",
-      data: {
-        labels: xValues,
-        datasets: [{
-          backgroundColor: barColors,
-          data: yValues
-        }]
-      },
-      options: {
-        
-      }
-    });
+  getGenderCounts(): number[] {
+    const countMale = this.citizens.filter(citizen => citizen.gender === "m").length;
+    const countFemale = this.citizens.filter(citizen => citizen.gender === "f").length;
+    const countOther = this.citizens.filter(citizen => citizen.gender === "o").length;
+    return [countMale, countFemale, countOther];
   }
 }
