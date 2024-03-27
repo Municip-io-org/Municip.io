@@ -3,6 +3,7 @@ import { AdminStatisticsService } from '../services/stats/admin-statistics.servi
 import { Citizen } from '../services/citizen-auth.service';
 import { MunicipalAdministrator } from '../services/municipal-admin-auth.service';
 import { RequestDocument } from '../services/documents/docs.service';
+import { UserAuthService } from '../services/user-auth.service';
 
 @Component({
   selector: 'app-munadmin-statistics-dashboard',
@@ -12,16 +13,15 @@ import { RequestDocument } from '../services/documents/docs.service';
 export class MunadminStatisticsDashboardComponent {
 
 
-  citizens: Citizen[] = [];
+  citizens: any[] = [];
   municipalAdmins: MunicipalAdministrator[] = [];
   municipalities: any[] = [];
   documentRequests: RequestDocument[] = [];
   numberOfCitizens: number = 0;
-  activeMunicipalities: number = 0;
+  activeCitizens: number = 0;
   numberOfMunicipalAdmins: number = 0;
-  blockedMunicipalities: number = 0;
-  percentageOfBlockedMunicipalities: number = 0;
-  sortingOrder: string = 'desc';
+  blockedCitizens: number = 0;
+blockedCitizensPercentage: number = 0;
 
   news: any[] = [];
   events: any[] = [];
@@ -39,32 +39,43 @@ export class MunadminStatisticsDashboardComponent {
   numberOfBooks: number = 0;
   Authors: number = 0;
 
-
-  constructor(private adminStatisticsService: AdminStatisticsService) { }
+  user: any;
+municipality : string = '';
+  constructor(private adminStatisticsService: AdminStatisticsService, private userAuthService : UserAuthService) { }
 
   ngOnInit() {
-    this.adminStatisticsService.getAllCitizens().subscribe((data: Citizen[]) => {
-      this.citizens = data;
-      this.adminStatisticsService.getAllMunicipalAdmins().subscribe((datamunadmin: MunicipalAdministrator[]) => {
-        this.municipalAdmins = datamunadmin;
 
-        this.adminStatisticsService.getAllMunicipalities().subscribe((datamun: any) => {
-          this.municipalities = datamun;
-          this.sortMunicipalities();
+
+    this.userAuthService.getUserData().subscribe(
+      res => {
+        let anyUser: any;
+        anyUser = res;
+        this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
+          async (res: any) => {
+            this.user = res;
+            this.municipality = this.user.municipality;
+
+
+    this.adminStatisticsService.getAllCitizens().subscribe((data: Citizen[]) => {
+      this.citizens = data.filter(citizen => citizen.municipality === this.municipality);
+      this.adminStatisticsService.getAllMunicipalAdmins().subscribe((datamunadmin: MunicipalAdministrator[]) => {
+        this.municipalAdmins = datamunadmin.filter(admin => admin.municipality === this.municipality);
+
+        
 
           this.adminStatisticsService.getAllNews().subscribe((datanews: any) => {
-            this.news = datanews;
+            this.news = datanews.filter((news: { municipality: string; }) => news.municipality === this.municipality);
 
             this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
-              this.events = dataevents;
+              this.events = dataevents.filter((event: { municipality: string; }) => event.municipality === this.municipality);
               this.adminStatisticsService.getAllDocumentRequests().subscribe((datadoc: any) => {
 
 
-                this.documentRequests = datadoc;
+                this.documentRequests = datadoc.filter((doc: { municipality: string; }) => doc.municipality === this.municipality);
                 this.generateStatistics();
               });
-            }
-            );
+
+           
           }
           );
         }
@@ -72,6 +83,10 @@ export class MunadminStatisticsDashboardComponent {
       }
       );
     }
+    );
+          }
+        );
+      }
     );
   }
 
@@ -82,31 +97,20 @@ export class MunadminStatisticsDashboardComponent {
 
 
 
-  toggleSorting() {
-    this.sortingOrder = this.sortingOrder === 'asc' ? 'desc' : 'asc';
-    this.sortMunicipalities();
-  }
 
-  sortMunicipalities() {
-    this.municipalities.sort((a, b) => {
-      if (this.sortingOrder === 'asc') {
-        return a.numberOfUsers - b.numberOfUsers;
-      } else {
-        return b.numberOfUsers - a.numberOfUsers;
-      }
-    });
-  }
+
 
 
   generateStatistics() {
     this.numberOfCitizens = this.citizens.length;
     this.numberOfMunicipalAdmins = this.municipalAdmins.length;
 
-    this.activeMunicipalities = this.municipalities.filter(mun => mun.status === 'Approved').length;
+    this.activeCitizens = this.citizens.filter(citizen => citizen.status === 'Approved').length;
 
-    this.blockedMunicipalities = this.municipalities.filter(mun => mun.status === 'Blocked').length;
+    this.blockedCitizens = this.citizens.filter(citizen => citizen.status === 'Blocked').length;
 
-    this.percentageOfBlockedMunicipalities = (this.blockedMunicipalities / this.municipalities.length) * 100;
+    this.blockedCitizensPercentage = (this.blockedCitizens / this.numberOfCitizens) * 100;
+
 
     this.newsPublished = this.news.length;
 

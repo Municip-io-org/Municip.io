@@ -14,21 +14,27 @@
         <app-input-title class="text-[1.8rem]">ISBN</app-input-title>
 
         <input required type="number" id="iSBN" formControlName="iSBN" name="iSBN"
-               class="input font-poppins w-full h-12 lg:h-14" />
+               class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" (change)="toggleControls()" />
 
-
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="iSBN?.touched && iSBN?.invalid">
-          <div *ngIf="iSBN?.errors?.['required']">ISBN obrigatório</div>
+        <div class="flex pt-2 gap-x-2 items-center">
+          <input id="useISBN" type="checkbox" (change)="toggleControls()" formControlName="useISBN" class="border-[#3a82f7] border-2 size-4 rounded-full" />
+          <label for="useISBN" class="text-municip-highlight-black text-[1.2rem] font-medium font-roboto">Usar ISBN</label>
         </div>
+
+        <div class="absolute text-red-500 font-bold" *ngIf="useISBN?.value! && iSBN?.touched && iSBN?.invalid">
+          <div *ngIf="iSBN?.errors?.['required']">ISBN obrigatório</div>
+          <div *ngIf="iSBN?.errors?.['pattern']">ISBN deve ter exatamente 10 ou 13 números</div>
+        </div>
+
       </div>
 
 
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Editora</app-input-title>
 
-        <input required type="text" id="publisher"
+        <input required type="text" id="publisher" 
                formControlName="publisher" name="publisher"
-               class="input font-poppins  w-full h-12 lg:h-14" />
+               class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="publisher?.touched && publisher?.invalid ">
@@ -41,8 +47,8 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Título</app-input-title>
 
-        <input required type="text" id="title" formControlName="title" name="title"
-               class="input font-poppins  w-full h-12 lg:h-14 " />
+        <input required type="text" id="title" formControlName="title" name="title" 
+               class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="title?.touched && title?.invalid">
@@ -54,9 +60,9 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Edição</app-input-title>
 
-        <input required type="text" id="edition"
+        <input required type="text" id="edition" 
                formControlName="edition" name="edition"
-               class="input font-poppins  w-full h-12 lg:h-14" />
+               class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="edition?.touched && edition?.invalid ">
@@ -70,8 +76,8 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Autores</app-input-title>
 
-        <input required type="text" id="author" formControlName="author" name="author"
-               class="input font-poppins w-full h-12 lg:h-14 " />
+        <input required type="text" id="author" formControlName="author" name="author" 
+               class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="author?.touched && author?.invalid">
@@ -83,9 +89,9 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Nº de exemplares</app-input-title>
 
-        <input required type="date" id="publicationDate"
+        <input required type="date" id="publicationDate" 
                formControlName="publicationDate" name="publicationDate"
-               class="input font-poppins w-full h-12 lg:h-14" />
+               class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="publicationDate?.touched && publicationDate?.invalid ">
@@ -100,8 +106,8 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Categorias</app-input-title>
 
-        <input required type="text" id="genre" formControlName="genre" name="genre"
-               class="input font-poppins w-full h-12 lg:h-14 " />
+        <input required type="text" id="genre" formControlName="genre" name="genre" 
+               class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="genre?.touched && genre?.invalid">
@@ -111,17 +117,19 @@
 
       <div class="flex flex-col  text-left w-full lg:w-5/12 mb-4 h-[16rem]">
         <app-input-title class="text-[1.8rem]">Capa do livro</app-input-title>
-        <div class="h-20 table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc]" (dragover)="onDragOver($event)"
-             (drop)="onDrop($event)" (click)="coverImagePicker.click()">
+        <div class="h-20 table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc] disabled:opacity-40"
+             [class.disabled-background]="coverImageUrl?.disabled"
+             (dragover)="onDragOver($event)"
+             (drop)="onDrop($event)" (click)="coverImagePicker.click() ">
 
           <div class="table-cell align-middle">
             <div class="text-center">
-              <input type="file" #coverImagePicker (change)="onCoverImagePicked($event)" accept="image/*" capture class="hidden">
+              <input type="file" #coverImagePicker (change)="onCoverImagePicked($event)" accept="image/*" capture class="hidden" formControlName="coverImageUrl">
 
               <label for="file" class="flex justify-center items-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
 
               <div *ngIf="coverImage" class="flex items-center justify-center pb-2">
-                <img [src]="coverImageUrl" alt="Imagem carregada" class="w-[10rem] h-[10rem] object-cover ">
+                <img [src]="coverImageUrl?.value!" alt="Imagem carregada" class="w-[10rem] h-[10rem] object-cover ">
               </div>
 
             </div>
@@ -134,8 +142,8 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Idioma</app-input-title>
 
-        <input required type="text" id="language" formControlName="language" name="language"
-               class="input font-poppins  w-full h-12 lg:h-14 " />
+        <input required type="text" id="language" formControlName="language" name="language" 
+               class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="language?.touched && language?.invalid">
@@ -149,7 +157,7 @@
 
         <input required type="number" id="copies"
                formControlName="copies" name="copies"
-               class="input font-poppins  w-full h-12 lg:h-14" />
+               class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="copies?.touched && copies?.invalid ">
@@ -163,11 +171,13 @@
 
     <div class="flex flex-col text-left w-full mt-6 mb-4 relative">
       <app-input-title class="text-[1.8rem]">Sinopse</app-input-title>
-      <ngx-editor [editor]="editor" formControlName="sinopsis" placeholder="Introduza a sinopse do livro">
-        <div class="bg-gray-100 border border-gray-300">
-          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
-        </div>
-      </ngx-editor>
+      <div [class.disabled-background-sinopsis]="sinopsis?.disabled">
+        <ngx-editor class="-z-10" [editor]="editor" formControlName="sinopsis" placeholder="Introduza a sinopse do livro">
+          <div class="bg-gray-100 border border-gray-300">
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+          </div>
+        </ngx-editor>
+      </div>
       <div class="text-red-500 font-bold py-2" *ngIf="sinopsis?.touched && sinopsis?.invalid ">
         <div *ngIf="sinopsis?.errors?.['required'] ">Sinopse Obrigatório</div>
       </div>
@@ -177,7 +187,7 @@
             class="absolute -bottom-[0rem] right-[2rem] h-auto w-[15rem] flex justify-center
               items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue
               to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600
-              rounded text-lg transition duration-700 ease-in-out">
+              rounded text-lg transition duration-700 ease-in-out disabled:cursor-not-allowed">
       Criar Livro
       <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
     </button>

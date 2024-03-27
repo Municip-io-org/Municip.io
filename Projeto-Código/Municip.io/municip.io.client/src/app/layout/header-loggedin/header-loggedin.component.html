@@ -76,7 +76,7 @@
 
 
 
-      <li class="relative group" (click)="setActiveDropdown(Dropdowns.Library)">
+      <li *ngIf="isLibraryFeatureActive()" class="relative group" (click)="setActiveDropdown(Dropdowns.Library)">
         <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Biblioteca
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
