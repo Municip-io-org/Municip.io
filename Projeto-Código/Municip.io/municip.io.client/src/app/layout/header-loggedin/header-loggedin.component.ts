@@ -175,6 +175,10 @@ export class HeaderLoggedinComponent {
   isTransportsFeatureActive() {
     return this.appFeatures.find(a => a.appFeatureCategory == "Transports")?.isEnabled;
   }
+
+  isLibraryFeatureActive() {
+    return this.appFeatures.find(a => a.appFeatureCategory == "Library")?.isEnabled;
+  }
 }
 
 
