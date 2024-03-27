@@ -117,7 +117,9 @@ export class RequestedBookCardComponent {
 
 
   borrowBook() {
+
     let date = new Date(this.borrowForm.get('returnDate')?.value);
+    date.setHours(23, 59, 59, 999);
     this.bookService.borrowBook(this.bookRequest.id, date).subscribe(
       (data) => {
         console.log(data);
@@ -155,6 +157,23 @@ export class RequestedBookCardComponent {
 
     )
   }
+
+  sendDelayedEmail() {
+    var authors = this.book.author.join(', ');
+    // convert this.bookRequest.returnDate!that is a date to a string in format dd/MM/yyyy
+    var returnDate = new Date(this.bookRequest.returnDate!).toLocaleDateString();
+    this.bookService.sendDelayedEmail(this.bookRequest.citizen.email, this.bookRequest.citizen.firstName,
+      this.book.coverImage, this.book.title, authors,
+      returnDate).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.error(error);
+        }
+      )
+  }
+
 
 
   closeDialog() {

@@ -50,8 +50,8 @@ export class LibraryService {
   }
 
 
-  sendDelayedEmail(email: string, name: string, bookImage: string, bookName: string, returnDate: string) {
-    return this.http.post(`api/Book/SendDelayedEmail?email=${email}&name=${name}&bookImage=${bookImage}&bookName=${bookName}&returnDate=${returnDate}`, null);
+  sendDelayedEmail(email: string, name: string, bookImage: string, bookName: string, bookAuthor: string, returnDate: string) {
+    return this.http.post(`api/Book/SendDelayedEmail?email=${email}&name=${name}&bookImage=${bookImage}&bookName=${bookName}&bookAuthor=${bookAuthor}&returnDate=${returnDate}`, null);
 
   }
 
