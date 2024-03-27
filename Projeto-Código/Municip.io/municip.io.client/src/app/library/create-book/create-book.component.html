@@ -73,16 +73,35 @@
 
 
     <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4 ">
-      <div class="w-full lg:w-5/12 mb-4 h-32">
-        <app-input-title class="text-[1.8rem]">Autores</app-input-title>
+      <div class="w-full lg:w-5/12 mb-4">
+        <div class="flex flex-col">
+          <app-input-title class="text-[1.8rem] ">Autores</app-input-title>
 
-        <input required type="text" id="author" formControlName="author" name="author" 
-               class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" />
+          <div class="flex flex-wrap gap-4">
+            <button type="button" (click)="addAuthor()" [disabled]="authors.disabled"
+                    class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-3 rounded-full w-[11rem]
+        transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
+              <img src="/assets/images/icons/plus-white.png" alt="Adicionar Autor" class="size-6" />
+              Adicionar autor
+            </button>
 
-
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="author?.touched && author?.invalid">
-          <div *ngIf="author?.errors?.['required']">Autor obrigatório</div>
+            <button type="button" (click)="removeLastAuthor()" [disabled]="authors.disabled"
+                    class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-3 rounded-full w-[14rem]
+        transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
+              <img src="/assets/images/icons/delete-white.png" alt="Remover Autor" class="size-6" />
+              Remover último autor
+            </button>
+          </div>
         </div>
+
+        <div formArrayName="authors" *ngFor="let authorControl of authors.controls; let i = index" class="flex flex-col gap-8 relative">
+          <input required type="text" [formControlName]="i"
+                 class="input font-poppins w-full h-12 lg:h-14 my-4 disabled:opacity-40" />
+          <div class="absolute -bottom-4 text-red-500 font-bold py-2" *ngIf="authors?.touched && authors?.invalid">
+            <div *ngIf="authorControl?.errors?.['required']">Autor obrigatório</div>
+          </div>
+        </div>
+
       </div>
 
 

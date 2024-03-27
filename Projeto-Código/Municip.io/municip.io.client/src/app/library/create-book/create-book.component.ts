@@ -3,7 +3,7 @@ import { Book, BookStatus, LibraryService } from '../../services/library/library
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { Editor, Toolbar } from 'ngx-editor';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-book',
@@ -38,6 +38,8 @@ export class CreateBookComponent {
   coverImage!: File;
   files: any[] = [];
 
+  authorsList: string[] = [];
+
   isDialogOpen: boolean = false;
 
   editor = new Editor();
@@ -52,21 +54,35 @@ export class CreateBookComponent {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
+  
 
   bookForm = new FormGroup({
-    iSBN: new FormControl('',[Validators.pattern(/^\d{10}$|^\d{13}$/)]),
+    iSBN: new FormControl('', [Validators.pattern(/^\d{10}$|^\d{13}$/)]),
     useISBN: new FormControl(true, [Validators.required]),
     title: new FormControl({ value: "", disabled: true }, [Validators.required]),
-    publisher: new FormControl({value: "", disabled: true }, [Validators.required]),
+    publisher: new FormControl({ value: "", disabled: true }, [Validators.required]),
     edition: new FormControl({ value: "", disabled: true }, [Validators.required]),
-    author: new FormControl({ value: "", disabled: true }, [Validators.required]),
+    authors: new FormArray([
+      new FormControl({ value: "", disabled: true }, Validators.required)
+    ]),
     publicationDate: new FormControl({ value: new Date(), disabled: true }, [Validators.required]),
     language: new FormControl({ value: "", disabled: true }, [Validators.required]),
     copies: new FormControl({ value: "", disabled: true }, [Validators.required]),
     genre: new FormControl({ value: "", disabled: true }, [Validators.required]),
     sinopsis: new FormControl({ value: "", disabled: true }, [Validators.required]),
     coverImageUrl: new FormControl({ value: "", disabled: true }, [Validators.required])
-  })
+  });
+
+
+  addAuthor() {
+    this.authors.push(new FormControl(''));
+  }
+  removeLastAuthor() {
+    if (this.authors.length > 1) {
+      this.authors.removeAt(this.authors.length - 1);
+    }
+  }
+
 
 
   /**
@@ -152,7 +168,7 @@ export class CreateBookComponent {
       this.book = {
         isbn: this.iSBN?.value!.toString() || '',
         title: this.title?.value!,
-        author: [this.author?.value!],
+        author: this.authors?.value!,
         availableCopies: parseInt(this.copies?.value!),
         copies: parseInt(this.copies?.value!),
         coverImage: '',
@@ -208,7 +224,7 @@ export class CreateBookComponent {
     this.title?.enable();
     this.publisher?.enable();
     this.edition?.enable();
-    this.author?.enable();
+    this.enableAuthorsControls();
     this.publicationDate?.enable();
     this.language?.enable();
     this.copies?.enable();
@@ -223,13 +239,31 @@ export class CreateBookComponent {
     this.title?.disable();
     this.publisher?.disable();
     this.edition?.disable();
-    this.author?.disable();
+    this.disableAuthorsControls();
     this.publicationDate?.disable();
     this.language?.disable();
     this.copies?.disable();
     this.genre?.disable();
     this.sinopsis?.disable();
     this.coverImageUrl?.disable();
+  }
+
+  enableAuthorsControls() {
+    this.authors.enable();
+    this.authors.controls.forEach(control => {
+      console.log("enable");
+      control.enable();
+      console.log(control.enable);
+    });
+  }
+
+  disableAuthorsControls() {
+    this.authors.disable();
+    this.authors.controls.forEach(control => {
+      console.log("disable");
+      control.disable();
+      console.log(control.disabled);
+    });
   }
 
 
@@ -258,8 +292,8 @@ export class CreateBookComponent {
     return this.bookForm.get('edition');
   }
 
-  get author() {
-    return this.bookForm.get('author');
+  get authors() : FormArray {
+    return this.bookForm.get('authors') as FormArray;
   }
 
   get publicationDate() {
