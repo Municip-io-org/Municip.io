@@ -15,7 +15,7 @@ export class RequestedBookCardComponent {
   book!: Book;
 
   isDialogOpen = false;
-
+  isDialogOpenOperation = false;
 
   @Output() update = new EventEmitter();
 
@@ -123,7 +123,8 @@ export class RequestedBookCardComponent {
     this.bookService.borrowBook(this.bookRequest.id, date).subscribe(
       (data) => {
         console.log(data);
-        this.update.emit();
+        this.openDialogOperation();
+
       },
       (error) => {
         console.error(error);
@@ -136,7 +137,8 @@ export class RequestedBookCardComponent {
     this.bookService.deliverBook(this.bookRequest.id).subscribe(
       (data) => {
         console.log(data);
-        this.update.emit();
+        this.openDialogOperation();
+
       },
       (error) => {
         console.error(error);
@@ -149,7 +151,7 @@ export class RequestedBookCardComponent {
 
       (data) => {
         console.log(data);
-        this.update.emit();
+        this.openDialogOperation();
       },
       (error) => {
         console.error(error);
@@ -167,6 +169,7 @@ export class RequestedBookCardComponent {
       returnDate).subscribe(
         (data) => {
           console.log(data);
+          this.openDialogOperation();
         },
         (error) => {
           console.error(error);
@@ -182,6 +185,15 @@ export class RequestedBookCardComponent {
 
   openDialog() {
     this.isDialogOpen = true;
+  }
+
+  closeDialogOperation() {
+    this.isDialogOpenOperation = false;
+    this.update.emit();
+  }
+
+  openDialogOperation() {
+    this.isDialogOpenOperation = true;
   }
 
 

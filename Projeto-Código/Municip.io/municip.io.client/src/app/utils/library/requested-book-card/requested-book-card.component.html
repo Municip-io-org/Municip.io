@@ -5,8 +5,7 @@
                       confirmButtonClass="disabled:cursor-not-allowed"
                       [confirmButtonDisabled]="!borrowForm.valid"
                       (cancel)="closeDialog()"
-                      (confirm)="borrowBook()"
-                      >
+                      (confirm)="borrowBook()">
     <form [formGroup]="borrowForm" class="mt-5">
       <div class="h-28 w-full">
         <app-input-title class="">Data de Retorno</app-input-title>
@@ -22,6 +21,10 @@
       </div>
     </form>
   </app-dialog-content>
+</ng-container>
+<ng-container *ngIf="isDialogOpenOperation">
+  <app-dialog-message (confirm)="closeDialogOperation()" title="Sucesso" message="Operação realizada com sucesso"
+                      [isConfirm]=true></app-dialog-message>
 </ng-container>
 <div class="flex bg-white rounded-xl shadow-2xl  hover:shadow-xl h-44">
   <img [src]="book.coverImage" alt="cover"
@@ -87,8 +90,7 @@
                 hover:bg-gray-300 rounded-full h-fit p-2
                 transition-all duration-500 ease-in-out
                 "
-                (click)="sendDelayedEmail()"
-                >
+                (click)="sendDelayedEmail()">
           <img src="assets/images/library/SendNotify.svg" alt="Send Notification"
                class="size-7" />
           <p class="text-sm font-inter">Notificar</p>
