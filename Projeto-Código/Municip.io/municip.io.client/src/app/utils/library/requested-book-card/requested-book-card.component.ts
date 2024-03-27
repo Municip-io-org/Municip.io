@@ -17,6 +17,31 @@ export class RequestedBookCardComponent {
   isDialogOpen = false;
   isDialogOpenOperation = false;
 
+
+
+
+
+/// THIS IS FOR THE DETAIL PAGE OF BOOK
+  isDialogOpenTest = false;
+
+  formBorrowTest = new FormGroup({
+    returnDate: new FormControl(new Date(), Validators.required),
+    citizenEmail: new FormControl('', [Validators.required, Validators.email])
+  })
+
+  get citizenEmail() {
+    return this.formBorrowTest.get('citizenEmail') as FormControl;
+  }
+
+
+
+
+
+
+
+
+
+
   @Output() update = new EventEmitter();
 
   //set min date to tomorrow

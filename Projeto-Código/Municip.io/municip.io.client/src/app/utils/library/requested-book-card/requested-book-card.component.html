@@ -1,3 +1,37 @@
+<ng-container *ngIf="isDialogOpenTest">
+  <app-dialog-content title="Requisitar o livro {{bookRequest.book.title}}"
+                      message="Insira os dados para realizar a requisição
+                    para {{bookRequest.citizen.firstName}} {{bookRequest.citizen.surname}}"
+                      confirmButtonClass="disabled:cursor-not-allowed"
+                      [confirmButtonDisabled]="!borrowForm.valid"
+                      (cancel)="closeDialog()"
+                      (confirm)="borrowBook()">
+    <form [formGroup]="formBorrowTest" class="mt-5">
+      <div class="h-28 w-full">
+        <app-input-title class="">Data de Retorno</app-input-title>
+        <div class="flex items-center">
+          <app-date-picker [date]="returnDate" name="returnDate" class="w-3/5"
+                           [minDate]="minDate" />
+
+          <app-tooltip [tooltipText]="'Utilize o seletor para a inserção da data'"></app-tooltip>
+        </div>
+        <div class="text-red-500 font-bold py-2" *ngIf="returnDate?.touched && returnDate?.invalid">
+          <div *ngIf="returnDate?.errors?.['required'] ">Data Obrigatória</div>
+        </div>
+      </div>
+      <div class="h-28">
+        <app-input-title >Email</app-input-title>
+        <input required placeholder="Introduza o email do cidaão" type="email" id="email" formControlName="citizenEmail" name="email"
+               class="input w-3/5 h-12" />
+        <div class="text-red-500 font-bold py-2" *ngIf="citizenEmail?.touched && citizenEmail?.invalid ">
+          <div *ngIf="citizenEmail?.errors?.['required'] ">Email Obrigatório</div>
+          <div *ngIf="citizenEmail?.errors?.['email']">Email Inválido</div>
+        </div>
+      </div>
+    </form>
+  </app-dialog-content>
+</ng-container>
+
 <ng-container *ngIf="isDialogOpen">
   <app-dialog-content title="Requisitar o livro {{bookRequest.book.title}}"
                       message="Insira os dados para realizar a requisição
