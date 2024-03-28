@@ -12,6 +12,8 @@ export class LibraryService {
   constructor(private http: HttpClient) { }
 
 
+
+
   //create mock data
   Books: Book[] = [
     {
@@ -151,6 +153,42 @@ export class LibraryService {
   getRequests(): Observable<BookRequest[]> {
     return this.http.get<BookRequest[]>('api/Book/GetRequests');
   }
+
+  getRequestsByMunicipality(municipality: string): Observable<BookRequest[]> {
+    return this.http.get<BookRequest[]>(`api/Book/GetRequestsByMunicipality?municipality=${municipality}`);
+  }
+
+  deleteRequest(requestId: number): Observable<any> {
+    return this.http.delete(`api/Book/DeleteRequest?requestId=${requestId}`);
+  }
+
+  denyRequest(requestId: number): Observable<any> {
+    return this.http.post(`api/Book/DenyRequest?requestId=${requestId}`, null);
+  }
+
+  borrowBook(requestId: number, returnDate: Date): Observable<any> {
+    return this.http.post(`api/Book/BorrowBook?requestId=${requestId}`, returnDate);
+
+  }
+
+  createRequest(email: string, request: BookRequest): Observable<any> {
+    return this.http.post(`api/Book/CreateRequest/${email}`, request);
+  }
+
+  delayRequest(requestId: number): Observable<any> {
+    return this.http.post(`api/Book/DelayRequest?requestId=${requestId}`, null);
+  }
+
+  deliverBook(requestId: number): Observable<any> {
+    return this.http.post(`api/Book/DeliverBook?requestId=${requestId}`, null);
+  }
+
+
+  sendDelayedEmail(email: string, name: string, bookImage: string, bookName: string, bookAuthor: string, returnDate: string) {
+    return this.http.post(`api/Book/SendDelayedEmail?email=${email}&name=${name}&bookImage=${bookImage}&bookName=${bookName}&bookAuthor=${bookAuthor}&returnDate=${returnDate}`, null);
+
+  }
+
 
 
 

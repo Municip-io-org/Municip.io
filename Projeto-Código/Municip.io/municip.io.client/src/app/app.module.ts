@@ -127,6 +127,7 @@ import { DistrictsMapComponent } from './admin-statistics-dashboard/districts-ma
 import { GoogleChartsModule } from 'angular-google-charts';
 import { CitizensMapComponent } from './admin-statistics-dashboard/citizens-map/citizens-map.component';
 import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
+import { DialogContentComponent } from './utils/dialog/dialog-content/dialog-content.component';
 import { RegisteredMunUsersGraphComponent } from './munadmin-statistics-dashboard/registered-mun-users-graph/registered-mun-users-graph.component';
 
 
@@ -236,6 +237,7 @@ registerLocaleData(localePt, 'pt-PT');
     DistrictsMapComponent,
     CitizensMapComponent,
     MunadminStatisticsDashboardComponent,
+    DialogContentComponent,
     RegisteredMunUsersGraphComponent,
     
   ],

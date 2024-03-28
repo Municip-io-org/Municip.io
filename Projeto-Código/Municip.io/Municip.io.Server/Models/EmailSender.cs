@@ -2,6 +2,7 @@
 using MailKit.Security;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MimeKit;
+using System.Drawing;
 
 namespace Municip.io.Server.Models
 {
@@ -43,6 +44,15 @@ namespace Municip.io.Server.Models
             var bodyBuilder = new BodyBuilder();
             bodyBuilder.HtmlBody = System.IO.File.ReadAllText(filePath).Replace("{{destinyName}}", destinyName).Replace("{{message}}", messageText).
                 Replace("{{urlButton}}", url).Replace("{{amount}}", amount);
+
+            SendEmail(email, subject, destinyName, messageText, bodyBuilder);
+        }
+
+        public static void SendBookEmail(string email, string subject, string destinyName, string messageText, string filePath, string bookImage)
+        {
+            var bodyBuilder = new BodyBuilder();
+            bodyBuilder.HtmlBody = System.IO.File.ReadAllText(filePath).Replace("{{destinyName}}", destinyName).Replace("{{message}}", messageText).
+                Replace("{{bookImage}}", bookImage);
 
             SendEmail(email, subject, destinyName, messageText, bodyBuilder);
         }
