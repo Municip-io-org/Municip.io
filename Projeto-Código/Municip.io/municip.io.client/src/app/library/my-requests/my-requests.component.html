@@ -29,7 +29,8 @@
     <p class="font-semibold">Sem Reservas.</p>
   </div>
   <div class="mx-32 py-10" *ngFor="let book of filteredBooks">
-    <app-requested-book-card [bookRequest]="book" (update)="updateRequests()" />
+    <app-requested-book-card [bookRequest]="book" (update)="updateRequests()"
+                             [showActions]="false"/>
   </div>
 
 </div>

@@ -15,6 +15,7 @@ export class MyRequestsComponent {
   orderOptions: any[] = [{ label: 'Mais antigo', value: true }, { label: 'Mais Recente', value: false }];
   ascendingOrder: boolean = true;
 
+  citizenEmail: string = '';
 
 
   constructor(private service: LibraryService, private authService: UserAuthService) {
@@ -28,6 +29,7 @@ export class MyRequestsComponent {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
           this.municipalityImage = municipality.landscapePhoto;
+          this.citizenEmail = user.email;
           this.service.getRequestsByCitizen(user.email).subscribe(
             (requests) => {
               this.booksRequested = requests;
@@ -66,7 +68,15 @@ export class MyRequestsComponent {
   }
 
   updateRequests() {
-
+    this.service.getRequestsByCitizen(this.citizenEmail).subscribe(
+      (requests) => {
+        this.booksRequested = requests;
+        this.sortEventsByDate();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
 
