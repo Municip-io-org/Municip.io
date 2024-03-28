@@ -1,0 +1,22 @@
+<ng-container *ngIf="isDialogOpen" (click)="closeDialog()">
+  <app-dialog-content title="Adicione uma nova categoria"
+                      message="Insira o nome de uma nova categoria no campo abaixo"
+                      confirmButtonClass="disabled:cursor-not-allowed"
+                      [confirmButtonDisabled]="!genreForm.valid"
+                      (cancel)="closeDialog()"
+                      (confirm)="addGenre()">
+    <form [formGroup]="genreForm" class="mt-5">
+      
+      <div class="h-28">
+        <app-input-title>Nova Categoria</app-input-title>
+        <input required placeholder="Introduza o nome da nova categoria" type="text" id="genre" formControlName="genre" name="genre"
+               class="input w-3/5 h-12" />
+        <div class="text-red-500 font-bold py-2" *ngIf="genre?.touched && genre?.invalid ">
+          <div *ngIf="genre?.errors?.['required'] ">Categoria Obrigatória</div>
+          <!--<div *ngIf="genre?.errors?.['email']">Email Inválido</div>-->
+        </div>
+      </div>
+    </form>
+  </app-dialog-content>
+</ng-container>
+

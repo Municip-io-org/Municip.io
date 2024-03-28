@@ -129,6 +129,7 @@ import { CitizensMapComponent } from './admin-statistics-dashboard/citizens-map/
 import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
 import { DialogContentComponent } from './utils/dialog/dialog-content/dialog-content.component';
 import { RegisteredMunUsersGraphComponent } from './munadmin-statistics-dashboard/registered-mun-users-graph/registered-mun-users-graph.component';
+import { AddGenreDialogComponent } from './utils/library/add-genre-dialog/add-genre-dialog.component';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -239,6 +240,7 @@ registerLocaleData(localePt, 'pt-PT');
     MunadminStatisticsDashboardComponent,
     DialogContentComponent,
     RegisteredMunUsersGraphComponent,
+    AddGenreDialogComponent,
     
   ],
   imports: [

@@ -3,6 +3,13 @@
                     class="font-inter" />
 
 
+
+<app-add-genre-dialog [(isDialogOpen)]="isAddGenreDialogOpen" (list)="extractCategoryNames()"></app-add-genre-dialog>
+
+
+
+
+
 <div class="flex flex-col bg-municip-blank pb-[4rem] text-municip-normal-black pt-6 px-32 space-y-20">
 
 
@@ -32,7 +39,7 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Editora</app-input-title>
 
-        <input required type="text" id="publisher" 
+        <input required type="text" id="publisher"
                formControlName="publisher" name="publisher"
                class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
@@ -47,7 +54,7 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Título</app-input-title>
 
-        <input required type="text" id="title" formControlName="title" name="title" 
+        <input required type="text" id="title" formControlName="title" name="title"
                class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
 
@@ -60,7 +67,7 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Edição</app-input-title>
 
-        <input required type="text" id="edition" 
+        <input required type="text" id="edition"
                formControlName="edition" name="edition"
                class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
@@ -108,7 +115,7 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Nº de exemplares</app-input-title>
 
-        <input required type="date" id="publicationDate" 
+        <input required type="date" id="publicationDate"
                formControlName="publicationDate" name="publicationDate"
                class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" />
 
@@ -123,12 +130,20 @@
     <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4">
 
       <div class="w-full lg:w-5/12 mb-4">
-        <app-input-title class="text-[1.8rem]">Categorias</app-input-title>
+        <div class="flex flex-wrap">
+          <app-input-title class="text-[1.8rem]">Categorias</app-input-title>
+          <button type="button" (click)="addGenre()" [disabled]="genres.disabled"
+                  class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-3 rounded-full w-[14rem]
+transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
+            <img src="/assets/images/icons/plus-white.png" alt="Adicionar Categoria" class="size-6" />
+            Adicionar categoria
+          </button>
+        </div>
 
         <div class="h-[19rem] overflow-y-scroll border-2 bg-municip-blank-gray transition duration-300 ease-in-out rounded-[0.375rem] border-[#bababd] px-[2rem] py-[1rem]">
           <div formArrayName="genres" *ngFor="let genreControl of genres.controls; let i = index"
                class="flex justify-between items-center mb-8"
-               [class.disabled-background]="genres?.disabled">
+               [class.disabled-background]="genres.disabled">
             <label for="categories[i].name" class="text-municip-highlight-black text-[1.2rem] font-medium font-roboto transition duration-300 ease-in-out">{{categories[i].name}}</label>
             <input id="categories[i].name" type="checkbox" [formControlName]="i"
                    class="size-10 transition duration-300 ease-in-out disabled:opacity-40" />
@@ -163,7 +178,7 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Idioma</app-input-title>
 
-        <input required type="text" id="language" formControlName="language" name="language" 
+        <input required type="text" id="language" formControlName="language" name="language"
                class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="language?.touched && language?.invalid">

@@ -55,6 +55,7 @@ export class CreateBookComponent {
   authorsList: string[] = [];
 
   isDialogOpen: boolean = false;
+  isAddGenreDialogOpen: boolean = false;
 
   editor = new Editor();
   toolbar: Toolbar = [
@@ -89,8 +90,11 @@ export class CreateBookComponent {
 
 
   addGenre() {
-    this.genres.push(new FormControl(''));
+    console.log(this.isAddGenreDialogOpen);
+    this.isAddGenreDialogOpen = true;
+    console.log(this.isAddGenreDialogOpen);
   }
+
   removeGenre() {
     if (this.genres.length > 1) {
       this.genres.removeAt(this.genres.length - 1);
@@ -313,6 +317,10 @@ export class CreateBookComponent {
       control.disable();
       console.log(control.disabled);
     });
+  }
+
+  extractCategoryNames(): string[] {
+    return this.categories.map(category => category.name);
   }
 
 
