@@ -12,6 +12,9 @@ import { provideNativeDateAdapter, DateAdapter } from '@angular/material/core';
 })
 export class RequestedBookCardComponent {
   @Input() bookRequest!: BookRequest;
+
+  @Input() showActions: boolean = true;
+
   book!: Book;
 
   isDialogOpen = false;
@@ -21,7 +24,7 @@ export class RequestedBookCardComponent {
 
 
 
-/// THIS IS FOR THE DETAIL PAGE OF BOOK
+  /// THIS IS FOR THE DETAIL PAGE OF BOOK
   isDialogOpenTest = false;
 
   formBorrowTest = new FormGroup({
@@ -185,6 +188,21 @@ export class RequestedBookCardComponent {
     )
   }
 
+  cancelRequest() {
+    this.bookService.deleteRequest(this.bookRequest.id).subscribe(
+      (data) => {
+        console.log(data);
+        this.openDialogOperation();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+
+
+
   sendDelayedEmail() {
     var authors = this.book.author.join(', ');
     // convert this.bookRequest.returnDate!that is a date to a string in format dd/MM/yyyy
@@ -221,6 +239,15 @@ export class RequestedBookCardComponent {
     this.isDialogOpenOperation = true;
   }
 
+
+  /**
+   * Abrir a página de detalhes do livro
+   */
+  goToBookDetail() {
+
+    this.router.navigate(['/news']);
+
+  }
 
 
 

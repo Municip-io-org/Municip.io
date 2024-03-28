@@ -165,6 +165,15 @@ namespace Municip.io.Server.Controllers
             return Ok(bookRequests);
         }
 
+        //get Requests by citizen
+        [HttpGet("GetRequestsByCitizen")]
+        public IActionResult GetRequestsByCitizen(string email)
+        {
+            var bookRequests = _context.BookRequests.Where(b => b.Citizen.Email == email).Include(b => b.Book).Include(b => b.Citizen).ToList();
+            return Ok(bookRequests);
+        }
+
+
 
         /**
          * Não aceita o pedido de empréstimo
@@ -234,7 +243,7 @@ namespace Municip.io.Server.Controllers
 
         //send email notification that the book is delayed
         [HttpPost("SendDelayedEmail")]
-        public IActionResult SendDelayedEmail(string email, string name, string bookImage, string bookName,string bookAuthor, string returnDate)
+        public IActionResult SendDelayedEmail(string email, string name, string bookImage, string bookName, string bookAuthor, string returnDate)
         {
             EmailSender.SendBookEmail(email, "Entrega de livro", name, $"Por favor, entregue o livro <span style='font-weight: bold;'>{bookName} de {bookAuthor}</span>. Uma vez que a data de entrega ({returnDate}) foi ultrapassada.",
                 "wwwroot/html/BookEmail.html", bookImage);

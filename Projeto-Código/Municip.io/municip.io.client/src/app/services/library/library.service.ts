@@ -31,7 +31,7 @@ export class LibraryService {
       sinopsis: 'Bilbo Bolseiro é um hobbit que leva uma vida confortável e sem ambições. Mas seu contentamento é perturbado quando Gandalf, o mago, e uma companhia de anões batem à sua porta e levam-no para uma expedição. Eles têm um plano para roubar o tesouro guardado por Smaug, o Magnífico, um grande e perigoso dragão. Bilbo reluta muito em participar da aventura, mas acaba surpreendendo até a si mesmo com sua esperteza e sua habilidade como ladrão!',
       status: BookStatus.Available,
       municipality: 'Londres',
-    },{
+    }, {
       id: 2,
       title: 'O Hobbit',
       author: ['J.R.R. Tolkien'],
@@ -156,6 +156,10 @@ export class LibraryService {
 
   getRequestsByMunicipality(municipality: string): Observable<BookRequest[]> {
     return this.http.get<BookRequest[]>(`api/Book/GetRequestsByMunicipality?municipality=${municipality}`);
+  }
+
+  getRequestsByCitizen(email: string) {
+    return this.http.get<BookRequest[]>(`api/Book/GetRequestsByCitizen?email=${email}`);
   }
 
   deleteRequest(requestId: number): Observable<any> {
