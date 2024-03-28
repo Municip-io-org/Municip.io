@@ -4,6 +4,7 @@ import { Citizen } from '../services/citizen-auth.service';
 import { MunicipalAdministrator } from '../services/municipal-admin-auth.service';
 import { RequestDocument } from '../services/documents/docs.service';
 import { UserAuthService } from '../services/user-auth.service';
+import { Book } from '../services/library/library.service';
 
 @Component({
   selector: 'app-munadmin-statistics-dashboard',
@@ -11,7 +12,8 @@ import { UserAuthService } from '../services/user-auth.service';
   styleUrl: './munadmin-statistics-dashboard.component.css'
 })
 export class MunadminStatisticsDashboardComponent {
-
+  selectedButton: number = 1;
+  orderOptions: any[] = [{ label: '1', value: true }, { label: '2', value: false }];
 
   citizens: any[] = [];
   municipalAdmins: MunicipalAdministrator[] = [];
@@ -21,7 +23,7 @@ export class MunadminStatisticsDashboardComponent {
   activeCitizens: number = 0;
   numberOfMunicipalAdmins: number = 0;
   blockedCitizens: number = 0;
-blockedCitizensPercentage: number = 0;
+  blockedCitizensPercentage: number = 0;
 
   news: any[] = [];
   events: any[] = [];
@@ -40,7 +42,59 @@ blockedCitizensPercentage: number = 0;
   Authors: number = 0;
 
   user: any;
-municipality : string = '';
+  municipality: string = '';
+
+  books: Book[] = [
+    {
+      "title": "Harry Potter and the Philosopher's Stone",
+      "author": ["J.K. Rowling"],
+      "publisher": "Bloomsbury",
+      "isbn": "9780747532699",
+      "genre": ["Fantasy"],
+      "sinopsis": "The story of a young wizard, Harry Potter, and his adventures at Hogwarts School of Witchcraft and Wizardry.",
+      "coverImage": "https://example.com/harry_potter_cover.jpg",
+      "language": "English",
+      "edition": "1st",
+      "publicationDate": new Date("2001-06-26"), // Convert string to Date object
+      "copies": 10,
+      "availableCopies": 10,
+      "status": 0,
+      "municipality": "London"
+    },
+    {
+      "title": "Harry Potter and the Philosopher's Stone",
+      "author": ["J.K. Rowling"],
+      "publisher": "Bloomsbury",
+      "isbn": "9780747532699",
+      "genre": ["Romance"],
+      "sinopsis": "The story of a young wizard, Harry Potter, and his adventures at Hogwarts School of Witchcraft and Wizardry.",
+      "coverImage": "https://example.com/harry_potter_cover.jpg",
+      "language": "English",
+      "edition": "1st",
+      "publicationDate": new Date("2001-06-26"), // Convert string to Date object
+      "copies": 10,
+      "availableCopies": 10,
+      "status": 0,
+      "municipality": "London"
+    },
+    {
+      "title": "Harry Potter and the Philosopher's Stone",
+      "author": ["J.K. Rowling"],
+      "publisher": "Bloomsbury",
+      "isbn": "9780747532699",
+      "genre": ["Terror"],
+      "sinopsis": "The story of a young wizard, Harry Potter, and his adventures at Hogwarts School of Witchcraft and Wizardry.",
+      "coverImage": "https://example.com/harry_potter_cover.jpg",
+      "language": "English",
+      "edition": "1st",
+      "publicationDate": new Date("2001-06-26"), // Convert string to Date object
+      "copies": 10,
+      "availableCopies": 10,
+      "status": 0,
+      "municipality": "London"
+    }
+  ];
+
   constructor(private adminStatisticsService: AdminStatisticsService, private userAuthService : UserAuthService) { }
 
   ngOnInit() {
@@ -133,5 +187,11 @@ municipality : string = '';
 
 
 
+  }
+
+
+
+  selectButton(buttonNumber: number): void {
+    this.selectedButton = buttonNumber;
   }
 }

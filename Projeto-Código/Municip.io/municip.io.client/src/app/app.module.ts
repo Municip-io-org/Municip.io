@@ -128,6 +128,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { CitizensMapComponent } from './admin-statistics-dashboard/citizens-map/citizens-map.component';
 import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
 import { RegisteredMunUsersGraphComponent } from './munadmin-statistics-dashboard/registered-mun-users-graph/registered-mun-users-graph.component';
+import { BooksGenreChartComponent } from './admin-statistics-dashboard/books-genre-chart/books-genre-chart.component';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -237,6 +238,7 @@ registerLocaleData(localePt, 'pt-PT');
     CitizensMapComponent,
     MunadminStatisticsDashboardComponent,
     RegisteredMunUsersGraphComponent,
+    BooksGenreChartComponent,
     
   ],
   imports: [
