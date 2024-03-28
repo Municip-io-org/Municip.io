@@ -162,6 +162,10 @@ export class LibraryService {
     return this.http.get<BookRequest[]>(`api/Book/GetRequestsByCitizen?email=${email}`);
   }
 
+  getDistinctCategoriesByMunicipality(municipality: string) {
+    return this.http.get<string[]>(`api/Book/GetDistinctCategoriesByMunicipality?municipality=${municipality}`);
+  }
+
   deleteRequest(requestId: number): Observable<any> {
     return this.http.delete(`api/Book/DeleteRequest?requestId=${requestId}`);
   }

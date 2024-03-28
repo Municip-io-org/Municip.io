@@ -173,6 +173,28 @@ namespace Municip.io.Server.Controllers
             return Ok(bookRequests);
         }
 
+        /**
+         * Retorna todas as categorias de um livro de um município
+         */
+        [HttpGet("GetDistinctCategoriesByMunicipality")]
+        public IActionResult GetDistinctCategoriesByMunicipality(string municipality)
+        {
+            var bookGenres = _context.Books
+                .Where(b => b.Municipality == municipality)
+                .ToList() // Convertendo para lista em memória
+                .SelectMany(b => b.Genre)
+                .Distinct()
+                .ToList();
+
+            if (bookGenres.Count == 0)
+            {
+                return NotFound("Nenhum município correspondente encontrado.");
+            }
+
+            return Ok(bookGenres);
+        }
+
+
 
 
         /**

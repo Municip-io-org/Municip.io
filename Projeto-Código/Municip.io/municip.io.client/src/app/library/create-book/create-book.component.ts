@@ -12,18 +12,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 })
 export class CreateBookComponent {
 
-  categories = [
-    {name: "Terror", value: false},
-    { name: "Policial", value: false },
-    { name: "Drama", value: false },
-    { name: "Economia", value: false },
-    { name: "Manga", value: false },
-    { name: "Direito", value: false },
-    { name: "História", value: false },
-    { name: "Tecnologia", value: false },
-    { name: "Romance", value: false },
-    { name: "Tragédia", value: false },
-  ];
+  categories: Category[] = [];
 
 
   book:Book = {
@@ -55,7 +44,10 @@ export class CreateBookComponent {
   authorsList: string[] = [];
 
   isDialogOpen: boolean = false;
+  dialogTitle = '';
+  dialogMessage = '';
   isAddGenreDialogOpen: boolean = false;
+  isConfirm: boolean = true;
 
   editor = new Editor();
   toolbar: Toolbar = [
@@ -123,6 +115,10 @@ export class CreateBookComponent {
     }
   }
 
+  closeDialog() {
+    this.isDialogOpen = false;
+    window.location.reload();
+  }
 
 
   /**
@@ -158,12 +154,17 @@ export class CreateBookComponent {
     });
   }
 
-  private buildCategoryCheckboxes(){
-    this.categories.forEach(category => {
-      this.genres.push(new FormControl({value: category.value, disabled: true}));
-    });
-
+  private buildCategoryCheckboxes() {
+    this.libraryService.getDistinctCategoriesByMunicipality(this.municipalityName).subscribe(
+      (categories: string[]) => {
+        categories.forEach(category => {
+          this.categories.push({ name: category, value: false });
+          this.genres.push(new FormControl({value: false, disabled: true})); // Por padrão, inicialize todas as categorias desmarcadas
+        });
+      }
+    );
   }
+
 
 
 
@@ -214,7 +215,6 @@ export class CreateBookComponent {
 
 
   onSubmit(): void {
-    console.log("SUBMIT");
     if (this.bookForm.valid) {
 
       this.book = {
@@ -225,25 +225,32 @@ export class CreateBookComponent {
         copies: parseInt(this.copies?.value!),
         coverImage: '',
         edition: this.edition?.value!,
-        genre: this.genres?.value!,
+        genre: this.genres?.value
+          .map((value: boolean, index: number) => (value ? this.categories[index].name : null))
+          .filter((genre: string | null) => genre !== null),
         language: this.language?.value!,
         publicationDate: this.publicationDate?.value!,
         publisher: this.publisher?.value!,
         sinopsis: this.sinopsis?.value!,
         status: BookStatus.Available,
         municipality: this.municipalityName
-      }
+      };
+
 
       console.log(this.book);
 
       this.libraryService.createBook(this.book, this.coverImage).subscribe(
         (res) => {
-          this.error = null;
+          this.dialogTitle = 'Criado com Sucesso';
+          this.dialogMessage = `O livro foi criado com sucesso`;
+          this.isConfirm = true;
           this.isDialogOpen = true;
         },
         (error) => {
-          console.log(error)
-          this.error = error.error.message;
+          this.dialogTitle = 'Erro';
+          this.dialogMessage = error.error;
+          this.isConfirm = false;
+          this.isDialogOpen = true;
           window.scrollTo(0, 0);
         }
       );
@@ -299,36 +306,28 @@ export class CreateBookComponent {
   enableGenresControls() {
     this.genres.enable();
     this.genres.controls.forEach(control => {
-      console.log("enable");
       control.enable();
-      console.log(control.enable);
     });
   }
 
   disableGenresControls() {
     this.genres.disable();
     this.genres.controls.forEach(control => {
-      console.log("disable");
       control.disable();
-      console.log(control.disabled);
     });
   }
 
   enableAuthorsControls() {
     this.authors.enable();
     this.authors.controls.forEach(control => {
-      console.log("enable");
       control.enable();
-      console.log(control.enable);
     });
   }
 
   disableAuthorsControls() {
     this.authors.disable();
     this.authors.controls.forEach(control => {
-      console.log("disable");
       control.disable();
-      console.log(control.disabled);
     });
   }
 
