@@ -11,25 +11,35 @@ export class AddGenreDialogComponent {
   @Input() isDialogOpen: boolean = false;
   @Output() isDialogOpenChange = new EventEmitter<boolean>();
 
-  @Input() list:string[] = [];
+  @Input() list: string[] = [];
+  @Output() newGenre = new EventEmitter<string>();
 
   genreForm = new FormGroup({
-    genre: new FormControl("", Validators.required)
+    genre: new FormControl("", [Validators.required, this.validateGenre.bind(this)])
   })
 
+  validateGenre(control: FormControl): { [key: string]: boolean } | null {
+    const name = control.value as string;
+    const listUpperCase = this.list.map(genre => genre.toUpperCase());
+    if (!listUpperCase.includes(name.toUpperCase())) {
+      return null; 
+    } else {
+      return { 'nameInList': true }; 
+    }
+  }
 
 
   closeDialog() {
-    console.log("Fechar dialogo");
     this.isDialogOpen = false;
-    console.log(this.isDialogOpen);
     this.isDialogOpenChange.emit(this.isDialogOpen);
   }
 
   addGenre() {
-    console.log("Adicionar categoria");
+    this.newGenre.emit(this.genre?.value!);
     this.isDialogOpen = false;
     this.isDialogOpenChange.emit(this.isDialogOpen);
+    this.genre?.setValue('');
+    this.genre?.markAsUntouched();
   }
 
   get genre() {

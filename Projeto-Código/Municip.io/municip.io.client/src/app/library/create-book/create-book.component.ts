@@ -83,16 +83,29 @@ export class CreateBookComponent {
     publicationDate: new FormControl({ value: new Date(), disabled: true }, [Validators.required]),
     language: new FormControl({ value: "", disabled: true }, [Validators.required]),
     copies: new FormControl({ value: "", disabled: true }, [Validators.required]),
-    genres: new FormArray([]),
+    genres: new FormArray([], [Validators.required ,this.validateGenre.bind(this)]),
     sinopsis: new FormControl({ value: "", disabled: true }, [Validators.required]),
     coverImageUrl: new FormControl({ value: "", disabled: true }, [Validators.required])
   });
 
+  validateGenre(controls: FormArray): { [key: string]: boolean } | null {
+    if (controls.controls.some(control => control.value)) {
+      return null; 
+    } else {
+      return { 'noGenreSelected': true }; 
+    }
+  }
 
-  addGenre() {
-    console.log(this.isAddGenreDialogOpen);
+
+
+  openAddGenreDialog() {
     this.isAddGenreDialogOpen = true;
-    console.log(this.isAddGenreDialogOpen);
+
+  }
+
+  addGenre(newGenre: string) {
+    this.categories.push({ name: newGenre, value: false });
+    this.genres.push(new FormControl({ value: false, disabled: false }))
   }
 
   removeGenre() {

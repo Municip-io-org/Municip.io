@@ -4,7 +4,7 @@
 
 
 
-<app-add-genre-dialog [(isDialogOpen)]="isAddGenreDialogOpen" (list)="extractCategoryNames()"></app-add-genre-dialog>
+<app-add-genre-dialog [(isDialogOpen)]="isAddGenreDialogOpen" [list]="extractCategoryNames()" (newGenre)="addGenre($event)"></app-add-genre-dialog>
 
 
 
@@ -86,14 +86,14 @@
 
           <div class="flex flex-wrap gap-4">
             <button type="button" (click)="addAuthor()" [disabled]="authors.disabled"
-                    class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-3 rounded-full w-[11rem]
+                    class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-2 rounded-full h-min
         transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
               <img src="/assets/images/icons/plus-white.png" alt="Adicionar Autor" class="size-6" />
               Adicionar autor
             </button>
 
             <button type="button" (click)="removeLastAuthor()" [disabled]="authors.disabled"
-                    class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-3 rounded-full w-[14rem]
+                    class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-2 rounded-full h-min
         transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
               <img src="/assets/images/icons/delete-white.png" alt="Remover Autor" class="size-6" />
               Remover último autor
@@ -130,23 +130,26 @@
     <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4">
 
       <div class="w-full lg:w-5/12 mb-4">
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap items-center gap-4 mb-4">
           <app-input-title class="text-[1.8rem]">Categorias</app-input-title>
-          <button type="button" (click)="addGenre()" [disabled]="genres.disabled"
-                  class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-3 rounded-full w-[14rem]
+          <button type="button" (click)="openAddGenreDialog()" [disabled]="genres.disabled"
+                  class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-2 rounded-full h-min
 transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
             <img src="/assets/images/icons/plus-white.png" alt="Adicionar Categoria" class="size-6" />
             Adicionar categoria
           </button>
         </div>
 
-        <div class="h-[19rem] overflow-y-scroll border-2 bg-municip-blank-gray transition duration-300 ease-in-out rounded-[0.375rem] border-[#bababd] px-[2rem] py-[1rem]">
+        <div class="h-[19rem] overflow-y-scroll border-2 bg-municip-blank-gray transition duration-300 ease-in-out rounded-[0.375rem] border-[#bababd] px-[2rem]">
           <div formArrayName="genres" *ngFor="let genreControl of genres.controls; let i = index"
-               class="flex justify-between items-center mb-8"
+               class="flex flex-col "
                [class.disabled-background]="genres.disabled">
-            <label for="categories[i].name" class="text-municip-highlight-black text-[1.2rem] font-medium font-roboto transition duration-300 ease-in-out">{{categories[i].name}}</label>
-            <input id="categories[i].name" type="checkbox" [formControlName]="i"
-                   class="size-10 transition duration-300 ease-in-out disabled:opacity-40" />
+            <hr class="border-t-[#bababd] rounded" *ngIf="i>0"/>
+            <div class="flex justify-between items-center my-3">
+              <label for="categories[i].name" class="text-municip-highlight-black text-[1.2rem] font-medium font-roboto transition duration-300 ease-in-out">{{categories[i].name}}</label>
+              <input id="categories[i].name" type="checkbox" [formControlName]="i"
+                     class="size-10 transition duration-300 ease-in-out disabled:opacity-40" />
+            </div>
           </div>
         </div>
       </div>

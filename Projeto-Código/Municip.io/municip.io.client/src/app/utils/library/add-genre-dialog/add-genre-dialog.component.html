@@ -13,7 +13,7 @@
                class="input w-3/5 h-12" />
         <div class="text-red-500 font-bold py-2" *ngIf="genre?.touched && genre?.invalid ">
           <div *ngIf="genre?.errors?.['required'] ">Categoria Obrigatória</div>
-          <!--<div *ngIf="genre?.errors?.['email']">Email Inválido</div>-->
+          <div *ngIf="genre?.errors?.['nameInList']">A categoria já existe</div>
         </div>
       </div>
     </form>
