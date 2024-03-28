@@ -63,6 +63,17 @@ namespace Municip.io.Server.Controllers
             return Ok(_context.Municipalities.Count());
         }
 
+        [HttpGet("getPendingRequestsByMunicipality")]
+        public IActionResult getPendingRequestsByMunicipality(string municipality)
+        {
+            return Ok(_context.DocumentRequests.Where(x => x.Municipality == municipality && x.Status == Models.DocumentStatus.Pending).Count());
+        }
+
+        [HttpGet("getWaitingForPaymentRequestsByMunicipality")]
+        public IActionResult getWaitingForPaymentRequestsByMunicipality(string municipality)
+        {
+            return Ok(_context.DocumentRequests.Where(x => x.Municipality == municipality && x.Status == Models.DocumentStatus.WaitingForPayment).Count());
+        }
 
         
     }
