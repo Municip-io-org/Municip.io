@@ -15,6 +15,8 @@ export class RequestsComponent {
   orderOptions: any[] = [{ label: 'Mais antigo', value: true }, { label: 'Mais Recente', value: false }];
   ascendingOrder: boolean = true;
 
+
+  municipalityName: string = '';
   constructor(private service: LibraryService, private authService: UserAuthService) {
 
   }
@@ -26,17 +28,8 @@ export class RequestsComponent {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
           this.municipalityImage = municipality.landscapePhoto;
-
-          //this.service.getRequestsFromCitizen(user.email).subscribe(
-          //  (docRes: any) => {
-          //    this.documents = docRes as RequestDocument[];
-
-          //  },
-          //  error => {
-          //    console.error(error);
-          //  }
-          //);
-          this.service.getRequests().subscribe(
+          this.municipalityName = municipality.name;
+          this.service.getRequestsByMunicipality(municipality.name).subscribe(
             (requests) => {
               this.booksRequested = requests;
               this.sortEventsByDate();
@@ -74,5 +67,16 @@ export class RequestsComponent {
     });
   }
 
+  updateRequests() {
+    this.service.getRequestsByMunicipality(this.municipalityName).subscribe(
+      (requests) => {
+        this.booksRequested = requests;
+        this.sortEventsByDate();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 
 }
