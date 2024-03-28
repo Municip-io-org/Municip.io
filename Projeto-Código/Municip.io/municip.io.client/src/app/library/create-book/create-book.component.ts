@@ -3,7 +3,7 @@ import { Book, BookStatus, LibraryService } from '../../services/library/library
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { Editor, Toolbar } from 'ngx-editor';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-book',
@@ -11,6 +11,20 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './create-book.component.css'
 })
 export class CreateBookComponent {
+
+  categories = [
+    {name: "Terror", value: false},
+    { name: "Policial", value: false },
+    { name: "Drama", value: false },
+    { name: "Economia", value: false },
+    { name: "Manga", value: false },
+    { name: "Direito", value: false },
+    { name: "História", value: false },
+    { name: "Tecnologia", value: false },
+    { name: "Romance", value: false },
+    { name: "Tragédia", value: false },
+  ];
+
 
   book:Book = {
       id: 1,
@@ -68,11 +82,20 @@ export class CreateBookComponent {
     publicationDate: new FormControl({ value: new Date(), disabled: true }, [Validators.required]),
     language: new FormControl({ value: "", disabled: true }, [Validators.required]),
     copies: new FormControl({ value: "", disabled: true }, [Validators.required]),
-    genre: new FormControl({ value: "", disabled: true }, [Validators.required]),
+    genres: new FormArray([]),
     sinopsis: new FormControl({ value: "", disabled: true }, [Validators.required]),
     coverImageUrl: new FormControl({ value: "", disabled: true }, [Validators.required])
   });
 
+
+  addGenre() {
+    this.genres.push(new FormControl(''));
+  }
+  removeGenre() {
+    if (this.genres.length > 1) {
+      this.genres.removeAt(this.genres.length - 1);
+    }
+  }
 
   addAuthor() {
     this.authors.push(new FormControl(''));
@@ -108,9 +131,21 @@ export class CreateBookComponent {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
           this.municipalityImage = municipality.landscapePhoto;
           this.municipalityName = municipality.name;
+
+
+          this.buildCategoryCheckboxes();
+
+
         });
       });
     });
+  }
+
+  private buildCategoryCheckboxes(){
+    this.categories.forEach(category => {
+      this.genres.push(new FormControl({value: category.value, disabled: true}));
+    });
+
   }
 
 
@@ -173,7 +208,7 @@ export class CreateBookComponent {
         copies: parseInt(this.copies?.value!),
         coverImage: '',
         edition: this.edition?.value!,
-        genre: [this.genre?.value!],
+        genre: this.genres?.value!,
         language: this.language?.value!,
         publicationDate: this.publicationDate?.value!,
         publisher: this.publisher?.value!,
@@ -219,8 +254,6 @@ export class CreateBookComponent {
 
 
   enableFormControls() {
-    
-
     this.title?.enable();
     this.publisher?.enable();
     this.edition?.enable();
@@ -228,14 +261,12 @@ export class CreateBookComponent {
     this.publicationDate?.enable();
     this.language?.enable();
     this.copies?.enable();
-    this.genre?.enable();
+    this.enableGenresControls();
     this.sinopsis?.enable();
     this.coverImageUrl?.enable();
   }
 
   disableFormControls() {
-    
-
     this.title?.disable();
     this.publisher?.disable();
     this.edition?.disable();
@@ -243,9 +274,27 @@ export class CreateBookComponent {
     this.publicationDate?.disable();
     this.language?.disable();
     this.copies?.disable();
-    this.genre?.disable();
+    this.disableGenresControls();
     this.sinopsis?.disable();
     this.coverImageUrl?.disable();
+  }
+
+  enableGenresControls() {
+    this.genres.enable();
+    this.genres.controls.forEach(control => {
+      console.log("enable");
+      control.enable();
+      console.log(control.enable);
+    });
+  }
+
+  disableGenresControls() {
+    this.genres.disable();
+    this.genres.controls.forEach(control => {
+      console.log("disable");
+      control.disable();
+      console.log(control.disabled);
+    });
   }
 
   enableAuthorsControls() {
@@ -308,8 +357,8 @@ export class CreateBookComponent {
     return this.bookForm.get('copies');
   }
 
-  get genre() {
-    return this.bookForm.get('genre');
+  get genres() {
+    return this.bookForm.get('genres') as FormArray;
   }
 
   get sinopsis() {
@@ -319,4 +368,9 @@ export class CreateBookComponent {
   get coverImageUrl() {
     return this.bookForm.get('coverImageUrl');
   }
+}
+
+interface Category {
+  name: string,
+  value: boolean
 }
