@@ -25,6 +25,7 @@ export class HeaderLoggedinComponent {
   showDropdownTransportes: boolean = false;
   showSignOutDropdown: boolean = false;
   showDropdownMunicipality: boolean = false;
+  showDropdownAdmin: boolean = false;
 
   constructor(private auth: UserAuthService, private appFeaturesService: AppFeaturesService, private router: Router) { }
 
@@ -44,7 +45,7 @@ export class HeaderLoggedinComponent {
             this.firstName = this.user.firstName;
             this.photo = this.user.photo;
 
-           
+
             this.appFeaturesService.getAppFeaturesByMunicipality(this.user.municipality).subscribe(
               (appFeaturesRes: AppFeature[]) => {
 
@@ -117,34 +118,41 @@ export class HeaderLoggedinComponent {
       case Dropdowns.Municipality:
         this.showDropdownMunicipality = !this.showDropdownMunicipality;
         break;
+      case Dropdowns.Admin:
+        this.showDropdownAdmin = !this.showDropdownAdmin;
+        break;
+
       default:
     }
   }
 
 
-    closeAllOtherDropdowns(dropdown: Dropdowns) {
-      if (dropdown !== Dropdowns.Events) {
-        this.showDropdownAgenda = false;
-      }
-      if (dropdown !== Dropdowns.Library) {
-        this.showDropdownBiblioteca = false;
-      }
-      if (dropdown !== Dropdowns.Documents) {
-        this.showDropdownDocumentos = false;
-      }
-      if (dropdown !== Dropdowns.News) {
-        this.showDropdownNoticias = false;
-      }
-      if (dropdown !== Dropdowns.Transports) {
-        this.showDropdownTransportes = false;
-      }
-      if (dropdown !== Dropdowns.Municipality) {
-        this.showDropdownMunicipality = false;
-      }
+  closeAllOtherDropdowns(dropdown: Dropdowns) {
+    if (dropdown !== Dropdowns.Events) {
+      this.showDropdownAgenda = false;
     }
+    if (dropdown !== Dropdowns.Library) {
+      this.showDropdownBiblioteca = false;
+    }
+    if (dropdown !== Dropdowns.Documents) {
+      this.showDropdownDocumentos = false;
+    }
+    if (dropdown !== Dropdowns.News) {
+      this.showDropdownNoticias = false;
+    }
+    if (dropdown !== Dropdowns.Transports) {
+      this.showDropdownTransportes = false;
+    }
+    if (dropdown !== Dropdowns.Municipality) {
+      this.showDropdownMunicipality = false;
+    }
+    if (dropdown !== Dropdowns.Admin) {
+      this.showDropdownAdmin = false;
+    }
+  }
 
 
-  
+
 
 
   get Dropdowns() {
@@ -190,13 +198,14 @@ export class HeaderLoggedinComponent {
 
 
 export enum Dropdowns {
-    Events = 'events',
-    Library = 'library',
-    Documents = 'documents',
-    News = 'news',
-    Transports = 'transports',
-    CloseAll = 'closeAll',
-    Municipality = "Municipality"
+  Events = 'events',
+  Library = 'library',
+  Documents = 'documents',
+  News = 'news',
+  Transports = 'transports',
+  CloseAll = 'closeAll',
+  Municipality = "Municipality",
+  Admin = "Admin"
 }
 
 
