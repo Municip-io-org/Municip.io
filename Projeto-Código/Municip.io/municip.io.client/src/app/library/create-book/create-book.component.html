@@ -118,11 +118,9 @@
 
 
       <div class="w-full lg:w-5/12 mb-4 h-32">
-        <app-input-title class="text-[1.8rem]">Nº de exemplares</app-input-title>
+        <app-input-title class="text-[1.8rem]">Data de publicação</app-input-title>
 
-        <input required type="date" id="publicationDate"
-               formControlName="publicationDate" name="publicationDate"
-               class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" />
+        <app-date-picker [date]="publicationDate" name="publicationDate" class="w-full" />
 
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="publicationDate?.touched && publicationDate?.invalid ">
@@ -146,23 +144,25 @@ transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:
           <span>Selecione pelo menos uma categoria</span>
         </div>
 
-        <div class="h-[15rem] overflow-y-scroll border-2 bg-municip-blank-gray transition duration-300 ease-in-out rounded-[0.375rem] border-[#bababd] px-[2rem]">
+        <div class="h-[17rem] overflow-y-scroll border-2 bg-municip-blank-gray transition duration-300 ease-in-out rounded-[0.375rem] border-[#bababd] px-[2rem]">
           <div formArrayName="genres" *ngFor="let genreControl of genres.controls; let i = index"
                class="flex flex-col "
                [class.disabled-background]="genres.disabled">
             <hr class="border-t-[#bababd] rounded" *ngIf="i>0"/>
             <div class="flex justify-between items-center my-3">
-              <label for="categories[i].name" class="text-municip-highlight-black text-[1.2rem] font-medium font-roboto transition duration-300 ease-in-out">{{categories[i].name}}</label>
-              <input id="categories[i].name" type="checkbox" [formControlName]="i"
+              <label for="categories[i]" class="text-municip-highlight-black text-[1.2rem] font-medium font-roboto transition duration-300 ease-in-out">
+                {{categories[i]}}
+              </label>
+              <input id="categories[i]" type="checkbox" [formControlName]="i"
                      class="size-10 transition duration-300 ease-in-out disabled:opacity-40" />
             </div>
           </div>
         </div>
       </div>
 
-      <div class="flex flex-col  text-left w-full lg:w-5/12 mb-4 h-[19rem]">
+      <div class="flex flex-col  text-left w-full lg:w-5/12 mb-4 h-[23.5rem]">
         <app-input-title class="text-[1.8rem]">Capa do livro</app-input-title>
-        <div class="h-20 table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc] "
+        <div class=" h-full table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc] "
              [class.disabled-background]="coverImageUrl?.disabled"
              (dragover)="onDragOver($event)"
              (drop)="onDrop($event)" (click)="coverImageUrl?.disabled ? null : coverImagePicker.click()">
@@ -173,8 +173,8 @@ transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:
 
               <label for="file" class="flex justify-center items-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
 
-              <div *ngIf="coverImage" class="flex items-center justify-center pb-2">
-                <img [src]="coverImageUrl?.value!" alt="Imagem carregada" class="w-[10rem] h-[10rem] object-cover ">
+              <div *ngIf="coverImageUrl?.value! !== '' " class="flex items-center justify-center pb-2">
+                <img [src]="coverImageUrl?.value!" alt="Imagem carregada" class="w-[10rem] h-[15rem] object-cover rounded">
               </div>
 
             </div>
@@ -227,7 +227,7 @@ transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:
       </div>
     </div>
 
-    <button type="submit" [disabled]="!bookForm.valid || !coverImageUrl"
+    <button type="submit" [disabled]="!bookForm.valid"
             class="absolute -bottom-[0rem] right-[2rem] h-auto w-[15rem] flex justify-center
               items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue
               to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600

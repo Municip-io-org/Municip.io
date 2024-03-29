@@ -4,19 +4,21 @@ import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { Editor, Toolbar } from 'ngx-editor';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-create-book',
   templateUrl: './create-book.component.html',
-  styleUrl: './create-book.component.css'
+  styleUrl: './create-book.component.css',
+  providers: [provideNativeDateAdapter()],
 })
 export class CreateBookComponent {
 
-  categories: Category[] = [];
+  categories: string[] = [];
 
 
-  book:Book = {
-      id: 1,
+  book: Book = {
+     
       isbn: '',
       title: '',
       author: [],
@@ -38,7 +40,7 @@ export class CreateBookComponent {
 
 
   error: string | null = null;
-  coverImage!: File;
+  coverImage: File | null = null;
   files: any[] = [];
 
   authorsList: string[] = [];
@@ -96,12 +98,8 @@ export class CreateBookComponent {
   }
 
   addGenre(newGenre: string) {
-    this.categories.push({ name: newGenre, value: false });
+    this.categories.push(newGenre);
     this.genres.push(new FormControl({ value: false, disabled: false }))
-  }
-
-  addGenreFromBookInfo(genres: string[]) {
-
   }
 
   removeGenre() {
@@ -113,6 +111,7 @@ export class CreateBookComponent {
   addAuthor() {
     this.authors.push(new FormControl(''));
   }
+
   removeLastAuthor() {
     if (this.authors.length > 1) {
       this.authors.removeAt(this.authors.length - 1);
@@ -131,8 +130,8 @@ export class CreateBookComponent {
    * @param libraryService
    * @param router
    */
-  constructor(private authService: UserAuthService, private libraryService: LibraryService, private router: Router) {
-
+  constructor(private authService: UserAuthService, private dateAdapter: DateAdapter<Date>, private libraryService: LibraryService, private router: Router) {
+    this.dateAdapter.setLocale('pt');
   }
 
  
@@ -162,7 +161,7 @@ export class CreateBookComponent {
     this.libraryService.getDistinctCategoriesByMunicipality(this.municipalityName).subscribe(
       (categories: string[]) => {
         categories.forEach(category => {
-          this.categories.push({ name: category, value: false });
+          this.categories.push(category);
           this.genres.push(new FormControl({value: false, disabled: true})); // Por padrão, inicialize todas as categorias desmarcadas
         });
       }
@@ -227,10 +226,10 @@ export class CreateBookComponent {
         author: this.authors?.value!,
         availableCopies: parseInt(this.copies?.value!),
         copies: parseInt(this.copies?.value!),
-        coverImage: '',
+        coverImage: this.coverImageUrl?.value!,
         edition: this.edition?.value!,
         genre: this.genres?.value
-          .map((value: boolean, index: number) => (value ? this.categories[index].name : null))
+          .map((value: boolean, index: number) => (value ? this.categories[index] : null))
           .filter((genre: string | null) => genre !== null),
         language: this.language?.value!,
         publicationDate: this.publicationDate?.value!,
@@ -268,23 +267,36 @@ export class CreateBookComponent {
 
   getInfo() {
     if (this.iSBN?.valid) {
-      this.libraryService.getBookInfoAPI(this.iSBN?.value!).subscribe(
-        (book) => {
-          if (book) {
-            this.bookForm.patchValue({
-              title: book.title,
-              authors: book.author,
-              publisher: book.publisher,
-              iSBN: book.isbn,
-              //genres: book.genre, TODO
-              sinopsis: book.sinopsis,
-              coverImageUrl: book.coverImage,
-              language: book.language,
-              edition: book.edition,
-              publicationDate: book.publicationDate,
-              copies: book.copies.toString(),
-              
-            });
+
+      console.log(this.iSBN?.value);
+
+
+      this.libraryService.getBookInfoAPI(this.iSBN?.value!.toString()).subscribe(
+        (bookRes) => { 
+          if (bookRes !== null) {
+          
+            const book: Book = bookRes[0];
+
+            console.log(book.title);
+            this.title?.setValue(book.title);
+            this.publisher?.setValue(book.publisher);
+            this.sinopsis?.setValue(book.sinopsis);
+            this.coverImageUrl?.setValue(book.coverImage);
+            this.language?.setValue(book.language);
+            this.edition?.setValue(book.edition);
+
+
+            this.setPublicationDate(book.publicationDate.toString());
+
+
+            this.copies?.setValue(book.copies.toString());
+ 
+            this.addAuthorsFromBookInfo(book.author);
+            this.addGenreFromBookInfo(book.genre);
+
+
+
+            console.log(this.bookForm);
           } else {
             console.log('Nenhum livro encontrado com o ISBN fornecido.');
           }
@@ -294,6 +306,45 @@ export class CreateBookComponent {
         }
       );
     }
+  }
+
+  // Função para ajustar a data para o formato "yyyy-MM-dd"
+  setUpDate(date: string): string {
+    let parts = date.split('-');
+    if (parts.length === 1) {
+      date += '-01-01';  // Adiciona o mês e o dia padrão se a data tiver apenas o ano
+    } else if (parts.length === 2) {
+      date += '-01';     // Adiciona o dia padrão se a data tiver ano e mês
+    }
+    return date;
+  }
+
+  setPublicationDate(bookPublicationDate: string): void {
+    const formattedDate = this.setUpDate(bookPublicationDate);
+    this.publicationDate?.setValue(formattedDate);
+  }
+
+  addAuthorsFromBookInfo(authors: string[]) {
+    this.authors.clear();
+    authors.forEach(author => {
+      this.authors.push(new FormControl(author));
+    })
+  }
+
+  addGenreFromBookInfo(genres: string[]) {
+    const categoryNamesUpperCase = this.categories.map(category => category.toUpperCase());
+
+    genres.forEach(genre => {
+      const index = categoryNamesUpperCase.indexOf(genre.toUpperCase());
+
+      if (index !== -1) {
+        this.genres.at(index).setValue(true);
+      } else {
+        this.categories.push(genre);
+        this.genres.push(new FormControl({ value: true, disabled: false }))
+      }
+
+    });
   }
 
 
@@ -371,7 +422,7 @@ export class CreateBookComponent {
   }
 
   extractCategoryNames(): string[] {
-    return this.categories.map(category => category.name);
+    return this.categories.map(category => category);
   }
 
 
@@ -405,7 +456,7 @@ export class CreateBookComponent {
   }
 
   get publicationDate() {
-    return this.bookForm.get('publicationDate');
+    return this.bookForm.get('publicationDate') as FormControl;
   }
 
   get language() {
@@ -429,7 +480,3 @@ export class CreateBookComponent {
   }
 }
 
-interface Category {
-  name: string,
-  value: boolean
-}

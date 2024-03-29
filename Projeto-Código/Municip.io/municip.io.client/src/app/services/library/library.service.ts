@@ -125,19 +125,24 @@ export class LibraryService {
     },
   ];
 
-  createBook(book: Book, image: File) {
-    var headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
-    let imgurl = "https://api.imgur.com/3/image";
+  createBook(book: Book, image: File | null): Observable<Book> {
+    if (image === null) {
+      return this.http.post<Book>('api/book/CreateBook', book);
+    }
 
-    //upload to imgur
+    const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    const imgurl = "https://api.imgur.com/3/image";
+
     const formData = new FormData();
     formData.append('image', image);
-    return this.http.post(imgurl, formData, { headers })
-      .pipe(switchMap((response: any) => {
-        book.coverImage = response['data']['link'];
-        return this.http.post<Book>('api/book/CreateBook', book);
-      }));
 
+    return this.http.post(imgurl, formData, { headers }).pipe(
+      switchMap((response: any) => {
+        book.coverImage = response['data']['link'];
+        console.log(book);
+        return this.http.post<Book>('api/book/CreateBook', book);
+      })
+    );
   }
 
 
@@ -146,7 +151,7 @@ export class LibraryService {
     return this.Books;
   }
 
-  getBookInfoAPI(isbn: string): Observable<Book> {
+  getBookInfoAPI(isbn: string) {
     return this.http.get<any>(`api/Book/GetBookInfoAPI?isbn=${isbn}`).pipe(
       map(response => {
         if (response && response.totalItems && response.totalItems > 0) {
@@ -154,22 +159,25 @@ export class LibraryService {
             const isbn13 = item.volumeInfo.industryIdentifiers.find((identifier: any) => identifier.type === 'ISBN_13')?.identifier || '';
             const isbn10 = item.volumeInfo.industryIdentifiers.find((identifier: any) => identifier.type === 'ISBN_10')?.identifier || '';
 
-            return {
+
+            const book:Book = {
               title: item.volumeInfo.title || '',
               author: item.volumeInfo.authors || [],
               publisher: item.volumeInfo.publisher || '',
-              isbn: isbn13 || isbn10 || '', 
+              isbn: isbn13 || isbn10 || '',
               genre: item.volumeInfo.categories || [],
               sinopsis: item.volumeInfo.description || '',
-              coverImage: item.volumeInfo.imageLinks?.thumbnail || '',
+              coverImage: item.volumeInfo.imageLinks.thumbnail || '',
               language: item.volumeInfo.language || '',
               edition: '',
-              publicationDate: item.volumeInfo.publishedDate || '',
-              copies: 0, 
-              availableCopies: 0, 
-              status: BookStatus.Available, 
-              municipality: '' 
+              publicationDate: item.volumeInfo.publishedDate || Date.now(),
+              copies: 0,
+              availableCopies: 0,
+              status: BookStatus.Available,
+              municipality: ''
             };
+            console.log(book)
+            return book;
           });
         } else {
           

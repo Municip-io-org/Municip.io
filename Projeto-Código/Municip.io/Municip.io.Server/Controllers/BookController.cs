@@ -31,7 +31,7 @@ namespace Municip.io.Server.Controllers
             {
                 var content = await response.Content.ReadAsStringAsync();
                 Console.WriteLine(content);
-                return Content(content, "application/json"); // Retorna o JSON com o tipo de conteúdo definido
+                return Content(content, "application/json");
             }
 
             return StatusCode((int)response.StatusCode, response.ReasonPhrase);
