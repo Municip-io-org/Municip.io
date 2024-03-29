@@ -100,6 +100,10 @@ export class CreateBookComponent {
     this.genres.push(new FormControl({ value: false, disabled: false }))
   }
 
+  addGenreFromBookInfo(genres: string[]) {
+
+  }
+
   removeGenre() {
     if (this.genres.length > 1) {
       this.genres.removeAt(this.genres.length - 1);
@@ -252,6 +256,41 @@ export class CreateBookComponent {
           this.isConfirm = false;
           this.isDialogOpen = true;
           window.scrollTo(0, 0);
+        }
+      );
+    }
+  }
+
+  onISBNChange() {
+    this.toggleControls();
+    this.getInfo();
+  }
+
+  getInfo() {
+    if (this.iSBN?.valid) {
+      this.libraryService.getBookInfoAPI(this.iSBN?.value!).subscribe(
+        (book) => {
+          if (book) {
+            this.bookForm.patchValue({
+              title: book.title,
+              authors: book.author,
+              publisher: book.publisher,
+              iSBN: book.isbn,
+              //genres: book.genre, TODO
+              sinopsis: book.sinopsis,
+              coverImageUrl: book.coverImage,
+              language: book.language,
+              edition: book.edition,
+              publicationDate: book.publicationDate,
+              copies: book.copies.toString(),
+              
+            });
+          } else {
+            console.log('Nenhum livro encontrado com o ISBN fornecido.');
+          }
+        },
+        (error) => {
+          console.error('Erro ao obter informações do livro:', error);
         }
       );
     }

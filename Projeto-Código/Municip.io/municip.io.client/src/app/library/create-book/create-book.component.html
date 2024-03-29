@@ -26,7 +26,7 @@
         <app-input-title class="text-[1.8rem]">ISBN</app-input-title>
 
         <input required type="number" id="iSBN" formControlName="iSBN" name="iSBN"
-               class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" (change)="toggleControls()" />
+               class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" (change)="onISBNChange()" />
 
         <div class="flex pt-2 gap-x-2 items-center">
           <input id="useISBN" type="checkbox" (change)="toggleControls()" formControlName="useISBN" class="border-[#3a82f7] border-2 size-4 rounded-full" />

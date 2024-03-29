@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Citizen } from '../citizen-auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { switchMap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -140,15 +140,49 @@ export class LibraryService {
 
   }
 
+
+
   getBooks(): Book[] {
     return this.Books;
   }
 
-  getRequestedBooks() {
-    return this.BooksRequested;
+  getBookInfoAPI(isbn: string): Observable<Book> {
+    return this.http.get<any>(`api/Book/GetBookInfoAPI?isbn=${isbn}`).pipe(
+      map(response => {
+        if (response && response.totalItems && response.totalItems > 0) {
+          return response.items.map((item: any) => {
+            const isbn13 = item.volumeInfo.industryIdentifiers.find((identifier: any) => identifier.type === 'ISBN_13')?.identifier || '';
+            const isbn10 = item.volumeInfo.industryIdentifiers.find((identifier: any) => identifier.type === 'ISBN_10')?.identifier || '';
+
+            return {
+              title: item.volumeInfo.title || '',
+              author: item.volumeInfo.authors || [],
+              publisher: item.volumeInfo.publisher || '',
+              isbn: isbn13 || isbn10 || '', 
+              genre: item.volumeInfo.categories || [],
+              sinopsis: item.volumeInfo.description || '',
+              coverImage: item.volumeInfo.imageLinks?.thumbnail || '',
+              language: item.volumeInfo.language || '',
+              edition: '',
+              publicationDate: item.volumeInfo.publishedDate || '',
+              copies: 0, 
+              availableCopies: 0, 
+              status: BookStatus.Available, 
+              municipality: '' 
+            };
+          });
+        } else {
+          
+          return null;
+        }
+      })
+    );
   }
 
 
+  getRequestedBooks() {
+    return this.BooksRequested;
+  }
 
   getRequests(): Observable<BookRequest[]> {
     return this.http.get<BookRequest[]>('api/Book/GetRequests');
