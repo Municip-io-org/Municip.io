@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Book, BookStatus, LibraryService } from '../../services/library/library.service';
+import { Book, BookStatus, BookRequest, LibraryService, BookRequestStatus } from '../../services/library/library.service';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 
 @Component({
@@ -31,6 +31,7 @@ export class BookPageComponent {
   }
   user: any;
   isMunAdmin: boolean = false;
+  isBookReserved: boolean = false;
 
   municipality: Municipality = {
     name: '',
@@ -90,6 +91,22 @@ export class BookPageComponent {
               (municipalityRes: Municipality) => {
                 this.municipality = municipalityRes;
 
+
+
+                this.libraryService.getRequestsByCitizen(this.user.email).subscribe(
+                  (bookRequestsRes: BookRequest[]) => {
+                    bookRequestsRes.forEach(br => {
+
+                      //se o livro da página estiver reservado ativa a flag
+                      if (br.status == BookRequestStatus.Reserved && br.book.id == this.book.id) {
+                        this.isBookReserved = true;
+                      }
+
+                    })
+                  }
+                )
+
+
               },
               error => {
                 console.error(error);
@@ -109,7 +126,13 @@ export class BookPageComponent {
     );
   }
 
+  reserveBook() {
+    //TODO
+  }
 
+  cancelBookReserve() {
+    //TODO
+  }
 
   goToEditBookPage() {
     this.router.navigateByUrl("library/create");
