@@ -1,0 +1,20 @@
+<div>
+
+  <ng-container *ngIf="showMap">
+    <google-map height="500px"
+                width="100%"
+                [zoom]="zoom"
+                [center]="center"
+                [options]="options"
+                #mapInstance="googleMap"></google-map>
+  </ng-container>
+
+  <ng-container *ngIf="!showMap">
+    <div class="mb-40 flex flex-col items-center justify-center">
+      <p class="text-xl font-semibold mb-4">Não foi possível mostrar o mapa para a morada de  {{ Address }}</p>
+      <p class="text-gray-600">Lamentamos, mas não conseguimos exibir o mapa. Por favor, tente novamente mais tarde.</p>
+    </div>
+  </ng-container>
+
+
+</div>
