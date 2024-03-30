@@ -57,9 +57,12 @@ export class BookPageComponent {
   };
 
 
-    isRemoveBookDialogOpen: boolean = false;
-    dialogTitle: string = '';
-    dialogMessage: string = '';
+  isDialogOpen: boolean = false;
+  isRemoveBookDialogOpen: boolean = false;
+  dialogTitle: string = '';
+  dialogMessage: string = '';
+  isConfirmDialog: boolean = false;
+  isReserveSuccesfull: boolean = false;
 
 
   constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router, private libraryService: LibraryService) { }
@@ -114,11 +117,47 @@ export class BookPageComponent {
 
   openRemoveBookDialog() {
     this.isRemoveBookDialogOpen = true;
-    this.dialogTitle = 'Deseja apagar o evento ' + this.book.title + '?';
+    this.dialogTitle = 'Deseja apagar o livro ' + this.book.title + '?';
     this.dialogMessage = 'Confirme a sua ação';
   }
 
-  closeRemoveEventDialog() {
+  removeBook() {
+    this.closeRemoveBookDialog();
+
+    this.libraryService.removeBook(this.book.id!).subscribe(
+      response => {
+        if (response && response.body) {
+          this.router.navigateByUrl(`/library/create`);
+        } else {
+          console.error('Resposta inválida do servidor após a remoção do livro:', response);
+
+          this.dialogTitle = 'Erro na remoção do livro';
+          this.dialogMessage = response?.body?.message || 'Ocorreu um erro ao processar a resposta do servidor.';
+          this.isConfirmDialog = false;
+          this.isDialogOpen = true;
+        }
+      },
+      error => {
+        console.error('Erro ao remover o livro:', error);
+
+        this.dialogTitle = 'Erro na remoção do livro';
+        this.dialogMessage = error?.message || 'Ocorreu um erro ao remover o livro.';
+        this.isConfirmDialog = false;
+        this.isDialogOpen = true;
+      }
+    );
+  }
+
+
+
+
+
+  closeRemoveBookDialog() {
     this.isRemoveBookDialogOpen = false;
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false;
+    window.location.reload();
   }
 }

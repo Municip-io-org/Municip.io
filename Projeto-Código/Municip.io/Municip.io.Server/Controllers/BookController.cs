@@ -172,6 +172,42 @@ namespace Municip.io.Server.Controllers
         }
 
 
+        [HttpDelete("DeleteBookById")]
+        public async Task<IActionResult> DeleteBookById(int bookId)
+        {
+            var book = _context.Books.Find(bookId);
+            Console.WriteLine(book);
+            if (book == null)
+            {
+                return NotFound("Não foi possível encontrar o livro");
+            }
+
+            var requests = await _context.BookRequests.Include(b => b.Book).Where(br => br.Book.Id == bookId).ToListAsync();
+
+            if (requests.Any())
+            {
+                if (requests.All(br => br.Status == BookRequestStatus.Delivered))
+                {
+                    _context.Books.Remove(book);
+                    await _context.SaveChangesAsync();
+                    return Ok(new { message = "O livro foi removido com sucesso" });
+                }
+                else
+                {
+                    return BadRequest(new { message = "Não é possível excluir o livro, porque existem pedidos deste livro pendentes." });
+                }
+            }
+            else
+            {
+                _context.Books.Remove(book);
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "O livro foi removido com sucesso" });
+            }
+        }
+
+
+
+
         //get requests by municipality
         [HttpGet("GetRequestsByMunicipality")]
         public IActionResult GetRequestsByMunicipality(string municipality)

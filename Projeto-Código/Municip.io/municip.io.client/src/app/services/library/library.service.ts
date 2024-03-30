@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Citizen } from '../citizen-auth.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { map, switchMap } from 'rxjs';
 import { Observable } from 'rxjs';
 
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LibraryService {
+  
 
   constructor(private http: HttpClient) { }
 
@@ -151,8 +152,8 @@ export class LibraryService {
     return this.Books;
   }
 
-  getBookById(id: number) : Observable<Book> {
-    return this.http.get<Book>(`api/Book/GetBookById?bookId=${id}`);
+  getBookById(bookId: number) : Observable<Book> {
+    return this.http.get<Book>(`api/Book/GetBookById?bookId=${bookId}`);
   }
 
   getBookInfoAPI(isbn: string) {
@@ -191,6 +192,9 @@ export class LibraryService {
     );
   }
 
+  removeBook(bookId: number): Observable<HttpResponse<any>> {
+    return this.http.delete<any>(`api/Book/DeleteBookById?bookId=${bookId}`, { observe: 'response' });
+  }
 
   getRequestedBooks() {
     return this.BooksRequested;
