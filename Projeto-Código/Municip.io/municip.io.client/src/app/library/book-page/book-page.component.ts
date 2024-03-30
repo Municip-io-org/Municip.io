@@ -86,6 +86,7 @@ export class BookPageComponent {
             if (userRole!.role === Roles.Municipal) {
               this.isMunAdmin = true;
             }
+            /*this.isMunAdmin = false;*/
 
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: Municipality) => {
@@ -124,6 +125,16 @@ export class BookPageComponent {
         console.error(error);
       }
     );
+  }
+
+  canBeReserved() {
+    if (this.isMunAdmin) return false;
+
+    if (this.isBookReserved) return false;
+
+    if (this.book.availableCopies <= 0) return false;
+
+    return true;
   }
 
   reserveBook() {

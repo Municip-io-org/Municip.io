@@ -74,12 +74,22 @@
       </div>
 
 
-      <ng-container *ngIf="!isBookReserved && !isMunAdmin">
-        <app-btn-municip-blue width="10rem" (click)="reserveBook()">
-          Reservar
-          <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-        </app-btn-municip-blue>
+      <ng-container *ngIf="!isMunAdmin">
+        <ng-container *ngIf="!isBookReserved && book.availableCopies > 0">
+          <app-btn-municip-blue width="10rem" (click)="reserveBook()">
+            Reservar
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          </app-btn-municip-blue>
+        </ng-container>
+
+        <ng-container *ngIf="book.availableCopies <= 0">
+          <app-btn-municip-blue width="10rem">
+            Indisponível para reserva
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          </app-btn-municip-blue>
+        </ng-container>
       </ng-container>
+
 
 
       <ng-container *ngIf="isBookReserved && !isMunAdmin">
