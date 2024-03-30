@@ -59,6 +59,7 @@ import { CreateBookComponent } from './library/create-book/create-book.component
 import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/admin-statistics-dashboard.component';
 import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
 import { MyRequestsComponent } from './library/my-requests/my-requests.component';
+import { LibraryHomepageComponent } from './library/library-homepage/library-homepage.component';
 
 
 const routes: Routes = [
@@ -116,6 +117,7 @@ const routes: Routes = [
   { path: 'library/my', component: MyRequestsComponent, data: {} },
   { path: 'adminstatistics', component: AdminStatisticsDashboardComponent },
   { path: 'munadminstatistics', component: MunadminStatisticsDashboardComponent },
+{ path: 'library', component: LibraryHomepageComponent }
 
 ];
 
