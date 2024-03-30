@@ -157,6 +157,21 @@ namespace Municip.io.Server.Controllers
             return Ok(bookRequests);
         }
 
+        /**
+         * Retorna um livro pelo seu ID
+         */
+        [HttpGet("GetBookById")]
+        public IActionResult GetBookById(int bookId)
+        {
+            var book = _context.Books.FirstOrDefault(b => b.Id == bookId);
+            if (book == null)
+            {
+                return NotFound(); 
+            }
+            return Ok(book);
+        }
+
+
         //get requests by municipality
         [HttpGet("GetRequestsByMunicipality")]
         public IActionResult GetRequestsByMunicipality(string municipality)

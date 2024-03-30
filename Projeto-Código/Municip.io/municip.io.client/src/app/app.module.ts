@@ -131,6 +131,7 @@ import { DialogContentComponent } from './utils/dialog/dialog-content/dialog-con
 import { RegisteredMunUsersGraphComponent } from './munadmin-statistics-dashboard/registered-mun-users-graph/registered-mun-users-graph.component';
 import { AddGenreDialogComponent } from './utils/library/add-genre-dialog/add-genre-dialog.component';
 import { MyRequestsComponent } from './library/my-requests/my-requests.component';
+import { BookPageComponent } from './library/book-page/book-page.component';
 
 
 
@@ -244,6 +245,7 @@ registerLocaleData(localePt, 'pt-PT');
     RegisteredMunUsersGraphComponent,
     AddGenreDialogComponent,
     MyRequestsComponent,
+    BookPageComponent,
 
     
   ],

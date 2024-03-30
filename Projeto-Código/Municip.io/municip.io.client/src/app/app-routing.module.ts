@@ -59,6 +59,7 @@ import { CreateBookComponent } from './library/create-book/create-book.component
 import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/admin-statistics-dashboard.component';
 import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
 import { MyRequestsComponent } from './library/my-requests/my-requests.component';
+import { BookPageComponent } from './library/book-page/book-page.component';
 
 
 const routes: Routes = [
@@ -114,6 +115,7 @@ const routes: Routes = [
   { path: 'library/create', component: CreateBookComponent, data: {} },
   { path: 'library/requests', component: RequestsComponent, data: {} },
   { path: 'library/my', component: MyRequestsComponent, data: {} },
+  { path: 'library/:bookId', component: BookPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'adminstatistics', component: AdminStatisticsDashboardComponent },
   { path: 'munadminstatistics', component: MunadminStatisticsDashboardComponent },
 

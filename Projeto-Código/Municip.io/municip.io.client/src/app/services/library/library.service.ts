@@ -151,6 +151,10 @@ export class LibraryService {
     return this.Books;
   }
 
+  getBookById(id: number) : Observable<Book> {
+    return this.http.get<Book>(`api/Book/GetBookById?bookId=${id}`);
+  }
+
   getBookInfoAPI(isbn: string) {
     return this.http.get<any>(`api/Book/GetBookInfoAPI?isbn=${isbn}`).pipe(
       map(response => {

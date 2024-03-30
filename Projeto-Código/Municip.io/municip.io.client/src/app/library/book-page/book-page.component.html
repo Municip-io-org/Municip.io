@@ -1,0 +1,83 @@
+<app-header-loggedin></app-header-loggedin>
+
+<app-smaller-banner title="Biblioteca de {{municipality.name}}"
+                    image="{{municipality.landscapePhoto}} ? {{municipality.landscapePhoto}} : '/assets/images/placeholder/Landscape placeholder.jpg'">
+
+</app-smaller-banner>
+
+<div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
+  <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
+    <app-black-btn-icon-text altImage="Editar livro"
+                             image="/assets/images/icons/pencil-white.png"
+                             (buttonClick)="goToEditBookPage()">
+      Editar livro
+    </app-black-btn-icon-text>
+  </div>
+  <div *ngIf="isMunAdmin" class="absolute -top-3 left-[20rem] text-[1.063rem] font-roboto flex justify-center items-center">
+    <app-black-btn-icon-text altImage="Remover livro"
+                             image="/assets/images/icons/delete-white.png"
+                             (buttonClick)="openRemoveBookDialog()">
+      Remover livro
+    </app-black-btn-icon-text>
+  </div>
+
+  
+  <section class="flex -mt-12 text-municip-gray justify-evenly text-[1.063rem] px-[3rem] ">
+
+
+    <img src="{{book.coverImage}} ? {{book.coverImage}} : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="Capa do livro"
+         class="object-cover w-[15rem] h-[21rem] rounded" />
+
+
+
+    <div class="flex gap-12">
+
+      <div class="flex flex-col gap-3">
+
+
+        <div class="flex flex-col flex-wrap text-[1.2rem] items-baseline gap-1">
+
+          <span class="font-open-sans text-[2.4rem] text-municip-highlight-black font-bold">{{book.title}}</span>
+
+          <div class="flex  flex-wrap ">
+            <ng-container *ngFor="let author of book.author; let last = last ">
+              <span class="font-roboto font-extralight">{{author}}<ng-container *ngIf="!last">,&nbsp;</ng-container></span>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap">
+          <ng-container *ngFor="let genre of book.genre; let last = last ">
+            <span class="font-inter text-municip-highlight-black">{{genre}}<ng-container *ngIf="!last">,&nbsp;</ng-container></span>
+          </ng-container>
+        </div>
+
+        <div class="flex flex-col">
+          <span>Editora: {{book.publisher}}</span>
+          <span>Edição: {{book.edition}}</span>
+          <span>Língua: {{book.language}}</span>
+          <span>Publicação: {{book.publicationDate | date: "dd/MM/yyyy" }}</span>
+          <span>ISBN: {{book.isbn}}</span>
+        </div>
+      </div>
+
+
+
+        <app-btn-municip-blue width="10rem" (click)="goToEditBookPage()">
+          Reservar
+          <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+        </app-btn-municip-blue>
+    </div>
+    
+  </section>
+
+
+  <section class="flex flex-col px-[3rem]  pb-[3rem]">
+    <span class="font-open-sans font-semibold text-[2rem] text-municip-highlight-black">Sinopse</span>
+    <div innerHTML="{{book.sinopsis}}" class="text-left text-municip-normal-black text-[1.25rem]">
+    </div>
+  </section>
+
+
+</div>
+<app-footer></app-footer>

@@ -5,6 +5,7 @@ import { EventsService, Event } from '../../../services/events/events.service';
 import { UserAuthService } from '../../../services/user-auth.service';
 import { NewsService } from '../../../services/news/news.service';
 import { DocsService } from '../../../services/documents/docs.service';
+import { LibraryService } from '../../../services/library/library.service';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ import { DocsService } from '../../../services/documents/docs.service';
 export class UserSameMunicipalityGuard implements CanActivate {
 
   constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router, private newsService: NewsService,
-    private docService: DocsService
+    private docService: DocsService, private libraryService : LibraryService
   ) { }
   async canActivate(
     next: ActivatedRouteSnapshot,
@@ -35,6 +36,8 @@ export class UserSameMunicipalityGuard implements CanActivate {
 
     const documentId = next.params['templateId'];
 
+    const bookId = next.params['bookId'];
+
     if (eventId) {
       const event = await this.eventsService.getEventById(eventId).toPromise();
 
@@ -54,8 +57,6 @@ export class UserSameMunicipalityGuard implements CanActivate {
         return true;
       } else {
         this.router.navigateByUrl('/accessDenied');
-        //return true;
-
         return false;
       }
     } else if (documentId) {
@@ -67,8 +68,16 @@ export class UserSameMunicipalityGuard implements CanActivate {
         this.router.navigateByUrl('/accessDenied');
         return false;
       }
-    }
-    else {
+    } else if (bookId) {
+      const book = await this.libraryService.getBookById(bookId).toPromise();
+      if (userMunicipality == book!.municipality) {
+        next.data = { book: book! };
+        return true;
+      } else {
+        this.router.navigateByUrl('/accessDenied');
+        return false;
+      }
+    } else {
       this.router.navigateByUrl('/accessDenied');
       return false;
     }
