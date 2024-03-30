@@ -61,6 +61,7 @@ import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dash
 import { MyRequestsComponent } from './library/my-requests/my-requests.component';
 import { BookPageComponent } from './library/book-page/book-page.component';
 import { EditBookComponent } from './library/edit-book/edit-book.component';
+import { LibraryHomepageComponent } from './library/library-homepage/library-homepage.component';
 
 
 const routes: Routes = [
@@ -120,6 +121,7 @@ const routes: Routes = [
   { path: 'library/edit/:bookId', component: EditBookComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'adminstatistics', component: AdminStatisticsDashboardComponent },
   { path: 'munadminstatistics', component: MunadminStatisticsDashboardComponent },
+{ path: 'library', component: LibraryHomepageComponent }
 
 ];
 

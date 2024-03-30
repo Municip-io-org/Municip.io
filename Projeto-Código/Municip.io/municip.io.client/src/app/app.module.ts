@@ -133,6 +133,8 @@ import { AddGenreDialogComponent } from './utils/library/add-genre-dialog/add-ge
 import { MyRequestsComponent } from './library/my-requests/my-requests.component';
 import { BookPageComponent } from './library/book-page/book-page.component';
 import { EditBookComponent } from './library/edit-book/edit-book.component';
+import { LibraryHomepageComponent } from './library/library-homepage/library-homepage.component';
+import { LibraryMapComponent } from './library/library-map/library-map.component';
 
 
 
@@ -248,6 +250,8 @@ registerLocaleData(localePt, 'pt-PT');
     MyRequestsComponent,
     BookPageComponent,
     EditBookComponent,
+    LibraryHomepageComponent,
+    LibraryMapComponent,
 
     
   ],
