@@ -1,38 +1,38 @@
 import { Component } from '@angular/core';
 import { Book, BookStatus, LibraryService } from '../../services/library/library.service';
-import { Router } from '@angular/router';
-import { UserAuthService } from '../../services/user-auth.service';
 import { Editor, Toolbar } from 'ngx-editor';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserAuthService } from '../../services/user-auth.service';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-create-book',
-  templateUrl: './create-book.component.html',
-  styleUrl: './create-book.component.css',
+  selector: 'app-edit-book',
+  templateUrl: './edit-book.component.html',
+  styleUrl: './edit-book.component.css',
   providers: [provideNativeDateAdapter()],
 })
-export class CreateBookComponent {
-
+export class EditBookComponent {
   categories: string[] = [];
 
 
   book: Book = {
-     
-      isbn: '',
-      title: '',
-      author: [],
-      availableCopies: 0,
-      copies: 0,
-      coverImage: '',
-      edition: '',
-      genre: [],
-      language: '',
-      publicationDate: new Date(),
-      publisher: '',
-      sinopsis: '',
-      status: BookStatus.Available,
-      municipality: ''
+
+    isbn: '',
+    title: '',
+    author: [],
+    availableCopies: 0,
+    copies: 0,
+    coverImage: '',
+    edition: '',
+    genre: [],
+    language: '',
+    publicationDate: new Date(),
+    publisher: '',
+    sinopsis: '',
+    status: BookStatus.Available,
+    municipality: ''
   }
 
   municipalityImage: string = "";
@@ -63,34 +63,34 @@ export class CreateBookComponent {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
-  
+
 
   bookForm = new FormGroup({
-    iSBN: new FormControl('', [Validators.pattern(/^\d{10}$|^\d{13}$/)]),
+    iSBN: new FormControl({ value: "", disabled: true }, [Validators.pattern(/^\d{10}$|^\d{13}$/)]),
     useISBN: new FormControl(true, [Validators.required]),
-    title: new FormControl({ value: "", disabled: true }, [Validators.required]),
-    publisher: new FormControl({ value: "", disabled: true }, [Validators.required]),
-    edition: new FormControl({ value: "", disabled: true }, [Validators.required]),
+    title: new FormControl({ value: "", disabled: false }, [Validators.required]),
+    publisher: new FormControl({ value: "", disabled: false }, [Validators.required]),
+    edition: new FormControl({ value: "", disabled: false }, [Validators.required]),
     authors: new FormArray([
-      new FormControl({ value: "", disabled: true }, Validators.required)
+      new FormControl({ value: "", disabled: false }, Validators.required)
     ]),
-    publicationDate: new FormControl({ value: new Date(), disabled: true }, [Validators.required]),
-    language: new FormControl({ value: "", disabled: true }, [Validators.required]),
-    copies: new FormControl({ value: "", disabled: true }, [Validators.required]),
-    genres: new FormArray([], [Validators.required ,this.validateGenre.bind(this)]),
-    sinopsis: new FormControl({ value: "", disabled: true }, [Validators.required]),
-    coverImageUrl: new FormControl({ value: "", disabled: true }, [Validators.required])
+    publicationDate: new FormControl({ value: new Date(), disabled: false }, [Validators.required]),
+    language: new FormControl({ value: "", disabled: false }, [Validators.required]),
+    copies: new FormControl({ value: "", disabled: false }, [Validators.required]),
+    genres: new FormArray([], [Validators.required, this.validateGenre.bind(this)]),
+    sinopsis: new FormControl({ value: "", disabled: false }, [Validators.required]),
+    coverImageUrl: new FormControl({ value: "", disabled: false }, [Validators.required])
   });
 
   validateGenre(controls: FormArray): { [key: string]: boolean } | null {
     if (controls.controls.some(control => control.value)) {
-      return null; 
+      return null;
     } else {
-      return { 'noGenreSelected': true }; 
+      return { 'noGenreSelected': true };
     }
   }
 
-  
+
 
   /**
    * Construtor do componente.
@@ -98,43 +98,84 @@ export class CreateBookComponent {
    * @param libraryService
    * @param router
    */
-  constructor(private authService: UserAuthService, private dateAdapter: DateAdapter<Date>, private libraryService: LibraryService, private router: Router) {
+  constructor(private authService: UserAuthService, private dateAdapter: DateAdapter<Date>, private libraryService: LibraryService, private router: Router,
+    private activatedRoute: ActivatedRoute) {
     this.dateAdapter.setLocale('pt');
   }
 
- 
+
 
   /**
    * Método onInit 
    */
   ngOnInit(): void {
+    this.book = this.activatedRoute.snapshot.data['book'];
     this.editor = new Editor();
 
-    this.authService.getUserData().subscribe((user) => {
-      this.authService.getInfoByEmail(user.email).subscribe((account) => {
-        this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
-          this.municipalityImage = municipality.landscapePhoto;
-          this.municipalityName = municipality.name;
 
-
-          this.buildCategoryCheckboxes();
-
-
-        });
-      });
-    });
-  }
-
-  private buildCategoryCheckboxes() {
-    this.libraryService.getDistinctCategoriesByMunicipality(this.municipalityName).subscribe(
+    this.authService.getUserData().pipe(
+      switchMap(user => this.authService.getInfoByEmail(user.email)),
+      switchMap(account => this.authService.getInfoMunicipality(account.municipality)),
+      switchMap(municipality => {
+        this.municipalityImage = municipality.landscapePhoto;
+        this.municipalityName = municipality.name;
+        return this.libraryService.getDistinctCategoriesByMunicipality(municipality.name);
+      })
+    ).subscribe(
       (categories: string[]) => {
-        categories.forEach(category => {
-          this.categories.push(category);
-          this.genres.push(new FormControl({value: false, disabled: true})); // Por padrão, inicialize todas as categorias desmarcadas
-        });
+        this.categories = categories;
+        this.buildCategoryCheckboxes();
+        this.initializeForm();
+      },
+      (error) => {
+        console.error("Erro ao carregar categorias:", error);
+        // Lidar com o erro conforme necessário
       }
     );
   }
+
+
+  private buildCategoryCheckboxes() {
+    console.log("AQUI1");
+    this.categories.forEach(category => {
+      console.log(this.categories);
+      this.genres.push(new FormControl({ value: false, disabled: false })); // Por padrão, inicialize todas as categorias desmarcadas
+    });
+  }
+
+  initializeForm(): void {
+    console.log("AQUI2");
+
+    this.bookForm.patchValue({
+      iSBN: this.book.isbn,
+      title: this.book.title,
+      publisher: this.book.publisher,
+      edition: this.book.edition,
+      publicationDate: new Date(this.book.publicationDate),
+      language: this.book.language,
+      copies: this.book.copies.toString(),
+      sinopsis: this.book.sinopsis,
+      coverImageUrl: this.book.coverImage
+    });
+
+    this.authors.clear();
+    this.book.author.forEach(author => {
+      this.authors.push(new FormControl(author));
+    })
+
+    this.book.genre.forEach(genre => {
+      const index = this.categories.indexOf(genre);
+      console.log("Gênero:", genre, "Índice:", index);
+      if (index !== -1) {
+        console.log("Marcando gênero:", genre);
+        this.genres.at(index).setValue(true);
+      } else {
+        console.log("Gênero não encontrado:", genre);
+        console.log(this.categories[1]);
+      }
+    });
+  }
+
 
   onSubmit(): void {
     if (this.bookForm.valid) {
@@ -257,54 +298,6 @@ export class CreateBookComponent {
     window.location.reload();
   }
 
-  onISBNChange() {
-    this.toggleControls();
-    this.getInfo();
-  }
-
-  getInfo() {
-    if (this.iSBN?.valid) {
-
-      console.log(this.iSBN?.value);
-
-
-      this.libraryService.getBookInfoAPI(this.iSBN?.value!.toString()).subscribe(
-        (bookRes) => { 
-          if (bookRes !== null) {
-          
-            const book: Book = bookRes[0];
-
-            console.log(book.title);
-            this.title?.setValue(book.title);
-            this.publisher?.setValue(book.publisher);
-            this.sinopsis?.setValue(book.sinopsis);
-            this.coverImageUrl?.setValue(book.coverImage);
-            this.language?.setValue(book.language);
-            this.edition?.setValue(book.edition);
-
-
-            this.setPublicationDate(book.publicationDate.toString());
-
-
-            this.copies?.setValue(book.copies.toString());
- 
-            this.addAuthorsFromBookInfo(book.author);
-            this.addGenreFromBookInfo(book.genre);
-
-
-
-            console.log(this.bookForm);
-          } else {
-            console.log('Nenhum livro encontrado com o ISBN fornecido.');
-          }
-        },
-        (error) => {
-          console.error('Erro ao obter informações do livro:', error);
-        }
-      );
-    }
-  }
-
   // Função para ajustar a data para o formato "yyyy-MM-dd"
   setUpDate(date: string): string {
     let parts = date.split('-');
@@ -319,103 +312,6 @@ export class CreateBookComponent {
   setPublicationDate(bookPublicationDate: string): void {
     const formattedDate = this.setUpDate(bookPublicationDate);
     this.publicationDate?.setValue(formattedDate);
-  }
-
-  addAuthorsFromBookInfo(authors: string[]) {
-    this.authors.clear();
-    authors.forEach(author => {
-      this.authors.push(new FormControl(author));
-    })
-  }
-
-  addGenreFromBookInfo(genres: string[]) {
-    const categoryNamesUpperCase = this.categories.map(category => category.toUpperCase());
-
-    genres.forEach(genre => {
-      const index = categoryNamesUpperCase.indexOf(genre.toUpperCase());
-
-      if (index !== -1) {
-        this.genres.at(index).setValue(true);
-      } else {
-        this.categories.push(genre);
-        this.genres.push(new FormControl({ value: true, disabled: false }))
-      }
-
-    });
-  }
-
-
-  toggleControls() {
-    const useISBN = this.useISBN?.value;
-    const iSBNValid = this.iSBN?.valid;
-
-    if (useISBN) {
-      this.iSBN?.enable();
-      this.disableFormControls();
-    } else {
-      this.iSBN?.disable();
-      this.iSBN?.setValue('');
-      this.enableFormControls();
-    }
-
-    if (useISBN && iSBNValid) {
-      this.enableFormControls();
-    }
-  }
-
-
-  enableFormControls() {
-    this.title?.enable();
-    this.publisher?.enable();
-    this.edition?.enable();
-    this.enableAuthorsControls();
-    this.publicationDate?.enable();
-    this.language?.enable();
-    this.copies?.enable();
-    this.enableGenresControls();
-    this.sinopsis?.enable();
-    this.coverImageUrl?.enable();
-  }
-
-  disableFormControls() {
-    this.title?.disable();
-    this.publisher?.disable();
-    this.edition?.disable();
-    this.disableAuthorsControls();
-    this.publicationDate?.disable();
-    this.language?.disable();
-    this.copies?.disable();
-    this.disableGenresControls();
-    this.sinopsis?.disable();
-    this.coverImageUrl?.disable();
-  }
-
-  enableGenresControls() {
-    this.genres.enable();
-    this.genres.controls.forEach(control => {
-      control.enable();
-    });
-  }
-
-  disableGenresControls() {
-    this.genres.disable();
-    this.genres.controls.forEach(control => {
-      control.disable();
-    });
-  }
-
-  enableAuthorsControls() {
-    this.authors.enable();
-    this.authors.controls.forEach(control => {
-      control.enable();
-    });
-  }
-
-  disableAuthorsControls() {
-    this.authors.disable();
-    this.authors.controls.forEach(control => {
-      control.disable();
-    });
   }
 
   extractCategoryNames(): string[] {
@@ -448,7 +344,7 @@ export class CreateBookComponent {
     return this.bookForm.get('edition');
   }
 
-  get authors() : FormArray {
+  get authors(): FormArray {
     return this.bookForm.get('authors') as FormArray;
   }
 
@@ -476,4 +372,3 @@ export class CreateBookComponent {
     return this.bookForm.get('coverImageUrl');
   }
 }
-

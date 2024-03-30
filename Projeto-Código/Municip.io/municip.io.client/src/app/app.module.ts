@@ -132,6 +132,7 @@ import { RegisteredMunUsersGraphComponent } from './munadmin-statistics-dashboar
 import { AddGenreDialogComponent } from './utils/library/add-genre-dialog/add-genre-dialog.component';
 import { MyRequestsComponent } from './library/my-requests/my-requests.component';
 import { BookPageComponent } from './library/book-page/book-page.component';
+import { EditBookComponent } from './library/edit-book/edit-book.component';
 
 
 
@@ -246,6 +247,7 @@ registerLocaleData(localePt, 'pt-PT');
     AddGenreDialogComponent,
     MyRequestsComponent,
     BookPageComponent,
+    EditBookComponent,
 
     
   ],

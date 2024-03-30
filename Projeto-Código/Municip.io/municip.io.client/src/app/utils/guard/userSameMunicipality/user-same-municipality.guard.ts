@@ -50,7 +50,6 @@ export class UserSameMunicipalityGuard implements CanActivate {
       }
     } else if (newsId) {
       const news = await this.newsService.getNewsById(newsId).toPromise();
-      console.log("DADHAUDBAUDBAUI", news?.municipality);
       if (userMunicipality == news!.municipality) {
 
         next.data = { news: news! };

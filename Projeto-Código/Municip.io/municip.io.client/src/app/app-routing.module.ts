@@ -60,6 +60,7 @@ import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/
 import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
 import { MyRequestsComponent } from './library/my-requests/my-requests.component';
 import { BookPageComponent } from './library/book-page/book-page.component';
+import { EditBookComponent } from './library/edit-book/edit-book.component';
 
 
 const routes: Routes = [
@@ -114,8 +115,9 @@ const routes: Routes = [
   { path: 'documents/template-list', component: TemplateListComponent, canActivate: [IsDocumentFeatureActive, MunicipalAdminGuard] },
   { path: 'library/create', component: CreateBookComponent, data: {} },
   { path: 'library/requests', component: RequestsComponent, data: {} },
-  { path: 'library/my', component: MyRequestsComponent, data: {} },
+  { path: 'library/my', component: MyRequestsComponent, data: {} },  
   { path: 'library/:bookId', component: BookPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
+  { path: 'library/edit/:bookId', component: EditBookComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'adminstatistics', component: AdminStatisticsDashboardComponent },
   { path: 'munadminstatistics', component: MunadminStatisticsDashboardComponent },
 
