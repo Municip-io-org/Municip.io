@@ -4,7 +4,7 @@
     <img class="w-56 pl-[2rem]" alt="logo" src="/assets/images/logos/logo-black-right.png" />
 
     <ul class="flex w-full justify-around ">
-      <li class="transition-all duration-700 ease-in-out  decoration-sky-500">
+      <li *ngIf="role !== Roles.Admin" class="transition-all duration-700 ease-in-out  decoration-sky-500">
 
         <a (click)="goToHomePage()" class="group hover:cursor-pointer">
           Home
@@ -12,7 +12,7 @@
         </a>
       </li>
 
-      <li class="relative group" (click)="setActiveDropdown(Dropdowns.Municipality)">
+      <li *ngIf="role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.Municipality)">
         <button class="transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Município
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -87,11 +87,13 @@
 
         <div *ngIf="showDropdownBiblioteca" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
-            <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 1</a>
+
+            <li *ngIf="role===Roles.Municipal">
+              <a routerLink="/library/requests" class="block px-4 py-2 hover:bg-gray-100">Requisições</a>
             </li>
-            <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 2</a>
+
+            <li *ngIf="role ===Roles.Citizen">
+              <a routerLink="/library/my" class="block px-4 py-2 hover:bg-gray-100">Os meus Livros</a>
             </li>
             <li>
               <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 3</a>
@@ -185,7 +187,30 @@
           </ul>
         </div>
       </li>
+      <li *ngIf="role == 'Admin'" class="relative group" (click)="setActiveDropdown(Dropdowns.Admin)">
+        <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
+          Administração
+          <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <span class="flex self-center max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
 
+        <div *ngIf="showDropdownAdmin" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
+          <ul class="py-2 text-sm text-gray-700">
+            <li>
+              <a routerLink="/" class="block px-4 py-2 hover:bg-gray-100">Não sei</a>
+            </li>
+            <li>
+              <a routerLink="/" class="block px-4 py-2 hover:bg-gray-100">Não sei</a>
+            </li>
+            <li>
+              <a routerLink="/" class="block px-4 py-2 hover:bg-gray-100">Não sei</a>
+            </li>
+
+          </ul>
+        </div>
+      </li>
     </ul>
 
     <div class="space-x-3 flex justify-end min-w-fit relative" *ngIf="isSignedIn">

@@ -1,11 +1,9 @@
-
-
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
 </head>
 <app-header-loggedin />
-<app-smaller-banner title="Gerir Requisições"
+<app-smaller-banner title="Meus Livros"
                     image={{municipalityImage}}></app-smaller-banner>
 <div class="min-h-80 bg-municip-blank">
   <div class=" flex items-center justify-between space-x-4 mx-20 pt-10">
@@ -31,7 +29,8 @@
     <p class="font-semibold">Sem Reservas.</p>
   </div>
   <div class="mx-32 py-10" *ngFor="let book of filteredBooks">
-    <app-requested-book-card [bookRequest]="book" (update)="updateRequests()" />
+    <app-requested-book-card [bookRequest]="book" (update)="updateRequests()"
+                             [showActions]="false"/>
   </div>
 
 </div>

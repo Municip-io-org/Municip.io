@@ -3,6 +3,18 @@
                     class="font-inter" />
 
 
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" (confirm)="closeDialog()"
+                      [isConfirm]="isConfirm"></app-dialog-message>
+</ng-container>
+
+
+<app-add-genre-dialog [(isDialogOpen)]="isAddGenreDialogOpen" [list]="extractCategoryNames()" (newGenre)="addGenre($event)"></app-add-genre-dialog>
+
+
+
+
+
 <div class="flex flex-col bg-municip-blank pb-[4rem] text-municip-normal-black pt-6 px-32 space-y-20">
 
 
@@ -32,7 +44,7 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Editora</app-input-title>
 
-        <input required type="text" id="publisher" 
+        <input required type="text" id="publisher"
                formControlName="publisher" name="publisher"
                class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
@@ -47,7 +59,7 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Título</app-input-title>
 
-        <input required type="text" id="title" formControlName="title" name="title" 
+        <input required type="text" id="title" formControlName="title" name="title"
                class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
 
@@ -60,7 +72,7 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Edição</app-input-title>
 
-        <input required type="text" id="edition" 
+        <input required type="text" id="edition"
                formControlName="edition" name="edition"
                class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
 
@@ -73,23 +85,42 @@
 
 
     <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4 ">
-      <div class="w-full lg:w-5/12 mb-4 h-32">
-        <app-input-title class="text-[1.8rem]">Autores</app-input-title>
+      <div class="w-full lg:w-5/12 mb-4">
+        <div class="flex flex-col">
+          <app-input-title class="text-[1.8rem] ">Autores</app-input-title>
 
-        <input required type="text" id="author" formControlName="author" name="author" 
-               class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" />
+          <div class="flex flex-wrap gap-4">
+            <button type="button" (click)="addAuthor()" [disabled]="authors.disabled"
+                    class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-2 rounded-full h-min
+        transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
+              <img src="/assets/images/icons/plus-white.png" alt="Adicionar Autor" class="size-6" />
+              Adicionar autor
+            </button>
 
-
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="author?.touched && author?.invalid">
-          <div *ngIf="author?.errors?.['required']">Autor obrigatório</div>
+            <button type="button" (click)="removeLastAuthor()" [disabled]="authors.disabled"
+                    class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-2 rounded-full h-min
+        transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
+              <img src="/assets/images/icons/delete-white.png" alt="Remover Autor" class="size-6" />
+              Remover último autor
+            </button>
+          </div>
         </div>
+
+        <div formArrayName="authors" *ngFor="let authorControl of authors.controls; let i = index" class="flex flex-col gap-8 relative">
+          <input required type="text" [formControlName]="i"
+                 class="input font-poppins w-full h-12 lg:h-14 my-4 disabled:opacity-40" />
+          <div class="absolute -bottom-4 text-red-500 font-bold py-2" *ngIf="authors?.touched && authors?.invalid">
+            <div *ngIf="authorControl?.errors?.['required']">Autor obrigatório</div>
+          </div>
+        </div>
+
       </div>
 
 
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Nº de exemplares</app-input-title>
 
-        <input required type="date" id="publicationDate" 
+        <input required type="date" id="publicationDate"
                formControlName="publicationDate" name="publicationDate"
                class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" />
 
@@ -103,28 +134,42 @@
 
     <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4">
 
-      <div class="w-full lg:w-5/12 mb-4 h-32">
-        <app-input-title class="text-[1.8rem]">Categorias</app-input-title>
+      <div class="w-full lg:w-5/12 mb-4">
+        <div class="flex flex-wrap items-center gap-x-4 mb-4">
+          <app-input-title class="text-[1.8rem]">Categorias</app-input-title>
+          <button type="button" (click)="openAddGenreDialog()" [disabled]="genres.disabled"
+                  class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-2 rounded-full h-min
+transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
+            <img src="/assets/images/icons/plus-white.png" alt="Adicionar Categoria" class="size-6" />
+            Adicionar categoria
+          </button>
+          <span>Selecione pelo menos uma categoria</span>
+        </div>
 
-        <input required type="text" id="genre" formControlName="genre" name="genre" 
-               class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" />
-
-
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="genre?.touched && genre?.invalid">
-          <div *ngIf="genre?.errors?.['required']">Categoria obrigatória</div>
+        <div class="h-[15rem] overflow-y-scroll border-2 bg-municip-blank-gray transition duration-300 ease-in-out rounded-[0.375rem] border-[#bababd] px-[2rem]">
+          <div formArrayName="genres" *ngFor="let genreControl of genres.controls; let i = index"
+               class="flex flex-col "
+               [class.disabled-background]="genres.disabled">
+            <hr class="border-t-[#bababd] rounded" *ngIf="i>0"/>
+            <div class="flex justify-between items-center my-3">
+              <label for="categories[i].name" class="text-municip-highlight-black text-[1.2rem] font-medium font-roboto transition duration-300 ease-in-out">{{categories[i].name}}</label>
+              <input id="categories[i].name" type="checkbox" [formControlName]="i"
+                     class="size-10 transition duration-300 ease-in-out disabled:opacity-40" />
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="flex flex-col  text-left w-full lg:w-5/12 mb-4 h-[16rem]">
+      <div class="flex flex-col  text-left w-full lg:w-5/12 mb-4 h-[19rem]">
         <app-input-title class="text-[1.8rem]">Capa do livro</app-input-title>
-        <div class="h-20 table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc] disabled:opacity-40"
+        <div class="h-20 table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc] "
              [class.disabled-background]="coverImageUrl?.disabled"
              (dragover)="onDragOver($event)"
-             (drop)="onDrop($event)" (click)="coverImagePicker.click() ">
+             (drop)="onDrop($event)" (click)="coverImageUrl?.disabled ? null : coverImagePicker.click()">
 
           <div class="table-cell align-middle">
             <div class="text-center">
-              <input type="file" #coverImagePicker (change)="onCoverImagePicked($event)" accept="image/*" capture class="hidden" formControlName="coverImageUrl">
+              <input type="file" #coverImagePicker (change)="onCoverImagePicked($event)" accept="image/*" capture class="hidden">
 
               <label for="file" class="flex justify-center items-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
 
@@ -142,9 +187,8 @@
       <div class="w-full lg:w-5/12 mb-4 h-32">
         <app-input-title class="text-[1.8rem]">Idioma</app-input-title>
 
-        <input required type="text" id="language" formControlName="language" name="language" 
+        <input required type="text" id="language" formControlName="language" name="language"
                class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
-
 
         <div class="absolute text-red-500 font-bold py-2" *ngIf="language?.touched && language?.invalid">
           <div *ngIf="language?.errors?.['required']">Idioma obrigatório</div>

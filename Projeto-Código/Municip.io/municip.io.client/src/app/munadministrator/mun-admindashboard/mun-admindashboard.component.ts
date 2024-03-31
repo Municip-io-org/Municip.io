@@ -20,18 +20,20 @@ export class MunAdmindashboardComponent {
   isDialogOpen: boolean = false;
   selectedUser: any;
 
-  constructor(private citizenStatusService: CitizenStatusService, private router: Router, private route: ActivatedRoute, private userAuthService: UserAuthService ) { }
+  constructor(private citizenStatusService: CitizenStatusService, private router: Router, private route: ActivatedRoute, private userAuthService: UserAuthService) { }
 
   ngOnInit() {
-   this.userAuthService.getMunicipality().subscribe((municipality: any) => {
-     this.municipalName = municipality;
-      
-    } );
+    this.userAuthService.getMunicipality().subscribe((municipality: any) => {
+      this.municipalName = municipality;
 
-    this.citizenStatusService.getCitizens(this.municipalName).subscribe((citizens: any) => {
-      this.citizens = citizens;
+      this.citizenStatusService.getCitizens(this.municipalName).subscribe((citizens: any) => {
+        this.citizens = citizens;
+
+      });
 
     });
+
+
   }
 
   openDialog(user: any) {
@@ -52,7 +54,7 @@ export class MunAdmindashboardComponent {
   }
 
   blockCitizen(email: any) {
-this.citizenStatusService.blockCitizen(email).subscribe((citizens: any) => {
+    this.citizenStatusService.blockCitizen(email).subscribe((citizens: any) => {
       this.citizens = citizens;
     })
   }
@@ -61,13 +63,13 @@ this.citizenStatusService.blockCitizen(email).subscribe((citizens: any) => {
 
 
   deleteCitizen(email: any) {
-this.citizenStatusService.deleteCitizen(email).subscribe((citizens: any) => {
+    this.citizenStatusService.deleteCitizen(email).subscribe((citizens: any) => {
       this.citizens = citizens;
     })
   }
 
 
-  
+
 
   sortTable(column: string): void {
     if (this.sortType === column) {

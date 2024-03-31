@@ -12,6 +12,8 @@ export class LibraryService {
   constructor(private http: HttpClient) { }
 
 
+
+
   //create mock data
   Books: Book[] = [
     {
@@ -29,7 +31,7 @@ export class LibraryService {
       sinopsis: 'Bilbo Bolseiro é um hobbit que leva uma vida confortável e sem ambições. Mas seu contentamento é perturbado quando Gandalf, o mago, e uma companhia de anões batem à sua porta e levam-no para uma expedição. Eles têm um plano para roubar o tesouro guardado por Smaug, o Magnífico, um grande e perigoso dragão. Bilbo reluta muito em participar da aventura, mas acaba surpreendendo até a si mesmo com sua esperteza e sua habilidade como ladrão!',
       status: BookStatus.Available,
       municipality: 'Londres',
-    },{
+    }, {
       id: 2,
       title: 'O Hobbit',
       author: ['J.R.R. Tolkien'],
@@ -151,6 +153,50 @@ export class LibraryService {
   getRequests(): Observable<BookRequest[]> {
     return this.http.get<BookRequest[]>('api/Book/GetRequests');
   }
+
+  getRequestsByMunicipality(municipality: string): Observable<BookRequest[]> {
+    return this.http.get<BookRequest[]>(`api/Book/GetRequestsByMunicipality?municipality=${municipality}`);
+  }
+
+  getRequestsByCitizen(email: string) {
+    return this.http.get<BookRequest[]>(`api/Book/GetRequestsByCitizen?email=${email}`);
+  }
+
+  getDistinctCategoriesByMunicipality(municipality: string) {
+    return this.http.get<string[]>(`api/Book/GetDistinctCategoriesByMunicipality?municipality=${municipality}`);
+  }
+
+  deleteRequest(requestId: number): Observable<any> {
+    return this.http.delete(`api/Book/DeleteRequest?requestId=${requestId}`);
+  }
+
+  denyRequest(requestId: number): Observable<any> {
+    return this.http.post(`api/Book/DenyRequest?requestId=${requestId}`, null);
+  }
+
+  borrowBook(requestId: number, returnDate: Date): Observable<any> {
+    return this.http.post(`api/Book/BorrowBook?requestId=${requestId}`, returnDate);
+
+  }
+
+  createRequest(email: string, request: BookRequest): Observable<any> {
+    return this.http.post(`api/Book/CreateRequest/${email}`, request);
+  }
+
+  delayRequest(requestId: number): Observable<any> {
+    return this.http.post(`api/Book/DelayRequest?requestId=${requestId}`, null);
+  }
+
+  deliverBook(requestId: number): Observable<any> {
+    return this.http.post(`api/Book/DeliverBook?requestId=${requestId}`, null);
+  }
+
+
+  sendDelayedEmail(email: string, name: string, bookImage: string, bookName: string, bookAuthor: string, returnDate: string) {
+    return this.http.post(`api/Book/SendDelayedEmail?email=${email}&name=${name}&bookImage=${bookImage}&bookName=${bookName}&bookAuthor=${bookAuthor}&returnDate=${returnDate}`, null);
+
+  }
+
 
 
 

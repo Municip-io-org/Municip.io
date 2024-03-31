@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { BookRequest, BookRequestStatus, LibraryService } from '../../services/library/library.service';
+import { BookRequest, LibraryService } from '../../services/library/library.service';
 import { UserAuthService } from '../../services/user-auth.service';
 
 @Component({
-  selector: 'app-requests',
-  templateUrl: './requests.component.html',
-  styleUrl: './requests.component.css'
+  selector: 'app-my-requests',
+  templateUrl: './my-requests.component.html',
+  styleUrl: './my-requests.component.css'
 })
-export class RequestsComponent {
+export class MyRequestsComponent {
 
   booksRequested: BookRequest[] = [];
   municipalityImage: string = '';
@@ -15,8 +15,9 @@ export class RequestsComponent {
   orderOptions: any[] = [{ label: 'Mais antigo', value: true }, { label: 'Mais Recente', value: false }];
   ascendingOrder: boolean = true;
 
+  citizenEmail: string = '';
 
-  municipalityName: string = '';
+
   constructor(private service: LibraryService, private authService: UserAuthService) {
 
   }
@@ -28,8 +29,8 @@ export class RequestsComponent {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
           this.municipalityImage = municipality.landscapePhoto;
-          this.municipalityName = municipality.name;
-          this.service.getRequestsByMunicipality(municipality.name).subscribe(
+          this.citizenEmail = user.email;
+          this.service.getRequestsByCitizen(user.email).subscribe(
             (requests) => {
               this.booksRequested = requests;
               this.sortEventsByDate();
@@ -46,8 +47,7 @@ export class RequestsComponent {
   }
 
   get filteredBooks() {
-    return this.booksRequested.filter(b => b.book.title.toLowerCase().includes(this.nameSearch.toLowerCase()) && b.status !== BookRequestStatus.Delivered && b.status !== BookRequestStatus.Denied
-    );
+    return this.booksRequested.filter(b => b.book.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }
 
   toggleSortOrder() {
@@ -68,7 +68,7 @@ export class RequestsComponent {
   }
 
   updateRequests() {
-    this.service.getRequestsByMunicipality(this.municipalityName).subscribe(
+    this.service.getRequestsByCitizen(this.citizenEmail).subscribe(
       (requests) => {
         this.booksRequested = requests;
         this.sortEventsByDate();
@@ -78,5 +78,7 @@ export class RequestsComponent {
       }
     );
   }
+
+
 
 }
