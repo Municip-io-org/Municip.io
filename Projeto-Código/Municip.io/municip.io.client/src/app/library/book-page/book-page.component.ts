@@ -72,7 +72,7 @@ export class BookPageComponent {
 
   ngOnInit(): void {
     this.book = this.activatedRoute.snapshot.data['book'];
-
+    this.book.coverImage = '';
     this.userAuthService.getUserData().subscribe(
       res => {
         let anyUser: any;
@@ -91,7 +91,7 @@ export class BookPageComponent {
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: Municipality) => {
                 this.municipality = municipalityRes;
-
+                this.municipality.landscapePhoto = '';
 
 
                 this.libraryService.getRequestsByCitizen(this.user.email).subscribe(

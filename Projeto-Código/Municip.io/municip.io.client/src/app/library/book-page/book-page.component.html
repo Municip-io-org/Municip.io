@@ -13,7 +13,7 @@
 </ng-container>
 
 <app-smaller-banner title="Biblioteca de {{municipality.name}}"
-                    image="{{municipality.landscapePhoto}} ? {{municipality.landscapePhoto}} : '/assets/images/placeholder/Landscape placeholder.jpg'">
+                    [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'">
 
 </app-smaller-banner>
 
@@ -37,8 +37,10 @@
   <section class="flex -mt-12 text-municip-gray justify-center gap-x-12 text-[1.063rem] px-[3rem] ">
 
 
-    <img src="{{book.coverImage}} ? {{book.coverImage}} : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="Capa do livro"
-         class="object-cover w-[15rem] h-[21rem] rounded" />
+    <img [src]="book.coverImage ? book.coverImage : '/assets/images/placeholder/Landscape placeholder.jpg'" 
+     alt="Capa do livro" 
+     class="object-cover w-[15rem] h-[21rem] rounded" />
+
 
 
 
