@@ -146,6 +146,28 @@ export class LibraryService {
     );
   }
 
+  updateBook(book: Book, image: File | null): Observable<HttpResponse<any>> {
+    console.log(book);
+    if (image === null) {
+      return this.http.put<any>('api/Book/UpdateBook', book, { observe: 'response' });
+    }
+
+    const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    const imgurl = "https://api.imgur.com/3/image";
+
+    const formData = new FormData();
+    formData.append('image', image);
+
+    return this.http.post(imgurl, formData, { headers }).pipe(
+      switchMap((response: any) => {
+        book.coverImage = response['data']['link'];
+        console.log(book);
+        return this.http.put<any>('api/Book/UpdateBook', book, { observe: 'response' });
+      })
+    );
+  }
+
+
 
 
   getBooks(): Book[] {

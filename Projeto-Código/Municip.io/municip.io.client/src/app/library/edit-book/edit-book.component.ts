@@ -18,7 +18,7 @@ export class EditBookComponent {
 
 
   book: Book = {
-
+    id: -1,
     isbn: '',
     title: '',
     author: [],
@@ -49,7 +49,7 @@ export class EditBookComponent {
   dialogTitle = '';
   dialogMessage = '';
   isAddGenreDialogOpen: boolean = false;
-  isConfirm: boolean = true;
+  isConfirmDialog: boolean = true;
 
   editor = new Editor();
   toolbar: Toolbar = [
@@ -81,6 +81,7 @@ export class EditBookComponent {
     sinopsis: new FormControl({ value: "", disabled: false }, [Validators.required]),
     coverImageUrl: new FormControl({ value: "", disabled: false }, [Validators.required])
   });
+    
 
   validateGenre(controls: FormArray): { [key: string]: boolean } | null {
     if (controls.controls.some(control => control.value)) {
@@ -110,6 +111,7 @@ export class EditBookComponent {
    */
   ngOnInit(): void {
     this.book = this.activatedRoute.snapshot.data['book'];
+    console.log(this.book);
     this.editor = new Editor();
 
 
@@ -136,22 +138,19 @@ export class EditBookComponent {
 
 
   private buildCategoryCheckboxes() {
-    console.log("AQUI1");
     this.categories.forEach(category => {
-      console.log(this.categories);
       this.genres.push(new FormControl({ value: false, disabled: false })); // Por padrão, inicialize todas as categorias desmarcadas
     });
   }
 
   initializeForm(): void {
-    console.log("AQUI2");
 
     this.bookForm.patchValue({
       iSBN: this.book.isbn,
       title: this.book.title,
       publisher: this.book.publisher,
       edition: this.book.edition,
-      publicationDate: new Date(this.book.publicationDate),
+      publicationDate: this.book.publicationDate,
       language: this.book.language,
       copies: this.book.copies.toString(),
       sinopsis: this.book.sinopsis,
@@ -165,12 +164,9 @@ export class EditBookComponent {
 
     this.book.genre.forEach(genre => {
       const index = this.categories.indexOf(genre);
-      console.log("Gênero:", genre, "Índice:", index);
       if (index !== -1) {
-        console.log("Marcando gênero:", genre);
         this.genres.at(index).setValue(true);
       } else {
-        console.log("Gênero não encontrado:", genre);
         console.log(this.categories[1]);
       }
     });
@@ -181,7 +177,8 @@ export class EditBookComponent {
     if (this.bookForm.valid) {
 
       this.book = {
-        isbn: this.iSBN?.value!.toString() || '',
+        id: this.book.id,
+        isbn: this.iSBN?.value!.toString(),
         title: this.title?.value!,
         author: this.authors?.value!,
         availableCopies: parseInt(this.copies?.value!),
@@ -202,19 +199,29 @@ export class EditBookComponent {
 
       console.log(this.book);
 
-      this.libraryService.createBook(this.book, this.coverImage).subscribe(
-        (res) => {
-          this.dialogTitle = 'Criado com Sucesso';
-          this.dialogMessage = `O livro foi criado com sucesso`;
-          this.isConfirm = true;
-          this.isDialogOpen = true;
+      this.libraryService.updateBook(this.book, this.coverImage).subscribe(
+        response => {
+          if (response && response.body) {
+            this.dialogTitle = 'Atualizado com sucesso';
+            this.dialogMessage = response.body.message;
+            this.isConfirmDialog = true;
+            this.isDialogOpen = true;
+          } else {
+            console.error('Resposta inválida do servidor após a remoção do livro:', response);
+
+            this.dialogTitle = 'Erro na atualização do livro';
+            this.dialogMessage = response?.body?.message || 'Ocorreu um erro ao processar a resposta do servidor.';
+            this.isConfirmDialog = false;
+            this.isDialogOpen = true;
+          }
         },
-        (error) => {
-          this.dialogTitle = 'Erro';
-          this.dialogMessage = error.error;
-          this.isConfirm = false;
+        error => {
+          console.error('Erro ao atualizar o livro:', error);
+
+          this.dialogTitle = 'Erro na atualização do livro';
+          this.dialogMessage = error?.message || 'Ocorreu um erro ao atualizar o livro.';
+          this.isConfirmDialog = false;
           this.isDialogOpen = true;
-          window.scrollTo(0, 0);
         }
       );
     }

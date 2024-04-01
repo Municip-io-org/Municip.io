@@ -10,9 +10,6 @@ namespace Municip.io.Server.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-
-
-
         private readonly HttpClient _httpClient;
         private readonly ApplicationDbContext _context;
 
@@ -77,6 +74,105 @@ namespace Municip.io.Server.Controllers
                 return StatusCode(500, $"Erro ao criar livro: {ex.Message}");
             }
         }
+
+        /**
+         * Retorna um livro pelo seu ID
+         */
+        [HttpGet("GetBookById")]
+        public IActionResult GetBookById(int bookId)
+        {
+            var book = _context.Books.FirstOrDefault(b => b.Id == bookId);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return Ok(book);
+        }
+
+        [HttpPut("UpdateBook")]
+        public IActionResult UpdateBook(Book book)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (book == null)
+                    {
+                        return BadRequest(new { message = "O objeto de livro recebido está vazio." });
+                    }
+
+                    // Verificar se o livro com o ID fornecido existe no banco de dados
+                    var existingBook = _context.Books.Find(book.Id);
+                    if (existingBook == null)
+                    {
+                        return NotFound(new { message = "Livro não encontrado." });
+                    }
+
+                    // Atualizar os detalhes do livro existente com os detalhes do livro atualizado
+                    existingBook.ISBN = book.ISBN;
+                    existingBook.Title = book.Title;
+                    existingBook.Author = book.Author;
+                    existingBook.AvailableCopies = book.AvailableCopies;
+                    existingBook.Copies = book.Copies;
+                    existingBook.CoverImage = book.CoverImage;
+                    existingBook.Edition = book.Edition;
+                    existingBook.Genre = book.Genre;
+                    existingBook.Language = book.Language;
+                    existingBook.PublicationDate = book.PublicationDate;
+                    existingBook.Publisher = book.Publisher;
+                    existingBook.Sinopsis = book.Sinopsis;
+                    existingBook.Status = book.Status;
+                    existingBook.Municipality = book.Municipality;
+
+                    // Salvar as alterações no banco de dados
+                    _context.SaveChanges();
+
+                    // Retornar um Ok para indicar que o livro foi atualizado com sucesso
+                    return Ok(new { message = "O livro foi atualizado com sucesso" });
+                }
+
+                return BadRequest(new { message = "Modelo inválido", ModelState });
+            }
+            catch (Exception ex)
+            {
+                // Lidar com exceções e retornar um código de status de erro
+                return StatusCode(500, $"Erro ao atualizar livro: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("DeleteBookById")]
+        public async Task<IActionResult> DeleteBookById(int bookId)
+        {
+            var book = _context.Books.Find(bookId);
+            Console.WriteLine(book);
+            if (book == null)
+            {
+                return NotFound(new { message = "Não foi possível encontrar o livro" });
+            }
+
+            var requests = await _context.BookRequests.Include(b => b.Book).Where(br => br.Book.Id == bookId).ToListAsync();
+
+            if (requests.Any())
+            {
+                if (requests.All(br => br.Status == BookRequestStatus.Delivered))
+                {
+                    _context.Books.Remove(book);
+                    await _context.SaveChangesAsync();
+                    return Ok(new { message = "O livro foi removido com sucesso" });
+                }
+                else
+                {
+                    return BadRequest(new { message = "Não é possível excluir o livro, porque existem pedidos deste livro pendentes." });
+                }
+            }
+            else
+            {
+                _context.Books.Remove(book);
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "O livro foi removido com sucesso" });
+            }
+        }
+
 
 
 
@@ -157,53 +253,10 @@ namespace Municip.io.Server.Controllers
             return Ok(bookRequests);
         }
 
-        /**
-         * Retorna um livro pelo seu ID
-         */
-        [HttpGet("GetBookById")]
-        public IActionResult GetBookById(int bookId)
-        {
-            var book = _context.Books.FirstOrDefault(b => b.Id == bookId);
-            if (book == null)
-            {
-                return NotFound(); 
-            }
-            return Ok(book);
-        }
+        
 
 
-        [HttpDelete("DeleteBookById")]
-        public async Task<IActionResult> DeleteBookById(int bookId)
-        {
-            var book = _context.Books.Find(bookId);
-            Console.WriteLine(book);
-            if (book == null)
-            {
-                return NotFound("Não foi possível encontrar o livro");
-            }
-
-            var requests = await _context.BookRequests.Include(b => b.Book).Where(br => br.Book.Id == bookId).ToListAsync();
-
-            if (requests.Any())
-            {
-                if (requests.All(br => br.Status == BookRequestStatus.Delivered))
-                {
-                    _context.Books.Remove(book);
-                    await _context.SaveChangesAsync();
-                    return Ok(new { message = "O livro foi removido com sucesso" });
-                }
-                else
-                {
-                    return BadRequest(new { message = "Não é possível excluir o livro, porque existem pedidos deste livro pendentes." });
-                }
-            }
-            else
-            {
-                _context.Books.Remove(book);
-                await _context.SaveChangesAsync();
-                return Ok(new { message = "O livro foi removido com sucesso" });
-            }
-        }
+        
 
 
 

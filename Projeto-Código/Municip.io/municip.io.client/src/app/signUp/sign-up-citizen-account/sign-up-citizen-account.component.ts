@@ -243,7 +243,6 @@ export class SignUpCitizenAccountComponent {
       birthDate: this.birthDate!.value!
     };
 
-
     this.citizenAuthService.registerCitizen(citizen, this.image).subscribe(
       result => {
         this.router.navigateByUrl('/signUp-Success');
