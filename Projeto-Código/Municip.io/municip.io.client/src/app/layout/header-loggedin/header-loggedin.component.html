@@ -105,7 +105,7 @@
       <li *ngIf="isDocumentsFeatureActive()" class="relative group" (click)="setActiveDropdown(Dropdowns.Documents)">
         <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Documentos
-          <span *ngIf="role ===Roles.Municipal" class="bg-yellow-500 text-yellow-900 px-2 py-1 ml-2 rounded text-xs font-bold">{{numberOfRequests}}</span>
+          <span *ngIf="role ===Roles.Municipal && numberOfRequests != 0" class="bg-yellow-500 text-yellow-900 px-2 py-1 ml-2 rounded text-xs font-bold">{{numberOfRequests}}</span>
 
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
