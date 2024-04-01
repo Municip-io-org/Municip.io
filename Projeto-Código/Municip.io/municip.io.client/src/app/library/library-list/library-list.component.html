@@ -1,0 +1,31 @@
+<app-header-loggedin></app-header-loggedin>
+
+<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" [title]="'Lista de Livros'"
+                    [text]="'Consulte os Livros disponiveis na biblioteca de '" />
+
+<div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-20 gap-y-20 min-h-[28rem]">
+  <div class=" flex items-center justify-between space-x-4 -mt-[3rem]">
+    <div class="relative w-full ">
+      <label for="nameSearch" class="sr-only">Procurar por eventos</label>
+      <div class="flex items-center">
+        <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+          <span class="fas fa-search"></span>
+        </i>
+        <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por eventos"
+               class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300 hover:border-black">
+      </div>
+    </div>
+
+  </div>
+
+  <section class="flex flex-wrap justify-around gap-y-16 gap-x-8 py-10">
+    <ng-container *ngFor="let book of books">
+      <app-library-card [book]="book"></app-library-card>
+    </ng-container>
+  </section>
+
+</div>
+
+
+
+  <app-footer class="flex-shrink-0"></app-footer>

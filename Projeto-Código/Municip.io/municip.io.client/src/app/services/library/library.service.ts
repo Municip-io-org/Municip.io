@@ -197,7 +197,15 @@ export class LibraryService {
 
   }
 
-
+  statusToString(status: BookStatus): string {
+    switch (status) {
+      case BookStatus.Available:
+        return "Disponível";
+      case BookStatus.Unavailable:
+        return "Indisponível";
+    }
+    
+  }
 
 
   bookRequestStatusToString(status: BookRequestStatus): string {
