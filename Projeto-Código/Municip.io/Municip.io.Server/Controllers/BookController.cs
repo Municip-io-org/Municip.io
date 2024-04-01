@@ -156,7 +156,7 @@ namespace Municip.io.Server.Controllers
             {
                 if (requests.All(br => br.Status == BookRequestStatus.Delivered))
                 {
-                    _context.Books.Remove(book);
+                    book.Status = BookStatus.Unavailable;
                     await _context.SaveChangesAsync();
                     return Ok(new { message = "O livro foi removido com sucesso" });
                 }
@@ -167,7 +167,7 @@ namespace Municip.io.Server.Controllers
             }
             else
             {
-                _context.Books.Remove(book);
+                book.Status = BookStatus.Unavailable;
                 await _context.SaveChangesAsync();
                 return Ok(new { message = "O livro foi removido com sucesso" });
             }

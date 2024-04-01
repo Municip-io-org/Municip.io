@@ -76,7 +76,7 @@
       </div>
 
 
-      <ng-container *ngIf="!isMunAdmin">
+      <ng-container *ngIf="!isMunAdmin && isBookStatusAvailable()">
         <ng-container *ngIf="!isBookReserved && book.availableCopies > 0">
           <app-btn-municip-blue width="10rem" (click)="reserveBook()">
             Reservar
