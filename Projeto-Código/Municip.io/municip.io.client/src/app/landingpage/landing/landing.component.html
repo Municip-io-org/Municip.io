@@ -1,3 +1,8 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+</head>
+
 <app-header />
 <main class="font-inter">
   <app-banner />
@@ -24,18 +29,18 @@
       <p>Contamos com diversas autarquias e munícipes que utilizam diariamente a nossa plataforma</p>
     </div>
     <div class="flex justify-center space-x-10 flex-1 py-20">
-      <div class="flex space-x-2">
-        <img alt="icone" src="/assets/images/landing/iconepessoa.png" class="h-11 self-center" />
+      <div class="flex items-center">
+        <i class="fas fa-users text-municip-blue text-3xl mr-3"></i>
         <div>
-          <p class="text-lg font-bold text-municip-normal-black">11313</p>
-          <p class="text-municip-gray">Municipes</p>
+          <p class="text-3xl font-bold text-municip-normal-black">{{citizens}}</p>
+          <p class="text-municip-gray text-2xl">Munícipes</p>
         </div>
       </div>
-      <div class="flex space-x-2">
-        <img alt="icone" src="/assets/images/landing/iconemao.png" class="h-11 self-center" />
+      <div class="flex items-center">
+        <i class="fas fa-city text-municip-blue text-3xl mr-3"></i>
         <div>
-          <p class="text-lg font-bold text-municip-normal-black">29</p>
-          <p class="text-municip-gray">Autarquias</p>
+          <p class="text-3xl font-bold text-municip-normal-black">{{municipalities}}</p>
+          <p class="text-municip-gray text-2xl">Autarquias</p>
         </div>
       </div>
     </div>
