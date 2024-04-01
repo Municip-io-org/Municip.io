@@ -59,14 +59,12 @@ export class LibraryListComponent {
     }
   ];
   nameSearch: string = '';
-  ascendingOrder: boolean = true;
-  orderOptions: any[] = [{ label: 'Brevemente', value: true }, { label: 'Mais Distantes', value: false }];
-
+  
 
   constructor( ) { }
 
 
-  get filteredEvents() {
+  get filteredBooks() {
     if (this.nameSearch == '') return this.books;
     return this.books.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }

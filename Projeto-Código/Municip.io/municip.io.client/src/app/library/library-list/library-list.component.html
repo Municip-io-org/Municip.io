@@ -4,22 +4,28 @@
                     [text]="'Consulte os Livros disponiveis na biblioteca de '" />
 
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-20 gap-y-20 min-h-[28rem]">
-  <div class=" flex items-center justify-between space-x-4 -mt-[3rem]">
-    <div class="relative w-full ">
+  <div class="flex items-center justify-between space-x-4 -mt-[3rem]">
+    <div class="relative w-full">
       <label for="nameSearch" class="sr-only">Procurar por eventos</label>
-      <div class="flex items-center">
+      <div class="flex items-center pb-3">
         <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
           <span class="fas fa-search"></span>
         </i>
         <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por eventos"
-               class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300 hover:border-black">
+               class="pl-10 px-4 py-2 border rounded-2xl w-full transition duration-300 hover:border-black">
       </div>
+      <button type="submit"
+              class="absolute h-[2.5rem] w-[6rem] flex justify-center items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded-2xl text-lg transition duration-700 ease-in-out disabled:cursor-not-allowed"
+              style="left: 50%; transform: translateX(-50%);">
+        Filtros
+      </button>
     </div>
-
   </div>
 
-  <section class="flex flex-wrap justify-around gap-y-16 gap-x-8 py-10">
-    <ng-container *ngFor="let book of books">
+
+
+  <section class="flex flex-wrap justify-around gap-y-16 gap-x-8 ">
+    <ng-container *ngFor="let book of filteredBooks">
       <app-library-card [book]="book"></app-library-card>
     </ng-container>
   </section>
