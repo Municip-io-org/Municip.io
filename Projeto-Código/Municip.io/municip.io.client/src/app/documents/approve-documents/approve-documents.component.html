@@ -1,5 +1,5 @@
 <app-header-loggedin />
-<app-smaller-banner title="Aprovar Documentos" image="{{municipalityImage}} ? {{municipalityImage}} : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
+<app-smaller-banner title="Aprovar Documentos" [image]="municipalityImage ? municipalityImage : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
 
 <div class="min-h-80 bg-municip-blank">
   <div class=" flex items-center justify-between space-x-4 mx-20 pt-10">

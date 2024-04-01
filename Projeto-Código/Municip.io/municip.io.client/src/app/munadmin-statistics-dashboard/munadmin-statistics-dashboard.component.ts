@@ -4,7 +4,7 @@ import { Citizen } from '../services/citizen-auth.service';
 import { MunicipalAdministrator } from '../services/municipal-admin-auth.service';
 import { RequestDocument } from '../services/documents/docs.service';
 import { UserAuthService } from '../services/user-auth.service';
-import { Book } from '../services/library/library.service';
+import { Book, BookRequest } from '../services/library/library.service';
 
 @Component({
   selector: 'app-munadmin-statistics-dashboard',
@@ -43,6 +43,70 @@ export class MunadminStatisticsDashboardComponent {
 
   user: any;
   municipality: string = '';
+
+  bookrequests: BookRequest[] = [
+    //{
+    //  "citizen": {
+    //    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    //    "firstName": "string",
+    //    "surname": "string",
+    //    "email": "string",
+    //    "password": "string",
+    //    "nif": "string",
+    //    "gender": "string",
+    //    "municipality": "string",
+    //    "address": "string",
+    //    "postalCode1": "string",
+    //    "postalCode2": "string",
+    //    "birthDate": new Date(),
+    //    "photo": "string",
+    //    "status": 0,
+    //    "date": {
+    //      "year": 0,
+    //      "month": 0,
+    //      "day": 0,
+    //      "dayOfWeek": 0
+    //    },
+    //    "events": [
+          
+    //    ],
+    //    "browsers": [
+          
+    //    ]
+    //  },
+    //  "book": {
+    //    "id": 0,
+    //    "title": "string",
+    //    "author": [
+    //      "string"
+    //    ],
+    //    "publisher": "string",
+    //    "isbn": "string",
+    //    "genre": [
+    //      "string"
+    //    ],
+    //    "sinopsis": "string",
+    //    "coverImage": "string",
+    //    "language": "string",
+    //    "edition": "string",
+    //    "publicationDate": new Date(),
+    //    "copies": 0,
+    //    "availableCopies": 0,
+    //    "status": 0,
+    //    "municipality": "string"
+    //  },
+    //  "reservedDate": new Date(),
+    //  "borrowedDate": new Date(),
+    //  "returnDate": new Date(),
+    //  "deliveredDate": new Date(),
+    //  "municipality": "string",
+    //  "status": 0
+    //}
+
+
+  ];
+
+
 
   books: Book[] = [
     {
@@ -90,7 +154,7 @@ export class MunadminStatisticsDashboardComponent {
       "publicationDate": new Date("2001-06-26"), // Convert string to Date object
       "copies": 10,
       "availableCopies": 10,
-      "status": 0,
+      "status": 1,
       "municipality": "London"
     }
   ];

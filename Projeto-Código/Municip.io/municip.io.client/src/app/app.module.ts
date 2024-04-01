@@ -132,6 +132,10 @@ import { RegisteredMunUsersGraphComponent } from './munadmin-statistics-dashboar
 import { BooksGenreChartComponent } from './admin-statistics-dashboard/books-genre-chart/books-genre-chart.component';
 import { AddGenreDialogComponent } from './utils/library/add-genre-dialog/add-genre-dialog.component';
 import { MyRequestsComponent } from './library/my-requests/my-requests.component';
+import { LibrarylistComponent } from './library/librarylist/librarylist.component';
+import { LibraryListComponent } from './library/library-list/library-list.component';
+import { LibraryCreateComponent } from './utils/library/library-create/library-create.component';
+import { LibraryCardComponent } from './utils/library/library-card/library-card.component';
 
 
 
@@ -246,6 +250,10 @@ registerLocaleData(localePt, 'pt-PT');
     BooksGenreChartComponent,
     AddGenreDialogComponent,
     MyRequestsComponent,
+    LibrarylistComponent,
+    LibraryListComponent,
+    LibraryCreateComponent,
+    LibraryCardComponent,
 
     
   ],

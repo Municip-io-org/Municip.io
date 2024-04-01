@@ -59,7 +59,7 @@ import { CreateBookComponent } from './library/create-book/create-book.component
 import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/admin-statistics-dashboard.component';
 import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
 import { MyRequestsComponent } from './library/my-requests/my-requests.component';
-
+import { LibraryListComponent } from './library/library-list/library-list.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -116,7 +116,7 @@ const routes: Routes = [
   { path: 'library/my', component: MyRequestsComponent, data: {} },
   { path: 'adminstatistics', component: AdminStatisticsDashboardComponent },
   { path: 'munadminstatistics', component: MunadminStatisticsDashboardComponent },
-
+  { path: 'library/librarylist', component: LibraryListComponent }
 ];
 
 @NgModule({
