@@ -252,7 +252,7 @@ export class LibraryService {
   }
 
   createRequest(email: string, request: BookRequest): Observable<any> {
-    return this.http.post(`api/Book/CreateRequest/${email}`, request);
+    return this.http.post(`api/Book/CreateRequest?email=${email}`, request);
   }
 
   delayRequest(requestId: number): Observable<any> {

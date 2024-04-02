@@ -180,6 +180,8 @@ namespace Municip.io.Server.Controllers
         [HttpPost("CreateRequest")]
         public async Task<IActionResult> CreateRequestAsync(string email, BookRequest request)
         {
+
+
             if (ModelState.IsValid)
             {
 
@@ -194,9 +196,18 @@ namespace Municip.io.Server.Controllers
 
                 if (book == null) return BadRequest(new { message = "Não foi encontrado nenhum livro", ModelState });
 
+
+                //if the citizen already has a request for the same book
+                var existingRequest = await _context.BookRequests.FirstOrDefaultAsync(r => r.Citizen.Id == citizen.Id && r.Book.Id == book.Id);
+                if (existingRequest != null) return BadRequest(new { message = "O cidadão já fez um pedido para este livro" });
+
+
+
                 request.Citizen = citizen;
                 request.Book = book;
-                request.Status = BookRequestStatus.Reserved;
+
+                book.AvailableCopies--;
+
 
 
                 _context.BookRequests.Add(request);
@@ -253,10 +264,10 @@ namespace Municip.io.Server.Controllers
             return Ok(bookRequests);
         }
 
-        
 
 
-        
+
+
 
 
 
@@ -307,11 +318,15 @@ namespace Municip.io.Server.Controllers
         [HttpPost("DenyRequest")]
         public async Task<IActionResult> DenyRequestAsync(int requestId)
         {
-            var request = await _context.BookRequests.FirstOrDefaultAsync(r => r.Id == requestId);
+            var request = await _context.BookRequests.Include(br => br.Book).FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
 
             request.Status = BookRequestStatus.Denied;
+
+            //increase available copies of the book
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == request.Book.Id);
+            book.AvailableCopies++;
 
             await _context.SaveChangesAsync();
 
@@ -324,12 +339,16 @@ namespace Municip.io.Server.Controllers
         [HttpPost("DeliverBook")]
         public async Task<IActionResult> DeliverBookAsync(int requestId)
         {
-            var request = await _context.BookRequests.FirstOrDefaultAsync(r => r.Id == requestId);
+            var request = await _context.BookRequests.Include(br => br.Book).FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
 
             request.Status = BookRequestStatus.Delivered;
             request.DeliveredDate = DateTime.Now;
+
+            //increase available copies of the book
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == request.Book.Id);
+            book.AvailableCopies++;
 
             await _context.SaveChangesAsync();
 
@@ -340,9 +359,13 @@ namespace Municip.io.Server.Controllers
         [HttpDelete("DeleteRequest")]
         public async Task<IActionResult> DeleteRequestAsync(int requestId)
         {
-            var request = await _context.BookRequests.FirstOrDefaultAsync(r => r.Id == requestId);
+            var request = await _context.BookRequests.Include(br => br.Book).FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
+
+            //increase available copies of the book
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == request.Book.Id);
+            book.AvailableCopies++;
 
             _context.BookRequests.Remove(request);
             await _context.SaveChangesAsync();

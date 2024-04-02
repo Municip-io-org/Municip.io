@@ -24,20 +24,6 @@ export class RequestedBookCardComponent {
 
 
 
-  /// THIS IS FOR THE DETAIL PAGE OF BOOK
-  isDialogOpenTest = false;
-
-  formBorrowTest = new FormGroup({
-    returnDate: new FormControl(new Date(), Validators.required),
-    citizenEmail: new FormControl('', [Validators.required, Validators.email])
-  })
-
-  get citizenEmail() {
-    return this.formBorrowTest.get('citizenEmail') as FormControl;
-  }
-
-
-
 
 
 
@@ -245,7 +231,7 @@ export class RequestedBookCardComponent {
    */
   goToBookDetail() {
 
-    this.router.navigate(['/news']);
+    this.router.navigate(['/library', this.book.id]);
 
   }
 
