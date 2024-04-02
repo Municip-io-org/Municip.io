@@ -136,6 +136,7 @@ import { LibrarylistComponent } from './library/librarylist/librarylist.componen
 import { LibraryListComponent } from './library/library-list/library-list.component';
 import { LibraryCreateComponent } from './utils/library/library-create/library-create.component';
 import { LibraryCardComponent } from './utils/library/library-card/library-card.component';
+import { BorrowedBooksChartComponent } from './admin-statistics-dashboard/borrowed-books-chart/borrowed-books-chart.component';
 
 
 
@@ -254,6 +255,7 @@ registerLocaleData(localePt, 'pt-PT');
     LibraryListComponent,
     LibraryCreateComponent,
     LibraryCardComponent,
+    BorrowedBooksChartComponent,
 
     
   ],

@@ -45,63 +45,104 @@ export class MunadminStatisticsDashboardComponent {
   municipality: string = '';
 
   bookrequests: BookRequest[] = [
-    //{
-    //  "citizen": {
-    //    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    //    "firstName": "string",
-    //    "surname": "string",
-    //    "email": "string",
-    //    "password": "string",
-    //    "nif": "string",
-    //    "gender": "string",
-    //    "municipality": "string",
-    //    "address": "string",
-    //    "postalCode1": "string",
-    //    "postalCode2": "string",
-    //    "birthDate": new Date(),
-    //    "photo": "string",
-    //    "status": 0,
-    //    "date": {
-    //      "year": 0,
-    //      "month": 0,
-    //      "day": 0,
-    //      "dayOfWeek": 0
-    //    },
-    //    "events": [
-          
-    //    ],
-    //    "browsers": [
-          
-    //    ]
-    //  },
-    //  "book": {
-    //    "id": 0,
-    //    "title": "string",
-    //    "author": [
-    //      "string"
-    //    ],
-    //    "publisher": "string",
-    //    "isbn": "string",
-    //    "genre": [
-    //      "string"
-    //    ],
-    //    "sinopsis": "string",
-    //    "coverImage": "string",
-    //    "language": "string",
-    //    "edition": "string",
-    //    "publicationDate": new Date(),
-    //    "copies": 0,
-    //    "availableCopies": 0,
-    //    "status": 0,
-    //    "municipality": "string"
-    //  },
-    //  "reservedDate": new Date(),
-    //  "borrowedDate": new Date(),
-    //  "returnDate": new Date(),
-    //  "deliveredDate": new Date(),
-    //  "municipality": "string",
-    //  "status": 0
-    //}
+    {
+      "id": 1,
+      "citizen": {
+        "firstName": "John",
+        "surname": "Doe",
+        "email": "john.doe@example.com",
+        "password": "password123",
+        "nif": "123456789",
+        "gender": "Male",
+        "municipality": "New York",
+        "address": "123 Main Street",
+        "postalCode1": "12345",
+        "postalCode2": "6789",
+        "birthDate": new Date(),
+        "photo": "profile.jpg",
+        
+        
+        "events": [],
+        "browsers": []
+      },
+      "book": {
+        "id": 1,
+        "title": "The Great Gatsby",
+        "author": [
+          "F. Scott Fitzgerald"
+        ],
+        "publisher": "Scribner",
+        "isbn": "9780743273565",
+        "genre": [
+          "Fiction",
+          "Classics"
+        ],
+        "sinopsis": "The story primarily concerns the young and mysterious millionaire Jay Gatsby and his quixotic passion and obsession with the beautiful former debutante Daisy Buchanan.",
+        "coverImage": "great_gatsby.jpg",
+        "language": "English",
+        "edition": "First Edition",
+        "publicationDate": new Date(),
+        "copies": 5,
+        "availableCopies": 3,
+        "status": 1,
+        "municipality": "New York"
+      },
+      "reservedDate": new Date(),
+      "returnDate": new Date(),
+      "deliveredDate": new Date(),
+      "municipality": "New York",
+      "status": 1
+    }
+
+    , {
+      "id": 2,
+      "citizen": {
+        "firstName": "John",
+        "surname": "Doe",
+        "email": "john.doe@example.com",
+        "password": "password123",
+        "nif": "123456789",
+        "gender": "Male",
+        "municipality": "New York",
+        "address": "123 Main Street",
+        "postalCode1": "12345",
+        "postalCode2": "6789",
+        "birthDate": new Date(),
+        "photo": "profile.jpg",
+
+
+        "events": [],
+        "browsers": []
+      },
+      "book": {
+        "id": 1,
+        "title": "The Great Gatsby",
+        "author": [
+          "F. Scott Fitzgerald"
+        ],
+        "publisher": "Scribner",
+        "isbn": "9780743273565",
+        "genre": [
+          "Fiction",
+          "Classics"
+        ],
+        "sinopsis": "The story primarily concerns the young and mysterious millionaire Jay Gatsby and his quixotic passion and obsession with the beautiful former debutante Daisy Buchanan.",
+        "coverImage": "great_gatsby.jpg",
+        "language": "English",
+        "edition": "First Edition",
+        "publicationDate": new Date(),
+        "copies": 5,
+        "availableCopies": 3,
+        "status": 1,
+        "municipality": "New York"
+      },
+      "reservedDate": new Date(),
+      "returnDate": new Date(),
+      "deliveredDate": new Date(),
+      "municipality": "New York",
+      "status": 0
+    }
+
 
 
   ];

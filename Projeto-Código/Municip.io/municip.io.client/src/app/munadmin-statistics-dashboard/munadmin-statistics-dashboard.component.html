@@ -253,12 +253,15 @@
           </div>
 
           <div *ngIf="selectedButton === 2" class="h-1 mb-5">
-           
-  
-              <app-books-genre-chart [books]="books"></app-books-genre-chart>
-           
 
-            
+            <app-books-genre-chart [books]="books"></app-books-genre-chart>
+
+          </div>
+
+          <div *ngIf="selectedButton === 3" class="h-1 mb-5">
+
+            <app-borrowed-books-chart [booksborrowed]="bookrequests"></app-borrowed-books-chart>
+
           </div>
         </div>
       </section>
