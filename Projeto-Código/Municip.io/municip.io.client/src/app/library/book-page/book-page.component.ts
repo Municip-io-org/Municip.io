@@ -32,6 +32,8 @@ export class BookPageComponent {
     status: BookStatus.Available,
     municipality: ''
   }
+
+  
   user: any;
   isMunAdmin: boolean = false;
   bookRequest!: BookRequest;
@@ -276,7 +278,7 @@ export class BookPageComponent {
   }
 
   goToEditBookPage() {
-    this.router.navigateByUrl("library/create");
+    this.router.navigateByUrl(`library/edit/${this.book.id}`);
   }
 
   openRemoveBookDialog() {

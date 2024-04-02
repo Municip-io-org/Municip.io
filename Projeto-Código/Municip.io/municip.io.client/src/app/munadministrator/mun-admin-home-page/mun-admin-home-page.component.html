@@ -80,8 +80,8 @@
   <div class="flex items-center justify-around">
     <app-statistical-home-page-card [iconSrc]="'/assets/images/icons/file.png'"
                                     iconAlt="Ícone de Pedidos"
-                                    title="Pedidos Pendentes"
-                                    [value]="'114'"
+                                    title="Pedidos por Pagar"
+                                    [value]="documentsToPay"
                                     buttonText="Analisar Pedidos"
                                     (buttonClick)="pendingCitizensClick()">
       
@@ -89,7 +89,7 @@
     <app-statistical-home-page-card [iconSrc]="'/assets/images/icons/git.png'"
                                     iconAlt="Ícone de Documentos por Aprovar"
                                     title="Documentos por Aprovar"
-                                    [value]="'12'"
+                                    [value]="documentsToApprove"
                                     buttonText="Analisar Documentos"
                                     (buttonClick)="approveDocumentsClick()">
       

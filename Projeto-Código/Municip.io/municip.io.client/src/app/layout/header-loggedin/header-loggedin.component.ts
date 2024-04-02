@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router';
 import { AppFeature, AppFeaturesService } from '../../services/appFeatures/app-features.service';
+import { DocsService } from '../../services/documents/docs.service';
 
 @Component({
   selector: 'app-header-loggedin',
@@ -27,7 +28,11 @@ export class HeaderLoggedinComponent {
   showDropdownMunicipality: boolean = false;
   showDropdownAdmin: boolean = false;
 
-  constructor(private auth: UserAuthService, private appFeaturesService: AppFeaturesService, private router: Router) { }
+numberOfRequests: number = 0;
+
+
+
+  constructor(private auth: UserAuthService, private appFeaturesService: AppFeaturesService, private router: Router, private docsService : DocsService ) { }
 
   ngOnInit() {
     this.auth.onStateChanged().forEach((state: any) => {
@@ -51,6 +56,30 @@ export class HeaderLoggedinComponent {
 
                 this.appFeatures = appFeaturesRes;
 
+                this.auth.getUserRole().subscribe(
+                  res => {
+
+                    this.role = res.role;
+                    if (this.role === Roles.Municipal) {
+                      this.docsService.numberOfRequestsToApprove(this.user.municipality).subscribe(
+                        res => {
+                          this.numberOfRequests = res;
+                          console.log("São" + this.numberOfRequests);
+                        });
+
+                    }
+
+
+
+
+
+                  },
+                  error => {
+                    console.error(error);
+                  }
+                );
+
+
               },
               error => {
                 console.error(error);
@@ -70,16 +99,6 @@ export class HeaderLoggedinComponent {
       }
     );
 
-    this.auth.getUserRole().subscribe(
-      res => {
-
-        this.role = res.role;
-
-      },
-      error => {
-        console.error(error);
-      }
-    );
   }
 
   get Roles() {
