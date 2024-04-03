@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 
@@ -219,6 +220,9 @@ namespace Municip.io.Server.Controllers
                 _context.BookRequests.Add(request);
                 await _context.SaveChangesAsync();
 
+                EmailSender.SendBookEmail(email, "Reserva de livro", citizen.firstName, $"Reservou o livro <span style='font-weight: bold;'>{book.Title}</span> de <span style='font-weight: bold;'>{book.Author[0]}</span>. Tem até ({request.ReservationLimitDate}) para levantar o livro.",
+               "wwwroot/html/BookEmail.html", book.CoverImage);
+
                 return Ok();
 
             }
@@ -239,7 +243,9 @@ namespace Municip.io.Server.Controllers
             //check if the return date is valid
             if (returnDate < DateTime.Now) return BadRequest(new { message = $"Data de retorno inválida, data: {returnDate}" });
 
-            var request = await _context.BookRequests.FirstOrDefaultAsync(r => r.Id == requestId);
+            var request = await _context.BookRequests.Include(br => br.Citizen)
+                                                     .Include(br => br.Book)
+                                                     .FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
 
@@ -254,6 +260,9 @@ namespace Municip.io.Server.Controllers
             }
 
             await _context.SaveChangesAsync();
+
+            EmailSender.SendBookEmail(request.Citizen.Email, "Requisição de livro", request.Citizen.firstName, $"Você requisitou o livro <span style='font-weight: bold;'>{request.Book.Title}</span> de <span style='font-weight: bold;'>{request.Book.Author[0]}</span>. Tem até ({request.ReturnDate}) para entregar o livro.",
+               "wwwroot/html/BookEmail.html", request.Book.CoverImage);
 
             return Ok();
         }
@@ -324,7 +333,9 @@ namespace Municip.io.Server.Controllers
         [HttpPost("DenyRequest")]
         public async Task<IActionResult> DenyRequestAsync(int requestId)
         {
-            var request = await _context.BookRequests.Include(br => br.Book).FirstOrDefaultAsync(r => r.Id == requestId);
+            var request = await _context.BookRequests.Include(br => br.Citizen)
+                                                     .Include(br => br.Book)
+                                                     .FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
 
@@ -336,6 +347,9 @@ namespace Municip.io.Server.Controllers
 
             await _context.SaveChangesAsync();
 
+            EmailSender.SendBookEmail(request.Citizen.Email, "Reserva de livro recusada", request.Citizen.firstName, $"O seu pedido de reserva, do livro <span style='font-weight: bold;'>{request.Book.Title}</span> de <span style='font-weight: bold;'>{book.Author[0]}</span>, foi recusado!",
+               "wwwroot/html/BookEmail.html", request.Book.CoverImage);
+
             return Ok();
         }
 
@@ -345,7 +359,9 @@ namespace Municip.io.Server.Controllers
         [HttpPost("DeliverBook")]
         public async Task<IActionResult> DeliverBookAsync(int requestId)
         {
-            var request = await _context.BookRequests.Include(br => br.Book).FirstOrDefaultAsync(r => r.Id == requestId);
+            var request = await _context.BookRequests.Include(br => br.Citizen)
+                                                     .Include(br => br.Book)
+                                                     .FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
 
@@ -357,7 +373,8 @@ namespace Municip.io.Server.Controllers
             book.AvailableCopies++;
 
             await _context.SaveChangesAsync();
-
+            EmailSender.SendBookEmail(request.Citizen.Email, "Livro entregue", request.Citizen.firstName, $"Você entregou o livro <span style='font-weight: bold;'>{request.Book.Title}</span> de <span style='font-weight: bold;'>{book.Author[0]}</span>.",
+               "wwwroot/html/BookEmail.html", request.Book.CoverImage);
             return Ok();
         }
 
@@ -365,13 +382,18 @@ namespace Municip.io.Server.Controllers
         [HttpDelete("DeleteRequest")]
         public async Task<IActionResult> DeleteRequestAsync(int requestId)
         {
-            var request = await _context.BookRequests.Include(br => br.Book).FirstOrDefaultAsync(r => r.Id == requestId);
+            var request = await _context.BookRequests.Include(br => br.Citizen)
+                                                     .Include(br => br.Book)
+                                                     .FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
 
             //increase available copies of the book
             var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == request.Book.Id);
             book.AvailableCopies++;
+
+            EmailSender.SendBookEmail(request.Citizen.Email, "Cancelamento de reserva de livro", request.Citizen.firstName, $"Você cancelou a reserva do livro <span style='font-weight: bold;'>{request.Book.Title}</span> de <span style='font-weight: bold;'>{book.Author[0]}</span>.",
+               "wwwroot/html/BookEmail.html", request.Book.CoverImage);
 
             _context.BookRequests.Remove(request);
             await _context.SaveChangesAsync();
