@@ -198,7 +198,7 @@ namespace Municip.io.Server.Controllers
 
 
                 //if the citizen already has a request for the same book
-                var existingRequest = await _context.BookRequests.FirstOrDefaultAsync(r => r.Citizen.Id == citizen.Id && r.Book.Id == book.Id);
+                var existingRequest = await _context.BookRequests.FirstOrDefaultAsync(r => r.Citizen.Id == citizen.Id && r.Book.Id == book.Id && r.Status != BookRequestStatus.Delivered && r.Status != BookRequestStatus.Denied);
                 if (existingRequest != null) return BadRequest(new { message = "O cidadão já fez um pedido para este livro" });
 
 

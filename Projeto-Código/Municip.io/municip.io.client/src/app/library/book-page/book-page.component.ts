@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Book, BookStatus, BookRequest, LibraryService, BookRequestStatus } from '../../services/library/library.service';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-book-page',
@@ -33,7 +33,7 @@ export class BookPageComponent {
     municipality: ''
   }
 
-  
+
   user: any;
   isMunAdmin: boolean = false;
   bookRequest!: BookRequest;
@@ -96,9 +96,10 @@ export class BookPageComponent {
 
 
 
-  constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router, private libraryService: LibraryService) {
+  constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router,
+    private libraryService: LibraryService, private dateAdapter: DateAdapter<Date>) {
 
-
+    this.dateAdapter.setLocale('pt');
 
 
   }
@@ -130,12 +131,12 @@ export class BookPageComponent {
             }
             /*this.isMunAdmin = false;*/
 
-            if (userRole!.role === Roles.Citizen) {
-              this.citizenEmail = this.user.email;
+            this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
+              (municipalityRes: Municipality) => {
+                this.municipality = municipalityRes;
 
-              this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
-                (municipalityRes: Municipality) => {
-                  this.municipality = municipalityRes;
+                if (userRole!.role === Roles.Citizen) {
+                  this.citizenEmail = this.user.email;
 
 
                   this.libraryService.getRequestsByCitizen(this.user.email).subscribe(
@@ -162,15 +163,15 @@ export class BookPageComponent {
                       })
                     }
                   )
-
-
-                },
-                error => {
-                  console.error(error);
                 }
-              );
 
-            }
+              },
+              error => {
+                console.error(error);
+              }
+            );
+
+
           },
           error => {
             console.error(error);
