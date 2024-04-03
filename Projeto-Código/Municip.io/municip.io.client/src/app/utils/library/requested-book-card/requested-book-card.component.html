@@ -1,37 +1,3 @@
-<ng-container *ngIf="isDialogOpenTest">
-  <app-dialog-content title="Requisitar o livro {{bookRequest.book.title}}"
-                      message="Insira os dados para realizar a requisição
-                    para {{bookRequest.citizen.firstName}} {{bookRequest.citizen.surname}}"
-                      confirmButtonClass="disabled:cursor-not-allowed"
-                      [confirmButtonDisabled]="!borrowForm.valid"
-                      (cancel)="closeDialog()"
-                      (confirm)="borrowBook()">
-    <form [formGroup]="formBorrowTest" class="mt-5">
-      <div class="h-28 w-full">
-        <app-input-title class="">Data de Retorno</app-input-title>
-        <div class="flex items-center">
-          <app-date-picker [date]="returnDate" name="returnDate" class="w-3/5"
-                           [minDate]="minDate" />
-
-          <app-tooltip [tooltipText]="'Utilize o seletor para a inserção da data'"></app-tooltip>
-        </div>
-        <div class="text-red-500 font-bold py-2" *ngIf="returnDate?.touched && returnDate?.invalid">
-          <div *ngIf="returnDate?.errors?.['required'] ">Data Obrigatória</div>
-        </div>
-      </div>
-      <div class="h-28">
-        <app-input-title >Email</app-input-title>
-        <input required placeholder="Introduza o email do cidaão" type="email" id="email" formControlName="citizenEmail" name="email"
-               class="input w-3/5 h-12" />
-        <div class="text-red-500 font-bold py-2" *ngIf="citizenEmail?.touched && citizenEmail?.invalid ">
-          <div *ngIf="citizenEmail?.errors?.['required'] ">Email Obrigatório</div>
-          <div *ngIf="citizenEmail?.errors?.['email']">Email Inválido</div>
-        </div>
-      </div>
-    </form>
-  </app-dialog-content>
-</ng-container>
-
 <ng-container *ngIf="isDialogOpen">
   <app-dialog-content title="Requisitar o livro {{bookRequest.book.title}}"
                       message="Insira os dados para realizar a requisição
@@ -60,9 +26,13 @@
   <app-dialog-message (confirm)="closeDialogOperation()" title="Sucesso" message="Operação realizada com sucesso"
                       [isConfirm]=true></app-dialog-message>
 </ng-container>
+
+<ng-container *ngIf="isDialogOpenUserInfo">
+  <app-userinfodialog [user]="citizen" (close)="closeDialogUserInfo()"></app-userinfodialog>
+</ng-container>
 <div class="flex bg-white rounded-xl shadow-2xl  hover:shadow-xl h-44">
-  <img [src]="book.coverImage" alt="cover" (click)="goToBookDetail()" 
-       class="w-36 h-52 object-cover rounded-xl 
+  <img [src]="book.coverImage" alt="cover" (click)="goToBookDetail()"
+       class="w-36 h-52 object-cover rounded-xl
        self-center shadow-2xl cursor-pointer
        " />
   <div class="px-12 py-8 flex justify-between items-center gap-8
@@ -79,7 +49,7 @@
             {{ book.author }}
           </h3>
         </div>
-        <div class="font-inter text-base" *ngIf="showActions">
+        <div class="font-inter text-base hover:cursor-pointer w-fit" *ngIf="showActions" (click)="openDialogUserInfo()">
           <h2 *ngIf="this.bookRequest.status === BookRequestStatus().Reserved"
               class="inline">
             Reservado Por:
@@ -100,7 +70,7 @@
 
       <div *ngIf="this.bookRequest.status === BookRequestStatus().Reserved" class="flex flex-col w-fit space-y-5">
         <div class="flex flex-col items-center">
-          <p class="font-inter">Tempo Restante: {{ getTimeLeft(bookRequest.reservedDate!)  }}</p>
+          <p class="font-inter">Tempo Restante: {{ getTimeLeft(bookRequest.reservationLimitDate!)  }}</p>
           <div class="flex justify-center rounded-md bg-opacity-35 {{ getStatusClass() }}
                w-44
                ">
@@ -118,7 +88,7 @@
                transition-all duration-500 ease-in-out"></i>
           </button>
         </div>
-        <div *ngIf="!showActions" class="w-full flex space-x-10 justify-center" >
+        <div *ngIf="!showActions" class="w-full flex space-x-10 justify-center">
           <button (click)="cancelRequest()" class="bg-red-200 size-10 rounded-xl group">
             <i class="fa-solid fa-xmark fa-2xl text-red-500 group-hover:text-red-700
        transition-all duration-500 ease-in-out"></i>
