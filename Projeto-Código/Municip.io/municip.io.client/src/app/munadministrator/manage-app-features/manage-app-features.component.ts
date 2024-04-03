@@ -164,7 +164,6 @@ export class ManageAppFeaturesComponent {
    */
   closeDialog() {
     this.isDialogOpen = false;
-    window.location.reload();
   }
 }
 

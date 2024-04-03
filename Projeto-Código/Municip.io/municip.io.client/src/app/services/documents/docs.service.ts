@@ -21,7 +21,6 @@ export class DocsService {
   numberOfRequestsToApprove(municipality: string): Observable<number> {
     return this.getRequestsFromMunicipality(municipality).pipe(
       map(requests => {
-        console.log(requests);
         this.requests = requests;
         return this.requests.filter(request => request.status === 'Pending').length;
       })
