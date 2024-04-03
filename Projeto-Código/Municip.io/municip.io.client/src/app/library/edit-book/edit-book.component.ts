@@ -111,7 +111,7 @@ export class EditBookComponent {
    */
   ngOnInit(): void {
     this.book = this.activatedRoute.snapshot.data['book'];
-    console.log(this.book);
+    
     this.editor = new Editor();
 
 
@@ -166,8 +166,6 @@ export class EditBookComponent {
       const index = this.categories.indexOf(genre);
       if (index !== -1) {
         this.genres.at(index).setValue(true);
-      } else {
-        console.log(this.categories[1]);
       }
     });
   }
@@ -196,8 +194,6 @@ export class EditBookComponent {
         municipality: this.municipalityName
       };
 
-
-      console.log(this.book);
 
       this.libraryService.updateBook(this.book, this.coverImage).subscribe(
         response => {
@@ -302,25 +298,8 @@ export class EditBookComponent {
 
   closeDialog() {
     this.isDialogOpen = false;
-    window.location.reload();
   }
-
-  // Função para ajustar a data para o formato "yyyy-MM-dd"
-  setUpDate(date: string): string {
-    let parts = date.split('-');
-    if (parts.length === 1) {
-      date += '-01-01';  // Adiciona o mês e o dia padrão se a data tiver apenas o ano
-    } else if (parts.length === 2) {
-      date += '-01';     // Adiciona o dia padrão se a data tiver ano e mês
-    }
-    return date;
-  }
-
-  setPublicationDate(bookPublicationDate: string): void {
-    const formattedDate = this.setUpDate(bookPublicationDate);
-    this.publicationDate?.setValue(formattedDate);
-  }
-
+ 
   extractCategoryNames(): string[] {
     return this.categories.map(category => category);
   }

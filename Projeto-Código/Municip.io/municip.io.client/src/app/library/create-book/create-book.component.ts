@@ -5,6 +5,7 @@ import { UserAuthService } from '../../services/user-auth.service';
 import { Editor, Toolbar } from 'ngx-editor';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
+import { BookLanguage } from '../../../assets/bookLanguages.enum';
 
 @Component({
   selector: 'app-create-book',
@@ -279,7 +280,12 @@ export class CreateBookComponent {
             this.publisher?.setValue(book.publisher);
             this.sinopsis?.setValue(book.sinopsis);
             this.coverImageUrl?.setValue(book.coverImage);
-            this.language?.setValue(book.language);
+
+
+            
+            this.setLanguage(book.language);
+
+
             this.edition?.setValue(book.edition);
 
 
@@ -319,6 +325,14 @@ export class CreateBookComponent {
   setPublicationDate(bookPublicationDate: string): void {
     const formattedDate = this.setUpDate(bookPublicationDate);
     this.publicationDate?.setValue(formattedDate);
+  }
+
+  setLanguage(language: string): void {
+    type BookLanguageKeys = keyof typeof BookLanguage;
+
+    const languageCode = language as BookLanguageKeys;
+
+    this.language?.setValue(BookLanguage.hasOwnProperty(languageCode) ? BookLanguage[languageCode] : "Inglês");
   }
 
   addAuthorsFromBookInfo(authors: string[]) {
@@ -475,5 +489,8 @@ export class CreateBookComponent {
   get coverImageUrl() {
     return this.bookForm.get('coverImageUrl');
   }
+
+
+  
 }
 
