@@ -74,12 +74,12 @@
     </div>
   </div>
 
-  <section class="flex -mt-12 text-municip-gray justify-center gap-x-12 text-[1.063rem] px-[3rem] ">
+  <section class="flex -mt-12 text-municip-gray justify-center gap-x-12 text-[1.063rem] ">
 
 
-    <img [src]="book.coverImage ? book.coverImage : '/assets/images/placeholder/Landscape placeholder.jpg'" 
-     alt="Capa do livro" 
-     class="object-cover w-[15rem] h-[21rem] rounded" />
+    <img [src]="book.coverImage ? book.coverImage : '/assets/images/placeholder/Landscape placeholder.jpg'"
+         alt="Capa do livro"
+         class="object-cover w-[15rem] h-[21rem] rounded" />
 
 
 
@@ -116,8 +116,8 @@
       </div>
 
 
-      <ng-container *ngIf="!isMunAdmin">
-        <ng-container *ngIf="book.availableCopies > 0 && !bookRequest">
+      <ng-container *ngIf="!isMunAdmin && !bookRequest">
+        <ng-container *ngIf="book.availableCopies > 0">
           <app-btn-municip-blue width="10rem" (click)="reserveBook()">
             Reservar
             <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
@@ -125,16 +125,20 @@
         </ng-container>
 
         <ng-container *ngIf="book.availableCopies <= 0">
-          <app-btn-municip-blue width="10rem">
-            Indisponível para reserva
-            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-          </app-btn-municip-blue>
+          <!--<app-btn-municip-blue width="10rem">
+            Indisponível para reserva-->
+          <!-- <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />-->
+          <!--</app-btn-municip-blue>-->
+          <div class="flex justify-center  w-fit space-x-4">
+            <div class=" rounded-full bg-red-600 size-10 min-w-10"></div>
+            <p>Indisponível para reserva</p>
+          </div>
         </ng-container>
       </ng-container>
 
 
-      <ng-container *ngIf="bookRequest">
-        <ng-container *ngIf="!isMunAdmin && this.bookRequest.status === BookRequestStatus().Reserved">
+      <ng-container *ngIf="bookRequest && !isMunAdmin">
+        <ng-container *ngIf="this.bookRequest.status === BookRequestStatus().Reserved">
           <div class="flex flex-col items-center space-y-4 ">
 
             <div *ngIf="this.bookRequest.status === BookRequestStatus().Reserved" class="flex flex-col w-fit space-y-5">
@@ -150,7 +154,7 @@
 
           </div>
         </ng-container>
-        <ng-container *ngIf="!isMunAdmin && this.bookRequest.status !== BookRequestStatus().Reserved && bookRequest">
+        <ng-container *ngIf="this.bookRequest.status !== BookRequestStatus().Reserved && bookRequest">
           <div class="flex flex-col space-y-5">
             <div class="flex flex-col items-center text-center border-2 border-municip-blue
                  px-4 py-4 rounded-lg

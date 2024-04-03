@@ -3,6 +3,7 @@ import { Book, BookRequest, BookRequestStatus, LibraryService } from '../../../s
 import { Data, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { provideNativeDateAdapter, DateAdapter } from '@angular/material/core';
+import { Citizen } from '../../../services/citizen-auth.service';
 
 @Component({
   selector: 'app-requested-book-card',
@@ -19,10 +20,9 @@ export class RequestedBookCardComponent {
 
   isDialogOpen = false;
   isDialogOpenOperation = false;
+  isDialogOpenUserInfo = false;
 
-
-
-
+  citizen!: Citizen;
 
 
 
@@ -57,6 +57,8 @@ export class RequestedBookCardComponent {
 
 
     this.book = this.bookRequest.book;
+
+    this.citizen = this.bookRequest.citizen;
 
     if (this.bookRequest.status === BookRequestStatus.Reserved) {
       //if it pass the 2h limit, the request is denied
@@ -223,6 +225,15 @@ export class RequestedBookCardComponent {
 
   openDialogOperation() {
     this.isDialogOpenOperation = true;
+  }
+
+
+  openDialogUserInfo() {
+    this.isDialogOpenUserInfo = true;
+  }
+
+  closeDialogUserInfo() {
+    this.isDialogOpenUserInfo = false;
   }
 
 

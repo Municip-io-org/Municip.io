@@ -36,7 +36,7 @@ export class BookPageComponent {
 
   user: any;
   isMunAdmin: boolean = false;
-  bookRequest!: BookRequest;
+  bookRequest?: BookRequest;
 
   municipality: Municipality = {
     name: '',
@@ -121,19 +121,20 @@ export class BookPageComponent {
         let anyUser: any;
         anyUser = res;
         this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
-          async (res: any) => {
+          (res: any) => {
             this.user = res;
 
-
-            const userRole = await this.userAuthService.getUserRole().toPromise();
-            if (userRole!.role === Roles.Municipal) {
-              this.isMunAdmin = true;
-            }
-            /*this.isMunAdmin = false;*/
-
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
-              (municipalityRes: Municipality) => {
+              async (municipalityRes: Municipality) => {
                 this.municipality = municipalityRes;
+
+
+                const userRole = await this.userAuthService.getUserRole().toPromise();
+                if (userRole!.role === Roles.Municipal) {
+                  this.isMunAdmin = true;
+                }
+
+
 
                 if (userRole!.role === Roles.Citizen) {
                   this.citizenEmail = this.user.email;
@@ -186,8 +187,8 @@ export class BookPageComponent {
 
   isReservationExpired() {
     var hoursLimit = 2 * 60 * 60 * 1000;
-    if (new Date().getTime() - new Date(this.bookRequest.reservedDate!).getTime() > hoursLimit) {
-      this.libraryService.deleteRequest(this.bookRequest.id).subscribe(
+    if (new Date().getTime() - new Date(this.bookRequest!.reservedDate!).getTime() > hoursLimit) {
+      this.libraryService.deleteRequest(this.bookRequest!.id).subscribe(
         (data) => {
           console.log(data);
           this.updateRequest();
@@ -201,8 +202,8 @@ export class BookPageComponent {
 
   isRequestDelayed() {
     //check if the return date is expired
-    if (new Date().getTime() > new Date(this.bookRequest.returnDate!).getTime()) {
-      this.libraryService.delayRequest(this.bookRequest.id).subscribe(
+    if (new Date().getTime() > new Date(this.bookRequest!.returnDate!).getTime()) {
+      this.libraryService.delayRequest(this.bookRequest!.id).subscribe(
         (data) => {
           console.log(data);
           this.updateRequest();
@@ -216,9 +217,31 @@ export class BookPageComponent {
   }
 
   updateRequest() {
+
+    this.libraryService.getBookById(this.book.id!).subscribe(
+      (book) => {
+        this.book = book;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
     this.libraryService.getRequestsByCitizen(this.citizenEmail).subscribe(
       (requests) => {
-        this.bookRequest = requests[0];
+        let requestFound = false;
+        requests.forEach((request: BookRequest) => {
+          if (request.book.id == this.book.id && request.status !== BookRequestStatus.Denied
+            && request.status !== BookRequestStatus.Delivered) {
+            this.bookRequest = request;
+            requestFound = true;
+          }
+        });
+
+        if (!requestFound) {
+          this.bookRequest = undefined;
+        }
+
       },
       (error) => {
         console.error(error);
@@ -267,7 +290,7 @@ export class BookPageComponent {
   }
 
   cancelBookReserve() {
-    this.libraryService.deleteRequest(this.bookRequest.id).subscribe(
+    this.libraryService.deleteRequest(this.bookRequest!.id).subscribe(
       (data) => {
         console.log(data);
         this.successFullDialog();
@@ -325,7 +348,7 @@ export class BookPageComponent {
 
   closeDialog() {
     this.isDialogOpen = false;
-    window.location.reload();
+    this.updateRequest();
   }
 
 
@@ -357,11 +380,11 @@ export class BookPageComponent {
    */
   getStatusClass(): string {
 
-    if (this.bookRequest.status === BookRequestStatus.Delivered) {
+    if (this.bookRequest!.status === BookRequestStatus.Delivered) {
       return 'bg-[#08BC25] text-[#1D8702]';
-    } else if (this.bookRequest.status === BookRequestStatus.Reserved) {
+    } else if (this.bookRequest!.status === BookRequestStatus.Reserved) {
       return 'bg-[#F4A42C] text-[#9B4F08]';
-    } else if (this.bookRequest.status === BookRequestStatus.Borrowed) {
+    } else if (this.bookRequest!.status === BookRequestStatus.Borrowed) {
       return 'bg-[#1E90FF] text-[#0E4F71]';
     } else {
       return 'bg-[#FF0000] text-[#B02121]';
