@@ -262,7 +262,7 @@ export class BookPageComponent {
   reserveBook() {
 
     let reservedDate = new Date();
-    reservedDate.setHours(reservedDate.getHours() + 1);
+
 
     if (this.book.copies > 0) {
       let bookRequest: BookRequest = {
