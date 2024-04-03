@@ -194,7 +194,7 @@ export class LibraryService {
               isbn: isbn13 || isbn10 || '',
               genre: item.volumeInfo.categories || [],
               sinopsis: item.volumeInfo.description || '',
-              coverImage: item.volumeInfo.imageLinks.thumbnail || '',
+              coverImage: item.volumeInfo.imageLinks?.thumbnail || '',
               language: item.volumeInfo.language || '',
               edition: '',
               publicationDate: item.volumeInfo.publishedDate || Date.now(),
@@ -203,7 +203,6 @@ export class LibraryService {
               status: BookStatus.Available,
               municipality: ''
             };
-            console.log(book)
             return book;
           });
         } else {
