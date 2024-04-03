@@ -72,8 +72,7 @@ export class RequestedBookCardComponent {
   }
 
   isReservationExpired() {
-    var hoursLimit = 2 * 60 * 60 * 1000;
-    if (new Date().getTime() - new Date(this.bookRequest.reservedDate!).getTime() > hoursLimit) {
+    if (new Date().getTime() > new Date(this.bookRequest!.reservationLimitDate!).getTime()) {
       this.bookService.deleteRequest(this.bookRequest.id).subscribe(
         (data) => {
           console.log(data);
@@ -248,12 +247,14 @@ export class RequestedBookCardComponent {
 
 
 
+
   getTimeLeft(date: Date): string {
-    let newDate = new Date(date);
-    newDate.setHours(newDate.getHours() + 2);
-    let diff = newDate.getTime() - new Date().getTime();
-    let hours = Math.floor(diff / 1000 / 60 / 60);
-    let minutes = Math.floor(diff / 1000 / 60) - (hours * 60);
+    //it will receive the date limit, and will return the time left in hours and minutes
+    let dateReceived = new Date(date);
+    let now = new Date();
+    let diff = dateReceived.getTime() - now.getTime();
+    let hours = Math.floor(diff / 3600000);
+    let minutes = Math.floor((diff % 3600000) / 60000);
 
     if (hours === 0) {
       return `${minutes}min`;
@@ -261,4 +262,5 @@ export class RequestedBookCardComponent {
       return `${hours}h ${minutes}min`;
     }
   }
+
 }

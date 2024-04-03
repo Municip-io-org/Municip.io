@@ -70,7 +70,7 @@
 
       <div *ngIf="this.bookRequest.status === BookRequestStatus().Reserved" class="flex flex-col w-fit space-y-5">
         <div class="flex flex-col items-center">
-          <p class="font-inter">Tempo Restante: {{ getTimeLeft(bookRequest.reservedDate!)  }}</p>
+          <p class="font-inter">Tempo Restante: {{ getTimeLeft(bookRequest.reservationLimitDate!)  }}</p>
           <div class="flex justify-center rounded-md bg-opacity-35 {{ getStatusClass() }}
                w-44
                ">

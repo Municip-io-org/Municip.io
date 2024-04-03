@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Municip.io.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class rui : Migration
+    public partial class ruiii : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -343,6 +343,7 @@ namespace Municip.io.Server.Migrations
                     CitizenId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false),
                     ReservedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ReservationLimitDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BorrowedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeliveredDate = table.Column<DateTime>(type: "datetime2", nullable: true),

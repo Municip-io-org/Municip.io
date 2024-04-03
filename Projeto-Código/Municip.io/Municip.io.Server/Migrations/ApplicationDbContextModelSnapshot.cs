@@ -346,6 +346,9 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("ReservationLimitDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("ReservedDate")
                         .HasColumnType("datetime2");
 

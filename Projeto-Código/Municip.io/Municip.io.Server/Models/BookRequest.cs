@@ -13,6 +13,9 @@ namespace Municip.io.Server.Models
         // the date when the book was reserved and possibly borrowed
         public DateTime? ReservedDate { get; set; }
 
+        //date limite to reservation finish
+        public DateTime? ReservationLimitDate { get; set; }
+
         //borrow date
         public DateTime? BorrowedDate { get; set; }
 

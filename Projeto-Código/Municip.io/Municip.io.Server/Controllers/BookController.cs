@@ -202,6 +202,12 @@ namespace Municip.io.Server.Controllers
                 if (existingRequest != null) return BadRequest(new { message = "O cidadão já fez um pedido para este livro" });
 
 
+                if (book.AvailableCopies == 0) return BadRequest(new { message = "Não há cópias disponíveis deste livro" });
+
+
+                request.ReservationLimitDate = DateTime.Now.AddHours(2);
+
+
 
                 request.Citizen = citizen;
                 request.Book = book;

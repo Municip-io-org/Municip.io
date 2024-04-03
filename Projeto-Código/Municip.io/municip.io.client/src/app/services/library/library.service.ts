@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LibraryService {
-  
+
 
   constructor(private http: HttpClient) { }
 
@@ -174,7 +174,7 @@ export class LibraryService {
     return this.Books;
   }
 
-  getBookById(bookId: number) : Observable<Book> {
+  getBookById(bookId: number): Observable<Book> {
     return this.http.get<Book>(`api/Book/GetBookById?bookId=${bookId}`);
   }
 
@@ -187,7 +187,7 @@ export class LibraryService {
             const isbn10 = item.volumeInfo.industryIdentifiers.find((identifier: any) => identifier.type === 'ISBN_10')?.identifier || '';
 
 
-            const book:Book = {
+            const book: Book = {
               title: item.volumeInfo.title || '',
               author: item.volumeInfo.authors || [],
               publisher: item.volumeInfo.publisher || '',
@@ -207,7 +207,7 @@ export class LibraryService {
             return book;
           });
         } else {
-          
+
           return null;
         }
       })
@@ -327,6 +327,7 @@ export interface BookRequest {
   reservedDate?: Date;
   returnDate?: Date;
   deliveredDate?: Date;
+  reservationLimitDate?: Date;
   municipality: string;
   status: BookRequestStatus;
 }

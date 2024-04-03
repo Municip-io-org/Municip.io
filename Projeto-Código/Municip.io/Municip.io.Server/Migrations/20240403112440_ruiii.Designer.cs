@@ -12,8 +12,8 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240401114633_rui")]
-    partial class rui
+    [Migration("20240403112440_ruiii")]
+    partial class ruiii
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -348,6 +348,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("Municipality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReservationLimitDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ReservedDate")
                         .HasColumnType("datetime2");

@@ -125,10 +125,6 @@
         </ng-container>
 
         <ng-container *ngIf="book.availableCopies <= 0">
-          <!--<app-btn-municip-blue width="10rem">
-            Indisponível para reserva-->
-          <!-- <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />-->
-          <!--</app-btn-municip-blue>-->
           <div class="flex justify-center  w-fit space-x-4">
             <div class=" rounded-full bg-red-600 size-10 min-w-10"></div>
             <p>Indisponível para reserva</p>
@@ -143,7 +139,7 @@
 
             <div *ngIf="this.bookRequest.status === BookRequestStatus().Reserved" class="flex flex-col w-fit space-y-5">
               <div class="flex flex-col items-center">
-                <p class="font-inter text-center">Tempo Restante: <br />{{ getTimeLeft(bookRequest.reservedDate!)  }}</p>
+                <p class="font-inter text-center">Tempo Restante: <br />{{ getTimeLeft(bookRequest.reservationLimitDate!)  }}</p>
 
               </div>
             </div>

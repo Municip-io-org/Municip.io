@@ -186,8 +186,7 @@ export class BookPageComponent {
   }
 
   isReservationExpired() {
-    var hoursLimit = 2 * 60 * 60 * 1000;
-    if (new Date().getTime() - new Date(this.bookRequest!.reservedDate!).getTime() > hoursLimit) {
+    if (new Date().getTime() > new Date(this.bookRequest!.reservationLimitDate!).getTime()) {
       this.libraryService.deleteRequest(this.bookRequest!.id).subscribe(
         (data) => {
           console.log(data);
@@ -262,6 +261,8 @@ export class BookPageComponent {
 
   reserveBook() {
 
+    let reservedDate = new Date();
+    reservedDate.setHours(reservedDate.getHours() + 1);
 
     if (this.book.copies > 0) {
       let bookRequest: BookRequest = {
@@ -270,7 +271,7 @@ export class BookPageComponent {
         citizen: this.user,
         status: BookRequestStatus.Reserved,
         municipality: this.municipality.name,
-        reservedDate: new Date(),
+        reservedDate: reservedDate,
       }
 
       this.libraryService.createRequest(this.user.email, bookRequest).subscribe(
@@ -359,11 +360,12 @@ export class BookPageComponent {
   }
 
   getTimeLeft(date: Date): string {
-    let newDate = new Date(date);
-    newDate.setHours(newDate.getHours() + 2);
-    let diff = newDate.getTime() - new Date().getTime();
-    let hours = Math.floor(diff / 1000 / 60 / 60);
-    let minutes = Math.floor(diff / 1000 / 60) - (hours * 60);
+    //it will receive the date limit, and will return the time left in hours and minutes
+    let dateReceived = new Date(date);
+    let now = new Date();
+    let diff = dateReceived.getTime() - now.getTime();
+    let hours = Math.floor(diff / 3600000);
+    let minutes = Math.floor((diff % 3600000) / 60000);
 
     if (hours === 0) {
       return `${minutes}min`;
@@ -446,7 +448,7 @@ export class BookPageComponent {
         //show a dialog with the error
         this.dialogTitle = 'Erro ao reservar o livro';
         this.dialogMessage = error.error.message;
-        this.isConfirmDialog = false;
+        this.isReserveSuccesfull = false;
         this.isDialogOpen = true;
 
 
