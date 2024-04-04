@@ -42,7 +42,7 @@ transition-all duration-700 ease-in-out  decoration-sky-500
       </div>
     </div>
     <div>
-      <app-input-title class="text-[2.4vh] text-start"><span class="text-municip-blank ">Paragem</span></app-input-title>
+      <app-input-title class="text-[2.4vh] text-start"><span class="text-municip-blank ">Destino</span></app-input-title>
       <div class="flex items-center">
         <select required id="pattern" formControlName="pattern" name="pattern"
                 class="input w-96 h-12
@@ -106,8 +106,8 @@ transition-all duration-700 ease-in-out  decoration-sky-500
       <li>Hora</li>
       <li>Min.</li>
     </ul>
-    <ng-container *ngFor="let arrivalTime of groupedArrivalTimes">
-      <ul class="flex flex-col">
+    <ng-container *ngFor="let arrivalTime of tableArrivalTimes">
+      <ul class="flex flex-col gap-5">
         <li>{{ arrivalTime.hour | number:'2.0-0' }}</li>
         <ng-container *ngFor="let minuteGroup of arrivalTime.minuteGroups">
           <li>{{ minuteGroup.minute | number:'2.0-0' }}</li>

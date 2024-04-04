@@ -12,8 +12,8 @@ import { BindQueryParamsFactory } from '@ngneat/bind-query-params';
   styleUrl: './schedules.component.css'
 })
 export class SchedulesComponent {
-    groupedArrivalTimes: any[] | undefined;
-
+   
+    
   constructor(private service: TransportsService, private authService: UserAuthService, private router: Router,
     private routeParams: ActivatedRoute, private factory: BindQueryParamsFactory) { }
 
@@ -36,6 +36,7 @@ export class SchedulesComponent {
     date: new FormControl("")
   });
 
+  tableArrivalTimes: any[] | undefined;
 
   get line() {
     return this.scheduleForm.get('line');
@@ -151,8 +152,8 @@ return this.scheduleForm.get('date');
 
     this.handlePatternChange(this.scheduleForm.get('pattern')?.value || "");
 
-    this.groupedArrivalTimes = this.groupByHourAndMinute(this.trips, 1);
-    console.log(this.groupedArrivalTimes);
+    
+    console.log(this.tableArrivalTimes);
 
   }
 
@@ -230,8 +231,10 @@ return this.scheduleForm.get('date');
 
     if (value === "") {
       this.scheduleForm.get("trip")?.setValue(this.trips[0].id || "");
+      this.tableArrivalTimes = this.groupByHourAndMinute(this.trips, 0);
     } else if (!this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value)) {
       this.scheduleForm.get('trip')?.setValue(this.trips[0].id || "");
+      this.tableArrivalTimes = this.groupByHourAndMinute(this.trips, 0);
     }
 
 
@@ -270,6 +273,7 @@ return this.scheduleForm.get('date');
     this.getCurrentTrips(this.scheduleForm.get('pattern')?.value || null);
     this.getCurrentPath(this.scheduleForm.get('pattern')?.value || null);
     this.getCurrentSchedule(this.scheduleForm.get('trip')?.value || null);
+    this.tableArrivalTimes = this.groupByHourAndMinute(this.trips, 0);
   }
 
 
