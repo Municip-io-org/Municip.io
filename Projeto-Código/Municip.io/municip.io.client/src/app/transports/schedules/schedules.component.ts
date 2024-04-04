@@ -12,6 +12,7 @@ import { BindQueryParamsFactory } from '@ngneat/bind-query-params';
   styleUrl: './schedules.component.css'
 })
 export class SchedulesComponent {
+    groupedArrivalTimes: any[] | undefined;
 
   constructor(private service: TransportsService, private authService: UserAuthService, private router: Router,
     private routeParams: ActivatedRoute, private factory: BindQueryParamsFactory) { }
@@ -150,7 +151,51 @@ return this.scheduleForm.get('date');
 
     this.handlePatternChange(this.scheduleForm.get('pattern')?.value || "");
 
+    this.groupedArrivalTimes = this.groupByHourAndMinute(this.trips, 1);
+    console.log(this.groupedArrivalTimes);
+
   }
+
+  groupByHourAndMinute(trips: any[], index : number): any[] {
+    const arrivalTimes = trips.map(trip => trip.schedule[index].arrival_time);
+    const groupedTimes: any[] = [];
+    const hourMinuteMap: { [hour: string]: { [minute: string]: string[] } } = {};
+
+    // Group arrival times by hour and minute
+    arrivalTimes.forEach(time => {
+      const [hour, minute] = time.split(':');
+      if (!hourMinuteMap[hour]) {
+        hourMinuteMap[hour] = {};
+      }
+      if (!hourMinuteMap[hour][minute]) {
+        hourMinuteMap[hour][minute] = [];
+      }
+      hourMinuteMap[hour][minute].push(time);
+    });
+
+    // Format grouped times
+    Object.keys(hourMinuteMap).forEach(hour => {
+      const minuteGroups = hourMinuteMap[hour];
+      const formattedMinuteGroups = Object.keys(minuteGroups)
+        .sort((a, b) => parseInt(a) - parseInt(b)) // Sort minutes numerically
+        .map(minute => ({
+          minute: parseInt(minute),
+          times: minuteGroups[minute]
+        }));
+      groupedTimes.push({
+        hour: parseInt(hour),
+        minuteGroups: formattedMinuteGroups
+      });
+    });
+
+    // Sort grouped times by hour
+    groupedTimes.sort((a, b) => a.hour - b.hour);
+
+    return groupedTimes;
+  }
+
+
+
 
 
 
@@ -297,17 +342,19 @@ this.patterns = [];
         });
       }
     }
+    console.log(this.trips);
   }
 
   getCurrentPath(pattern: string | null) {
     let patternSelected = this.patterns.find(p => p.id === pattern);
     this.path = patternSelected ? patternSelected.path : null;
+    console.log(this.path);
   }
 
   getCurrentSchedule(trip : string | null) {
     let tripSelected = this.trips.find(t=> t.id ===  trip);
     this.schedule = tripSelected ? tripSelected.schedule : null;
-
+    /*console.log(this.schedule);*/
   }
 
 

@@ -95,12 +95,28 @@ transition-all duration-700 ease-in-out  decoration-sky-500
         <div *ngFor="let value of schedule">
           <app-show-stop [stopName]="getNameStopById(value.stop_id)" [stopTime]="formatTime(value.arrival_time)"
                          [stopId]="value.stop_id" [stopMunicipality]="getLocalityStopById(value.stop_id)" [userMunicipality]="municipality?.name ?? ''"
-
                          class="flex justify-center" />
         </div>
       </div>
     </div>
   </div>
+
+  <div *ngIf="!iswithoutTrips()" class="flex flex-row flex-wrap gap-4">
+    <ul class="flex flex-col">
+      <li>Hora</li>
+      <li>Min.</li>
+    </ul>
+    <ng-container *ngFor="let arrivalTime of groupedArrivalTimes">
+      <ul class="flex flex-col">
+        <li>{{ arrivalTime.hour | number:'2.0-0' }}</li>
+        <ng-container *ngFor="let minuteGroup of arrivalTime.minuteGroups">
+          <li>{{ minuteGroup.minute | number:'2.0-0' }}</li>
+        </ng-container>
+      </ul>
+    </ng-container>
+  </div>
+
+
 
   <div *ngIf="iswithoutTrips()">
     <h1 class="text-2xl font-bold my-5 font-roboto">Sem paragens para  a data selecionada</h1>
