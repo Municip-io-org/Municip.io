@@ -76,7 +76,7 @@ email=email.replace('@', '%40');
   }
 
   getEventByMunicipality(municipalityName: string) {
-    return this.http.get<Event>(`api/events/GetEventsByMunicipality?municipalityName=${municipalityName}`);
+    return this.http.get<Event[]>(`api/events/GetEventsByMunicipality?municipalityName=${municipalityName}`);
   }
 
   getEventById(eventId: string) {

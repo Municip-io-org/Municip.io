@@ -1,0 +1,8 @@
+<app-header-loggedin />
+<app-smaller-banner title="Eventos de {{municipalityName}}" [image]="municipalityImage"
+                    class="font-inter" />
+
+<div class="mx-10 my-20">
+  <app-calendar [events$]="events$" [activeDayIsOpen]="eventsToday"/>
+</div>
+<app-footer />

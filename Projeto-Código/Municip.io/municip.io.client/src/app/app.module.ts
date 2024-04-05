@@ -135,6 +135,7 @@ import { BookPageComponent } from './library/book-page/book-page.component';
 import { EditBookComponent } from './library/edit-book/edit-book.component';
 import { LibraryHomepageComponent } from './library/library-homepage/library-homepage.component';
 import { LibraryMapComponent } from './library/library-map/library-map.component';
+import { MunicipalCalendarComponent } from './events/municipal-calendar/municipal-calendar.component';
 
 
 
@@ -252,6 +253,7 @@ registerLocaleData(localePt, 'pt-PT');
     EditBookComponent,
     LibraryHomepageComponent,
     LibraryMapComponent,
+    MunicipalCalendarComponent,
 
     
   ],

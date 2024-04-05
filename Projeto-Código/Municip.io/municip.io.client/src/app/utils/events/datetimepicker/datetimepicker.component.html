@@ -2,9 +2,9 @@
   <div class="h-40">
     <app-input-title class="text-[2.6vh]">{{titleDate}}</app-input-title>
     <mat-form-field class="inputRange w-full">
-      <mat-date-range-input [formGroup]="componentForm" [rangePicker]="pickerEventDate">
-        <input matStartDate formControlName="startDate" placeholder="Data de Início">
-        <input matEndDate formControlName="endDate" placeholder="  Data de Fim">
+      <mat-date-range-input [min]="minDate" [formGroup]="componentForm" [rangePicker]="pickerEventDate">
+        <input matStartDate  formControlName="startDate" placeholder="Data de Início">
+        <input matEndDate  formControlName="endDate" placeholder="  Data de Fim">
       </mat-date-range-input>
       <mat-datepicker-toggle matIconSuffix [for]="pickerEventDate"></mat-datepicker-toggle>
       <mat-date-range-picker #pickerEventDate></mat-date-range-picker>
@@ -13,6 +13,7 @@
       <div *ngIf="startDate?.errors?.['matStartDateInvalid'] ">Data de Início Inválida</div>
       <div *ngIf="endDate?.errors?.['matEndDateInvalid'] ">Data de Fim Inválida</div>
       <div *ngIf="startDate?.errors?.['required'] || endDate?.errors?.['required']">Data Obrigatória</div>
+      <div *ngIf="startDate?.errors?.['matDatepickerMin'] || endDate?.errors?.['matDatepickerMin']">Data Inválida, deve ser depois da inscrição!</div>
     </div>
   </div>
 

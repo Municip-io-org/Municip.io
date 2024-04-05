@@ -163,10 +163,10 @@ namespace Municip.io.Server.Controllers
             var events = _context.Events;
             var municipalityEvents = events.Where(e => e.Municipality == municipalityName);
 
-            if (municipalityEvents.IsNullOrEmpty())
-            {
-                return NotFound(new { message = "Events from " + municipalityName + " Not Found" });
-            }
+            //if (municipalityEvents.IsNullOrEmpty())
+            //{
+            //    return NotFound(new { message = "Events from " + municipalityName + " Not Found" });
+            //}
 
             return Json(municipalityEvents);
         }

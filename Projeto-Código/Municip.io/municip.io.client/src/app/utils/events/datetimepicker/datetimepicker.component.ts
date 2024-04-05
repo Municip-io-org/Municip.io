@@ -14,6 +14,7 @@ export class DatetimepickerComponent implements OnInit {
   @Input() EndHourPlaceholder: string = "Fim";
   @Input() formReceived: FormGroup = new FormGroup({});
 
+  @Input() minDate?: Date; 
 
   componentForm: FormGroup = new FormGroup({});
  
