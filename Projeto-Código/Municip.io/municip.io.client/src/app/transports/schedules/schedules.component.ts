@@ -244,11 +244,11 @@ return this.scheduleForm.get('date');
 
     if (value === "") {
       this.scheduleForm.get("trip")?.setValue(this.trips[0].id || "");
-      this.selectedStopId = this.path![0].stop.id;
+      //this.selectedStopId = this.path![0].stop.id;
       this.tableArrivalTimes = this.groupByHourAndMinute(this.trips);
     } else if (!this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value)) {
       this.scheduleForm.get('trip')?.setValue(this.trips[0].id || "");
-      this.selectedStopId = this.path![0].stop.id;
+      //this.selectedStopId = this.path![0].stop.id;
       this.tableArrivalTimes = this.groupByHourAndMinute(this.trips);
     }
 
@@ -288,7 +288,7 @@ return this.scheduleForm.get('date');
     this.getCurrentTrips(this.scheduleForm.get('pattern')?.value || null);
     this.getCurrentPath(this.scheduleForm.get('pattern')?.value || null);
     this.getCurrentSchedule(this.scheduleForm.get('trip')?.value || null);
-    this.selectedStopId = this.path![0].stop.id;
+    /*this.selectedStopId = this.path![0].stop.id;*/
     this.tableArrivalTimes = this.groupByHourAndMinute(this.trips);
   }
 
