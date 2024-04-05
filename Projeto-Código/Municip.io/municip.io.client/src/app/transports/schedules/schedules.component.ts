@@ -26,7 +26,7 @@ export class SchedulesComponent {
   path: stop[] | null = [];
   schedule: stopTime[] | null = [];
   lineSelected : line | null = null;
-
+  selectedStopId: string = '';
 
   scheduleForm = new FormGroup({
     line: new FormControl(""),
@@ -157,8 +157,12 @@ return this.scheduleForm.get('date');
 
   }
 
-  groupByHourAndMinute(trips: any[], index : number): any[] {
-    const arrivalTimes = trips.map(trip => trip.schedule[index].arrival_time);
+  groupByHourAndMinute(trips: any[]): any[] {
+
+    const arrivalTimes = trips
+      .map(trip => trip.schedule.find((schedule: { stop_id: string; }) => schedule.stop_id === this.selectedStopId)?.arrival_time)
+      .filter(time => time !== undefined); // Remove undefined values
+
     const groupedTimes: any[] = [];
     const hourMinuteMap: { [hour: string]: { [minute: string]: string[] } } = {};
 
@@ -192,10 +196,19 @@ return this.scheduleForm.get('date');
     // Sort grouped times by hour
     groupedTimes.sort((a, b) => a.hour - b.hour);
 
+    
+
     return groupedTimes;
   }
 
 
+
+
+  handleStopClicked(stopId: string) {
+    console.log("Stop ID clicked:", stopId);
+    this.selectedStopId = stopId;
+    this.tableArrivalTimes = this.groupByHourAndMinute(this.trips);
+  }
 
 
 
@@ -231,10 +244,12 @@ return this.scheduleForm.get('date');
 
     if (value === "") {
       this.scheduleForm.get("trip")?.setValue(this.trips[0].id || "");
-      this.tableArrivalTimes = this.groupByHourAndMinute(this.trips, 0);
+      this.selectedStopId = this.path![0].stop.id;
+      this.tableArrivalTimes = this.groupByHourAndMinute(this.trips);
     } else if (!this.trips.find(trip => trip.id === this.scheduleForm.get('trip')?.value)) {
       this.scheduleForm.get('trip')?.setValue(this.trips[0].id || "");
-      this.tableArrivalTimes = this.groupByHourAndMinute(this.trips, 0);
+      this.selectedStopId = this.path![0].stop.id;
+      this.tableArrivalTimes = this.groupByHourAndMinute(this.trips);
     }
 
 
@@ -273,7 +288,8 @@ return this.scheduleForm.get('date');
     this.getCurrentTrips(this.scheduleForm.get('pattern')?.value || null);
     this.getCurrentPath(this.scheduleForm.get('pattern')?.value || null);
     this.getCurrentSchedule(this.scheduleForm.get('trip')?.value || null);
-    this.tableArrivalTimes = this.groupByHourAndMinute(this.trips, 0);
+    this.selectedStopId = this.path![0].stop.id;
+    this.tableArrivalTimes = this.groupByHourAndMinute(this.trips);
   }
 
 
@@ -358,7 +374,7 @@ this.patterns = [];
   getCurrentSchedule(trip : string | null) {
     let tripSelected = this.trips.find(t=> t.id ===  trip);
     this.schedule = tripSelected ? tripSelected.schedule : null;
-    /*console.log(this.schedule);*/
+    console.log(this.schedule);
   }
 
 
@@ -383,7 +399,6 @@ this.patterns = [];
     }
     return "";
   }
-
 
 
   iswithoutTrips(): boolean {

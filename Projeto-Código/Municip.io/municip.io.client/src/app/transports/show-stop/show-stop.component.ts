@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 
@@ -13,7 +13,7 @@ export class ShowStopComponent {
   @Input() stopId : string = "";
   @Input() stopMunicipality: string = "";
   @Input() userMunicipality: string = "";
-
+  @Output() stopClicked: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private router: Router) { }
 
@@ -45,6 +45,10 @@ export class ShowStopComponent {
   redirectToStop() {
     this.router.navigateByUrl(`/transports/stops/${this.stopId}`);
 
+  }
+
+  onClickStop() {
+    this.stopClicked.emit(this.stopId);
   }
 
 }
