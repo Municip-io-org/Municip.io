@@ -67,6 +67,9 @@
               <li>
                 <a routerLink="/events/create" class="block px-4 py-2 hover:bg-gray-100">Criar Evento</a>
               </li>
+              <li>
+                <a routerLink="/events/municipal-calendar" class="block px-4 py-2 hover:bg-gray-100">Calendário de Eventos</a>
+              </li>
             </ng-container>
           </ul>
         </div>
@@ -88,7 +91,7 @@
         <div *ngIf="showDropdownBiblioteca" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
 
-            
+
 
             <li *ngIf="role ===Roles.Citizen">
               <a routerLink="/library/my" class="block px-4 py-2 hover:bg-gray-100">Os meus Livros</a>
