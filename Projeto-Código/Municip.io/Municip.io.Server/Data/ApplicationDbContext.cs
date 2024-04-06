@@ -33,7 +33,7 @@ namespace Municip.io.Server.Data
                 base(options)
         { }
 
-        public DbSet<Municip.io.Server.Models.News> News { get; set; } = default!;
+        public DbSet<News> News { get; set; } = default!;
 
     }
 

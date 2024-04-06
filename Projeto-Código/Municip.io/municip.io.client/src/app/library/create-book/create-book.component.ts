@@ -3,20 +3,22 @@ import { Book, BookStatus, LibraryService } from '../../services/library/library
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { Editor, Toolbar } from 'ngx-editor';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
+import { BookLanguage } from '../../../assets/bookLanguages.enum';
 
 @Component({
   selector: 'app-create-book',
   templateUrl: './create-book.component.html',
-  styleUrl: './create-book.component.css'
+  styleUrl: './create-book.component.css',
+  providers: [provideNativeDateAdapter()],
 })
 export class CreateBookComponent {
 
-  categories: Category[] = [];
+  categories: string[] = [];
 
 
-  book:Book = {
-      id: 1,
+  book: Book = {  
       isbn: '',
       title: '',
       author: [],
@@ -38,7 +40,7 @@ export class CreateBookComponent {
 
 
   error: string | null = null;
-  coverImage!: File;
+  coverImage: File | null = null;
   files: any[] = [];
 
   authorsList: string[] = [];
@@ -88,38 +90,7 @@ export class CreateBookComponent {
     }
   }
 
-
-
-  openAddGenreDialog() {
-    this.isAddGenreDialogOpen = true;
-
-  }
-
-  addGenre(newGenre: string) {
-    this.categories.push({ name: newGenre, value: false });
-    this.genres.push(new FormControl({ value: false, disabled: false }))
-  }
-
-  removeGenre() {
-    if (this.genres.length > 1) {
-      this.genres.removeAt(this.genres.length - 1);
-    }
-  }
-
-  addAuthor() {
-    this.authors.push(new FormControl(''));
-  }
-  removeLastAuthor() {
-    if (this.authors.length > 1) {
-      this.authors.removeAt(this.authors.length - 1);
-    }
-  }
-
-  closeDialog() {
-    this.isDialogOpen = false;
-    window.location.reload();
-  }
-
+  
 
   /**
    * Construtor do componente.
@@ -127,8 +98,8 @@ export class CreateBookComponent {
    * @param libraryService
    * @param router
    */
-  constructor(private authService: UserAuthService, private libraryService: LibraryService, private router: Router) {
-
+  constructor(private authService: UserAuthService, private dateAdapter: DateAdapter<Date>, private libraryService: LibraryService, private router: Router) {
+    this.dateAdapter.setLocale('pt');
   }
 
  
@@ -158,14 +129,55 @@ export class CreateBookComponent {
     this.libraryService.getDistinctCategoriesByMunicipality(this.municipalityName).subscribe(
       (categories: string[]) => {
         categories.forEach(category => {
-          this.categories.push({ name: category, value: false });
+          this.categories.push(category);
           this.genres.push(new FormControl({value: false, disabled: true})); // Por padrão, inicialize todas as categorias desmarcadas
         });
       }
     );
   }
 
+  onSubmit(): void {
+    if (this.bookForm.valid) {
 
+      this.book = {
+        isbn: this.iSBN?.value!.toString() || '',
+        title: this.title?.value!,
+        author: this.authors?.value!,
+        availableCopies: parseInt(this.copies?.value!),
+        copies: parseInt(this.copies?.value!),
+        coverImage: this.coverImageUrl?.value!,
+        edition: this.edition?.value!,
+        genre: this.genres?.value
+          .map((value: boolean, index: number) => (value ? this.categories[index] : null))
+          .filter((genre: string | null) => genre !== null),
+        language: this.language?.value!,
+        publicationDate: this.publicationDate?.value!,
+        publisher: this.publisher?.value!,
+        sinopsis: this.sinopsis?.value!,
+        status: BookStatus.Available,
+        municipality: this.municipalityName
+      };
+
+
+      console.log(this.book);
+
+      this.libraryService.createBook(this.book, this.coverImage).subscribe(
+        (res) => {
+          this.dialogTitle = 'Criado com Sucesso';
+          this.dialogMessage = `O livro foi criado com sucesso`;
+          this.isConfirm = true;
+          this.isDialogOpen = true;
+        },
+        (error) => {
+          this.dialogTitle = 'Erro';
+          this.dialogMessage = error.error;
+          this.isConfirm = false;
+          this.isDialogOpen = true;
+          window.scrollTo(0, 0);
+        }
+      );
+    }
+  }
 
 
   onCoverImagePicked(event: any) {
@@ -214,47 +226,119 @@ export class CreateBookComponent {
   }
 
 
-  onSubmit(): void {
-    if (this.bookForm.valid) {
+  openAddGenreDialog() {
+    this.isAddGenreDialogOpen = true;
 
-      this.book = {
-        isbn: this.iSBN?.value!.toString() || '',
-        title: this.title?.value!,
-        author: this.authors?.value!,
-        availableCopies: parseInt(this.copies?.value!),
-        copies: parseInt(this.copies?.value!),
-        coverImage: '',
-        edition: this.edition?.value!,
-        genre: this.genres?.value
-          .map((value: boolean, index: number) => (value ? this.categories[index].name : null))
-          .filter((genre: string | null) => genre !== null),
-        language: this.language?.value!,
-        publicationDate: this.publicationDate?.value!,
-        publisher: this.publisher?.value!,
-        sinopsis: this.sinopsis?.value!,
-        status: BookStatus.Available,
-        municipality: this.municipalityName
-      };
+  }
 
+  addGenre(newGenre: string) {
+    this.categories.push(newGenre);
+    this.genres.push(new FormControl({ value: false, disabled: false }))
+  }
 
-      console.log(this.book);
+  removeGenre() {
+    if (this.genres.length > 1) {
+      this.genres.removeAt(this.genres.length - 1);
+    }
+  }
 
-      this.libraryService.createBook(this.book, this.coverImage).subscribe(
-        (res) => {
-          this.dialogTitle = 'Criado com Sucesso';
-          this.dialogMessage = `O livro foi criado com sucesso`;
-          this.isConfirm = true;
-          this.isDialogOpen = true;
+  addAuthor() {
+    this.authors.push(new FormControl(''));
+  }
+
+  removeLastAuthor() {
+    if (this.authors.length > 1) {
+      this.authors.removeAt(this.authors.length - 1);
+    }
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false;
+    window.location.reload();
+  }
+
+  onISBNChange() {
+    this.toggleControls();
+    this.getInfo();
+  }
+
+  getInfo() {
+    if (this.iSBN?.valid) {
+
+      console.log(this.iSBN?.value);
+
+      this.libraryService.getBookInfoAPI(this.iSBN?.value!.toString()).subscribe(
+        (bookRes) => { 
+          if (bookRes !== null) {
+          
+            const book: Book = bookRes[0];
+            this.title?.setValue(book.title);
+            this.publisher?.setValue(book.publisher);
+            this.sinopsis?.setValue(book.sinopsis);
+            this.coverImageUrl?.setValue(book.coverImage);  
+            this.setLanguage(book.language);
+            this.edition?.setValue(book.edition);
+            this.setPublicationDate(book.publicationDate.toString());
+            this.copies?.setValue(book.copies.toString());
+            this.addAuthorsFromBookInfo(book.author);
+            this.addGenreFromBookInfo(book.genre);
+
+          } else {
+            console.log('Nenhum livro encontrado com o ISBN fornecido.');
+          }
         },
         (error) => {
-          this.dialogTitle = 'Erro';
-          this.dialogMessage = error.error;
-          this.isConfirm = false;
-          this.isDialogOpen = true;
-          window.scrollTo(0, 0);
+          console.error('Erro ao obter informações do livro:', error);
         }
       );
     }
+  }
+
+  // Função para ajustar a data para o formato "yyyy-MM-dd"
+  setUpDate(date: string): string {
+    let parts = date.split('-');
+    if (parts.length === 1) {
+      date += '-01-01';  // Adiciona o mês e o dia padrão se a data tiver apenas o ano
+    } else if (parts.length === 2) {
+      date += '-01';     // Adiciona o dia padrão se a data tiver ano e mês
+    }
+    return date;
+  }
+
+  setPublicationDate(bookPublicationDate: string): void {
+    const formattedDate = this.setUpDate(bookPublicationDate);
+    this.publicationDate?.setValue(formattedDate);
+  }
+
+  setLanguage(language: string): void {
+    type BookLanguageKeys = keyof typeof BookLanguage;
+
+    const languageCode = language as BookLanguageKeys;
+
+    this.language?.setValue(BookLanguage.hasOwnProperty(languageCode) ? BookLanguage[languageCode] : "Inglês");
+  }
+
+  addAuthorsFromBookInfo(authors: string[]) {
+    this.authors.clear();
+    authors.forEach(author => {
+      this.authors.push(new FormControl(author));
+    })
+  }
+
+  addGenreFromBookInfo(genres: string[]) {
+    const categoryNamesUpperCase = this.categories.map(category => category.toUpperCase());
+
+    genres.forEach(genre => {
+      const index = categoryNamesUpperCase.indexOf(genre.toUpperCase());
+
+      if (index !== -1) {
+        this.genres.at(index).setValue(true);
+      } else {
+        this.categories.push(genre);
+        this.genres.push(new FormControl({ value: true, disabled: false }))
+      }
+
+    });
   }
 
 
@@ -332,7 +416,7 @@ export class CreateBookComponent {
   }
 
   extractCategoryNames(): string[] {
-    return this.categories.map(category => category.name);
+    return this.categories.map(category => category);
   }
 
 
@@ -366,7 +450,7 @@ export class CreateBookComponent {
   }
 
   get publicationDate() {
-    return this.bookForm.get('publicationDate');
+    return this.bookForm.get('publicationDate') as FormControl;
   }
 
   get language() {
@@ -388,9 +472,8 @@ export class CreateBookComponent {
   get coverImageUrl() {
     return this.bookForm.get('coverImageUrl');
   }
+
+
+  
 }
 
-interface Category {
-  name: string,
-  value: boolean
-}

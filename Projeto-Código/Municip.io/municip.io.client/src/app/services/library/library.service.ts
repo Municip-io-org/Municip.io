@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Citizen } from '../citizen-auth.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { switchMap } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { map, switchMap } from 'rxjs';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LibraryService {
+
 
   constructor(private http: HttpClient) { }
 
@@ -125,30 +126,100 @@ export class LibraryService {
     },
   ];
 
-  createBook(book: Book, image: File) {
-    var headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
-    let imgurl = "https://api.imgur.com/3/image";
+  createBook(book: Book, image: File | null): Observable<Book> {
+    if (image === null) {
+      return this.http.post<Book>('api/book/CreateBook', book);
+    }
 
-    //upload to imgur
+    const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    const imgurl = "https://api.imgur.com/3/image";
+
     const formData = new FormData();
     formData.append('image', image);
-    return this.http.post(imgurl, formData, { headers })
-      .pipe(switchMap((response: any) => {
-        book.coverImage = response['data']['link'];
-        return this.http.post<Book>('api/book/CreateBook', book);
-      }));
 
+    return this.http.post(imgurl, formData, { headers }).pipe(
+      switchMap((response: any) => {
+        book.coverImage = response['data']['link'];
+        console.log(book);
+        return this.http.post<Book>('api/book/CreateBook', book);
+      })
+    );
   }
+
+  updateBook(book: Book, image: File | null): Observable<HttpResponse<any>> {
+    console.log(book);
+    if (image === null) {
+      return this.http.put<any>('api/Book/UpdateBook', book, { observe: 'response' });
+    }
+
+    const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
+    const imgurl = "https://api.imgur.com/3/image";
+
+    const formData = new FormData();
+    formData.append('image', image);
+
+    return this.http.post(imgurl, formData, { headers }).pipe(
+      switchMap((response: any) => {
+        book.coverImage = response['data']['link'];
+        console.log(book);
+        return this.http.put<any>('api/Book/UpdateBook', book, { observe: 'response' });
+      })
+    );
+  }
+
+
+
 
   getBooks(): Book[] {
     return this.Books;
   }
 
+  getBookById(bookId: number): Observable<Book> {
+    return this.http.get<Book>(`api/Book/GetBookById?bookId=${bookId}`);
+  }
+
+  getBookInfoAPI(isbn: string) {
+    return this.http.get<any>(`api/Book/GetBookInfoAPI?isbn=${isbn}`).pipe(
+      map(response => {
+        if (response && response.totalItems && response.totalItems > 0) {
+          return response.items.map((item: any) => {
+            const isbn13 = item.volumeInfo.industryIdentifiers.find((identifier: any) => identifier.type === 'ISBN_13')?.identifier || '';
+            const isbn10 = item.volumeInfo.industryIdentifiers.find((identifier: any) => identifier.type === 'ISBN_10')?.identifier || '';
+
+
+            const book: Book = {
+              title: item.volumeInfo.title || '',
+              author: item.volumeInfo.authors || [],
+              publisher: item.volumeInfo.publisher || '',
+              isbn: isbn13 || isbn10 || '',
+              genre: item.volumeInfo.categories || [],
+              sinopsis: item.volumeInfo.description || '',
+              coverImage: item.volumeInfo.imageLinks?.thumbnail || '',
+              language: item.volumeInfo.language || '',
+              edition: '',
+              publicationDate: item.volumeInfo.publishedDate || Date.now(),
+              copies: 0,
+              availableCopies: 0,
+              status: BookStatus.Available,
+              municipality: ''
+            };
+            return book;
+          });
+        } else {
+
+          return null;
+        }
+      })
+    );
+  }
+
+  removeBook(bookId: number): Observable<HttpResponse<any>> {
+    return this.http.delete<any>(`api/Book/DeleteBookById?bookId=${bookId}`, { observe: 'response' });
+  }
+
   getRequestedBooks() {
     return this.BooksRequested;
   }
-
-
 
   getRequests(): Observable<BookRequest[]> {
     return this.http.get<BookRequest[]>('api/Book/GetRequests');
@@ -180,7 +251,7 @@ export class LibraryService {
   }
 
   createRequest(email: string, request: BookRequest): Observable<any> {
-    return this.http.post(`api/Book/CreateRequest/${email}`, request);
+    return this.http.post(`api/Book/CreateRequest?email=${email}`, request);
   }
 
   delayRequest(requestId: number): Observable<any> {
@@ -263,6 +334,7 @@ export interface BookRequest {
   reservedDate?: Date;
   returnDate?: Date;
   deliveredDate?: Date;
+  reservationLimitDate?: Date;
   municipality: string;
   status: BookRequestStatus;
 }

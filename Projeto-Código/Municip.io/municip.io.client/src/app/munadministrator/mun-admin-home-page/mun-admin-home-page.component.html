@@ -45,26 +45,14 @@
           </app-btn-municip-blue>
         </li>
         <li>
-          <app-btn-municip-blue width="16rem" routerLink="/news/news-create">
-            Criar Notícia
-            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-          </app-btn-municip-blue>
-        </li>
-        <li>
-          <app-btn-municip-blue width="16rem" routerLink="/events/create">
-            Criar Evento
-            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-          </app-btn-municip-blue>
-        </li>
-        <li>
-          <app-btn-municip-blue width="16rem" routerLink="/documents/createtemplate">
-            Criar Documento
+          <app-btn-municip-blue width="16rem" routerLink="/library/requests">
+            Requisições de livros
             <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
           </app-btn-municip-blue>
         </li>
         <li>
           <app-btn-municip-blue width="16rem" routerLink="/documents/approve">
-            Aprovar Documento
+            Aprovar Documentos
             <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
           </app-btn-municip-blue>
         </li>
@@ -80,8 +68,8 @@
   <div class="flex items-center justify-around">
     <app-statistical-home-page-card [iconSrc]="'/assets/images/icons/file.png'"
                                     iconAlt="Ícone de Pedidos"
-                                    title="Pedidos Pendentes"
-                                    [value]="'114'"
+                                    title="Pedidos por Pagar"
+                                    [value]="documentsToPay"
                                     buttonText="Analisar Pedidos"
                                     (buttonClick)="pendingCitizensClick()">
       
@@ -89,7 +77,7 @@
     <app-statistical-home-page-card [iconSrc]="'/assets/images/icons/git.png'"
                                     iconAlt="Ícone de Documentos por Aprovar"
                                     title="Documentos por Aprovar"
-                                    [value]="'12'"
+                                    [value]="documentsToApprove"
                                     buttonText="Analisar Documentos"
                                     (buttonClick)="approveDocumentsClick()">
       

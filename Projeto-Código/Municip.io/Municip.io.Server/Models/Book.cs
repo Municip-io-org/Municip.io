@@ -22,7 +22,7 @@
 
         public string Edition { get; set; }
 
-        public DateOnly PublicationDate { get; set; }
+        public DateTime PublicationDate { get; set; }
 
         public int Copies { get; set; }
 
