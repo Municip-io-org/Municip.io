@@ -299,8 +299,8 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("PublicationDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("PublicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Publisher")
                         .IsRequired()
@@ -345,6 +345,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("Municipality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReservationLimitDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ReservedDate")
                         .HasColumnType("datetime2");

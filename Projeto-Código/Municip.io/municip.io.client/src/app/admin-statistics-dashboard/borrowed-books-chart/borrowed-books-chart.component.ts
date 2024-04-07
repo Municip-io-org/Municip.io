@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { BookRequest, BookRequestStatus } from '../../services/library/library.service';
+import { Book, BookRequest, BookRequestStatus } from '../../services/library/library.service';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -9,6 +9,7 @@ import { Chart } from 'chart.js';
 })
 export class BorrowedBooksChartComponent {
   @Input() borrowedbooks: BookRequest[] = [];
+  @Input() books: Book[] = [];
   chart: Chart<'pie', number[], string> | undefined;
 
 
@@ -57,8 +58,8 @@ export class BorrowedBooksChartComponent {
 
   getBorrowedCount(): number[] {
     const countBorrowed = this.borrowedbooks.filter(borrowed => borrowed.status === BookRequestStatus.Borrowed).length;
-    const countTotal = this.borrowedbooks.length;
-    return [countBorrowed, countTotal];
+    const countTotal = this.books.filter(book => book.availableCopies > 0).length;
+    return [countTotal, countBorrowed];
   }
 
 

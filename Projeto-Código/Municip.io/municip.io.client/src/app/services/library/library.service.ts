@@ -167,11 +167,9 @@ export class LibraryService {
     );
   }
 
-
-
-
-  getBooks(): Book[] {
-    return this.Books;
+  getBooks(municipality: string): Observable<any> {
+    const params = { municipality: municipality };
+    return this.http.get<any>('api/Book/GetBooks', { params: params });
   }
 
   getBookById(bookId: number): Observable<Book> {

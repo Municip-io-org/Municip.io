@@ -120,11 +120,11 @@ const routes: Routes = [
   { path: 'library/create', component: CreateBookComponent, data: {} },
   { path: 'library/requests', component: RequestsComponent, data: {} },
   { path: 'library/my', component: MyRequestsComponent, data: {} },
+  { path: 'library/librarylist', component: LibraryListComponent, data: {} },
   { path: 'library/:bookId', component: BookPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'library/edit/:bookId', component: EditBookComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
   { path: 'adminstatistics', component: AdminStatisticsDashboardComponent },
   { path: 'munadminstatistics', component: MunadminStatisticsDashboardComponent },
-  { path: 'library/librarylist', component: LibraryListComponent },
   { path: 'library', component: LibraryHomepageComponent }
 
 ];

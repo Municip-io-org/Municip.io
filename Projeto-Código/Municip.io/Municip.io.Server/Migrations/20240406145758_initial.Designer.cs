@@ -12,7 +12,7 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240331155436_initial")]
+    [Migration("20240406145758_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -302,8 +302,8 @@ namespace Municip.io.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("PublicationDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("PublicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Publisher")
                         .IsRequired()
@@ -348,6 +348,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("Municipality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReservationLimitDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ReservedDate")
                         .HasColumnType("datetime2");

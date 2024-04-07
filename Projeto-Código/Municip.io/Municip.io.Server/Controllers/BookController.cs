@@ -35,6 +35,14 @@ namespace Municip.io.Server.Controllers
             return StatusCode((int)response.StatusCode, response.ReasonPhrase);
         }
 
+        [HttpGet("GetBooks")]
+        public IActionResult GetBooks(string municipality)
+        {
+            var books = _context.Books;
+            var booksMunicipality = books.Where(b => b.Municipality == municipality);
+            return new JsonResult(booksMunicipality);
+        }
+
         [HttpPost("CreateBook")]
         public IActionResult CreateBook(Book newBook)
         {

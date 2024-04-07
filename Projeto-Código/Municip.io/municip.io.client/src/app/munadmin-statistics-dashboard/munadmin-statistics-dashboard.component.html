@@ -223,8 +223,8 @@
 
               </div>
               <div class="flex-grow">
-                <span class="block text-lg sm:text-xl font-bold">Romance</span>
-                <span class="block text-gray-500">Genero Mais requisitado</span>
+                <span class="block text-lg sm:text-xl font-bold">{{mostPopularGenre}}</span>
+                <span class="block text-gray-500">Género Mais requisitado</span>
               </div>
             </div>
 
@@ -234,7 +234,7 @@
 
               </div>
               <div class="flex-grow">
-                <span class="block text-lg sm:text-xl font-bold">574</span>
+                <span class="block text-lg sm:text-xl font-bold">{{numberOfBooks}}</span>
                 <span class="block text-gray-500">Livros Registados</span>
               </div>
             </div>
@@ -246,7 +246,7 @@
 
               </div>
               <div class="flex-grow">
-                <span class="block text-lg sm:text-xl font-bold">357</span>
+                <span class="block text-lg sm:text-xl font-bold">{{Authors}}</span>
                 <span class="block text-gray-500">Autores</span>
               </div>
             </div>
@@ -260,7 +260,7 @@
 
           <div *ngIf="selectedButton === 3" class="h-1 mb-5">
 
-            <app-borrowed-books-chart [borrowedbooks]="bookrequests"></app-borrowed-books-chart>
+            <app-borrowed-books-chart [borrowedbooks]="bookrequests" [books]="books"></app-borrowed-books-chart>
 
           </div>
         </div>
