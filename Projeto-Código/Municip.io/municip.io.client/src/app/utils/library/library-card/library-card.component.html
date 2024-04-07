@@ -3,7 +3,8 @@
 
     <div class="absolute -top-3 -left-3">
       <app-black-btn-icon-text altImage="Editar Livro"
-                               image="/assets/images/icons/pencil-white.png">
+                               image="/assets/images/icons/pencil-white.png"
+                               (click)="editCurrent(this)">
         Editar
       </app-black-btn-icon-text>
     </div>
@@ -11,7 +12,8 @@
     <div class="absolute -top-3 -right-3">
       <app-black-btn-icon-text [justImage]="true"
                                altImage="Remover Livro"
-                               image="/assets/images/icons/delete-white.png">
+                               image="/assets/images/icons/delete-white.png"
+                               (click)="deleteCurrent(this)">
       </app-black-btn-icon-text>
     </div>
 

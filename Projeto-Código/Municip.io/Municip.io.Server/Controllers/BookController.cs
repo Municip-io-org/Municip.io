@@ -222,7 +222,7 @@ namespace Municip.io.Server.Controllers
                 request.Book = book;
 
                 book.AvailableCopies--;
-
+                if (book.AvailableCopies == 0) book.Status = BookStatus.Unavailable;
 
 
                 _context.BookRequests.Add(request);

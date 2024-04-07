@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Book, LibraryService } from '../../services/library/library.service';
+import { Book, BookStatus, LibraryService } from '../../services/library/library.service';
 
-import { UserAuthService } from '../../services/user-auth.service';
+import { Roles, UserAuthService } from '../../services/user-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-library-list',
@@ -11,61 +12,12 @@ import { UserAuthService } from '../../services/user-auth.service';
 export class LibraryListComponent {
 
   books: Book[] = [];
-    //{
-    //  "title": "Harry Potter and the Philosopher's Stone",
-    //  "author": ["J.K. Rowling"],
-    //  "publisher": "Bloomsbury",
-    //  "isbn": "9780747532699",
-    //  "genre": ["Fantasy"],
-    //  "sinopsis": "The story of a young wizard, Harry Potter, and his adventures at Hogwarts School of Witchcraft and Wizardry.",
-    //  "coverImage": "https://example.com/harry_potter_cover.jpg",
-    //  "language": "English",
-    //  "edition": "1st",
-    //  "publicationDate": new Date("2001-06-26"), // Convert string to Date object
-    //  "copies": 10,
-    //  "availableCopies": 10,
-    //  "status": 0,
-    //  "municipality": "London"
-    //},
-    //{
-    //  "title": "Harry Potter and the Philosopher's Stone",
-    //  "author": ["J.K. Rowling"],
-    //  "publisher": "Bloomsbury",
-    //  "isbn": "9780747532699",
-    //  "genre": ["Romance"],
-    //  "sinopsis": "The story of a young wizard, Harry Potter, and his adventures at Hogwarts School of Witchcraft and Wizardry.",
-    //  "coverImage": "https://example.com/harry_potter_cover.jpg",
-    //  "language": "English",
-    //  "edition": "1st",
-    //  "publicationDate": new Date("2001-06-26"), // Convert string to Date object
-    //  "copies": 10,
-    //  "availableCopies": 10,
-    //  "status": 0,
-    //  "municipality": "London"
-    //},
-    //{
-    //  "title": "Harry Potter and the Philosopher's Stone",
-    //  "author": ["J.K. Rowling","JKROLLING22222"],
-    //  "publisher": "Bloomsbury",
-    //  "isbn": "9780747532699",
-    //  "genre": ["Terror"],
-    //  "sinopsis": "The story of a young wizard, Harry Potter, and his adventures at Hogwarts School of Witchcraft and Wizardry.",
-    //  "coverImage": "https://example.com/harry_potter_cover.jpg",
-    //  "language": "English",
-    //  "edition": "1st",
-    //  "publicationDate": new Date("2001-06-26"), // Convert string to Date object
-    //  "copies": 10,
-    //  "availableCopies": 10,
-    //  "status": 1,
-    //  "municipality": "London"
-    //}
-  
   nameSearch: string = '';
     user: any;
     municipality: any;
   
 
-  constructor(private userAuthService:UserAuthService, private libraryService: LibraryService) { }
+  constructor(private userAuthService:UserAuthService, private libraryService: LibraryService,private router :Router) { }
 
   ngOnInit() {
 
@@ -77,15 +29,13 @@ export class LibraryListComponent {
           async (res: any) => {
             this.user = res;
             this.municipality = this.user.municipality;
-
+            const role = await this.userAuthService.getUserRole().toPromise();
+            
             this.libraryService.getBooks(this.municipality).subscribe((data: Book[]) => {
               this.books = data;
-              console.log(this.books);
+              this.books = this.books.filter(b => b.status != BookStatus.Unavailable)
             });
-            this.libraryService.getBooks("Almada").subscribe((data: Book[]) => {
-              this.books = data;
-
-            });
+            
           }
         )
       });
@@ -96,5 +46,20 @@ export class LibraryListComponent {
     return this.books.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }
 
-  
+  editBook(book: any) {
+    this.router.navigateByUrl('/library/edit/' + book.book.id);
+    console.log("Editar livro", book);
+  }
+
+  deleteBook(book: any) {    
+    this.libraryService.removeBook(book.book.id).subscribe(
+      (res) => {
+        console.log("Livro apagado com sucesso", res);
+        this.books = this.books.filter(e => e.isbn !== book.isbn);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

@@ -1,17 +1,17 @@
 <app-header-loggedin></app-header-loggedin>
 
-<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" [title]="'Lista de Livros'"
-                    [text]="'Consulte os Livros disponiveis na biblioteca de '" />
+<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" title="Biblioteca de {{municipality}}"
+                    [text]="'Consulte os Livros disponiveis na biblioteca'"/>
 
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-20 gap-y-20 min-h-[28rem]">
   <div class="flex items-center justify-between space-x-4 -mt-[3rem]">
     <div class="relative w-full">
-      <label for="nameSearch" class="sr-only">Procurar por eventos</label>
+      <label for="nameSearch" class="sr-only">Procurar por Livros</label>
       <div class="flex items-center pb-3">
         <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
           <span class="fas fa-search"></span>
         </i>
-        <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por eventos"
+        <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por livros"
                class="pl-10 px-4 py-2 border rounded-2xl w-full transition duration-300 hover:border-black">
       </div>
       <button type="submit"
@@ -25,11 +25,17 @@
 
 
   <section class="flex flex-wrap justify-around gap-y-16 gap-x-8 ">
-    <ng-container *ngFor="let book of books">
-      <app-library-card [book]="book"></app-library-card>
+    <ng-container *ngFor="let book of filteredBooks">
+      <app-library-card [book]="book" (deleteid)="deleteBook($event)" (editid)="editBook($event)"></app-library-card>
     </ng-container>
+    
   </section>
-
+  <div class="flex justify-end ">
+    <button type="button" routerLink="/library/create" class="relative h-auto w-[11rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+      Criar Livro
+      <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+    </button>
+  </div>
 </div>
 
 
