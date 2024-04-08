@@ -15,7 +15,11 @@ export class LibraryListComponent {
   nameSearch: string = '';
     user: any;
     municipality: any;
-  
+  filterWindow: boolean = true;
+  isbnSearch: string = '';
+  authorSearch: string = '';
+  dateSearch: string = '';
+  genreSearch: string = '';
 
   constructor(private userAuthService:UserAuthService, private libraryService: LibraryService,private router :Router) { }
 
@@ -61,5 +65,9 @@ export class LibraryListComponent {
         console.log(error);
       }
     );
+  }
+
+  OpenFilterWindow() {
+    this.filterWindow = !this.filterWindow;
   }
 }
