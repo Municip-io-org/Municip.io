@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 import { Book, BookStatus, LibraryService } from '../../../services/library/library.service';
 
 @Component({
@@ -23,8 +23,8 @@ export class LibraryCardComponent {
     "status": 0,
     "municipality": "London"
   };
-
-
+  @Output() deleteid = new EventEmitter<number>();
+  @Output() editid = new EventEmitter<number>();
   constructor(private bookService: LibraryService) { }
 
   getStatusClass(): string {
@@ -39,5 +39,15 @@ export class LibraryCardComponent {
 
   getStatusString(status: BookStatus): string {
     return this.bookService.statusToString(status)
+  }
+
+  deleteCurrent(book: any) {
+    this.deleteid.emit(book);
+    console.log("Apagar livro", book);
+  }
+
+  editCurrent(book: any) {
+    this.editid.emit(book);
+    console.log("Editar livro", book);
   }
 }
