@@ -74,6 +74,19 @@ namespace Municip.io.Server.Controllers
             }
         }
 
+        [HttpGet("GetEnrolledInEvent")]
+        public IActionResult GetEnrolledInEvent(int eventId)
+        {
+            var evento = _context.Events.Include(e => e.Citizens).FirstOrDefault(e => e.Id == eventId);
+            if (evento != null)
+            {
+                return Json(evento.Citizens);
+            }
+            else
+            {
+                return BadRequest(new { message = "Event not found" });
+            }
+        }
 
         /// <summary>
         /// Esta chamada permite atualizar um evento no sistema, passando omo parâmetro um objeto do tipo Event

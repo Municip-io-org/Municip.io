@@ -11,7 +11,7 @@ export class BoundsService {
   constructor(private http: HttpClient) { }
 
   getMunicipalityBounds(municipalityName: string): Observable<any> {
-    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${municipalityName}&key=AIzaSyDNwbIjZzCxVDfVZBvwpJ8WyX-DUb--44s`;
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${municipalityName}&key=AIzaSyCyiX_3_TeJH9cLZpL5wJD2ZHCMV52anyA`;
 
     
 
@@ -39,14 +39,14 @@ if (data.status === 'ZERO_RESULTS') {
   }
 
   getFromAPI(municipalityName: string): Observable<any> {
-const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${municipalityName}&key=AIzaSyDNwbIjZzCxVDfVZBvwpJ8WyX-DUb--44s`;
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${municipalityName}&key=AIzaSyCyiX_3_TeJH9cLZpL5wJD2ZHCMV52anyA`;
     return this.http.get(apiUrl);
   }
 
 
   getBoundsFromAddress(address: string): Observable<any> {
     //get bounds from address
-    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDNwbIjZzCxVDfVZBvwpJ8WyX-DUb--44s`;
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyCyiX_3_TeJH9cLZpL5wJD2ZHCMV52anyA`;
     return this.http.get(apiUrl).pipe(
       map((data: any) => {
         if (data.status === 'ZERO_RESULTS') {

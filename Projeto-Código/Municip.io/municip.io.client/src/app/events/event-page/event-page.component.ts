@@ -15,7 +15,15 @@ export class EventPageComponent {
   isRemoveEventDialogOpen: boolean = false;
   dialogTitle = '';
   dialogMessage = '';
-  isSuccesfullEnroll : boolean = false;
+  isSuccesfullEnroll: boolean = false;
+
+  isEnrolledDialogOpen: boolean = false;
+  dialogEnrolledTitle = '';
+  dialogEnrolledMessage = '';
+  isAddGenreDialogOpen: boolean = false;
+  isConfirm: boolean = true;
+
+
   
 
   event: Event = {
@@ -114,6 +122,30 @@ export class EventPageComponent {
   closeDialog() {
     this.isDialogOpen = false;
     window.location.reload();
+  }
+
+  openEnrolledDialog() {
+    this.dialogEnrolledTitle = 'Cidadãos inscritos no evento '+ this.event.title ;
+this.isEnrolledDialogOpen = true;
+
+    //show enrolled citizens
+
+    if (this.event.citizens != null) {
+      //loop all citizens
+      this.dialogEnrolledMessage = '';
+      for (const citizen of this.event.citizens) {
+        this.dialogEnrolledMessage += citizen.firstName + ' ' + citizen.surname + ' - ' + citizen.email + '\n';
+      }
+
+    }
+
+  }
+
+  closeEnrolledDialog() {
+    this.isEnrolledDialogOpen = false;
+
+    
+
   }
 
   goToEditEventPage() {
