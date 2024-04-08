@@ -90,17 +90,14 @@
 
         <div *ngIf="showDropdownBiblioteca" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
           <ul class="py-2 text-sm text-gray-700">
+            <li>
+              <a routerLink="/library/librarylist" class="block px-4 py-2 hover:bg-gray-100">Ver Livros</a>
+            </li>
 
 
-
-            <li *ngIf="role ===Roles.Citizen">
+            <li *ngIf="role === Roles.Citizen">
               <a routerLink="/library/my" class="block px-4 py-2 hover:bg-gray-100">Os meus Livros</a>
             </li>
-            <li>
-              <a routerLink="/agenda/" class="block px-4 py-2 hover:bg-gray-100">opção 3</a>
-            </li>
-
-
             <ng-container *ngIf="role===Roles.Municipal">
               <li>
                 <a routerLink="/library/requests" class="block px-4 py-2 hover:bg-gray-100">Requisições</a>

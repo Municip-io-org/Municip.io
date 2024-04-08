@@ -13,17 +13,17 @@ export class LibraryListComponent {
 
   books: Book[] = [];
   nameSearch: string = '';
-    user: any;
+  user: any;
   municipality: any;
-    filteredBookList: Book[] = [];
-  filterWindow: boolean = true;
+  filteredBookList: Book[] = [];
+  filterWindow: boolean = false;
   isbnSearch: string = '';
   authorSearch: string = '';
   dateSearch: string ='';
   genreSearch: string = '';
   options: string[] = [];
   dateOptions: string[] = [];
-  showDropdown: boolean = false;
+  genreOptions: string[] = [];
 
   constructor(private userAuthService:UserAuthService, private libraryService: LibraryService,private router :Router) { }
 
@@ -42,8 +42,9 @@ export class LibraryListComponent {
             this.libraryService.getBooks(this.municipality).subscribe((data: Book[]) => {
               this.books = data;
               this.books = this.books.filter(b => b.status != BookStatus.Unavailable);
-              
+
               this.loadDateOptions();
+              this.loadGenreOptions();
             });
 
 
@@ -116,8 +117,15 @@ export class LibraryListComponent {
       this.dateOptions =this.books.map(book => {
         return book.publicationDate.toString().split("-")[0];
       });
-    
-    console.log(this.dateOptions);
   }
 
+  loadGenreOptions() {
+
+    this.genreOptions = Array.from(new Set(this.books.flatMap(book => book.genre)));
+    console.log(this.genreOptions);
+  }
+
+  goToBookPage(book:any) {
+    this.router.navigateByUrl('/library/'+book);
+  }
 }
