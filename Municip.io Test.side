@@ -2,7 +2,7 @@
   "id": "8b864d39-9231-4e16-8a7c-fecaeef7ee09",
   "version": "2.0",
   "name": "Municip.io Test",
-  "url": "https://municip.io:4200/documents/my",
+  "url": "https://municip.io:4200/library/create",
   "tests": [{
     "id": "13345bfd-82bd-45c0-852b-404ee0d246ae",
     "name": "Create municipality",
@@ -2969,6 +2969,173 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "876faf46-cf57-4638-8b17-306318c2a68c",
+    "name": "RFB1 - Criar Livro",
+    "commands": [{
+      "id": "25130c29-9c1e-42f4-9bb6-de0ad3befd3e",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/library/create",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b7d92d98-1aa1-4a2c-927c-2d794e42c6d2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1192x730",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e854c6f9-a1fe-4415-a0f9-81e96c046b9b",
+      "comment": "",
+      "command": "click",
+      "target": "id=iSBN",
+      "targets": [
+        ["id=iSBN", "id"],
+        ["name=iSBN", "name"],
+        ["css=#iSBN", "css:finder"],
+        ["xpath=//input[@id='iSBN']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3f7c78f-2d81-4cda-bb60-20aa75c27943",
+      "comment": "",
+      "command": "type",
+      "target": "id=iSBN",
+      "targets": [
+        ["id=iSBN", "id"],
+        ["name=iSBN", "name"],
+        ["css=#iSBN", "css:finder"],
+        ["xpath=//input[@id='iSBN']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "9781781104057"
+    }, {
+      "id": "126b5f9b-e136-4461-ab37-7ab40d1e619d",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.pb-\\[4rem\\]",
+      "targets": [
+        ["css=.pb-\\[4rem\\]", "css:finder"],
+        ["xpath=//app-create-book/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c5a5eb92-617c-4114-bb71-aaca6aaf3d20",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=app-spinner",
+      "targets": [
+        ["css=app-spinner", "css:finder"],
+        ["xpath=//app-spinner", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "abd594f8-d423-435f-a8d7-cb0f7caaf342",
+      "comment": "",
+      "command": "click",
+      "target": "css=body > div",
+      "targets": [
+        ["css=body > div", "css:finder"],
+        ["xpath=//div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "05e41edc-80f8-4742-bc80-f3ede2ef7cb3",
+      "comment": "",
+      "command": "click",
+      "target": "id=edition",
+      "targets": [
+        ["id=edition", "id"],
+        ["name=edition", "name"],
+        ["css=#edition", "css:finder"],
+        ["xpath=//input[@id='edition']", "xpath:attributes"],
+        ["xpath=//section[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "29c2549a-e1c4-4348-95d5-2f8d0f280f16",
+      "comment": "",
+      "command": "type",
+      "target": "id=edition",
+      "targets": [
+        ["id=edition", "id"],
+        ["name=edition", "name"],
+        ["css=#edition", "css:finder"],
+        ["xpath=//input[@id='edition']", "xpath:attributes"],
+        ["xpath=//section[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "2951cef6-b30c-4db3-9cd8-bc3aa642692d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pt-\\[1rem\\]",
+      "targets": [
+        ["css=.pt-\\[1rem\\]", "css:finder"],
+        ["xpath=//form", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a8c5b05-4696-43bb-ae5f-b69545faee46",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(5)",
+      "targets": [
+        ["css=.flex:nth-child(5)", "css:finder"],
+        ["xpath=//section[5]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "74d890c0-c590-4ce0-90af-a89b4a6e12fb",
+      "comment": "",
+      "command": "type",
+      "target": "id=copies",
+      "targets": [
+        ["id=copies", "id"],
+        ["name=copies", "name"],
+        ["css=#copies", "css:finder"],
+        ["xpath=//input[@id='copies']", "xpath:attributes"],
+        ["xpath=//section[5]/div[2]/input", "xpath:position"]
+      ],
+      "value": "10"
+    }, {
+      "id": "87979add-e8a1-403a-96c2-b052a7d5d70e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(5)",
+      "targets": [
+        ["css=.flex:nth-child(5)", "css:finder"],
+        ["xpath=//section[5]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "53d6ac11-0424-4a4b-a867-5aa6cfbcb4ce",
+      "comment": "",
+      "command": "click",
+      "target": "css=.-bottom-\\[0rem\\]",
+      "targets": [
+        ["css=.-bottom-\\[0rem\\]", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Criar Livro')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2c1f223b-6aa6-4c64-8a2e-b44aac277342",
+      "comment": "",
+      "command": "click",
+      "target": "css=.inline-flex",
+      "targets": [
+        ["css=.inline-flex", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Proceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "51064974-307f-4f9a-8a52-00b506e4355c",
@@ -2978,6 +3145,6 @@
     "timeout": 300,
     "tests": ["13345bfd-82bd-45c0-852b-404ee0d246ae"]
   }],
-  "urls": ["https://municip.io:4200/", "https://municipio:4200/", "https://municipio:4200/admindashboard", "https://municipio:4200/munadmin-dashboard", "https://municip.io:4200/admindashboard", "https://municip.io:4200/userpage", "https://municip.io:4200/munadmin-dashboard", "https://municip.io:4200/transports/stops", "https://municip.io:4200/documents/my"],
+  "urls": ["https://municip.io:4200/", "https://municipio:4200/", "https://municipio:4200/admindashboard", "https://municipio:4200/munadmin-dashboard", "https://municip.io:4200/admindashboard", "https://municip.io:4200/userpage", "https://municip.io:4200/munadmin-dashboard", "https://municip.io:4200/transports/stops", "https://municip.io:4200/documents/my", "https://municip.io:4200/library/create"],
   "plugins": []
 }
