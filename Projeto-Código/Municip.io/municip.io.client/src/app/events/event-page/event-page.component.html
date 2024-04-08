@@ -70,12 +70,21 @@
         <img src="/assets/images/icons/user.png" alt="Número de inscrições" class="size-10 mr-2" />
         {{ event.nRegistrations }}/{{ event.capacity }} inscritos
       </div>
+
+      <button *ngIf="isMunAdmin" (click)="openEnrolledDialog()" class="rounded-lg px-4 py-2 border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-gray-100 duration-300">Ver Inscritos</button>
+
     </div>
   </section>
+
   <section innerHTML="{{event.description}}" class="text-left text-municip-normal-black text-[1.25rem] px-[3rem] pb-[3rem]">
     
   </section>
 </div>
+
+<ng-container *ngIf="isEnrolledDialogOpen">
+  <app-dialog-message [title]="dialogEnrolledTitle" [message]="dialogEnrolledMessage" (confirm)="closeDialog()"
+                      [isConfirm]="isConfirm"></app-dialog-message>
+</ng-container>
 
 <app-eventsmap [EventAddress]="event.local + ' ' + municipality.name"></app-eventsmap>
 <app-footer></app-footer>
