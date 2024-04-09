@@ -20,6 +20,11 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
 
+        public BookController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet("GetBookInfoAPI")]
         public async Task<IActionResult> GetBookInfoAPI(string isbn)
         {
@@ -38,10 +43,21 @@ namespace Municip.io.Server.Controllers
         [HttpGet("GetBooks")]
         public IActionResult GetBooks(string municipality)
         {
-            var books = _context.Books;
-            var booksMunicipality = books.Where(b => b.Municipality == municipality);
-            return new JsonResult(booksMunicipality);
+            if (string.IsNullOrEmpty(municipality))
+            {
+                return BadRequest("O Município não pode ser nulo ou vazio");
+            }
+
+            var books = _context.Books.Where(b => b.Municipality == municipality).ToList();
+
+            if (books == null || !books.Any())
+            {
+                return NotFound("Não foram encontrados nenhuns livros neste Município");
+            }
+
+            return new JsonResult(books);
         }
+
 
         [HttpPost("CreateBook")]
         public IActionResult CreateBook(Book newBook)
