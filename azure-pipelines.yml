@@ -23,6 +23,7 @@ steps:
   - task: Npm@1
     inputs:
       command: 'custom'
+      workingDir: 'Projeto-Código\Municip.io\municip.io.client'
       customCommand: 'install --force'
   - task: VSBuild@1
     inputs:
