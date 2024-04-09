@@ -2,6 +2,8 @@
 <app-profile-banner title="Dados do Munícipio"
                     [image]="currentLandscapePhoto"
                     [profileimg]="currentEmblemPhoto"></app-profile-banner>
+
+
 <div class="flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 space-y-20">
   <form [formGroup]="municipalityEditForm" (ngSubmit)="onSubmit()" class="pt-[1rem] relative flex flex-col pb-[5rem]">
     <section class="flex text-left justify-around mb-4 ">
@@ -33,7 +35,7 @@
 
     <section class="relative flex text-left justify-around mb-4">
       <div class="absolute -top-40 right-8">
-        <app-input-title class="hidden text-[2.4vh]">Foto do Brasão</app-input-title>
+        <app-input-title class="hidden text-[2.4rem]">Foto do Brasão</app-input-title>
         <input type="file" #emblemPicker id="emblemPhoto" formControlName="emblemPhoto" name="emblemPhoto"
                (change)="onEmblemImagePicked($event)" accept="image/*"
                class="hidden input font-poppins w-[18rem] " />

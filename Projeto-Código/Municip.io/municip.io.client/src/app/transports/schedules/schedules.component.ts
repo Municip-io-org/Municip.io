@@ -12,7 +12,8 @@ import { BindQueryParamsFactory } from '@ngneat/bind-query-params';
   styleUrl: './schedules.component.css'
 })
 export class SchedulesComponent {
-
+   
+    
   constructor(private service: TransportsService, private authService: UserAuthService, private router: Router,
     private routeParams: ActivatedRoute, private factory: BindQueryParamsFactory) { }
 
@@ -25,7 +26,7 @@ export class SchedulesComponent {
   path: stop[] | null = [];
   schedule: stopTime[] | null = [];
   lineSelected : line | null = null;
-
+  selectedStopId: string = '';
 
   scheduleForm = new FormGroup({
     line: new FormControl(""),
@@ -35,6 +36,7 @@ export class SchedulesComponent {
     date: new FormControl("")
   });
 
+  tableArrivalTimes: any[] | undefined;
 
   get line() {
     return this.scheduleForm.get('line');
@@ -150,7 +152,64 @@ return this.scheduleForm.get('date');
 
     this.handlePatternChange(this.scheduleForm.get('pattern')?.value || "");
 
+    
+    console.log(this.tableArrivalTimes);
+
   }
+
+  groupByHourAndMinute(trips: any[]): any[] {
+
+    const arrivalTimes = trips
+      .map(trip => trip.schedule.find((schedule: { stop_id: string; }) => schedule.stop_id === this.selectedStopId)?.arrival_time)
+      .filter(time => time !== undefined); // Remove undefined values
+
+    const groupedTimes: any[] = [];
+    const hourMinuteMap: { [hour: string]: { [minute: string]: string[] } } = {};
+
+    // Group arrival times by hour and minute
+    arrivalTimes.forEach(time => {
+      const [hour, minute] = time.split(':');
+      if (!hourMinuteMap[hour]) {
+        hourMinuteMap[hour] = {};
+      }
+      if (!hourMinuteMap[hour][minute]) {
+        hourMinuteMap[hour][minute] = [];
+      }
+      hourMinuteMap[hour][minute].push(time);
+    });
+
+    // Format grouped times
+    Object.keys(hourMinuteMap).forEach(hour => {
+      const minuteGroups = hourMinuteMap[hour];
+      const formattedMinuteGroups = Object.keys(minuteGroups)
+        .sort((a, b) => parseInt(a) - parseInt(b)) // Sort minutes numerically
+        .map(minute => ({
+          minute: parseInt(minute),
+          times: minuteGroups[minute]
+        }));
+      groupedTimes.push({
+        hour: parseInt(hour),
+        minuteGroups: formattedMinuteGroups
+      });
+    });
+
+    // Sort grouped times by hour
+    groupedTimes.sort((a, b) => a.hour - b.hour);
+
+    
+
+    return groupedTimes;
+  }
+
+
+
+
+  handleStopClicked(stopId: string) {
+    console.log("Stop ID clicked:", stopId);
+    this.selectedStopId = stopId;
+    this.tableArrivalTimes = this.groupByHourAndMinute(this.trips);
+  }
+
 
 
 
@@ -297,17 +356,22 @@ this.patterns = [];
         });
       }
     }
+    console.log(this.trips);
   }
 
   getCurrentPath(pattern: string | null) {
     let patternSelected = this.patterns.find(p => p.id === pattern);
     this.path = patternSelected ? patternSelected.path : null;
+    console.log(this.path);
   }
 
   getCurrentSchedule(trip : string | null) {
     let tripSelected = this.trips.find(t=> t.id ===  trip);
     this.schedule = tripSelected ? tripSelected.schedule : null;
 
+    if (this.schedule) this.selectedStopId = this.schedule![0].stop_id;
+    this.tableArrivalTimes = this.groupByHourAndMinute(this.trips);
+    console.log(this.schedule);
   }
 
 
@@ -332,7 +396,6 @@ this.patterns = [];
     }
     return "";
   }
-
 
 
   iswithoutTrips(): boolean {

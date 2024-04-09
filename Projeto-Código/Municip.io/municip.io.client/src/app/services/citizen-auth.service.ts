@@ -25,9 +25,12 @@ export class CitizenAuthService {
         citizen.photo = response['data']['link'];
         citizen.events = [];
         citizen.browsers = [];
+        
         return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
       }));
   }
+  
+
 }
 
 export interface Citizen {

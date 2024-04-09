@@ -14,6 +14,10 @@ export class EventsService {
     return this.http.get<Event[]>('api/events/GetEvents');
   }
 
+  GetEnrolledInEvent(eventId: string): Observable<Citizen[]> {
+    return this.http.get<Citizen[]>(`api/events/GetEnrolledInEvent?eventId=${eventId}`);
+  }
+
   getUserEvents(email: string): Observable<Event[]> {
     const params = { email: email };
     return this.http.get<Event[]>('api/events/GetEventsByCitizen', { params: params });
@@ -33,6 +37,8 @@ export class EventsService {
       }));
 
   }
+
+
   updateEvent(event: Event, image?: File) {
     if (!image) return this.http.put<Event>('api/events/UpdateEvent', event);
 
@@ -74,7 +80,7 @@ email=email.replace('@', '%40');
   }
 
   getEventByMunicipality(municipalityName: string) {
-    return this.http.get<Event>(`api/events/GetEventsByMunicipality?municipalityName=${municipalityName}`);
+    return this.http.get<Event[]>(`api/events/GetEventsByMunicipality?municipalityName=${municipalityName}`);
   }
 
   getEventById(eventId: string) {

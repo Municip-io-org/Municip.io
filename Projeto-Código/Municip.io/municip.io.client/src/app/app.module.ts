@@ -115,6 +115,33 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FileDragDropDirective } from './directives/fileDragDrop/file-drag-drop.directive';
 import { TemplateListComponent } from './documents/template-list/template-list.component';
 import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
+import { RequestsComponent } from './library/requests/requests.component';
+
+import { RequestedBookCardComponent } from './utils/library/requested-book-card/requested-book-card.component';
+import { CreateBookComponent } from './library/create-book/create-book.component';
+import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/admin-statistics-dashboard.component';
+import { RegisteredUsersGraphComponent } from './admin-statistics-dashboard/registered-users-graph/registered-users-graph.component';
+import { GenderChartComponent } from './admin-statistics-dashboard/gender-chart/gender-chart.component';
+import { AgeChartComponent } from './admin-statistics-dashboard/age-chart/age-chart.component';
+import { DistrictsMapComponent } from './admin-statistics-dashboard/districts-map/districts-map.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { CitizensMapComponent } from './admin-statistics-dashboard/citizens-map/citizens-map.component';
+import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
+import { DialogContentComponent } from './utils/dialog/dialog-content/dialog-content.component';
+import { RegisteredMunUsersGraphComponent } from './munadmin-statistics-dashboard/registered-mun-users-graph/registered-mun-users-graph.component';
+import { BooksGenreChartComponent } from './admin-statistics-dashboard/books-genre-chart/books-genre-chart.component';
+import { AddGenreDialogComponent } from './utils/library/add-genre-dialog/add-genre-dialog.component';
+import { MyRequestsComponent } from './library/my-requests/my-requests.component';
+import { LibraryListComponent } from './library/library-list/library-list.component';
+import { LibraryCardComponent } from './utils/library/library-card/library-card.component';
+import { BorrowedBooksChartComponent } from './admin-statistics-dashboard/borrowed-books-chart/borrowed-books-chart.component';
+import { BookPageComponent } from './library/book-page/book-page.component';
+import { EditBookComponent } from './library/edit-book/edit-book.component';
+import { LibraryHomepageComponent } from './library/library-homepage/library-homepage.component';
+import { LibraryMapComponent } from './library/library-map/library-map.component';
+import { MunicipalCalendarComponent } from './events/municipal-calendar/municipal-calendar.component';
+
+
 
 registerLocaleData(localePt, 'pt-PT');
 
@@ -212,6 +239,30 @@ registerLocaleData(localePt, 'pt-PT');
     FileDragDropDirective,
     TemplateListComponent,
     EditTemplateComponent,
+    RequestsComponent,
+    RequestedBookCardComponent,
+    CreateBookComponent,
+    AdminStatisticsDashboardComponent,
+    RegisteredUsersGraphComponent,
+    GenderChartComponent,
+    AgeChartComponent,
+    DistrictsMapComponent,
+    CitizensMapComponent,
+    MunadminStatisticsDashboardComponent,
+    DialogContentComponent,
+    RegisteredMunUsersGraphComponent,
+    BooksGenreChartComponent,
+    AddGenreDialogComponent,
+    MyRequestsComponent,
+    LibraryListComponent,
+    LibraryCardComponent,
+    BorrowedBooksChartComponent,
+    BookPageComponent,
+    EditBookComponent,
+    LibraryHomepageComponent,
+    LibraryMapComponent,
+    MunicipalCalendarComponent,
+
     
   ],
   imports: [
@@ -228,7 +279,7 @@ registerLocaleData(localePt, 'pt-PT');
     NgxMaterialTimepickerModule.setOpts('pt-PT'),
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     InfiniteScrollModule, SelectButtonModule, RippleModule,
-    CheckboxModule
+    CheckboxModule, GoogleChartsModule
   ],
   providers: [
     MunicipalityGuard,

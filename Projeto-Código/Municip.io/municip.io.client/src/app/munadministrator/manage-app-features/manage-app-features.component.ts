@@ -50,6 +50,7 @@ export class ManageAppFeaturesComponent {
     events: new FormControl(false),
     news: new FormControl(false),
     transports: new FormControl(false),
+    library: new FormControl(false),
   });
 
 
@@ -109,6 +110,7 @@ export class ManageAppFeaturesComponent {
       events: this.appFeatures.find(a => a.appFeatureCategory == "Events")?.isEnabled,
       news: this.appFeatures.find(a => a.appFeatureCategory == "News")?.isEnabled,
       transports: this.appFeatures.find(a => a.appFeatureCategory == "Transports")?.isEnabled,
+      library : this.appFeatures.find(a => a.appFeatureCategory == "Library")?.isEnabled,
     });
   }
 
@@ -136,6 +138,7 @@ export class ManageAppFeaturesComponent {
     this.appFeatures.find(a => a.appFeatureCategory == "Events")!.isEnabled = this.events!.value!;
     this.appFeatures.find(a => a.appFeatureCategory == "News")!.isEnabled = this.news!.value!;
     this.appFeatures.find(a => a.appFeatureCategory == "Transports")!.isEnabled = this.transports!.value!;
+    this.appFeatures.find(a => a.appFeatureCategory == "Library")!.isEnabled = this.library!.value!;
   }
  
 
@@ -152,12 +155,15 @@ export class ManageAppFeaturesComponent {
     return this.appFeatureEditForm.get('transports');
   }
 
+  get library() {
+    return this.appFeatureEditForm.get('library');
+  }
+
   /**
    * Método responsável por fechar o diálogo
    */
   closeDialog() {
     this.isDialogOpen = false;
-    window.location.reload();
   }
 }
 

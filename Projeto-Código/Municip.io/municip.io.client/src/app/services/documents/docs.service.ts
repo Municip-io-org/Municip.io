@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Citizen } from '../citizen-auth.service';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Citizen } from '../citizen-auth.service';
 })
 export class DocsService {
 
-
+  requests: RequestDocument[] = [];
   constructor(private http: HttpClient) { }
 
   //get all documents
@@ -17,6 +17,17 @@ export class DocsService {
     const params = { municipality: municipality };
     return this.http.get<DocumentTemplate[]>('api/documents/GetTemplatesFromMunicipality', { params: params });
   }
+
+  numberOfRequestsToApprove(municipality: string): Observable<number> {
+    return this.getRequestsFromMunicipality(municipality).pipe(
+      map(requests => {
+        this.requests = requests;
+        return this.requests.filter(request => request.status === 'Pending').length;
+      })
+    );
+  }
+
+
 
   GetDistinctDocumentTypesFromMunicipality(municipality: string): Observable<string[]> {
     console.log(municipality + 'dasd');

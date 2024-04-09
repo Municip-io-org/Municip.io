@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router';
 import { AppFeature, AppFeaturesService } from '../../services/appFeatures/app-features.service';
+import { DocsService } from '../../services/documents/docs.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header-loggedin',
   templateUrl: './header-loggedin.component.html',
   styleUrl: './header-loggedin.component.css'
 })
+
 export class HeaderLoggedinComponent {
   isSignedIn: boolean = false;
   user: any;
@@ -25,8 +27,13 @@ export class HeaderLoggedinComponent {
   showDropdownTransportes: boolean = false;
   showSignOutDropdown: boolean = false;
   showDropdownMunicipality: boolean = false;
+  showDropdownAdmin: boolean = false;
 
-  constructor(private auth: UserAuthService, private appFeaturesService: AppFeaturesService, private router: Router) { }
+numberOfRequests: number = 0;
+
+
+
+  constructor(private auth: UserAuthService, private appFeaturesService: AppFeaturesService, private router: Router, private docsService : DocsService ) { }
 
   ngOnInit() {
     this.auth.onStateChanged().forEach((state: any) => {
@@ -44,11 +51,35 @@ export class HeaderLoggedinComponent {
             this.firstName = this.user.firstName;
             this.photo = this.user.photo;
 
-           
+
             this.appFeaturesService.getAppFeaturesByMunicipality(this.user.municipality).subscribe(
               (appFeaturesRes: AppFeature[]) => {
 
                 this.appFeatures = appFeaturesRes;
+
+                this.auth.getUserRole().subscribe(
+                  res => {
+
+                    this.role = res.role;
+                    if (this.role === Roles.Municipal) {
+                      this.docsService.numberOfRequestsToApprove(this.user.municipality).subscribe(
+                        res => {
+                          this.numberOfRequests = res;
+                          console.log("São" + this.numberOfRequests);
+                        });
+
+                    }
+
+
+
+
+
+                  },
+                  error => {
+                    console.error(error);
+                  }
+                );
+
 
               },
               error => {
@@ -69,16 +100,6 @@ export class HeaderLoggedinComponent {
       }
     );
 
-    this.auth.getUserRole().subscribe(
-      res => {
-
-        this.role = res.role;
-
-      },
-      error => {
-        console.error(error);
-      }
-    );
   }
 
   get Roles() {
@@ -117,34 +138,41 @@ export class HeaderLoggedinComponent {
       case Dropdowns.Municipality:
         this.showDropdownMunicipality = !this.showDropdownMunicipality;
         break;
+      case Dropdowns.Admin:
+        this.showDropdownAdmin = !this.showDropdownAdmin;
+        break;
+
       default:
     }
   }
 
 
-    closeAllOtherDropdowns(dropdown: Dropdowns) {
-      if (dropdown !== Dropdowns.Events) {
-        this.showDropdownAgenda = false;
-      }
-      if (dropdown !== Dropdowns.Library) {
-        this.showDropdownBiblioteca = false;
-      }
-      if (dropdown !== Dropdowns.Documents) {
-        this.showDropdownDocumentos = false;
-      }
-      if (dropdown !== Dropdowns.News) {
-        this.showDropdownNoticias = false;
-      }
-      if (dropdown !== Dropdowns.Transports) {
-        this.showDropdownTransportes = false;
-      }
-      if (dropdown !== Dropdowns.Municipality) {
-        this.showDropdownMunicipality = false;
-      }
+  closeAllOtherDropdowns(dropdown: Dropdowns) {
+    if (dropdown !== Dropdowns.Events) {
+      this.showDropdownAgenda = false;
     }
+    if (dropdown !== Dropdowns.Library) {
+      this.showDropdownBiblioteca = false;
+    }
+    if (dropdown !== Dropdowns.Documents) {
+      this.showDropdownDocumentos = false;
+    }
+    if (dropdown !== Dropdowns.News) {
+      this.showDropdownNoticias = false;
+    }
+    if (dropdown !== Dropdowns.Transports) {
+      this.showDropdownTransportes = false;
+    }
+    if (dropdown !== Dropdowns.Municipality) {
+      this.showDropdownMunicipality = false;
+    }
+    if (dropdown !== Dropdowns.Admin) {
+      this.showDropdownAdmin = false;
+    }
+  }
 
 
-  
+
 
 
   get Dropdowns() {
@@ -175,6 +203,10 @@ export class HeaderLoggedinComponent {
   isTransportsFeatureActive() {
     return this.appFeatures.find(a => a.appFeatureCategory == "Transports")?.isEnabled;
   }
+
+  isLibraryFeatureActive() {
+    return this.appFeatures.find(a => a.appFeatureCategory == "Library")?.isEnabled;
+  }
 }
 
 
@@ -186,13 +218,14 @@ export class HeaderLoggedinComponent {
 
 
 export enum Dropdowns {
-    Events = 'events',
-    Library = 'library',
-    Documents = 'documents',
-    News = 'news',
-    Transports = 'transports',
-    CloseAll = 'closeAll',
-    Municipality = "Municipality"
+  Events = 'events',
+  Library = 'library',
+  Documents = 'documents',
+  News = 'news',
+  Transports = 'transports',
+  CloseAll = 'closeAll',
+  Municipality = "Municipality",
+  Admin = "Admin"
 }
 
 

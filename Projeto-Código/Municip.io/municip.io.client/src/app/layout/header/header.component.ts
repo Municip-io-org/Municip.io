@@ -15,5 +15,20 @@ export class HeaderComponent {
 
   }
 
- 
+
+  //click for change the language
+  onChange(value: any) {
+    console.log(value.target.value);
+
+    //get the entire url, like domain+path
+    let url = window.location.href;
+    console.log(url);
+
+
+
+
+
   }
+
+
+}

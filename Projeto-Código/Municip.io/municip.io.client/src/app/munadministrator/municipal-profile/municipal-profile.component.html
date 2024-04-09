@@ -56,7 +56,8 @@
     <section class="flex flex-col space-y-10">
       <app-card-outline-white>
         <div class="flex flex-col p-5 space-y-4">
-          <img src={{municipality.emblemPhoto}} alt="Brasão do Município" class="object-cover w-[20rem] mb-4 rounded-2xl self-center" />
+          <img [src]="municipality.emblemPhoto ? municipality.emblemPhoto : '/assets/images/placeholder/placeholderpersons.jpg'"
+               alt="Brasão do Município" class="object-cover w-[20rem] mb-4 rounded-2xl self-center" />
           <ul class="flex flex-col space-y-4 text-left font-inter">
             <li>
               <div>

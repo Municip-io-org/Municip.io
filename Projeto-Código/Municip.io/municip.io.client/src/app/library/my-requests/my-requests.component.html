@@ -1,0 +1,37 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+</head>
+<app-header-loggedin />
+<app-smaller-banner title="Meus Livros"
+                    [image]="municipalityImage ? municipalityImage : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
+<div class="min-h-80 bg-municip-blank">
+  <div class=" flex items-center justify-between space-x-4 mx-20 pt-10">
+    <div class="relative w-[50rem] ">
+      <label for="nameSearch" class="sr-only">Procurar por livros</label>
+      <div class="flex items-center">
+        <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+          <span class="fas fa-search"></span>
+        </i>
+        <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por livros"
+               class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300  hover:border-black">
+      </div>
+    </div>
+    <p-selectButton [options]="orderOptions" [(ngModel)]="ascendingOrder" optionLabel="label" optionValue="value" [unselectable]="true"
+                    (onChange)="toggleSortOrder()"
+                    styleClass="orderOptions">
+    </p-selectButton>
+  </div>
+
+  <div *ngIf="filteredBooks.length === 0"
+       class="flex justify-center items-center text-municip-normal-black text-[3rem]
+       mt-16">
+    <p class="font-semibold">Sem Reservas.</p>
+  </div>
+  <div class="mx-32 py-10" *ngFor="let book of filteredBooks">
+    <app-requested-book-card [bookRequest]="book" (update)="updateRequests()"
+                             [showActions]="false"/>
+  </div>
+
+</div>
+<app-footer />

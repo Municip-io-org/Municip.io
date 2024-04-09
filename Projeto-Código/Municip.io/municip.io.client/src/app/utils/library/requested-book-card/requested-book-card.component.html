@@ -1,0 +1,136 @@
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-content title="Requisitar o livro {{bookRequest.book.title}}"
+                      message="Insira os dados para realizar a requisição
+                    para {{bookRequest.citizen.firstName}} {{bookRequest.citizen.surname}}"
+                      confirmButtonClass="disabled:cursor-not-allowed"
+                      [confirmButtonDisabled]="!borrowForm.valid"
+                      (cancel)="closeDialog()"
+                      (confirm)="borrowBook()">
+    <form [formGroup]="borrowForm" class="mt-5">
+      <div class="h-28 w-full">
+        <app-input-title class="">Data de Retorno</app-input-title>
+        <div class="flex items-center">
+          <app-date-picker [date]="returnDate" name="returnDate" class="w-3/5"
+                           [minDate]="minDate" />
+
+          <app-tooltip [tooltipText]="'Utilize o seletor para a inserção da data'"></app-tooltip>
+        </div>
+        <div class="text-red-500 font-bold py-2" *ngIf="returnDate?.touched && returnDate?.invalid">
+          <div *ngIf="returnDate?.errors?.['required'] ">Data Obrigatória</div>
+        </div>
+      </div>
+    </form>
+  </app-dialog-content>
+</ng-container>
+<ng-container *ngIf="isDialogOpenOperation">
+  <app-dialog-message (confirm)="closeDialogOperation()" title="Sucesso" message="Operação realizada com sucesso"
+                      [isConfirm]=true></app-dialog-message>
+</ng-container>
+
+<ng-container *ngIf="isDialogOpenUserInfo">
+  <app-userinfodialog [user]="citizen" (close)="closeDialogUserInfo()"></app-userinfodialog>
+</ng-container>
+<div class="flex bg-white rounded-xl shadow-2xl  hover:shadow-xl h-44">
+  <img [src]="book.coverImage" alt="cover" (click)="goToBookDetail()"
+       class="w-36 h-52 object-cover rounded-xl
+       self-center shadow-2xl cursor-pointer
+       " />
+  <div class="px-12 py-8 flex justify-between items-center gap-8
+       w-full
+       ">
+    <div class="flex">
+
+      <div class="flex flex-col space-y-4">
+        <div class="max-w-[35rem] cursor-pointer" (click)="goToBookDetail()">
+          <h1 class="text-3xl font-roboto font-semibold text-municip-highlight-black truncate">
+            {{ book.title }}
+          </h1>
+          <h3 class="text-base font-inter font-bold text-gray-500 truncate">
+            <ng-container *ngFor="let author of book.author; let last = last ">
+              <span>{{author}}<ng-container *ngIf="!last">,&nbsp;</ng-container></span>
+            </ng-container>
+          </h3>
+        </div>
+        <div class="font-inter text-base hover:cursor-pointer w-fit" *ngIf="showActions" (click)="openDialogUserInfo()">
+          <h2 *ngIf="this.bookRequest.status === BookRequestStatus().Reserved"
+              class="inline">
+            Reservado Por:
+          </h2>
+          <h2 *ngIf="this.bookRequest.status !== BookRequestStatus().Reserved"
+              class="inline">
+            Requisitado por
+          </h2>
+          <img class="ml-2 mr-1 size-14 rounded-full inline"
+               alt="profile image" [src]="bookRequest.citizen.photo" />
+          <h2 class="inline">{{bookRequest.citizen.firstName}} {{bookRequest.citizen.surname}}</h2>
+        </div>
+
+      </div>
+    </div>
+    <div class="flex items-center">
+
+
+      <div *ngIf="this.bookRequest.status === BookRequestStatus().Reserved" class="flex flex-col w-fit space-y-5">
+        <div class="flex flex-col items-center">
+          <p class="font-inter">Tempo Restante: {{ getTimeLeft(bookRequest.reservationLimitDate!)  }}</p>
+          <div class="flex justify-center rounded-md bg-opacity-35 {{ getStatusClass() }}
+               w-44
+               ">
+            <p class="font-inter font-semibold">{{ getStatusString(this.bookRequest.status) }}</p>
+          </div>
+        </div>
+        <div class="w-full flex space-x-10 justify-center" *ngIf="showActions">
+          <button (click)="openDialog()" class="bg-green-200 size-10 rounded-xl group">
+            <i class="fa-solid fa-check fa-2xl text-green-500 group-hover:text-green-700
+               transition-all duration-500 ease-in-out
+               "></i>
+          </button>
+          <button (click)="denyRequest()" class="bg-red-200 size-10 rounded-xl group">
+            <i class="fa-solid fa-xmark fa-2xl text-red-500 group-hover:text-red-700
+               transition-all duration-500 ease-in-out"></i>
+          </button>
+        </div>
+        <div *ngIf="!showActions" class="w-full flex space-x-10 justify-center">
+          <button (click)="cancelRequest()" class="bg-red-200 size-10 rounded-xl group">
+            <i class="fa-solid fa-xmark fa-2xl text-red-500 group-hover:text-red-700
+       transition-all duration-500 ease-in-out"></i>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="this.bookRequest.status !== BookRequestStatus().Reserved" class="flex
+           w-fit space-x-10">
+        <button *ngIf="this.bookRequest.status === BookRequestStatus().Delayed && showActions"
+                class="flex flex-col items-center
+                hover:bg-gray-300 rounded-full h-fit p-2
+                transition-all duration-500 ease-in-out
+                "
+                (click)="sendDelayedEmail()">
+          <img src="assets/images/library/SendNotify.svg" alt="Send Notification"
+               class="size-7" />
+          <p class="text-sm font-inter">Notificar</p>
+        </button>
+        <div class="flex flex-col space-y-5">
+          <div class="flex flex-col items-center">
+            <p *ngIf="this.bookRequest.status !== BookRequestStatus().Denied && this.bookRequest.status !== BookRequestStatus().Delivered "
+               class="font-inter">Entregar até: {{ bookRequest.returnDate | date:'dd/MM/yyyy'  }}</p>
+            <p *ngIf="this.bookRequest.status === BookRequestStatus().Delivered"
+               class="font-inter">Entregue em: {{ bookRequest.deliveredDate| date:'dd/MM/yyyy'  }}</p>
+
+            <div class="flex justify-center rounded-md bg-opacity-35 {{ getStatusClass() }}
+                 w-44
+                 ">
+              <p class="font-inter font-semibold">{{ getStatusString(this.bookRequest.status) }}</p>
+            </div>
+          </div>
+          <div class="flex justify-center items-center flex-col" *ngIf="showActions">
+            <app-black-btn-icon-text altImage="Receive Book"
+                                     image="assets/images/library/ReturnBook-white.png"
+                                     (buttonClick)="deliverBook()">
+              Receber
+            </app-black-btn-icon-text>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

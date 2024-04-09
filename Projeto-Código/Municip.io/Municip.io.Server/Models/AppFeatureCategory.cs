@@ -6,6 +6,7 @@
         Events,
         News,
         Transports,
+        Library
     }
     //string values to it
     public static class AppFeatureCategoryExtensions
@@ -22,6 +23,8 @@
                     return "News";
                 case AppFeatureCategory.Transports:
                     return "Transports";
+                case AppFeatureCategory.Library:
+                    return "Library";
                 default:
                     return "Unknown";
             }

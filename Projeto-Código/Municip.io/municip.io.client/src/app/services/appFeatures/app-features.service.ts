@@ -98,6 +98,8 @@ export class AppFeaturesService {
         return 2;
       case 'Transports':
         return 3;
+      case 'Library':
+        return 4;
       default:
         return -1;
     }
@@ -123,5 +125,6 @@ export enum AppFeatureCategory {
   Events = "Events",
   News = "News",
   Transports = "Transports",
+  Library = "Library",
   Unknown = "Unknown"
 }

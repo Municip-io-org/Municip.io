@@ -46,6 +46,10 @@ export class CreateEventComponent implements OnInit {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
+  minDateRegistration: Date = new Date();
+  minDateEvent: Date = new Date();
+
+
   /**
    * Construtor do componente.
    * @param dateAdapter
@@ -58,16 +62,15 @@ export class CreateEventComponent implements OnInit {
   ) {
     // Set the locale to pt in the calendar
     this.dateAdapter.setLocale('pt');
-
-
-
-
   }
 
   /**
    * Método onInit 
    */
   ngOnInit(): void {
+    this.minDateRegistration.setDate(new Date().getDate() - 2);
+    this.minDateEvent.setDate(this.minDateRegistration.getDate() + 1);
+
     this.editor = new Editor();
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
@@ -78,6 +81,15 @@ export class CreateEventComponent implements OnInit {
       });
 
     });
+
+    //when the user changes de end date of registration, the start date of the event should be updated
+    this.eventForm.get('eventRegistration')?.valueChanges.subscribe((value) => {
+      if (value.endDate) {
+
+        this.minDateEvent = new Date(value.endDate);
+        this.minDateEvent.setDate(this.minDateEvent.getDate() + 1);
+      }
+    })
 
   }
 
