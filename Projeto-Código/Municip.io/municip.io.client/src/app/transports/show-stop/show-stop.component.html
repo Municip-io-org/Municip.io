@@ -5,7 +5,7 @@
     <p class="text-sm">{{calculateTimeRemaining(stopTime)}}</p>
   </div>
   <div class="flex  justify-between items-center">
-    <h1 class="flex text-municip-normal-black group-hover:underline "> {{stopName}}</h1>
+    <h1 class="flex text-municip-normal-black group-hover:underline notranslate "> {{stopName}}</h1>
     <div [ngClass]="{'opacity-30': stopMunicipality !== userMunicipality, 'pointer-events-none': stopMunicipality !== userMunicipality}"
          class="bg-gray-200 rounded-md p-1 size-8 cursor-pointer" (click)="stopMunicipality === userMunicipality ? redirectToStop() : null">
       <img alt="arrow" src="assets/images/icons/arrow.png" class="size-5" />
