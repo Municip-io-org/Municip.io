@@ -159,24 +159,17 @@ namespace Municip.io.Server.Controllers
                 return NotFound(new { message = "Não foi possível encontrar o livro" });
             }
 
-            var requests = await _context.BookRequests.Include(b => b.Book).Where(br => br.Book.Id == bookId).ToListAsync();
+            var requests = await _context.BookRequests.AnyAsync(br => br.Book.Id == bookId);
 
-            if (requests.Any())
+            if (requests)
             {
-                if (requests.All(br => br.Status == BookRequestStatus.Delivered))
-                {
-                    book.Status = BookStatus.Unavailable;
-                    await _context.SaveChangesAsync();
-                    return Ok(new { message = "O livro foi removido com sucesso" });
-                }
-                else
-                {
-                    return BadRequest(new { message = "Não é possível excluir o livro, porque existem pedidos deste livro pendentes." });
-                }
+                book.Status = BookStatus.Unavailable;
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "O livro foi marcado como indisponível porque existem pedidos deste livro." });
             }
             else
             {
-                book.Status = BookStatus.Unavailable;
+                _context.Books.Remove(book);
                 await _context.SaveChangesAsync();
                 return Ok(new { message = "O livro foi removido com sucesso" });
             }
@@ -286,13 +279,6 @@ namespace Municip.io.Server.Controllers
             var bookRequests = _context.BookRequests.Include(b => b.Book).Include(b => b.Citizen).ToList();
             return Ok(bookRequests);
         }
-
-
-
-
-
-
-
 
 
         //get requests by municipality

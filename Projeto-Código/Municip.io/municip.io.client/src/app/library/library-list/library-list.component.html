@@ -3,6 +3,9 @@
 <app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" title="Biblioteca de {{municipality}}"
                     [text]="'Consulte os Livros disponiveis na biblioteca'"/>
 
+
+
+
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-20 gap-y-20 min-h-[28rem]">
   <div class="flex items-center justify-between space-x-4 -mt-[3rem]">
     <div class="relative w-full">
@@ -14,21 +17,71 @@
         <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por livros"
                class="pl-10 px-4 py-2 border rounded-2xl w-full transition duration-300 hover:border-black">
       </div>
+      <div *ngIf="filterWindow" class="flex justify-center pb-3">
+
+        <div class="flex flex-wrap border-solid border-gray-200 border-2 rounded-[0.8rem] space-y-5 relative pb-7 w-[45rem] pt-4">
+
+          <div class="flex col w-full">
+            <div class="w-full ml-10">
+              <app-input-title class="text-[2vh] ml-1/4">ISBN</app-input-title>
+              <input type="text" id="isbnSearch" [(ngModel)]="isbnSearch" placeholder="Procurar por ISBN"
+                     class="pl-3 px-4 py-2 border rounded-2xl w-[90%] transition duration-300 hover:border-black">
+            </div>
+            <div class="w-full ml-10">
+              <app-input-title class="text-[2vh] ml-1/4">Autor</app-input-title>
+              <input type="text" id="authorSearch" [(ngModel)]="authorSearch" placeholder="Procurar por Autor"
+                     class="pl-3 px-4 py-2 border rounded-2xl w-[90%] transition duration-300 hover:border-black">
+            </div>
+          </div>
+          <div class="flex col w-full">
+            <div class="w-full ml-10">
+              <app-input-title class="text-[2vh] ml-1/4">Data</app-input-title>
+              <div class="dropdown">
+                <select id="dateSearch" [(ngModel)]="dateSearch" class="pr-3 px-4 py-2 border rounded-2xl w-[90%] transition duration-300 hover:border-black"
+                        [class.text-municip-black]="dateSearch != ''" [class.text-gray-400]="dateSearch == ''">
+                  <option value="" [class.text-gray-400]="dateSearch != ''" selected>Procurar por Data</option>
+                  <option *ngFor="let option of dateOptions" [class.text-municip-black]="dateSearch ==''" [value]="option">{{ option }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full ml-10">
+              <app-input-title class="text-[2vh] ml-1/4">Género</app-input-title>
+              <div class="dropdown">
+                <select id="genreSearch" [(ngModel)]="genreSearch" class="pr-3 px-4 py-2 border rounded-2xl w-[90%] transition duration-300 hover:border-black"
+                        [class.text-municip-black]="genreSearch != ''" [class.text-gray-400]="genreSearch == ''">
+                  <option value="" [class.text-gray-400]="genreSearch != ''" selected>Procurar por Género</option>
+                  <option *ngFor="let option of genreOptions" [class.text-municip-black]="genreSearch ==''" [value]="option">{{ option }}</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
       <button type="submit"
               class="absolute h-[2.5rem] w-[6rem] flex justify-center items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded-2xl text-lg transition duration-700 ease-in-out disabled:cursor-not-allowed"
-              style="left: 50%; transform: translateX(-50%);">
+              style="left: 50%; transform: translateX(-50%);"
+              (click)="OpenFilterWindow()">
         Filtros
       </button>
     </div>
   </div>
 
+  <div *ngIf="books.length === 0"
+       class="flex justify-center items-center text-municip-normal-black grow ">
+    <p class="text-[3rem] font-semibold">Não há livros Disponíveis</p>
+  </div>
 
+  <div *ngIf="filteredBooks.length === 0 && books.length !== 0"
+       class="flex justify-center items-center text-municip-normal-black grow ">
+    <p class="text-[3rem] font-semibold">Não há livros correspondentes à pesquisa</p>
+  </div>
 
   <section class="flex flex-wrap justify-around gap-y-16 gap-x-8 ">
     <ng-container *ngFor="let book of filteredBooks">
-      <app-library-card [book]="book" (deleteid)="deleteBook($event)" (editid)="editBook($event)"></app-library-card>
+      <app-library-card [book]="book" (deleteid)="deleteBook($event)" (editid)="editBook($event)" (click)="goToBookPage(book.id)"></app-library-card>
     </ng-container>
-    
+
   </section>
   <div class="flex justify-end ">
     <button type="button" routerLink="/library/create" class="relative h-auto w-[11rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
