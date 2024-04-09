@@ -416,7 +416,21 @@ namespace Municip.ioTest
             
         }
 
+        [Fact]
+        public void Test_GetBookById()
+        {
+            // Arrange
+            int id = 1;
 
+            // Act
+            var actionResult = _bookController.GetBookById(id);
+
+            // Assert
+            Assert.NotNull(actionResult);
+            var result = Assert.IsType<OkObjectResult>(actionResult);
+            var resultBooks = Assert.IsAssignableFrom<Book>(result.Value);
+            Assert.Equal(_books.Find(b => b.Id == id), resultBooks);
+        }
     }
 
 
