@@ -1,7 +1,7 @@
 <div class="border-[0.2rem] border-municip-blue rounded-[1rem]">
-  <div class="relative flex flex-col font-roboto justify-center items-center text-left gap-x-2 max-w-[24rem] h-[33rem] text-[1.063rem] bg-white p-7 rounded-[1rem]">
+  <div class="relative flex flex-col font-roboto justify-center items-center text-left gap-x-2 max-w-[18rem] h-[28rem] text-[1.063rem] bg-white p-7 rounded-[1rem]">
 
-    <div class="absolute -top-3 -left-3">
+    <div class="absolute -top-3 -left-3 ">
       <app-black-btn-icon-text altImage="Editar Livro"
                                image="/assets/images/icons/pencil-white.png"
                                (click)="editCurrent(this)">
@@ -16,22 +16,34 @@
                                (click)="deleteCurrent(this)">
       </app-black-btn-icon-text>
     </div>
+    <div class="h-[18rem] w-48">
+      <img src="{{book.coverImage}}" alt="Foto do Livro" class="object-cover w-full h-full rounded-3xl" />
+    </div>
 
-    <img src="{{book.coverImage}}" alt="Foto do Livro" class="object-cover w-[17rem] h-[25rem] rounded-3xl" />
-    <section class="flex flex-col text-municip-highlight-black ">
-      <p class="font-bold text-center text-[2rem] text-ellipsis overflow-hidden line-clamp-2">{{book.title}}</p>
-      <p class="text-center overflow-hidden pb-5">
-        <ng-container *ngFor="let author of book.author; let last = last">
-          <span>{{ author }}</span>
-          <span *ngIf="!last">, </span>
-        </ng-container>
-      </p>
+    <section class="flex flex-col text-municip-highlight-black">
+      <div class="text-container w-[16rem]">
+        
+          <p class="font-bold text-center text-[1.7rem] text-nowrap h-10 w-15 text-ellipsis overflow-hidden">
+            {{ book.title }}
+          </p>
+       
+        <div class=" text-center text-nowrap text-ellipsis overflow-hidden">
+          <ng-container *ngFor="let author of book.author; let last = last" class="flex justify-center">
+            <span>{{ author }}</span>
+            <span *ngIf="!last">, </span>
+          </ng-container>
+        </div>
+      </div>
 
-      <div class="flex justify-center rounded-md bg-opacity-35 {{getStatusClass()}}">
-        <p class="font-inter font-semibold">{{getStatusString(this.book.status)}}</p>
-
+      <div *ngIf="book.availableCopies != 0" class="flex justify-center rounded-md bg-opacity-35 {{ getStatusClass() }}">
+        <p class="font-inter font-semibold">{{ getStatusString(this.book.status) }}</p>
+      </div>
+      <div *ngIf="book.availableCopies == 0" class="flex justify-center rounded-md bg-opacity-35 bg-[#FF0000] text-[#B02121]">
+        <p class="font-inter font-semibold">Indisponível</p>
       </div>
     </section>
 
+
+
   </div>
-  </div>
+</div>
