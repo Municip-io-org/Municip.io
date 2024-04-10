@@ -155,17 +155,17 @@ namespace Municip.ioTest
                 .UseInternalServiceProvider(serviceProvider)
                 .Options;
 
-            // Inicializar o contexto do banco de dados com dados de teste
             _context = new ApplicationDbContext(options);
-            SeedDatabase();
+            SeedDatabase(); 
+   
+            var httpClientFactory = new FakeHttpClientFactory();
 
-            // Instanciar o controlador BookController com o contexto em memória
-            _bookController = new BookController(_context);
+            
+            _bookController = new BookController(httpClientFactory, _context);
         }
 
         private void SeedDatabase()
         {
-            // Adicionar cidadãos fictícios e livros fictícios ao contexto em memória
             _context.Citizens.AddRange(_citizens);
             _context.SaveChanges();
 
@@ -435,6 +435,15 @@ namespace Municip.ioTest
 
 
 
+    public class FakeHttpClientFactory : IHttpClientFactory
+    {
+        public HttpClient CreateClient(string name)
+        {
+            // Aqui você pode retornar uma instância de HttpClient simulada
+            // para uso nos testes
+            return new HttpClient();
+        }
+    }
 }
 
 
