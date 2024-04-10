@@ -29,7 +29,7 @@ module.exports = {
             transform: "scaleX(1) scaleY(1)",
           },
           "50%": {
-            transform: "scaleX(0.97) scaleY(0.97)",
+            transform: "scaleX(0.95) scaleY(0.95)",
           },
           "100%": {
             transform: "scaleX(1) scaleY(1)",
