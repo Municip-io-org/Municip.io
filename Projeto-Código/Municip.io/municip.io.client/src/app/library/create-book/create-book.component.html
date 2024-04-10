@@ -37,7 +37,10 @@
             <label for="useISBN" class="text-municip-highlight-black text-[1.2rem] font-roboto font-medium">Usar ISBN</label>
 
           </div>
-          <a class="text-municip-highlight-black text-[1.2rem] font-roboto font-medium hover:underline" href="https://isbnsearch.org/">Obter ISBN através do Título do livro</a>
+          <a class="text-municip-highlight-black text-[1.2rem] font-roboto font-medium hover:underline"
+             href="https://isbnsearch.org/"
+             target="_blank">
+          Obter ISBN através do título do livro</a>
         </div>
 
         <div class="absolute font-bold text-red-500" *ngIf="useISBN?.value! && iSBN?.touched && iSBN?.invalid">
