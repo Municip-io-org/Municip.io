@@ -254,7 +254,7 @@ export class CreateBookComponent {
 
   closeDialog() {
     this.isDialogOpen = false;
-    window.location.reload();
+    this.router.navigateByUrl('/library/librarylist');
   }
 
   onISBNChange() {

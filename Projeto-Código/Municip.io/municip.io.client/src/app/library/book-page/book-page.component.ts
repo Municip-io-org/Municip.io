@@ -318,7 +318,7 @@ export class BookPageComponent {
     this.libraryService.removeBook(this.book.id!).subscribe(
       response => {
         if (response && response.body) {
-          this.router.navigateByUrl(`/library/create`);
+          
         } else {
           console.error('Resposta inválida do servidor após a remoção do livro:', response);
 
@@ -345,11 +345,13 @@ export class BookPageComponent {
 
   closeRemoveBookDialog() {
     this.isRemoveBookDialogOpen = false;
+    this.router.navigateByUrl(`/library/librarylist`);
   }
 
   closeDialog() {
     this.isDialogOpen = false;
     this.updateRequest();
+    
   }
 
 
