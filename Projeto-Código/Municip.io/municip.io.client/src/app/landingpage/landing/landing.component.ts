@@ -28,17 +28,7 @@ res => {
         this.municipalities = res;
     
 
-    this.userAuthService.getUserData().subscribe(
-      res => {
-        this.anyUser = res;
-
-        if (this.anyUser.email != null) {
-
-
-          this.router.navigate(['/userpage']);
-        
-        }
-      });
+    
       });
       });
 

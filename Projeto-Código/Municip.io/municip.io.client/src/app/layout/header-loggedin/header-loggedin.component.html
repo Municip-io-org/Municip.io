@@ -31,6 +31,9 @@
                 <a routerLink="/municipal/edit" class="block px-4 py-2 hover:bg-gray-100">Editar Município</a>
               </li>
               <li>
+                <a routerLink="/munadminstatistics" class="block px-4 py-2 hover:bg-gray-100">Estatísticas</a>
+              </li>
+              <li>
                 <a routerLink="/manageAppFeatures" class="block px-4 py-2 hover:bg-gray-100">Editar Funcionalidades</a>
               </li>
             </ng-container>
@@ -39,8 +42,8 @@
         </div>
       </li>
 
-      <li *ngIf="isEventsFeatureActive()" class="group relative" (click)="setActiveDropdown(Dropdowns.Events)">
-        <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
+      <li *ngIf="isEventsFeatureActive() && role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.Events)">
+        <button class="transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Agenda
           <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -79,8 +82,8 @@
 
 
 
-      <li *ngIf="isLibraryFeatureActive()" class="group relative" (click)="setActiveDropdown(Dropdowns.Library)">
-        <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
+      <li *ngIf="isLibraryFeatureActive() && role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.Library)">
+        <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Biblioteca
           <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -113,8 +116,8 @@
         </div>
       </li>
 
-      <li *ngIf="isDocumentsFeatureActive()" class="group relative" (click)="setActiveDropdown(Dropdowns.Documents)">
-        <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
+      <li *ngIf="isDocumentsFeatureActive() && role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.Documents)">
+        <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Documentos
           <span *ngIf="role ===Roles.Municipal && numberOfRequests != 0" class="ml-2 rounded bg-yellow-500 px-2 py-1 text-xs font-bold text-yellow-900">{{numberOfRequests}}</span>
 
@@ -155,8 +158,8 @@
         </div>
       </li>
 
-      <li *ngIf="isNewsFeatureActive()" class="group relative" (click)="setActiveDropdown(Dropdowns.News)">
-        <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
+      <li *ngIf="isNewsFeatureActive() && role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.News)">
+        <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Notícias
           <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -176,8 +179,8 @@
         </div>
       </li>
 
-      <li *ngIf="isTransportsFeatureActive()" class="group relative" (click)="setActiveDropdown(Dropdowns.Transports)">
-        <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
+      <li *ngIf="isTransportsFeatureActive() && role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.Transports)">
+        <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Transportes
           <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>

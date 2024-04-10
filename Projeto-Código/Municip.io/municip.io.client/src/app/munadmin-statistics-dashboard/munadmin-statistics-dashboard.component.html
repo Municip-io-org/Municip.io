@@ -4,14 +4,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
 </head>
-<header class="font-">
-  <div class="flex items-center w-full shadow-md py-[0.7rem] px-3 font-poppins">
 
-    <img class="w-56 pl-[2rem]"
-         alt="logo"
-         src="/assets/images/logos/logo-black-right.png" />
-  </div>
-</header>
+<app-header-loggedin></app-header-loggedin>
 
 <app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" [title]="'Estatísticas de Município'"
                     [text]="'Consulte os dados sobre a utilização da municip.io, monitorizando o desempenho da ferramenta junto dos municípios e utilizadores'" />
@@ -86,7 +80,7 @@
 
 
         </div>
-  
+
 
       </section>
 
@@ -196,10 +190,9 @@
 
 
 
-        <div class="flex flex-col md:col-span-1 row-span-8 bg-white shadow rounded-lg">
+        <div class="flex flex-col col-span-1 row-span-8 bg-white shadow rounded-lg ">
           <div class="flex row justify-between px-6 py-5 border-b border-gray-100">
             <p class="font-semibold">Biblioteca</p>
-
             <div class="flex row">
               <button type="button" class=" flex h-[0.1rem] w-[0.001rem] text-municip-blank bg-gray-300 to-municip-blue border-0 py-3 px-5 focus:outline-none text-lg justify-center items-center bg-[position:_0%_0%] rounded-l hover:bg-[position:_100%_100%] bg-[size:_200%] transition-all duration-300" [ngClass]="{'bg-gradient-to-tl from-municip-light-blue': selectedButton === 1, 'bg-gray-300': selectedButton !== 1}" (click)="selectButton(1)">
                 1
@@ -252,18 +245,23 @@
             </div>
           </div>
 
-          <div *ngIf="selectedButton === 2" class="h-1 mb-5">
-
-            <app-books-genre-chart [books]="books"></app-books-genre-chart>
-
+          <div *ngIf="selectedButton === 2" class="flex justify-center ">
+            <div class="h-9 w-[18.6rem] ">
+            <div class="flex flex-wrap items-center justify-center px-4 text-gray-400 text-3xl font-semibold transition duration-200 rounded-md col-span-1 row-span-2">
+              <app-books-genre-chart [books]="books"></app-books-genre-chart>
+            </div>
+            </div>
           </div>
 
-          <div *ngIf="selectedButton === 3" class="h-1 mb-5">
+          <div *ngIf="selectedButton === 3" class="flex justify-center">
+            <div class="h-9 w-[18.6rem] ">
+              <div class="flex items-center justify-center px-4 text-gray-400 text-3xl font-semibold transition duration-200 rounded-md ">
 
-            <app-borrowed-books-chart [borrowedbooks]="bookrequests" [books]="books"></app-borrowed-books-chart>
-
+                <app-borrowed-books-chart [borrowedbooks]="bookrequests" [books]="books"></app-borrowed-books-chart>
+              </div>
+              </div>
+            </div>
           </div>
-        </div>
       </section>
 
 
@@ -298,7 +296,7 @@
 
 
 
-      
+
 
           </div>
 

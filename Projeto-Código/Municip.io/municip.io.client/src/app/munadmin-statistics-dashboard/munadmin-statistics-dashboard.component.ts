@@ -12,7 +12,7 @@ import { Book, BookRequest, LibraryService } from '../services/library/library.s
   styleUrl: './munadmin-statistics-dashboard.component.css'
 })
 export class MunadminStatisticsDashboardComponent {
-  selectedButton: number = 1;
+  selectedButton: number = 2;
   orderOptions: any[] = [{ label: '1', value: true }, { label: '2', value: false }];
 
   citizens: any[] = [];

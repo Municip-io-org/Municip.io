@@ -22,9 +22,25 @@ module.exports = {
         "open-sans": ["Open Sans"],
         "poppins": ["Poppins"],
         "varela-round": ['Varela Round']
-      }
-    },
+      },
+      keyframes: {
+        myBounce: {
+          "0%": {
+            transform: "scaleX(1) scaleY(1)",
+          },
+          "50%": {
+            transform: "scaleX(0.97) scaleY(0.97)",
+          },
+          "100%": {
+            transform: "scaleX(1) scaleY(1)",
+          },
+        },
 
+      },
+      animation: {
+        "myBounceAnim": "myBounce 8s linear infinite",
+      },
+    },
   },
   plugins: [],
 }
