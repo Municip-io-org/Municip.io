@@ -12,7 +12,7 @@
         </a>
       </li>
 
-      <li *ngIf="role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.Municipality)">
+      <li *ngIf="role !== Roles.Admin && role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.Municipality)">
         <button class="transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Município
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -31,6 +31,9 @@
                 <a routerLink="/municipal/edit" class="block px-4 py-2 hover:bg-gray-100">Editar Município</a>
               </li>
               <li>
+                <a routerLink="/munadminstatistics" class="block px-4 py-2 hover:bg-gray-100">Estatísticas</a>
+              </li>
+              <li>
                 <a routerLink="/manageAppFeatures" class="block px-4 py-2 hover:bg-gray-100">Editar Funcionalidades</a>
               </li>
             </ng-container>
@@ -39,7 +42,7 @@
         </div>
       </li>
 
-      <li *ngIf="isEventsFeatureActive()" class="relative group" (click)="setActiveDropdown(Dropdowns.Events)">
+      <li *ngIf="isEventsFeatureActive() && role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.Events)">
         <button class="transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Agenda
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -79,7 +82,7 @@
 
 
 
-      <li *ngIf="isLibraryFeatureActive()" class="relative group" (click)="setActiveDropdown(Dropdowns.Library)">
+      <li *ngIf="isLibraryFeatureActive() && role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.Library)">
         <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Biblioteca
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -110,7 +113,7 @@
         </div>
       </li>
 
-      <li *ngIf="isDocumentsFeatureActive()" class="relative group" (click)="setActiveDropdown(Dropdowns.Documents)">
+      <li *ngIf="isDocumentsFeatureActive() && role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.Documents)">
         <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Documentos
           <span *ngIf="role ===Roles.Municipal && numberOfRequests != 0" class="bg-yellow-500 text-yellow-900 px-2 py-1 ml-2 rounded text-xs font-bold">{{numberOfRequests}}</span>
@@ -152,7 +155,7 @@
         </div>
       </li>
 
-      <li *ngIf="isNewsFeatureActive()" class="relative group" (click)="setActiveDropdown(Dropdowns.News)">
+      <li *ngIf="isNewsFeatureActive() && role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.News)">
         <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Notícias
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -173,7 +176,7 @@
         </div>
       </li>
 
-      <li *ngIf="isTransportsFeatureActive()" class="relative group" (click)="setActiveDropdown(Dropdowns.Transports)">
+      <li *ngIf="isTransportsFeatureActive() && role !== Roles.Admin" class="relative group" (click)="setActiveDropdown(Dropdowns.Transports)">
         <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
           Transportes
           <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
