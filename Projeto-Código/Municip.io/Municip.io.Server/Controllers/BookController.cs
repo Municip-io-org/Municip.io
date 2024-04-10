@@ -59,11 +59,11 @@ namespace Municip.io.Server.Controllers
                     }
 
                     // Adicionar o novo livro ao contexto e salvar as alterações no banco de dados
-                    _context.Books.Add(newBook);
+                    var created = _context.Books.Add(newBook);
                     _context.SaveChanges();
 
                     // Retornar um Ok para indicar que o livro foi adicionado com sucesso
-                    return Ok();
+                    return Ok(created.Entity);
                 }
 
                 return BadRequest(new { message = "Modelo inválido", ModelState });
