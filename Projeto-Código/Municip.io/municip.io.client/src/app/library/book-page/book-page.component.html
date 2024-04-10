@@ -1,4 +1,4 @@
-﻿<app-header-loggedin></app-header-loggedin>
+<app-header-loggedin></app-header-loggedin>
 
 
 <ng-container *ngIf="isDialogOpen">
@@ -126,9 +126,9 @@
         </ng-container>
 
         <ng-container *ngIf="book.availableCopies <= 0">
-          <div class="flex w-fit justify-center space-x-4">
+          <div class="flex w-fit items-center justify-center space-x-4">
             <div class="size-10 min-w-10 rounded-full bg-red-600"></div>
-            <p>Indisponível para reserva</p>
+            <p class="font-bold">Indisponível para reserva</p>
           </div>
         </ng-container>
       </ng-container>
