@@ -5,7 +5,7 @@
 </head>
 <app-header-loggedin />
 <app-smaller-banner title="Documentos do Município"
-                    image={{municipalityImage}}></app-smaller-banner>
+                    [image]="municipalityImage ? municipalityImage : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
 <div class="container mx-auto px-4 sm:px-8 mb-40">
   <div class="w-44 mt-10">
     <app-black-btn-icon-text altImage="Voltar"

@@ -48,14 +48,17 @@
 
       <app-datetimepicker [titleDate]="'Período de Inscrição'" [formGroup]="eventForm"
                           [StartHourPlaceholder]="'Início de Incrição'" [EndHourPlaceholder]="'Fim de Inscrição'"
-                          [formReceived]="eventRegistration" />
+                          [formReceived]="eventRegistration"
+                          [minDate]="minDateRegistration"
+                          />
     </div>
 
     <div class="w-full lg:w-5/12 mb-4 p-6 shadow-2xl rounded-xl">
 
       <app-datetimepicker [titleDate]="'Período de Evento'" [formGroup]="eventForm"
                           [StartHourPlaceholder]="'Início do Evento'" [EndHourPlaceholder]="'Fim do Evento'"
-                          [formReceived]="eventDate" />
+                          [formReceived]="eventDate"
+                          [minDate]="minDateEvent"/>
     </div>
   </div>
   <div class="flex items-center justify-between ">

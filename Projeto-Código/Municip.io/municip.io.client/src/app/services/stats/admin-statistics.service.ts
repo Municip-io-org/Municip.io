@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { BookRequest } from '../library/library.service';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +54,11 @@ return this.http.get<any>('api/stats/getAllMunicipalities');
     return this.http.get<any>('api/stats/getWaitingForPaymentRequestsByMunicipality', { params: params });
   }
 
+ 
 
+  getRequestsByMunicipality(municipality: string): Observable<BookRequest[]> {
+    return this.http.get<BookRequest[]>(`api/Book/GetRequestsByMunicipality?municipality=${municipality}`);
+  }
 
 
 

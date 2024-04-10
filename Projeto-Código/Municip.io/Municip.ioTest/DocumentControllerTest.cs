@@ -19,7 +19,7 @@ namespace Municip.ioTest
 
         public DocumentControllerTest()
         {
-            // Setup DbContext
+
             var serviceProvider = new ServiceCollection()
                 .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
@@ -31,13 +31,13 @@ namespace Municip.ioTest
 
             _context = new ApplicationDbContext(options);
 
-            // Setup UserManager with mock UserStore
+
             var _userManagerMock = new Mock<UserManager<IdentityUser>>(
                                Mock.Of<IUserStore<IdentityUser>>(), null, null, null, null, null, null, null, null);
 
             SeedDatabase();
 
-            // Instantiate the controller with the mocked dependencies
+
             _controller = new DocumentController(_context);
             _controller2 = new DocumentTemplateStatusController(_context);
             _controller3 = new AppFeatureController(_context);

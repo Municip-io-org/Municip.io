@@ -5,6 +5,7 @@ import { UserAuthService } from '../../services/user-auth.service';
 import { Editor, Toolbar } from 'ngx-editor';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
+import { BookLanguage } from '../../../assets/bookLanguages.enum';
 
 @Component({
   selector: 'app-create-book',
@@ -17,8 +18,7 @@ export class CreateBookComponent {
   categories: string[] = [];
 
 
-  book: Book = {
-     
+  book: Book = {  
       isbn: '',
       title: '',
       author: [],
@@ -267,33 +267,22 @@ export class CreateBookComponent {
 
       console.log(this.iSBN?.value);
 
-
       this.libraryService.getBookInfoAPI(this.iSBN?.value!.toString()).subscribe(
         (bookRes) => { 
           if (bookRes !== null) {
           
             const book: Book = bookRes[0];
-
-            console.log(book.title);
             this.title?.setValue(book.title);
             this.publisher?.setValue(book.publisher);
             this.sinopsis?.setValue(book.sinopsis);
-            this.coverImageUrl?.setValue(book.coverImage);
-            this.language?.setValue(book.language);
+            this.coverImageUrl?.setValue(book.coverImage);  
+            this.setLanguage(book.language);
             this.edition?.setValue(book.edition);
-
-
             this.setPublicationDate(book.publicationDate.toString());
-
-
             this.copies?.setValue(book.copies.toString());
- 
             this.addAuthorsFromBookInfo(book.author);
             this.addGenreFromBookInfo(book.genre);
 
-
-
-            console.log(this.bookForm);
           } else {
             console.log('Nenhum livro encontrado com o ISBN fornecido.');
           }
@@ -319,6 +308,14 @@ export class CreateBookComponent {
   setPublicationDate(bookPublicationDate: string): void {
     const formattedDate = this.setUpDate(bookPublicationDate);
     this.publicationDate?.setValue(formattedDate);
+  }
+
+  setLanguage(language: string): void {
+    type BookLanguageKeys = keyof typeof BookLanguage;
+
+    const languageCode = language as BookLanguageKeys;
+
+    this.language?.setValue(BookLanguage.hasOwnProperty(languageCode) ? BookLanguage[languageCode] : "Inglês");
   }
 
   addAuthorsFromBookInfo(authors: string[]) {
@@ -475,5 +472,8 @@ export class CreateBookComponent {
   get coverImageUrl() {
     return this.bookForm.get('coverImageUrl');
   }
+
+
+  
 }
 

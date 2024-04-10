@@ -129,12 +129,17 @@ import { CitizensMapComponent } from './admin-statistics-dashboard/citizens-map/
 import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
 import { DialogContentComponent } from './utils/dialog/dialog-content/dialog-content.component';
 import { RegisteredMunUsersGraphComponent } from './munadmin-statistics-dashboard/registered-mun-users-graph/registered-mun-users-graph.component';
+import { BooksGenreChartComponent } from './admin-statistics-dashboard/books-genre-chart/books-genre-chart.component';
 import { AddGenreDialogComponent } from './utils/library/add-genre-dialog/add-genre-dialog.component';
 import { MyRequestsComponent } from './library/my-requests/my-requests.component';
+import { LibraryListComponent } from './library/library-list/library-list.component';
+import { LibraryCardComponent } from './utils/library/library-card/library-card.component';
+import { BorrowedBooksChartComponent } from './admin-statistics-dashboard/borrowed-books-chart/borrowed-books-chart.component';
 import { BookPageComponent } from './library/book-page/book-page.component';
 import { EditBookComponent } from './library/edit-book/edit-book.component';
 import { LibraryHomepageComponent } from './library/library-homepage/library-homepage.component';
 import { LibraryMapComponent } from './library/library-map/library-map.component';
+import { MunicipalCalendarComponent } from './events/municipal-calendar/municipal-calendar.component';
 
 
 
@@ -246,12 +251,17 @@ registerLocaleData(localePt, 'pt-PT');
     MunadminStatisticsDashboardComponent,
     DialogContentComponent,
     RegisteredMunUsersGraphComponent,
+    BooksGenreChartComponent,
     AddGenreDialogComponent,
     MyRequestsComponent,
+    LibraryListComponent,
+    LibraryCardComponent,
+    BorrowedBooksChartComponent,
     BookPageComponent,
     EditBookComponent,
     LibraryHomepageComponent,
     LibraryMapComponent,
+    MunicipalCalendarComponent,
 
     
   ],

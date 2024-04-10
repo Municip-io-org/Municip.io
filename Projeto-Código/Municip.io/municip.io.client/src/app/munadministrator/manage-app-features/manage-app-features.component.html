@@ -2,7 +2,7 @@
 
 
 <app-smaller-banner title="Alterar Funcionalidades"
-                   image="{{municipality.landscapePhoto}} ? {{municipality.landscapePhoto}} : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
+                   [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
 
 
 <ng-container *ngIf="isDialogOpen">
@@ -39,7 +39,7 @@
 
       <div class="flex px-6 py-6 gap-4 bg-white rounded-xl drop-shadow hover:drop-shadow-2xl transition duration-500 ease-in-out justify-center items-center">
 
-        <img src="/assets/images/icons/event-blue.png" alt="Library" class="size-24" />
+        <img src="/assets/images/icons/book-blue.png" alt="Library" class="size-24" />
 
         <div class="flex flex-col items-center justify-center">
 

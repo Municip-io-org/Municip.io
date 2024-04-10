@@ -13,7 +13,7 @@
 </ng-container>
 
 <app-smaller-banner title={{event.title}}
-                    image="{{municipality.landscapePhoto}} ? {{municipality.landscapePhoto}} : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
+                    [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
   <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
     <app-black-btn-icon-text altImage="Editar Evento"
@@ -29,7 +29,7 @@
       Remover Evento
     </app-black-btn-icon-text>
   </div>
-  <img src="{{event.image}} ? {{event.image}} : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="Imagem do evento"
+  <img [src]="event.image ? event.image : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="Imagem do evento"
        class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center" />
   <section class="flex -mt-12 text-municip-gray justify-evenly text-[1.063rem] ">
     <div class="flex justify-center gap-x-2">
@@ -70,12 +70,21 @@
         <img src="/assets/images/icons/user.png" alt="Número de inscrições" class="size-10 mr-2" />
         {{ event.nRegistrations }}/{{ event.capacity }} inscritos
       </div>
+
+      <button *ngIf="isMunAdmin" (click)="openEnrolledDialog()" class="rounded-lg px-4 py-2 border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-gray-100 duration-300">Ver Inscritos</button>
+
     </div>
   </section>
+
   <section innerHTML="{{event.description}}" class="text-left text-municip-normal-black text-[1.25rem] px-[3rem] pb-[3rem]">
     
   </section>
 </div>
+
+<ng-container *ngIf="isEnrolledDialogOpen">
+  <app-dialog-message [title]="dialogEnrolledTitle" [message]="dialogEnrolledMessage" (confirm)="closeDialog()"
+                      [isConfirm]="isConfirm"></app-dialog-message>
+</ng-container>
 
 <app-eventsmap [EventAddress]="event.local + ' ' + municipality.name"></app-eventsmap>
 <app-footer></app-footer>

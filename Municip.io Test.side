@@ -2,7 +2,7 @@
   "id": "8b864d39-9231-4e16-8a7c-fecaeef7ee09",
   "version": "2.0",
   "name": "Municip.io Test",
-  "url": "https://municip.io:4200/documents/my",
+  "url": "https://municip.io:4200/library/requests",
   "tests": [{
     "id": "13345bfd-82bd-45c0-852b-404ee0d246ae",
     "name": "Create municipality",
@@ -2969,6 +2969,505 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "876faf46-cf57-4638-8b17-306318c2a68c",
+    "name": "RFB1 - Criar Livro",
+    "commands": [{
+      "id": "25130c29-9c1e-42f4-9bb6-de0ad3befd3e",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/library/create",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b7d92d98-1aa1-4a2c-927c-2d794e42c6d2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1192x730",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e854c6f9-a1fe-4415-a0f9-81e96c046b9b",
+      "comment": "",
+      "command": "click",
+      "target": "id=iSBN",
+      "targets": [
+        ["id=iSBN", "id"],
+        ["name=iSBN", "name"],
+        ["css=#iSBN", "css:finder"],
+        ["xpath=//input[@id='iSBN']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3f7c78f-2d81-4cda-bb60-20aa75c27943",
+      "comment": "",
+      "command": "type",
+      "target": "id=iSBN",
+      "targets": [
+        ["id=iSBN", "id"],
+        ["name=iSBN", "name"],
+        ["css=#iSBN", "css:finder"],
+        ["xpath=//input[@id='iSBN']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "9781781104057"
+    }, {
+      "id": "126b5f9b-e136-4461-ab37-7ab40d1e619d",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.pb-\\[4rem\\]",
+      "targets": [
+        ["css=.pb-\\[4rem\\]", "css:finder"],
+        ["xpath=//app-create-book/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c5a5eb92-617c-4114-bb71-aaca6aaf3d20",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=app-spinner",
+      "targets": [
+        ["css=app-spinner", "css:finder"],
+        ["xpath=//app-spinner", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "abd594f8-d423-435f-a8d7-cb0f7caaf342",
+      "comment": "",
+      "command": "click",
+      "target": "css=body > div",
+      "targets": [
+        ["css=body > div", "css:finder"],
+        ["xpath=//div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "05e41edc-80f8-4742-bc80-f3ede2ef7cb3",
+      "comment": "",
+      "command": "click",
+      "target": "id=edition",
+      "targets": [
+        ["id=edition", "id"],
+        ["name=edition", "name"],
+        ["css=#edition", "css:finder"],
+        ["xpath=//input[@id='edition']", "xpath:attributes"],
+        ["xpath=//section[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "29c2549a-e1c4-4348-95d5-2f8d0f280f16",
+      "comment": "",
+      "command": "type",
+      "target": "id=edition",
+      "targets": [
+        ["id=edition", "id"],
+        ["name=edition", "name"],
+        ["css=#edition", "css:finder"],
+        ["xpath=//input[@id='edition']", "xpath:attributes"],
+        ["xpath=//section[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "2951cef6-b30c-4db3-9cd8-bc3aa642692d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pt-\\[1rem\\]",
+      "targets": [
+        ["css=.pt-\\[1rem\\]", "css:finder"],
+        ["xpath=//form", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a8c5b05-4696-43bb-ae5f-b69545faee46",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(5)",
+      "targets": [
+        ["css=.flex:nth-child(5)", "css:finder"],
+        ["xpath=//section[5]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "74d890c0-c590-4ce0-90af-a89b4a6e12fb",
+      "comment": "",
+      "command": "type",
+      "target": "id=copies",
+      "targets": [
+        ["id=copies", "id"],
+        ["name=copies", "name"],
+        ["css=#copies", "css:finder"],
+        ["xpath=//input[@id='copies']", "xpath:attributes"],
+        ["xpath=//section[5]/div[2]/input", "xpath:position"]
+      ],
+      "value": "10"
+    }, {
+      "id": "87979add-e8a1-403a-96c2-b052a7d5d70e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(5)",
+      "targets": [
+        ["css=.flex:nth-child(5)", "css:finder"],
+        ["xpath=//section[5]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "53d6ac11-0424-4a4b-a867-5aa6cfbcb4ce",
+      "comment": "",
+      "command": "click",
+      "target": "css=.-bottom-\\[0rem\\]",
+      "targets": [
+        ["css=.-bottom-\\[0rem\\]", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Criar Livro')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2c1f223b-6aa6-4c64-8a2e-b44aac277342",
+      "comment": "",
+      "command": "click",
+      "target": "css=.inline-flex",
+      "targets": [
+        ["css=.inline-flex", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Proceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "30ec61c7-038a-4073-8674-45774a447508",
+    "name": "RFB1 - Remoção de um Livro",
+    "commands": [{
+      "id": "016de867-214b-4a21-a86c-c2ccd9e3e1a5",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/library/librarylist",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2cad6f95-4b8e-4687-9c80-1d82a8283356",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ca97341e-8924-4aff-a60c-5236ccf8396a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-\\[17rem\\]",
+      "targets": [
+        ["css=.w-\\[17rem\\]", "css:finder"],
+        ["xpath=//img[@alt='Foto do Livro']", "xpath:img"],
+        ["xpath=//app-library-card/div/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3420b9ab-eb95-467b-a823-8ba7ff272968",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-\\[1\\.063rem\\]:nth-child(2) .text-municip-blank",
+      "targets": [
+        ["css=.text-\\[1\\.063rem\\]:nth-child(2) .text-municip-blank", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[2]/app-black-btn-icon-text/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Remover livro')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "14543e40-e034-42ba-8e02-0c2d5cea7b3a",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.text-\\[1\\.063rem\\]:nth-child(2) .text-municip-blank",
+      "targets": [
+        ["css=.text-\\[1\\.063rem\\]:nth-child(2) .text-municip-blank", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[2]/app-black-btn-icon-text/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Remover livro')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5f77e570-f51d-47b1-ae47-c7a92071f9a7",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.text-\\[1\\.063rem\\]:nth-child(2) .text-municip-blank",
+      "targets": [
+        ["css=.text-\\[1\\.063rem\\]:nth-child(2) .text-municip-blank", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[2]/app-black-btn-icon-text/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Remover livro')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "34a719dc-cc7b-46c0-b916-dc57c3ff7837",
+      "comment": "",
+      "command": "click",
+      "target": "css=.sm\\3Aml-3",
+      "targets": [
+        ["css=.sm\\3Aml-3", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Proceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "115281a0-c064-4a79-bf46-140d2e01a158",
+    "name": "RFB3 - Filtragem de Livros",
+    "commands": [{
+      "id": "f15ead92-1e26-46d5-a3c4-285b6f6ab20e",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/library/librarylist",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6b3569ed-c5fd-4610-85ad-7b3008560ac2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ab416f1d-8483-4a5a-b471-b876c74c6820",
+      "comment": "",
+      "command": "click",
+      "target": "css=.h-\\[2\\.5rem\\]",
+      "targets": [
+        ["css=.h-\\[2\\.5rem\\]", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//app-library-list/div/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Filtros')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ea9a99d2-1ca0-4c99-9a00-ce11b906cc87",
+      "comment": "",
+      "command": "click",
+      "target": "id=dateSearch",
+      "targets": [
+        ["id=dateSearch", "id"],
+        ["css=#dateSearch", "css:finder"],
+        ["xpath=//select[@id='dateSearch']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "185ec4c0-a364-429c-a03a-23b864146a72",
+      "comment": "",
+      "command": "select",
+      "target": "id=dateSearch",
+      "targets": [],
+      "value": "label=2015"
+    }, {
+      "id": "66b7ea59-302a-43f1-8380-8b9a12557b67",
+      "comment": "",
+      "command": "click",
+      "target": "id=genreSearch",
+      "targets": [
+        ["id=genreSearch", "id"],
+        ["css=#genreSearch", "css:finder"],
+        ["xpath=//select[@id='genreSearch']", "xpath:attributes"],
+        ["xpath=//div[2]/div/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "45ac5c53-1cdf-4121-a375-715f056dca91",
+      "comment": "",
+      "command": "select",
+      "target": "id=genreSearch",
+      "targets": [],
+      "value": "label=Juvenile Fiction"
+    }, {
+      "id": "17ab6b6b-3b7b-47d0-84da-48a3619f64f1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-municip-blank",
+      "targets": [
+        ["css=.bg-municip-blank", "css:finder"],
+        ["xpath=//app-library-list/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "cc51f7cc-7534-42b1-8218-6906e89986bd",
+    "name": "RFB4 - Reservar um livro",
+    "commands": [{
+      "id": "21fdcf75-dc96-45fa-b9f0-416f75c344b4",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/library/librarylist",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b146ae01-e8a9-4050-92ad-d46699a15717",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "669ccaf8-a255-4dbb-9dd2-402ca3235267",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-\\[17rem\\]",
+      "targets": [
+        ["css=.w-\\[17rem\\]", "css:finder"],
+        ["xpath=//img[@alt='Foto do Livro']", "xpath:img"],
+        ["xpath=//app-library-card/div/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f3054ff5-aa8c-47a1-b8c8-86ddffa19c13",
+      "comment": "",
+      "command": "click",
+      "target": "css=.inline-flex",
+      "targets": [
+        ["css=.inline-flex", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//app-btn-municip-blue/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Reservar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a648cfbb-0159-438a-842b-73a416bb71b2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.rounded-md",
+      "targets": [
+        ["css=.rounded-md", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Proceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "42429f5d-55fe-4d0d-8eb3-9efcbbc07024",
+    "name": "RFB8 - Cancelamento de uma reserva",
+    "commands": [{
+      "id": "882a5de8-7452-49cc-8f18-22516773d8ae",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/library/librarylist",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c5536a1b-55e4-4c8a-9bb7-e59bcd4cc35d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1196x732",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3c601518-a0e1-4077-978e-62aa2a9b65b1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-\\[17rem\\]",
+      "targets": [
+        ["css=.w-\\[17rem\\]", "css:finder"],
+        ["xpath=//img[@alt='Foto do Livro']", "xpath:img"],
+        ["xpath=//app-library-card/div/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "06fb77ae-ebf4-46e1-b6dc-4b2fa8ec70e3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.inline-flex",
+      "targets": [
+        ["css=.inline-flex", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//app-btn-municip-blue/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Cancelar reserva')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c207be20-ca7c-4014-b415-7283f37fe3a4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.rounded-md",
+      "targets": [
+        ["css=.rounded-md", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Proceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "42aa10a2-06bf-4a32-818d-881486ca55d2",
+    "name": "RFB7 - Aceitar Reserva Livro Admin Municipal",
+    "commands": [{
+      "id": "33b720eb-b9e0-402b-afe4-86f070555465",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/library/requests",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8899c352-aff5-44ef-942a-cc72e205b46d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "99c526ef-bad6-43a7-a988-4055251bea0c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-check",
+      "targets": [
+        ["css=.fa-check", "css:finder"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "31f6b469-355d-4135-ae3d-b72de3ed0bd5",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.fa-check",
+      "targets": [
+        ["css=.fa-check", "css:finder"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a406e0d4-1bba-4d83-9433-0f331c276438",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.fa-check",
+      "targets": [
+        ["css=.fa-check", "css:finder"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5fc987ad-1df2-4d4f-978d-526011c6742b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.sm\\3Aml-3",
+      "targets": [
+        ["css=.sm\\3Aml-3", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Proceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d577b812-e829-4adf-8a19-98b4b01c4475",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ng-star-inserted:nth-child(2) > .relative .inline-flex",
+      "targets": [
+        ["css=.ng-star-inserted:nth-child(2) > .relative .inline-flex", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//app-dialog-message/div/div/div[2]/div/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "51064974-307f-4f9a-8a52-00b506e4355c",
@@ -2978,6 +3477,6 @@
     "timeout": 300,
     "tests": ["13345bfd-82bd-45c0-852b-404ee0d246ae"]
   }],
-  "urls": ["https://municip.io:4200/", "https://municipio:4200/", "https://municipio:4200/admindashboard", "https://municipio:4200/munadmin-dashboard", "https://municip.io:4200/admindashboard", "https://municip.io:4200/userpage", "https://municip.io:4200/munadmin-dashboard", "https://municip.io:4200/transports/stops", "https://municip.io:4200/documents/my"],
+  "urls": ["https://municip.io:4200/", "https://municipio:4200/", "https://municipio:4200/admindashboard", "https://municipio:4200/munadmin-dashboard", "https://municip.io:4200/admindashboard", "https://municip.io:4200/userpage", "https://municip.io:4200/munadmin-dashboard", "https://municip.io:4200/transports/stops", "https://municip.io:4200/documents/my", "https://municip.io:4200/library/create", "https://municip.io:4200/library/librarylist", "https://municip.io:4200/library/requests"],
   "plugins": []
 }

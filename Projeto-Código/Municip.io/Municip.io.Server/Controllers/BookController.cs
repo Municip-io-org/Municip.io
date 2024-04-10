@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
 
@@ -19,6 +20,11 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
 
+        public BookController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet("GetBookInfoAPI")]
         public async Task<IActionResult> GetBookInfoAPI(string isbn)
         {
@@ -33,6 +39,25 @@ namespace Municip.io.Server.Controllers
 
             return StatusCode((int)response.StatusCode, response.ReasonPhrase);
         }
+
+        [HttpGet("GetBooks")]
+        public IActionResult GetBooks(string municipality)
+        {
+            if (string.IsNullOrEmpty(municipality))
+            {
+                return BadRequest("O Município não pode ser nulo ou vazio");
+            }
+
+            var books = _context.Books.Where(b => b.Municipality == municipality).ToList();
+
+            if (books == null || !books.Any())
+            {
+                return NotFound("Não foram encontrados nenhuns livros neste Município");
+            }
+
+            return new JsonResult(books);
+        }
+
 
         [HttpPost("CreateBook")]
         public IActionResult CreateBook(Book newBook)
@@ -150,24 +175,17 @@ namespace Municip.io.Server.Controllers
                 return NotFound(new { message = "Não foi possível encontrar o livro" });
             }
 
-            var requests = await _context.BookRequests.Include(b => b.Book).Where(br => br.Book.Id == bookId).ToListAsync();
+            var requests = await _context.BookRequests.AnyAsync(br => br.Book.Id == bookId);
 
-            if (requests.Any())
+            if (requests)
             {
-                if (requests.All(br => br.Status == BookRequestStatus.Delivered))
-                {
-                    book.Status = BookStatus.Unavailable;
-                    await _context.SaveChangesAsync();
-                    return Ok(new { message = "O livro foi removido com sucesso" });
-                }
-                else
-                {
-                    return BadRequest(new { message = "Não é possível excluir o livro, porque existem pedidos deste livro pendentes." });
-                }
+                book.Status = BookStatus.Unavailable;
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "O livro foi marcado como indisponível porque existem pedidos deste livro." });
             }
             else
             {
-                book.Status = BookStatus.Unavailable;
+                _context.Books.Remove(book);
                 await _context.SaveChangesAsync();
                 return Ok(new { message = "O livro foi removido com sucesso" });
             }
@@ -180,6 +198,8 @@ namespace Municip.io.Server.Controllers
         [HttpPost("CreateRequest")]
         public async Task<IActionResult> CreateRequestAsync(string email, BookRequest request)
         {
+
+
             if (ModelState.IsValid)
             {
 
@@ -194,13 +214,30 @@ namespace Municip.io.Server.Controllers
 
                 if (book == null) return BadRequest(new { message = "Não foi encontrado nenhum livro", ModelState });
 
+
+                //if the citizen already has a request for the same book
+                var existingRequest = await _context.BookRequests.FirstOrDefaultAsync(r => r.Citizen.Id == citizen.Id && r.Book.Id == book.Id && r.Status != BookRequestStatus.Delivered && r.Status != BookRequestStatus.Denied);
+                if (existingRequest != null) return BadRequest(new { message = "O cidadão já fez um pedido para este livro" });
+
+
+                if (book.AvailableCopies == 0) return BadRequest(new { message = "Não há cópias disponíveis deste livro" });
+
+
+                request.ReservationLimitDate = DateTime.Now.AddHours(2);
+
+
+
                 request.Citizen = citizen;
                 request.Book = book;
-                request.Status = BookRequestStatus.Reserved;
+
+                book.AvailableCopies--;
 
 
                 _context.BookRequests.Add(request);
                 await _context.SaveChangesAsync();
+
+                EmailSender.SendBookEmail(email, "Reserva de livro", citizen.firstName, $"Reservou o livro <span style='font-weight: bold;'>{book.Title}</span> de <span style='font-weight: bold;'>{book.Author[0]}</span>. Tem até ({request.ReservationLimitDate}) para levantar o livro.",
+               "wwwroot/html/BookEmail.html", book.CoverImage);
 
                 return Ok();
 
@@ -222,7 +259,9 @@ namespace Municip.io.Server.Controllers
             //check if the return date is valid
             if (returnDate < DateTime.Now) return BadRequest(new { message = $"Data de retorno inválida, data: {returnDate}" });
 
-            var request = await _context.BookRequests.FirstOrDefaultAsync(r => r.Id == requestId);
+            var request = await _context.BookRequests.Include(br => br.Citizen)
+                                                     .Include(br => br.Book)
+                                                     .FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
 
@@ -238,6 +277,9 @@ namespace Municip.io.Server.Controllers
 
             await _context.SaveChangesAsync();
 
+            EmailSender.SendBookEmail(request.Citizen.Email, "Requisição de livro", request.Citizen.firstName, $"Você requisitou o livro <span style='font-weight: bold;'>{request.Book.Title}</span> de <span style='font-weight: bold;'>{request.Book.Author[0]}</span>. Tem até ({request.ReturnDate}) para entregar o livro.",
+               "wwwroot/html/BookEmail.html", request.Book.CoverImage);
+
             return Ok();
         }
 
@@ -252,13 +294,6 @@ namespace Municip.io.Server.Controllers
             var bookRequests = _context.BookRequests.Include(b => b.Book).Include(b => b.Citizen).ToList();
             return Ok(bookRequests);
         }
-
-        
-
-
-        
-
-
 
 
         //get requests by municipality
@@ -307,13 +342,22 @@ namespace Municip.io.Server.Controllers
         [HttpPost("DenyRequest")]
         public async Task<IActionResult> DenyRequestAsync(int requestId)
         {
-            var request = await _context.BookRequests.FirstOrDefaultAsync(r => r.Id == requestId);
+            var request = await _context.BookRequests.Include(br => br.Citizen)
+                                                     .Include(br => br.Book)
+                                                     .FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
 
             request.Status = BookRequestStatus.Denied;
 
+            //increase available copies of the book
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == request.Book.Id);
+            book.AvailableCopies++;
+
             await _context.SaveChangesAsync();
+
+            EmailSender.SendBookEmail(request.Citizen.Email, "Reserva de livro recusada", request.Citizen.firstName, $"O seu pedido de reserva, do livro <span style='font-weight: bold;'>{request.Book.Title}</span> de <span style='font-weight: bold;'>{book.Author[0]}</span>, foi recusado!",
+               "wwwroot/html/BookEmail.html", request.Book.CoverImage);
 
             return Ok();
         }
@@ -324,15 +368,22 @@ namespace Municip.io.Server.Controllers
         [HttpPost("DeliverBook")]
         public async Task<IActionResult> DeliverBookAsync(int requestId)
         {
-            var request = await _context.BookRequests.FirstOrDefaultAsync(r => r.Id == requestId);
+            var request = await _context.BookRequests.Include(br => br.Citizen)
+                                                     .Include(br => br.Book)
+                                                     .FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
 
             request.Status = BookRequestStatus.Delivered;
             request.DeliveredDate = DateTime.Now;
 
-            await _context.SaveChangesAsync();
+            //increase available copies of the book
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == request.Book.Id);
+            book.AvailableCopies++;
 
+            await _context.SaveChangesAsync();
+            EmailSender.SendBookEmail(request.Citizen.Email, "Livro entregue", request.Citizen.firstName, $"Você entregou o livro <span style='font-weight: bold;'>{request.Book.Title}</span> de <span style='font-weight: bold;'>{book.Author[0]}</span>.",
+               "wwwroot/html/BookEmail.html", request.Book.CoverImage);
             return Ok();
         }
 
@@ -340,9 +391,18 @@ namespace Municip.io.Server.Controllers
         [HttpDelete("DeleteRequest")]
         public async Task<IActionResult> DeleteRequestAsync(int requestId)
         {
-            var request = await _context.BookRequests.FirstOrDefaultAsync(r => r.Id == requestId);
+            var request = await _context.BookRequests.Include(br => br.Citizen)
+                                                     .Include(br => br.Book)
+                                                     .FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null) return BadRequest(new { message = "Pedido não encontrado" });
+
+            //increase available copies of the book
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == request.Book.Id);
+            book.AvailableCopies++;
+
+            EmailSender.SendBookEmail(request.Citizen.Email, "Cancelamento de reserva de livro", request.Citizen.firstName, $"Você cancelou a reserva do livro <span style='font-weight: bold;'>{request.Book.Title}</span> de <span style='font-weight: bold;'>{book.Author[0]}</span>.",
+               "wwwroot/html/BookEmail.html", request.Book.CoverImage);
 
             _context.BookRequests.Remove(request);
             await _context.SaveChangesAsync();

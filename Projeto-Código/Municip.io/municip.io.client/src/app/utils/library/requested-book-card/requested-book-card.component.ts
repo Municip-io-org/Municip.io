@@ -3,6 +3,7 @@ import { Book, BookRequest, BookRequestStatus, LibraryService } from '../../../s
 import { Data, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { provideNativeDateAdapter, DateAdapter } from '@angular/material/core';
+import { Citizen } from '../../../services/citizen-auth.service';
 
 @Component({
   selector: 'app-requested-book-card',
@@ -19,24 +20,9 @@ export class RequestedBookCardComponent {
 
   isDialogOpen = false;
   isDialogOpenOperation = false;
+  isDialogOpenUserInfo = false;
 
-
-
-
-
-  /// THIS IS FOR THE DETAIL PAGE OF BOOK
-  isDialogOpenTest = false;
-
-  formBorrowTest = new FormGroup({
-    returnDate: new FormControl(new Date(), Validators.required),
-    citizenEmail: new FormControl('', [Validators.required, Validators.email])
-  })
-
-  get citizenEmail() {
-    return this.formBorrowTest.get('citizenEmail') as FormControl;
-  }
-
-
+  citizen!: Citizen;
 
 
 
@@ -72,6 +58,8 @@ export class RequestedBookCardComponent {
 
     this.book = this.bookRequest.book;
 
+    this.citizen = this.bookRequest.citizen;
+
     if (this.bookRequest.status === BookRequestStatus.Reserved) {
       //if it pass the 2h limit, the request is denied
       this.isReservationExpired();
@@ -84,8 +72,7 @@ export class RequestedBookCardComponent {
   }
 
   isReservationExpired() {
-    var hoursLimit = 2 * 60 * 60 * 1000;
-    if (new Date().getTime() - new Date(this.bookRequest.reservedDate!).getTime() > hoursLimit) {
+    if (new Date().getTime() > new Date(this.bookRequest!.reservationLimitDate!).getTime()) {
       this.bookService.deleteRequest(this.bookRequest.id).subscribe(
         (data) => {
           console.log(data);
@@ -240,23 +227,34 @@ export class RequestedBookCardComponent {
   }
 
 
+  openDialogUserInfo() {
+    this.isDialogOpenUserInfo = true;
+  }
+
+  closeDialogUserInfo() {
+    this.isDialogOpenUserInfo = false;
+  }
+
+
   /**
    * Abrir a página de detalhes do livro
    */
   goToBookDetail() {
 
-    this.router.navigate(['/news']);
+    this.router.navigate(['/library', this.book.id]);
 
   }
 
 
 
+
   getTimeLeft(date: Date): string {
-    let newDate = new Date(date);
-    newDate.setHours(newDate.getHours() + 2);
-    let diff = newDate.getTime() - new Date().getTime();
-    let hours = Math.floor(diff / 1000 / 60 / 60);
-    let minutes = Math.floor(diff / 1000 / 60) - (hours * 60);
+    //it will receive the date limit, and will return the time left in hours and minutes
+    let dateReceived = new Date(date);
+    let now = new Date();
+    let diff = dateReceived.getTime() - now.getTime();
+    let hours = Math.floor(diff / 3600000);
+    let minutes = Math.floor((diff % 3600000) / 60000);
 
     if (hours === 0) {
       return `${minutes}min`;
@@ -264,4 +262,5 @@ export class RequestedBookCardComponent {
       return `${hours}h ${minutes}min`;
     }
   }
+
 }

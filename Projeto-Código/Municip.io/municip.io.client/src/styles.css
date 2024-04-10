@@ -37,8 +37,85 @@
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+       top: 0px !important;}
 
 ::ng-deep mat-select-country .mat-form-field {
   width: 100%;
+}
+
+
+#google_translate_element {
+  text-align: center;
+  padding: 0px;
+  margin: 10px;
+position: fixed;
+right: 0;
+bottom: 0;
+z-index: 1000;
+
+
+}
+
+.goog-te-combo {
+  font-size: 16px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  background-color: #f9f9f9;
+  color: #333;
+  appearance: none;
+  height: 50px;
+  width: 130px;
+  background-image: url('assets/images/icons/languages.png');
+  background-size: 25px; 
+  background-repeat: no-repeat; 
+  background-position: 10px center; 
+  padding-left: 40px;
+  /*bro adiciona aí uma shadow*/
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  
+}
+
+  .goog-te-combo:focus {
+    outline: 1px solid #5875F6;
+  }
+
+
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf.VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc {
+  display: none;
+}
+
+.VIpgJd-ZVi9od-l4eHX-hSRGPd {
+  text-decoration: none;
+  color: #1a0dab;
+  font-weight: bold;
+}
+
+  .VIpgJd-ZVi9od-l4eHX-hSRGPd img {
+    vertical-align: middle;
+  }
+
+#google_translate_element span[style="white-space:nowrap"] {
+  display: none !important;
+}
+
+
+
+/*
+
+.skiptranslate.goog-te-gadget {
+  color: transparent !important;
+  text-shadow: none !important;
+}
+
+    */
+.skiptranslate.goog-te-gadget {
+  font-size: 0;
+}
+
+.VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate {
+/*delete from pagewithout white space*/
+  display: none;
+
 }

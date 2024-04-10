@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LibraryService {
-  
+
 
   constructor(private http: HttpClient) { }
 
@@ -167,14 +167,12 @@ export class LibraryService {
     );
   }
 
-
-
-
-  getBooks(): Book[] {
-    return this.Books;
+  getBooks(municipality: string): Observable<any> {
+    const params = { municipality: municipality };
+    return this.http.get<any>('api/Book/GetBooks', { params: params });
   }
 
-  getBookById(bookId: number) : Observable<Book> {
+  getBookById(bookId: number): Observable<Book> {
     return this.http.get<Book>(`api/Book/GetBookById?bookId=${bookId}`);
   }
 
@@ -187,14 +185,14 @@ export class LibraryService {
             const isbn10 = item.volumeInfo.industryIdentifiers.find((identifier: any) => identifier.type === 'ISBN_10')?.identifier || '';
 
 
-            const book:Book = {
+            const book: Book = {
               title: item.volumeInfo.title || '',
               author: item.volumeInfo.authors || [],
               publisher: item.volumeInfo.publisher || '',
               isbn: isbn13 || isbn10 || '',
               genre: item.volumeInfo.categories || [],
               sinopsis: item.volumeInfo.description || '',
-              coverImage: item.volumeInfo.imageLinks.thumbnail || '',
+              coverImage: item.volumeInfo.imageLinks?.thumbnail || '',
               language: item.volumeInfo.language || '',
               edition: '',
               publicationDate: item.volumeInfo.publishedDate || Date.now(),
@@ -203,11 +201,10 @@ export class LibraryService {
               status: BookStatus.Available,
               municipality: ''
             };
-            console.log(book)
             return book;
           });
         } else {
-          
+
           return null;
         }
       })
@@ -252,7 +249,7 @@ export class LibraryService {
   }
 
   createRequest(email: string, request: BookRequest): Observable<any> {
-    return this.http.post(`api/Book/CreateRequest/${email}`, request);
+    return this.http.post(`api/Book/CreateRequest?email=${email}`, request);
   }
 
   delayRequest(requestId: number): Observable<any> {
@@ -269,7 +266,15 @@ export class LibraryService {
 
   }
 
-
+  statusToString(status: BookStatus): string {
+    switch (status) {
+      case BookStatus.Available:
+        return "Disponível";
+      case BookStatus.Unavailable:
+        return "Indisponível";
+    }
+    
+  }
 
 
   bookRequestStatusToString(status: BookRequestStatus): string {
@@ -327,6 +332,7 @@ export interface BookRequest {
   reservedDate?: Date;
   returnDate?: Date;
   deliveredDate?: Date;
+  reservationLimitDate?: Date;
   municipality: string;
   status: BookRequestStatus;
 }
