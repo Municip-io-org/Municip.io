@@ -90,7 +90,9 @@
   </div>
   <!-- End Features -->
 
-  <app-library-map [Address]="getLibraryAddress(municipality)"></app-library-map>
+  
+  <app-library-map *ngIf="municipality.libraryAddress && municipality.libraryAddress.trim() !== ''"
+                   [Address]="municipality.libraryAddress"></app-library-map>
 
 
   <section class="flex flex-col items-center space-y-10 bg-municip-blank px-32 py-20">

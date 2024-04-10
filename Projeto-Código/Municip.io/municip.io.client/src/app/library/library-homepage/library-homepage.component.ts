@@ -56,15 +56,7 @@ export class LibraryHomepageComponent {
     });
   }
 
-  getLibraryAddress(municipality: Municipality): string {
-    if (municipality && municipality.libraryAddress && municipality.libraryAddress.trim() !== '') {
-      return municipality.libraryAddress;
-    } else if (municipality && municipality.rua && municipality.rua.trim() !== '') {
-      return municipality.rua;
-    } else {
-      return municipality.name;
-    }
-  }
+  
 
 }
 
