@@ -114,9 +114,9 @@ export class LibraryListComponent {
 
   loadDateOptions() {
     
-      this.dateOptions =this.books.map(book => {
-        return book.publicationDate.toString().split("-")[0];
-      });
+      this.dateOptions = [...new Set(this.books.map(book => {
+   return book.publicationDate.toString().split("-")[0];}))].sort();
+     
   }
 
   loadGenreOptions() {

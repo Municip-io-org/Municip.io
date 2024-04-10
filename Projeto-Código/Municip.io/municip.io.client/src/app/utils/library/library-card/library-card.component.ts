@@ -23,6 +23,7 @@ export class LibraryCardComponent {
     "status": 0,
     "municipality": "London"
   };
+  
   @Output() deleteid = new EventEmitter<number>();
   @Output() editid = new EventEmitter<number>();
   constructor(private bookService: LibraryService) { }
@@ -30,11 +31,12 @@ export class LibraryCardComponent {
   getStatusClass(): string {
     if (this.book.status === BookStatus.Available) {
       return 'bg-[#08BC25] text-[#1D8702]';
-    } else if (this.book.status === BookStatus.Unavailable) {
+    } else if (this.book.availableCopies == 0) {
       return 'bg-[#FF0000] text-[#B02121]';
     } else {
       return 'bg-[#F4A42C] text-[#9B4F08]';
     }
+    
   }
 
   getStatusString(status: BookStatus): string {

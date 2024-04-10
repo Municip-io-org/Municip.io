@@ -20,6 +20,11 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
 
+        public BookController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet("GetBookInfoAPI")]
         public async Task<IActionResult> GetBookInfoAPI(string isbn)
         {
@@ -38,10 +43,21 @@ namespace Municip.io.Server.Controllers
         [HttpGet("GetBooks")]
         public IActionResult GetBooks(string municipality)
         {
-            var books = _context.Books;
-            var booksMunicipality = books.Where(b => b.Municipality == municipality);
-            return new JsonResult(booksMunicipality);
+            if (string.IsNullOrEmpty(municipality))
+            {
+                return BadRequest("O Município não pode ser nulo ou vazio");
+            }
+
+            var books = _context.Books.Where(b => b.Municipality == municipality).ToList();
+
+            if (books == null || !books.Any())
+            {
+                return NotFound("Não foram encontrados nenhuns livros neste Município");
+            }
+
+            return new JsonResult(books);
         }
+
 
         [HttpPost("CreateBook")]
         public IActionResult CreateBook(Book newBook)
@@ -68,11 +84,11 @@ namespace Municip.io.Server.Controllers
                     }
 
                     // Adicionar o novo livro ao contexto e salvar as alterações no banco de dados
-                    _context.Books.Add(newBook);
+                    var created = _context.Books.Add(newBook);
                     _context.SaveChanges();
 
                     // Retornar um Ok para indicar que o livro foi adicionado com sucesso
-                    return Ok();
+                    return Ok(created.Entity);
                 }
 
                 return BadRequest(new { message = "Modelo inválido", ModelState });
@@ -215,7 +231,6 @@ namespace Municip.io.Server.Controllers
                 request.Book = book;
 
                 book.AvailableCopies--;
-                if (book.AvailableCopies == 0) book.Status = BookStatus.Unavailable;
 
 
                 _context.BookRequests.Add(request);
