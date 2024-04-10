@@ -197,33 +197,25 @@
           </ul>
         </div>
       </li>
-      <li *ngIf="role == 'Admin'" class="relative group" (click)="setActiveDropdown(Dropdowns.Admin)">
-        <button class="   transition-all duration-700 ease-in-out decoration-sky-500 flex items-center">
-          Administração
-          <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </button>
-        <span class="flex self-center max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+      <li *ngIf="role == Roles.Admin" class="transition-all duration-700 ease-in-out  decoration-sky-500">
 
-        <div *ngIf="showDropdownAdmin" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 top-full left-0 mt-1">
-          <ul class="py-2 text-sm text-gray-700">
-            <li>
-              <a routerLink="/" class="block px-4 py-2 hover:bg-gray-100">Não sei</a>
-            </li>
-            <li>
-              <a routerLink="/" class="block px-4 py-2 hover:bg-gray-100">Não sei</a>
-            </li>
-            <li>
-              <a routerLink="/" class="block px-4 py-2 hover:bg-gray-100">Não sei</a>
-            </li>
+        <a routerLink="/admindashboard" class="group hover:cursor-pointer">
+          Gerir Municípios e Administradores
+          <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+        </a>
+      </li>
 
-          </ul>
-        </div>
+      <li *ngIf="role == Roles.Admin" class="transition-all duration-700 ease-in-out  decoration-sky-500">
+
+        <a routerLink="/adminstatistics" class="group hover:cursor-pointer">
+          Estatísticas Gerais
+          <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+        </a>
       </li>
     </ul>
 
-    <div class="space-x-3 flex justify-end min-w-fit relative" *ngIf="isSignedIn">
+
+    <div class="space-x-3 flex justify-end min-w-fit relative" *ngIf="isSignedIn && role !== Roles.Admin">
       <div class="flex items-center space-x-2">
         <img src="{{ user.photo }}" alt="{{ user.firstName }}" class="w-10 h-10 rounded-full">
 
@@ -252,6 +244,32 @@
 
                 </div>
               </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-x-3 flex justify-end min-w-fit relative" *ngIf="isSignedIn && role == Roles.Admin">
+      <div class="flex items-center space-x-2">
+
+        <div class="relative group" (click)="showSignOutDropdown=!showSignOutDropdown">
+          <button class="transition-all duration-700 ease-in-out  decoration-sky-500 flex items-center">
+            Bem-vindo, Administrador
+            <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <span class="flex self-center max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+
+          <div *ngIf="showSignOutDropdown" class="dropdown absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 right-0 mt-1">
+            <ul class="py-2 text-sm text-gray-700">
+              <li>
+                <button routerLink="/" (click)="signOut()" class=" text-black px-2 py-1 rounded-md hover:bg-sky-500 transition-all duration-500 ease-in-out">
+                  Terminar Sessão
+                </button>
+              </li>
+              
             </ul>
           </div>
         </div>
