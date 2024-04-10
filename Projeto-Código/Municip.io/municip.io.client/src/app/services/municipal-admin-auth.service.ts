@@ -136,6 +136,7 @@ export interface Municipality {
   eleitores: string;
   email: string;
   fax: string;
+  libraryAddress? : string;
   localidade: string;
   name: string;
   nif: string;

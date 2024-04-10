@@ -34,6 +34,8 @@ namespace Municip.io.Server.Models
         public string? nome { get; set; }
         public string? distrito { get; set; }
 
+        public string? libraryAddress { get; set; }
+
         public DateOnly? date { get; set; }
 
         public int? numberOfUsers { get; set; }

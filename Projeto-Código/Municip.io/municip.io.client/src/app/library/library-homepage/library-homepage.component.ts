@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserAuthService } from '../../services/user-auth.service';
+import { Municipality } from '../../services/municipal-admin-auth.service';
 
 @Component({
   selector: 'app-library-homepage',
@@ -8,12 +9,61 @@ import { UserAuthService } from '../../services/user-auth.service';
 })
 export class LibraryHomepageComponent {
 
-  municipality: string = '';
+  municipalityName: string = '';
 
-  constructor(private service: UserAuthService) {
+  municipality: Municipality = {
+    name: '',
+    president: '',
+    contact: '',
+    description: '',
+    areaha: '',
+    codigo: '',
+    codigopostal: '',
+    codigoine: '',
+    descpstal: '',
+    distrito: '',
+    eleitores: '',
+    email: '',
+    fax: '',
+    localidade: '',
+    nif: '',
+    populacao: '',
+    rua: '',
+    sitio: '',
+    telefone: '',
+    emblemPhoto: '',
+    landscapePhoto: '',
+    libraryAddress: ''
+  };
+
+
+
+  constructor(private service: UserAuthService, private userAuthService : UserAuthService) {
     service.getMunicipality().toPromise().then((municipality) => {
-      this.municipality = municipality || '';
+      this.municipalityName = municipality || '';
+
+      this.userAuthService.getInfoMunicipality(this.municipalityName).subscribe(
+        (municipalityRes: any) => {
+          this.municipality = municipalityRes as Municipality;
+
+          console.log(this.municipality);
+
+        },
+        error => {
+          console.error(error);
+        }
+      );
     });
+  }
+
+  getLibraryAddress(municipality: Municipality): string {
+    if (municipality && municipality.libraryAddress && municipality.libraryAddress.trim() !== '') {
+      return municipality.libraryAddress;
+    } else if (municipality && municipality.rua && municipality.rua.trim() !== '') {
+      return municipality.rua;
+    } else {
+      return municipality.name;
+    }
   }
 
 }
