@@ -11,6 +11,40 @@ import { Book, BookRequest, LibraryService } from '../services/library/library.s
   templateUrl: './munadmin-statistics-dashboard.component.html',
   styleUrl: './munadmin-statistics-dashboard.component.css'
 })
+
+ /**
+ * Municipal Administrator Statistics Dashboard Component
+ *
+ * Este componente representa o dashboard de estatísticas do administrador municipal
+ *
+ * @param selectedButton - Botão selecionado
+ * @param orderOptions - Opções de ordenação
+ * @param citizens - Cidadãos
+ * @param municipalAdmins - Administradores municipais
+ * @param municipalities - Municípios
+ * @param documentRequests - Pedidos de documentos
+ * @param numberOfCitizens - Número de cidadãos
+ * @param activeCitizens - Cidadãos ativos
+ * @param numberOfMunicipalAdmins - Número de administradores municipais
+ * @param blockedCitizens - Cidadãos bloqueados
+ * @param blockedCitizensPercentage - Percentagem de cidadãos bloqueados
+ * @param news - Notícias
+ * @param events - Eventos
+ * @param newsPublished - Notícias publicadas
+ * @param newsPublishedToday - Notícias publicadas hoje
+ * @param eventsRegistered - Eventos registados
+ * @param eventsToday - Eventos de hoje
+ * @param documentsRequested - Documentos pedidos
+ * @param documentsApproved - Documentos aprovados
+ * @param totalEarnings - Total de ganhos
+ * @param numberOfBooks - Número de livros
+ * @param Authors - Autores
+ * @param mostPopularGenre - Género mais popular
+ * @param user - Utilizador
+ * @param municipality - Município
+ * @param bookrequests - Pedidos de livros
+ * @param books - Livros
+ */
 export class MunadminStatisticsDashboardComponent {
   selectedButton: number = 2;
   orderOptions: any[] = [{ label: '1', value: true }, { label: '2', value: false }];
@@ -45,164 +79,24 @@ export class MunadminStatisticsDashboardComponent {
   municipality: string = '';
   bookrequests: BookRequest[] = [];
   books: Book[] = [];
-  //bookrequests1: BookRequest[] = [
-  //  {
-  //    "id": 1,
-  //    "citizen": {
-  //      "firstName": "John",
-  //      "surname": "Doe",
-  //      "email": "john.doe@example.com",
-  //      "password": "password123",
-  //      "nif": "123456789",
-  //      "gender": "Male",
-  //      "municipality": "New York",
-  //      "address": "123 Main Street",
-  //      "postalCode1": "12345",
-  //      "postalCode2": "6789",
-  //      "birthDate": new Date(),
-  //      "photo": "profile.jpg",
-        
-        
-  //      "events": [],
-  //      "browsers": []
-  //    },
-  //    "book": {
-  //      "id": 1,
-  //      "title": "The Great Gatsby",
-  //      "author": [
-  //        "F. Scott Fitzgerald"
-  //      ],
-  //      "publisher": "Scribner",
-  //      "isbn": "9780743273565",
-  //      "genre": [
-  //        "Fiction",
-  //        "Classics"
-  //      ],
-  //      "sinopsis": "The story primarily concerns the young and mysterious millionaire Jay Gatsby and his quixotic passion and obsession with the beautiful former debutante Daisy Buchanan.",
-  //      "coverImage": "great_gatsby.jpg",
-  //      "language": "English",
-  //      "edition": "First Edition",
-  //      "publicationDate": new Date(),
-  //      "copies": 5,
-  //      "availableCopies": 3,
-  //      "status": 1,
-  //      "municipality": "New York"
-  //    },
-  //    "reservedDate": new Date(),
-  //    "returnDate": new Date(),
-  //    "deliveredDate": new Date(),
-  //    "municipality": "New York",
-  //    "status": 1
-  //  }
+  
 
-  //  , {
-  //    "id": 2,
-  //    "citizen": {
-  //      "firstName": "John",
-  //      "surname": "Doe",
-  //      "email": "john.doe@example.com",
-  //      "password": "password123",
-  //      "nif": "123456789",
-  //      "gender": "Male",
-  //      "municipality": "New York",
-  //      "address": "123 Main Street",
-  //      "postalCode1": "12345",
-  //      "postalCode2": "6789",
-  //      "birthDate": new Date(),
-  //      "photo": "profile.jpg",
-
-
-  //      "events": [],
-  //      "browsers": []
-  //    },
-  //    "book": {
-  //      "id": 1,
-  //      "title": "The Great Gatsby",
-  //      "author": [
-  //        "F. Scott Fitzgerald"
-  //      ],
-  //      "publisher": "Scribner",
-  //      "isbn": "9780743273565",
-  //      "genre": [
-  //        "Fiction",
-  //        "Classics"
-  //      ],
-  //      "sinopsis": "The story primarily concerns the young and mysterious millionaire Jay Gatsby and his quixotic passion and obsession with the beautiful former debutante Daisy Buchanan.",
-  //      "coverImage": "great_gatsby.jpg",
-  //      "language": "English",
-  //      "edition": "First Edition",
-  //      "publicationDate": new Date(),
-  //      "copies": 5,
-  //      "availableCopies": 3,
-  //      "status": 1,
-  //      "municipality": "New York"
-  //    },
-  //    "reservedDate": new Date(),
-  //    "returnDate": new Date(),
-  //    "deliveredDate": new Date(),
-  //    "municipality": "New York",
-  //    "status": 0
-  //  }
-
-
-
-  //];
-
-
-
-  //books: Book[] = [
-  //  {
-  //    "title": "Harry Potter and the Philosopher's Stone",
-  //    "author": ["J.K. Rowling"],
-  //    "publisher": "Bloomsbury",
-  //    "isbn": "9780747532699",
-  //    "genre": ["Fantasy"],
-  //    "sinopsis": "The story of a young wizard, Harry Potter, and his adventures at Hogwarts School of Witchcraft and Wizardry.",
-  //    "coverImage": "https://example.com/harry_potter_cover.jpg",
-  //    "language": "English",
-  //    "edition": "1st",
-  //    "publicationDate": new Date("2001-06-26"), // Convert string to Date object
-  //    "copies": 10,
-  //    "availableCopies": 10,
-  //    "status": 0,
-  //    "municipality": "London"
-  //  },
-  //  {
-  //    "title": "Harry Potter and the Philosopher's Stone",
-  //    "author": ["J.K. Rowling"],
-  //    "publisher": "Bloomsbury",
-  //    "isbn": "9780747532699",
-  //    "genre": ["Romance"],
-  //    "sinopsis": "The story of a young wizard, Harry Potter, and his adventures at Hogwarts School of Witchcraft and Wizardry.",
-  //    "coverImage": "https://example.com/harry_potter_cover.jpg",
-  //    "language": "English",
-  //    "edition": "1st",
-  //    "publicationDate": new Date("2001-06-26"), // Convert string to Date object
-  //    "copies": 10,
-  //    "availableCopies": 10,
-  //    "status": 0,
-  //    "municipality": "London"
-  //  },
-  //  {
-  //    "title": "Harry Potter and the Philosopher's Stone",
-  //    "author": ["J.K. Rowling"],
-  //    "publisher": "Bloomsbury",
-  //    "isbn": "9780747532699",
-  //    "genre": ["Terror"],
-  //    "sinopsis": "The story of a young wizard, Harry Potter, and his adventures at Hogwarts School of Witchcraft and Wizardry.",
-  //    "coverImage": "https://example.com/harry_potter_cover.jpg",
-  //    "language": "English",
-  //    "edition": "1st",
-  //    "publicationDate": new Date("2001-06-26"), // Convert string to Date object
-  //    "copies": 10,
-  //    "availableCopies": 10,
-  //    "status": 1,
-  //    "municipality": "London"
-  //  }
-  //];
-
+  /**
+   * @constructor
+   * MunadminStatisticsDashboardComponent
+   *
+   * @param adminStatisticsService - Serviço de estatísticas do administrador
+   * @param userAuthService - Serviço de autenticação do utilizador
+   * @param libraryService - Serviço da biblioteca
+   *
+   */
   constructor(private adminStatisticsService: AdminStatisticsService, private userAuthService : UserAuthService,private libraryService : LibraryService) { }
 
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente
+   */
   ngOnInit() {
 
     this.userAuthService.getUserData().subscribe(
@@ -260,17 +154,11 @@ export class MunadminStatisticsDashboardComponent {
     );
   }
 
-
-
-
-
-
-
-
-
-
-
-
+  /**
+   * generateStatistics
+   *
+   * Gera as estatísticas
+   */
   generateStatistics() {
     this.numberOfCitizens = this.citizens.length;
     this.numberOfMunicipalAdmins = this.municipalAdmins.length;
@@ -315,6 +203,13 @@ export class MunadminStatisticsDashboardComponent {
 
 
 
+  /**
+   * selectButton
+   *
+   * Seleciona o botão
+   *
+   * @param buttonNumber - Número do botão
+   */
   selectButton(buttonNumber: number): void {
     this.selectedButton = buttonNumber;
   }

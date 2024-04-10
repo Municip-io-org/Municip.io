@@ -7,6 +7,16 @@ import Chart from 'chart.js/auto';
   templateUrl: './books-genre-chart.component.html',
   styleUrl: './books-genre-chart.component.css'
 })
+  /**
+   * @class BooksGenreChartComponent
+   *
+   * Este componente é responsável por exibir um gráfico de géneros de livros.
+   *
+   * @input books - A lista de livros.
+   *
+   * @returns Um piechart com a distribuição de géneros de livros.
+   *
+   */
 export class BooksGenreChartComponent {
   @Input() books: Book[] = [];
   chart: Chart<'pie', number[], string> | undefined;
@@ -14,16 +24,36 @@ export class BooksGenreChartComponent {
 
   constructor() { }
 
+  
+  /**
+   * Este método é responsável por criar o gráfico.
+   * 
+   * @returns O gráfico.
+   *
+   **/
+
   ngOnInit() {
     this.createChart();
   }
 
+  /**
+   * Este método é responsável por atualizar o gráfico.
+   *
+   * @returns O gráfico atualizado.
+   *
+   **/
   ngOnChanges(changes: SimpleChanges) {
     if (changes['books'] && !changes['books'].firstChange) {
       this.updateChart();
     }
   }
 
+  /**
+   * Este método é responsável por criar o gráfico.
+   * 
+   * @returns O gráfico.
+   *
+   **/
   createChart() {
     const allGenres = this.getAllGenres(); // Get all genres from books
     const xValues = Array.from(new Set(allGenres)); // Get unique genres
@@ -49,6 +79,12 @@ export class BooksGenreChartComponent {
     }
   }
 
+  /**
+   * Este método é responsável por atualizar o gráfico.
+   * 
+   * @returns O gráfico atualizado.
+   *
+   **/
   updateChart() {
     if (this.chart) {
       const allGenres = this.getAllGenres();
@@ -59,13 +95,25 @@ export class BooksGenreChartComponent {
     }
   }
 
+   /**
+    * Este método é responsável por obter todos os géneros de livros.
+    * 
+    * @returns A lista de géneros de livros.
+    *
+    **/
   getAllGenres(): string[] {
     return this.books.reduce((acc, book) => [...acc, ...book.genre], [] as string[]);
   }
 
+  /**
+   * Este método é responsável por obter o número de ocorrências de um género.
+   * 
+   * @param genre - O género.
+   * 
+   * @returns O número de ocorrências do género.
+   *
+   **/
   getGenreCount(genre: string): number {
     return this.getAllGenres().filter(g => g === genre).length;
   }
-
-
 }

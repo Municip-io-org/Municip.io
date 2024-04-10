@@ -10,8 +10,26 @@ import { News, NewsService } from '../../services/news/news.service';
   templateUrl: './citizen-home-page.component.html',
   styleUrl: './citizen-home-page.component.css'
 })
+/**
+ * @class CitizenHomePageComponent
+ *
+ * Este componente é responsável por exibir a página inicial do cidadão.
+ *
+ * @returns A página inicial do cidadão com eventos e notícias.
+ *
+ **/
 export class CitizenHomePageComponent {
 
+  /**
+  * @constructor
+  *
+  * Este construtor é responsável por injetar os serviços de autenticação, serviço de eventos e de notícias. 
+  *
+  * @param userAuthService - O serviço de autenticação.
+  * @param eventsService - O serviço de eventos.
+  * @param newsService - O serviço de notícias.
+  *
+  **/
   constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private newsService : NewsService) { }
 
   events: Event[] = [];
@@ -59,6 +77,12 @@ export class CitizenHomePageComponent {
   };
 
 
+  /**
+   * Este método é responsável por obter as informações do cidadão, do município e carregar os eventos e notícias.
+   * 
+   * @returns As informações do cidadão, do município e os eventos e notícias.
+   *
+   **/
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
       res => {
@@ -85,6 +109,13 @@ export class CitizenHomePageComponent {
       }
     );
   }
+
+  /**
+   * Este método é responsável por carregar os eventos e notícias.
+   * 
+   * @returns Os eventos e notícias.
+   *
+   **/
   loadData() {
 
     this.eventsService.getEventByMunicipality(this.municipality.name).subscribe(
@@ -108,6 +139,12 @@ export class CitizenHomePageComponent {
     );
   }
 
+  /**
+   * Este método é responsável por ordenar os eventos por data.
+   * 
+   * @returns Os eventos ordenados por data.
+   *
+   **/
   sortEventsByDate() {
     this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
   }

@@ -8,6 +8,25 @@ import { AdminStatisticsService } from '../../services/stats/admin-statistics.se
   templateUrl: './districts-map.component.html',
   styleUrl: './districts-map.component.css'
 })
+
+/**
+ * @class DistrictsMapComponent
+ *
+ * Este componente é responsável por exibir um mapa com a distribuição de distritos.
+ * 
+ * @param title - O título do mapa.
+ * @param districtData - Os dados dos distritos.
+ * @param municipalities - A lista de municípios.
+ * @param type - O tipo de gráfico.
+ * @param data - Os dados a serem exibidos no gráfico.
+ * @param columnNames - Os nomes das colunas do gráfico.
+ * @param options - As opções do gráfico.
+ * @param width - A largura do gráfico.
+ * @param height - A altura do gráfico.
+ *
+ * @returns Um mapa com a distribuição de distritos.
+ *
+ **/
 export class DistrictsMapComponent {
 
   constructor(private adminStatisticsService: AdminStatisticsService) { }
@@ -46,6 +65,12 @@ export class DistrictsMapComponent {
 
 
 
+  /**
+   * Este método é responsável por inicializar o componente.
+   * 
+   * @returns Os dados dos distritos.
+   *
+   **/
   ngOnInit() {
     this.adminStatisticsService.getAllMunicipalities().subscribe((municipalities: Municipality[]) => {
       this.municipalities = municipalities;
@@ -57,6 +82,12 @@ export class DistrictsMapComponent {
 
   }
 
+  /**
+   * Este método é responsável por gerar os dados dos distritos.
+   * 
+   * @returns Os dados dos distritos.
+   *
+   **/
   generateDistrictsData() {
     const districtMap = new Map<string, number>();
     this.municipalities.forEach(municipality => {
