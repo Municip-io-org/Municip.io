@@ -6,6 +6,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
 import { BindQueryParamsFactory } from '@ngneat/bind-query-params';
 
+/**
+ * Componente para a página de horários.
+ */
 @Component({
   selector: 'app-schedules',
   templateUrl: './schedules.component.html',
@@ -13,7 +16,15 @@ import { BindQueryParamsFactory } from '@ngneat/bind-query-params';
 })
 export class SchedulesComponent {
    
-    
+
+  /**
+   * Método construtor para instanciar o componente.
+   * @param service serviço TransportsService
+   * @param authService UserAuthService
+   * @param router Router
+   * @param routeParams ActivatedRoute
+   * @param factory BindQueryParamsFactory
+   */
   constructor(private service: TransportsService, private authService: UserAuthService, private router: Router,
     private routeParams: ActivatedRoute, private factory: BindQueryParamsFactory) { }
 
@@ -70,10 +81,16 @@ return this.scheduleForm.get('date');
 
 
 
+    /**
+     * Método on destroy
+     */
   ngOnDestroy() {
     this.bindQueryParamsManager.destroy();
   }
-
+  /**
+   * método on init
+   * @returns
+   */
   async ngOnInit() {
 
    
@@ -157,6 +174,11 @@ return this.scheduleForm.get('date');
 
   }
 
+  /**
+   * Método que junta as horas e os munutos 
+   * @param trips viagens
+   * @returns o resultado
+   */
   groupByHourAndMinute(trips: any[]): any[] {
 
     const arrivalTimes = trips
@@ -203,7 +225,10 @@ return this.scheduleForm.get('date');
 
 
 
-
+  /**
+   * Método do clique numa stop
+   * @param stopId stop id
+   */
   handleStopClicked(stopId: string) {
     console.log("Stop ID clicked:", stopId);
     this.selectedStopId = stopId;
@@ -213,7 +238,10 @@ return this.scheduleForm.get('date');
 
 
 
-
+  /**
+   * Método do clique numa linha
+   * @param value valor 
+   */
   async handleLineChange(value: string) {
     this.lineSelected = this.lines.find(line => line.id === value) || null;
 
@@ -227,6 +255,10 @@ return this.scheduleForm.get('date');
     }
   }
 
+  /**
+   * Método do clique numa rota
+   * @param value valor
+   */
   async handleRouteChange(value: string) {
 
     if (value === "") {
@@ -238,7 +270,10 @@ return this.scheduleForm.get('date');
 
 
   }
-
+  /**
+   * Método do clique numa pattern
+   * @param value valor
+   */
   async handlePatternChange(value: string) {
 
 
@@ -251,7 +286,10 @@ return this.scheduleForm.get('date');
 
 
   }
-
+  /**
+   * Método do clique de uma data
+   * @param value valor
+   */
   async handleDateChange(value: string) {
    
 
@@ -269,7 +307,11 @@ return this.scheduleForm.get('date');
 
 
 
-
+  /**
+   * retorna se a rota é da linha
+   * @param id id da rota
+   * @returns o resultado
+   */
   isRouteFromLine(id: string): boolean{
     if (this.routes.find(route => route.id === id)) {
       return true;
@@ -277,7 +319,9 @@ return this.scheduleForm.get('date');
     return false;
   }
 
-
+  /**
+   * Método para obter as rotas e patterns e trips
+   */
   async getCurrentRoutesAndPatternsAndTrips() {
     await this.getCurrentRoutes(this.scheduleForm.get('line')?.value || null);
     await this.getCurrentPatterns(this.scheduleForm.get('route')?.value || null);
@@ -288,7 +332,9 @@ return this.scheduleForm.get('date');
 
 
 
-  
+  /**
+   * Retorna as linhas do municipio
+   */
   async getLines() {
     const municipality = await this.authService.getMunicipality().toPromise();
     if (municipality) {
@@ -305,7 +351,10 @@ return this.scheduleForm.get('date');
       
     
 
-
+/**
+ * Retorna as rota da linha
+ * @param line linha
+ */
   async getCurrentRoutes(line: string | null) {
     this.routes = [];
     if (line) {
@@ -322,7 +371,10 @@ return this.scheduleForm.get('date');
     }
   }
 
-
+  /**
+   * Retorna as patterns da rota
+   * @param route rota
+   */
   async getCurrentPatterns(route: string | null) {
 this.patterns = [];
     if (route) {
@@ -338,7 +390,10 @@ this.patterns = [];
     }
   }
 
-
+  /**
+   * Retorna as trips da pattern
+   * @param pattern
+   */
   getCurrentTrips(pattern: string | null) {
     this.trips = [];
     if (pattern) {
@@ -359,12 +414,20 @@ this.patterns = [];
     console.log(this.trips);
   }
 
+  /**
+   * Retorna o path da pattern 
+   * @param pattern pattern
+   */
   getCurrentPath(pattern: string | null) {
     let patternSelected = this.patterns.find(p => p.id === pattern);
     this.path = patternSelected ? patternSelected.path : null;
     console.log(this.path);
   }
 
+  /**
+   * Retorna o schedule da trip
+   * @param trip tripe
+   */
   getCurrentSchedule(trip : string | null) {
     let tripSelected = this.trips.find(t=> t.id ===  trip);
     this.schedule = tripSelected ? tripSelected.schedule : null;
@@ -374,12 +437,20 @@ this.patterns = [];
     console.log(this.schedule);
   }
 
-
+  /**
+   * Formata o tempo
+   * @param time tempo
+   * @returns a formatação
+   */
   formatTime(time: string): string {
     return time.substring(0, 5);
   }
 
-
+  /**
+   * Retorna o nome do stop pela id
+   * @param id id da stop
+   * @returns nome da stop
+   */
   getNameStopById(id: string): string {
     if (this.path) {
       let stop = this.path.find(stop => stop.stop.id === id);
@@ -389,6 +460,11 @@ this.patterns = [];
 
   }
 
+  /**
+   * Nome da localidade pela stop id
+   * @param id stop id
+   * @returns o resultado
+   */
   getLocalityStopById(id : string): string {
     if (this.path) {
       let stop = this.path.find(stop => stop.stop.id === id);
@@ -398,6 +474,10 @@ this.patterns = [];
   }
 
 
+  /**
+   * Verifica se existem trips
+   * @returns o resultado
+   */
   iswithoutTrips(): boolean {
     if (this.trips.length === 0 && this.scheduleForm.get('pattern')?.value !== "") {
       return true;
