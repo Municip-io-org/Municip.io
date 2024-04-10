@@ -28,27 +28,28 @@ import { Editor, Toolbar } from 'ngx-editor';
 export class MunicipalEditComponent {
 
   municipality: Municipality = {
-    name: '',
-    president: '',
-    contact: '',
-    description: '',
-    areaha: '',
-    codigo: '',
-    codigopostal: '',
-    codigoine: '',
-    descpstal: '',
-    distrito: '',
-    eleitores: '',
-    email: '',
-    fax: '',
-    localidade: '',
-    nif: '',
-    populacao: '',
-    rua: '',
-    sitio: '',
-    telefone: '',
-    emblemPhoto: '',
-    landscapePhoto: '',
+      name: '',
+      president: '',
+      contact: '',
+      description: '',
+      areaha: '',
+      codigo: '',
+      codigopostal: '',
+      codigoine: '',
+      descpstal: '',
+      distrito: '',
+      eleitores: '',
+      email: '',
+      fax: '',
+      localidade: '',
+      nif: '',
+      populacao: '',
+      rua: '',
+      sitio: '',
+      telefone: '',
+      emblemPhoto: '',
+      landscapePhoto: '',
+      libraryAddress: ''
   };
 
   editor = new Editor();
@@ -76,6 +77,7 @@ export class MunicipalEditComponent {
     president: new FormControl({ value: this.municipality.president, disabled:true}, [Validators.required]),
     contact: new FormControl({ value: this.municipality.contact, disabled: true }, [Validators.required, Validators.pattern(/^\d{9}$/)]),
     description: new FormControl({ value: this.municipality.description, disabled: true }, [Validators.required]),
+    libraryAddress: new FormControl({ value: this.municipality.libraryAddress, disabled: true }),
     emblemPhoto: new FormControl({ value: null, disabled: true }),
     landscapePhoto: new FormControl({ value: null, disabled: true })
   });
@@ -146,6 +148,7 @@ export class MunicipalEditComponent {
       president: this.municipality.president,
       contact: this.municipality.contact,
       description: this.municipality.description,
+      libraryAddress: this.municipality.libraryAddress,
       emblemPhoto: null,
       landscapePhoto: null
     });
@@ -191,6 +194,10 @@ export class MunicipalEditComponent {
 
   get description() {
     return this.municipalityEditForm.get('description');
+  }
+
+  get libraryAddress() {
+    return this.municipalityEditForm.get('libraryAddress');
   }
 
   get emblemPhoto() {
@@ -259,6 +266,7 @@ export class MunicipalEditComponent {
     this.municipality.president = this.president!.value!;
     this.municipality.contact = this.contact!.value!.toString();
     this.municipality.description = this.description!.value!;
+    this.municipality.libraryAddress = this.libraryAddress!.value!;
 
 
   this.municipalAdminAuthService.updateMunicipality(this.municipality, this.emblemImg, this.landscapeImg).subscribe(

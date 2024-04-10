@@ -4,14 +4,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
 </head>
-<header class="font-">
-  <div class="flex items-center w-full shadow-md py-[0.7rem] px-3 font-poppins">
+<app-header-loggedin></app-header-loggedin>
 
-    <img class="w-56 pl-[2rem]"
-         alt="logo"
-         src="/assets/images/logos/logo-black-right.png" />
-  </div>
-</header>
 
 <app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" [title]="'Estatísticas de Administrador'"
                     [text]="'Consulte os dados sobre a utilização da municip.io, monitorizando o desempenho da ferramenta junto dos municípios e utilizadores'" />
@@ -71,7 +65,10 @@
 
       <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-12">
         <div class="flex flex-col md:col-span-3 md:row-span-3 bg-white shadow rounded-lg">
-          <div class="px-6 py-5 font-semibold border-b border-gray-100">Utilizadores inscritos por mês</div>
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p>Utilizadores inscritos por mês</p>
+            <app-tooltip [tooltipText]="'Gráfico que mostra o número de pessoas inscritas, por mês'"></app-tooltip>
+          </div>
 
 
           <div class="  p-4 flex-grow bg-gray-50 m-6 shadow-xl rounded-xl hover:shadow-2xl transition duration-200 ">
@@ -114,11 +111,11 @@
           </div>
         </div>
         <!--<div class="flex flex-col row-span-3 bg-white shadow rounded-lg">
-      <div class="px-6 py-5 font-semibold border-b border-gray-100">Students by type of studying</div>
-      <div class="p-4 flex-grow">
-        <div class="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
-      </div>
-    </div>-->
+          <div class="px-6 py-5 font-semibold border-b border-gray-100">Students by type of studying</div>
+          <div class="p-4 flex-grow">
+            <div class="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
+          </div>
+        </div>-->
 
       </section>
 
@@ -128,7 +125,10 @@
       <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 grid-rows-4">
 
         <div class="flex flex-col md:col-span-1 row-span-8 bg-white shadow rounded-lg">
-          <div class="px-6 py-5 font-semibold border-b border-gray-100">Notícias</div>
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p> Notícias</p>
+            <app-tooltip [tooltipText]="'Estatísticas relativas às notícias da aplicação.'"></app-tooltip>
+          </div>
 
           <div class="p-4 flex-grow grid grid-cols-1 grid-rows-2 gap-4 h-1 ">
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -157,7 +157,10 @@
         </div>
 
         <div class="flex flex-col md:col-span-1 row-span-8 bg-white shadow rounded-lg">
-          <div class="px-6 py-5 font-semibold border-b border-gray-100">Eventos</div>
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p>Eventos</p>
+            <app-tooltip [tooltipText]="'Estatísticas relativas aos eventos da aplicação.'"></app-tooltip>
+          </div>
 
           <div class="p-4 flex-grow grid grid-cols-1 grid-rows-2 gap-4 h-1 ">
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -186,7 +189,10 @@
         </div>
 
         <div class="flex flex-col md:col-span-1 row-span-8 bg-white shadow rounded-lg">
-          <div class="px-6 py-5 font-semibold border-b border-gray-100">Documentos</div>
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p>Documentos</p>
+            <app-tooltip [tooltipText]="'Estatísticas relativas aos documentos da aplicação.'"></app-tooltip>
+          </div>
 
           <div class="p-4 flex-grow grid grid-cols-1 grid-rows-3 gap-4 h-1 ">
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -229,7 +235,11 @@
 
 
         <div class="flex flex-col md:col-span-1 row-span-8 bg-white shadow rounded-lg">
-          <div class="px-6 py-5 font-semibold border-b border-gray-100">Biblioteca</div>
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p>Biblioteca</p>
+            <app-tooltip [tooltipText]="'Estatísticas relativas à biblioteca da aplicação.'"></app-tooltip>
+
+          </div>
 
           <div class="p-4 flex-grow grid grid-cols-1 grid-rows-2 gap-4 h-1 ">
             <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -265,18 +275,21 @@
 
 
         <!--<div class="flex flex-col row-span-3 bg-white shadow rounded-lg">
-      <div class="px-6 py-5 font-semibold border-b border-gray-100">Students by type of studying</div>
-      <div class="p-4 flex-grow">
-        <div class="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
-      </div>
-    </div>-->
+          <div class="px-6 py-5 font-semibold border-b border-gray-100">Students by type of studying</div>
+          <div class="p-4 flex-grow">
+            <div class="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
+          </div>
+        </div>-->
       </section>
 
 
 
       <section class="grid sm:grid-cols-2  xl:grid-cols-4 xl:grid-rows-2 xl:grid-flow-col gap-12">
         <div class="flex flex-col md:col-span-4 md:row-span-2 bg-white shadow rounded-lg">
-          <div class="px-6 py-5 font-semibold border-b border-gray-100">Análise Demográfica</div>
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p>Análise Demográfica </p>
+            <app-tooltip [tooltipText]="'Gráficos referentes à análise demografica da aplicação.'"></app-tooltip>
+          </div>
 
 
 
@@ -333,12 +346,14 @@
         </div>
 
         <!--<div class="flex flex-col row-span-3 bg-white shadow rounded-lg">
-      <div class="px-6 py-5 font-semibold border-b border-gray-100">Students by type of studying</div>
-      <div class="p-4 flex-grow">
-        <div class="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
-      </div>
-    </div>-->
+          <div class="px-6 py-5 font-semibold border-b border-gray-100">Students by type of studying</div>
+          <div class="p-4 flex-grow">
+            <div class="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
+          </div>
+        </div>-->
       </section>
     </main>
   </div>
 </body>
+
+<app-footer />

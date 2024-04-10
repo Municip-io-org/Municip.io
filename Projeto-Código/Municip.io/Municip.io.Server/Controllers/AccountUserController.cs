@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using MimeKit.Cryptography;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
@@ -314,6 +315,7 @@ namespace Municip.io.Server.Controllers
                     municipality.eleitores = informacoesMunicipio.eleitores;
                     municipality.codigoine = informacoesMunicipio.codigoine;
                     municipality.distrito = informacoesMunicipio.distrito;
+                    municipality.libraryAddress = "";
                     municipality.date = DateOnly.FromDateTime(DateTime.Now);
                     municipality.numberOfUsers = 0;
                     municipality.status = MunicipalityStatus.Pending;
@@ -535,6 +537,7 @@ namespace Municip.io.Server.Controllers
             existingMunicipality.description = updatedMunicipality.description;
             existingMunicipality.emblemPhoto = updatedMunicipality.emblemPhoto;
             existingMunicipality.landscapePhoto = updatedMunicipality.landscapePhoto;
+            existingMunicipality.libraryAddress = updatedMunicipality.libraryAddress;
 
             if (_context.ChangeTracker.HasChanges())
             {

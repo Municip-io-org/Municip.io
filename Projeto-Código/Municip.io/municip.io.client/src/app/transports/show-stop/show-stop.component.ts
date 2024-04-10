@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
-
+/**
+ * Componente para mostrar uma paragem.
+ */
 @Component({
   selector: 'app-show-stop',
   templateUrl: './show-stop.component.html',
@@ -18,7 +20,11 @@ export class ShowStopComponent {
   constructor(private router: Router) { }
 
   
-
+  /**
+   * Método para calcular o tempo restante até à paragem.
+   * @param stopTime objeto stoptime
+   * @returns o valor do tempo restante
+   */
   calculateTimeRemaining(stopTime: string): string {
     const currentTime = new Date();
     const [hours, minutes] = stopTime.split(':');
@@ -41,12 +47,16 @@ export class ShowStopComponent {
     return timeRemaining;
   }
 
-
+  /**
+   * Redireciona para uma paragem
+   */
   redirectToStop() {
     this.router.navigateByUrl(`/transports/stops/${this.stopId}`);
 
   }
-
+  /**
+   * Evento de clique num stop
+   */
   onClickStop() {
     this.stopClicked.emit(this.stopId);
   }

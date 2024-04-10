@@ -17,12 +17,16 @@
 
 
   <div class="flex items-center justify-between">
-    <div class="w-full lg:w-5/12 mb-4 h-32">
-      <app-input-title class="text-[1.8rem]">Título</app-input-title>
+    <div class="w-full lg:w-5/12 mb-4 h-32 relative">
+      <div class="flex items-center">
+        <app-input-title class="text-[1.8rem] mr-2">Título</app-input-title>
+        <app-tooltip [tooltipText]="'Título do evento'" class="mt-1"></app-tooltip>
+      </div>
       <div class="flex items-center">
         <input required placeholder="Título do evento" type="text" id="title" formControlName="title" name="title"
                class="input w-full h-12 lg:h-14" />
       </div>
+
       <div class="text-red-500 font-bold py-2" *ngIf="title?.touched && title?.invalid ">
         <div *ngIf="title?.errors?.['required'] ">Título Obrigatório</div>
       </div>
@@ -44,21 +48,25 @@
 
 
   <div class="flex items-center justify-between mb-4">
+
     <div class="w-full lg:w-5/12 mb-4 p-6 shadow-2xl rounded-xl">
+      <app-tooltip [tooltipText]="'Período no qual os cidadãos se podem inscrever no evento'" class=" m-0 right-0"></app-tooltip>
 
       <app-datetimepicker [titleDate]="'Período de Inscrição'" [formGroup]="eventForm"
                           [StartHourPlaceholder]="'Início de Incrição'" [EndHourPlaceholder]="'Fim de Inscrição'"
                           [formReceived]="eventRegistration"
-                          [minDate]="minDateRegistration"
-                          />
+                          [minDate]="minDateRegistration" />
+
     </div>
 
+
     <div class="w-full lg:w-5/12 mb-4 p-6 shadow-2xl rounded-xl">
+      <app-tooltip [tooltipText]="'Período no qual decorrerá o evento'" class=" m-0 right-0"></app-tooltip>
 
       <app-datetimepicker [titleDate]="'Período de Evento'" [formGroup]="eventForm"
                           [StartHourPlaceholder]="'Início do Evento'" [EndHourPlaceholder]="'Fim do Evento'"
                           [formReceived]="eventDate"
-                          [minDate]="minDateEvent"/>
+                          [minDate]="minDateEvent" />
     </div>
   </div>
   <div class="flex items-center justify-between ">

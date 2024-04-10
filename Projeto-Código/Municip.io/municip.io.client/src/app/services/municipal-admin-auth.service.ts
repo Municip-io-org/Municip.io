@@ -4,14 +4,27 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, forkJoin, map, switchMap, tap } from 'rxjs';
 
+/**
+ * Serviço que fornece métodos para autenticação de administradores municipais.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class MunicipalAdminAuthService {
 
+  /**
+   * Método construtor.
+   * @param http O serviço HttpClient
+   * @param router O Serviço Router
+   */
   constructor(private http: HttpClient, private router: Router) { }
 
-
+  /**
+   * Regista um administrador municipal 
+   * @param municipalAdministrator objeto administrador municipal
+   * @param image imagem do administrador
+   * @returns retorna a resposta da ação
+   */
   registerMunicipalAdmin(municipalAdministrator: MunicipalAdministrator, image: File): Observable<boolean> {
 
     var headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
@@ -32,7 +45,13 @@ export class MunicipalAdminAuthService {
 
 
 
-
+  /**
+   * Regista um município
+   * @param municipality Objeto do muncipio
+   * @param emblemImage Brasão do município
+   * @param landscapeImage Imagem de fundo do município
+   * @returns retorna a resposta da ação
+   */
   registerMunicipality(municipality: Municipality, emblemImage: File, landscapeImage: File): Observable<Municipality> {
     const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
     const imgurl = "https://api.imgur.com/3/image";
@@ -65,6 +84,13 @@ export class MunicipalAdminAuthService {
     );
   }
 
+  /**
+   * Atualiza o município
+   * @param municipality Objeto município
+   * @param emblemImage Brasão do município
+   * @param landscapeImage Imagem de fundo do município
+   * @returns retorna a resposta da ação
+   */
   updateMunicipality(municipality: Municipality, emblemImage: File, landscapeImage: File): Observable<Municipality> {
     const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
     const imgurl = "https://api.imgur.com/3/image";
@@ -94,6 +120,13 @@ export class MunicipalAdminAuthService {
     );
   }
 
+  /**
+   * Coloca a imagem no imgur
+   * @param url url do caminho da imagem
+   * @param image ficheiro da imagem 
+   * @param headers header do pedido
+   * @returns retorna a resposta do pedido
+   */
   private uploadImageToImgur(url: string, image: File, headers: HttpHeaders): Observable<string> {
     const formData = new FormData();
     formData.append('image', image);
@@ -102,7 +135,10 @@ export class MunicipalAdminAuthService {
     );
   }
 
-
+  /**
+   * Retorna os municipios aprovados.
+   * @returns
+   */
   getApprovedMunicipalities() {
     return this.http.get<Municipality>('api/municipalitystatus/approvedMunicipalities');
   }
@@ -136,6 +172,7 @@ export interface Municipality {
   eleitores: string;
   email: string;
   fax: string;
+  libraryAddress? : string;
   localidade: string;
   name: string;
   nif: string;
