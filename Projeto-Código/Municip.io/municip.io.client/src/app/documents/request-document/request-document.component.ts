@@ -10,6 +10,20 @@ import { DocsService, DocumentTemplate, DocumentTemplateStatus } from '../../ser
   templateUrl: './request-document.component.html',
   styleUrl: './request-document.component.css'
 })
+/**
+ * @class RequestDocumentComponent
+ *
+ * Este componente é responsável por solicitar um documento.
+ *
+ * @param templates - Os modelos de documento.
+ * @param user - O utilizador.
+ * @param isMunAdmin - O administrador municipal.
+ * @param municipality - O município.
+ * @param nameSearch - A pesquisa por nome.
+ * 
+ * @returns Um documento solicitado.
+ *
+ **/
 export class RequestDocumentComponent {
 
   templates: DocumentTemplate[] = [];
@@ -44,10 +58,23 @@ export class RequestDocumentComponent {
   nameSearch: string = '';
 
 
+  /**
+   * Construtor do componente.
+   * @param userAuthService
+   * @param router
+   * @param documentsService
+   *
+   **/
   constructor(private userAuthService: UserAuthService, private router: Router, private documentsService: DocsService) {
    
   }
 
+  /**
+   * Este método é responsável por inicializar o componente.
+   * 
+   * @returns As informações do utilizador.
+   *
+   **/
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
       res => {
@@ -96,6 +123,12 @@ export class RequestDocumentComponent {
 
   }
 
+  /**
+   * Este método é responsável por filtrar os documentos.
+   * 
+   * @returns A lista de documentos filtrada.
+   *
+   **/
   get filteredDocuments() {
     return this.templates.filter(template => template.name.toLowerCase().includes(this.nameSearch.toLowerCase()) && template.status == DocumentTemplateStatus.active);
   }

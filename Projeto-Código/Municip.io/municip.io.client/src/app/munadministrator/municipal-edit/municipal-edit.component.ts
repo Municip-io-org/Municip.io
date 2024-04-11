@@ -9,30 +9,47 @@ import { Editor, Toolbar } from 'ngx-editor';
   templateUrl: './municipal-edit.component.html',
   styleUrl: './municipal-edit.component.css'
 })
+/**
+ * Municipal Edit Component
+ *
+ * Este componente representa a edição municipal
+ *
+ * @param municipality - Município
+ * @param editor - Editor
+ * @param toolbar - Barra de ferramentas
+ * @param currentEmblemPhoto - Foto de emblema atual
+ * @param currentLandscapePhoto - Foto de paisagem atual
+ * @param emblemImg - Imagem de emblema
+ * @param landscapeImg - Imagem de paisagem
+ * @param user - Utilizador
+ * @param editMode - Modo de edição
+ * @param municipalityEditForm - Formulário de edição do município
+ */
 export class MunicipalEditComponent {
 
   municipality: Municipality = {
-    name: '',
-    president: '',
-    contact: '',
-    description: '',
-    areaha: '',
-    codigo: '',
-    codigopostal: '',
-    codigoine: '',
-    descpstal: '',
-    distrito: '',
-    eleitores: '',
-    email: '',
-    fax: '',
-    localidade: '',
-    nif: '',
-    populacao: '',
-    rua: '',
-    sitio: '',
-    telefone: '',
-    emblemPhoto: '',
-    landscapePhoto: '',
+      name: '',
+      president: '',
+      contact: '',
+      description: '',
+      areaha: '',
+      codigo: '',
+      codigopostal: '',
+      codigoine: '',
+      descpstal: '',
+      distrito: '',
+      eleitores: '',
+      email: '',
+      fax: '',
+      localidade: '',
+      nif: '',
+      populacao: '',
+      rua: '',
+      sitio: '',
+      telefone: '',
+      emblemPhoto: '',
+      landscapePhoto: '',
+      libraryAddress: ''
   };
 
   editor = new Editor();
@@ -60,12 +77,25 @@ export class MunicipalEditComponent {
     president: new FormControl({ value: this.municipality.president, disabled:true}, [Validators.required]),
     contact: new FormControl({ value: this.municipality.contact, disabled: true }, [Validators.required, Validators.pattern(/^\d{9}$/)]),
     description: new FormControl({ value: this.municipality.description, disabled: true }, [Validators.required]),
+    libraryAddress: new FormControl({ value: this.municipality.libraryAddress, disabled: true }),
     emblemPhoto: new FormControl({ value: null, disabled: true }),
     landscapePhoto: new FormControl({ value: null, disabled: true })
   });
 
+  /**
+   * @constructor
+   * MunicipalEditComponent
+   *
+   * @param municipalAdminAuthService - Serviço de autenticação do administrador municipal
+   * @param userAuthService - Serviço de autenticação do cidadão
+   */
   constructor(private userAuthService: UserAuthService, private municipalAdminAuthService :MunicipalAdminAuthService) { }
 
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente
+   */
   ngOnInit(): void {
     this.editor = new Editor();
     this.userAuthService.getUserData().subscribe(
@@ -99,15 +129,26 @@ export class MunicipalEditComponent {
     );
   }
 
+  /**
+   * ngOnDestroy
+   *
+   * Destroi o editor
+   */
   ngOnDestroy(): void {
     this.editor.destroy();
   }
 
+  /**
+   * initForm
+   *
+   * Inicializa o formulário
+   */
   initForm() {
     this.municipalityEditForm.patchValue({
       president: this.municipality.president,
       contact: this.municipality.contact,
       description: this.municipality.description,
+      libraryAddress: this.municipality.libraryAddress,
       emblemPhoto: null,
       landscapePhoto: null
     });
@@ -116,6 +157,11 @@ export class MunicipalEditComponent {
     this.currentLandscapePhoto = this.municipality.landscapePhoto;
   }
 
+  /**
+   * toggleEditMode
+   *
+   * Ativa/desativa o modo de edição
+   */
   toggleEditMode() {
     this.editMode = !this.editMode;
 
@@ -126,13 +172,18 @@ export class MunicipalEditComponent {
     }
   }
 
+  /**
+   * cancelEditMode
+   *
+   * Cancela o modo de edição
+   */
   cancelEditMode() {
     this.toggleEditMode();
     this.initForm();
   }
 
   
-
+  //Getters
   get president() {
     return this.municipalityEditForm.get('president');
   }
@@ -145,6 +196,10 @@ export class MunicipalEditComponent {
     return this.municipalityEditForm.get('description');
   }
 
+  get libraryAddress() {
+    return this.municipalityEditForm.get('libraryAddress');
+  }
+
   get emblemPhoto() {
     return this.municipalityEditForm.get('emblemPhoto');
   }
@@ -153,6 +208,13 @@ export class MunicipalEditComponent {
     return this.municipalityEditForm.get('landscapePhoto');
   }
 
+  /**
+   * onEmblemImagePicked
+   *
+   * Seleciona a imagem de emblema
+   *
+   * @param event - Evento
+   */
   onEmblemImagePicked(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -169,6 +231,13 @@ export class MunicipalEditComponent {
 
 
 
+  /**
+   * onLandscapeImagePicked
+   *
+   * Seleciona a imagem de paisagem
+   *
+   * @param event - Evento
+   */
   onLandscapeImagePicked(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -184,6 +253,11 @@ export class MunicipalEditComponent {
   }
 
 
+  /**
+   * onSubmit
+   *
+   * Submete o formulário
+   */
   onSubmit() {
 
   this.toggleEditMode();
@@ -192,6 +266,7 @@ export class MunicipalEditComponent {
     this.municipality.president = this.president!.value!;
     this.municipality.contact = this.contact!.value!.toString();
     this.municipality.description = this.description!.value!;
+    this.municipality.libraryAddress = this.libraryAddress!.value!;
 
 
   this.municipalAdminAuthService.updateMunicipality(this.municipality, this.emblemImg, this.landscapeImg).subscribe(

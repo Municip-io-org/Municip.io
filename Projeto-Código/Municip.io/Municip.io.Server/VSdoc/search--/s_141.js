@@ -1,1 +1,1 @@
-search_result['141']=["topic_0000000000000037_props--.html","EventsController Properties",""];
+search_result['141']=["topic_0000000000000036.html","DocumentController Class","Controller to manage the documents"];

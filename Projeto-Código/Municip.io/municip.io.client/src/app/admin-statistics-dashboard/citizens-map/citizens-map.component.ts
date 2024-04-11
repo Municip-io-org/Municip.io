@@ -8,6 +8,25 @@ import { AdminStatisticsService } from '../../services/stats/admin-statistics.se
   templateUrl: './citizens-map.component.html',
   styleUrl: './citizens-map.component.css'
 })
+
+/**
+ * @class CitizensMapComponent
+ *
+ * Este componente é responsável por exibir um mapa com a distribuição de cidadãos por distrito.
+ * 
+ * @param title - O título do mapa.
+ * @param districtData - Os dados dos distritos.
+ * @param municipalities - A lista de municípios.
+ * @param type - O tipo de gráfico.
+ * @param data - Os dados a serem exibidos no gráfico.
+ * @param columnNames - Os nomes das colunas do gráfico.
+ * @param options - As opções do gráfico.
+ * @param width - A largura do gráfico.
+ * @param height - A altura do gráfico.
+ *
+ * @returns Um mapa com a distribuição de cidadãos por distrito.
+ *
+ **/
 export class CitizensMapComponent {
 
   constructor(private adminStatisticsService: AdminStatisticsService) { }
@@ -35,8 +54,8 @@ export class CitizensMapComponent {
     backgroundColor: 'transparent',
     resolution: "provinces",
     datalessRegionColor: 'transparent',
-
-
+    //colorAxis: { colors: ['#10b981','yellow', '#ef4444'] },
+    colorAxis: { colors: ['#0cab46', '#f59e0b', '#ef4444'] },
 
     legend: 'none',
 
@@ -44,8 +63,16 @@ export class CitizensMapComponent {
   width = 600;
   height = 400;
 
+  min = 0;
+max = 0;
 
 
+  /**
+   * Este método é responsável por obter a lista de municípios e gerar os dados dos distritos.
+   * 
+   * @returns A lista de municípios.
+   *
+   **/
   ngOnInit() {
     this.adminStatisticsService.getAllMunicipalities().subscribe((municipalities: Municipality[]) => {
       this.municipalities = municipalities;
@@ -57,6 +84,12 @@ export class CitizensMapComponent {
 
   }
 
+  /**
+   * Este método é responsável por gerar os dados dos distritos.
+   * 
+   * @returns Os dados dos distritos.
+   *
+   **/
   generateCitizensDistrictsData() {
 
 this.municipalities.forEach(municipality => {
@@ -69,6 +102,8 @@ this.municipalities.forEach(municipality => {
 
 
     this.data = Object.entries(this.districtData);
+    this.min = Math.min(...Object.values(this.districtData));
+this.max = Math.max(...Object.values(this.districtData));
   }
 
 

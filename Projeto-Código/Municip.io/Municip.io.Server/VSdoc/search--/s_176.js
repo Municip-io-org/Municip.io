@@ -1,1 +1,1 @@
-search_result['176']=["topic_0000000000000043_events--.html","GeoAPIController Events",""];
+search_result['176']=["topic_0000000000000040.html","DocumentController.GetDistinctDocumentTypesFromMunicipality Method","Method to get the distinct document types from a municipality"];

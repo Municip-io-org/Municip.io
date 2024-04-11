@@ -9,8 +9,18 @@ import { Municipalities } from '../../municipalities.enum';
   templateUrl: './sign-up-municipal-administrator-account.component.html',
   styleUrl: './sign-up-municipal-administrator-account.component.css',
 })
-
-
+/**
+ * Componente para a criação de uma conta de administrador municipal
+ *
+ * @param municipalAdministrator O administrador municipal a registar
+ * @param errors Os erros
+ * @param defaultMunicipalityOption A opção de município padrão
+ * @param municipalities Os municípios
+ * @param signUpMunicipalAdminForm O formulário de registo de administrador municipal
+ * @param image A imagem
+ * @param imageUrl A URL da imagem
+ * @param files Os ficheiros
+ */
 export class SignUpMunicipalAdministratorAccountComponent {
   municipalAdministrator: MunicipalAdministrator = {
     firstName: '',
@@ -36,6 +46,13 @@ export class SignUpMunicipalAdministratorAccountComponent {
     return Object.values(this.municipalities)
   }
 
+  /**
+  * @constructor
+  * SignUpMunicipalAdministratorAccountComponent
+  * 
+  * @param municipalAdminAuthService 
+  * @param router 
+  */
   constructor(private municipalAdminAuthService: MunicipalAdminAuthService, private router: Router) { }
 
   signUpMunicipalAdminForm = new FormGroup({
@@ -46,6 +63,11 @@ export class SignUpMunicipalAdministratorAccountComponent {
     municipality: new FormControl("", [Validators.required, this.validateMunicipality.bind(this)])
   });
 
+  /**
+   * Validador de município
+   * @param control O controlador
+   * @returns Validação
+   */
   validateMunicipality(control: FormControl): { [key: string]: boolean } | null {
     if (!control.value || this.getMunicipalities().find((municipality: Municipalities) => municipality === control.value)) {
       return null;
@@ -53,6 +75,11 @@ export class SignUpMunicipalAdministratorAccountComponent {
     return { 'invalidMunicipality': true };
   }
 
+  /**
+   * Validação da password
+   * @param control
+   * @returns
+   */
   validatePassword(control: FormControl): { [key: string]: boolean } | null {
     const value: string = control.value;
 
@@ -73,6 +100,10 @@ export class SignUpMunicipalAdministratorAccountComponent {
     return isValid ? null : { 'invalidPassword': true };
   }
 
+  /**
+ * Evento dispultado aquando do selecionamento de uma imagem
+ * @param event
+ */
   onFileChange(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const fileList: FileList | null = fileInput?.files;
@@ -87,16 +118,30 @@ export class SignUpMunicipalAdministratorAccountComponent {
     }
   }
 
+  /**
+   * Método responsável por validar se o ficheiro é uma imagem
+   * @param file
+   * @returns
+   */
+
   isValidImageFile(file: File): boolean {
     // Adicione aqui a lógica para validar se o arquivo é uma imagem
     // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
     return file.type.startsWith('image/');
   }
 
+  /**
+   * Metodo onDragOver
+   * @param event 
+   */
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
 
+  /**
+   * Método onDrop
+   * @param event
+   */
   onDrop(event: DragEvent) {
     event.preventDefault();
     const files: FileList | null = event.dataTransfer?.files || null;
@@ -115,7 +160,9 @@ export class SignUpMunicipalAdministratorAccountComponent {
   }
 
 
-
+  /**
+   * Método onSubmit
+   */
   onSubmit() {
 
     this.municipalAdminAuthService.registerMunicipalAdmin(this.signUpMunicipalAdminForm.value as MunicipalAdministrator, this.image).subscribe(

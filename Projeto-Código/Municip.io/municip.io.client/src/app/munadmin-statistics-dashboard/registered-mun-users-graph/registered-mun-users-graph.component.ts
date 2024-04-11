@@ -11,8 +11,28 @@ import { UserAuthService } from '../../services/user-auth.service';
   templateUrl: './registered-mun-users-graph.component.html',
   styleUrl: './registered-mun-users-graph.component.css'
 })
+/**
+ * Registered Municipal Users Graph Component
+ *
+ * Este componente representa o gráfico de utilizadores municipais registados
+ *
+ * @param chart - Gráfico
+ * @param countsByMonthCitizens - Contagem por mês dos cidadãos
+ * @param countsByMonthMunicipalAdmins - Contagem por mês dos administradores municipais
+ * @param municipality - Município
+ * @param user - Utilizador
+ * @param municipalityCitizens - Cidadãos do município
+ * @param municipalityAdmins - Administradores municipais do município
+ */
 export class RegisteredMunUsersGraphComponent {
 
+  /**
+   * @constructor
+   * RegisteredMunUsersGraphComponent
+   *
+   * @param adminStatisticsService - Serviço de estatísticas do administrador
+   * @param userAuthService - Serviço de autenticação do utilizador
+   */
   constructor(private adminStatisticsService: AdminStatisticsService, private userAuthService : UserAuthService) { }
 
   chart: Chart | undefined;
@@ -23,6 +43,11 @@ export class RegisteredMunUsersGraphComponent {
   municipalityCitizens: Citizen[] = [];
 municipalityAdmins: MunicipalAdministrator[] = [];
 
+  /**
+   * ngAfterViewInit
+   *
+   * Inicializa o componente
+   */
   ngAfterViewInit() {
 
     this.userAuthService.getUserData().subscribe(
@@ -62,7 +87,11 @@ municipalityAdmins: MunicipalAdministrator[] = [];
   }
 
 
-
+  /**
+   * createChart
+   *
+   * Cria o gráfico
+   */
   createChart() {
     const maxDataValue = Math.max(...Array.from(this.countsByMonthCitizens.values()));
     const maxYAxisValue = Math.ceil(maxDataValue) + 5;
@@ -105,6 +134,14 @@ municipalityAdmins: MunicipalAdministrator[] = [];
     });
   }
 
+  /**
+   * getRegisteredByMonth
+   *
+   * Obtém os registos por mês
+   *
+   * @param data - Dados
+   * @returns Contagem por mês
+   */
   getRegisteredByMonth(data: any[]): Map<string, number> {
     const monthOrder: { [key: string]: number } = {
       'janeiro': 1,

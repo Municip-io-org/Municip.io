@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using MimeKit.Cryptography;
 using Municip.io.Server.Data;
 using Municip.io.Server.Models;
@@ -50,7 +51,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        //function to get the role who the user belongs to
+        
+        /// <summary> 
+        /// Obtém a Role do utilizador autenticado.
+        /// 
+        /// <returns>return JSON com a role do utilizador</returns>
         [HttpGet("UserRole")]
         public async Task<IActionResult> UserRole()
         {
@@ -67,6 +72,10 @@ namespace Municip.io.Server.Controllers
 
 
 
+        /// <summary> 
+        /// Realiza o logout do utilizador autenticado.
+        /// 
+        /// <returns>A mensagem de sucesso</returns>
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {
@@ -314,6 +323,7 @@ namespace Municip.io.Server.Controllers
                     municipality.eleitores = informacoesMunicipio.eleitores;
                     municipality.codigoine = informacoesMunicipio.codigoine;
                     municipality.distrito = informacoesMunicipio.distrito;
+                    municipality.libraryAddress = "";
                     municipality.date = DateOnly.FromDateTime(DateTime.Now);
                     municipality.numberOfUsers = 0;
                     municipality.status = MunicipalityStatus.Pending;
@@ -401,6 +411,11 @@ namespace Municip.io.Server.Controllers
 
         }
 
+        /// <summary>
+        /// Atualiza a informação de um cidadão
+        /// <param name="updatedCitizen"></param>"
+        /// <param name="passwordConfirmation"></param>"
+        /// <returns>A mensagem de sucesso ou erro da operação</returns>
         [HttpPut("UpdateUserInfo")]
         public async Task<IActionResult> UpdateUserInfo(Citizen updatedCitizen, string passwordConfirmation)
         {
@@ -452,7 +467,11 @@ namespace Municip.io.Server.Controllers
 
 
 
-
+        /// <summary>
+        /// Atualiza a informação de um administrador municipal
+        /// <param name="updatedCitizen"></param>"
+        /// <param name="passwordConfirmation"></param>"
+        /// <returns>A mensagem de sucesso ou erro da operação</returns>
         [HttpPut("UpdateAdmMunicipalInfo")]
         public async Task<IActionResult> UpdateAdmMunicipalInfo(MunicipalAdministrator updatedCitizen, string passwordConfirmation)
         {
@@ -513,6 +532,10 @@ namespace Municip.io.Server.Controllers
         }
 
 
+        /// <summary>
+        /// Atualiza a informação de um municipio
+        /// <param name="updatedMunicipality"></param>"
+        /// <returns>A mensagem de sucesso ou erro da operação</returns>
         [HttpPut("UpdateMunicipality")]
         public async Task<IActionResult> UpdateMunicipality(Municipality updatedMunicipality)
         {
@@ -535,6 +558,7 @@ namespace Municip.io.Server.Controllers
             existingMunicipality.description = updatedMunicipality.description;
             existingMunicipality.emblemPhoto = updatedMunicipality.emblemPhoto;
             existingMunicipality.landscapePhoto = updatedMunicipality.landscapePhoto;
+            existingMunicipality.libraryAddress = updatedMunicipality.libraryAddress;
 
             if (_context.ChangeTracker.HasChanges())
             {
@@ -558,6 +582,11 @@ namespace Municip.io.Server.Controllers
             return Ok("Success");
         }
 
+        /// <summary>
+        /// Atualiza o histórico de navegadores de um cidadão
+        /// <param name="email"></param>
+        /// <param name="userAgent"></param>
+        /// <returns> O estado de Sucesso/Insucesso</returns>
         [HttpPut("UpdateBrowserHistory")]
         public async Task<IActionResult> UpdateBrowserHistory(string email, string userAgent)
         {
@@ -580,7 +609,10 @@ namespace Municip.io.Server.Controllers
             }
             return BadRequest(new { Message = "Cidadão não encontrado." });
         }
-
+        /// <summary>
+        /// Obtém o histórico de navegadores de um cidadão
+        /// <param name="email"></param>
+        /// <returns>Os navegadores de um cidadão</returns>
         [HttpGet("GetBrowserHistory")]
         public async Task<IActionResult> GetBrowserHistory(string email)
         {
@@ -601,6 +633,10 @@ namespace Municip.io.Server.Controllers
             }
         }
 
+        /// <summary>
+        /// Envia email de novo login
+        /// <param name="email"></param>"
+        /// <returns>A mensagem de sucesso ou erro da operação</returns>
         [HttpPost("SendNewLogin")]
         public IActionResult SendNewLogin(string email)
         {

@@ -1,1 +1,1 @@
-search_result['373']=["topic_0000000000000092_vars--.html","AppFeatureCategoryExtensions Fields",""];
+search_result['373']=["topic_0000000000000083.html","StatsController.getLandingPageMunicipalities Method","O método abaixo é utilizados para obter informações para obter o número de administradores municipais para a página inicial"];

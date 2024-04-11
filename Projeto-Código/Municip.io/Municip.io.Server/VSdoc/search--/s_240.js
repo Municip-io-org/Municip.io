@@ -1,1 +1,1 @@
-search_result['240']=["topic_000000000000005C_attached_props--.html","WeatherForecast Attached Properties",""];
+search_result['240']=["topic_0000000000000053.html","EventsController.DropOutCitizen Method","Esta chamada permite desinscrever um cidadão num evento passando o id do evento e o email do cidadão como parâmetros"];

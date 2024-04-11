@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="GENERATOR" content="VSdocman - documentation generator; https://www.helixoft.com" />
 	<link rel="icon" href="favicon.ico">
-	<title>StripePaymentController Methods</title>
+	<title>MunicipalityStatusController Methods</title>
 
 	<link rel="stylesheet" type="text/css" href="msdn2019/toc.css" />
 	<script src="msdn2019/toc.js"></script>
@@ -75,11 +75,11 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
   </div>
 
 <div id="mainBody">
-		<h1 class="title">StripePaymentController Methods</h1>
+		<h1 class="title">MunicipalityStatusController Methods</h1>
         <p />
         <p>
           The following tables list the members exposed by the  
-              <a href="topic_0000000000000066.html">StripePaymentController</a>
+              <a href="topic_0000000000000066.html">MunicipalityStatusController</a>
              type.
         </p>
 
@@ -119,12 +119,41 @@ document.write(getCssCustomProperty('--headerTopCustomLineHtml'));
     
 	</td>
 	<td>
-	<a href="topic_000000000000006A.html">ArchivePrice(string)</a>
+	<a href="topic_0000000000000069.html">GetApprovedMunicipalities()</a>
 
 	</td>
 	<td>
 
-method to archive a price and a product
+Esta função retorna todos os municípios aprovados como json.
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000006F.html">SendAprove(string, string, string)</a>
+
+	</td>
+	<td>
+
+Esta função envia um email para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município.
 
 	</td>
 </tr>
@@ -147,40 +176,12 @@ method to archive a price and a product
     
 	</td>
 	<td>
-	<a href="topic_0000000000000068.html">Create(string, string, string, string, int)</a>
+	<a href="topic_0000000000000070.html">SendDeny(string, string, string)</a>
 
 	</td>
 	<td>
 
-method to create a session
-
-	</td>
-</tr>
-
-
-
-
-
-
-
-
-	<tr class="
-
-
-">
-	<td>
-<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
-
-
-    
-	</td>
-	<td>
-	<a href="topic_0000000000000069.html">CreatePrice(string, string, string, float)</a>
-
-	</td>
-	<td>
-
-method to create a price and a product
+esta função envia um email de negação para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município.
 
 	</td>
 </tr>
@@ -203,12 +204,180 @@ method to create a price and a product
     
 	</td>
 	<td>
-	<a href="topic_000000000000006B.html">SendPayment(string, string, string, string)</a>
+	<a href="topic_0000000000000071.html">SendRemove(string, string, string)</a>
 
 	</td>
 	<td>
 
-method to send a payment email
+esta função envia um email de remoção para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município.
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000006A.html">approveMunicipality(string)</a>
+
+	</td>
+	<td>
+
+Esta função aprova um município. Recebe como parâmetro o nome do município.
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000006D.html">deleteAllAccountsByMunicipality(string)</a>
+
+	</td>
+	<td>
+
+Esta função remove todas as contas de administradores de um município. Recebe como parâmetro o nome do município. Não é uma ação passível de ser chamada via API
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000006B.html">deleteMunicipality(string)</a>
+
+	</td>
+	<td>
+
+Esta função remove um município. Recebe como parâmetro o nome do município.
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_0000000000000068.html">getMunicipalities()</a>
+
+	</td>
+	<td>
+
+Esta função retorna todos os municípios como json.
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000006C.html">pendingMunicipality(string)</a>
+
+	</td>
+	<td>
+
+Esta função coloca um município em estado de espera. Recebe como parâmetro o nome do município.
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+	<tr class="
+
+
+">
+	<td>
+<img alt="Public method" title="Public method" src="msdn2019/pubmethod.png"></img>
+
+
+    
+	</td>
+	<td>
+	<a href="topic_000000000000006E.html">sendEmailToMunicipalAdmins(string, Func&lt;StringStringStringIActionResult&gt;)</a>
+
+	</td>
+	<td>
+
+esta função envia um email para todos os administradores de um município. Recebe como parâmetro o nome do município e uma função que envia o email. Não é uma ação passível de ser chamada via API
 
 	</td>
 </tr>
@@ -233,10 +402,70 @@ method to send a payment email
 
 
 
+<div class="section_container">
+	<div class="section_heading">
+		<span><a href="javascript:void(0)" title="Collapse" onclick="toggleSection(this);">Operators</a></span>
+		<div>&nbsp;</div>
+	</div>
+
+	<div id="OperatorsSection" class="section">	
+  <table class="memberListTable">
+    <tr>
+      <th></th>
+      <th>
+        Name
+      </th>
+      <th>
+        Description
+      </th>
+    </tr>
 
 
 
 
+	<tr class="
+
+
+">
+	<td>
+	<img alt="Operator" title="Operator" src="msdn2019/puboperator.png"></img>
+	<img alt="Static" title="Static" src="msdn2019/static.png"></img>
+
+    
+	</td>
+	<td>
+	<a href="topic_0000000000000072.html">Implicit Conversion (AccountUserController to MunicipalityStatusController)</a>
+
+	</td>
+	<td>
+
+
+
+	</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </table>
+
+  <a href="#mainBody">
+    Top
+  </a>
+
+	</div>					
+</div>
 
 
 
@@ -250,7 +479,7 @@ method to send a payment email
 
 	<div id="seeAlsoSection" class="section">	
 		<div>
-			<a href="topic_0000000000000066.html">StripePaymentController Class</a><br />
+			<a href="topic_0000000000000066.html">MunicipalityStatusController Class</a><br />
 	<a href="topic_0000000000000000.html">Municip.io.Server.Controllers Namespace</a><br />
 
 

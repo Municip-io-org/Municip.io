@@ -1,1 +1,1 @@
-search_result['161']=["topic_000000000000003F_attached_props--.html","Municipality Attached Properties",""];
+search_result['161']=["topic_000000000000003B.html","DocumentController.GetDocuments Method","Method to change the status of a document template to active"];

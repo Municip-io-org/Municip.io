@@ -11,6 +11,19 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './manage-app-features.component.html',
   styleUrls: ['./manage-app-features.component.css']
 })
+/**
+ * Manage App Features Component
+ *
+ * Este componente representa a gestão de funcionalidades da aplicação
+ *
+ * @param error - Erro
+ * @param isDialogOpen - Diálogo aberto
+ * @param user - Utilizador
+ * @param isMunAdmin - É administrador municipal
+ * @param municipality - Município
+ * @param appFeatures - Funcionalidades da aplicação
+ * @param appFeatureEditForm - Formulário de edição de funcionalidades da aplicação
+ */
 export class ManageAppFeaturesComponent {
 
   error: string | null = null;
@@ -55,8 +68,22 @@ export class ManageAppFeaturesComponent {
 
 
 
+
+  /**
+   * @constructor
+   * ManageAppFeaturesComponent
+   *
+   * @param userAuthService - Serviço de autenticação do utilizador
+   * @param appFeaturesService - Serviço de funcionalidades da aplicação
+   * @param router - O Router
+   */
   constructor(private userAuthService: UserAuthService, private appFeaturesService: AppFeaturesService, private router: Router) { }
 
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente
+   */
   ngOnInit(): void {
 
     this.userAuthService.getUserData().subscribe(
@@ -104,6 +131,11 @@ export class ManageAppFeaturesComponent {
     );
   }
 
+  /**
+   * initForm
+   *
+   * Inicializa o formulário
+   */
   initForm() {
     this.appFeatureEditForm.patchValue({
       documents: this.appFeatures.find(a => a.appFeatureCategory == "Documents")?.isEnabled,
@@ -114,6 +146,11 @@ export class ManageAppFeaturesComponent {
     });
   }
 
+  /**
+   * onSubmit
+   *
+   * Submete o formulário
+   */
   onSubmit() {
 
 
@@ -133,6 +170,11 @@ export class ManageAppFeaturesComponent {
 
   }
 
+  /**
+   * saveChanges
+   *
+   * Guarda as alterações
+   */
   saveChanges() {
     this.appFeatures.find(a => a.appFeatureCategory == "Documents")!.isEnabled = this.documents!.value!;
     this.appFeatures.find(a => a.appFeatureCategory == "Events")!.isEnabled = this.events!.value!;
@@ -142,6 +184,7 @@ export class ManageAppFeaturesComponent {
   }
  
 
+  //Getters
   get documents() {
     return this.appFeatureEditForm.get('documents');
   }

@@ -1,1 +1,1 @@
-search_result['247']=["topic_000000000000005F.html","NewsController Class","Este controlador é responsável por gerir as notícias."];
+search_result['247']=["topic_0000000000000056_props--.html","GeoAPI Properties",""];

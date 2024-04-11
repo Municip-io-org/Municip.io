@@ -10,6 +10,24 @@ import { Editor, Toolbar } from 'ngx-editor';
   templateUrl: './news-create.component.html',
   styleUrl: './news-create.component.css',
 })
+/**
+ * News Create Component
+ *
+ * Este componente representa a criação de notícias
+ *
+ * @param editor - Editor
+ * @param toolbar - Barra de ferramentas
+ * @param news - Notícia
+ * @param user - Utilizador
+ * @param newUser - Novo utilizador
+ * @param errors - Erros
+ * @param image - Imagem
+ * @param imageUrl - URL da imagem
+ * @param files - Ficheiros
+ * @param subtitleCharacterCount - Contagem de caracteres do subtítulo
+ * @param mainTextCharacterCount - Contagem de caracteres do texto principal
+ * @param isDialogOpen - Diálogo aberto
+ */
 export class NewsCreateComponent {
 
   editor = new Editor();
@@ -42,8 +60,23 @@ export class NewsCreateComponent {
 
   isDialogOpen: boolean = false;
 
+  /**
+ * @constructor
+ * NewsCreateComponent
+ *
+ * @param newsService - Serviço de notícias
+ * @param router - O Router
+ * @param userAuthService - Serviço de autenticação do cidadão
+ */
   constructor(private newsService: NewsService, private router: Router, private userAuthService: UserAuthService ) { }
 
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente
+   *
+   */
+  
   ngOnInit() {
     this.editor = new Editor();
     this.userAuthService.getUserData().subscribe(
@@ -74,6 +107,7 @@ export class NewsCreateComponent {
     mainText: new FormControl("", [Validators.required]),  
   });
 
+  //Getter para aceder aos campos do formulário
   get title() {
     return this.newsCreateForm.get('title');
   }
@@ -84,10 +118,20 @@ export class NewsCreateComponent {
     return this.newsCreateForm.get('mainText');
   }
 
+  /**
+   * ngOnDestroy
+   *
+   * Destroi o editor
+   */
   ngDestroy() {
     this.editor.destroy();
   }
 
+  /**
+   * onSubmit
+   *
+   * Função que é chamada quando o utilizador faz submit do formulário de criação de notícias
+   */
   OnSubmit() {
    
     this.news.municipality = this.newUser.municipality;
@@ -110,6 +154,13 @@ export class NewsCreateComponent {
     );
   }
 
+  /**
+   * onFileChange
+   *
+   * Função que é chamada quando o utilizador seleciona uma imagem
+   *
+   * @param event - Evento
+   */
   onFileChange(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const fileList: FileList | null = fileInput?.files;
@@ -124,19 +175,38 @@ export class NewsCreateComponent {
     }
   }
 
-
-
-
+  /**
+   * isValidImageFile
+   *
+   * Verifica se o ficheiro é uma imagem
+   *
+   * @param file - Ficheiro
+   * @returns boolean
+   */
   isValidImageFile(file: File): boolean {
     // Adicione aqui a lógica para validar se o arquivo é uma imagem
     // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
     return file.type.startsWith('image/');
   }
 
+  /**
+   * onDragOver
+   *
+   * Função que é chamada quando o utilizador arrasta um ficheiro para a área de drop
+   *
+   * @param event - Evento
+   */
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
 
+  /**
+   * onDrop
+   *
+   * Função que é chamada quando o utilizador solta um ficheiro na área de drop
+   *
+   * @param event - Evento
+   */
   onDrop(event: DragEvent) {
     event.preventDefault();
     const files: FileList | null = event.dataTransfer?.files || null;
@@ -154,14 +224,23 @@ export class NewsCreateComponent {
     }
   }
 
-
- 
-
+  /**
+   * closeDialog
+   *
+   * Fecha o diálogo
+   */
   closeDialog() {
     this.isDialogOpen = false;
     this.router.navigate(['/news']);
   }
 
+  /**
+   * updateCharacterCount
+   *
+   * Atualiza a contagem de caracteres
+   *
+   * @param event - Evento
+   */
   updateCharacterCount(event: any) {
     const target = event.target as HTMLInputElement;
     if (target.id === 'subtitle') {

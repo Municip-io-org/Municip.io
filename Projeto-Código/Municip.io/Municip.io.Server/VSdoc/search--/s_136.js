@@ -1,1 +1,1 @@
-search_result['136']=["topic_0000000000000036.html","DocumentTemplateStatusController.Remove Method","Method to remove the document template"];
+search_result['136']=["topic_0000000000000034_events--.html","NewsController Events",""];

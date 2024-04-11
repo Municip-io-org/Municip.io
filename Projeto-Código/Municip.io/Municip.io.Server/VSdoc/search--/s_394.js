@@ -1,1 +1,1 @@
-search_result['394']=["topic_000000000000009D.html","Citizen.Email Property",""];
+search_result['394']=["topic_0000000000000089.html","StripePaymentController.CreatePrice Method","method to create a price and a product"];

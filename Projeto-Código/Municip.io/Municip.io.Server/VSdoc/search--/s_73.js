@@ -1,1 +1,1 @@
-search_result['73']=["topic_000000000000001A.html","CitizenStatusController.approveCitizen Method","Esta função aprova um cidadão. Recebe como parâmetro o email do cidadão ."];
+search_result['73']=["topic_000000000000001A.html","BookController.GetBooks Method","Obter todos os livros de um município"];

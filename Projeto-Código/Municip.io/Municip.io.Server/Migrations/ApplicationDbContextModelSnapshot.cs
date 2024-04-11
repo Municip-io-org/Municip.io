@@ -655,6 +655,9 @@ namespace Municip.io.Server.Migrations
                     b.Property<string>("landscapePhoto")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("libraryAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("localidade")
                         .HasColumnType("nvarchar(max)");
 

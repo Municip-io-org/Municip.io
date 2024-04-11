@@ -3,6 +3,9 @@ import { UserAuthService } from '../services/user-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Country } from '../services/citizen-auth.service';
 
+/**
+ * Componente para a página de perfil do utilizador.
+ */
 @Component({
   selector: 'app-userpage',
   templateUrl: './userpage.component.html',
@@ -23,11 +26,17 @@ export class UserpageComponent {
   imageUrl: string | null = null;
   files: any[] = [];
 
+  /**
+   * Método construtor para instanciar o componente.
+   * @param userAuthService  Serviço de autenticação do utilizador.
+   */
   constructor(private userAuthService: UserAuthService) { }
   user: any;
   role: string = "";
  
-
+  /**
+   * Método onInit
+   */
   ngOnInit() {
     
     
@@ -128,7 +137,9 @@ export class UserpageComponent {
   get passwordConfirmation() {
     return this.profileEdit.get('passwordConfirmation');
   }
-
+  /**
+   * Método de submissão
+   */
   OnSubmit() {
 
     this.toggleEditMode();
@@ -200,6 +211,9 @@ export class UserpageComponent {
   //  return Object.keys(this.newUser).map(key => ({ key, value: this.newUser[key] }));
   //}
 
+  /**
+   * Método para formatar a data de nascimento 
+   */
   formatBirthDate() {
     const dateString = this.newUser.birthDate;
     const date = new Date(dateString);
@@ -210,6 +224,9 @@ export class UserpageComponent {
     this.newUser.birthDate = formattedDate;
   }
 
+  /**
+   * Inverter o modo de edição
+   */
   toggleEditMode() {
     this.editMode = !this.editMode;
     if (this.editMode) {
@@ -219,12 +236,16 @@ export class UserpageComponent {
       this.profileEdit.disable();
     }
   }
-
+  /**
+   * Cancelar o estado de edição
+   */
   cancelEditMode() {
     this.toggleEditMode();
     this.initForm();
   }
-
+  /**
+   * Inicializar o formulário
+   */
   initForm() {
     console.log("isiodjasdnoasin",this.newUser);
     this.profileEdit.patchValue({
@@ -245,6 +266,10 @@ export class UserpageComponent {
     this.imageUrl = this.newUser.photo; 
   }
 
+  /**
+   * Evento resposável pela alteração do ficheiro
+   * @param event evento HTML
+   */
   onFileChange(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const fileList: FileList | null = fileInput?.files;
@@ -258,17 +283,28 @@ export class UserpageComponent {
       console.error('Nenhuma imagem selecionada');
     }
   }
-
+  /**
+   * Validação da image 
+   * @param file ficheiro da imagem 
+   * @returns o resultado
+   */
   isValidImageFile(file: File): boolean {
     // Adicione aqui a lógica para validar se o arquivo é uma imagem
     // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
     return file.type.startsWith('image/');
   }
-
+  /**
+   * Evento ao arrastar a imagem
+   * @param event evento HTML
+   */
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
-
+  /**
+   * Evento ao largar a imagem 
+   * @param event evento HTML
+   * @returns o resultado
+   */
   onDrop(event: DragEvent) {
     if (!this.editMode) return;
 
@@ -287,7 +323,9 @@ export class UserpageComponent {
       console.error('Nenhuma imagem solta.');
     }
   }
-
+  /**
+   * Fechar o diálogo
+   */
   closeDialog() {
     this.isDialogOpen = false;
     window.location.reload();

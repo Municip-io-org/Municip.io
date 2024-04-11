@@ -10,6 +10,14 @@ import { Book, BookRequest, LibraryService } from '../services/library/library.s
   templateUrl: './admin-statistics-dashboard.component.html',
   styleUrl: './admin-statistics-dashboard.component.css'
 })
+/**
+ * @class AdminStatisticsDashboardComponent
+ *
+ * Este componente é responsável por exibir um dashboard de estatísticas do administrador.
+ *
+ * @returns Um dashboard com várias estatísticas sobre os cidadãos, administradores municipais, municípios, notícias, eventos e documentos.
+ *
+ **/
 export class AdminStatisticsDashboardComponent {
   selectedButton: number = 1;
   citizens: Citizen[] = [];
@@ -51,6 +59,12 @@ export class AdminStatisticsDashboardComponent {
   **/
   constructor(private adminStatisticsService: AdminStatisticsService,private libraryService: LibraryService) { }
 
+  /**
+   * Este método é responsável por obter as estatísticas.
+   * 
+   * @returns As estatísticas.
+   *
+   **/
   ngOnInit() {
     this.adminStatisticsService.getAllCitizens().subscribe((data: Citizen[]) => {
       this.citizens = data;
@@ -92,18 +106,23 @@ this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
     );
   }
 
-
-  
-
-
-
-     
-
+/**
+   * Este método é responsável por inverter a ordem de ordenação.
+   * 
+   * @returns A lista de municípios ordenada.
+   *
+   **/
   toggleSorting() {
     this.sortingOrder = this.sortingOrder === 'asc' ? 'desc' : 'asc';
     this.sortMunicipalities();
   }
 
+  /**
+   * Este método é responsável por ordenar a lista de municípios.
+   * 
+   * @returns A lista de municípios ordenada.
+   *
+   **/
   sortMunicipalities() {
     this.municipalities.sort((a, b) => {
       if (this.sortingOrder === 'asc') {
@@ -114,7 +133,12 @@ this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
     });
   }
 
-
+  /**
+   * Este método é responsável por gerar as estatísticas.
+   * 
+   * @returns As estatísticas.
+   *
+   **/
   generateStatistics() {
     this.numberOfCitizens = this.citizens.length;
     this.numberOfMunicipalAdmins = this.municipalAdmins.length;

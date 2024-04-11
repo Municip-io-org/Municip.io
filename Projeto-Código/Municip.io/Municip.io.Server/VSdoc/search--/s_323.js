@@ -1,1 +1,1 @@
-search_result['323']=["topic_000000000000007B_methods--.html","DataSeeder Methods",""];
+search_result['323']=["topic_000000000000006F.html","MunicipalityStatusController.SendAprove Method","Esta função envia um email para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município."];

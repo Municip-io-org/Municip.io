@@ -2,14 +2,29 @@ import { Component } from '@angular/core';
 import { MunicipalityStatusService } from '../../services/municipality-status.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
-/**
- * Componente responsável por exibir o painel de administradores municipais no painel de administração do administrador.
- */
+
+
 @Component({
   selector: 'app-admin-dashboard-municipal-admins',
   templateUrl: './admin-dashboard-municipal-admins.component.html',
   styleUrl: './admin-dashboard-municipal-admins.component.css'
 })
+
+/**
+ * @class AdminDashboardMunicipalAdminsComponent
+ *
+ * Este componente é responsável por exibir a lista de administradores municipais de um município.
+ * 
+ * @param sortType - O tipo de ordenação da tabela.
+ * @param sortReverse - A ordem de ordenação da tabela.
+ * @param nameSearch - O nome do administrador municipal a pesquisar.
+ * @param admins - A lista de administradores municipais.
+ * @param municipalName - O nome do município.
+ * @param isDialogOpen - A flag que indica se o diálogo está aberto.
+ * @param selectedUser - O utilizador selecionado.
+ *
+ *
+ **/
 export class AdminDashboardMunicipalAdminsComponent {
 
   sortType = 'firstName';
@@ -20,8 +35,24 @@ export class AdminDashboardMunicipalAdminsComponent {
   isDialogOpen: boolean = false;
   selectedUser: any;
 
+  /**
+   * @constructor
+   *
+   * Este construtor é responsável por injetar o serviço de estado do município, o router e o ActivatedRoute.
+   *
+   * @param municipalityStatusService - O serviço de estado do município.
+   * @param router - O router.
+   * @param route - O ActivatedRoute.
+   *
+   **/
   constructor(private municipalityStatusService: MunicipalityStatusService, private router: Router, private route: ActivatedRoute) { }
 
+  /**
+   * Este método é responsável por obter a lista de administradores municipais de um município.
+   * 
+   * @returns A lista de administradores municipais.
+   *
+   **/
   ngOnInit() {
     this.municipalName = this.route.snapshot.params['municipalName'];
     this.municipalityStatusService.getMunicipalAdmins(this.municipalName).subscribe((admins: any) => {
@@ -37,6 +68,7 @@ export class AdminDashboardMunicipalAdminsComponent {
     this.selectedUser = user;
     this.isDialogOpen = true;
   }
+
 
   /**
    * Fecha o diálogo.
@@ -99,8 +131,10 @@ export class AdminDashboardMunicipalAdminsComponent {
     });
   }
 
+
   /**
-   * Filtra os administradores municipais com base no nome.
+   * Obtém a lista de administradores municipais filtrada com base no nome de pesquisa.
+   * @returns A lista de administradores municipais filtrada.
    */
   get filteredAdmins() {
     return this.admins.filter(m => m.firstName.toLowerCase().includes(this.nameSearch.toLowerCase()));

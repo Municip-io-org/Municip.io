@@ -1,1 +1,1 @@
-search_result['167']=["topic_0000000000000041.html","EventsController.GetEventsByCitizen Method","Esta chamada permite obter todos os eventos de um determinado cidadão passando o email do cidadão como parâmetro"];
+search_result['167']=["topic_000000000000003C_vars--.html","ApplicationDbContext Fields",""];

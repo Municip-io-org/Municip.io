@@ -11,6 +11,19 @@ import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
   styleUrls: ['./sign-up-citizen-account.component.css'],
   providers: [provideNativeDateAdapter()],
 })
+
+/**
+ * Componente para a criação de uma conta de cidadão
+ *
+ * @param citizen O cidadão a registar
+ * @param errors Os erros
+ * @param defaultMunicipalityOption A opção de município padrão
+ * @param municipalities Os municípios
+ * @param signUpCitizenForm O formulário de registo de cidadão
+ * @param image A imagem
+ * @param imageUrl A URL da imagem
+ * @param files Os ficheiros
+ */
 export class SignUpCitizenAccountComponent {
 
   citizen: Citizen = {
@@ -82,8 +95,11 @@ export class SignUpCitizenAccountComponent {
     return isValid ? null : { 'invalidPassword': true };
   }
 
-  
-
+  /**
+   * Validador de idade
+   * @param control O controlador
+   * @returns Validação
+   */
   adultAgeValidator(control: FormControl): { [key: string]: boolean } | null {
     const birthDate: Date = control.value;
     const today: Date = new Date();
@@ -99,11 +115,23 @@ export class SignUpCitizenAccountComponent {
 
 
 
+  /**
+   * @constructor
+   * SignUpCitizenAccountComponent
+   * 
+   * @param citizenAuthService 
+   * @param router 
+   * @param municipalityService 
+   * @param dateAdapter 
+   */
   constructor(private citizenAuthService: CitizenAuthService, private router: Router, private municipalityService: MunicipalAdminAuthService,
     private dateAdapter: DateAdapter<Date>) {
     this.dateAdapter.setLocale('pt');
   }
 
+  /**
+   * Inicialização do componente
+   */
   ngOnInit(): void {
     this.municipalityService.getApprovedMunicipalities().subscribe(
       (res: any) => {
@@ -123,7 +151,7 @@ export class SignUpCitizenAccountComponent {
 
   
 
-  
+  //Getters
 
   get firstName() {
     return this.signUpCitizenForm.get('firstName');
@@ -173,10 +201,10 @@ export class SignUpCitizenAccountComponent {
   }
 
 
-
-  
-
-
+  /**
+   * Evento dispultado aquando do selecionamento de uma imagem
+   * @param event
+   */
   onFileChange(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const fileList: FileList | null = fileInput?.files;
@@ -194,16 +222,29 @@ export class SignUpCitizenAccountComponent {
 
   
 
+  /**
+   * Verifica a validade da imagem
+   * @param file
+   * @returns
+   */
   isValidImageFile(file: File): boolean {
     // Adicione aqui a lógica para validar se o arquivo é uma imagem
     // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
     return file.type.startsWith('image/');
   }
 
+  /**
+   * Metodo onDragOver
+   * @param event 
+   */
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
 
+  /**
+   * Método onDrop
+   * @param event
+   */
   onDrop(event: DragEvent) {
     event.preventDefault();
     const files: FileList | null = event.dataTransfer?.files || null;
@@ -221,12 +262,9 @@ export class SignUpCitizenAccountComponent {
     }
   }
 
-
-
-  
-
-
-
+  /**
+   * Método onSubmit
+   */
   onSubmit() {
 
     const citizen: Citizen = {

@@ -20,7 +20,21 @@ import { Editor, Toolbar } from 'ngx-editor';
 
 
 /**
+ * @class CreateEventComponent
  * Componente responsável por criar um evento.
+ *
+ * @param municipalityImage - A imagem do município.
+ * @param municipalityName - O nome do município.
+ * @param error - O erro.
+ * @param image - A imagem.
+ * @param imageUrl - A URL da imagem.
+ * @param files - Os ficheiros.
+ * @param isDialogOpen - O estado do dialog.
+ * @param editor - O editor.
+ * @param toolbar - A barra de ferramentas.
+ * @param minDateRegistration - A data mínima de registo.
+ * @param minDateEvent - A data mínima do evento.
+ * 
  */
 export class CreateEventComponent implements OnInit {
 
@@ -93,6 +107,9 @@ export class CreateEventComponent implements OnInit {
 
   }
 
+  /**
+   * Método OnDestroy
+   */
   ngDestroy() {
     this.editor.destroy();
   }
@@ -118,8 +135,7 @@ export class CreateEventComponent implements OnInit {
 
   })
 
-
-
+  // Getters
   get title() {
     return this.eventForm.get('title');
   }
@@ -261,6 +277,11 @@ export class CreateEventComponent implements OnInit {
 
 
 
+  /**
+   * Método responsável por validar se o ficheiro é uma imagem
+   * @param file
+   * @returns
+   */
 
   isValidImageFile(file: File): boolean {
     // Adicione aqui a lógica para validar se o arquivo é uma imagem
@@ -268,10 +289,18 @@ export class CreateEventComponent implements OnInit {
     return file.type.startsWith('image/');
   }
 
+  /**
+   * Método responsável por prevenir o comportamento padrão do navegador
+   * @param event
+   */
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
 
+  /**
+   * Método responsável por prevenir o comportamento padrão do navegador
+   * @param event
+   */
   onDrop(event: DragEvent) {
     event.preventDefault();
     const files: FileList | null = event.dataTransfer?.files || null;

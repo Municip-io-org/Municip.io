@@ -6,11 +6,25 @@ import { UserAuthService } from '../user-auth.service';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * App Features Service
+ *
+ * Serviço de funcionalidades da aplicação
+ *
+ * @param appFeatures - Funcionalidades da aplicação
+ */
 export class AppFeaturesService {
 
   appFeatures: AppFeature[] = [];
 
 
+  /**
+   * @constructor
+   * AppFeaturesService
+   *
+   * @param http - HttpClient
+   * @param userAuthService - Serviço de autenticação do cidadão
+   */
   constructor(private http: HttpClient, private userAuthService: UserAuthService) { }
 
   /**
@@ -87,7 +101,14 @@ export class AppFeaturesService {
     );
   }
 
-  // Função para mapear as strings de categoria para enum
+  /**
+   * mapCategoryStringToNumber
+   *
+   * Função para mapear as strings de categoria para enum
+   * 
+   * @param categoryString
+   * @returns
+   */
   mapCategoryStringToNumber(categoryString: string): number {
     switch (categoryString) {
       case 'Documents':

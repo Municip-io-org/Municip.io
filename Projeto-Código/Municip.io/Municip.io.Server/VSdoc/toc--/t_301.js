@@ -1,1 +1,1 @@
-c['301']=[['302',"toString Method","topic_0000000000000130.html",0]];
+c['301']=[['302',"Description Property","topic_0000000000000114.html",0],['303',"Id Property","topic_0000000000000112.html",0],['304',"Municipality Property","topic_0000000000000118.html",0],['305',"Name Property","topic_0000000000000113.html",0],['306',"Price Property","topic_0000000000000117.html",0],['307',"Status Property","topic_0000000000000119.html",0],['308',"TextTemplate Property","topic_0000000000000116.html",0],['309',"Type Property","topic_0000000000000115.html",0]];

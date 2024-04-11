@@ -10,6 +10,24 @@ import { Citizen } from '../../../services/citizen-auth.service';
   templateUrl: './events-list.component.html',
   styleUrl: './events-list.component.css'
 })
+/**
+ *
+ * @class EventsListComponent
+ *
+ * Este componente é responsável por exibir a lista de eventos.
+ *
+ * @param municipality - O município.
+ * @param user - O utilizador.
+ * @param events - A lista de eventos.
+ * @param showEvents - Os eventos a exibir.
+ * @param nameSearch - A pesquisa por nome.
+ * @param ascendingOrder - A ordem ascendente.
+ * @param orderOptions - As opções de ordem.
+ * @param isLoading - O estado de carregamento.
+ * @param currentPage - A página atual.
+ * @param itemsPerPage - O número de itens por página.
+ *
+ */
 export class EventsListComponent {
   municipality: Municipality = {
     name: '',
@@ -61,8 +79,26 @@ export class EventsListComponent {
   itemsPerPage = 6;
 
 
+  /**
+   * @constructor
+   *
+   * EventsListComponent
+   *
+   * Construtor do componente.
+   * @param userAuthService - O serviço de autenticação de utilizador.
+   * @param eventsService - O serviço de eventos.
+   * @param router - O router.
+   *
+   */
   constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router) { }
 
+  /**
+   *
+   * Este método é responsável por obter as informações di utilizador, do evento e do município.
+   *
+   * @returns A lista de templates de documentos.
+   *
+   */
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
       res => {
@@ -100,8 +136,15 @@ export class EventsListComponent {
     );
   }
 
+
+  /**
+   * Este método é responsável por alternar o estado de carregamento.
+   */
   toggleLoading() { this.isLoading = !this.isLoading; }
 
+  /**
+   * Este método é responsável por carregar os dados.
+   */
   loadData() {
     this.toggleLoading();
 
@@ -122,6 +165,9 @@ export class EventsListComponent {
 
   }
 
+  /**
+   * Este método é responsável por carregar mais eventos.
+   */
   onScrollDown() {
     if (this.events.length > this.showEvents.length) {
 
@@ -131,17 +177,26 @@ export class EventsListComponent {
     }
   }
 
+  /**
+   * Este método é responsável por filtrar os eventos.
+   */
   get filteredEvents() {
     if (this.nameSearch == '') return this.showEvents;
     return this.events.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }
 
 
+  /**
+   * Este método é responsável por alternar a ordem de classificação.
+   */
   toggleSortOrder() {
 
     this.sortEventsByDate();
   }
 
+  /**
+   * Este método é responsável por ordenar os eventos por data.
+   */
   sortEventsByDate() {
     this.currentPage = 1;
     if (this.ascendingOrder) {

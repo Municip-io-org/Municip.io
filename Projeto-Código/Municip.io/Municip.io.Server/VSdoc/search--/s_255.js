@@ -1,1 +1,1 @@
-search_result['255']=["topic_0000000000000061_attached_props--.html","CitizenStatusExtensions Attached Properties",""];
+search_result['255']=["topic_0000000000000058.html","GeoAPIController Constructor","Construtor com injeção de dependências."];

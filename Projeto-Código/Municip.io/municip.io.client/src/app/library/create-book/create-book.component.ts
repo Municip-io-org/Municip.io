@@ -13,6 +13,30 @@ import { BookLanguage } from '../../../assets/bookLanguages.enum';
   styleUrl: './create-book.component.css',
   providers: [provideNativeDateAdapter()],
 })
+
+/**
+ *
+ * Componente para a criação de um novo livro.
+ *
+ * @param categories - Lista de categorias disponíveis.
+ * @param book - Objeto do tipo Book.
+ * @param municipalityImage - Imagem da municipalidade.
+ * @param municipalityName - Nome da municipalidade.
+ * @param error - Mensagem de erro.
+ * @param coverImage - Imagem da capa do livro.
+ * @param files - Lista de arquivos.
+ * @param authorsList - Lista de autores.
+ * @param isDialogOpen - Flag para abrir o dialog.
+ * @param dialogTitle - Título do dialog.
+ * @param dialogMessage - Mensagem do dialog.
+ * @param isAddGenreDialogOpen - Flag para abrir o dialog de adicionar gênero.
+ * @param isConfirm - Flag para confirmar.
+ * @param editor - Editor de texto.
+ * @param toolbar - Barra de ferramentas.
+ * @param bookForm - Formulário do livro.
+ * @param dateAdapter - Adaptador de data.
+ * 
+ */
 export class CreateBookComponent {
 
   categories: string[] = [];
@@ -136,6 +160,12 @@ export class CreateBookComponent {
     );
   }
 
+  /**
+   * Método onSubmit
+   *
+   * Verifica se o formulário é válido e cria um novo livro.
+   * 
+   */
   onSubmit(): void {
     if (this.bookForm.valid) {
 
@@ -180,6 +210,11 @@ export class CreateBookComponent {
   }
 
 
+  /**
+   * Método onCoverImagePicked
+   *
+   * @param event
+   */
   onCoverImagePicked(event: any) {
     if (this.coverImageUrl?.disabled) return;
 
@@ -196,16 +231,31 @@ export class CreateBookComponent {
     }
   }
 
+  /**
+   * Método isValidImageFile
+   *
+   * @param file
+   */
   isValidImageFile(file: File): boolean {
     // Adicione aqui a lógica para validar se o arquivo é uma imagem
     // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
     return file.type.startsWith('image/');
   }
 
+  /**
+   * Método onDragOver
+   *
+   * @param event
+   */
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
 
+  /**
+   * Método onDrop
+   *
+   * @param event
+   */
   onDrop(event: DragEvent) {
     if (this.coverImageUrl?.disabled) return;
 
@@ -225,43 +275,70 @@ export class CreateBookComponent {
     }
   }
 
-
+  /**
+   * Método openAddGenreDialog
+   */
   openAddGenreDialog() {
     this.isAddGenreDialogOpen = true;
 
   }
 
+  /**
+   * Método para adicionar um género de livro
+   */
   addGenre(newGenre: string) {
     this.categories.push(newGenre);
     this.genres.push(new FormControl({ value: false, disabled: false }))
   }
 
+  /**
+   * Método de remoção de género de livro
+   */
   removeGenre() {
     if (this.genres.length > 1) {
       this.genres.removeAt(this.genres.length - 1);
     }
   }
 
+  /**
+   * Método para adicionar um autor
+   *
+   */
   addAuthor() {
     this.authors.push(new FormControl(''));
   }
 
+  /**
+   * Método para remover um autor
+   *
+   */
   removeLastAuthor() {
     if (this.authors.length > 1) {
       this.authors.removeAt(this.authors.length - 1);
     }
   }
 
+  /**
+   * Método para fechar o dialog
+   *
+   */
   closeDialog() {
     this.isDialogOpen = false;
     this.router.navigateByUrl('/library/librarylist');
   }
 
+  /**
+   * Método para mudar o ISBN
+   *
+   */
   onISBNChange() {
     this.toggleControls();
     this.getInfo();
   }
 
+  /**
+   * Método para obter informações do livro
+   */
   getInfo() {
     if (this.iSBN?.valid) {
 
@@ -305,11 +382,22 @@ export class CreateBookComponent {
     return date;
   }
 
+  /**
+   * Método para definir a data de publicação
+   * 
+   * @param bookPublicationDate
+   */
   setPublicationDate(bookPublicationDate: string): void {
     const formattedDate = this.setUpDate(bookPublicationDate);
     this.publicationDate?.setValue(formattedDate);
   }
 
+  /**
+   *
+   * Método para mudar a linguagem
+   * 
+   * @param language
+   */
   setLanguage(language: string): void {
     type BookLanguageKeys = keyof typeof BookLanguage;
 
@@ -318,13 +406,24 @@ export class CreateBookComponent {
     this.language?.setValue(BookLanguage.hasOwnProperty(languageCode) ? BookLanguage[languageCode] : "Inglês");
   }
 
+  /**
+   *
+   * Método para adicionar autores a partir da informação da API 
+   * 
+   * @param authors
+   */
   addAuthorsFromBookInfo(authors: string[]) {
     this.authors.clear();
     authors.forEach(author => {
       this.authors.push(new FormControl(author));
     })
   }
-
+  /**
+   *
+   * Método para adicionar géneros a partir da informação da API 
+   * 
+   * @param genres
+   */
   addGenreFromBookInfo(genres: string[]) {
     const categoryNamesUpperCase = this.categories.map(category => category.toUpperCase());
 
@@ -342,6 +441,11 @@ export class CreateBookComponent {
   }
 
 
+  /**
+   *
+   * Método para ligar/desligar campos
+   * 
+   */
   toggleControls() {
     const useISBN = this.useISBN?.value;
     const iSBNValid = this.iSBN?.valid;
@@ -360,7 +464,11 @@ export class CreateBookComponent {
     }
   }
 
-
+  /**
+   *
+   * Método para ligar campos
+   * 
+   */
   enableFormControls() {
     this.title?.enable();
     this.publisher?.enable();
@@ -374,6 +482,11 @@ export class CreateBookComponent {
     this.coverImageUrl?.enable();
   }
 
+  /**
+   *
+   * Método para desligar campos
+   * 
+   */
   disableFormControls() {
     this.title?.disable();
     this.publisher?.disable();
@@ -387,13 +500,22 @@ export class CreateBookComponent {
     this.coverImageUrl?.disable();
   }
 
+  /**
+   *
+   * Método para ligar campo de género do livro
+   * 
+   */
   enableGenresControls() {
     this.genres.enable();
     this.genres.controls.forEach(control => {
       control.enable();
     });
   }
-
+  /**
+   *
+   * Método para desligar campo de género do livro
+   * 
+   */
   disableGenresControls() {
     this.genres.disable();
     this.genres.controls.forEach(control => {
@@ -401,6 +523,11 @@ export class CreateBookComponent {
     });
   }
 
+  /**
+   *
+   * Método para ligar campo de autores do livro
+   * 
+   */
   enableAuthorsControls() {
     this.authors.enable();
     this.authors.controls.forEach(control => {
@@ -408,6 +535,11 @@ export class CreateBookComponent {
     });
   }
 
+  /**
+   *
+   * Método para desligar campo de autores do livro
+   * 
+   */
   disableAuthorsControls() {
     this.authors.disable();
     this.authors.controls.forEach(control => {
@@ -415,11 +547,18 @@ export class CreateBookComponent {
     });
   }
 
+  /**
+   *
+   * Método obter cagetorias de livros
+   * 
+   */
   extractCategoryNames(): string[] {
     return this.categories.map(category => category);
   }
 
-
+  /*
+  * Método ngOnDestroy
+  */
   ngOnDestroy(): void {
     this.editor.destroy();
   }
