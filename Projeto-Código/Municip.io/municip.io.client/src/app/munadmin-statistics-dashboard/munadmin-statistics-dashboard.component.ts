@@ -46,7 +46,7 @@ import { Book, BookRequest, LibraryService } from '../services/library/library.s
  * @param books - Livros
  */
 export class MunadminStatisticsDashboardComponent {
-  selectedButton: number = 2;
+  selectedButton: number = 1;
   orderOptions: any[] = [{ label: '1', value: true }, { label: '2', value: false }];
 
   citizens: any[] = [];

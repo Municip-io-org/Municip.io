@@ -3,6 +3,7 @@ import { AdminStatisticsService } from '../services/stats/admin-statistics.servi
 import { Citizen } from '../services/citizen-auth.service';
 import { MunicipalAdministrator, Municipality } from '../services/municipal-admin-auth.service';
 import { RequestDocument } from '../services/documents/docs.service';
+import { Book, BookRequest, LibraryService } from '../services/library/library.service';
 
 @Component({
   selector: 'app-admin-statistics-dashboard',
@@ -43,10 +44,12 @@ export class AdminStatisticsDashboardComponent {
   documentsApproved: number = 0;
   totalEarnings: number = 0;
 
+  mostPopularGenre: string = 'Não Existe';
   numberOfBooks: number = 0;
   Authors: number = 0;
-
-
+  books: Book[] = [];
+  bookrequests: BookRequest[] = [];
+  selectedButton: number = 1;
   /**
   * @constructor
   *
@@ -55,7 +58,7 @@ export class AdminStatisticsDashboardComponent {
   * @param adminStatisticsService - O serviço de estatísticas do administrador.
   *
   **/
-  constructor(private adminStatisticsService: AdminStatisticsService) { }
+  constructor(private adminStatisticsService: AdminStatisticsService,private libraryService: LibraryService) { }
 
   /**
    * Este método é responsável por obter as estatísticas.
@@ -72,7 +75,13 @@ export class AdminStatisticsDashboardComponent {
         this.adminStatisticsService.getAllMunicipalities().subscribe((datamun: any) => {
         this.municipalities = datamun;
           this.sortMunicipalities();
+          this.libraryService.getRequests().subscribe((data: BookRequest[]) => {
+            this.bookrequests = data;
+          });
+          this.adminStatisticsService.getAllBooks().subscribe((data: Book[]) => {
+            this.books = data;
 
+          });
           this.adminStatisticsService.getAllNews().subscribe((datanews: any) => {
             this.news = datanews;
 
@@ -154,6 +163,30 @@ this.percentageOfBlockedMunicipalities = (this.blockedMunicipalities / this.muni
 
 this.documentRequests.forEach(doc => {
       this.totalEarnings += doc.documentTemplate.price;
+});
+    this.numberOfBooks = this.books.length;
+    this.Authors = this.books.map(book => book.author).length;
+    const genreCounts: { [genre: string]: number } = {};
+
+    this.books.forEach(book => {
+      book.genre.forEach(genre => {
+        genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+        console.log(genreCounts);
+      });
     });
+
+    this.mostPopularGenre = Object.entries(genreCounts).reduce((prev, curr) => curr[1] > prev[1] ? curr : prev)[0];
+
   }
+  
+/**
+   * selectButton
+   *
+   * Seleciona o botão
+   *
+   * @param buttonNumber - Número do botão
+   */
+selectButton(buttonNumber: number): void {
+  this.selectedButton = buttonNumber;
+}
 }

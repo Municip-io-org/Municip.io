@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BookRequest } from '../library/library.service';
+import { Book, BookRequest } from '../library/library.service';
 
 @Injectable({
   providedIn: 'root'
@@ -120,7 +120,14 @@ return this.http.get<any>('api/stats/getAllMunicipalities');
   }
 
 
-
+  /**
+   * Obtem os livros de todos os municípios
+   *
+   * @returns Todos os livros 
+   */
+  getAllBooks(): Observable<Book[]> {
+    return this.http.get<Book[]>('api/stats/getAllBooks');
+  }
        
 
       
