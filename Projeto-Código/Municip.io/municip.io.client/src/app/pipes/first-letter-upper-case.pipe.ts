@@ -3,6 +3,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'firstLetterUpperCase'
 })
+/**
+ * First Letter Upper Case Pipe
+ *
+ * Este pipe transforma a primeira letra de cada palavra em maiúscula
+ */
 export class FirstLetterUpperCasePipe implements PipeTransform {
   transform(value: string): string {
     // Check if the value is not null or undefined

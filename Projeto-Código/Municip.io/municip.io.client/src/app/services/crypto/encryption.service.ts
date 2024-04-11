@@ -5,12 +5,18 @@ import * as CryptoJS from 'crypto-js';
   providedIn: 'root'
 })
 
+
+
 /**
- * Service to encrypt and decrypt data
+ * Encryption Service
+ *
+ * Serviço de criptografia
+ *
  */
 export class EncryptionService {
 
   private readonly secretKey = 'estaeapasswordutilizadaparaencriptarmososdadosnamunicipio';
+
 
   constructor() { }
 

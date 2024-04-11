@@ -9,6 +9,22 @@ import { UserAuthService } from '../../services/user-auth.service';
   templateUrl: './template-list.component.html',
   styleUrl: './template-list.component.css'
 })
+/**
+ * @class TemplateListComponent
+ *
+ * Este componente é responsável por listar os templates de documentos.
+ *
+ * @param municipalityImage - A imagem do município.
+ * @param municipalName - O nome do município.
+ * @param documents - Os documentos.
+ * @param sortType - O tipo de ordenação.
+ * @param sortReverse - A ordem de ordenação.
+ * @param nameSearch - A pesquisa por nome.
+ * @param selectedUser - O utilizador selecionado.
+ * 
+ * @returns Uma lista de templates de documentos.
+ *
+ **/
 export class TemplateListComponent {
   municipalityImage: string = "";
   municipalName: string = "";
@@ -19,9 +35,27 @@ export class TemplateListComponent {
   nameSearch: string = '';
   selectedUser: any;
 
+  /**
+   * @constructor
+   *
+   * Este construtor é responsável por injetar o serviço de documentos, o router e o ActivatedRoute.
+   *
+   * @param service - O serviço de documentos.
+   * @param router - O router.
+   * @param route - O ActivatedRoute.
+   * @param authService - O serviço de autenticação de utilizadores.
+   *
+   **/
   constructor(private service: DocsService, private router: Router, private route: ActivatedRoute,
     private authService: UserAuthService) { }
 
+    /**
+     *
+     * Este método é responsável por obter os templates de documentos.
+     *
+     * @returns A lista de templates de documentos.
+     *
+     */
   ngOnInit() {
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
@@ -36,6 +70,10 @@ export class TemplateListComponent {
     });
   }
 
+  /**
+   * Retorna o estado de um template.
+   * @returns O estado do template.
+   */
   DocumentTemplateStatus() {
     return DocumentTemplateStatus;
   }
@@ -67,7 +105,7 @@ export class TemplateListComponent {
   }
   /**
    * Atiav um template
-   * @param document
+   * @param document - O template a ser ativado.
    */
   activeDocument(document: DocumentTemplate) {
     this.service.activeTemplate(document.id!).subscribe(
@@ -81,7 +119,7 @@ export class TemplateListComponent {
   }
   /**
    * Desactiva um template
-   * @param document
+   * @param document - O template a ser desativado.
    */
   desactiveDocument(document: DocumentTemplate) {
     this.service.desactiveTemplate(document.id!).subscribe(
@@ -96,7 +134,7 @@ export class TemplateListComponent {
   }
   /**
    * Elimina um template
-   * @param document
+   * @param document - O template a ser eliminado.
    */
   deleteDocument(document: DocumentTemplate) {
     this.service.removeTemplate(document.id!).subscribe(
@@ -111,7 +149,7 @@ export class TemplateListComponent {
   }
   /**
    * Editar um template
-   * @param document
+   * @param document - O template a ser editado.
    */
   editDocument(document: DocumentTemplate) {
     //redirect to edit page documents/edit-template/:templateId

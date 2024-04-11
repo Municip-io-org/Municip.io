@@ -7,15 +7,37 @@ import { Event } from '../../../services/events/events.service';
 import { Observable, map } from 'rxjs';
 import { UserAuthService } from '../../../services/user-auth.service';
 
-/**
- * Componente responsável por exibir um calendário de eventos do cidadão.
- */
+
 @Component({
   selector: 'app-calendar-page',
   templateUrl: './calendar-page.component.html',
   styleUrl: './calendar-page.component.css'
 })
+/**
+ * @class CalendarPageComponent
+ *
+ * Este componente é responsável por exibir a página do calendário.
+ *
+ * @param events$ - Os eventos do calendário.
+ * @param municipalityImage - A imagem do município.
+ * @param eventsToday - O estado dos eventos de hoje.
+ * 
+ * 
+ * @returns A página do calendário.
+ *
+ **/
 export class CalendarPageComponent {
+
+  /**
+   * @constructor
+   *
+   * CalendarPageComponent 
+   * 
+   * Construtor do componente.
+   * @param eventService - O serviço de eventos.
+   * @param authService - O serviço de autenticação de utilizador.
+   *
+   */
   constructor(private eventService: EventsService, private authService: UserAuthService) { }
 
   events$: Observable<CalendarEvent<{ event: Event }>[]> = new Observable<CalendarEvent<{ event: Event }>[]>();

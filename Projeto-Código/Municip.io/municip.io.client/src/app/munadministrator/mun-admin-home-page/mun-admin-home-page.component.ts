@@ -11,7 +11,27 @@ import { AdminStatisticsService } from '../../services/stats/admin-statistics.se
   templateUrl: './mun-admin-home-page.component.html',
   styleUrl: './mun-admin-home-page.component.css'
 })
+/**
+ * Municipal Administrator Home Page Component
+ *
+ * Este componente representa a página inicial do administrador municipal
+ *
+ * @param userAuthService - Serviço de autenticação do utilizador
+ * @param router - O Router
+ * @param adminStatisticsService - Serviço de estatísticas do administrador
+ * @param cdr - O ChangeDetectorRef
+ */
 export class MunAdminHomePageComponent {
+
+  /**
+   * @constructor
+   * MunAdminHomePageComponent
+   *
+   * @param userAuthService - Serviço de autenticação do utilizador
+   * @param router - O Router
+   * @param adminStatisticsService - Serviço de estatísticas do administrador
+   * @param cdr - O ChangeDetectorRef
+   */
   constructor(private userAuthService: UserAuthService, private router: Router, private adminStatisticsService: AdminStatisticsService, private cdr: ChangeDetectorRef) { }
 
 
@@ -55,6 +75,11 @@ export class MunAdminHomePageComponent {
 
 
 
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente
+   */
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
       res => {
@@ -108,10 +133,21 @@ error => {
 
 
 
+  /**
+   * pendingCitizensClick
+   *
+   * Abre os cidadãos pendentes
+   */
   pendingCitizensClick() {
     this.router.navigateByUrl("/");
   }
 
+
+  /**
+   * approveDocumentsClick
+   *
+   * Aprova os documentos
+   */
   approveDocumentsClick() {
     this.router.navigateByUrl("/");
   }

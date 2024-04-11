@@ -10,6 +10,28 @@ import { Component } from '@angular/core';
   styleUrl: './header-loggedin.component.css'
 })
 
+/**
+ * HeaderComponent
+ *
+ * Este componente é utilizado para o cabeçalho.
+ *
+ * @param isSignedIn: boolean - O estado de autenticação do utilizador.
+ * @param user: any - A informação do utilizador.
+ * @param firstName: string - O primeiro nome do utilizador.
+ * @param photo: string - A foto do utilizador.
+ * @param role: string - O papel do utilizador.
+ * @param appFeatures: AppFeature[] - As funcionalidades da aplicação.
+ * @param showDropdownAgenda: boolean - O estado do dropdown de agenda.
+ * @param showDropdownBiblioteca: boolean - O estado do dropdown de biblioteca.
+ * @param showDropdownDocumentos: boolean - O estado do dropdown de documentos.
+ * @param showDropdownNoticias: boolean - O estado do dropdown de notícias.
+ * @param showDropdownTransportes: boolean - O estado do dropdown de transportes.
+ * @param showSignOutDropdown: boolean - O estado do dropdown de sair.
+ * @param showDropdownMunicipality: boolean - O estado do dropdown de município.
+ * @param showDropdownAdmin: boolean - O estado do dropdown de administração.
+ * @param numberOfRequests: number - O número de pedidos.
+ * 
+ */
 export class HeaderLoggedinComponent {
   isSignedIn: boolean = false;
   user: any;
@@ -33,8 +55,26 @@ numberOfRequests: number = 0;
 
 
 
+  /**
+   *
+   * @constructor
+   *
+   * HeaderComponent
+   * 
+   * @param auth: UserAuthService - O serviço de autenticação do utilizador.
+   * @param appFeaturesService: AppFeaturesService - O serviço de funcionalidades da aplicação.
+   * @param router: Router - O router.
+   * @param docsService: DocsService - O serviço de documentos.
+   * 
+   * Inicializador do componente HeaderComponent.
+   */
   constructor(private auth: UserAuthService, private appFeaturesService: AppFeaturesService, private router: Router, private docsService : DocsService ) { }
 
+  /**
+   * ngOnInit
+   *
+   * Método que é chamado quando o componente é inicializado.
+   */
   ngOnInit() {
     this.auth.onStateChanged().forEach((state: any) => {
       this.auth.isSignedIn().forEach((signedIn: boolean) => this.isSignedIn = signedIn);
@@ -106,6 +146,12 @@ numberOfRequests: number = 0;
     return Roles;
   }
 
+  /**
+   * signOut
+   *
+   * Método que é chamado quando o utilizador faz logout.
+   *
+   */ 
   signOut() {
     if (this.isSignedIn) {
       this.auth.signOut().forEach(response => {
@@ -116,6 +162,13 @@ numberOfRequests: number = 0;
     }
   }
 
+  /**
+   * setActiveDropdown
+   *
+   * Método que é chamado quando um dropdown é ativado.
+   *
+   * @param dropdown: Dropdowns - O dropdown.
+   */
   setActiveDropdown(dropdown: Dropdowns) {
     this.closeAllOtherDropdowns(dropdown);
 
@@ -147,6 +200,13 @@ numberOfRequests: number = 0;
   }
 
 
+  /**
+   * closeAllOtherDropdowns
+   *
+   * Método que é chamado para fechar todos os outros dropdowns.
+   *
+   * @param dropdown: Dropdowns - O dropdown.
+   */
   closeAllOtherDropdowns(dropdown: Dropdowns) {
     if (dropdown !== Dropdowns.Events) {
       this.showDropdownAgenda = false;
@@ -179,6 +239,12 @@ numberOfRequests: number = 0;
     return Dropdowns;
   }
 
+  /**
+   * goToHomePage
+   *
+   * Método que é chamado quando o utilizador vai para a página inicial.
+   *
+   */
   goToHomePage() {
     if (this.role === 'Citizen') {
       this.router.navigateByUrl(`/citizen/homePage`)
@@ -188,22 +254,45 @@ numberOfRequests: number = 0;
     }
   }
 
+  /**
+   *
+   * Método que é chamado para verificiar se as funcionlidade Documentos está ativa.
+   *
+   */
   isDocumentsFeatureActive() {
     return this.appFeatures.find(a => a.appFeatureCategory == "Documents")?.isEnabled;
   }
-
+  /**
+   *
+   * Método que é chamado para verificiar se as funcionlidade Eventos está ativa.
+   *
+   */
   isEventsFeatureActive() {
     return this.appFeatures.find(a => a.appFeatureCategory == "Events")?.isEnabled;
   }
 
+  /**
+   *
+   * Método que é chamado para verificiar se as funcionlidade Notícias está ativa.
+   *
+   */
   isNewsFeatureActive() {
     return this.appFeatures.find(a => a.appFeatureCategory == "News")?.isEnabled;
   }
-
+  /**
+   *
+   * Método que é chamado para verificiar se as funcionlidade Transportes está ativa.
+   *
+   */
   isTransportsFeatureActive() {
     return this.appFeatures.find(a => a.appFeatureCategory == "Transports")?.isEnabled;
   }
 
+  /**
+  *
+  * Método que é chamado para verificiar se as funcionlidade Biblioteca está ativa.
+  *
+  */
   isLibraryFeatureActive() {
     return this.appFeatures.find(a => a.appFeatureCategory == "Library")?.isEnabled;
   }

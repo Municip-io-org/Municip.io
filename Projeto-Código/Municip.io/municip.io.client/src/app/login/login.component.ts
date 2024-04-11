@@ -12,6 +12,17 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './login.component.css',
   providers: [CitizenAuthService]
 })
+ /**
+  * Login component
+  *
+  * Classe que contem a logica do login
+  *
+  * @param role - variavel que guarda a role do utilizador
+  * @param user - variavel que guarda o email, password, twoFactorCode e twoFactorRecoveryCode
+  * @param newUser - variavel que guarda o novo utilizador
+  * @param loginForm - Formulario de login
+  * 
+  */
 export class LoginComponent {
 
   role: string = "";
@@ -22,7 +33,16 @@ export class LoginComponent {
     twoFactorCode: "",
     twoFactorRecoveryCode: ""
   };
-    newUser: any;
+  newUser: any;
+
+  /**
+   * @constructor
+   * LoginComponent
+   *
+   * @param citizenAuthService - Serviço de autenticação do cidadão
+   * @param userAuthService - Serviço de autenticação do cidadão
+   * @param router - O Router
+   */
   constructor(private citizenAuthService: CitizenAuthService, private userAuthService: UserAuthService,
     private router: Router) { }
 
@@ -34,104 +54,22 @@ export class LoginComponent {
 
   error: string = "";
   browserId: string = "";
+
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente
+   */
   ngOnInit(): void {
 
     localStorage.clear();
   }
-  //onSubmit()
-  //{
-  //  var email = this.loginForm.value.email || "";
-  //  //nao esta a ter o user e pass (null) e falta fazer a navigation apenas quando for autenticado
-  //  this.userAuthService.login(this.loginForm.value as Login, true, true).subscribe(
-  //    res => {
-  //      this.error = "";
 
-  //      this.userAuthService.getUserRole().subscribe(
-  //        res => {
-  //          var userAgent = navigator.userAgent;
-  //          console.log('User-Agent:', userAgent);
-  //          this.role = res.role;
-  //          this.user.email = res.email;
-
-  //          this.userAuthService.getInfoByEmail(email).subscribe(
-  //            res => {
-
-  //              console.log(res);
-  //              this.browserId = this.hashString(userAgent);
-  //              console.log('Browser ID:', this.browserId);
-
-  //              //send email if browser id is not in the list
-  //              //utiliza o servico para get
-
-  //              this.userAuthService.getBrowserHistory(email).subscribe(
-
-  //                res => {
-  //                  console.log(res);
-  //                  //se nao existir envia email
-
-  //                  var found = false;
-  //                  for (var i = 0; i < res.length; i++) {
-  //                    console.log(res[i].userAgent, this.browserId)
-
-  //                    if (res[i].userAgent == this.browserId) {
-  //                      found = true;
-  //                      break;
-  //                    }
-  //                  }
-
-
-  //                  this.userAuthService.updateBrowserHistory(email, this.browserId).subscribe(
-  //                    res => {
-  //                      console.log(res);
-  //                    },
-  //                    error => {
-  //                      console.error(error);
-  //                    }
-  //                  );
-
-
-  //                  if (!found) {
-  //                    this.userAuthService.sendEmail(email).subscribe(
-  //                      res => {
-
-  //                        console.log("LA VAI MAIL", res);
-  //                      },
-  //                      error => {
-  //                        console.error(error);
-  //                      }
-  //                    );
-  //                  }
-  //                }
-  //              );
-
-
-
-  //              if (this.role == "Citizen") {
-  //                this.router.navigateByUrl('/citizen/homePage');
-  //              } else {
-  //                this.router.navigateByUrl('/municipal/homePage');
-  //              }
-  //            },
-  //            error => {
-  //              console.error(error);
-  //            }
-  //          );
-
-  //        },
-  //        error => {
-  //          console.error(error);
-  //        }
-  //      );
-
-
-  //    },
-  //    error => {
-  //      console.log(error);
-  //      this.error = "Erro de autenticação";
-  //    }
-  //  );
-  //}
-
+  /**
+   * onSubmit
+   *
+   * Função que é chamada quando o utilizador faz submit do formulario de login
+   */
   onSubmit() {
 
     localStorage.clear();
@@ -234,6 +172,14 @@ export class LoginComponent {
 
 
   }
+
+  /**
+   * hashString
+   *
+   * Função que gera um hash de uma string para guardar o browserId
+   *
+   * @param str - string a ser hashed 
+   */
   hashString(str: string): string {
     let hash = 0;
     if (str.length === 0) {

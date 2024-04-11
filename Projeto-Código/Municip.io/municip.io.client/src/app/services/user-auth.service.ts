@@ -264,15 +264,30 @@ localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
     );
   }
 
-
+  /**
+   * Dá update ao histórico de browsers do utilizador
+   * @param email  email do utilizador
+   * @param browserId browser id
+   * @returns o resultado da ação
+   */
   updateBrowserHistory(email: string, browserId: string): Observable<any> {
     return this.http.put(`/api/accounts/UpdateBrowserHistory?email=${email}&userAgent=${browserId}`, {});
   }
 
+  /**
+   * Retorna o histórico do browser
+   * @param email email do utilizador
+   * @returns retorna a ação
+   */
   getBrowserHistory(email: string): Observable<any> {
     return this.http.get<any>(`/api/accounts/GetBrowserHistory?email=${email}`);
   }
 
+  /**
+   * Envia um email 
+   * @param email email do cidadão
+   * @returns retorna a resposta
+   */
   sendEmail(email: string) {
     
     return this.http.post<any>(`/api/accounts/SendNewLogin?email=${email}`, {});

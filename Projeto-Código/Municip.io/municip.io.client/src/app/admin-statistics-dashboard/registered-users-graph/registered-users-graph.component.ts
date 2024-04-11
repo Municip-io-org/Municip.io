@@ -8,15 +8,36 @@ import { Citizen } from '../../services/citizen-auth.service';
   templateUrl: './registered-users-graph.component.html',
   styleUrls: ['./registered-users-graph.component.css']
 })
+/**
+ * @class RegisteredUsersGraphComponent
+ *
+ * Este componente é responsável por exibir um gráfico de cidadãos registados.
+ *
+ * @returns Um gráfico de linhas com o número de cidadãos registados por mês.
+ *
+ **/
 export class RegisteredUsersGraphComponent implements AfterViewInit {
 
-  
+  /**
+  * @constructor
+  *
+  * Este construtor é responsável por injetar o serviço estatístico do administrador.
+  *
+  * @param adminStatisticsService - O serviço de estatísticas do administrador.
+  *
+  **/
   constructor(private adminStatisticsService: AdminStatisticsService) { }
 
   chart: Chart | undefined;
   countsByMonthCitizens: Map<string, number> = new Map();
   countsByMonthMunicipalAdmins: Map<string, number> = new Map();
 
+  /**
+   * Este método é responsável por criar o gráfico.
+   * 
+   * @returns O gráfico.
+   *
+   **/
   ngAfterViewInit() {
 
     this.adminStatisticsService.getAllCitizens().subscribe((data: Citizen[]) => {
@@ -36,6 +57,12 @@ export class RegisteredUsersGraphComponent implements AfterViewInit {
     );
   }
 
+  /**
+   * Este método é responsável por criar o gráfico.
+   * 
+   * @returns O gráfico.
+   *
+   **/
   createChart() {
     const maxDataValue = Math.max(...Array.from(this.countsByMonthCitizens.values()));
     const maxYAxisValue = Math.ceil(maxDataValue)+ 5; 
@@ -78,6 +105,13 @@ export class RegisteredUsersGraphComponent implements AfterViewInit {
     });
   }
 
+  /**
+   * Este método é responsável por obter o número de cidadãos registados por mês.
+   * 
+   * @param data - Dados dos cidadãos.
+   * @returns O número de cidadãos registados por mês.
+   *
+   **/
   getRegisteredByMonth(data: any[]): Map<string, number> {
     const monthOrder: { [key: string]: number } = {
       'janeiro': 1,

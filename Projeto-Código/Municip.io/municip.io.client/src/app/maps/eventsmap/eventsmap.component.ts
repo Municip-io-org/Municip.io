@@ -7,9 +7,28 @@ import { BoundsService } from '../bounds.service';
   templateUrl: './eventsmap.component.html',
   styleUrl: './eventsmap.component.css'
 })
+/**
+ * Events Map Component
+ *
+ * Este componente representa o mapa de eventos
+ *
+ * @param EventAddress - Endereço do evento
+ * @param showMap - Mostrar mapa
+ * @param zoom - Zoom
+ * @param center - Centro
+ * @param options - Opções
+ * @param infoWindow - Janela de informações
+ * @param markers - Marcadores
+ */
 export class EventsmapComponent {
 
-
+  /**
+   * @constructor
+   * EventsmapComponent
+   *
+   * @param boundsService - Serviço de limites
+   * @param cdr - ChangeDetectorRef
+   */
   constructor(private boundsService: BoundsService, private cdr: ChangeDetectorRef) { }
 
   @ViewChild(GoogleMap, { static: false }) googleMap: GoogleMap | undefined;
@@ -39,6 +58,14 @@ export class EventsmapComponent {
 
 
 
+  /**
+   *
+   * ngOnChanges
+   *
+   * Este método é chamado quando há alterações
+   * @param changes - Alterações
+   *
+   */ 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['EventAddress'] && changes['EventAddress'].currentValue) {
       this.setCenterAndMarkerForEventAddress(changes['EventAddress'].currentValue);
@@ -48,6 +75,13 @@ export class EventsmapComponent {
 
   }
 
+  /**
+   * setCenterAndMarkerForEventAddress
+   *
+   * Este método define o centro e o marcador para o endereço do evento
+   * @param eventAddress - Endereço do evento
+   *
+   */
   setCenterAndMarkerForEventAddress(eventAddress: string) {
     console.log('EventAddressnometodo'+eventAddress)
     this.boundsService.getBoundsFromAddress(eventAddress).subscribe(bounds => {

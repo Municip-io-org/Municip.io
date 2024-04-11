@@ -9,6 +9,14 @@ import { RequestDocument } from '../services/documents/docs.service';
   templateUrl: './admin-statistics-dashboard.component.html',
   styleUrl: './admin-statistics-dashboard.component.css'
 })
+/**
+ * @class AdminStatisticsDashboardComponent
+ *
+ * Este componente é responsável por exibir um dashboard de estatísticas do administrador.
+ *
+ * @returns Um dashboard com várias estatísticas sobre os cidadãos, administradores municipais, municípios, notícias, eventos e documentos.
+ *
+ **/
 export class AdminStatisticsDashboardComponent {
 
   citizens: Citizen[] = [];
@@ -39,8 +47,22 @@ export class AdminStatisticsDashboardComponent {
   Authors: number = 0;
 
 
+  /**
+  * @constructor
+  *
+  * Este construtor é responsável por injetar o serviço estatístico do administrador.
+  *
+  * @param adminStatisticsService - O serviço de estatísticas do administrador.
+  *
+  **/
   constructor(private adminStatisticsService: AdminStatisticsService) { }
 
+  /**
+   * Este método é responsável por obter as estatísticas.
+   * 
+   * @returns As estatísticas.
+   *
+   **/
   ngOnInit() {
     this.adminStatisticsService.getAllCitizens().subscribe((data: Citizen[]) => {
       this.citizens = data;
@@ -74,18 +96,23 @@ this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
     );
   }
 
-
-  
-
-
-
-     
-
+/**
+   * Este método é responsável por inverter a ordem de ordenação.
+   * 
+   * @returns A lista de municípios ordenada.
+   *
+   **/
   toggleSorting() {
     this.sortingOrder = this.sortingOrder === 'asc' ? 'desc' : 'asc';
     this.sortMunicipalities();
   }
 
+  /**
+   * Este método é responsável por ordenar a lista de municípios.
+   * 
+   * @returns A lista de municípios ordenada.
+   *
+   **/
   sortMunicipalities() {
     this.municipalities.sort((a, b) => {
       if (this.sortingOrder === 'asc') {
@@ -96,7 +123,12 @@ this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
     });
   }
 
-
+  /**
+   * Este método é responsável por gerar as estatísticas.
+   * 
+   * @returns As estatísticas.
+   *
+   **/
   generateStatistics() {
     this.numberOfCitizens = this.citizens.length;
     this.numberOfMunicipalAdmins = this.municipalAdmins.length;
@@ -123,10 +155,5 @@ this.percentageOfBlockedMunicipalities = (this.blockedMunicipalities / this.muni
 this.documentRequests.forEach(doc => {
       this.totalEarnings += doc.documentTemplate.price;
     });
-
-
-
-
-
   }
 }
