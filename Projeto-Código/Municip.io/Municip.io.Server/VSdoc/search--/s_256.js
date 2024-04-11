@@ -1,1 +1,1 @@
-search_result['256']=["topic_0000000000000061_events--.html","CitizenStatusExtensions Events",""];
+search_result['256']=["topic_0000000000000059.html","GeoAPIController.ObterInformacoesMunicipio Method","Informação do municipio pelo nome. Pede à api"];

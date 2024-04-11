@@ -1,1 +1,0 @@
-c['151']=[['152',"StripeWebHookController Constructor","topic_000000000000006D.html",0],['153',"Methods","topic_000000000000006C_methods--.html",1]];

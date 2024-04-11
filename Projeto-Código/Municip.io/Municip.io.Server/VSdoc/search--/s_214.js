@@ -1,1 +1,1 @@
-search_result['214']=["topic_0000000000000052.html","MunicipalityStatusController Class","Este controlador é responsável por gerir o estado dos municípios."];
+search_result['214']=["topic_0000000000000048.html","DocumentTemplateStatusController.Deactivate Method","Method to deactivate the document template"];

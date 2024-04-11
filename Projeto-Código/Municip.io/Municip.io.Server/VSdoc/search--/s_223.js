@@ -1,1 +1,1 @@
-search_result['223']=["topic_0000000000000056.html","MunicipalityStatusController.approveMunicipality Method","Esta função aprova um município. Recebe como parâmetro o nome do município."];
+search_result['223']=["topic_000000000000004C.html","EventsController.CreateEvent Method","Esta chamada permite criar um evento no sistema, passando omo parâmetro um objeto do tipo Event"];

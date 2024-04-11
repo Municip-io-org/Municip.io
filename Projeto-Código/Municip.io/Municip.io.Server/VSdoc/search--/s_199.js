@@ -1,1 +1,1 @@
-search_result['199']=["topic_0000000000000048.html","MunicipalAdministratorStatusController.getMunicipalAdministrators Method","Esta função retorna todos os administradores de um município. Recebe como parâmetro o nome do município."];
+search_result['199']=["topic_0000000000000045_methods--.html","DocumentTemplateStatusController Methods",""];

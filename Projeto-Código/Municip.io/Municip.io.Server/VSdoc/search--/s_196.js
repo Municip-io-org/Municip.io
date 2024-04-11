@@ -1,1 +1,1 @@
-search_result['196']=["topic_0000000000000047_methods--.html","initial Methods",""];
+search_result['196']=["topic_0000000000000045.html","DocumentTemplateStatusController Class","Controller to manage the status of the document templates"];

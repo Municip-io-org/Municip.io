@@ -1,1 +1,1 @@
-search_result['347']=["topic_0000000000000086_attached_props--.html","AccountUserEmailExtensions Attached Properties",""];
+search_result['347']=["topic_0000000000000078.html","NewsController.UpdateNews Method","esta função atualiza uma notícia. Recebe como parâmetro a notícia atualizada."];

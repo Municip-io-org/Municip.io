@@ -1,1 +1,1 @@
-search_result['346']=["topic_0000000000000086.html","AccountUserEmailExtensions Class",""];
+search_result['346']=["topic_0000000000000077.html","NewsController.DeleteNews Method","esta função remove uma notícia. Recebe como parâmetro o id da notícia."];

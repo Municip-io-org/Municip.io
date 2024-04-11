@@ -1,1 +1,1 @@
-search_result['284']=["topic_000000000000006B_vars--.html","CitizenStatusMessageExtensions Fields",""];
+search_result['284']=["topic_0000000000000061.html","MunicipalAdministratorStatusController.SendAprove Method","Esta função envia um email de aprovação para um administrador."];

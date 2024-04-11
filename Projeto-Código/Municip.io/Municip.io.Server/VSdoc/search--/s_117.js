@@ -1,1 +1,1 @@
-search_result['117']=["topic_000000000000002D.html","DocumentController.GetDistinctDocumentTypesFromMunicipality Method","Method to get the distinct document types from a municipality"];
+search_result['117']=["topic_000000000000002A_methods--.html","CitizenStatusController Methods",""];

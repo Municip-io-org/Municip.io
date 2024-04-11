@@ -1,1 +1,1 @@
-search_result['369']=["topic_0000000000000092_attached_props--.html","AppFeatureCategoryExtensions Attached Properties",""];
+search_result['369']=["topic_000000000000007F.html","StatsController.getAllDocuments Method","Obtem todos os pedidos de documentos"];

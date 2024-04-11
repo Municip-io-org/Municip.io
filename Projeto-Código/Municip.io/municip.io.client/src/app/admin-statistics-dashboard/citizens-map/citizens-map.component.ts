@@ -54,14 +54,17 @@ export class CitizensMapComponent {
     backgroundColor: 'transparent',
     resolution: "provinces",
     datalessRegionColor: 'transparent',
-
-
+    //colorAxis: { colors: ['#10b981','yellow', '#ef4444'] },
+    colorAxis: { colors: ['#0cab46', '#f59e0b', '#ef4444'] },
 
     legend: 'none',
 
   };
   width = 600;
   height = 400;
+
+  min = 0;
+max = 0;
 
 
   /**
@@ -99,6 +102,8 @@ this.municipalities.forEach(municipality => {
 
 
     this.data = Object.entries(this.districtData);
+    this.min = Math.min(...Object.values(this.districtData));
+this.max = Math.max(...Object.values(this.districtData));
   }
 
 

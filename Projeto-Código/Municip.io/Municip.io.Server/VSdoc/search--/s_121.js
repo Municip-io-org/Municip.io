@@ -1,1 +1,1 @@
-search_result['121']=["topic_0000000000000031.html","DocumentController.GetTemplateById Method","method to change the status of a document request to rejected"];
+search_result['121']=["topic_000000000000002C.html","CitizenStatusController.getCitizens Method","Esta função retorna todos os cidadãos de um município. Recebe como parâmetro o nome do município."];

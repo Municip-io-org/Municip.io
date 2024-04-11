@@ -1,1 +1,0 @@
-c['138']=[['139',"CreateNews Method","topic_0000000000000061.html",0],['140',"DeleteNews Method","topic_0000000000000063.html",0],['141',"GetNews Method","topic_0000000000000062.html",0],['142',"GetNewsById Method","topic_0000000000000065.html",0],['143',"UpdateNews Method","topic_0000000000000064.html",0]];

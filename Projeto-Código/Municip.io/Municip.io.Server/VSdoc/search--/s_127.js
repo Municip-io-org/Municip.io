@@ -1,1 +1,1 @@
-search_result['127']=["topic_0000000000000032_vars--.html","DocumentTemplateStatusController Fields",""];
+search_result['127']=["topic_0000000000000032.html","CitizenStatusController.SendDeny Method","Esta função envia um email de reprovação para um cidadão."];

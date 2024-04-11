@@ -1,1 +1,1 @@
-search_result['307']=["topic_0000000000000073.html","ApplicationDbContext.Citizens Property",""];
+search_result['307']=["topic_0000000000000069.html","MunicipalityStatusController.GetApprovedMunicipalities Method","Esta função retorna todos os municípios aprovados como json."];
