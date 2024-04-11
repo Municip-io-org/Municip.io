@@ -1,1 +1,1 @@
-search_result['235']=["topic_0000000000000059_props--.html","WeatherForecast Properties",""];
+search_result['235']=["topic_0000000000000052_attached_props--.html","MunicipalityStatusController Attached Properties",""];

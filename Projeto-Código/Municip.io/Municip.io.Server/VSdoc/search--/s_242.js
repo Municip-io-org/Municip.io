@@ -1,1 +1,1 @@
-search_result['242']=["topic_000000000000005C_methods--.html","WeatherForecast Methods",""];
+search_result['242']=["topic_0000000000000055.html","EventsController.GetEventsByCitizen Method","Esta chamada permite obter todos os eventos de um determinado cidadão passando o email do cidadão como parâmetro"];

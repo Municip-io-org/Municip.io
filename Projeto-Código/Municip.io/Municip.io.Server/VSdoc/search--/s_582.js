@@ -1,1 +1,1 @@
-search_result['582']=["topic_000000000000011A.html","Municipality.codigopostal Property",""];
+search_result['582']=["topic_00000000000000DE_attached_props--.html","Event Attached Properties",""];

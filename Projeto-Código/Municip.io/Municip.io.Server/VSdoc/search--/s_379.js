@@ -1,1 +1,1 @@
-search_result['379']=["topic_0000000000000094_props--.html","Browser Properties",""];
+search_result['379']=["topic_0000000000000084.html","StatsController.getPendingRequestsByMunicipality Method","O método abaixo é utilizado para obter informações para obter o número de pedidos de documentos para a página inicial"];

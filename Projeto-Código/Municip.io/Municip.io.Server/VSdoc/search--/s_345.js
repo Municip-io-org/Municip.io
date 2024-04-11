@@ -1,1 +1,1 @@
-search_result['345']=["topic_0000000000000085.html","InformacoesMunicipio.nif Property",""];
+search_result['345']=["topic_0000000000000076.html","NewsController.GetNews Method","esta função retorna todas as notícias de um município. Recebe como parâmetro o nome do município."];

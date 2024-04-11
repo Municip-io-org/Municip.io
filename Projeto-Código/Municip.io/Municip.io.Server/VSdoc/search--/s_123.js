@@ -1,1 +1,1 @@
-search_result['123']=["topic_0000000000000032_attached_props--.html","DocumentTemplateStatusController Attached Properties",""];
+search_result['123']=["topic_000000000000002E.html","CitizenStatusController.deleteCitizen Method","Esta função remove um cidadão. Recebe como parâmetro o email do cidadão ."];

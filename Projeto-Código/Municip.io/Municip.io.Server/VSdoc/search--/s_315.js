@@ -1,1 +1,1 @@
-search_result['315']=["topic_0000000000000076.html","ApplicationDbContext.Events Property",""];
+search_result['315']=["topic_000000000000006C.html","MunicipalityStatusController.pendingMunicipality Method","Esta função coloca um município em estado de espera. Recebe como parâmetro o nome do município."];

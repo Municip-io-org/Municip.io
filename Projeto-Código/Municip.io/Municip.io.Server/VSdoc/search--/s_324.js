@@ -1,1 +1,1 @@
-search_result['324']=["topic_000000000000007B_props--.html","DataSeeder Properties",""];
+search_result['324']=["topic_0000000000000070.html","MunicipalityStatusController.SendDeny Method","esta função envia um email de negação para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município."];

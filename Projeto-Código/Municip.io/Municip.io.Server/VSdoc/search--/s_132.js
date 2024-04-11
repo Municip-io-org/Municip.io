@@ -1,1 +1,1 @@
-search_result['132']=["topic_0000000000000034_methods--.html","NewsController Methods",""];
+search_result['132']=["topic_0000000000000032_vars--.html","DocumentTemplateStatusController Fields",""];

@@ -1,1 +1,1 @@
-search_result['344']=["topic_0000000000000084.html","InformacoesMunicipio.codigo Property",""];
+search_result['344']=["topic_0000000000000075.html","NewsController.CreateNews Method","Esta função cria uma notícia. Recebe como parâmetro a notícia."];

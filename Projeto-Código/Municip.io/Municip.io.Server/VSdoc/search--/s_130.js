@@ -1,1 +1,1 @@
-search_result['130']=["topic_0000000000000034_attached_props--.html","NewsController Attached Properties",""];
+search_result['130']=["topic_0000000000000032_methods--.html","DocumentTemplateStatusController Methods",""];

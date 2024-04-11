@@ -1,1 +1,1 @@
-search_result['202']=["topic_000000000000004B.html","MunicipalAdministratorStatusController.blockMunicipalAdministrator Method","Esta função bloqueia um administrador. Recebe como parâmetro o email do administrador ."];
+search_result['202']=["topic_0000000000000046.html","DocumentTemplateStatusController Constructor",""];

@@ -1,1 +1,1 @@
-search_result['232']=["topic_0000000000000059_attached_props--.html","WeatherForecast Attached Properties",""];
+search_result['232']=["topic_0000000000000050.html","EventsController.GetEventsByMunicipality Method","Esta chamada permite obter todos os eventos de um determinado município passando o nome do município como parâmetro e retorna um objeto do tipo Event"];

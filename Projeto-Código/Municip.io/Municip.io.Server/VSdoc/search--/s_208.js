@@ -1,1 +1,1 @@
-search_result['208']=["topic_000000000000004C_vars--.html","Citizen Fields",""];
+search_result['208']=["topic_0000000000000047.html","DocumentTemplateStatusController.Activate Method","Method to activate the document template"];

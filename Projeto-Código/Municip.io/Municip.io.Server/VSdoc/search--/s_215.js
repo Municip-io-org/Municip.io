@@ -1,1 +1,1 @@
-search_result['215']=["topic_0000000000000052_attached_props--.html","MunicipalityStatusController Attached Properties",""];
+search_result['215']=["topic_0000000000000049.html","DocumentTemplateStatusController.Remove Method","Method to remove the document template"];

@@ -1,1 +1,1 @@
-search_result['153']=["topic_000000000000003C_attached_props--.html","ApplicationDbContext Attached Properties",""];
+search_result['153']=["topic_0000000000000038.html","DocumentController.CreateDocumentTemplateAsync Method","Method to create a document template"];
