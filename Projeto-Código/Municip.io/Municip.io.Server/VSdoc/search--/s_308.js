@@ -1,1 +1,1 @@
-search_result['308']=["topic_0000000000000073_attached_props--.html","Event Attached Properties",""];
+search_result['308']=["topic_000000000000006A.html","MunicipalityStatusController.approveMunicipality Method","Esta função aprova um município. Recebe como parâmetro o nome do município."];

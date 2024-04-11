@@ -1,1 +1,1 @@
-search_result['302']=["topic_0000000000000071_events--.html","MunicipalityStatusMessageExtensions Events",""];
+search_result['302']=["topic_0000000000000066_methods--.html","MunicipalityStatusController Methods",""];

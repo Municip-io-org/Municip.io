@@ -1,1 +1,1 @@
-search_result['134']=["topic_0000000000000034_vars--.html","NewsController Fields",""];
+search_result['134']=["topic_0000000000000034.html","CitizenStatusController.SendBlock Method","Esta função envia um email de bloqueio para um cidadão."];

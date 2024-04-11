@@ -1,1 +1,1 @@
-search_result['336']=["topic_0000000000000081.html","rui.BuildTargetModel Method",""];
+search_result['336']=["topic_0000000000000072.html","MunicipalityStatusController.Implicit Conversion (AccountUserController to MunicipalityStatusController) Operator",""];

@@ -1,1 +1,1 @@
-search_result['281']=["topic_000000000000006B_events--.html","CitizenStatusMessageExtensions Events",""];
+search_result['281']=["topic_000000000000005F_props--.html","NewsController Properties",""];

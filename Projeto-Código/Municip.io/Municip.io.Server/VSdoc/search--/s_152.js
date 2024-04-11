@@ -1,1 +1,1 @@
-search_result['152']=["topic_000000000000003C.html","EventsController.GetEventsByMunicipality Method","Esta chamada permite obter todos os eventos de um determinado município passando o nome do município como parâmetro e retorna um objeto do tipo Event"];
+search_result['152']=["topic_0000000000000037_vars--.html","EventsController Fields",""];

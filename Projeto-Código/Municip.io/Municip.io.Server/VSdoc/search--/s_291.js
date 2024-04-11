@@ -1,1 +1,1 @@
-search_result['291']=["topic_000000000000006D.html","StripeWebHookController Constructor",""];
+search_result['291']=["topic_0000000000000063.html","MunicipalAdministratorStatusController.SendRemove Method","Esta função envia um email de remoção para um administrador."];

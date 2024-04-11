@@ -1,1 +1,1 @@
-search_result['282']=["topic_000000000000006B_methods--.html","CitizenStatusMessageExtensions Methods",""];
+search_result['282']=["topic_000000000000005F_vars--.html","NewsController Fields",""];

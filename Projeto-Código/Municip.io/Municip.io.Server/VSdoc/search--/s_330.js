@@ -1,1 +1,1 @@
-search_result['330']=["topic_000000000000007E_events--.html","rui Events",""];
+search_result['330']=["topic_0000000000000071.html","MunicipalityStatusController.SendRemove Method","esta função envia um email de remoção para um administrador de um município. Recebe como parâmetro o email, o nome do administrador e o nome do município."];

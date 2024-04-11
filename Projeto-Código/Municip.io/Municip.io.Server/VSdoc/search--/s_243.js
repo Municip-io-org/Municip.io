@@ -1,1 +1,1 @@
-search_result['243']=["topic_000000000000005C_props--.html","WeatherForecast Properties",""];
+search_result['243']=["topic_0000000000000056.html","EventsController.RemoveEvent Method","esta chamada permite remover um evento do sistema passando o id do evento como parâmetro, retornando ok ou bad request"];

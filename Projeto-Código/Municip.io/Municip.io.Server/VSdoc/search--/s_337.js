@@ -1,1 +1,1 @@
-search_result['337']=["topic_0000000000000082.html","Municip.io.Server.Models Namespace",""];
+search_result['337']=["topic_0000000000000073.html","NewsController Class","Este controlador é responsável por gerir as notícias."];

@@ -1,1 +1,1 @@
-search_result['260']=["topic_0000000000000062.html","NewsController.GetNews Method","esta função retorna todas as notícias de um município. Recebe como parâmetro o nome do município."];
+search_result['260']=["topic_0000000000000059_props--.html","WeatherForecast Properties",""];

@@ -2,7 +2,7 @@
   "id": "8b864d39-9231-4e16-8a7c-fecaeef7ee09",
   "version": "2.0",
   "name": "Municip.io Test",
-  "url": "https://municip.io:4200/library/create",
+  "url": "https://municip.io:4200/",
   "tests": [{
     "id": "13345bfd-82bd-45c0-852b-404ee0d246ae",
     "name": "Create municipality",
@@ -4367,6 +4367,42 @@
       "target": "window.scrollTo(0,82)",
       "targets": [],
       "value": ""
+    }]
+  }, {
+    "id": "d47978b7-8aca-44b9-b61b-7fa048cc3d8d",
+    "name": "RFO1 - Tradução de páginas",
+    "commands": [{
+      "id": "287a55dd-3f90-4a0a-b588-42636a885f2b",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "081c2dc6-637d-44e4-a2ee-94dff3f48cbe",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x860",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "737c7d29-92f9-42c2-94ef-decc9cd43cd8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.goog-te-combo",
+      "targets": [
+        ["css=.goog-te-combo", "css:finder"],
+        ["xpath=//div[@id=':0.targetLanguage']/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e5fed5e2-bf3f-4165-8f07-a1ce65fa90cd",
+      "comment": "",
+      "command": "select",
+      "target": "css=.goog-te-combo",
+      "targets": [],
+      "value": "label=Inglês"
     }]
   }],
   "suites": [{

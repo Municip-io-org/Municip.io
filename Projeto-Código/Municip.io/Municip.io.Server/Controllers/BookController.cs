@@ -84,8 +84,10 @@ namespace Municip.io.Server.Controllers
                     // Verificar se o ISBN não está vazio antes de realizar a verificação
                     if (!string.IsNullOrEmpty(newBook.ISBN))
                     {
-                        // Verificar se já existe um livro com o mesmo ISBN e o mesmo município
-                        var existingBook = _context.Books.FirstOrDefault(b => b.ISBN == newBook.ISBN && b.Municipality == newBook.Municipality);
+                        // Verificar se já existe um livro com o mesmo ISBN, mesmo município e o livro disponível
+                        var existingBook = _context.Books.FirstOrDefault(b => b.ISBN == newBook.ISBN 
+                                                                        && b.Municipality == newBook.Municipality 
+                                                                        && b.Status == BookStatus.Available);
                         if (existingBook != null)
                         {
                             // Se já existe um livro com o mesmo ISBN e município, retornar um BadRequest

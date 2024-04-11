@@ -1,1 +1,1 @@
-search_result['322']=["topic_000000000000007B_events--.html","DataSeeder Events",""];
+search_result['322']=["topic_000000000000006E.html","MunicipalityStatusController.sendEmailToMunicipalAdmins Method","esta função envia um email para todos os administradores de um município. Recebe como parâmetro o nome do município e uma função que envia o email. Não é uma ação passível de ser chamada via API"];
