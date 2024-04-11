@@ -9,6 +9,22 @@ import { Editor, Toolbar } from 'ngx-editor';
   templateUrl: './municipal-edit.component.html',
   styleUrl: './municipal-edit.component.css'
 })
+/**
+ * Municipal Edit Component
+ *
+ * Este componente representa a edição municipal
+ *
+ * @param municipality - Município
+ * @param editor - Editor
+ * @param toolbar - Barra de ferramentas
+ * @param currentEmblemPhoto - Foto de emblema atual
+ * @param currentLandscapePhoto - Foto de paisagem atual
+ * @param emblemImg - Imagem de emblema
+ * @param landscapeImg - Imagem de paisagem
+ * @param user - Utilizador
+ * @param editMode - Modo de edição
+ * @param municipalityEditForm - Formulário de edição do município
+ */
 export class MunicipalEditComponent {
 
   municipality: Municipality = {
@@ -66,8 +82,20 @@ export class MunicipalEditComponent {
     landscapePhoto: new FormControl({ value: null, disabled: true })
   });
 
+  /**
+   * @constructor
+   * MunicipalEditComponent
+   *
+   * @param municipalAdminAuthService - Serviço de autenticação do administrador municipal
+   * @param userAuthService - Serviço de autenticação do cidadão
+   */
   constructor(private userAuthService: UserAuthService, private municipalAdminAuthService :MunicipalAdminAuthService) { }
 
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente
+   */
   ngOnInit(): void {
     this.editor = new Editor();
     this.userAuthService.getUserData().subscribe(
@@ -101,10 +129,20 @@ export class MunicipalEditComponent {
     );
   }
 
+  /**
+   * ngOnDestroy
+   *
+   * Destroi o editor
+   */
   ngOnDestroy(): void {
     this.editor.destroy();
   }
 
+  /**
+   * initForm
+   *
+   * Inicializa o formulário
+   */
   initForm() {
     this.municipalityEditForm.patchValue({
       president: this.municipality.president,
@@ -119,6 +157,11 @@ export class MunicipalEditComponent {
     this.currentLandscapePhoto = this.municipality.landscapePhoto;
   }
 
+  /**
+   * toggleEditMode
+   *
+   * Ativa/desativa o modo de edição
+   */
   toggleEditMode() {
     this.editMode = !this.editMode;
 
@@ -129,13 +172,18 @@ export class MunicipalEditComponent {
     }
   }
 
+  /**
+   * cancelEditMode
+   *
+   * Cancela o modo de edição
+   */
   cancelEditMode() {
     this.toggleEditMode();
     this.initForm();
   }
 
   
-
+  //Getters
   get president() {
     return this.municipalityEditForm.get('president');
   }
@@ -160,6 +208,13 @@ export class MunicipalEditComponent {
     return this.municipalityEditForm.get('landscapePhoto');
   }
 
+  /**
+   * onEmblemImagePicked
+   *
+   * Seleciona a imagem de emblema
+   *
+   * @param event - Evento
+   */
   onEmblemImagePicked(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -176,6 +231,13 @@ export class MunicipalEditComponent {
 
 
 
+  /**
+   * onLandscapeImagePicked
+   *
+   * Seleciona a imagem de paisagem
+   *
+   * @param event - Evento
+   */
   onLandscapeImagePicked(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -191,6 +253,11 @@ export class MunicipalEditComponent {
   }
 
 
+  /**
+   * onSubmit
+   *
+   * Submete o formulário
+   */
   onSubmit() {
 
   this.toggleEditMode();

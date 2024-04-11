@@ -9,23 +9,50 @@ import Chart from 'chart.js/auto';
   templateUrl: './gender-chart.component.html',
   styleUrl: './gender-chart.component.css'
 })
+/**
+ * @class GenderChartComponent
+ *
+ * Este componente é responsável por exibir um gráfico de géneros dos cidadãos.
+ *
+ * @input citizens - A lista de cidadãos.
+ *
+ * @returns Um piechart com a distribuição de géneros dos cidadãos.
+ *
+ */
 export class GenderChartComponent {
   @Input() citizens: Citizen[] = [];
   chart: Chart<"pie", number[], string> | undefined; // Adjusted chart type to explicitly specify Chart type
 
   constructor(private adminStatisticsService: AdminStatisticsService) { }
 
+  /**
+   * Este método é responsável por criar o gráfico.
+   * 
+   * @returns O gráfico.
+   *
+   **/
   ngOnInit() {
     this.createChart();
   }
 
+  /**
+   * Este método é responsável por atualizar o gráfico.
+   *
+   * @returns O gráfico atualizado.
+   *
+   **/
   ngOnChanges(changes: SimpleChanges) {
     if (changes['citizens'] && !changes['citizens'].firstChange) {
       this.updateChart();
     }
   }
 
-
+  /**
+   * Este método é responsável por criar o gráfico.
+   * 
+   * @returns O gráfico.
+   *
+   **/
   createChart() {
     const xValues = ["Masculino", "Feminino", "Outro"];
     const genderCounts = this.getGenderCounts();
@@ -47,6 +74,12 @@ export class GenderChartComponent {
     }
   }
 
+  /**
+   * Este método é responsável por atualizar o gráfico.
+   *
+   * @returns O gráfico atualizado.
+   *
+   **/
   updateChart() {
     if (this.chart) {
       const genderCounts = this.getGenderCounts();
@@ -55,6 +88,12 @@ export class GenderChartComponent {
     }
   }
 
+  /**
+   * Este método é responsável por contar o número de géneros.
+   * 
+   * @returns O número de géneros.
+   *
+   **/
   getGenderCounts(): number[] {
     const countMale = this.citizens.filter(citizen => citizen.gender === "m").length;
     const countFemale = this.citizens.filter(citizen => citizen.gender === "f").length;

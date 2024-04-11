@@ -6,16 +6,38 @@ import { EventsService } from '../../services/events/events.service';
 import { Event } from '../../services/events/events.service';
 import { Observable, map } from 'rxjs';
 import { UserAuthService } from '../../services/user-auth.service';
-/**
- * Componente responsável por exibir um calendário de eventos municipais.
- */
+
 @Component({
   selector: 'app-municipal-calendar',
   templateUrl: './municipal-calendar.component.html',
   styleUrl: './municipal-calendar.component.css'
 })
+/**
+ * @class MunicipalCalendarComponent
+ *
+ * Este componente é responsável por exibir o calendário municipal.
+ *
+ * @param events$ - Os eventos.
+ * @param municipalityImage - A imagem do município.
+ * @param municipalityName - O nome do município.
+ * @param eventsToday - O estado dos eventos de hoje.
+ * 
+ * 
+ * @returns O calendário municipal.
+ *
+ **/
 export class MunicipalCalendarComponent {
 
+  /**
+   * @constructor
+   *
+   * MunicipalCalendarComponent 
+   * 
+   * Construtor do componente.
+   * @param eventService - O serviço de eventos.
+   * @param authService - O serviço de autenticação de utilizador.
+   *
+   */
   constructor(private eventService: EventsService, private authService: UserAuthService) { }
 
   events$: Observable<CalendarEvent<{ event: Event }>[]> = new Observable<CalendarEvent<{ event: Event }>[]>();

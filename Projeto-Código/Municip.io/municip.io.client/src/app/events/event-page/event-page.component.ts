@@ -9,6 +9,34 @@ import { EventsService, Event } from '../../services/events/events.service';
   templateUrl: './event-page.component.html',
   styleUrl: './event-page.component.css'
 })
+/**
+ * @class EventPageComponent
+ *
+ * Este componente é responsável por exibir a página de um evento.
+ *
+ * @param isDialogOpen - O estado do dialog.
+ * @param isRemoveEventDialogOpen - O estado do dialog de remoção de evento.
+ * @param dialogTitle - O título do dialog.
+ * @param dialogMessage - A mensagem do dialog.
+ * @param isSuccesfullEnroll - O estado da inscrição.
+ * @param isEnrolledDialogOpen - O estado do dialog de inscrição.
+ * @param dialogEnrolledTitle - O título do dialog de inscrição.
+ * @param dialogEnrolledMessage - A mensagem do dialog de inscrição.
+ * @param isAddGenreDialogOpen - O estado do dialog de adição de género.
+ * @param isConfirm - O estado de confirmação.
+ * @param event - O evento.
+ * @param municipality - O município.
+ * @param user - O utilizador.
+ * @param isMunAdmin - O estado do administrador municipal.
+ * @param events - A lista de eventos.
+ * @param isLoading - O estado de carregamento.
+ * @param currentPage - A página atual.
+ * @param itemsPerPage - O número de itens por página.
+ * 
+ * 
+ * @returns A página de um evento.
+ *
+ **/
 export class EventPageComponent {
 
   isDialogOpen: boolean = false;
@@ -75,10 +103,25 @@ export class EventPageComponent {
   currentPage = 1;
   itemsPerPage = 6;
 
-  
-
+  /**
+   * @constructor
+   *
+   * Este é o contrutor do componente EventPageComponent.
+   * 
+   * @param userAuthService
+   * @param activatedRoute
+   * @param router
+   * @param EventsService
+   */
   constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router, private EventsService: EventsService) { }
 
+  /**
+     *
+     * Este método é responsável por obter as informações di utilizador, do evento e do município.
+     *
+     * @returns A lista de templates de documentos.
+     *
+     */
   ngOnInit(): void {
     this.event = this.activatedRoute.snapshot.data['event'];
 
@@ -119,11 +162,22 @@ export class EventPageComponent {
     );
   }
 
+
+  /**
+   *
+   * Este método é responsável por fechar o dialog.
+   * 
+   */
   closeDialog() {
     this.isDialogOpen = false;
     window.location.reload();
   }
 
+  /**
+   *
+   * Este método é responsável por abrir o dialog.
+   * 
+   */
   openEnrolledDialog() {
     this.dialogEnrolledTitle = 'Cidadãos inscritos no evento '+ this.event.title ;
 this.isEnrolledDialogOpen = true;
@@ -141,6 +195,11 @@ this.isEnrolledDialogOpen = true;
 
   }
 
+  /**
+   *
+   * Este método é responsável por fechar o dialog.
+   * 
+   */
   closeEnrolledDialog() {
     this.isEnrolledDialogOpen = false;
 
@@ -148,10 +207,22 @@ this.isEnrolledDialogOpen = true;
 
   }
 
+  /**
+   *
+   * Este método é responsável por redirecionar para a pagina de edição de um evento
+   * 
+   */
   goToEditEventPage() {
     this.router.navigateByUrl(`/events/edit/${this.event.id}`);
   }
 
+  /** 
+  *
+  * Este método é responsável por inscrever um cidadão num evento
+  *
+  * @param eventId - ID do evento
+  * @param email - email do cidadão
+  */
   enrollInEvent(eventId: string, email: string) {
     this.EventsService.enrollEvent(eventId, email).subscribe(
       response => {
@@ -173,6 +244,15 @@ this.isEnrolledDialogOpen = true;
     );
   }
 
+
+  /**
+   *
+   * Este método é responsável por desistir de um evento
+   *
+   * @param eventId - ID do evento
+   * @param email - email do cidadão
+   *
+   */
   dropOutEvent(eventId: string, email: string) {
 
     this.EventsService.dropOutEvent(eventId, email).subscribe(
@@ -193,16 +273,31 @@ this.isEnrolledDialogOpen = true;
     );
   }
 
+  /**
+   *
+   * Este método é responsável por abrir o dialog de remoção de evento
+   * 
+   */
   openRemoveEventDialog() {
     this.isRemoveEventDialogOpen = true;
     this.dialogTitle = 'Deseja apagar o evento ' + this.event.title + '?';
     this.dialogMessage = 'Confirme a sua ação';
   }
 
+  /**
+   *
+   * Este método é responsável por fechar o dialog de remoção de evento
+   * 
+   */
   closeRemoveEventDialog() {
     this.isRemoveEventDialogOpen = false;
   }
 
+  /**
+   *
+   * Este método é responsável por remover um evento
+   * 
+   */
   removeEvent() {
     this.closeRemoveEventDialog();
    
@@ -226,6 +321,11 @@ this.isEnrolledDialogOpen = true;
   }
 
 
+  /**
+   *
+   * Este método é responsável por verificar se um cidadão está inscrito num evento
+   * 
+   */
 
   isEnrolled(): boolean {
     

@@ -4,6 +4,9 @@ import { GoogleMap, MapMarker } from '@angular/google-maps';
 import { TransportsService } from '../../services/transports.service';
 import { ChangeDetectorRef } from '@angular/core';
 
+/**
+ * Componente para o mapa de paragens.
+ */
 @Component({
   selector: 'app-stops-map',
   templateUrl: './stops-map.component.html',
@@ -11,6 +14,12 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class StopsMapComponent {
 
+  /**
+   * Método construtor para instanciar o componente.
+   * @param boundsService serviço de limites
+   * @param transportsService serviço de transportes
+   * @param cdr serviço de mudança
+   */
   constructor(private boundsService: BoundsService, private transportsService: TransportsService, private cdr: ChangeDetectorRef) { }
 
   @ViewChild(GoogleMap, { static: false }) googleMap: GoogleMap | undefined;
@@ -44,9 +53,16 @@ export class StopsMapComponent {
   markers: google.maps.Marker[] = []; // Armazenar marcadores em uma matriz
 
 
+  /**
+   * Método oninit
+   */
   ngOnInit(): void {
   };
 
+  /**
+   * Método onchange
+   * @param changes alterações
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['municipalityName'] && changes['municipalityName'].currentValue) {
       this.setBoundsAndCenterForMunicipality(changes['municipalityName'].currentValue);
@@ -56,6 +72,10 @@ export class StopsMapComponent {
     }
   }
 
+  /**
+   * Altera as bounds do municipio
+   * @param municipalityName nome do municipio
+   */
   setBoundsAndCenterForMunicipality(municipalityName: string) {
 
     this.boundsService.getMunicipalityBounds(municipalityName).subscribe(bounds => {
@@ -116,6 +136,11 @@ export class StopsMapComponent {
     });
   }
 
+  /**
+   * Mostra a informação da janela 
+   * @param stop paragem
+   * @param marker marcador da google maps
+   */
   showInfoWindow(stop: any, marker: google.maps.Marker) {
     const content = `<b>${stop.name}</b><br/><br/> <p style="font-weight: 500"> <b>Linhas:</b>  ${stop.lines.join(', ')} </p></div>`;
     this.infoWindow.setContent(content);
@@ -135,6 +160,9 @@ export class StopsMapComponent {
     this.getNextBuses(stop.id);
   }
 
+  /**
+   * Retorna as linhas
+   */
   getLines() {
     this.transportsService.getLines().subscribe(
       lines => {
@@ -152,7 +180,10 @@ export class StopsMapComponent {
       }
     );
   }
-
+  /**
+   * Retorna o próximo autocarro
+   * @param stopId id do stop
+   */
   getNextBuses(stopId: string) {
     this.transportsService.getRealtimeBuses(stopId).subscribe(
       buses => {
@@ -183,7 +214,11 @@ export class StopsMapComponent {
       }
     );
   }
-
+  /**
+   * Retorna se o autocarro já passou
+   * @param bus autocarro
+   * @returns o resultado
+   */
   isBusPassed(bus: any): boolean {
     const now = new Date();
     const scheduledArrivalTime = new Date();
@@ -195,6 +230,9 @@ export class StopsMapComponent {
     return scheduledArrivalTime < now;
   }
 
+  /**
+   * Realça uma paragem
+   */
   highlightSelectedStop() {
     this.markers.forEach(marker => {
       if (marker.getTitle() === this.selectedStopName) {

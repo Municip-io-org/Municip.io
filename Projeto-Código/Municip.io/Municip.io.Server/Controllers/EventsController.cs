@@ -74,6 +74,10 @@ namespace Municip.io.Server.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtem todos os cidadãos inscritos num evento
+        /// <param name="eventId"></param>"
+        /// <returns>A listagem de todos os cidadãos inscritos no evento</returns>
         [HttpGet("GetEnrolledInEvent")]
         public IActionResult GetEnrolledInEvent(int eventId)
         {

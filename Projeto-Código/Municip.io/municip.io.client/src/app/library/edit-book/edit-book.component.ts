@@ -13,6 +13,50 @@ import { switchMap } from 'rxjs';
   styleUrl: './edit-book.component.css',
   providers: [provideNativeDateAdapter()],
 })
+
+  //documentação do componente
+/**
+ * Componente para edição de um livro.
+ *
+ * Este componente permite a edição de um livro existente na biblioteca.
+ *
+ * @param categories - As categorias disponíveis na biblioteca.
+ * @param book - O livro a ser editado.
+ * @param municipalityImage - A imagem da municipalidade.
+ * @param municipalityName - O nome da municipalidade.
+ * @param error - A mensagem de erro.
+ * @param coverImage - A imagem da capa do livro.
+ * @param files - Os arquivos.
+ * @param authorsList - A lista de autores.
+ * @param isDialogOpen - Indica se o diálogo está aberto.
+ * @param dialogTitle - O título do diálogo.
+ * @param dialogMessage - A mensagem do diálogo.
+ * @param isAddGenreDialogOpen - Indica se o diálogo de adição de gênero está aberto.
+ * @param isConfirmDialog - Indica se o diálogo de confirmação está aberto.
+ * @param editor - O editor.
+ * @param toolbar - A barra de ferramentas.
+ * @param bookForm - O formulário do livro.
+ * @param authService - O serviço de autenticação do usuário.
+ * @param dateAdapter - O adaptador de data.
+ * @param libraryService - O serviço da biblioteca.
+ * @param router - O roteador.
+ * @param activatedRoute - A rota ativa.
+ * @param iSBN - O ISBN.
+ * @param useISBN - O uso do ISBN.
+ * @param title - O título.
+ * @param publisher - O editor.
+ * @param edition - A edição.
+ * @param authors - Os autores.
+ * @param publicationDate - A data de publicação.
+ * @param language - O idioma.
+ * @param copies - As cópias.
+ * @param genres - Os gêneros.
+ * @param sinopsis - A sinopse.
+ * @param coverImageUrl - A URL da imagem da capa.
+ *
+ *
+ * 
+ */
 export class EditBookComponent {
   categories: string[] = [];
 
@@ -136,13 +180,20 @@ export class EditBookComponent {
     );
   }
 
-
+  /**
+   * Método para construir os checkboxes das categorias
+   *
+   */
   private buildCategoryCheckboxes() {
     this.categories.forEach(category => {
       this.genres.push(new FormControl({ value: false, disabled: false })); // Por padrão, inicialize todas as categorias desmarcadas
     });
   }
 
+
+  /**
+   * Método para inicializar o formulário
+   */
   initializeForm(): void {
 
     this.bookForm.patchValue({
@@ -171,6 +222,9 @@ export class EditBookComponent {
   }
 
 
+  /**
+   * Método para submeter o formulário
+   */
   onSubmit(): void {
     if (this.bookForm.valid) {
 
@@ -223,7 +277,11 @@ export class EditBookComponent {
     }
   }
 
-
+  /**
+   * Método onCoverImagePicked
+   *
+   * @param event
+   */
   onCoverImagePicked(event: any) {
     if (this.coverImageUrl?.disabled) return;
 
@@ -240,16 +298,31 @@ export class EditBookComponent {
     }
   }
 
+
+  /**
+   * Método isValidImageFile
+   *
+   * @param file
+   */
   isValidImageFile(file: File): boolean {
     // Adicione aqui a lógica para validar se o arquivo é uma imagem
     // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
     return file.type.startsWith('image/');
   }
 
+  /**
+   * Método onDragOver
+   *
+   * @param event
+   */
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
-
+  /**
+   * Método onDrop
+   *
+   * @param event
+   */
   onDrop(event: DragEvent) {
     if (this.coverImageUrl?.disabled) return;
 
@@ -269,42 +342,65 @@ export class EditBookComponent {
     }
   }
 
-
+  /**
+   * Método openAddGenreDialog
+   */
   openAddGenreDialog() {
     this.isAddGenreDialogOpen = true;
 
   }
-
+  /**
+   * Método para adicionar um género de livro
+   */
   addGenre(newGenre: string) {
     this.categories.push(newGenre);
     this.genres.push(new FormControl({ value: false, disabled: false }))
   }
-
+  /**
+   * Método de remoção de género de livro
+   */
   removeGenre() {
     if (this.genres.length > 1) {
       this.genres.removeAt(this.genres.length - 1);
     }
   }
-
+  /**
+   * Método para adicionar um autor
+   *
+   */
   addAuthor() {
     this.authors.push(new FormControl(''));
   }
-
+  /**
+   * Método para remover um autor
+   *
+   */
   removeLastAuthor() {
     if (this.authors.length > 1) {
       this.authors.removeAt(this.authors.length - 1);
     }
   }
-
+  /**
+   * Método para fechar o dialog
+   *
+   */
   closeDialog() {
     this.isDialogOpen = false;
   }
- 
+
+  /**
+   * Método para obter os nomes das categorias
+   *
+   */
   extractCategoryNames(): string[] {
     return this.categories.map(category => category);
   }
 
 
+  /**
+   * Método onDestroy
+   *
+   */
   ngOnDestroy(): void {
     this.editor.destroy();
   }

@@ -7,10 +7,18 @@ import { Municipality } from '../../services/municipal-admin-auth.service';
   templateUrl: './library-homepage.component.html',
   styleUrl: './library-homepage.component.css'
 })
+/**
+ * Library Homepage Component
+ *
+ * Este componente representa a página inicial da biblioteca
+ *
+ * @param municipality - Nome da cidade do cidadão
+ */ 
 export class LibraryHomepageComponent {
 
   municipalityName: string = '';
 
+  
   municipality: Municipality = {
     name: '',
     president: '',
@@ -36,7 +44,13 @@ export class LibraryHomepageComponent {
     libraryAddress: ''
   };
 
-
+/**
+   * @constructor
+   * LibraryHomepageComponent
+   *
+   * @param service - Serviço de autenticação do usuário
+   * @param userAuthService - Serviço de autenticação do usuário
+   */ 
 
   constructor(private service: UserAuthService, private userAuthService : UserAuthService) {
     service.getMunicipality().toPromise().then((municipality) => {

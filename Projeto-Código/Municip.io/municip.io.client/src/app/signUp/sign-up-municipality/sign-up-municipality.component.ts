@@ -11,6 +11,23 @@ import { Editor, Toolbar } from 'ngx-editor';
   templateUrl: './sign-up-municipality.component.html',
   styleUrl: './sign-up-municipality.component.css'
 })
+
+  /**
+   * Componente para a criação de uma conta de um município
+   *
+   * @param municipality
+   * @param editor
+   * @param toolbar
+   * @param emblemPhoto
+   * @param landscapePhoto
+   * @param emblemImg
+   * @param landscapeImg
+   * @param emblemUrl
+   * @param landscapeUrl
+   * @param files
+   * 
+   * 
+   */  
 export class SignUpMunicipalityComponent {
   municipality: Municipality = {
     name: '',
@@ -54,6 +71,15 @@ export class SignUpMunicipalityComponent {
   landscapeUrl: string | null = null;
   files: any[] = [];
   
+
+  /**
+  * @constructor
+  * SignUpMunicipalityComponent
+  * 
+  * @param municipalAdminAuthService 
+  * @param router
+  * @param route
+  */
   constructor(private municipalAdminAuthService: MunicipalAdminAuthService, private router: Router, private route: ActivatedRoute) { }
 
   signUpMunicipalityForm = new FormGroup({
@@ -63,14 +89,21 @@ export class SignUpMunicipalityComponent {
   });
 
 
+  /**
+   * Método onInit
+   */
   ngOnInit() {
     this.editor = new Editor();
   }
 
+  /**
+   * ngOnDestroy
+   */
   ngOnDestroy() {
     this.editor.destroy();
   }
 
+  //Getters for form controls
   get president() {
     return this.signUpMunicipalityForm.get('president');
   }
@@ -87,6 +120,11 @@ export class SignUpMunicipalityComponent {
  
 
 
+  /**
+   * Método para a mudança de imagem do emblema
+   * @param event
+   * @returns A alteração da imagem
+   */ 
   onEmblemChange(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const fileList: FileList | null = fileInput?.files;
@@ -101,6 +139,11 @@ export class SignUpMunicipalityComponent {
     }
   }
 
+  /**
+   * Método para a mudança de imagem do emblema
+   * @param event
+   * @returns A alteração da imagem
+   */
   onDropEmblem(event: DragEvent) {
     event.preventDefault();
     const files: FileList | null = event.dataTransfer?.files || null;
@@ -118,6 +161,11 @@ export class SignUpMunicipalityComponent {
     }
   }
 
+  /**
+   * Método para a mudança de imagem da paisagem
+   * @param event
+   * @returns A alteração da imagem
+   */
   onLandscapeChange(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const fileList: FileList | null = fileInput?.files;
@@ -132,6 +180,11 @@ export class SignUpMunicipalityComponent {
     }
   }
 
+  /**
+   * Método para a mudança de imagem da paisagem
+   * @param event
+   * @returns A alteração da imagem
+   */
   onDropLandscape(event: DragEvent) {
     event.preventDefault();
     const files: FileList | null = event.dataTransfer?.files || null;
@@ -151,12 +204,21 @@ export class SignUpMunicipalityComponent {
 
   
 
+  /**
+   * Método para validar se o ficheiro é uma imagem
+   * @param file
+   * @returns A validade do ficheiro
+   */
   isValidImageFile(file: File): boolean {
     // Adicione aqui a lógica para validar se o arquivo é uma imagem
     // Por exemplo, verificando a extensão do arquivo ou seu tipo MIME
     return file.type.startsWith('image/');
   }
 
+  /**
+   * Método para prevenir o comportamento padrão do navegador
+   * @param event
+   */
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
@@ -164,6 +226,9 @@ export class SignUpMunicipalityComponent {
   
 
 
+  /**
+   * Método onSubmit
+   */
   onSubmit() {
     var municipalName = this.route.snapshot.params['municipalName'];
 

@@ -3,6 +3,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'formatNumber3By3Pipe'
 })
+/**
+ * Format Number 3 By 3 Pipe
+ *
+ * Este pipe formata um número em grupos de três dígitos separados por espaços
+ */
 export class FormatNumber3By3Pipe implements PipeTransform {
 
   transform(value: string | number): string {

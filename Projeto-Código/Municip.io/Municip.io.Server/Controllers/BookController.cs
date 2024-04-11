@@ -20,7 +20,11 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
 
-      
+      /// <summary>
+      /// Obter informações do livro através da API do Google Books
+      /// </summary>
+      /// <param name="isbn"></param>
+      /// <returns>A informação de um livro</returns>
         [HttpGet("GetBookInfoAPI")]
         public async Task<IActionResult> GetBookInfoAPI(string isbn)
         {
@@ -36,6 +40,11 @@ namespace Municip.io.Server.Controllers
             return StatusCode((int)response.StatusCode, response.ReasonPhrase);
         }
 
+        /// <summary>
+        /// Obter todos os livros de um município
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <returns>Os livros de um município</returns>
         [HttpGet("GetBooks")]
         public IActionResult GetBooks(string municipality)
         {
@@ -55,6 +64,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
+        /// <summary>
+        /// Criar um novo livro
+        /// </summary>
+        /// <param name="newBook"></param>
+        /// <returns>A mensagem de resultado</returns>
         [HttpPost("CreateBook")]
         public IActionResult CreateBook(Book newBook)
         {
@@ -96,9 +110,11 @@ namespace Municip.io.Server.Controllers
             }
         }
 
-        /**
-         * Retorna um livro pelo seu ID
-         */
+        /// <summary>
+        /// Obter um livro por ID
+        /// </summary>
+        /// <param name="bookId"></param>
+        /// <returns>O livro</returns>
         [HttpGet("GetBookById")]
         public IActionResult GetBookById(int bookId)
         {
@@ -110,6 +126,11 @@ namespace Municip.io.Server.Controllers
             return Ok(book);
         }
 
+        /// <summary>
+        /// Atualizar um livro
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns>A atualização de um livro</returns>
         [HttpPut("UpdateBook")]
         public IActionResult UpdateBook(Book book)
         {
@@ -161,6 +182,11 @@ namespace Municip.io.Server.Controllers
             }
         }
 
+        /// <summary>
+        /// Apagar um livro por ID
+        /// </summary>
+        /// <param name="bookId"></param>
+        /// <returns>A mensagem de resultado</returns>
         [HttpDelete("DeleteBookById")]
         public async Task<IActionResult> DeleteBookById(int bookId)
         {
@@ -190,7 +216,12 @@ namespace Municip.io.Server.Controllers
 
 
 
-        //create a new book request
+        /// <summary>
+        /// Cria um pedido de requisição de livro
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="request"></param>
+        /// <returns>A mensagem do resultado</returns>
         [HttpPost("CreateRequest")]
         public async Task<IActionResult> CreateRequestAsync(string email, BookRequest request)
         {
@@ -248,6 +279,12 @@ namespace Municip.io.Server.Controllers
 
 
 
+        /// <summary>
+        /// Aceita o pedido de empréstimo
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <param name="returnDate"></param>
+        /// <returns>A mensagem de resultado</returns>
         [HttpPost("BorrowBook")]
         public async Task<IActionResult> BorrowBookAsync(int requestId, [FromBody] DateTime returnDate)
         {
@@ -281,9 +318,10 @@ namespace Municip.io.Server.Controllers
 
 
 
-        /**
-         * Retorna todos os pedidos de empréstimo
-         */
+       /// <summary>
+       /// Obtém todos os pedidos de requisição de livro
+       /// </summary>
+       /// <returns>Os pedidos realizados</returns>
         [HttpGet("GetRequests")]
         public IActionResult GetRequest()
         {
@@ -292,7 +330,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        //get requests by municipality
+        /// <summary>
+        /// Obtém todos os pedidos de requisição de livro de um município
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <returns>Os pedidos de livros de um município</returns>
         [HttpGet("GetRequestsByMunicipality")]
         public IActionResult GetRequestsByMunicipality(string municipality)
         {
@@ -300,7 +342,12 @@ namespace Municip.io.Server.Controllers
             return Ok(bookRequests);
         }
 
-        //get Requests by citizen
+        
+        /// <summary>
+        /// Obtém todos os pedidos de requisição de livro de um cidadão
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Os pedidos de um cidadão</returns>
         [HttpGet("GetRequestsByCitizen")]
         public IActionResult GetRequestsByCitizen(string email)
         {
@@ -308,9 +355,11 @@ namespace Municip.io.Server.Controllers
             return Ok(bookRequests);
         }
 
-        /**
-         * Retorna todas as categorias de um livro de um município
-         */
+        /// <summary>
+        /// Obtém todos as diferentes categorias de livros de um município
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <returns>As categorias de livros de um município</returns>
         [HttpGet("GetDistinctCategoriesByMunicipality")]
         public IActionResult GetDistinctCategoriesByMunicipality(string municipality)
         {
@@ -332,9 +381,12 @@ namespace Municip.io.Server.Controllers
 
 
 
-        /**
-         * Não aceita o pedido de empréstimo
-         */
+        
+        /// <summary>
+        /// Recusa o pedido de empréstimo
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <returns>A mensagem de resultado</returns>
         [HttpPost("DenyRequest")]
         public async Task<IActionResult> DenyRequestAsync(int requestId)
         {
@@ -358,9 +410,12 @@ namespace Municip.io.Server.Controllers
             return Ok();
         }
 
-        /**
-         * Completa a entrega do livro
-         */
+        
+        /// <summary>
+        /// Completa o pedido de empréstimo
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <returns>A mensagem de resultado</returns>
         [HttpPost("DeliverBook")]
         public async Task<IActionResult> DeliverBookAsync(int requestId)
         {
@@ -384,6 +439,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
+        /// <summary>
+        /// Apaga um pedido de requisição de livro
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <returns>A mensagem de resultado</returns>
         [HttpDelete("DeleteRequest")]
         public async Task<IActionResult> DeleteRequestAsync(int requestId)
         {
@@ -407,6 +467,11 @@ namespace Municip.io.Server.Controllers
         }
 
 
+        /// <summary>
+        /// Cologa a entrega em atraso
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <returns>A mensagem de resposta</returns>
         [HttpPost("DelayRequest")]
         public async Task<IActionResult> DelayRequestAsync(int requestId)
         {
@@ -423,7 +488,16 @@ namespace Municip.io.Server.Controllers
 
 
 
-        //send email notification that the book is delayed
+        /// <summary>
+        /// Envia email de atraso do livro
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <param name="bookImage"></param>
+        /// <param name="bookName"></param>
+        /// <param name="bookAuthor"></param>
+        /// <param name="returnDate"></param>
+        /// <returns></returns>
         [HttpPost("SendDelayedEmail")]
         public IActionResult SendDelayedEmail(string email, string name, string bookImage, string bookName, string bookAuthor, string returnDate)
         {
