@@ -12,6 +12,30 @@ import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
   styleUrl: './book-page.component.css',
   providers: [provideNativeDateAdapter()],
 })
+/**
+ * BookPageComponent
+ *
+ * Este componente é utilizado para a página de livro.
+ *
+ * @param book: Book - O livro.
+ * @param user: any - O utilizador.
+ * @param isMunAdmin: boolean - Se é administrador municipal.
+ * @param bookRequest: BookRequest - O pedido do livro.
+ * @param municipality: Municipality - O município.
+ * @param isDialogOpen: boolean - Se o diálogo está aberto.
+ * @param isRemoveBookDialogOpen: boolean - Se o diálogo de remoção do livro está aberto.
+ * @param dialogTitle: string - O título do diálogo.
+ * @param dialogMessage: string - A mensagem do diálogo.
+ * @param isConfirmDialog: boolean - Se é um diálogo de confirmação.
+ * @param isReserveSuccesfull: boolean - Se a reserva foi bem sucedida.
+ * @param citizenEmail: string - O email do cidadão.
+ * @param isDialogOpenBorrow: boolean - Se o diálogo de empréstimo está aberto.
+ * @param borrowForm: FormGroup - O formulário de empréstimo.
+ * @param minDate: Date - A data mínima.
+ * @param citizenEmailControl: FormControl - O controlo do email do cidadão.
+ * @param returnDateControl: FormControl - O controlo da data de retorno.
+ * 
+ */
 export class BookPageComponent {
 
 
@@ -85,6 +109,7 @@ export class BookPageComponent {
 
   minDate = new Date();
 
+
   get citizenEmailControl() {
     return this.borrowForm.get('citizenEmail') as FormControl;
   }
@@ -96,6 +121,17 @@ export class BookPageComponent {
 
 
 
+  /**
+   * @constructor
+   *
+   * BookPageComponent
+   * 
+   * @param userAuthService
+   * @param activatedRoute
+   * @param router
+   * @param libraryService
+   * @param dateAdapter
+   */
   constructor(private userAuthService: UserAuthService, private activatedRoute: ActivatedRoute, private router: Router,
     private libraryService: LibraryService, private dateAdapter: DateAdapter<Date>) {
 
@@ -106,6 +142,11 @@ export class BookPageComponent {
 
 
 
+  /**
+   * ngOnInit
+   *
+   * Método que é chamado quando o componente é inicializado.
+   */
   ngOnInit(): void {
     this.book = this.activatedRoute.snapshot.data['book'];
 
@@ -185,6 +226,10 @@ export class BookPageComponent {
     );
   }
 
+  /**
+   *
+   * Este Método verifica se a reserva está Expirada
+   */
   isReservationExpired() {
     if (new Date().getTime() > new Date(this.bookRequest!.reservationLimitDate!).getTime()) {
       this.libraryService.deleteRequest(this.bookRequest!.id).subscribe(
@@ -199,6 +244,10 @@ export class BookPageComponent {
     }
   }
 
+  /**
+  *
+  * Este Método verifica se a reserva está Atrasada
+  */
   isRequestDelayed() {
     //check if the return date is expired
     if (new Date().getTime() > new Date(this.bookRequest!.returnDate!).getTime()) {
@@ -215,6 +264,10 @@ export class BookPageComponent {
 
   }
 
+  /**
+  *
+  * Este Método atualiza um Pedido
+  */
   updateRequest() {
 
     this.libraryService.getBookById(this.book.id!).subscribe(
@@ -250,6 +303,13 @@ export class BookPageComponent {
 
 
 
+  /**
+   * canBeReserved
+   *
+   * Método que verifica se o livro pode ser emprestado.
+   *
+   * @returns boolean
+   */
   canBeReserved() {
     if (this.isMunAdmin) return false;
 
@@ -259,6 +319,11 @@ export class BookPageComponent {
     return true;
   }
 
+  /**
+   *
+   * Metodo para realizar a reserva de um livro
+   *
+   */
   reserveBook() {
 
     let reservedDate = new Date();
@@ -290,6 +355,10 @@ export class BookPageComponent {
     }
   }
 
+  /**
+   *
+   * Método para cancelar a reserva de um livro
+   */
   cancelBookReserve() {
     this.libraryService.deleteRequest(this.bookRequest!.id).subscribe(
       (data) => {
@@ -302,23 +371,34 @@ export class BookPageComponent {
     );
   }
 
+  /**
+   * Método para ir para a pagina de edição de um livro
+   */
   goToEditBookPage() {
     this.router.navigateByUrl(`library/edit/${this.book.id}`);
   }
 
+  /**
+   * Método fechar o dialogo de remoção
+   */
   openRemoveBookDialog() {
     this.isRemoveBookDialogOpen = true;
     this.dialogTitle = 'Deseja apagar o livro ' + this.book.title + '?';
     this.dialogMessage = 'Confirme a sua ação';
   }
 
+  /**
+   *
+   * Método para remover um livro
+   * 
+   */
   removeBook() {
     this.closeRemoveBookDialog();
 
     this.libraryService.removeBook(this.book.id!).subscribe(
       response => {
         if (response && response.body) {
-          this.router.navigateByUrl(`/library/create`);
+          
         } else {
           console.error('Resposta inválida do servidor após a remoção do livro:', response);
 
@@ -339,26 +419,43 @@ export class BookPageComponent {
     );
   }
 
-
-
-
-
+  /**
+   *
+   * Método para fechar o dialogo de remoção
+   */ 
   closeRemoveBookDialog() {
     this.isRemoveBookDialogOpen = false;
+    this.router.navigateByUrl(`/library/librarylist`);
   }
-
+  /**
+   *
+   * Método para fechar o dialogo
+   */
   closeDialog() {
     this.isDialogOpen = false;
     this.updateRequest();
+    
   }
 
 
-
-
+  /**
+   *
+   * Método para retornar o BookRequestStatus
+   *
+   * @returns BookRequestStatus - O status do request
+   */
   BookRequestStatus() {
     return BookRequestStatus;
   }
 
+
+  /**
+   *
+   * Método para calcular o tempo restante na reserva
+   * 
+   * @param date - A data de inicio de reserva
+   * @returns O tempo restante para a reserva
+   */
   getTimeLeft(date: Date): string {
     //it will receive the date limit, and will return the time left in hours and minutes
     let dateReceived = new Date(date);
@@ -394,11 +491,18 @@ export class BookPageComponent {
   }
 
 
+  /**
+   * Método para retornar o status do pedido
+   * @param status
+   * @returns
+   */
   getStatusString(status: BookRequestStatus): string {
     return this.libraryService.bookRequestStatusToString(status)
   }
 
-
+ /**
+  * Método para criar um BookRequest
+  */
   borrowBook() {
     let bookRequest: BookRequest = {
       id: 0,
@@ -457,6 +561,9 @@ export class BookPageComponent {
     );
   }
 
+  /**
+   * Diálogo de sucesso
+   */
   successFullDialog() {
     this.dialogTitle = 'Operação realizada com sucesso';
     this.dialogMessage = 'Ação bem sucedida';
@@ -464,10 +571,16 @@ export class BookPageComponent {
     this.isDialogOpen = true;
   }
 
+  /**
+   * Dialogo de emprestar (abrir) 
+   */
   openDialogBorrow() {
     this.isDialogOpenBorrow = true;
   }
 
+  /**
+   * Dialogo de emprestar (fechar) 
+   */
   closeDialogBorrow() {
     this.isDialogOpenBorrow = false;
   }

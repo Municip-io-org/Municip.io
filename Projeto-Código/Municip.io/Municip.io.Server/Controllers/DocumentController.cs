@@ -170,7 +170,10 @@ namespace Municip.io.Server.Controllers
             return Json(municipalRequests);
         }
 
-        //get requests from a citizen
+        /// <summary>
+        /// Obtem os pedidos de um cidadão
+        /// <param name="email"></param>"
+        /// <returns>O json dos requests do cidadão</returns>
         [HttpGet("GetRequestsFromCitizen")]
         public IActionResult GetRequestsFromCitizen(string email)
         {

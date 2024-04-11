@@ -7,8 +7,30 @@ import { GoogleMap } from '@angular/google-maps';
   templateUrl: './library-map.component.html',
   styleUrl: './library-map.component.css'
 })
+/**
+ * Library Map Component
+ *
+ * Este componente representa o mapa da biblioteca
+ *
+ * @param Address - Endereço
+ * @param showMap - Mostrar mapa
+ * @param zoom - Zoom
+ * @param center - Centro
+ * @param options - Opções
+ * @param infoWindow - Janela de informações
+ * @param markers - Marcadores
+ *
+ * @input Address - Endereço
+ */
 export class LibraryMapComponent {
 
+  /**
+   * @constructor
+   * LibraryMapComponent
+   *
+   * @param boundsService - Serviço de limites
+   * @param cdr - ChangeDetectorRef
+   */
   constructor(private boundsService: BoundsService, private cdr: ChangeDetectorRef) { }
 
   @ViewChild(GoogleMap, { static: false }) googleMap: GoogleMap | undefined;
@@ -38,6 +60,11 @@ export class LibraryMapComponent {
 
 
 
+  /**
+   * ngOnChanges
+   *
+   * @param changes - Mudanças
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['Address'] && changes['Address'].currentValue) {
       this.setCenterAndMarkerForEventAddress(changes['Address'].currentValue);
@@ -47,6 +74,11 @@ export class LibraryMapComponent {
 
   }
 
+  /**
+   * setCenterAndMarkerForEventAddress
+   *
+   * @param eventAddress - Endereço do evento
+   */
   setCenterAndMarkerForEventAddress(eventAddress: string) {
     console.log('EventAddressnometodo' + eventAddress)
     this.boundsService.getBoundsFromAddress(eventAddress).subscribe(bounds => {

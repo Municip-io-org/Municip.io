@@ -9,6 +9,10 @@ import { Injectable } from '@angular/core';
 })
 export class MunicipalityStatusService {
 
+  /**
+   * Método construtor.
+   * @param http  O serviço HttpClient.
+   */
   constructor(private http: HttpClient) { }
 
   /**

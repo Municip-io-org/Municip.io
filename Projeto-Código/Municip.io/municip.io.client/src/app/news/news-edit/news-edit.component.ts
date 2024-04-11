@@ -10,6 +10,22 @@ import { Editor, Toolbar } from 'ngx-editor';
   templateUrl: './news-edit.component.html',
   styleUrl: './news-edit.component.css'
 })
+/**
+ * News Edit Component
+ *
+ * Este componente representa a edição de notícias
+ *
+ * @param news - Notícia
+ * @param user - Utilizador
+ * @param newUser - Novo utilizador
+ * @param errors - Erros
+ * @param image - Imagem
+ * @param subtitleCharacterCount - Contagem de caracteres do subtítulo
+ * @param mainTextCharacterCount - Contagem de caracteres do texto principal
+ * @param isDialogOpen - Diálogo aberto
+ * @param editor - Editor
+ * @param toolbar - Barra de ferramentas
+ */
 export class NewsEditComponent {
   news: any;
   user: any;
@@ -30,6 +46,16 @@ export class NewsEditComponent {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
+
+  /**
+ * @constructor
+ * NewsEditComponent
+ *
+ * @param newsService - Serviço de notícias
+ * @param activatedRoute - Rota ativada
+ * @param router - O Router
+ * @param userAuthService - Serviço de autenticação do cidadão
+ */
   constructor(private newsService: NewsService, private activatedRoute: ActivatedRoute,private router :Router, private userAuthService: UserAuthService) { }
 
   
@@ -42,6 +68,11 @@ export class NewsEditComponent {
     date: new FormControl(new Date(), [Validators.required]),
   });
 
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente
+   */
   ngOnInit() {
     this.editor = new Editor();
     this.news = this.activatedRoute.snapshot.data['news'];
@@ -52,6 +83,7 @@ export class NewsEditComponent {
     this.newsEditForm.controls['mainText'].setValue(this.news.mainText);
   }
 
+  //Getters
   get title() {
     return this.newsEditForm.get('title');
   }
@@ -68,6 +100,11 @@ export class NewsEditComponent {
     return this.newsEditForm.get('date');
   }
 
+  /**
+   * onSubmit
+   *
+   * Submete o formulário
+   */
   OnSubmit() {
     this.news.date = new Date();
     if (this.image != null)
@@ -88,11 +125,23 @@ export class NewsEditComponent {
     );
   }
 
+  /**
+   * ngOnDestroy
+   *
+   * Destroi o editor
+   */
   ngDestroy() {
     this.editor.destroy();
   }
 
 
+  /**
+   * onImagePicked
+   *
+   * Seleciona a imagem
+   *
+   * @param event - Evento
+   */
   onImagePicked(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0];
@@ -105,11 +154,23 @@ export class NewsEditComponent {
     }
   }
 
+  /**
+   * closeDialog
+   *
+   * Fecha o diálogo
+   */
   closeDialog() {
     this.isDialogOpen = false;
 
   }
 
+  /**
+   * updateCharacterCount
+   *
+   * Atualiza a contagem de caracteres
+   *
+   * @param event - Evento
+   */
   updateCharacterCount(event: any) {
     const target = event.target as HTMLInputElement;
     if (target.id === 'subtitle') {

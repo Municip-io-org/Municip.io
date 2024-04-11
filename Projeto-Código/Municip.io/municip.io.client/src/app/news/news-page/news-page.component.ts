@@ -8,6 +8,16 @@ import { Roles, UserAuthService } from '../../services/user-auth.service';
   templateUrl: './news-page.component.html',
   styleUrl: './news-page.component.css'
 })
+/**
+ * News Page Component
+ *
+ * Este componente representa a página de notícias
+ *
+ * @param news - Notícias
+ * @param role - A role do utilizador
+ * @param user - Utilizador
+ * @param newUser - Novo utilizador
+ */
 export class NewsPageComponent {
 
   news: any;
@@ -15,8 +25,21 @@ export class NewsPageComponent {
   user: any;
   newUser: any;
 
+  /**
+   * @constructor
+   * NewsPageComponent
+   *
+   * @param newsService - Serviço de notícias
+   * @param activatedRoute - A rota ativada
+   * @param userAuthService - Serviço de autenticação do cidadão
+   */
   constructor(private newsService: NewsService, private activatedRoute: ActivatedRoute, private userAuthService: UserAuthService) { }
 
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente
+   */
   ngOnInit() {
     this.news = this.activatedRoute.snapshot.data['news'];
     console.log("EVENTO SELECIONADO");

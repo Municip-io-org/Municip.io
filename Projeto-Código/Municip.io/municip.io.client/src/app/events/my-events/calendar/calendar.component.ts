@@ -13,9 +13,7 @@ import { Router } from '@angular/router';
 import { UserAuthService } from '../../../services/user-auth.service';
 
 
-/**
- * Componente responsável por exibir um calendário de eventos.
- */
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -33,6 +31,18 @@ import { UserAuthService } from '../../../services/user-auth.service';
     },
   ],
 })
+/**
+ * @class CalendarComponent
+ *
+ * Este componente é responsável por exibir um calendário de eventos.
+ *
+ * @param view - O modo de visualização do calendário.
+ * @param viewDate - A data de visualização do calendário.
+ * @param events$ - Os eventos do calendário.
+ * @param locale - O idioma do calendário.
+ * @param activeDayIsOpen - Indica se o dia ativo está aberto.
+ *
+ */
 export class CalendarComponent implements OnInit {
 
   /**

@@ -94,7 +94,7 @@
       </app-card-outline-white>
       <section class="flex flex-col space-y-6">
         <app-next-news [newsList]="newsList" [municipalityName]="municipality.name"></app-next-news>
-        <app-btn-municip-blue width="15rem"
+        <app-btn-municip-blue *ngIf="newsList.length != 0" width="15rem"
                               (buttonClick)="seeMoreNewsClick()">
           Ver mais notícias
           <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />

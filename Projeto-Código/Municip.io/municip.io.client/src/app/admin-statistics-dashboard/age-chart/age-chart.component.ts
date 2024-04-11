@@ -8,22 +8,54 @@ import Chart from 'chart.js/auto';
   templateUrl: './age-chart.component.html',
   styleUrl: './age-chart.component.css'
 })
+
+/**
+ * @class AgeChartComponent
+ *
+ * Este componente é responsável por exibir um gráfico de idades dos cidadãos.
+ * 
+ * @input citizens - A lista de cidadãos.
+ *
+ * @returns A pie chart with the age distribution of citizens.
+ *
+ **/
 export class AgeChartComponent {
   @Input() citizens: Citizen[] = [];
   chart: Chart<'pie', number[], string> | undefined;
 
   constructor() { }
 
+  
+  /**
+   * Este método é responsável por criar o gráfico.
+   * 
+   * @returns O gráfico.
+   *
+   **/
   ngOnInit() {
     this.createChart();
   }
 
+  
+  /**
+   * Este método é responsável por atualizar o gráfico.
+   * 
+   * @returns O gráfico atualizado.
+   *
+   **/
   ngOnChanges(changes: SimpleChanges) {
     if (changes['citizens'] && !changes['citizens'].firstChange) {
       this.updateChart();
     }
   }
 
+
+  /**
+   * Este método é responsável por criar o gráfico.
+   * 
+   * @returns O gráfico.
+   *
+   **/
   createChart() {
     const xValues = ["0-17", "18-29", "30-49", "50-64", "65+"];
     const yValues = [this.getAgeCount(this.arrangeAges(), "0-17"), this.getAgeCount(this.arrangeAges(), "18-29"), this.getAgeCount(this.arrangeAges(), "30-49"), this.getAgeCount(this.arrangeAges(), "50-64"), this.getAgeCount(this.arrangeAges(), "65+")];
@@ -47,6 +79,13 @@ export class AgeChartComponent {
     }
   }
 
+
+  /**
+   * Este método é responsável por atualizar o gráfico.
+   * 
+   * @returns O gráfico atualizado.
+   *
+   **/
   updateChart() {
     if (this.chart) {
       const yValues = [this.getAgeCount(this.arrangeAges(), "0-17"), this.getAgeCount(this.arrangeAges(), "18-29"), this.getAgeCount(this.arrangeAges(), "30-49"), this.getAgeCount(this.arrangeAges(), "50-64"), this.getAgeCount(this.arrangeAges(), "65+")];
@@ -55,6 +94,11 @@ export class AgeChartComponent {
     }
   }
 
+  /**
+   * Este método é responsável por organizar as idades dos cidadãos em grupos.
+   * 
+   * @returns  As idades dos cidadãos organizadas em grupos.
+   */
   arrangeAges() {
     let ages = this.citizens.map(citizen => {
       let age = new Date().getFullYear() - new Date(citizen.birthDate).getFullYear();
@@ -74,6 +118,13 @@ export class AgeChartComponent {
     return ages;
   }
 
+
+  /**
+   * Este método é responsável pela contagem das idades dos cidadãos.
+   * 
+   * @returns a contagem das idades dos cidadãos.
+   *
+   **/
   getAgeCount(ages: string[], ageGroup: string) {
     return ages.filter(age => age === ageGroup).length;
   }

@@ -1,4 +1,4 @@
-<app-header-loggedin></app-header-loggedin>
+﻿<app-header-loggedin></app-header-loggedin>
 <app-smaller-banner [title]="'Editar Livro'" [image]="municipalityImage"
                     class="font-inter" />
 
@@ -15,90 +15,102 @@
 
 
 
-<div class="flex flex-col bg-municip-blank pb-[4rem] text-municip-normal-black pt-6 px-32 space-y-20">
+<div class="pb-[4rem] text-municip-normal-black flex flex-col space-y-20 bg-municip-blank px-32 pt-6">
 
 
 
-  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="pt-[1rem] relative flex flex-col gap-y-3 pb-[5rem]">
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="pt-[1rem] pb-[5rem] relative flex flex-col gap-y-3">
 
-    <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4 ">
-      <div class="w-full lg:w-5/12 mb-4 h-32">
+    <section class="mb-4 flex flex-wrap justify-around gap-y-6 text-left">
+      <div class="mb-4 h-32 w-full lg:w-5/12">
         <app-input-title class="text-[1.8rem]">ISBN</app-input-title>
 
-        <input required type="number" id="iSBN" formControlName="iSBN" name="iSBN"
-               class="input font-poppins w-full h-12 lg:h-14 disabled:opacity-40" />
+        <div class="flex items-center">
+          <input required type="number" id="iSBN" formControlName="iSBN" name="iSBN"
+                 class="input font-poppins h-12 w-full disabled:opacity-40 lg:h-14" />
+          <app-tooltip [tooltipText]="'O ISBN deve ter 10 ou 13 números'"></app-tooltip>
+        </div>
+
       </div>
 
 
-      <div class="w-full lg:w-5/12 mb-4 h-32">
+      <div class="mb-4 h-32 w-full lg:w-5/12">
         <app-input-title class="text-[1.8rem]">Editora</app-input-title>
 
-        <input required type="text" id="publisher"
-               formControlName="publisher" name="publisher"
-               class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
+        <div class="flex items-center">
+          <input required type="text" id="publisher"
+                 formControlName="publisher" name="publisher"
+                 class="input font-poppins h-12 w-full disabled:opacity-40 lg:h-14" />
+          <app-tooltip [tooltipText]="'Introduza a editora de acordo com o livro'"></app-tooltip>
+        </div>
 
-
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="publisher?.touched && publisher?.invalid ">
+        <div class="absolute py-2 font-bold text-red-500" *ngIf="publisher?.touched && publisher?.invalid ">
           <div *ngIf="publisher?.errors?.['required'] ">Edição obrigatória</div>
         </div>
       </div>
     </section>
 
-    <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4 ">
-      <div class="w-full lg:w-5/12 mb-4 h-32">
+    <section class="mb-4 flex flex-wrap justify-around gap-y-6 text-left">
+      <div class="mb-4 h-32 w-full lg:w-5/12">
         <app-input-title class="text-[1.8rem]">Título</app-input-title>
 
-        <input required type="text" id="title" formControlName="title" name="title"
-               class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
+        <div class="flex items-center">
+          <input required type="text" id="title" formControlName="title" name="title"
+                 class="input font-poppins h-12 w-full disabled:opacity-40 lg:h-14" />
+          <app-tooltip [tooltipText]="'Introduza o título de acordo com o livro'"></app-tooltip>
+        </div>
 
-
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="title?.touched && title?.invalid">
+        <div class="absolute py-2 font-bold text-red-500" *ngIf="title?.touched && title?.invalid">
           <div *ngIf="title?.errors?.['required']">Título obrigatório</div>
         </div>
       </div>
 
 
-      <div class="w-full lg:w-5/12 mb-4 h-32">
+      <div class="mb-4 h-32 w-full lg:w-5/12">
         <app-input-title class="text-[1.8rem]">Edição</app-input-title>
 
-        <input required type="text" id="edition"
-               formControlName="edition" name="edition"
-               class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
+        <div class="flex items-center">
+          <input required type="text" id="edition"
+                 formControlName="edition" name="edition"
+                 class="input font-poppins h-12 w-full disabled:opacity-40 lg:h-14" />
+          <app-tooltip [tooltipText]="'Introduza a edição de acordo com o livro'"></app-tooltip>
+        </div>
 
-
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="edition?.touched && edition?.invalid ">
+        <div class="absolute py-2 font-bold text-red-500" *ngIf="edition?.touched && edition?.invalid ">
           <div *ngIf="edition?.errors?.['required'] ">Edição obrigatória</div>
         </div>
       </div>
     </section>
 
 
-    <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4 ">
-      <div class="w-full lg:w-5/12 mb-4">
+    <section class="mb-4 flex flex-wrap justify-around gap-y-6 text-left">
+      <div class="mb-4 w-full lg:w-5/12">
         <div class="flex flex-col">
-          <app-input-title class="text-[1.8rem] ">Autores</app-input-title>
+          <div class="flex items-center gap-2">
+            <app-input-title class="text-[1.8rem]">Autores</app-input-title>
+            <app-tooltip [tooltipText]="'Introduza os autores de acordo com o livro, apenas é permitido um autor por campo'"></app-tooltip>
+          </div>
+
 
           <div class="flex flex-wrap gap-4">
             <button type="button" (click)="addAuthor()" [disabled]="authors.disabled"
-                    class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-2 rounded-full h-min
-        transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
+                    class="text-[1rem] bg-municip-highlight-black flex h-min items-center justify-center gap-x-2 rounded-full p-2 font-normal text-municip-blank transition duration-300 hover:bg-black disabled:opacity-20 disabled:cursor-not-allowed">
               <img src="/assets/images/icons/plus-white.png" alt="Adicionar Autor" class="size-6" />
               Adicionar autor
             </button>
 
             <button type="button" (click)="removeLastAuthor()" [disabled]="authors.disabled"
-                    class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-2 rounded-full h-min
-        transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
+                    class="text-[1rem] bg-municip-highlight-black flex h-min items-center justify-center gap-x-2 rounded-full p-2 font-normal text-municip-blank transition duration-300 hover:bg-black disabled:opacity-20 disabled:cursor-not-allowed">
               <img src="/assets/images/icons/delete-white.png" alt="Remover Autor" class="size-6" />
               Remover último autor
             </button>
           </div>
         </div>
 
-        <div formArrayName="authors" *ngFor="let authorControl of authors.controls; let i = index" class="flex flex-col gap-8 relative">
+        <div formArrayName="authors" *ngFor="let authorControl of authors.controls; let i = index" class="relative flex flex-col gap-8">
           <input required type="text" [formControlName]="i"
-                 class="input font-poppins w-full h-12 lg:h-14 my-4 disabled:opacity-40" />
-          <div class="absolute -bottom-4 text-red-500 font-bold py-2" *ngIf="authors?.touched && authors?.invalid">
+                 class="input font-poppins my-4 h-12 w-full disabled:opacity-40 lg:h-14" />
+          <div class="absolute -bottom-4 py-2 font-bold text-red-500" *ngIf="authors?.touched && authors?.invalid">
             <div *ngIf="authorControl?.errors?.['required']">Autor obrigatório</div>
           </div>
         </div>
@@ -106,40 +118,41 @@
       </div>
 
 
-      <div class="w-full lg:w-5/12 mb-4 h-32">
+      <div class="mb-4 h-32 w-full lg:w-5/12">
         <app-input-title class="text-[1.8rem]">Data de publicação</app-input-title>
 
-        <app-date-picker [date]="publicationDate" name="publicationDate" class="w-full" />
+        <div class="flex items-center">
+          <app-date-picker [date]="publicationDate" name="publicationDate" class="w-full" />
+          <app-tooltip [tooltipText]="'Introduza a data de publicação de acordo com o livro, apenas é permitido um autor por campo'"></app-tooltip>
+        </div>
 
-
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="publicationDate?.touched && publicationDate?.invalid ">
+        <div class="absolute py-2 font-bold text-red-500" *ngIf="publicationDate?.touched && publicationDate?.invalid ">
           <div *ngIf="publicationDate?.errors?.['required'] ">Data de publicação obrigatória</div>
         </div>
       </div>
     </section>
 
 
-    <section class="flex flex-wrap gap-y-6 text-left justify-around mb-4">
+    <section class="mb-4 flex flex-wrap justify-around gap-y-6 text-left">
 
-      <div class="w-full lg:w-5/12 mb-4">
-        <div class="flex flex-wrap items-center gap-x-4 mb-4">
+      <div class="mb-4 w-full lg:w-5/12">
+        <div class="mb-4 flex flex-wrap items-center gap-x-4">
           <app-input-title class="text-[1.8rem]">Categorias</app-input-title>
           <button type="button" (click)="openAddGenreDialog()" [disabled]="genres.disabled"
-                  class="text-[1rem] text-municip-blank bg-municip-highlight-black flex justify-center items-center gap-x-2 p-2 rounded-full h-min
-transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:cursor-not-allowed">
+                  class="text-[1rem] bg-municip-highlight-black flex h-min items-center justify-center gap-x-2 rounded-full p-2 font-normal text-municip-blank transition duration-300 hover:bg-black disabled:opacity-20 disabled:cursor-not-allowed">
             <img src="/assets/images/icons/plus-white.png" alt="Adicionar Categoria" class="size-6" />
             Adicionar categoria
           </button>
-          <span>Selecione pelo menos uma categoria</span>
+          <app-tooltip [tooltipText]="'Introduza as categorias de acordo com o livro, selecione pelo menos uma categoria'"></app-tooltip>
         </div>
 
-        <div class="h-[17rem] overflow-y-scroll border-2 bg-municip-blank-gray transition duration-300 ease-in-out rounded-[0.375rem] border-[#bababd] px-[2rem]">
+        <div class="h-[17rem] border-2 bg-municip-blank-gray rounded-[0.375rem] border-[#bababd] px-[2rem] overflow-y-scroll transition duration-300 ease-in-out">
           <div formArrayName="genres" *ngFor="let genreControl of genres.controls; let i = index"
-               class="flex flex-col "
+               class="flex flex-col"
                [class.disabled-background]="genres.disabled">
             <hr class="border-t-[#bababd] rounded" *ngIf="i>0" />
-            <div class="flex justify-between items-center my-3">
-              <label for="categories[i]" class="text-municip-highlight-black text-[1.2rem] font-medium font-roboto transition duration-300 ease-in-out">
+            <div class="my-3 flex items-center justify-between">
+              <label for="categories[i]" class="text-municip-highlight-black text-[1.2rem] font-roboto font-medium transition duration-300 ease-in-out">
                 {{categories[i]}}
               </label>
               <input id="categories[i]" type="checkbox" [formControlName]="i"
@@ -149,9 +162,9 @@ transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:
         </div>
       </div>
 
-      <div class="flex flex-col  text-left w-full lg:w-5/12 mb-4 h-[23.5rem]">
+      <div class="h-[23.5rem] mb-4 flex w-full flex-col text-left lg:w-5/12">
         <app-input-title class="text-[1.8rem]">Capa do livro</app-input-title>
-        <div class=" h-full table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc] "
+        <div class="bg-[#F5F5F7] rounded-[0.375rem] border-2 border-[#bbbabc] table h-full w-full border-dotted"
              [class.disabled-background]="coverImageUrl?.disabled"
              (dragover)="onDragOver($event)"
              (drop)="onDrop($event)" (click)="coverImageUrl?.disabled ? null : coverImagePicker.click()">
@@ -160,10 +173,10 @@ transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:
             <div class="text-center">
               <input type="file" #coverImagePicker (change)="onCoverImagePicked($event)" accept="image/*" capture class="hidden">
 
-              <label for="file" class="flex justify-center items-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
+              <label for="file" class="flex items-center justify-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
 
               <div *ngIf="coverImageUrl?.value! !== '' " class="flex items-center justify-center pb-2">
-                <img [src]="coverImageUrl?.value!" alt="Imagem carregada" class="w-[10rem] h-[15rem] object-cover rounded">
+                <img [src]="coverImageUrl?.value!" alt="Imagem carregada" class="w-[10rem] h-[15rem] rounded object-cover">
               </div>
 
             </div>
@@ -172,28 +185,33 @@ transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:
       </div>
     </section>
 
-    <section class="flex flex-wrap gap-y-6 text-left justify-around  ">
-      <div class="w-full lg:w-5/12 mb-4 h-32">
+    <section class="flex flex-wrap justify-around gap-y-6 text-left">
+      <div class="mb-4 h-32 w-full lg:w-5/12">
         <app-input-title class="text-[1.8rem]">Idioma</app-input-title>
 
-        <input required type="text" id="language" formControlName="language" name="language"
-               class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
+        <div class="flex items-center">
+          <input required type="text" id="language" formControlName="language" name="language"
+                 class="input font-poppins h-12 w-full disabled:opacity-40 lg:h-14" />
+          <app-tooltip [tooltipText]="'Introduza o idioma de acordo com o livro'"></app-tooltip>
+        </div>
 
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="language?.touched && language?.invalid">
+        <div class="absolute py-2 font-bold text-red-500" *ngIf="language?.touched && language?.invalid">
           <div *ngIf="language?.errors?.['required']">Idioma obrigatório</div>
         </div>
       </div>
 
 
-      <div class="w-full lg:w-5/12 mb-4 h-32">
+      <div class="mb-4 h-32 w-full lg:w-5/12">
         <app-input-title class="text-[1.8rem]">Nº de exemplares</app-input-title>
 
-        <input required type="number" id="copies"
-               formControlName="copies" name="copies"
-               class="input font-poppins  w-full h-12 lg:h-14 disabled:opacity-40" />
+        <div class="flex items-center">
+          <input required type="number" id="copies"
+                 formControlName="copies" name="copies"
+                 class="input font-poppins h-12 w-full disabled:opacity-40 lg:h-14" />
+          <app-tooltip [tooltipText]="'Introduza o número de exemplares do livro que tem na biblioteca'"></app-tooltip>
+        </div>
 
-
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="copies?.touched && copies?.invalid ">
+        <div class="absolute py-2 font-bold text-red-500" *ngIf="copies?.touched && copies?.invalid ">
           <div *ngIf="copies?.errors?.['required'] ">Contacto Obrigatório</div>
           <div *ngIf="copies?.errors?.['pattern'] ">Contacto Inválido</div>
         </div>
@@ -202,27 +220,31 @@ transition duration-300 hover:bg-black font-normal disabled:opacity-20 disabled:
 
     </section>
 
-    <div class="flex flex-col text-left w-full mt-6 mb-4 relative">
-      <app-input-title class="text-[1.8rem]">Sinopse</app-input-title>
+    <div class="relative mb-4 mt-6 flex w-full flex-col text-left">
+      <div class="flex items-center gap-2">
+        <app-input-title class="text-[1.8rem]">Sinopse</app-input-title>
+        <app-tooltip [tooltipText]="'Introduza a sinopse do livro'"></app-tooltip>
+      </div>
+
+
       <div [class.disabled-background-sinopsis]="sinopsis?.disabled">
         <ngx-editor class="-z-10" [editor]="editor" formControlName="sinopsis" placeholder="Introduza a sinopse do livro">
-          <div class="bg-gray-100 border border-gray-300">
+          <div class="border border-gray-300 bg-gray-100">
             <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
           </div>
         </ngx-editor>
       </div>
-      <div class="text-red-500 font-bold py-2" *ngIf="sinopsis?.touched && sinopsis?.invalid ">
+
+
+      <div class="py-2 font-bold text-red-500" *ngIf="sinopsis?.touched && sinopsis?.invalid ">
         <div *ngIf="sinopsis?.errors?.['required'] ">Sinopse Obrigatório</div>
       </div>
     </div>
 
     <button type="submit" [disabled]="!bookForm.valid"
-            class="absolute -bottom-[0rem] right-[2rem] h-auto w-[15rem] flex justify-center
-              items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue
-              to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600
-              rounded text-lg transition duration-700 ease-in-out disabled:cursor-not-allowed">
+            class="-bottom-[0rem] right-[2rem] w-[15rem] from-municip-light-blue border-0 absolute flex h-auto items-center justify-center rounded bg-gradient-to-tl to-municip-blue py-4 text-lg text-municip-blank transition duration-700 ease-in-out hover:cursor-pointer hover:bg-indigo-600 focus:outline-none disabled:cursor-not-allowed">
       Editar Livro
-      <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+      <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
     </button>
   </form>
 

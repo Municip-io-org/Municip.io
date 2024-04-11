@@ -2,7 +2,7 @@
   "id": "8b864d39-9231-4e16-8a7c-fecaeef7ee09",
   "version": "2.0",
   "name": "Municip.io Test",
-  "url": "https://municip.io:4200/library/requests",
+  "url": "https://municip.io:4200/library/create",
   "tests": [{
     "id": "13345bfd-82bd-45c0-852b-404ee0d246ae",
     "name": "Create municipality",
@@ -3468,6 +3468,906 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "ce7d498b-ec9f-4b1e-85e3-e6a4079a424b",
+    "name": "RQ3 - Pesquisa e Filtragem de livros",
+    "commands": [{
+      "id": "c9c2a18c-89e3-4eeb-851d-02ae33474919",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/library/librarylist",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8655313f-2d99-4069-a216-e4fc7870ea78",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2814a1ba-4880-4a2e-9dd8-66831f523bc7",
+      "comment": "",
+      "command": "click",
+      "target": "id=nameSearch",
+      "targets": [
+        ["id=nameSearch", "id"],
+        ["css=#nameSearch", "css:finder"],
+        ["xpath=//input[@id='nameSearch']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5b8c6e99-8890-4b80-95ac-00f762bc9f95",
+      "comment": "",
+      "command": "type",
+      "target": "id=nameSearch",
+      "targets": [
+        ["id=nameSearch", "id"],
+        ["css=#nameSearch", "css:finder"],
+        ["xpath=//input[@id='nameSearch']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "a"
+    }, {
+      "id": "ffe122fd-7a11-418e-aa9d-535569952176",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-municip-blank",
+      "targets": [
+        ["css=.bg-municip-blank", "css:finder"],
+        ["xpath=//app-library-list/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5b93cbef-bf2a-46dc-ae7a-36e4e833bb81",
+      "comment": "",
+      "command": "click",
+      "target": "id=nameSearch",
+      "targets": [
+        ["id=nameSearch", "id"],
+        ["css=#nameSearch", "css:finder"],
+        ["xpath=//input[@id='nameSearch']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "81390f2f-549d-4dab-a013-3612292bf1f9",
+      "comment": "",
+      "command": "type",
+      "target": "id=nameSearch",
+      "targets": [
+        ["id=nameSearch", "id"],
+        ["css=#nameSearch", "css:finder"],
+        ["xpath=//input[@id='nameSearch']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ad8a2020-d63e-4a46-a09f-d90d8c2d7554",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-municip-blank",
+      "targets": [
+        ["css=.bg-municip-blank", "css:finder"],
+        ["xpath=//app-library-list/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8062b079-db0f-46cb-99eb-127899603af5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.h-\\[2\\.5rem\\]",
+      "targets": [
+        ["css=.h-\\[2\\.5rem\\]", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//app-library-list/div/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Filtros')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3643d520-41cf-4c2c-a7f7-a83ee6d42288",
+      "comment": "",
+      "command": "click",
+      "target": "id=isbnSearch",
+      "targets": [
+        ["id=isbnSearch", "id"],
+        ["css=#isbnSearch", "css:finder"],
+        ["xpath=//input[@id='isbnSearch']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "12a75030-a621-4656-aeb1-9c35a75fe3d1",
+      "comment": "",
+      "command": "type",
+      "target": "id=isbnSearch",
+      "targets": [
+        ["id=isbnSearch", "id"],
+        ["css=#isbnSearch", "css:finder"],
+        ["xpath=//input[@id='isbnSearch']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "75beeaaa-b080-409c-bc22-b580e9d0c149",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col:nth-child(1)",
+      "targets": [
+        ["css=.col:nth-child(1)", "css:finder"],
+        ["xpath=//div[2]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9773f12a-e992-4b59-a46b-b4d685aee580",
+      "comment": "",
+      "command": "click",
+      "target": "id=isbnSearch",
+      "targets": [
+        ["id=isbnSearch", "id"],
+        ["css=#isbnSearch", "css:finder"],
+        ["xpath=//input[@id='isbnSearch']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "720d1806-a1fd-4e74-b077-64d663a55f4b",
+      "comment": "",
+      "command": "type",
+      "target": "id=isbnSearch",
+      "targets": [
+        ["id=isbnSearch", "id"],
+        ["css=#isbnSearch", "css:finder"],
+        ["xpath=//input[@id='isbnSearch']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0de8ae2e-0258-436d-a72b-6f2c153fcd28",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col:nth-child(1)",
+      "targets": [
+        ["css=.col:nth-child(1)", "css:finder"],
+        ["xpath=//div[2]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e83c9103-7683-41dc-b044-2539a229203a",
+      "comment": "",
+      "command": "click",
+      "target": "id=authorSearch",
+      "targets": [
+        ["id=authorSearch", "id"],
+        ["css=#authorSearch", "css:finder"],
+        ["xpath=//input[@id='authorSearch']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1925bf11-e1f0-4c55-9113-f105901af2a1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.border-solid",
+      "targets": [
+        ["css=.border-solid", "css:finder"],
+        ["xpath=//div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "898074bc-3ff6-44c1-ac4b-eecb3093fedf",
+      "comment": "",
+      "command": "click",
+      "target": "id=dateSearch",
+      "targets": [
+        ["id=dateSearch", "id"],
+        ["css=#dateSearch", "css:finder"],
+        ["xpath=//select[@id='dateSearch']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3d14d6ba-9b1e-4085-b9ae-7a649be79a3e",
+      "comment": "",
+      "command": "select",
+      "target": "id=dateSearch",
+      "targets": [],
+      "value": "label=2005"
+    }, {
+      "id": "0a7da000-5ba3-4f13-be80-d5706fb25244",
+      "comment": "",
+      "command": "click",
+      "target": "id=dateSearch",
+      "targets": [
+        ["id=dateSearch", "id"],
+        ["css=#dateSearch", "css:finder"],
+        ["xpath=//select[@id='dateSearch']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a230a028-3a51-477f-b97e-60e275c2ba40",
+      "comment": "",
+      "command": "select",
+      "target": "id=dateSearch",
+      "targets": [],
+      "value": "label=Procurar por Data"
+    }, {
+      "id": "034f785a-530c-489c-8246-5235c1a42398",
+      "comment": "",
+      "command": "click",
+      "target": "id=genreSearch",
+      "targets": [
+        ["id=genreSearch", "id"],
+        ["css=#genreSearch", "css:finder"],
+        ["xpath=//select[@id='genreSearch']", "xpath:attributes"],
+        ["xpath=//div[2]/div/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "38e11605-28dd-480c-88ba-813829325228",
+      "comment": "",
+      "command": "select",
+      "target": "id=genreSearch",
+      "targets": [],
+      "value": "label=Business & Economics"
+    }, {
+      "id": "8b712264-db89-49dd-9d2a-f17492502d42",
+      "comment": "",
+      "command": "click",
+      "target": "id=genreSearch",
+      "targets": [
+        ["id=genreSearch", "id"],
+        ["css=#genreSearch", "css:finder"],
+        ["xpath=//select[@id='genreSearch']", "xpath:attributes"],
+        ["xpath=//div[2]/div/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "60ed4cd3-d13d-46ad-8ac2-7b7fc0df6911",
+      "comment": "",
+      "command": "select",
+      "target": "id=genreSearch",
+      "targets": [],
+      "value": "label=Procurar por Género"
+    }, {
+      "id": "d3fa5079-1f50-40b8-b234-f04197da292c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.h-\\[2\\.5rem\\]",
+      "targets": [
+        ["css=.h-\\[2\\.5rem\\]", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//app-library-list/div/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Filtros')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "12d86edd-9b2c-4a1c-8334-f9787e2287d6",
+    "name": "RQ4 - Consultar Estatísticas",
+    "commands": [{
+      "id": "98468d8f-f1cd-4820-9e9c-69503d958559",
+      "comment": "Deve ser usado a conta de administrador de plataforma",
+      "command": "open",
+      "target": "https://municip.io:4200/signUp-SelectAccountType",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "02d1f903-fb4e-4812-a79d-a83fa1781f5d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cad371c2-4606-46c4-9b5c-2eef86b5d3e9",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Faça login",
+      "targets": [
+        ["linkText=Faça login", "linkText"],
+        ["css=.cursor-pointer", "css:finder"],
+        ["xpath=//a[contains(text(),'Faça login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Faça login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "eef2081f-493f-4ec4-8a4c-b95041c6c1d0",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5988ec64-c7b1-4652-bfb2-0a26a8530940",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "admin@ips.pt"
+    }, {
+      "id": "a5bfe1d2-48b1-453a-bc22-cb6c424bcbc9",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a6d52aa7-aeea-4d28-bd73-4aa213ecaee4",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Password-123"
+    }, {
+      "id": "fd6c9c9b-cd9f-4ff4-b633-ac3ae36159e3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.h-auto",
+      "targets": [
+        ["css=.h-auto", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Entrar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "602dd978-50a3-4958-9abf-be02e228c05c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Estatísticas Gerais",
+      "targets": [
+        ["linkText=Estatísticas Gerais", "linkText"],
+        ["css=.decoration-sky-500:nth-child(2) > .group", "css:finder"],
+        ["xpath=//a[contains(text(),'Estatísticas Gerais')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/adminstatistics')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Estatísticas Gerais')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "414bb53b-48d8-4d83-9ef8-ede4d67e8643",
+    "name": "RQ72 - Preenchimento automático do formulário do livro",
+    "commands": [{
+      "id": "c66eba8c-b0db-4afe-a23f-e9386aedec7b",
+      "comment": "",
+      "command": "open",
+      "target": "https://municip.io:4200/library/create",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bb611190-0c1b-4a3e-b0f2-e4f2d35bf1c1",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2bb89571-a407-4ac9-9925-23f2c5d46eba",
+      "comment": "",
+      "command": "click",
+      "target": "id=iSBN",
+      "targets": [
+        ["id=iSBN", "id"],
+        ["name=iSBN", "name"],
+        ["css=#iSBN", "css:finder"],
+        ["xpath=//input[@id='iSBN']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "39238cbd-db4a-4458-8bdc-ba2b1792e923",
+      "comment": "",
+      "command": "type",
+      "target": "id=iSBN",
+      "targets": [
+        ["id=iSBN", "id"],
+        ["name=iSBN", "name"],
+        ["css=#iSBN", "css:finder"],
+        ["xpath=//input[@id='iSBN']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "97"
+    }, {
+      "id": "8508690e-b3d0-45e2-8379-3a45266e6af2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mb-4:nth-child(2) > .mb-4:nth-child(1)",
+      "targets": [
+        ["css=.mb-4:nth-child(2) > .mb-4:nth-child(1)", "css:finder"],
+        ["xpath=//section[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "54c6d56b-10ea-4f29-9e48-a4165a244163",
+      "comment": "",
+      "command": "click",
+      "target": "id=iSBN",
+      "targets": [
+        ["id=iSBN", "id"],
+        ["name=iSBN", "name"],
+        ["css=#iSBN", "css:finder"],
+        ["xpath=//input[@id='iSBN']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1d3500e6-2c08-4f7d-92d0-976feb82e129",
+      "comment": "",
+      "command": "type",
+      "target": "id=iSBN",
+      "targets": [
+        ["id=iSBN", "id"],
+        ["name=iSBN", "name"],
+        ["css=#iSBN", "css:finder"],
+        ["xpath=//input[@id='iSBN']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "978055380457"
+    }, {
+      "id": "1517cc8d-e5be-4d8d-b138-4ea8cf8f957a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mb-4:nth-child(2) > .mb-4:nth-child(1) .font-roboto",
+      "targets": [
+        ["css=.mb-4:nth-child(2) > .mb-4:nth-child(1) .font-roboto", "css:finder"],
+        ["xpath=//section[2]/div/app-input-title/h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Título')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "186e7b6a-677b-4e5d-8d2e-9354b2d80def",
+      "comment": "",
+      "command": "click",
+      "target": "id=iSBN",
+      "targets": [
+        ["id=iSBN", "id"],
+        ["name=iSBN", "name"],
+        ["css=#iSBN", "css:finder"],
+        ["xpath=//input[@id='iSBN']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "212c6783-ed16-4d9b-9409-208b81b1c426",
+      "comment": "",
+      "command": "type",
+      "target": "id=iSBN",
+      "targets": [
+        ["id=iSBN", "id"],
+        ["name=iSBN", "name"],
+        ["css=#iSBN", "css:finder"],
+        ["xpath=//input[@id='iSBN']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "9780553804577"
+    }, {
+      "id": "d6a3094b-03c2-4f76-aa41-6baed3ec70ec",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.mb-4:nth-child(2) > .mb-4:nth-child(1) .font-roboto",
+      "targets": [
+        ["css=.mb-4:nth-child(2) > .mb-4:nth-child(1) .font-roboto", "css:finder"],
+        ["xpath=//section[2]/div/app-input-title/h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Título')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6d076263-6492-48d3-bbc1-df4d3fc2ec5b",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=app-spinner",
+      "targets": [
+        ["css=app-spinner", "css:finder"],
+        ["xpath=//app-spinner", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8c3ee79c-3b93-4a21-9af4-44856b4f2c98",
+      "comment": "",
+      "command": "click",
+      "target": "css=body:nth-child(1) > div",
+      "targets": [
+        ["css=body:nth-child(1) > div", "css:finder"],
+        ["xpath=//app-root/body/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "c66c1d6b-0e44-4d88-9cfd-47a2d847437a",
+    "name": "RQ33 - Criar livro sem usar API de livros",
+    "commands": [{
+      "id": "c43a9aff-024b-4988-8be2-80d496707a7f",
+      "comment": "Não usar API de livros basta criar um livro sem um ISBN ou usar um ISBN que a API não tenha",
+      "command": "open",
+      "target": "https://municip.io:4200/library/create",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "29f1af85-e08b-4a55-897b-01ba0db84b2d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f9e0dc8f-5bfa-4208-bb19-f3c03a310e99",
+      "comment": "",
+      "command": "click",
+      "target": "id=useISBN",
+      "targets": [
+        ["id=useISBN", "id"],
+        ["css=#useISBN", "css:finder"],
+        ["xpath=//input[@id='useISBN']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f1f08e91-7444-4009-a025-88397de840c8",
+      "comment": "",
+      "command": "click",
+      "target": "id=title",
+      "targets": [
+        ["id=title", "id"],
+        ["name=title", "name"],
+        ["css=#title", "css:finder"],
+        ["xpath=//input[@id='title']", "xpath:attributes"],
+        ["xpath=//section[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "14862e2e-d1f0-4429-9725-7b0f764302ed",
+      "comment": "",
+      "command": "type",
+      "target": "id=title",
+      "targets": [
+        ["id=title", "id"],
+        ["name=title", "name"],
+        ["css=#title", "css:finder"],
+        ["xpath=//input[@id='title']", "xpath:attributes"],
+        ["xpath=//section[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "Novo Título"
+    }, {
+      "id": "828f563e-c250-46ca-a643-c8430e4119b7",
+      "comment": "",
+      "command": "click",
+      "target": "id=publisher",
+      "targets": [
+        ["id=publisher", "id"],
+        ["name=publisher", "name"],
+        ["css=#publisher", "css:finder"],
+        ["xpath=//input[@id='publisher']", "xpath:attributes"],
+        ["xpath=//section/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3568f9e9-c0a1-473b-869a-acfdc9b261be",
+      "comment": "",
+      "command": "type",
+      "target": "id=publisher",
+      "targets": [
+        ["id=publisher", "id"],
+        ["name=publisher", "name"],
+        ["css=#publisher", "css:finder"],
+        ["xpath=//input[@id='publisher']", "xpath:attributes"],
+        ["xpath=//section/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "Editora"
+    }, {
+      "id": "bff57a16-ff2e-43f0-8c4e-ed5acd893aec",
+      "comment": "",
+      "command": "click",
+      "target": "id=edition",
+      "targets": [
+        ["id=edition", "id"],
+        ["name=edition", "name"],
+        ["css=#edition", "css:finder"],
+        ["xpath=//input[@id='edition']", "xpath:attributes"],
+        ["xpath=//section[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d4e11ecd-03ab-4c97-adb7-8d700951c730",
+      "comment": "",
+      "command": "type",
+      "target": "id=edition",
+      "targets": [
+        ["id=edition", "id"],
+        ["name=edition", "name"],
+        ["css=#edition", "css:finder"],
+        ["xpath=//input[@id='edition']", "xpath:attributes"],
+        ["xpath=//section[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "Edição"
+    }, {
+      "id": "9eeadaf5-fef6-481b-806d-033c16da525b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mb-4:nth-child(3)",
+      "targets": [
+        ["css=.mb-4:nth-child(3)", "css:finder"],
+        ["xpath=//section[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5e313c8f-6f99-4e77-a836-7badcf29aff8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.my-4",
+      "targets": [
+        ["css=.my-4", "css:finder"],
+        ["xpath=(//input[@type='text'])[5]", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "640af356-5057-47d6-82b5-0643d72b2d4f",
+      "comment": "",
+      "command": "type",
+      "target": "css=.my-4",
+      "targets": [
+        ["css=.my-4", "css:finder"],
+        ["xpath=(//input[@type='text'])[5]", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Primeiro Autor"
+    }, {
+      "id": "df4b54c2-a8bc-4912-b7cc-74cd97b8c9b2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-\\[1rem\\]:nth-child(1)",
+      "targets": [
+        ["css=.text-\\[1rem\\]:nth-child(1)", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Adicionar autor')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cf7bae1d-c7a2-47b2-88e2-c4246fe3efa5",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.text-\\[1rem\\]:nth-child(1)",
+      "targets": [
+        ["css=.text-\\[1rem\\]:nth-child(1)", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Adicionar autor')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "056de037-85d4-4b5a-be7e-87d5e41c6976",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.text-\\[1rem\\]:nth-child(1)",
+      "targets": [
+        ["css=.text-\\[1rem\\]:nth-child(1)", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Adicionar autor')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3ef5e88c-01d2-49f0-9d56-4126c67d05f0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ng-star-inserted > .input",
+      "targets": [
+        ["css=.ng-star-inserted > .input", "css:finder"],
+        ["xpath=(//input[@type='text'])[6]", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9df33698-a758-4c4b-9066-5cb5eeefb94a",
+      "comment": "",
+      "command": "type",
+      "target": "css=.ng-star-inserted > .input",
+      "targets": [
+        ["css=.ng-star-inserted > .input", "css:finder"],
+        ["xpath=(//input[@type='text'])[6]", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "Segundo Autor"
+    }, {
+      "id": "de6f6bde-9d33-4474-a789-cae583ddec49",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mb-4:nth-child(4)",
+      "targets": [
+        ["css=.mb-4:nth-child(4)", "css:finder"],
+        ["xpath=//section[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8d9e1901-bb3e-4795-a024-4d5a185c5070",
+      "comment": "",
+      "command": "click",
+      "target": "id=categories[i]",
+      "targets": [
+        ["id=categories[i]", "id"],
+        ["css=.my-3:nth-child(1) > #categories\\[i\\]", "css:finder"],
+        ["xpath=//input[@id='categories[i]']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f8b05a07-639b-4be9-87eb-49c7e9479b8e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.p-5",
+      "targets": [
+        ["css=.p-5", "css:finder"],
+        ["xpath=//div[2]/div/div/div/label", "xpath:position"],
+        ["xpath=//label[contains(.,'Seleciona uma imagem ou arrasta-a para aqui!')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9b1fffc5-558e-471f-ab91-9d6fa144da34",
+      "comment": "Alterar caminho do ficheiro",
+      "command": "type",
+      "target": "css=.hidden:nth-child(1)",
+      "targets": [
+        ["css=.hidden:nth-child(1)", "css:finder"],
+        ["xpath=//input[@type='file']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\andre\\Downloads\\Screenshot_3.png"
+    }, {
+      "id": "aced91cf-3f61-431d-ba55-2f4dc3cc21e5",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.flex:nth-child(2) > .my-3 > #categories\\[i\\]",
+      "targets": [
+        ["css=.flex:nth-child(2) > .my-3 > #categories\\[i\\]", "css:finder"],
+        ["xpath=(//input[@id='categories[i]'])[2]", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "41e98165-3ce0-4a56-814e-c69236a6ee5d",
+      "comment": "",
+      "command": "click",
+      "target": "id=language",
+      "targets": [
+        ["id=language", "id"],
+        ["name=language", "name"],
+        ["css=#language", "css:finder"],
+        ["xpath=//input[@id='language']", "xpath:attributes"],
+        ["xpath=//section[5]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae654b12-d454-4ef1-ac36-6ee211e2661c",
+      "comment": "",
+      "command": "type",
+      "target": "id=language",
+      "targets": [
+        ["id=language", "id"],
+        ["name=language", "name"],
+        ["css=#language", "css:finder"],
+        ["xpath=//input[@id='language']", "xpath:attributes"],
+        ["xpath=//section[5]/div/div/input", "xpath:position"]
+      ],
+      "value": "Português"
+    }, {
+      "id": "47200790-ff70-4056-85ab-a49fec185d47",
+      "comment": "",
+      "command": "click",
+      "target": "id=copies",
+      "targets": [
+        ["id=copies", "id"],
+        ["name=copies", "name"],
+        ["css=#copies", "css:finder"],
+        ["xpath=//input[@id='copies']", "xpath:attributes"],
+        ["xpath=//section[5]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2b13fd81-5d20-4ae2-bfbc-185c8b802693",
+      "comment": "",
+      "command": "type",
+      "target": "id=copies",
+      "targets": [
+        ["id=copies", "id"],
+        ["name=copies", "name"],
+        ["css=#copies", "css:finder"],
+        ["xpath=//input[@id='copies']", "xpath:attributes"],
+        ["xpath=//section[5]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "1e9274dc-92c6-4cd5-9dc6-ec3d7a37277d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex-wrap:nth-child(5)",
+      "targets": [
+        ["css=.flex-wrap:nth-child(5)", "css:finder"],
+        ["xpath=//section[5]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "74abf49a-1f0d-4da2-87f7-50170d9f88ac",
+      "comment": "",
+      "command": "click",
+      "target": "css=.NgxEditor__Placeholder",
+      "targets": [
+        ["css=.NgxEditor__Placeholder", "css:finder"],
+        ["xpath=//div[2]/p", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "17a1ae49-3557-44a3-aa7e-33cef86042b1",
+      "comment": "",
+      "command": "editContent",
+      "target": "css=.ProseMirror",
+      "targets": [
+        ["css=.ProseMirror", "css:finder"],
+        ["xpath=//ngx-editor/div/div[2]", "xpath:position"]
+      ],
+      "value": "<p>Nova sinopse</p>"
+    }, {
+      "id": "08ffaf5b-7521-460c-a514-912de9863c18",
+      "comment": "",
+      "command": "click",
+      "target": "css=.-bottom-\\[0rem\\]",
+      "targets": [
+        ["css=.-bottom-\\[0rem\\]", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Criar Livro')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1d10f31c-fc66-4673-b3b5-97a3fd2888da",
+      "comment": "",
+      "command": "click",
+      "target": "css=.inline-flex",
+      "targets": [
+        ["css=.inline-flex", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Proceder')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cc93b846-6ed2-4609-b833-79a1eaed60da",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,82)",
+      "targets": [],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "51064974-307f-4f9a-8a52-00b506e4355c",
@@ -3477,6 +4377,6 @@
     "timeout": 300,
     "tests": ["13345bfd-82bd-45c0-852b-404ee0d246ae"]
   }],
-  "urls": ["https://municip.io:4200/", "https://municipio:4200/", "https://municipio:4200/admindashboard", "https://municipio:4200/munadmin-dashboard", "https://municip.io:4200/admindashboard", "https://municip.io:4200/userpage", "https://municip.io:4200/munadmin-dashboard", "https://municip.io:4200/transports/stops", "https://municip.io:4200/documents/my", "https://municip.io:4200/library/create", "https://municip.io:4200/library/librarylist", "https://municip.io:4200/library/requests"],
+  "urls": ["https://municip.io:4200/", "https://municipio:4200/", "https://municipio:4200/admindashboard", "https://municipio:4200/munadmin-dashboard", "https://municip.io:4200/admindashboard", "https://municip.io:4200/userpage", "https://municip.io:4200/munadmin-dashboard", "https://municip.io:4200/transports/stops", "https://municip.io:4200/documents/my", "https://municip.io:4200/library/create", "https://municip.io:4200/library/librarylist", "https://municip.io:4200/library/requests", "https://municip.io:4200/signUp-SelectAccountType"],
   "plugins": []
 }

@@ -7,9 +7,29 @@ import { BoundsService } from '../bounds.service';
   templateUrl: './municipalitymap.component.html',
   styleUrls: ['./municipalitymap.component.css']
 })
+/**
+ * Municipality Map Component
+ *
+ * Este componente representa o mapa do município
+ *
+ * @param municipalityName - Nome do município
+ * @param showMap - Mostrar mapa
+ * @param zoom - Zoom
+ * @param center - Centro
+ * @param options - Opções
+ * @param infoWindow - Janela de informações
+ * @param markers - Marcadores
+ */
 export class MunicipalitymapComponent {
 
 
+  /**
+   * @constructor
+   * MunicipalitymapComponent
+   *
+   * @param boundsService - Serviço de limites
+   * @param cdr - ChangeDetectorRef
+   */
   constructor(private boundsService: BoundsService, private cdr: ChangeDetectorRef) { }
 
   @ViewChild(GoogleMap, { static: false }) googleMap: GoogleMap | undefined;
@@ -37,8 +57,15 @@ export class MunicipalitymapComponent {
   markers: google.maps.Marker[] = []; // Armazenar marcadores em uma matriz
 
 
-  
 
+
+  /**
+   * ngOnChanges
+   *
+   * Verifica se houve mudanças
+   *
+   * @param changes - Mudanças
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['municipalityName'] && changes['municipalityName'].currentValue) {
       this.setBoundsAndCenterForMunicipality(changes['municipalityName'].currentValue);
@@ -47,6 +74,13 @@ export class MunicipalitymapComponent {
 
   }
 
+  /**
+   * setBoundsAndCenterForMunicipality
+   *
+   * Define limites e centro para o município
+   *
+   * @param municipalityName - Nome do município
+   */
   setBoundsAndCenterForMunicipality(municipalityName: string) {
 
     this.boundsService.getMunicipalityBounds(municipalityName).subscribe(bounds => {

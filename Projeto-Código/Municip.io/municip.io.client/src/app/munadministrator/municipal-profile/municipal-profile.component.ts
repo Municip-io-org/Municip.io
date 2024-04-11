@@ -10,6 +10,17 @@ import { News, NewsService } from '../../services/news/news.service';
   templateUrl: './municipal-profile.component.html',
   styleUrl: './municipal-profile.component.css'
 })
+/**
+ * Municipal Profile Component
+ *
+ * Este componente representa o perfil municipal
+ *
+ * @param events - Eventos
+ * @param newsList - Lista de notícias
+ * @param anyUser - Qualquer utilizador
+ * @param user - Utilizador
+ * @param municipality - Município
+ */
 export class MunicipalProfileComponent {
   
   
@@ -46,9 +57,23 @@ export class MunicipalProfileComponent {
       
   };
 
+  /**
+   * @constructor
+   * MunicipalProfileComponent
+   *
+   * @param userAuthService - Serviço de autenticação do utilizador
+   * @param eventsService - Serviço de eventos
+   * @param router - O Router
+   * @param newsService - Serviço de notícias
+   */
   constructor(private userAuthService: UserAuthService, private eventsService: EventsService, private router: Router,private newsService:NewsService) { }
 
 
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente
+   */
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
       res => {
@@ -78,14 +103,32 @@ export class MunicipalProfileComponent {
     );
   }
 
+  /**
+   * exploreMapClick
+   *
+   * Função que é chamada quando o utilizador clica no botão de explorar o mapa
+   * Navega para a página inicial
+   */ 
   exploreMapClick(){
     this.router.navigateByUrl("/");
   }
 
+  /**
+   * seeMoreEventsClick
+   *
+   * Função que é chamada quando o utilizador clica no botão de ver mais eventos
+   * Navega para a página de eventos
+   */
   seeMoreNewsClick() {
     this.router.navigateByUrl("/news");
   }
 
+  /**
+   * seeMoreEventsClick
+   *
+   * Função que é chamada quando o utilizador clica no botão de ver mais eventos
+   * Navega para a página de eventos
+   */
   loadData() {
 
     this.eventsService.getEventByMunicipality(this.municipality.name).subscribe(
@@ -111,6 +154,11 @@ export class MunicipalProfileComponent {
   }
   
 
+  /**
+   * sortEventsByDate
+   *
+   * Função que ordena os eventos por data
+   */
   sortEventsByDate() {
     this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());   
   }
