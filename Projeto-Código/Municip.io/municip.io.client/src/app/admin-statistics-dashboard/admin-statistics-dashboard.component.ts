@@ -3,6 +3,7 @@ import { AdminStatisticsService } from '../services/stats/admin-statistics.servi
 import { Citizen } from '../services/citizen-auth.service';
 import { MunicipalAdministrator, Municipality } from '../services/municipal-admin-auth.service';
 import { RequestDocument } from '../services/documents/docs.service';
+import { Book, BookRequest, LibraryService } from '../services/library/library.service';
 
 @Component({
   selector: 'app-admin-statistics-dashboard',
@@ -10,7 +11,7 @@ import { RequestDocument } from '../services/documents/docs.service';
   styleUrl: './admin-statistics-dashboard.component.css'
 })
 export class AdminStatisticsDashboardComponent {
-
+  selectedButton: number = 1;
   citizens: Citizen[] = [];
   municipalAdmins: MunicipalAdministrator[] = [];
   municipalities: any[] = [];
@@ -37,9 +38,18 @@ export class AdminStatisticsDashboardComponent {
 
   numberOfBooks: number = 0;
   Authors: number = 0;
-
-
-  constructor(private adminStatisticsService: AdminStatisticsService) { }
+  books: Book[] = [];
+  mostPopularGenre: string = "Não Existem Livros";
+  bookrequests: BookRequest[] = [];
+  /**
+  * @constructor
+  *
+  * Este construtor é responsável por injetar o serviço estatístico do administrador.
+  *
+  * @param adminStatisticsService - O serviço de estatísticas do administrador.
+  *
+  **/
+  constructor(private adminStatisticsService: AdminStatisticsService,private libraryService: LibraryService) { }
 
   ngOnInit() {
     this.adminStatisticsService.getAllCitizens().subscribe((data: Citizen[]) => {
@@ -50,6 +60,13 @@ export class AdminStatisticsDashboardComponent {
         this.adminStatisticsService.getAllMunicipalities().subscribe((datamun: any) => {
         this.municipalities = datamun;
           this.sortMunicipalities();
+          this.libraryService.getRequests().subscribe((data: BookRequest[]) => {
+            this.bookrequests = data;
+          });
+          this.adminStatisticsService.getAllBooks().subscribe((data: Book[]) => {
+            this.books = data;
+
+          });
 
           this.adminStatisticsService.getAllNews().subscribe((datanews: any) => {
             this.news = datanews;
@@ -58,6 +75,7 @@ this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
               this.events = dataevents;
   this.adminStatisticsService.getAllDocumentRequests().subscribe((datadoc: any) => {
 
+    
 
     this.documentRequests = datadoc;
                 this.generateStatistics();
@@ -122,11 +140,31 @@ this.percentageOfBlockedMunicipalities = (this.blockedMunicipalities / this.muni
 
 this.documentRequests.forEach(doc => {
       this.totalEarnings += doc.documentTemplate.price;
+});
+
+    this.numberOfBooks = this.books.length;
+   
+    this.Authors = this.books.map(book => book.author).length;
+    const genreCounts: { [genre: string]: number } = {};
+
+    this.books.forEach(book => {
+      book.genre.forEach(genre => {
+        genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+        console.log(genreCounts);
+      });
     });
+    this.mostPopularGenre = Object.entries(genreCounts).reduce((prev, curr) => curr[1] > prev[1] ? curr : prev)[0];
+   
+  }
 
-
-
-
-
+  /**
+   * selectButton
+   *
+   * Seleciona o botão
+   *
+   * @param buttonNumber - Número do botão
+   */
+  selectButton(buttonNumber: number): void {
+    this.selectedButton = buttonNumber;
   }
 }

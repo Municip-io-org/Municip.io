@@ -12,7 +12,7 @@ import { Book, BookRequest, LibraryService } from '../services/library/library.s
   styleUrl: './munadmin-statistics-dashboard.component.css'
 })
 export class MunadminStatisticsDashboardComponent {
-  selectedButton: number = 2;
+  selectedButton: number = 1;
   orderOptions: any[] = [{ label: '1', value: true }, { label: '2', value: false }];
 
   citizens: any[] = [];
@@ -40,7 +40,7 @@ export class MunadminStatisticsDashboardComponent {
 
   numberOfBooks: number = 0;
   Authors: number = 0;
-  mostPopularGenre: string ="";
+  mostPopularGenre: string ="Não Existem Livros";
   user: any;
   municipality: string = '';
   bookrequests: BookRequest[] = [];
@@ -311,6 +311,7 @@ export class MunadminStatisticsDashboardComponent {
     });
 
     this.mostPopularGenre = Object.entries(genreCounts).reduce((prev, curr) => curr[1] > prev[1] ? curr : prev)[0];
+    console.log(this.books);
   }
 
 

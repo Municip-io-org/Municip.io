@@ -56,8 +56,8 @@
                 <app-input-title class="text-[2.6vh]">Email</app-input-title>
                 <div class="flex items-center">
                   <input required placeholder="{{newUser.email}}" type="text" id="email" formControlName="email" name="email" [(ngModel)]="newUser.email"
-                         class="input w-full h-12 lg:h-14" />
-                  <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-15" />
+                       [class.disabled:cursor-not-allowed]="editMode ==true"  class="input w-full text-gray-400 h-12 lg:h-14" />
+                  
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="email?.touched && email?.invalid ">
                   <div *ngIf="email?.errors?.['required'] ">Email Obrigatório</div>
