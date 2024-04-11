@@ -1,16 +1,38 @@
 
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { MunicipalAdministrator, Municipality } from '../../services/municipal-admin-auth.service';
 import { Router } from '@angular/router';
+import { AdminStatisticsDashboardComponent } from '../../admin-statistics-dashboard/admin-statistics-dashboard.component';
+import { AdminStatisticsService } from '../../services/stats/admin-statistics.service';
 
 @Component({
   selector: 'app-mun-admin-home-page',
   templateUrl: './mun-admin-home-page.component.html',
   styleUrl: './mun-admin-home-page.component.css'
 })
+/**
+ * Municipal Administrator Home Page Component
+ *
+ * Este componente representa a página inicial do administrador municipal
+ *
+ * @param userAuthService - Serviço de autenticação do utilizador
+ * @param router - O Router
+ * @param adminStatisticsService - Serviço de estatísticas do administrador
+ * @param cdr - O ChangeDetectorRef
+ */
 export class MunAdminHomePageComponent {
-  constructor(private userAuthService: UserAuthService, private router: Router) { }
+
+  /**
+   * @constructor
+   * MunAdminHomePageComponent
+   *
+   * @param userAuthService - Serviço de autenticação do utilizador
+   * @param router - O Router
+   * @param adminStatisticsService - Serviço de estatísticas do administrador
+   * @param cdr - O ChangeDetectorRef
+   */
+  constructor(private userAuthService: UserAuthService, private router: Router, private adminStatisticsService: AdminStatisticsService, private cdr: ChangeDetectorRef) { }
 
 
   anyUser: any;
@@ -48,7 +70,16 @@ export class MunAdminHomePageComponent {
     landscapePhoto: 'Sem landscape',
   };
 
+  documentsToPay: string = 'empty';
+  documentsToApprove: string = 'empty';
 
+
+
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente
+   */
   ngOnInit(): void {
     this.userAuthService.getUserData().subscribe(
       res => {
@@ -61,25 +92,64 @@ export class MunAdminHomePageComponent {
               res => {
                 this.municipality = res as Municipality;
 
-              },
-              error => {
-                console.error(error);
-              }
-            )
-          });
-      },
-      error => {
-        console.error(error);
-      }
-    );
+                this.adminStatisticsService.getPendingRequestsByMunicipality(this.municipality.name).subscribe(
+                  res => {
+                    this.documentsToApprove = res.toString();
+                    console.log("aqui" + this.documentsToApprove);
+                    this.cdr.detectChanges(); 
 
+
+                    this.adminStatisticsService.getWaitingForPaymentRequestsByMunicipality(this.municipality.name).subscribe(
+                      res => {
+                        this.documentsToPay = res.toString();
+                        console.log("aqui" + this.documentsToPay);
+                        this.cdr.detectChanges();
+                     
+
+                      },
+                      error => {
+                        console.error(error);
+                      }
+                    )
+
+
+                  },
+                  error => {
+                    console.error(error);
+                  }
+                )
+              });
+          },
+          error => {
+            console.error(error);
+          }
+        );
+      },
+error => {
+        console.error(error);
+}
+    );
   }
 
+
+
+  /**
+   * pendingCitizensClick
+   *
+   * Abre os cidadãos pendentes
+   */
   pendingCitizensClick() {
     this.router.navigateByUrl("/");
   }
 
+
+  /**
+   * approveDocumentsClick
+   *
+   * Aprova os documentos
+   */
   approveDocumentsClick() {
     this.router.navigateByUrl("/");
   }
 }
+

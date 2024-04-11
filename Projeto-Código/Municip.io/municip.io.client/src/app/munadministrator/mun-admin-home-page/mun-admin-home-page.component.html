@@ -1,5 +1,5 @@
 <app-header-loggedin></app-header-loggedin>
-<app-big-banner [image]="municipality.landscapePhoto!" title="Município de {{municipality.name}}"
+<app-big-banner [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'" title="Município de {{municipality.name}}"
                 text={{municipality.description}}></app-big-banner>
 <div class=" my-[4rem] mx-60 space-y-20">
   <div class="flex">
@@ -19,7 +19,7 @@
     </section>
     <div class="w-1 bg-gradient-to-tl from-municip-light-blue to-municip-blue rounded mx-[5rem] "></div>
     <section class="flex flex-col w-full justify-center items-center min-w-[20rem]">
-      <div class="flex items-center font-open-sans text-left text-[1.5rem] font-extrabold">
+      <div class="flex items-center font-open-sans text-left text-[1.5rem] font-extrabold hover:opacity-75 duration-300">
         <img src="/assets/images/icons/external-link.png" alt="Notícias" class="size-10 mr-5 " />
         ATALHOS RÁPIDOS
       </div>
@@ -45,31 +45,19 @@
           </app-btn-municip-blue>
         </li>
         <li>
-          <app-btn-municip-blue width="16rem" routerLink="/news/news-create">
-            Criar Notícia
-            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-          </app-btn-municip-blue>
-        </li>
-        <li>
-          <app-btn-municip-blue width="16rem" routerLink="/events/create">
-            Criar Evento
-            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-          </app-btn-municip-blue>
-        </li>
-        <li>
-          <app-btn-municip-blue width="16rem" routerLink="/documents/createtemplate">
-            Criar Documento
+          <app-btn-municip-blue width="16rem" routerLink="/library/requests">
+            Requisições de livros
             <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
           </app-btn-municip-blue>
         </li>
         <li>
           <app-btn-municip-blue width="16rem" routerLink="/documents/approve">
-            Aprovar Documento
+            Aprovar Documentos
             <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
           </app-btn-municip-blue>
         </li>
         <li>
-          <app-btn-municip-blue width="16rem">
+          <app-btn-municip-blue width="16rem" routerLink="/munadminstatistics">
             Estatísticas
             <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
           </app-btn-municip-blue>
@@ -80,8 +68,8 @@
   <div class="flex items-center justify-around">
     <app-statistical-home-page-card [iconSrc]="'/assets/images/icons/file.png'"
                                     iconAlt="Ícone de Pedidos"
-                                    title="Pedidos Pendentes"
-                                    [value]="'114'"
+                                    title="Pedidos por Pagar"
+                                    [value]="documentsToPay"
                                     buttonText="Analisar Pedidos"
                                     (buttonClick)="pendingCitizensClick()">
       
@@ -89,7 +77,7 @@
     <app-statistical-home-page-card [iconSrc]="'/assets/images/icons/git.png'"
                                     iconAlt="Ícone de Documentos por Aprovar"
                                     title="Documentos por Aprovar"
-                                    [value]="'12'"
+                                    [value]="documentsToApprove"
                                     buttonText="Analisar Documentos"
                                     (buttonClick)="approveDocumentsClick()">
       

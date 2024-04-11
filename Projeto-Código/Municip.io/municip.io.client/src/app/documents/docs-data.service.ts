@@ -11,10 +11,32 @@ import { Municipality } from '../services/municipal-admin-auth.service';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * @class DocsDataService
+ *
+ * Este serviço é responsável por gerar um PDF.
+ *
+ * @param document - O documento.
+ * @param emblemPhoto - A foto do emblema.
+ * 
+ * @returns Um PDF gerado.
+ *
+ **/
 export class DocsDataService {
   document: RequestDocument | null = null;
   emblemPhoto: string = '';
 
+  /**
+   * @constructor
+   *
+   * Este construtor é responsável por injetar o serviço de roteamento, o serviço de ativação de rotas, o serviço de documentos e o serviço de autenticação de utilizadores.
+   *
+   * @param router - O serviço de roteamento.
+   * @param route - O serviço de ativação de rotas.
+   * @param documentService - O serviço de documentos.
+   * @param userAuthService - O serviço de autenticação de utilizadores.
+   *
+   **/
   downloadPDF(canvas: HTMLCanvasElement, name: string) {
 
     const pdf = new jspdf('p', 'mm', 'a4');

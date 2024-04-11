@@ -13,6 +13,23 @@ import { DocsService, DocumentTemplate } from '../../services/documents/docs.ser
   templateUrl: './create-template.component.html',
   styleUrl: './create-template.component.css'
 })
+/**
+ * @class CreateTemplateComponent
+ *
+ * Este componente é responsável por criar um novo template de documento.
+ *
+ * @param municipalityImage - A imagem do município.
+ * @param municipalityName - O nome do município.
+ * @param propriedades - As propriedades do template.
+ * @param options - As opções do template.
+ * @param selectedItem - A opção selecionada.
+ * @param showDropdown - A dropdown.
+ * @param error - O erro.
+ * @param isDialogOpen - O diálogo.
+ * 
+ * @returns Um novo template de documento.
+ *
+ **/
 export class CreateTemplateComponent {
 
 
@@ -57,11 +74,7 @@ export class CreateTemplateComponent {
 
   }
 
-  /**
-   * Método onInit 
-   */
-
-
+  
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
@@ -70,7 +83,10 @@ export class CreateTemplateComponent {
     }
   }
 
-
+  
+  /**
+   * Método responsável por inicializar o componente.
+   */
   ngOnInit(): void {
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
@@ -96,6 +112,13 @@ export class CreateTemplateComponent {
   }
 
 
+   /**
+    * Método responsável por selecionar uma opção.
+    * @param option
+    * 
+    * @returns void
+    *
+    */
   selectOption(option: string) {
     this.selectedItem = option;
     this.showDropdown = false;
@@ -113,27 +136,60 @@ export class CreateTemplateComponent {
 
 
 
+   /**
+    * Método responsável por obter o nome.
+    *
+    * @returns O nome.
+    *
+    */
   get name() {
     return this.templateForm.get('name');
   }
 
+  /**
+   * Método responsável por obter a descrição.
+   *
+   * @returns A descrição.
+   *
+   */
   get description() {
     return this.templateForm.get('description');
   }
 
+  /**
+   * Método responsável por obter o tipo.
+   *
+   * @returns O tipo.
+   *
+   */
   get type() {
     return this.templateForm.get('type');
   }
 
+  /**
+   * Método responsável por obter o preço.
+   *
+   * @returns O preço.
+   *
+   */
   get price() {
     return this.templateForm.get('price');
   }
 
+  /**
+   * Método responsável por obter o texto do template.
+   *
+   * @returns O texto do template.
+   *
+   */
   get templatetext() {
     return this.templateForm.get('templatetext') ;
   }
 
 
+  /**
+   * Método responsável por submeter o formulário.
+   */
 OnSubmit() {
   if (this.templateForm.valid) {
     const template: DocumentTemplate = {
@@ -158,6 +214,9 @@ OnSubmit() {
     this.router.navigate(['/documents/template-list']);
   }
 
+  /**
+   * Método responsável por adicionar uma propriedade ao template
+   */
   adicionarPropriedade() {
     const propriedadeSelecionada = (document.getElementById('propriedade') as HTMLSelectElement).value;
     const textArea = (document.getElementById('templatetext') as HTMLTextAreaElement);

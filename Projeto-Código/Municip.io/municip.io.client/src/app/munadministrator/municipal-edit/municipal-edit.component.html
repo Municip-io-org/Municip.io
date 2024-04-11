@@ -1,105 +1,132 @@
-<app-header-loggedin></app-header-loggedin>
+﻿<app-header-loggedin></app-header-loggedin>
 <app-profile-banner title="Dados do Munícipio"
                     [image]="currentLandscapePhoto"
                     [profileimg]="currentEmblemPhoto"></app-profile-banner>
-<div class="flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black pt-24 px-32 space-y-20">
-  <form [formGroup]="municipalityEditForm" (ngSubmit)="onSubmit()" class="pt-[1rem] relative flex flex-col pb-[5rem]">
-    <section class="flex text-left justify-around mb-4 ">
-      <div class="w-[24rem]" *ngIf="municipalityEditForm">
-        <app-input-title class="text-[2.4vh]">Presidente</app-input-title>
+
+
+<div class="py-[4rem] text-municip-normal-black flex flex-col space-y-20 bg-municip-blank px-32 pt-24">
+  <form [formGroup]="municipalityEditForm" (ngSubmit)="onSubmit()" class="pt-[1rem] pb-[5rem] relative flex flex-col">
+    <section class="mb-4 flex flex-wrap items-center justify-around gap-y-4 text-left">
+
+      <div class="w-[20rem]" *ngIf="municipalityEditForm">
+        <app-input-title class="text-[1.4rem]">Presidente</app-input-title>
         <div class="relative">
           <input required type="text" id="president" formControlName="president" name="president"
-                 class="input font-poppins w-[18rem] " />
-          <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 left-64 top-3.5" />
+                 class="input font-poppins w-[18rem]" />
+          <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute left-64 top-3.5 size-5" />
         </div>
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="president?.touched && president?.invalid">
+        <div class="absolute py-2 font-bold text-red-500" *ngIf="president?.touched && president?.invalid">
           <div *ngIf="president?.errors?.['required']">Presidente Obrigatório</div>
         </div>
       </div>
+
+
+
       <div class="w-[20rem]">
-        <app-input-title class="text-[2.4vh]">Contacto Telefónico</app-input-title>
+        <app-input-title class="text-[1.4rem]">Contacto Telefónico</app-input-title>
         <div class="relative">
           <input required type="number" id="contact"
                  formControlName="contact" name="contact"
                  class="input font-poppins w-[18rem]" />
-          <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 left-64 top-3.5" />
+          <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute left-64 top-3.5 size-5" />
         </div>
-        <div class="absolute text-red-500 font-bold py-2" *ngIf="contact?.touched && contact?.invalid ">
+        <div class="absolute py-2 font-bold text-red-500" *ngIf="contact?.touched && contact?.invalid ">
           <div *ngIf="contact?.errors?.['required'] ">Contacto Obrigatório</div>
           <div *ngIf="contact?.errors?.['pattern'] ">Contacto Inválido</div>
         </div>
       </div>
+
+
+      <div class="w-[20rem]">
+        <app-input-title class="text-[1.4rem]">Morada da Biblioteca Municipal</app-input-title>
+        <div class="relative">
+          <input type="text" id="libraryAddress" formControlName="libraryAddress" name="libraryAddress"
+                 class="input font-poppins w-[18rem]" />
+          <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute left-64 top-3.5 size-5" />
+        </div>
+      </div>
+
     </section>
 
-    <section class="relative flex text-left justify-around mb-4">
-      <div class="absolute -top-40 right-8">
-        <app-input-title class="hidden text-[2.4vh]">Foto do Brasão</app-input-title>
+    <section class="relative mb-4 flex justify-around text-left">
+      <div class="absolute">
+        <app-input-title class="text-[2.4rem] hidden">Foto do Brasão</app-input-title>
         <input type="file" #emblemPicker id="emblemPhoto" formControlName="emblemPhoto" name="emblemPhoto"
                (change)="onEmblemImagePicked($event)" accept="image/*"
-               class="hidden input font-poppins w-[18rem] " />
-        
-        <app-black-btn-icon-text *ngIf="editMode"
-      
-                                 altImage="editar brasão"
-                                 image="/assets/images/icons/pencil-white.png"
-                                 (buttonClick)="emblemPicker.click()">
-        </app-black-btn-icon-text>
+               class="input font-poppins w-[18rem] hidden" />
+
+
       </div>
 
-      <div class="absolute -top-60 left-8">
-        <app-input-title class="hidden text-[2.4rem]">Foto da Paisagem</app-input-title>
+      <div class="absolute">
+        <app-input-title class="text-[2.4rem] hidden">Foto da Paisagem</app-input-title>
         <input type="file" #landscapePicker id="landscapePhoto" formControlName="landscapePhoto"
                name="landscapePhoto" (change)="onLandscapeImagePicked($event)" accept="image/*"
-               class="hidden input font-poppins w-[18rem]" />
-     
-        <app-black-btn-icon-text *ngIf="editMode" class="text-[1.063rem]"
-                         
-                                 altImage="editar paisagem"
-                                 image="/assets/images/icons/pencil-white.png"
-                                 (buttonClick)="landscapePicker.click()">
-          Editar Paisagem
-        </app-black-btn-icon-text>
-  
-        
+               class="input font-poppins w-[18rem] hidden" />
+
+
+
+
       </div>
     </section>
 
-    <div class="flex flex-col text-left w-full mt-6 mb-4 relative">
+    <div class="relative mb-4 mt-6 flex w-full flex-col text-left">
       <app-input-title class="text-[2.4vh]">Texto Informativo</app-input-title>
       <ngx-editor [editor]="editor" formControlName="description" placeholder="Introduza uma descrição da Câmara.">
-        <div class="bg-gray-100 border border-gray-300">
+        <div class="border border-gray-300 bg-gray-100">
           <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
         </div>
       </ngx-editor>
-      <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-14" />
-      <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">
+      <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute right-6 top-14 size-5" />
+      <div class="py-2 font-bold text-red-500" *ngIf="description?.touched && description?.invalid ">
         <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatório</div>
       </div>
     </div>
 
     <button *ngIf="editMode" type="submit" [disabled]="!municipalityEditForm.valid"
-            class="absolute -bottom-[0rem] right-[2rem] h-auto w-[15rem] flex justify-center
-              items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue
-              to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600
-              rounded text-lg transition duration-700 ease-in-out">
+            class="-bottom-[0rem] right-[2rem] w-[15rem] from-municip-light-blue border-0 absolute flex h-auto items-center justify-center rounded bg-gradient-to-tl to-municip-blue py-4 text-lg text-municip-blank transition duration-700 ease-in-out hover:cursor-pointer hover:bg-indigo-600 focus:outline-none">
       Finalizar Alterações
-      <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+      <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
     </button>
 
   </form>
-  <div  *ngIf="!editMode" class="absolute top-[15.3rem] right-[25rem] text-[1.063rem]">
+
+
+  <div *ngIf="!editMode" class="top-[15.3rem] right-[25rem] text-[1.063rem] absolute">
     <app-black-btn-icon-text altImage="editar munícipio"
                              image="/assets/images/icons/pencil-white.png"
                              (buttonClick)="toggleEditMode()">
       Editar Munícipio
     </app-black-btn-icon-text>
   </div>
-  <div *ngIf="editMode" class="absolute top-[15.3rem] right-[25rem] text-[1.063rem]">
+
+
+  <div *ngIf="editMode" class="top-[15.3rem] right-[25rem] text-[1.063rem] absolute">
     <app-black-btn-icon-text altImage="Cancelar"
                              image="/assets/images/icons/pencil-white.png"
                              (buttonClick)="cancelEditMode()">
       Cancelar Edição
     </app-black-btn-icon-text>
   </div>
+
+
+  <div *ngIf="editMode" class="top-[13.3rem] left-[10rem] text-[1.063rem] absolute">
+    <app-black-btn-icon-text *ngIf="editMode" class="text-[1.063rem]"
+                             altImage="editar paisagem"
+                             image="/assets/images/icons/pencil-white.png"
+                             (buttonClick)="landscapePicker.click()">
+      Editar Paisagem
+    </app-black-btn-icon-text>
+  </div>
+
+  <div *ngIf="editMode" class="top-[18.3rem] right-[10rem] text-[1.063rem] absolute">
+    <app-black-btn-icon-text *ngIf="editMode"
+                             altImage="editar brasão"
+                             image="/assets/images/icons/pencil-white.png"
+                             (buttonClick)="emblemPicker.click()">
+    </app-black-btn-icon-text>
+  </div>
+
+
 </div>
 <app-footer></app-footer>

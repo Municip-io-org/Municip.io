@@ -4,26 +4,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
 </head>
-<header class="font-">
-  <div class="flex items-center w-full shadow-md py-[0.7rem] px-3 font-poppins">
 
-    <img class="w-56 pl-[2rem]"
-         alt="logo"
-         src="/assets/images/logos/logo-black-right.png" />
-  </div>
-</header>
+<app-header-loggedin />
 
-<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" [title]="'Gestão de Municípios'"
-                [text]="'Efetue a gestão dos municípios da plataforma, gerindo a presença dos mesmos na nossa aplicação'" />
+<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" [title]="'Gestão de Municípios e Administradores'"
+                    [text]="'Efetue a gestão dos municípios e administradores municipais da plataforma, gerindo a presença dos mesmos na nossa aplicação'" />
 
 <div class="container mx-auto px-4 sm:px-8">
   <div class="py-8">
-
+    <p class=" text-center   italic text-municip-black">Utilize a tabela abaixo para gerir os municípios e administradores municipais da plataforma.<br /> Pode aprovar ou eliminar municípios, e gerir os administradores municipais associados a cada município carregando no mesmo.</p>
     <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
       <div class="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
 
         <!-- Add a search input for name -->
+
         <div class="mb-4 relative">
+
           <label for="nameSearch" class="sr-only">Procurar por município</label>
           <div class="flex items-center">
             <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
@@ -32,6 +28,7 @@
             <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por município" class="pl-10 px-4 py-2 border rounded w-full">
           </div>
         </div>
+
         <table class="min-w-full leading-normal">
           <thead>
             <tr>
@@ -61,11 +58,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let m of filteredMunicipalities" [class]="(filteredMunicipalities.indexOf(m) % 2 === 0 ? 'bg-white' : 'bg-gray-100')" (click)="sendToPage(m)">
-              <td class="px-5 py-5 text-left">{{ m.id }}</td>
-              <td class="px-5 py-5 text-left">{{ m.name }}</td>
-              <td class="px-5 py-5 text-left">{{ m.numberOfUsers }}</td>
-              <td class="px-5 py-5 text-left">{{ m.date | date: 'dd MMM yy' }}</td>
+            <tr *ngFor="let m of filteredMunicipalities"
+                [class]="(filteredMunicipalities.indexOf(m) % 2 === 0 ? 'bg-white' : 'bg-gray-100')">
+              <td (click)="sendToPage(m)" class="px-5 py-5 text-left cursor-pointer">{{ m.id }}</td>
+              <td (click)="sendToPage(m)" class="px-5 py-5 text-left cursor-pointer">{{ m.name }}</td>
+              <td (click)="sendToPage(m)" class="px-5 py-5 text-left cursor-pointer">{{ m.numberOfUsers }}</td>
+              <td (click)="sendToPage(m)" class="px-5 py-5 text-left cursor-pointer">{{ m.date | date: 'dd MMM yy' }}</td>
               <td class="px-5 py-5 text-left">
                 <span *ngIf="m.status === 'Approved'" class="inline-block p-1.5 bg-green-500 text-white rounded-full text-xs">
                   {{ m.status }}
@@ -76,8 +74,8 @@
               </td>
 
               <td class="px-5 py-5 ">
-       
-<button *ngIf="m.status === 'Pending'" (click)="approveMunicipality(m.name)" class="bg-green-500 text-white px-3 py-1 rounded-md mr-2"> 
+
+                <button *ngIf="m.status === 'Pending'" (click)="approveMunicipality(m.name)" class="bg-green-500 text-white px-3 py-1 rounded-md mr-2">
 
                   <i class="fas fa-check"></i>
                 </button>

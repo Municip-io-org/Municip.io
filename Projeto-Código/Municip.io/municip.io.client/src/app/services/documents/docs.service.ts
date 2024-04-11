@@ -1,49 +1,122 @@
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Citizen } from '../citizen-auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * Docs Service
+ *
+ * Serviço de documentos
+ *
+ * @param requests - Pedidos
+ */
 export class DocsService {
 
+  requests: RequestDocument[] = [];
 
+  /**
+   * @constructor
+   * DocsService
+   *
+   * @param http - HttpClient
+   */
   constructor(private http: HttpClient) { }
 
-  //get all documents
+
+  /**
+   * Obter todos as Templates de documentos
+   *
+   * Obter todos os modelos de documentos
+   * @params municipality - Município
+   * 
+   * @returns Observable de DocumentTemplate[]
+   */
   getTemplatesFromMunicipality(municipality: string): Observable<DocumentTemplate[]> {
     const params = { municipality: municipality };
     return this.http.get<DocumentTemplate[]>('api/documents/GetTemplatesFromMunicipality', { params: params });
   }
 
+
+  /**
+   * Obter o numero de pedidos por aprovar
+   *
+   * @param municipality - O município
+   * 
+   * @returns O numero de pedidos por aprovar
+   */
+  numberOfRequestsToApprove(municipality: string): Observable<number> {
+    return this.getRequestsFromMunicipality(municipality).pipe(
+      map(requests => {
+        this.requests = requests;
+        return this.requests.filter(request => request.status === 'Pending').length;
+      })
+    );
+  }
+
+  /**
+   * Obter os diferentes tipos de documentos por município 
+   * 
+   * @param municipality - O município
+   * @returns Uma lista com os diferentes tipos de documentos
+   */
   GetDistinctDocumentTypesFromMunicipality(municipality: string): Observable<string[]> {
     console.log(municipality + 'dasd');
     return this.http.get<string[]>(`api/documents/GetDistinctDocumentTypesFromMunicipality?municipality=${municipality}`);
   }
 
-  //get all request documents
+
+  /**
+   * Obtem todos os requests por município
+   * 
+   * @param municipality - O município
+   * @returns a lista dos requests num município
+   */
   getRequestsFromMunicipality(municipality: string): Observable<RequestDocument[]> {
     const params = { municipality: municipality };
     return this.http.get<RequestDocument[]>('api/documents/GetRequestsFromMunicipality', { params: params });
   }
 
-  //get all request documents
+  /**
+   * Obtem todos os requests de um determinado cidadão
+   * @param email - Email do cidadão
+   * @returns Uma lista de requests de um cidadão
+   */
   getRequestsFromCitizen(email: string): Observable<RequestDocument[]> {
     const params = { email: email };
     return this.http.get<RequestDocument[]>('api/documents/GetRequestsFromCitizen', { params: params });
   }
 
+  /**
+   * Criação de um template
+   * @param template O template a criar
+   * @returns A criação de um template
+   */
   createTemplate(template: any): Observable<any> {
     return this.http.post<any>('/api/documents/CreateTemplate', template);
   }
 
+  /**
+   * Edição de um template
+   * @param template O template a editar
+   * @returns A edição de um template
+   */
   editTemplate(template: DocumentTemplate, id: number): Observable<any> {
     return this.http.post<any>('/api/documents/EditTemplate', template, { params: { id: id.toString() } });
   }
 
 
+  /**
+   * Criação de um request
+   * 
+   * @param email - email de um cidadão
+   * @param documentRequest - Request de um documento
+   * @returns Criação de um DocumentRequest
+   */
   createRequest(email: string, documentRequest: RequestDocument): Observable<any> {
     let params = new HttpParams()
       .set('email', email.toString())
@@ -60,10 +133,10 @@ export class DocsService {
   /**
    *
    * Cria o pagamento
-   * @param documentRequest
-   * @param municipalityImage
-   * @param successUrl
-   * @param cancelUrl
+   * @param documentRequest - O DocumentRequest
+   * @param municipalityImage - A imagem do município
+   * @param successUrl - O url de sucesso
+   * @param cancelUrl - O url de Cancelamento
    * @returns
    */
   createPayment(documentRequest: RequestDocument, municipalityImage: string, successUrl: string, cancelUrl: string) {
@@ -86,7 +159,7 @@ export class DocsService {
   }
   /**
    * Insere o link de pagamento na base de daods
-   * @param id
+   * @param id 
    * @param link
    * @returns
    */
@@ -160,22 +233,49 @@ export class DocsService {
 
 
 
+  /**
+   *
+   * Este método coloca o estado do RequestDocument a WaitingForPayment
+   * 
+   * @param id - id do documento
+   * @returns
+   */
   waitingForPayment(id: number): Observable<any> {
     const params = new HttpParams().set('id', id.toString());
     return this.http.post<any>('api/documents/WaitingForPayment', {}, { params });
   }
 
+  /**
+   *
+   * Este método coloca o estado do RequestDocument a Approved
+   * 
+   * @param id - id do documento
+   * @returns
+   */
   approveDocument(id: number): Observable<any> {
     const params = new HttpParams().set('id', id.toString());
     return this.http.post<any>('api/documents/ApproveDocument', {}, { params });
   }
 
+  /**
+   *
+   * Este método coloca o estado do RequestDocument a Rejected
+   * 
+   * @param id - id do documento
+   * @returns
+   */
   rejectDocument(id: number): Observable<any> {
     const params = new HttpParams().set('id', id.toString());
     return this.http.post<any>('api/documents/RejectRequest', {}, { params });
   }
 
 
+  /**
+   * Obtem o template pelo seu ID
+   * 
+   * @param id id do template
+   * @returns O Template com o ID
+   */
   getTemplateById(id: number): Observable<DocumentTemplate> {
     return this.http.get<DocumentTemplate>(`api/documents/GetTemplateById?id=${id}`);
   }

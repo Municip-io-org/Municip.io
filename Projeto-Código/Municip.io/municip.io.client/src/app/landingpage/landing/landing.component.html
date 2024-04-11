@@ -1,9 +1,14 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+</head>
+
 <app-header />
 <main class="font-inter">
   <app-banner />
 
 
-  <div class="bg-gray-200 pt-5 pb-10 px-32">
+  <div class="bg-gray-200 pt-5 pb-10 px-32  drop-shadow-md ">
     <div class="mx-auto w-1/2 text-center mb-10">
       <h1 class="text-3xl text-municip-normal-black font-bold">Serviços disponíveis</h1>
       <h3 class="text-sm text-municip-gray">O que pode fazer na Municip.io?</h3>
@@ -24,18 +29,18 @@
       <p>Contamos com diversas autarquias e munícipes que utilizam diariamente a nossa plataforma</p>
     </div>
     <div class="flex justify-center space-x-10 flex-1 py-20">
-      <div class="flex space-x-2">
-        <img alt="icone" src="/assets/images/landing/iconepessoa.png" class="h-11 self-center" />
+      <div class="flex items-center hover:opacity-75 transition duration-300" >
+        <i class="fas fa-users text-municip-blue text-3xl mr-3"></i>
         <div>
-          <p class="text-lg font-bold text-municip-normal-black">11313</p>
-          <p class="text-municip-gray">Municipes</p>
+          <p class="text-3xl font-bold text-municip-normal-black">{{citizens}}</p>
+          <p class="text-municip-gray text-2xl">Munícipes</p>
         </div>
       </div>
-      <div class="flex space-x-2">
-        <img alt="icone" src="/assets/images/landing/iconemao.png" class="h-11 self-center" />
+      <div class="flex items-center hover:opacity-75 transition duration-300">
+        <i class="fas fa-city text-municip-blue text-3xl mr-3"></i>
         <div>
-          <p class="text-lg font-bold text-municip-normal-black">29</p>
-          <p class="text-municip-gray">Autarquias</p>
+          <p class="text-3xl font-bold text-municip-normal-black">{{municipalities}}</p>
+          <p class="text-municip-gray text-2xl">Autarquias</p>
         </div>
       </div>
     </div>

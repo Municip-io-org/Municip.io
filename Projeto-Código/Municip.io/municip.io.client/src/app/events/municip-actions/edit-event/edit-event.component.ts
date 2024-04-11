@@ -7,9 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { format } from 'date-fns';
 import { Editor, Toolbar } from 'ngx-editor';
 
-/**
- * Componente responsável por editar um evento.
- */
+
 @Component({
   selector: 'app-edit-event',
   templateUrl: './edit-event.component.html',
@@ -17,6 +15,23 @@ import { Editor, Toolbar } from 'ngx-editor';
   providers: [provideNativeDateAdapter()],
   encapsulation: ViewEncapsulation.None,
 })
+/**
+ * @class EditEventComponent
+ * Componente responsável por editar um evento.
+ *
+ * @param municipalityImage - A imagem do município.
+ * @param municipalityName - O nome do município.
+ * @param error - O erro.
+ * @param photo - A foto.
+ * @param editor - O editor.
+ * @param toolbar - A barra de ferramentas.
+ * @param imagePreview - A pré-visualização da imagem.
+ * @param eventSelected - O evento selecionado.
+ * @param isDialogOpen - O estado do dialog.
+ * @param minDateRegistration - A data mínima de registo.
+ * @param minDateEvent - A data mínima do evento.
+ * 
+ */
 export class EditEventComponent implements OnInit {
 
   municipalityImage: string = "";
@@ -42,6 +57,11 @@ export class EditEventComponent implements OnInit {
 
   isDialogOpen: boolean = false;
 
+
+  minDateRegistration: Date = new Date();
+  minDateEvent: Date = new Date();
+
+
   /**
      * Construtor do componente.
      * @param dateAdapter
@@ -59,6 +79,9 @@ export class EditEventComponent implements OnInit {
   }
 
 
+  /**
+   * Método onInit 
+   */
   ngOnInit(): void {
     this.editor = new Editor();
     this.authService.getUserData().subscribe((user) => {
@@ -74,8 +97,36 @@ export class EditEventComponent implements OnInit {
     this.eventSelected = this.route.snapshot.data['event'];
     this.setForm(this.eventSelected);
 
+
+
+    //if the event is in the past, the min date will be the start date of the event
+    //if not, the min date will be the current date - 2 days
+    let date = new Date();
+    date.setDate(date.getDate() - 2);
+    if (new Date(this.eventSelected.startRegistration) < date) {
+      this.minDateRegistration = new Date(this.eventSelected.startRegistration);
+    } else {
+      this.minDateRegistration = date;
+    }
+
+
+
+    //set minDateEvent one day after the end date of registration
+    this.minDateEvent = new Date(this.eventSelected.endRegistration);
+
+    //when the user changes de end date of registration, the start date of the event should be updated
+    this.eventForm.get('eventRegistration')?.valueChanges.subscribe((value) => {
+      if (value.endDate) {
+        this.minDateEvent = new Date(value.endDate);
+        this.minDateEvent.setDate(this.minDateEvent.getDate() + 1);
+      }
+    })
+
   }
 
+  /**
+   * Método OnDestroy
+   */
   ngOnDestroy() {
     this.editor.destroy();
   }
@@ -149,7 +200,7 @@ export class EditEventComponent implements OnInit {
   })
 
 
-
+  //Getters
   get title() {
     return this.eventForm.get('title');
   }

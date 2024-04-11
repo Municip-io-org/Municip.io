@@ -12,7 +12,7 @@
       Editar Notícia
     </app-black-btn-icon-text>
   </div>
-  <img src={{news.photo}} alt="Imagem da Notícia"
+  <img [src]="news.photo ? news.photo : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="Imagem da Notícia"
        class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center" />
 </div>
 

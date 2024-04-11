@@ -6,11 +6,25 @@ import { UserAuthService } from '../user-auth.service';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * App Features Service
+ *
+ * Serviço de funcionalidades da aplicação
+ *
+ * @param appFeatures - Funcionalidades da aplicação
+ */
 export class AppFeaturesService {
 
   appFeatures: AppFeature[] = [];
 
 
+  /**
+   * @constructor
+   * AppFeaturesService
+   *
+   * @param http - HttpClient
+   * @param userAuthService - Serviço de autenticação do cidadão
+   */
   constructor(private http: HttpClient, private userAuthService: UserAuthService) { }
 
   /**
@@ -87,7 +101,14 @@ export class AppFeaturesService {
     );
   }
 
-  // Função para mapear as strings de categoria para enum
+  /**
+   * mapCategoryStringToNumber
+   *
+   * Função para mapear as strings de categoria para enum
+   * 
+   * @param categoryString
+   * @returns
+   */
   mapCategoryStringToNumber(categoryString: string): number {
     switch (categoryString) {
       case 'Documents':
@@ -98,6 +119,8 @@ export class AppFeaturesService {
         return 2;
       case 'Transports':
         return 3;
+      case 'Library':
+        return 4;
       default:
         return -1;
     }
@@ -123,5 +146,6 @@ export enum AppFeatureCategory {
   Events = "Events",
   News = "News",
   Transports = "Transports",
+  Library = "Library",
   Unknown = "Unknown"
 }

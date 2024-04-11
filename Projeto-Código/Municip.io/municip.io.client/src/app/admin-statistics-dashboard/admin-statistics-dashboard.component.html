@@ -1,0 +1,359 @@
+
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+</head>
+<app-header-loggedin></app-header-loggedin>
+
+
+<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" [title]="'Estatísticas de Administrador'"
+                    [text]="'Consulte os dados sobre a utilização da municip.io, monitorizando o desempenho da ferramenta junto dos municípios e utilizadores'" />
+
+
+<body class="flex bg-gray-100 min-h-screen" x-data="{panel:false, menu:true}">
+
+  <div class="flex-grow text-gray-800">
+
+    <main class="p-6 sm:p-10 space-y-16">
+
+      <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div class="flex items-center p-8 bg-white shadow rounded-lg hover:shadow-2xl transition duration-300">
+          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
+            <i class="fas fa-users "></i>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold">{{numberOfCitizens}}</span>
+            <span class="block text-gray-500">Cidadãos Registados</span>
+          </div>
+        </div>
+        <div class="flex items-center p-8 bg-white shadow rounded-lg hover:shadow-2xl transition duration-300">
+          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+            <i class="fas fa-building "></i>
+
+          </div>
+          <div>
+            <span class="block text-2xl font-bold">{{activeMunicipalities}}</span>
+            <span class="block text-gray-500">Municípios Ativos</span>
+          </div>
+        </div>
+        <div class="flex items-center p-8 bg-white shadow rounded-lg hover:shadow-2xl transition duration-300">
+          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+            </svg>
+          </div>
+          <div>
+            <span class="inline-block text-2xl font-bold">{{blockedMunicipalities}}</span>
+            <span class="inline-block text-xl text-gray-500 font-semibold ml-1">({{percentageOfBlockedMunicipalities}}%)</span>
+            <span class="block text-gray-500">Municípios Bloqueados</span>
+          </div>
+        </div>
+        <div class="flex items-center p-8 bg-white shadow rounded-lg hover:shadow-2xl transition duration-300">
+          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
+            <i class="fas fa-user-tie "></i>
+
+          </div>
+          <div>
+            <span class="block text-2xl font-bold">{{numberOfMunicipalAdmins}}</span>
+            <span class="block text-gray-500">Administradores Municipais</span>
+          </div>
+        </div>
+      </section>
+
+
+
+      <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-12">
+        <div class="flex flex-col md:col-span-3 md:row-span-3 bg-white shadow rounded-lg">
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p>Utilizadores inscritos por mês</p>
+            <app-tooltip [tooltipText]="'Gráfico que mostra o número de pessoas inscritas, por mês'"></app-tooltip>
+          </div>
+
+
+          <div class="  p-4 flex-grow bg-gray-50 m-6 shadow-xl rounded-xl hover:shadow-2xl transition duration-200 ">
+
+            <app-registered-users-graph></app-registered-users-graph>
+
+
+
+          </div>
+
+
+
+
+        </div>
+        <div class="row-span-3 bg-white shadow rounded-lg">
+          <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
+            <span>Municípios por número de utilizadores</span>
+            <button type="button" class="inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600" id="options-menu" aria-haspopup="true" aria-expanded="true" (click)="toggleSorting()">
+              {{ sortingOrder === 'asc' ? 'Ascendente' : 'Descendente' }}
+              <svg class="-mr-1 ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->
+          </div>
+          <div class="overflow-y-auto" style="max-height: 24rem;">
+            <ul class="p-6 space-y-6">
+
+              <li *ngFor="let municipality of municipalities" class="flex items-center">
+                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                  <!-- Use the first user's photo for the municipality -->
+                  <img [src]="municipality.emblemPhoto" alt="{{municipality.name}} profile picture">
+                </div>
+                <span class="text-gray-600">{{municipality.name}}</span>
+                <span class="ml-auto font-semibold">{{municipality.numberOfUsers}}</span>
+              </li>
+
+
+            </ul>
+          </div>
+        </div>
+        <!--<div class="flex flex-col row-span-3 bg-white shadow rounded-lg">
+          <div class="px-6 py-5 font-semibold border-b border-gray-100">Students by type of studying</div>
+          <div class="p-4 flex-grow">
+            <div class="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
+          </div>
+        </div>-->
+
+      </section>
+
+
+
+
+      <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 grid-rows-4">
+
+        <div class="flex flex-col md:col-span-1 row-span-8 bg-white shadow rounded-lg">
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p> Notícias</p>
+            <app-tooltip [tooltipText]="'Estatísticas relativas às notícias da aplicação.'"></app-tooltip>
+          </div>
+
+          <div class="p-4 flex-grow grid grid-cols-1 grid-rows-2 gap-4 h-1 ">
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-newspaper text-xl"></i>
+
+              </div>
+              <div class="flex-grow">
+                <span class="block text-lg sm:text-xl font-bold">{{newsPublished}}</span>
+                <span class="block text-gray-500">Notícias Publicadas</span>
+              </div>
+            </div>
+
+
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-upload text-xl"></i>
+
+              </div>
+              <div class="flex-grow">
+                <span class="block text-lg sm:text-xl font-bold">{{newsPublishedToday}}</span>
+                <span class="block text-gray-500">Publicadas Hoje</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:col-span-1 row-span-8 bg-white shadow rounded-lg">
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p>Eventos</p>
+            <app-tooltip [tooltipText]="'Estatísticas relativas aos eventos da aplicação.'"></app-tooltip>
+          </div>
+
+          <div class="p-4 flex-grow grid grid-cols-1 grid-rows-2 gap-4 h-1 ">
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-calendar-check text-xl"></i>
+
+              </div>
+              <div class="flex-grow">
+                <span class="block text-lg sm:text-xl font-bold">{{eventsRegistered}}</span>
+                <span class="block text-gray-500">Eventos registados</span>
+              </div>
+            </div>
+
+
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-calendar-week text-xl"></i>
+
+              </div>
+              <div class="flex-grow">
+                <span class="block text-lg sm:text-xl font-bold">{{eventsToday}}</span>
+                <span class="block text-gray-500">A decorrer hoje</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:col-span-1 row-span-8 bg-white shadow rounded-lg">
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p>Documentos</p>
+            <app-tooltip [tooltipText]="'Estatísticas relativas aos documentos da aplicação.'"></app-tooltip>
+          </div>
+
+          <div class="p-4 flex-grow grid grid-cols-1 grid-rows-3 gap-4 h-1 ">
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-file text-xl"></i>
+
+              </div>
+              <div class="flex-grow">
+                <span class="block text-lg sm:text-xl font-bold">{{documentsRequested}}</span>
+                <span class="block text-gray-500">Documentos pedidos</span>
+              </div>
+            </div>
+
+
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-file-signature text-xl"></i>
+
+              </div>
+              <div class="flex-grow">
+                <span class="block text-lg sm:text-xl font-bold">{{documentsApproved}}</span>
+                <span class="block text-gray-500">Documentos Aprovados</span>
+              </div>
+            </div>
+
+
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-money-bill text-xl"></i>
+
+              </div>
+              <div class="flex-grow">
+                <span class="block text-lg sm:text-xl font-bold">{{totalEarnings}}</span>
+                <span class="block text-gray-500">Receita total</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="flex flex-col md:col-span-1 row-span-8 bg-white shadow rounded-lg">
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p>Biblioteca</p>
+            <app-tooltip [tooltipText]="'Estatísticas relativas à biblioteca da aplicação.'"></app-tooltip>
+
+          </div>
+
+          <div class="p-4 flex-grow grid grid-cols-1 grid-rows-2 gap-4 h-1 ">
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-book text-xl"></i>
+
+              </div>
+              <div class="flex-grow">
+                <span class="block text-lg sm:text-xl font-bold">574</span>
+                <span class="block text-gray-500">Livros Registados</span>
+              </div>
+            </div>
+
+
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+              <div class="inline-flex items-center justify-center h-16 w-16 sm:h-12 sm:w-12 text-blue-600 bg-blue-100 rounded-full mr-6">
+                <i class="fas fa-users text-xl"></i>
+
+              </div>
+              <div class="flex-grow">
+                <span class="block text-lg sm:text-xl font-bold">357</span>
+                <span class="block text-gray-500">Autores</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+        <!--<div class="flex flex-col row-span-3 bg-white shadow rounded-lg">
+          <div class="px-6 py-5 font-semibold border-b border-gray-100">Students by type of studying</div>
+          <div class="p-4 flex-grow">
+            <div class="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
+          </div>
+        </div>-->
+      </section>
+
+
+
+      <section class="grid sm:grid-cols-2  xl:grid-cols-4 xl:grid-rows-2 xl:grid-flow-col gap-12">
+        <div class="flex flex-col md:col-span-4 md:row-span-2 bg-white shadow rounded-lg">
+          <div class="px-6 py-5 font-semibold border-b border-gray-100 flex space-x-4">
+            <p>Análise Demográfica </p>
+            <app-tooltip [tooltipText]="'Gráficos referentes à análise demografica da aplicação.'"></app-tooltip>
+          </div>
+
+
+
+          <div class="p-4 flex-grow grid grid-cols-2 grid-rows-2 gap-16 ">
+
+            <div class="flex flex-wrap items-center justify-center px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-50 border-2 border-gray-200 shadow hover:shadow-xl transition duration-200 rounded-md col-span-1 row-span-2">
+
+
+              <h3 class="text-2xl text-gray-500">Cidadãos por género</h3>
+
+              <app-gender-chart [citizens]="citizens"></app-gender-chart>
+
+            </div>
+
+
+            <div class="flex flex-wrap items-center justify-center px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-50 border-2 border-gray-200 shadow hover:shadow-xl transition duration-200 rounded-md col-span-1 row-span-2">
+
+
+
+              <app-age-chart [citizens]="citizens"></app-age-chart>
+              <h3 class="text-2xl text-gray-500">Cidadãos por idade</h3>
+
+            </div>
+
+
+
+
+            <div class="flex flex-wrap items-center justify-center px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-50 border-2 border-gray-200 shadow hover:shadow-xl transition duration-200 rounded-md col-span-1 row-span-2">
+
+              <h3 class="text-2xl text-gray-500">Municípios por distrito</h3>
+
+              <app-districts-map></app-districts-map>
+
+            </div>
+
+
+
+            <div class="flex flex-wrap items-center justify-center px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-50 border-2 border-gray-200 shadow hover:shadow-xl transition duration-200 rounded-md col-span-1 row-span-2">
+
+              <h3 class="text-2xl text-gray-500 ">Cidadãos por distrito</h3>
+
+              <app-citizens-map></app-citizens-map>
+
+
+
+            </div>
+
+          </div>
+
+
+
+
+
+        </div>
+
+        <!--<div class="flex flex-col row-span-3 bg-white shadow rounded-lg">
+          <div class="px-6 py-5 font-semibold border-b border-gray-100">Students by type of studying</div>
+          <div class="p-4 flex-grow">
+            <div class="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
+          </div>
+        </div>-->
+      </section>
+    </main>
+  </div>
+</body>
+
+<app-footer />

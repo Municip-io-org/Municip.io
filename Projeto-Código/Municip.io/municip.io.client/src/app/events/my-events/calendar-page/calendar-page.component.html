@@ -1,5 +1,8 @@
-<app-header-loggedin/>
+<app-header-loggedin />
+<app-smaller-banner title="Os Meus Eventos" [image]="municipalityImage"
+                    class="font-inter" />
+
 <div class="mx-10 my-20">
-  <app-calendar />
+  <app-calendar [events$]="events$" [activeDayIsOpen]="eventsToday"/>
 </div>
-<app-footer/>
+<app-footer />

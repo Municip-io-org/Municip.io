@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { CalendarDateFormatter, CalendarEvent, CalendarEventTitleFormatter, CalendarMonthViewDay, CalendarView, CalendarWeekViewBeforeRenderEvent } from 'angular-calendar';
 
 
@@ -13,9 +13,7 @@ import { Router } from '@angular/router';
 import { UserAuthService } from '../../../services/user-auth.service';
 
 
-/**
- * Componente responsável por exibir um calendário de eventos.
- */
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -33,6 +31,18 @@ import { UserAuthService } from '../../../services/user-auth.service';
     },
   ],
 })
+/**
+ * @class CalendarComponent
+ *
+ * Este componente é responsável por exibir um calendário de eventos.
+ *
+ * @param view - O modo de visualização do calendário.
+ * @param viewDate - A data de visualização do calendário.
+ * @param events$ - Os eventos do calendário.
+ * @param locale - O idioma do calendário.
+ * @param activeDayIsOpen - Indica se o dia ativo está aberto.
+ *
+ */
 export class CalendarComponent implements OnInit {
 
   /**
@@ -47,35 +57,8 @@ export class CalendarComponent implements OnInit {
    * Método executado ao inicializar o componente.
    */
   ngOnInit(): void {
-    // Obtém os dados do usuário autenticado
-    this.authService.getUserData().subscribe((user) => {
-      // Obtém os eventos do usuário
-      this.events$ = this.eventService.getUserEvents(user.email).pipe(
-        map((events) => {
-          return events.map((event) => {
-            return {
-              title: event.title,
-              start: new Date(event.startDate),
-              end: new Date(event.endDate),
-              cssClass: 'event-cell',
-              meta: {
-                event: event
-              }
-            };
-          });
-        })
-      );
-    },
-    (error) => {
-      console.error(error);
-    });
 
-    // Verifica se não há eventos e fecha o dia ativo
-    this.events$.subscribe((events) => {
-      if (events.length === 0) {
-        this.activeDayIsOpen = false;
-      }
-    });
+
   }
 
   /**
@@ -91,7 +74,7 @@ export class CalendarComponent implements OnInit {
   /**
    * Os eventos do calendário.
    */
-  events$: Observable<CalendarEvent<{ event: Event }>[]> = new Observable<CalendarEvent<{ event: Event }>[]>();
+  @Input() events$: Observable<CalendarEvent<{ event: Event }>[]> = new Observable<CalendarEvent<{ event: Event }>[]>();
 
   /**
    * O idioma do calendário.
@@ -101,7 +84,7 @@ export class CalendarComponent implements OnInit {
   /**
    * Indica se o dia ativo está aberto.
    */
-  activeDayIsOpen: boolean = true;
+  @Input() activeDayIsOpen: boolean = true;
 
   /**
    * Manipula o evento de clique em um dia do calendário.

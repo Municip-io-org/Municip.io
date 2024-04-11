@@ -9,10 +9,26 @@ import { Login } from './user-auth.service';
 @Injectable({
   providedIn: 'root'
 })
+  /**
+   * Serviço para Citizen Authentication
+   */
 export class CitizenAuthService {
 
+  /**
+   * @constructor
+   * CitizenAuthService
+   * 
+   * @param http 
+   */
   constructor(private http: HttpClient) { }
 
+  /**
+   * Faz o Registo
+   * 
+   * @param citizen O cidadão a registar
+   * @param image A imagem do cidadão
+   * @returns O cidadão registado
+   */
   registerCitizen(citizen: Citizen, image: File): Observable<Citizen> {
     var headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
     let imgurl = "https://api.imgur.com/3/image";
@@ -25,9 +41,12 @@ export class CitizenAuthService {
         citizen.photo = response['data']['link'];
         citizen.events = [];
         citizen.browsers = [];
+        
         return this.http.post<Citizen>('api/accounts/registerCitizen', citizen);
       }));
   }
+  
+
 }
 
 export interface Citizen {

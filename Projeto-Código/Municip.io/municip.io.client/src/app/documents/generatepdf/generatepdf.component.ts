@@ -14,6 +14,19 @@ import { filter } from 'rxjs';
   templateUrl: './generatepdf.component.html',
   styleUrl: './generatepdf.component.css'
 })
+/**
+ * @class GeneratepdfComponent
+ *
+ * Este componente é responsável por gerar um PDF.
+ *
+ * @param document - O documento.
+ * @param citizenKeys - As chaves do objeto cidadão.
+ * @param replacedText - O texto substituído.
+ * @param municipalityInfo - As informações do município.
+ * 
+ * @returns Um PDF gerado.
+ *
+ **/
 export class GeneratepdfComponent implements OnInit {
 
   document: RequestDocument | null = null;
@@ -24,12 +37,29 @@ export class GeneratepdfComponent implements OnInit {
   replacedText: string = '';
   municipalityInfo!: Municipality;
 
+  /**
+   * @constructor
+   *
+   * Este construtor é responsável por injetar o serviço de roteamento, o serviço de ativação de rotas, o serviço de documentos e o serviço de autenticação de utilizadores.
+   *
+   * @param router - O serviço de roteamento.
+   * @param route - O serviço de ativação de rotas.
+   * @param documentService - O serviço de documentos.
+   * @param userAuthService - O serviço de autenticação de utilizadores.
+   *
+   **/
   constructor(private router: Router, private route: ActivatedRoute, private documentService: DocsDataService, private userAuthService: UserAuthService
   ) { }
 
 
 
 
+  /**
+   * Este método é responsável por inicializar o componente.
+   * 
+   * @returns As informações do município.
+   *
+   **/
   ngOnInit(): void {
 
     this.municipalityInfo = {
@@ -105,6 +135,14 @@ export class GeneratepdfComponent implements OnInit {
 
 
 
+  /**
+   * Este método é responsável por substituir as propriedades do cidadão.
+   * 
+   * @param citizen - O cidadão.
+   *
+   * @returns O texto substituído.
+   *
+   **/
   replaceProperties(citizen: Citizen | undefined): string {
 
 
@@ -127,6 +165,12 @@ export class GeneratepdfComponent implements OnInit {
 
 
 
+  /**
+   * Este método é responsável por descarregar o PDF e navegar.
+   * 
+   * @returns O PDF descarregado.
+   *
+   **/
   async downloadPDFAndNavigate(): Promise<void> {
     const data = document.getElementById('contentToConvert');
 

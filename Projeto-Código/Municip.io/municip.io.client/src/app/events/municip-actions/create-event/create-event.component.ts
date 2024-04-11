@@ -20,7 +20,21 @@ import { Editor, Toolbar } from 'ngx-editor';
 
 
 /**
+ * @class CreateEventComponent
  * Componente responsável por criar um evento.
+ *
+ * @param municipalityImage - A imagem do município.
+ * @param municipalityName - O nome do município.
+ * @param error - O erro.
+ * @param image - A imagem.
+ * @param imageUrl - A URL da imagem.
+ * @param files - Os ficheiros.
+ * @param isDialogOpen - O estado do dialog.
+ * @param editor - O editor.
+ * @param toolbar - A barra de ferramentas.
+ * @param minDateRegistration - A data mínima de registo.
+ * @param minDateEvent - A data mínima do evento.
+ * 
  */
 export class CreateEventComponent implements OnInit {
 
@@ -46,6 +60,10 @@ export class CreateEventComponent implements OnInit {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
+  minDateRegistration: Date = new Date();
+  minDateEvent: Date = new Date();
+
+
   /**
    * Construtor do componente.
    * @param dateAdapter
@@ -58,16 +76,15 @@ export class CreateEventComponent implements OnInit {
   ) {
     // Set the locale to pt in the calendar
     this.dateAdapter.setLocale('pt');
-
-
-
-
   }
 
   /**
    * Método onInit 
    */
   ngOnInit(): void {
+    this.minDateRegistration.setDate(new Date().getDate() - 2);
+    this.minDateEvent.setDate(this.minDateRegistration.getDate() + 1);
+
     this.editor = new Editor();
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
@@ -79,8 +96,20 @@ export class CreateEventComponent implements OnInit {
 
     });
 
+    //when the user changes de end date of registration, the start date of the event should be updated
+    this.eventForm.get('eventRegistration')?.valueChanges.subscribe((value) => {
+      if (value.endDate) {
+
+        this.minDateEvent = new Date(value.endDate);
+        this.minDateEvent.setDate(this.minDateEvent.getDate() + 1);
+      }
+    })
+
   }
 
+  /**
+   * Método OnDestroy
+   */
   ngDestroy() {
     this.editor.destroy();
   }
@@ -106,8 +135,7 @@ export class CreateEventComponent implements OnInit {
 
   })
 
-
-
+  // Getters
   get title() {
     return this.eventForm.get('title');
   }
@@ -249,6 +277,11 @@ export class CreateEventComponent implements OnInit {
 
 
 
+  /**
+   * Método responsável por validar se o ficheiro é uma imagem
+   * @param file
+   * @returns
+   */
 
   isValidImageFile(file: File): boolean {
     // Adicione aqui a lógica para validar se o arquivo é uma imagem
@@ -256,10 +289,18 @@ export class CreateEventComponent implements OnInit {
     return file.type.startsWith('image/');
   }
 
+  /**
+   * Método responsável por prevenir o comportamento padrão do navegador
+   * @param event
+   */
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
 
+  /**
+   * Método responsável por prevenir o comportamento padrão do navegador
+   * @param event
+   */
   onDrop(event: DragEvent) {
     event.preventDefault();
     const files: FileList | null = event.dataTransfer?.files || null;

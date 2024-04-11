@@ -54,6 +54,17 @@ import { IsNewsFeatureActive } from './utils/guard/isNewsFeaturesActive/is-news-
 import { IsTransportFeatureActive } from './utils/guard/isTransportFeatureActive/is-transport-feature-active.guard';
 import { TemplateListComponent } from './documents/template-list/template-list.component';
 import { EditTemplateComponent } from './documents/edit-template/edit-template.component';
+import { RequestsComponent } from './library/requests/requests.component';
+import { CreateBookComponent } from './library/create-book/create-book.component';
+import { AdminStatisticsDashboardComponent } from './admin-statistics-dashboard/admin-statistics-dashboard.component';
+import { MunadminStatisticsDashboardComponent } from './munadmin-statistics-dashboard/munadmin-statistics-dashboard.component';
+import { MyRequestsComponent } from './library/my-requests/my-requests.component';
+import { LibraryListComponent } from './library/library-list/library-list.component';
+import { BookPageComponent } from './library/book-page/book-page.component';
+import { EditBookComponent } from './library/edit-book/edit-book.component';
+import { LibraryHomepageComponent } from './library/library-homepage/library-homepage.component';
+import { MunicipalCalendarComponent } from './events/municipal-calendar/municipal-calendar.component';
+
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full', data: { animation: 'Home' } },
@@ -84,27 +95,37 @@ const routes: Routes = [
   { path: 'municipal/profile', component: MunicipalProfileComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'municipal/edit', component: MunicipalEditComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'citizen/homePage', component: CitizenHomePageComponent, data: {}, canActivate: [CitizenGuard] },
-  { path: 'events/create', component: CreateEventComponent, data: {}, canActivate:[IsEventsFeatureActive,MunicipalAdminGuard] },
-  { path: 'events/edit/:eventId', component: EditEventComponent, data: {}, canActivate: [IsEventsFeatureActive,MunicipalAdminGuard, UserSameMunicipalityGuard] },
-  { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [IsEventsFeatureActive,CitizenGuard] },
-  { path: 'events/myEvents', component: EventsListComponent, data: {}, canActivate: [IsEventsFeatureActive,CitizenGuard] },
-  { path: 'events', component: MunicipalEventsComponent, data: {}, canActivate: [IsEventsFeatureActive,CitizenOrMunicipalAdminGuard] },
-  { path: 'events/:eventId', component: EventPageComponent, data: {}, canActivate: [IsEventsFeatureActive,UserSameMunicipalityGuard] },
+  { path: 'events/create', component: CreateEventComponent, data: {}, canActivate: [IsEventsFeatureActive, MunicipalAdminGuard] },
+  { path: 'events/edit/:eventId', component: EditEventComponent, data: {}, canActivate: [IsEventsFeatureActive, MunicipalAdminGuard, UserSameMunicipalityGuard] },
+  { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [IsEventsFeatureActive, CitizenGuard] },
+  { path: 'events/municipal-calendar', component: MunicipalCalendarComponent, canActivate: [IsEventsFeatureActive, MunicipalAdminGuard] },
+  { path: 'events/myEvents', component: EventsListComponent, data: {}, canActivate: [IsEventsFeatureActive, CitizenGuard] },
+  { path: 'events', component: MunicipalEventsComponent, data: {}, canActivate: [IsEventsFeatureActive, CitizenOrMunicipalAdminGuard] },
+  { path: 'events/:eventId', component: EventPageComponent, data: {}, canActivate: [IsEventsFeatureActive, UserSameMunicipalityGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} },
-  { path: 'news', component: NewsListComponent, data: {}, canActivate: [IsNewsFeatureActive,CitizenOrMunicipalAdminGuard] },
-  { path: 'news/news-create', component: NewsCreateComponent, data: {}, canActivate: [IsNewsFeatureActive,MunicipalAdminGuard]  },
-  { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [IsEventsFeatureActive,CitizenGuard] },
-  { path: 'news/:newsId', component: NewsPageComponent, data: {}, canActivate: [IsNewsFeatureActive,UserSameMunicipalityGuard] },
-  { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [IsNewsFeatureActive,UserSameMunicipalityGuard, MunicipalAdminGuard,] },
+  { path: 'news', component: NewsListComponent, data: {}, canActivate: [IsNewsFeatureActive, CitizenOrMunicipalAdminGuard] },
+  { path: 'news/news-create', component: NewsCreateComponent, data: {}, canActivate: [IsNewsFeatureActive, MunicipalAdminGuard] },
+  { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [IsEventsFeatureActive, CitizenGuard] },
+  { path: 'news/:newsId', component: NewsPageComponent, data: {}, canActivate: [IsNewsFeatureActive, UserSameMunicipalityGuard] },
+  { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [IsNewsFeatureActive, UserSameMunicipalityGuard, MunicipalAdminGuard,] },
   { path: 'documents', component: DocsHomepageComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
   { path: 'acessBlocked', component: AccessBlockedComponent, data: {} },
   { path: 'documents/request', component: RequestDocumentComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
-  { path: 'documents/my', component: MyDocumentsComponent, canActivate: [IsDocumentFeatureActive] },
-  { path: 'documents/approve', component: ApproveDocumentsComponent, data: {}, canActivate: [IsDocumentFeatureActive,MunicipalAdminGuard] },
-  { path: 'documents/createtemplate', component: CreateTemplateComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
-  { path: 'documents/edit-template/:templateId', component: EditTemplateComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
+  { path: 'documents/my', component: MyDocumentsComponent, canActivate: [IsDocumentFeatureActive, CitizenGuard] },
+  { path: 'documents/approve', component: ApproveDocumentsComponent, data: {}, canActivate: [IsDocumentFeatureActive, MunicipalAdminGuard] },
+  { path: 'documents/createtemplate', component: CreateTemplateComponent, data: {}, canActivate: [IsDocumentFeatureActive, MunicipalAdminGuard] },
+  { path: 'documents/edit-template/:templateId', component: EditTemplateComponent, data: {}, canActivate: [UserSameMunicipalityGuard, IsDocumentFeatureActive, MunicipalAdminGuard] },
   { path: 'documents/generate-pdf', component: GeneratepdfComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
-  { path: 'documents/template-list', component: TemplateListComponent }
+  { path: 'documents/template-list', component: TemplateListComponent, canActivate: [IsDocumentFeatureActive, MunicipalAdminGuard] },
+  { path: 'library/create', component: CreateBookComponent, data: {} },
+  { path: 'library/requests', component: RequestsComponent, data: {} },
+  { path: 'library/my', component: MyRequestsComponent, data: {} },
+  { path: 'library/librarylist', component: LibraryListComponent, data: {} },
+  { path: 'library/:bookId', component: BookPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
+  { path: 'library/edit/:bookId', component: EditBookComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
+  { path: 'adminstatistics', component: AdminStatisticsDashboardComponent },
+  { path: 'munadminstatistics', component: MunadminStatisticsDashboardComponent },
+  { path: 'library', component: LibraryHomepageComponent }
 
 ];
 

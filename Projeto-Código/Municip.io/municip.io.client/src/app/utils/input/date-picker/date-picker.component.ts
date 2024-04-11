@@ -12,6 +12,9 @@ export class DatePickerComponent {
 
   @Input() date!: FormControl;
   @Input() name: string = "date";
+  @Input() class = "";
+
+  @Input() minDate: Date = new Date(1900, 0, 1);
 
 
   get control() {

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, output } from '@angular/core';
-import { RequestDocument, StatusDocument } from '../../../services/documents/docs.service';
+import { RequestDocument, StatusDocument, statusToString } from '../../../services/documents/docs.service';
 
 
 @Component({
@@ -26,6 +26,10 @@ export class DocumentApproveCardComponent {
       return 'bg-[#FF0000] text-[#B02121]';
     }
   }
+
+  getStatusString(status: StatusDocument): string {
+    return statusToString(status)
+  }
   /**
    * Colocar o documento em estado de espera de pagamento
    * @param doc
@@ -42,6 +46,7 @@ export class DocumentApproveCardComponent {
     this.deleteDoc.emit(doc);
 
   }
+
 
   
 }

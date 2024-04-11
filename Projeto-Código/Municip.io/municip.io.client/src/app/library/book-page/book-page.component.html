@@ -1,0 +1,182 @@
+<app-header-loggedin></app-header-loggedin>
+
+
+<ng-container *ngIf="isDialogOpen">
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" (confirm)="closeDialog()"
+                      [isConfirm]="isReserveSuccesfull"></app-dialog-message>
+</ng-container>
+
+
+<ng-container *ngIf="isRemoveBookDialogOpen">
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" [twoButtons]="true" (confirm)="removeBook()" (cancel)="closeRemoveBookDialog()"
+                      [isConfirm]="isConfirmDialog"></app-dialog-message>
+</ng-container>
+
+<app-smaller-banner title="Biblioteca de {{municipality.name}}"
+                    [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'">
+
+</app-smaller-banner>
+<ng-container *ngIf="isDialogOpenBorrow">
+  <app-dialog-content title="Requisitar o livro {{book.title}}"
+                      message="Insira os dados para realizar a requisição"
+                      confirmButtonClass="disabled:cursor-not-allowed"
+                      [confirmButtonDisabled]="!borrowForm.valid"
+                      (cancel)="closeDialogBorrow()"
+                      (confirm)="borrowBook()">
+    <form [formGroup]="borrowForm" class="mt-5">
+      <div class="h-28 w-full">
+        <app-input-title class="">Data de Retorno</app-input-title>
+        <div class="flex items-center">
+          <app-date-picker [date]="returnDateControl" name="returnDate" class="w-3/5"
+                           [minDate]="minDate" />
+
+          <app-tooltip [tooltipText]="'Utilize o seletor para a inserção da data'"></app-tooltip>
+        </div>
+        <div class="py-2 font-bold text-red-500" *ngIf="returnDateControl?.touched && returnDateControl?.invalid">
+          <div *ngIf="returnDateControl?.errors?.['required'] ">Data Obrigatória</div>
+        </div>
+      </div>
+      <div class="h-28">
+        <app-input-title>Email</app-input-title>
+        <input required placeholder="Introduza o email do cidaão" type="email" id="email" formControlName="citizenEmail" name="email"
+               class="input h-12 w-3/5" />
+        <div class="py-2 font-bold text-red-500" *ngIf="citizenEmailControl?.touched && citizenEmailControl?.invalid ">
+          <div *ngIf="citizenEmailControl?.errors?.['required'] ">Email Obrigatório</div>
+          <div *ngIf="citizenEmailControl?.errors?.['email']">Email Inválido</div>
+        </div>
+      </div>
+    </form>
+  </app-dialog-content>
+</ng-container>
+
+<div class="py-[4rem] text-municip-normal-black font-inter min-h-[28rem] relative flex flex-col gap-y-20 bg-municip-blank px-32 pt-24">
+  <div *ngIf="isMunAdmin" class="absolute -top-3 flex space-x-20">
+    <div class="text-[1.063rem] font-roboto flex items-center justify-center">
+      <app-black-btn-icon-text altImage="Editar livro"
+                               image="/assets/images/icons/pencil-white.png"
+                               (buttonClick)="goToEditBookPage()">
+        Editar livro
+      </app-black-btn-icon-text>
+    </div>
+    <div class="text-[1.063rem] font-roboto flex items-center justify-center">
+      <app-black-btn-icon-text altImage="Remover livro"
+                               image="/assets/images/icons/delete-white.png"
+                               (buttonClick)="openRemoveBookDialog()">
+        Remover livro
+      </app-black-btn-icon-text>
+    </div>
+    <div class="text-[1.063rem] font-roboto flex items-center justify-center" *ngIf="book.availableCopies > 0">
+      <app-black-btn-icon-text altImage="Remover livro"
+                               image="/assets/images/icons/plus-white.png"
+                               (buttonClick)="openDialogBorrow()">
+        Requisições
+      </app-black-btn-icon-text>
+    </div>
+  </div>
+
+  <section class="text-[1.063rem] -mt-12 flex justify-center gap-x-12 text-municip-gray">
+
+
+    <img [src]="book.coverImage ? book.coverImage : '/assets/images/placeholder/Landscape placeholder.jpg'"
+         alt="Capa do livro"
+         class="w-[15rem] h-[21rem] rounded object-cover" />
+
+
+
+
+    <div class="flex gap-12">
+
+      <div class="flex flex-col gap-3">
+
+
+        <div class="text-[1.2rem] flex flex-col flex-wrap items-baseline gap-1">
+
+          <span class="font-open-sans text-[2.4rem] text-municip-highlight-black font-bold">{{book.title}}</span>
+
+          <div class="flex flex-wrap pl-3">
+            <ng-container *ngFor="let author of book.author; let last = last ">
+              <span class="font-roboto font-extralight">{{author}}<ng-container *ngIf="!last">,&nbsp;</ng-container></span>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap pl-5">
+          <ng-container *ngFor="let genre of book.genre; let last = last ">
+            <span class="font-inter text-municip-highlight-black">{{genre}}<ng-container *ngIf="!last">,&nbsp;</ng-container></span>
+          </ng-container>
+        </div>
+
+        <div class="flex flex-col pl-5">
+          <span>Editora: {{book.publisher}}</span>
+          <span>Edição: {{book.edition}}</span>
+          <span>Língua: {{book.language}}</span>
+          <span>Publicação: {{book.publicationDate | date: "dd/MM/yyyy" }}</span>
+          <span>ISBN: {{book.isbn}}</span>
+          <span>Cópias Disponíveis: {{book.availableCopies}}</span>
+        </div>
+      </div>
+
+
+      <ng-container *ngIf="!isMunAdmin && !bookRequest">
+        <ng-container *ngIf="book.availableCopies > 0">
+          <app-btn-municip-blue width="10rem" (click)="reserveBook()">
+            Reservar
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
+          </app-btn-municip-blue>
+        </ng-container>
+
+        <ng-container *ngIf="book.availableCopies <= 0">
+          <div class="flex w-fit items-center justify-center space-x-4">
+            <div class="size-10 min-w-10 rounded-full bg-red-600"></div>
+            <p class="font-bold">Indisponível para reserva</p>
+          </div>
+        </ng-container>
+      </ng-container>
+
+
+      <ng-container *ngIf="bookRequest && !isMunAdmin">
+        <ng-container *ngIf="this.bookRequest.status === BookRequestStatus().Reserved">
+          <div class="flex flex-col items-center space-y-4">
+
+            <div *ngIf="this.bookRequest.status === BookRequestStatus().Reserved" class="flex w-fit flex-col space-y-5">
+              <div class="flex flex-col items-center gap-3">
+                <p class="font-inter text-center">Tempo Restante: <br />{{ getTimeLeft(bookRequest.reservationLimitDate!)  }}</p>
+                <p class="font-inter text-center">Dirija-se à Biblioteca Municipal para requisitar o livro</p>
+              </div>
+            </div>
+            <app-btn-municip-blue width="10rem" (click)="cancelBookReserve()">
+              Cancelar reserva
+              <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
+            </app-btn-municip-blue>
+
+          </div>
+        </ng-container>
+        <ng-container *ngIf="this.bookRequest.status !== BookRequestStatus().Reserved && bookRequest">
+          <div class="flex flex-col space-y-5">
+            <div class="border-2 flex flex-col items-center rounded-lg border-municip-blue px-4 py-4 text-center">
+              <p *ngIf="this.bookRequest.status !== BookRequestStatus().Denied && this.bookRequest.status !== BookRequestStatus().Delivered "
+                 class="font-inter">Entregar até: {{ bookRequest.returnDate | date:'dd/MM/yyyy'  }}</p>
+              <p *ngIf="this.bookRequest.status === BookRequestStatus().Delivered"
+                 class="font-inter">Entregue em: {{ bookRequest.deliveredDate| date:'dd/MM/yyyy'  }}</p>
+
+              <div class="{{ getStatusClass() }} flex w-44 justify-center rounded-md bg-opacity-35">
+                <p class="font-inter font-semibold">{{ getStatusString(this.bookRequest.status) }}</p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+
+  </section>
+
+
+  <section class="px-[3rem] pb-[3rem] flex flex-col">
+    <span class="font-open-sans text-[2rem] text-municip-highlight-black pb-2 font-semibold">Sinopse</span>
+    <div innerHTML="{{book.sinopsis}}" class="text-municip-normal-black text-[1.25rem] text-left">
+    </div>
+  </section>
+
+
+</div>
+<app-footer></app-footer>
