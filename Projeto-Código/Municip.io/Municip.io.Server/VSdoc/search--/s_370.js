@@ -1,1 +1,1 @@
-search_result['370']=["topic_0000000000000092_events--.html","AppFeatureCategoryExtensions Events",""];
+search_result['370']=["topic_0000000000000080.html","StatsController.getAllNews Method","Obtem todas as notícias"];

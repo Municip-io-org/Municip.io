@@ -1,1 +1,1 @@
-search_result['100']=["topic_0000000000000026.html","DocumentController.EditDocumentTemplateAsync Method","Method to edit a document template"];
+search_result['100']=["topic_0000000000000026.html","BookController.DeliverBookAsync Method","Completa o pedido de empréstimo"];

@@ -1,1 +1,1 @@
-search_result['361']=["topic_000000000000008B.html","AppFeature.IsEnabled Property",""];
+search_result['361']=["topic_000000000000007C.html","StatsController.getAllCitizens Method","Esta função retorna todos os cidadãos como json."];

@@ -1,1 +1,1 @@
-search_result['349']=["topic_0000000000000086_methods--.html","AccountUserEmailExtensions Methods",""];
+search_result['349']=["topic_000000000000007A.html","StatsController Class",""];

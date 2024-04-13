@@ -1,1 +1,1 @@
-search_result['155']=["topic_000000000000003C_methods--.html","ApplicationDbContext Methods",""];
+search_result['155']=["topic_000000000000003A.html","DocumentController.SendLinkPayment Method","Method to change the status of a document template to active"];

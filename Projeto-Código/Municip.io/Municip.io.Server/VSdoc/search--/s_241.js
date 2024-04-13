@@ -1,1 +1,1 @@
-search_result['241']=["topic_000000000000005C_events--.html","WeatherForecast Events",""];
+search_result['241']=["topic_0000000000000054.html","EventsController.RemoveCitizen Method","Esta chamada permite remover um cidadão de um evento passando o id do evento e o email do cidadão como parâmetros"];

@@ -1,1 +1,1 @@
-search_result['372']=["topic_0000000000000092_props--.html","AppFeatureCategoryExtensions Properties",""];
+search_result['372']=["topic_0000000000000082.html","StatsController.getLandingPageCitizens Method","O método abaixo é utilizado para obter o número de cidadãos para a página inicial"];

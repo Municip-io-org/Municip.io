@@ -1,1 +1,1 @@
-search_result['321']=["topic_000000000000007B_attached_props--.html","DataSeeder Attached Properties",""];
+search_result['321']=["topic_000000000000006D.html","MunicipalityStatusController.deleteAllAccountsByMunicipality Method","Esta função remove todas as contas de administradores de um município. Recebe como parâmetro o nome do município. Não é uma ação passível de ser chamada via API"];

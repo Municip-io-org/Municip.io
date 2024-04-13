@@ -139,9 +139,10 @@
           <div class="flex flex-col items-center space-y-4">
 
             <div *ngIf="this.bookRequest.status === BookRequestStatus().Reserved" class="flex w-fit flex-col space-y-5">
-              <div class="flex flex-col items-center gap-3">
-                <p class="font-inter text-center">Tempo Restante: <br />{{ getTimeLeft(bookRequest.reservationLimitDate!)  }}</p>
+              <div class="flex flex-col items-center gap-2">
                 <p class="font-inter text-center">Dirija-se à Biblioteca Municipal para requisitar o livro</p>
+                <p class="font-inter text-center">Tempo restante da reserva: <br />{{ getTimeLeft(bookRequest.reservationLimitDate!)  }}</p>
+
               </div>
             </div>
             <app-btn-municip-blue width="10rem" (click)="cancelBookReserve()">

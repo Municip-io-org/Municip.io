@@ -1,1 +1,1 @@
-search_result['116']=["topic_000000000000002C.html","DocumentController.GetTemplatesFromMunicipality Method","Method to get the templates from a municipality"];
+search_result['116']=["topic_000000000000002A_events--.html","CitizenStatusController Events",""];

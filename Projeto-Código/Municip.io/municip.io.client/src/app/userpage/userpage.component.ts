@@ -231,6 +231,7 @@ export class UserpageComponent {
     this.editMode = !this.editMode;
     if (this.editMode) {
       this.profileEdit.enable();
+      this.profileEdit.controls['email'].disable();
     } else {
       this.profileEdit.disable();
     }

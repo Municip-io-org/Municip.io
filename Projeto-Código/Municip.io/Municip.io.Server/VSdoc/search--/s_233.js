@@ -1,1 +1,1 @@
-search_result['233']=["topic_0000000000000059_events--.html","WeatherForecast Events",""];
+search_result['233']=["topic_0000000000000051.html","EventsController.GetEventById Method","Esta chamada permite obter um evento por id passando o id do evento como parâmetro e retorna um objeto do tipo Event"];

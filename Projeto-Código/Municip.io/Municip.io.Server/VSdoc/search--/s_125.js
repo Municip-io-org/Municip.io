@@ -1,1 +1,1 @@
-search_result['125']=["topic_0000000000000032_methods--.html","DocumentTemplateStatusController Methods",""];
+search_result['125']=["topic_0000000000000030.html","CitizenStatusController.pendingCitizen Method","Esta função desbloqueia um cidadão. Recebe como parâmetro o email do cidadão ."];

@@ -1,1 +1,1 @@
-search_result['283']=["topic_000000000000006B_props--.html","CitizenStatusMessageExtensions Properties",""];
+search_result['283']=["topic_0000000000000060.html","MunicipalAdministratorStatusController.pendingMunicipalAdministrator Method","Esta função desbloqueia um administrador. Recebe como parâmetro o email do administrador ."];

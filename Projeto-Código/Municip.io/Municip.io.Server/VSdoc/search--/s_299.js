@@ -1,1 +1,1 @@
-search_result['299']=["topic_0000000000000070_vars--.html","ApplicationDbContext Fields",""];
+search_result['299']=["topic_0000000000000066.html","MunicipalityStatusController Class","Este controlador é responsável por gerir o estado dos municípios."];

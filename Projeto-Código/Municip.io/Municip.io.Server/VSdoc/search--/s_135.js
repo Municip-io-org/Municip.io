@@ -1,1 +1,1 @@
-search_result['135']=["topic_0000000000000035.html","DocumentTemplateStatusController.Deactivate Method","Method to deactivate the document template"];
+search_result['135']=["topic_0000000000000034_attached_props--.html","NewsController Attached Properties",""];

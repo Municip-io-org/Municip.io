@@ -1,1 +1,1 @@
-search_result['122']=["topic_0000000000000032.html","DocumentTemplateStatusController Class","Controller to manage the status of the document templates"];
+search_result['122']=["topic_000000000000002D.html","CitizenStatusController.approveCitizen Method","Esta função aprova um cidadão. Recebe como parâmetro o email do cidadão ."];

@@ -1,1 +1,1 @@
-search_result['297']=["topic_0000000000000070_methods--.html","ApplicationDbContext Methods",""];
+search_result['297']=["topic_0000000000000064.html","MunicipalAdministratorStatusController.SendBlock Method","Esta função envia um email de bloqueio para um administrador."];

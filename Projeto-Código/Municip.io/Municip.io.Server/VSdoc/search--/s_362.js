@@ -1,1 +1,1 @@
-search_result['362']=["topic_000000000000008C.html","AppFeature.Municipality Property",""];
+search_result['362']=["topic_000000000000007D.html","StatsController.getAllMunicipalAdmins Method","Obtem todos os administradores municipais"];
