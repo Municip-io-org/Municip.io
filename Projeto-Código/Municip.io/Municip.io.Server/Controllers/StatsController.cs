@@ -116,6 +116,14 @@ namespace Municip.io.Server.Controllers
             return Ok(_context.DocumentRequests.Where(x => x.Municipality == municipality && x.Status == Models.DocumentStatus.WaitingForPayment).Count());
         }
 
-        
+        /// <summary>
+        /// Obtem o todos os livros
+        /// </summary>
+        /// <returns>o json com os livros</returns>
+        [HttpGet("getAllBooks")]
+        public IActionResult getAllBooks()
+        {
+            return Ok(_context.Books);
+        }
     }
 }

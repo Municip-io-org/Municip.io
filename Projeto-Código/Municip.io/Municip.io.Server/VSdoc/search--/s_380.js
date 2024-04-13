@@ -1,1 +1,1 @@
-search_result['380']=["topic_0000000000000094_vars--.html","Browser Fields",""];
+search_result['380']=["topic_0000000000000085.html","StatsController.getWaitingForPaymentRequestsByMunicipality Method","Obtem o número de pedidos de documentos à espera de pagamento"];

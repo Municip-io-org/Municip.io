@@ -1,1 +1,1 @@
-search_result['309']=["topic_0000000000000073_events--.html","Event Events",""];
+search_result['309']=["topic_000000000000006B.html","MunicipalityStatusController.deleteMunicipality Method","Esta função remove um município. Recebe como parâmetro o nome do município."];

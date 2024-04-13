@@ -1,1 +1,1 @@
-search_result['276']=["topic_0000000000000068.html","StripePaymentController.Create Method","method to create a session"];
+search_result['276']=["topic_000000000000005E.html","MunicipalAdministratorStatusController.deleteMunicipalAdministrator Method","Esta função remove um administrador. Recebe como parâmetro o email do administrador ."];

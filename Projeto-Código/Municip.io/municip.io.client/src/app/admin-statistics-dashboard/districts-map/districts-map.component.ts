@@ -35,7 +35,8 @@ export class DistrictsMapComponent {
 
   districtData: [string, number][] = [];
 
-
+  min = 0;
+max = 0;
 
 
   municipalities: Municipality[] = [];
@@ -54,6 +55,7 @@ export class DistrictsMapComponent {
     backgroundColor: 'transparent',
     resolution: "provinces",
     datalessRegionColor: 'transparent',
+    colorAxis: { colors: ['#0cab46', '#f59e0b', '#ef4444'] },
 
 
 
@@ -103,6 +105,8 @@ export class DistrictsMapComponent {
     this.districtData = Array.from(districtMap.entries()).map(([key, value]) => [key, value]);
 
     this.data = this.districtData;
+    this.max = Math.max(...this.districtData.map(d => d[1]));
+this.min = Math.min(...this.districtData.map(d => d[1]));
 
 
   }

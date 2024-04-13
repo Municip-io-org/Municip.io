@@ -1,1 +1,1 @@
-search_result['275']=["topic_0000000000000067.html","StripePaymentController Constructor",""];
+search_result['275']=["topic_000000000000005D.html","MunicipalAdministratorStatusController.approveMunicipalAdministrator Method","Esta função aprova um administrador. Recebe como parâmetro o email do administrador ."];

@@ -262,7 +262,7 @@ namespace Municip.ioTest
             var actionResult = _bookController.CreateBook(newBook);
 
             // Assert
-            Assert.IsType<OkResult>(actionResult);
+            Assert.IsType<OkObjectResult>(actionResult);
         }
 
         [Fact]

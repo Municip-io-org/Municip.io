@@ -1,1 +1,1 @@
-search_result['133']=["topic_0000000000000034_props--.html","NewsController Properties",""];
+search_result['133']=["topic_0000000000000033.html","CitizenStatusController.SendRemove Method","Esta função envia um email de remoção para um cidadão."];

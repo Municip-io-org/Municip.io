@@ -1,1 +1,1 @@
-search_result['124']=["topic_0000000000000032_events--.html","DocumentTemplateStatusController Events",""];
+search_result['124']=["topic_000000000000002F.html","CitizenStatusController.blockCitizen Method","Esta função bloqueia um cidadão. Recebe como parâmetro o email do cidadão ."];

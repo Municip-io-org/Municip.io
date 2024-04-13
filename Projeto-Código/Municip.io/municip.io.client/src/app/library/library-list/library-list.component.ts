@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Book, BookStatus, LibraryService } from '../../services/library/library.service';
-
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router';
 import { Municipality } from '../../services/municipal-admin-auth.service';
@@ -34,6 +33,9 @@ export class LibraryListComponent {
   books: Book[] = [];
   nameSearch: string = '';
   user: any;
+  isMunAdmin: boolean = false;
+  
+
   municipality: Municipality = {
     name: '',
     president: '',
@@ -92,6 +94,15 @@ export class LibraryListComponent {
         this.userAuthService.getInfoByEmail(anyUser.email).subscribe(
           async (res: any) => {
             this.user = res;
+            console.log(this.user);
+
+            
+            const userRole = await this.userAuthService.getUserRole().toPromise();
+            if (userRole!.role === Roles.Municipal) {
+              this.isMunAdmin = true;
+            }
+
+
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               async (municipalityRes: Municipality) => {
                 this.municipality = municipalityRes;
@@ -104,11 +115,9 @@ export class LibraryListComponent {
                   this.loadGenreOptions();
                 });
               });
-            const role = await this.userAuthService.getUserRole().toPromise();
             
             
-
-
+           
           }
         )
       });
@@ -223,6 +232,17 @@ export class LibraryListComponent {
       this.dateOptions = [...new Set(this.books.map(book => {
    return book.publicationDate.toString().split("-")[0];}))].sort();
      
+  }
+
+
+  /**
+   * goToCreateBookPage
+   *
+   * Redireciona para a página de criação de livros
+   *
+   */
+  goToCreateBookPage() {
+    this.router.navigateByUrl(`library/create`);
   }
 
   /**

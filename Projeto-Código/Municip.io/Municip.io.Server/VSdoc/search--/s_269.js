@@ -1,1 +1,1 @@
-search_result['269']=["topic_0000000000000066.html","StripePaymentController Class","controller to payment"];
+search_result['269']=["topic_000000000000005C.html","MunicipalAdministratorStatusController.getMunicipalAdministrators Method","Esta função retorna todos os administradores de um município. Recebe como parâmetro o nome do município."];

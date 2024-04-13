@@ -1,1 +1,1 @@
-search_result['99']=["topic_0000000000000025.html","DocumentController.CreateDocumentTemplateAsync Method","Method to create a document template"];
+search_result['99']=["topic_0000000000000025.html","BookController.DenyRequestAsync Method","Recusa o pedido de empréstimo"];
