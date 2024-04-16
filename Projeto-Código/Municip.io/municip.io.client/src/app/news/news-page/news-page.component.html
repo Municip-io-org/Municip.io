@@ -1,7 +1,7 @@
 
 <app-header-loggedin></app-header-loggedin>
 <app-smaller-banner title={{news.title}}
-                    [image]="'/assets/images/admin/banner.jpg'"
+                    [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"
                     text={{news.subtitle}}></app-smaller-banner>
 <div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
   <div *ngIf="role == 'Municipal'" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
