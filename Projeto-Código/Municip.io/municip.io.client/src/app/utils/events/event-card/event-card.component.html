@@ -1,7 +1,7 @@
-<app-card-outline-theme class="mb-20 ">
-  <div class="relative flex flex-col font-roboto justify-center text-left gap-x-2 max-w-[28rem] h-[35rem] text-[1.063rem] bg-white p-7">
+﻿<app-card-outline-theme class="mb-20">
+  <div class="font-roboto max-w-[28rem] h-[35rem] text-[1.063rem] relative flex flex-col justify-center gap-x-2 bg-white p-7 text-left">
 
-    <div *ngIf="isMunAdmin" class="absolute -top-3 -left-3">
+    <div *ngIf="isMunAdmin" class="absolute -left-3 -top-3">
       <app-black-btn-icon-text altImage="Editar evento"
                                image="/assets/images/icons/pencil-white.png"
                                (buttonClick)="goToEditEventPage()">
@@ -9,7 +9,7 @@
       </app-black-btn-icon-text>
     </div>
 
-    <div *ngIf="isMunAdmin" class="absolute -top-3 -right-3">
+    <div *ngIf="isMunAdmin" class="absolute -right-3 -top-3">
       <app-black-btn-icon-text [justImage]="true"
                                altImage="Remover evento"
                                image="/assets/images/icons/delete-white.png"
@@ -17,21 +17,27 @@
       </app-black-btn-icon-text>
     </div>
 
-    <img [src]="event.image" alt="Foto do evento" class="object-cover w-[28rem] h-[16rem] rounded-3xl" />
-    <p class="text-[0.96rem] text-right font-open-sans font-semibold">De {{event.startDate | date: "d/MM/yyyy"}} a {{event.endDate | date: "d/MM/yyyy"}}</p>
-    <section class="flex flex-col text-municip-highlight-black ">
-      <p class="font-bold text-center text-[2rem] text-ellipsis overflow-hidden line-clamp-2">{{event.title}}</p>
-      <p innerHTML="{{event.description}}" class=" font-bold text-ellipsis overflow-hidden line-clamp-3 "></p>
+    <img (click)="goToEventPage()" [src]="event.image" alt="Foto do evento" class="w-[28rem] h-[16rem] rounded-3xl object-cover hover:cursor-pointer" />
+    <p class="text-[0.96rem] font-open-sans text-right font-semibold">De {{event.startDate | date: "d/MM/yyyy"}} a {{event.endDate | date: "d/MM/yyyy"}}</p>
+
+
+    <section class="text-municip-highlight-black flex flex-col">
+      <a (click)="goToEventPage()"
+         class="text-[2rem] line-clamp-2 cursor-pointer overflow-hidden text-ellipsis text-center font-bold hover:underline">
+        {{ event.title }}
+      </a>
+
+      <p innerHTML="{{event.description}}" class="line-clamp-3 overflow-hidden text-ellipsis font-bold"></p>
     </section>
-    <div class="flex justify-between items-center font-open-sans font-extrabold pt-4">
+    <div class="font-open-sans flex items-center justify-between pt-4 font-extrabold">
       <div class="flex items-center">
-        <img src="/assets/images/icons/user.png" alt="Número de inscrições" class="size-10 mr-2" />
+        <img src="/assets/images/icons/user.png" alt="Número de inscrições" class="mr-2 size-10" />
         {{ event.nRegistrations }}/{{ event.capacity }} inscritos
       </div>
       <app-btn-municip-blue width="10rem"
                             (buttonClick)="goToEventPage()">
         Ver Mais
-        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
       </app-btn-municip-blue>
     </div>
   </div>

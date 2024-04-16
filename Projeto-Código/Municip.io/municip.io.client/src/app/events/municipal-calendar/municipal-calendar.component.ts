@@ -6,6 +6,7 @@ import { EventsService } from '../../services/events/events.service';
 import { Event } from '../../services/events/events.service';
 import { Observable, map } from 'rxjs';
 import { UserAuthService } from '../../services/user-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-municipal-calendar',
@@ -38,7 +39,7 @@ export class MunicipalCalendarComponent {
    * @param authService - O serviço de autenticação de utilizador.
    *
    */
-  constructor(private eventService: EventsService, private authService: UserAuthService) { }
+  constructor(private eventService: EventsService, private authService: UserAuthService, private router: Router) { }
 
   events$: Observable<CalendarEvent<{ event: Event }>[]> = new Observable<CalendarEvent<{ event: Event }>[]>();
 
@@ -85,5 +86,12 @@ export class MunicipalCalendarComponent {
       });
 
     });
+  }
+
+  /**
+   * Método para navegar para a página de criação de evento.
+   */
+  goToEventsPage() {
+    this.router.navigateByUrl(`events`);
   }
 }

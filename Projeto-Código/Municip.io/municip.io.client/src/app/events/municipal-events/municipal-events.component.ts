@@ -67,7 +67,7 @@ export class MunicipalEventsComponent {
   showEvents: Event[] = [];
   nameSearch: string = '';
   ascendingOrder: boolean = true;
-  orderOptions: any[] = [{ label: 'Brevemente', value: true }, { label: 'Mais Distantes', value: false }];
+  orderOptions: any[] = [{ label: 'Brevemente', value: true }, { label: 'Eventos Futuros', value: false }];
  
 
   isLoading = false;
@@ -181,6 +181,27 @@ export class MunicipalEventsComponent {
   }
 
   /**
+   * Método para navegar para o calendário do Município.
+   */
+  goToMunicipalCalendarPage() {
+    this.router.navigateByUrl(`events/municipal-calendar`);
+  }
+
+  /**
+   * Método para navegar para os eventos em que o cidadão está inscrito.
+   */
+  goToMyEventsPage() {
+    this.router.navigateByUrl(`events/myEvents`);
+  }
+
+  /**
+   * Método para navegar para o calendário de eventos do cidadão.
+   */
+  goToCalendarPage() {
+    this.router.navigateByUrl(`events/calendar`);
+  }
+
+  /** 
    * Método para abrir o dialog de remoção de evento.
    * @param eventData - Os dados do evento.
    */

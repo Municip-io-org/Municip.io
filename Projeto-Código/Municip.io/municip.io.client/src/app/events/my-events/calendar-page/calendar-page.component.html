@@ -2,7 +2,22 @@
 <app-smaller-banner title="O Meu Calendário de Eventos" [image]="municipalityImage"
                     class="font-inter" />
 
-<div class="mx-10 my-20">
-  <app-calendar [events$]="events$" [activeDayIsOpen]="eventsToday"/>
+<div class="py-[4rem] text-municip-normal-black min-h-[28rem] relative flex flex-col gap-y-20 bg-municip-blank px-10 pt-20">
+
+  <div class="left-[7rem] text-[1.063rem] font-roboto absolute -top-3 flex items-center justify-center gap-4">
+    <app-black-btn-icon-text altImage="Meus Eventos"
+                             image="/assets/images/icons/event-white.png"
+                             (buttonClick)="goToMunicipalEventsPage()">
+      Eventos do meu Município
+    </app-black-btn-icon-text>
+
+    <app-black-btn-icon-text altImage="Meus Eventos"
+                             image="/assets/images/icons/calendar-white.png"
+                             (buttonClick)="goToMyEventsPage()">
+      Meus Eventos
+    </app-black-btn-icon-text>
+  </div>
+
+  <app-calendar [events$]="events$" [activeDayIsOpen]="eventsToday" />
 </div>
 <app-footer />

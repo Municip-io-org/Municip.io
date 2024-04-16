@@ -231,7 +231,9 @@ export class EventPageComponent {
         this.dialogTitle = 'Inscrição bem-sucedida';
         this.dialogMessage = 'Foi inscrito com sucesso no evento ' + this.event.title;
         
-
+        this.isSuccesfullEnroll = true;
+        this.event.nRegistrations++;
+        this.event.citizens?.push(this.user);
         
       },
       error => {
@@ -254,15 +256,21 @@ export class EventPageComponent {
    *
    */
   dropOutEvent(eventId: string, email: string) {
-
     this.EventsService.dropOutEvent(eventId, email).subscribe(
       response => {
         this.isDialogOpen = true;
         this.dialogTitle = 'Desistência bem-sucedida';
         this.dialogMessage = 'Desistiu com sucesso do evento ' + this.event.title;
-        
+
         this.isSuccesfullEnroll = true;
-        
+
+        this.event.nRegistrations--;
+        if (this.event.citizens && this.user) {
+          const index = this.event.citizens.findIndex(citizen => citizen.email === this.user.email);
+          if (index !== -1) {
+            this.event.citizens.splice(index, 1);
+          }
+        }
       },
       error => {
         this.isDialogOpen = true;
@@ -272,6 +280,7 @@ export class EventPageComponent {
       }
     );
   }
+
 
   /**
    *
