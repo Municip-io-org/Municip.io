@@ -1,4 +1,4 @@
-﻿<header class="font-">
+<header class="font-">
   <div class="py-[0.7rem] font-poppins flex w-full items-center px-3 shadow-md">
 
     <img class="pl-[2rem] w-56" alt="logo" src="/assets/images/logos/logo-black-right.png" />
@@ -61,12 +61,13 @@
 
             <ng-container *ngIf="role===Roles.Citizen">
               <li>
-                <a routerLink="/events/calendar" class="block px-4 py-2 hover:bg-gray-100">Calendário Pessoal</a>
+                <a routerLink="/events/myEvents" class="block px-4 py-2 hover:bg-gray-100">Meus Eventos</a>
               </li>
 
               <li>
-                <a routerLink="/events/myEvents" class="block px-4 py-2 hover:bg-gray-100">Meus Eventos</a>
+                <a routerLink="/events/calendar" class="block px-4 py-2 hover:bg-gray-100">Calendário Pessoal</a>
               </li>
+
             </ng-container>
 
             <ng-container *ngIf="role===Roles.Municipal">
