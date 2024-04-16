@@ -34,6 +34,8 @@ namespace Municip.io.Server.Controllers
 
             _context = context;
 
+            StripeConfiguration.ApiKey = appSettings.Value.SecretKey;
+
 
         }
 
@@ -71,7 +73,7 @@ namespace Municip.io.Server.Controllers
             }
             catch (StripeException e)
             {
-                return BadRequest(e);
+                return BadRequest(new { Message = e.Message });
             }
         }
 
