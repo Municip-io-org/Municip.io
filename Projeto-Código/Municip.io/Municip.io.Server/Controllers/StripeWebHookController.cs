@@ -71,7 +71,7 @@ namespace Municip.io.Server.Controllers
             }
             catch (StripeException e)
             {
-                return BadRequest();
+                return BadRequest(e);
             }
         }
 
