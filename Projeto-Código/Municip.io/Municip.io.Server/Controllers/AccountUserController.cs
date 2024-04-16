@@ -51,7 +51,7 @@ namespace Municip.io.Server.Controllers
         }
 
 
-        
+
         /// <summary> 
         /// Obtém a Role do utilizador autenticado.
         /// 
@@ -334,12 +334,37 @@ namespace Municip.io.Server.Controllers
 
                     foreach (AppFeatureCategory category in Enum.GetValues(typeof(AppFeatureCategory)))
                     {
-                        _context.AppFeatures.Add(new AppFeature
+
+                        if (category != AppFeatureCategory.Transports)
                         {
-                            AppFeatureCategory = category,
-                            IsEnabled = true,
-                            Municipality = municipality.name
-                        });
+                            _context.AppFeatures.Add(new AppFeature
+                            {
+                                AppFeatureCategory = category,
+                                IsEnabled = true,
+                                Municipality = municipality.name
+                            });
+                        }
+                        else
+                        {
+                            if (AMLMunicipalities.MunicipalitiesOfAML.Contains(municipality.name))
+                            {
+                                _context.AppFeatures.Add(new AppFeature
+                                {
+                                    AppFeatureCategory = category,
+                                    IsEnabled = true,
+                                    Municipality = municipality.name
+                                });
+                            }
+                            else
+                            {
+                                _context.AppFeatures.Add(new AppFeature
+                                {
+                                    AppFeatureCategory = category,
+                                    IsEnabled = false,
+                                    Municipality = municipality.name
+                                });
+                            }
+                        }
                     }
                     await _context.SaveChangesAsync();
 
