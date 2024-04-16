@@ -34,6 +34,8 @@ namespace Municip.io.Server.Controllers
 
             _context = context;
 
+            StripeConfiguration.ApiKey = appSettings.Value.SecretKey;
+
 
         }
 
