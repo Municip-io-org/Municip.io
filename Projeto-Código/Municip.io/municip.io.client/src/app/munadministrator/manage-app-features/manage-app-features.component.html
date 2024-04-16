@@ -2,13 +2,20 @@
 
 
 <app-smaller-banner title="Alterar Funcionalidades"
-                   [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
+                    [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
 
 
 <ng-container *ngIf="isDialogOpen">
   <app-dialog-message (confirm)="closeDialog()" title="Sucesso" message="Operação realizada com sucesso"
                       [isConfirm]=true></app-dialog-message>
 </ng-container>
+
+<ng-container *ngIf="isDialogTransportsOpen">
+  <app-dialog-message title="Atenção" [message]="messageTransport" (confirm)="disableTransports()"
+                      [isConfirm]="false" confirmText="Compreendi"></app-dialog-message>
+</ng-container>
+
+
 
 <div class="relative flex flex-col bg-municip-blank pt-[3rem] pb-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
   <div class="text-[1.8rem] italic">
@@ -31,8 +38,8 @@
           <label for="documents" class="text-municip-highlight-black text-[1.5rem] font-bold font-varela-round">Documentos</label>
 
           <!--<div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
-        <p-checkbox [binary]="documents!.value!" inputId="documents" formControlName="documents"></p-checkbox>
-      </div>-->
+            <p-checkbox [binary]="documents!.value!" inputId="documents" formControlName="documents"></p-checkbox>
+          </div>-->
           <input type="checkbox" formControlName="documents" class="border-[#3a82f7] border-2 size-8 rounded-full" />
         </div>
       </div>
@@ -79,8 +86,8 @@
           <label for="news" class="text-municip-highlight-black text-[1.5rem] font-bold font-varela-round">Notícias</label>
 
           <!--<div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
-        <p-checkbox [binary]="news!.value!" inputId="news" formControlName="news"></p-checkbox>
-      </div>-->
+            <p-checkbox [binary]="news!.value!" inputId="news" formControlName="news"></p-checkbox>
+          </div>-->
           <input type="checkbox" formControlName="news" class="border-[#3a82f7] border-2 size-8 rounded-full" />
         </div>
       </div>
@@ -94,9 +101,10 @@
           <label for="transports" class="text-municip-highlight-black text-[1.5rem] font-bold font-varela-round">Transportes</label>
 
           <!--<div class="bg-[#3a82f7] p-[0.24rem] rounded-xl flex justify-center items-center">
-        <p-checkbox [binary]="transports!.value!" inputId="transports" formControlName="transports"></p-checkbox>
-      </div>-->
-          <input type="checkbox" formControlName="transports" class="border-[#3a82f7] border-2 size-8 rounded-full" />
+            <p-checkbox [binary]="transports!.value!" inputId="transports" formControlName="transports"></p-checkbox>
+          </div>-->
+          <input type="checkbox" formControlName="transports" class="border-[#3a82f7] border-2 size-8 rounded-full"
+                 (click)="hasTransports ? null : showMessageTransport()" />
         </div>
       </div>
 
@@ -110,7 +118,7 @@
     <button type="submit" [disabled]="!appFeatureEditForm.valid"
             class="absolute -bottom-[0rem] right-[2rem] h-auto w-[15rem] flex text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-3 px-8
                focus:outline-none rounded text-lg justify-center items-center
-               bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%]  
+               bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%]
                transition-all duration-300">
       Gravar Alterações
       <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />

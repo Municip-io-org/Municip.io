@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Municipality } from '../../services/municipal-admin-auth.service';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router';
-import { AppFeature, AppFeaturesService, AppFeatureCategory } from '../../services/appFeatures/app-features.service';
+import { AppFeature, AppFeaturesService, AppFeatureCategory, MunicipalitiesOfAML } from '../../services/appFeatures/app-features.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
@@ -31,6 +31,11 @@ export class ManageAppFeaturesComponent {
 
   user: any;
   isMunAdmin: boolean = false;
+
+  isDialogTransportsOpen: boolean = false;
+  messageTransport: string = "O seu município não está abrangido pela funcionalidade de transportes. Para a ativar, por favor contacte o suporte técnico.";
+  hasTransports: boolean = false;
+
 
   municipality: Municipality = {
     name: '',
@@ -85,7 +90,6 @@ export class ManageAppFeaturesComponent {
    * Inicializa o componente
    */
   ngOnInit(): void {
-
     this.userAuthService.getUserData().subscribe(
       res => {
         let anyUser: any;
@@ -99,16 +103,22 @@ export class ManageAppFeaturesComponent {
               this.isMunAdmin = true;
             }
 
+            MunicipalitiesOfAML.forEach(municipality => {
+              if (municipality === this.user.municipality) {
+                this.hasTransports = true;
+              }
+            });
+
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: Municipality) => {
                 this.municipality = municipalityRes;
 
                 this.appFeaturesService.getAppFeaturesByMunicipality(this.municipality.name).subscribe(
                   (appFeaturesRes: AppFeature[]) => {
-                  
+
                     this.appFeatures = appFeaturesRes;
                     this.initForm();
-                   
+
                   },
                   error => {
                     console.error(error);
@@ -142,7 +152,7 @@ export class ManageAppFeaturesComponent {
       events: this.appFeatures.find(a => a.appFeatureCategory == "Events")?.isEnabled,
       news: this.appFeatures.find(a => a.appFeatureCategory == "News")?.isEnabled,
       transports: this.appFeatures.find(a => a.appFeatureCategory == "Transports")?.isEnabled,
-      library : this.appFeatures.find(a => a.appFeatureCategory == "Library")?.isEnabled,
+      library: this.appFeatures.find(a => a.appFeatureCategory == "Library")?.isEnabled,
     });
   }
 
@@ -160,8 +170,8 @@ export class ManageAppFeaturesComponent {
       (response) => {
         this.error = null;
         this.isDialogOpen = true;
-         
-        
+
+
       },
       error => {
         console.error(error);
@@ -182,7 +192,7 @@ export class ManageAppFeaturesComponent {
     this.appFeatures.find(a => a.appFeatureCategory == "Transports")!.isEnabled = this.transports!.value!;
     this.appFeatures.find(a => a.appFeatureCategory == "Library")!.isEnabled = this.library!.value!;
   }
- 
+
 
   //Getters
   get documents() {
@@ -190,10 +200,10 @@ export class ManageAppFeaturesComponent {
   }
   get events() {
     return this.appFeatureEditForm.get('events');
-  } 
+  }
   get news() {
     return this.appFeatureEditForm.get('news');
-  } 
+  }
   get transports() {
     return this.appFeatureEditForm.get('transports');
   }
@@ -208,6 +218,38 @@ export class ManageAppFeaturesComponent {
   closeDialog() {
     this.isDialogOpen = false;
   }
+
+  /**
+   * Método responsável por abrir o diálogo
+   */
+  openDialogTransports() {
+    this.isDialogTransportsOpen = true;
+  }
+
+  /**
+   * Método responsável por fechar o diálogo
+   */
+  closeDialogTransports() {
+    this.isDialogTransportsOpen = false;
+  }
+
+  /**
+   * Método responsável por mostrar a mensagem de transportes
+   */
+  showMessageTransport() {
+    if (this.transports?.value == false) {
+      this.openDialogTransports();
+    }
+  }
+
+  /**
+   * Método responsável por desativar as funcionalidades de transportes
+   */
+  disableTransports() {
+    this.closeDialogTransports();
+    this.transports?.setValue(false);
+  }
+
 }
 
 
