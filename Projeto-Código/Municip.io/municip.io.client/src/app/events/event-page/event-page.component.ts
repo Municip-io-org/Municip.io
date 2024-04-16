@@ -170,7 +170,7 @@ export class EventPageComponent {
    */
   closeDialog() {
     this.isDialogOpen = false;
-    window.location.reload();
+    this.isEnrolledDialogOpen = false;
   }
 
   /**
@@ -180,7 +180,7 @@ export class EventPageComponent {
    */
   openEnrolledDialog() {
     this.dialogEnrolledTitle = 'Cidadãos inscritos no evento '+ this.event.title ;
-this.isEnrolledDialogOpen = true;
+    this.isEnrolledDialogOpen = true;
 
     //show enrolled citizens
 

@@ -1,4 +1,4 @@
-
+﻿
 <app-header-loggedin></app-header-loggedin>
 <app-smaller-banner [title]="'Criar Evento'" [image]="municipalityImage"
                     class="font-inter" />
@@ -10,34 +10,34 @@
 </ng-container>
 
 
-<form [formGroup]="eventForm" (ngSubmit)="OnSubmit()" class="px-32 mb-32 mt-10">
-  <div *ngIf="error" class=" text-red-500 text-xl font-bold space-y-2 text-start mb-5">
+<form [formGroup]="eventForm" (ngSubmit)="OnSubmit()" class="mb-32 mt-10 px-32">
+  <div *ngIf="error" class="mb-5 space-y-2 text-start text-xl font-bold text-red-500">
     <p>{{error}}</p>
   </div>
 
 
   <div class="flex items-center justify-between">
-    <div class="w-full lg:w-5/12 mb-4 h-32 relative">
+    <div class="relative mb-4 h-32 w-full lg:w-5/12">
       <div class="flex items-center">
         <app-input-title class="text-[1.8rem] mr-2">Título</app-input-title>
         <app-tooltip [tooltipText]="'Título do evento'" class="mt-1"></app-tooltip>
       </div>
       <div class="flex items-center">
         <input required placeholder="Título do evento" type="text" id="title" formControlName="title" name="title"
-               class="input w-full h-12 lg:h-14" />
+               class="input h-12 w-full lg:h-14" />
       </div>
 
-      <div class="text-red-500 font-bold py-2" *ngIf="title?.touched && title?.invalid ">
+      <div class="py-2 font-bold text-red-500" *ngIf="title?.touched && title?.invalid ">
         <div *ngIf="title?.errors?.['required'] ">Título Obrigatório</div>
       </div>
     </div>
-    <div class="w-full lg:w-5/12 mb-4 h-32">
+    <div class="mb-4 h-32 w-full lg:w-5/12">
       <app-input-title class="text-[1.8rem]">Número máximo de participantes</app-input-title>
       <div class="flex items-center">
         <input required placeholder="Capacidade do evento" type="number" id="capacity" formControlName="capacity" name="capacity"
-               class="input w-full h-12 lg:h-14 " />
+               class="input h-12 w-full lg:h-14" />
       </div>
-      <div class="text-red-500 font-bold py-2" *ngIf="capacity?.touched && capacity?.invalid">
+      <div class="py-2 font-bold text-red-500" *ngIf="capacity?.touched && capacity?.invalid">
         <div *ngIf="capacity?.errors?.['required'] ">Capacidade Obrigatória</div>
         <div *ngIf="capacity?.errors?.['min'] ">Capacidade mínima de 1</div>
 
@@ -47,10 +47,10 @@
 
 
 
-  <div class="flex items-center justify-between mb-4">
+  <div class="mb-4 flex items-center justify-between">
 
-    <div class="w-full lg:w-5/12 mb-4 p-6 shadow-2xl rounded-xl">
-      <app-tooltip [tooltipText]="'Período no qual os cidadãos se podem inscrever no evento'" class=" m-0 right-0"></app-tooltip>
+    <div class="mb-4 w-full rounded-xl p-6 shadow-2xl lg:w-5/12">
+      <app-tooltip [tooltipText]="'Período no qual os cidadãos se podem inscrever no evento'" class="right-0 m-0"></app-tooltip>
 
       <app-datetimepicker [titleDate]="'Período de Inscrição'" [formGroup]="eventForm"
                           [StartHourPlaceholder]="'Início de Incrição'" [EndHourPlaceholder]="'Fim de Inscrição'"
@@ -60,8 +60,8 @@
     </div>
 
 
-    <div class="w-full lg:w-5/12 mb-4 p-6 shadow-2xl rounded-xl">
-      <app-tooltip [tooltipText]="'Período no qual decorrerá o evento'" class=" m-0 right-0"></app-tooltip>
+    <div class="mb-4 w-full rounded-xl p-6 shadow-2xl lg:w-5/12">
+      <app-tooltip [tooltipText]="'Período no qual decorrerá o evento'" class="right-0 m-0"></app-tooltip>
 
       <app-datetimepicker [titleDate]="'Período de Evento'" [formGroup]="eventForm"
                           [StartHourPlaceholder]="'Início do Evento'" [EndHourPlaceholder]="'Fim do Evento'"
@@ -69,31 +69,31 @@
                           [minDate]="minDateEvent" />
     </div>
   </div>
-  <div class="flex items-center justify-between ">
-    <div class="w-full lg:w-5/12 mb-4 h-[16rem]">
+  <div class="flex items-center justify-between">
+    <div class="h-[16rem] mb-4 w-full lg:w-5/12">
       <app-input-title class="text-[1.8rem]">Localização</app-input-title>
       <div class="flex items-center">
         <input required placeholder="Localização do evento" type="text" id="local" formControlName="local" name="local"
-               class="input w-full h-12 lg:h-14 " />
+               class="input h-12 w-full lg:h-14" />
       </div>
-      <div class="text-red-500 font-bold py-2" *ngIf="local?.touched && local?.invalid ">
+      <div class="py-2 font-bold text-red-500" *ngIf="local?.touched && local?.invalid ">
         <div *ngIf="local?.errors?.['required'] ">Local Obrigatório</div>
       </div>
     </div>
 
-    <div class="flex flex-col  text-left w-full lg:w-5/12 mb-4 h-[16rem]">
+    <div class="h-[16rem] mb-4 flex w-full flex-col text-left lg:w-5/12">
       <app-input-title class="text-[1.8rem]">Foto</app-input-title>
-      <div class="h-20 table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc]" (dragover)="onDragOver($event)"
+      <div class="bg-[#F5F5F7] rounded-[0.375rem] border-2 border-[#bbbabc] table h-20 w-full border-dotted" (dragover)="onDragOver($event)"
            (drop)="onDrop($event)" (click)="filePicker.click()">
 
         <div class="table-cell align-middle">
           <div class="text-center">
             <input type="file" #filePicker (change)="onFileChange($event)" accept="image/*" capture class="hidden">
 
-            <label for="file" class="flex justify-center items-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
+            <label for="file" class="flex items-center justify-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
 
             <div *ngIf="image" class="flex items-center justify-center pb-2">
-              <img [src]="imageUrl" alt="Imagem carregada" class="w-[16rem] h-[10rem] object-cover ">
+              <img [src]="imageUrl" alt="Imagem carregada" class="w-[16rem] h-[10rem] object-cover">
             </div>
 
           </div>
@@ -106,37 +106,33 @@
   </div>
 
 
-  <div class="w-full mb-4 h-72">
+  <div class="mb-4 w-full">
     <app-input-title class="text-[1.8rem]">Descrição</app-input-title>
     <div class="flex items-center">
       
       <ngx-editor [editor]="editor" formControlName="description" class="w-full">
-        <div class="bg-gray-100 border border-gray-300">
+        <div class="border border-gray-300 bg-gray-100">
           <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
         </div>
       </ngx-editor>
     </div>
-    <div class="text-red-500 font-bold py-2" *ngIf="description?.touched && description?.invalid ">
+    <div class="py-2 font-bold text-red-500" *ngIf="description?.touched && description?.invalid ">
       <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatório</div>
     </div>
   </div>
-  <div class="flex mt-12">
+  <div class="mt-12 flex">
 
-    <button class="border-municip-gray border-2 rounded-md
-            hover:bg-municip-blank
-            hover:border-municip-blue text-municip-highlight-black
-            inline-flex py-3 px-8
-            focus:outline-none text-lg
-            transition duration-700 ease-in-out justify-center items-center
-            "
-            (click)="cancel()">
+    <button (click)="cancel()"
+            class="border-2 rounded-lg border-gray-900 px-8 py-3 text-gray-900 duration-300 hover:bg-gray-900 hover:text-gray-100">
       Cancelar
     </button>
-    <div class="flex flex-1 justify-end ">
+
+
+    <div class="flex-1 flex justify-end">
       <app-btn-municip-blue [disabled]="!eventForm.valid || !image" buttonClass="disabled:!cursor-not-allowed"
                             type="submit">
         Criar Evento
-        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
       </app-btn-municip-blue>
     </div>
     
