@@ -52,7 +52,7 @@
       <p *ngIf="event.nRegistrations >= event.capacity" class="text-red-500">O evento já está lotado</p>
 
       <div class="relative">
-        <div *ngIf="(event.nRegistrations >= event.capacity && !isEnrolled()) || canRegisterForEvent() || isMunAdmin"
+        <div *ngIf="(event.nRegistrations >= event.capacity && !isEnrolled()) || canNotRegisterForEvent() || isMunAdmin"
              class="absolute rounded w-[10rem] inset-0 bg-gray-700 opacity-50"></div>
 
 

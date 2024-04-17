@@ -203,6 +203,14 @@ export class CreateEventComponent implements OnInit {
       let newStartRegistrationDate = this.createDateTime(new Date(this.startRegistrationDate?.value || ""), this.startRegistrationHour?.value || "");
       let newEndRegistrationDate = this.createDateTime(new Date(this.endRegistrationDate?.value || ""), this.endRegistrationHour?.value || "");
 
+      const timezoneOffsetMinutes = newStartDate.getTimezoneOffset();
+
+      
+      this.updateDateTimeWithOffSet(newStartDate, timezoneOffsetMinutes);
+      this.updateDateTimeWithOffSet(newEndDate, timezoneOffsetMinutes);
+      this.updateDateTimeWithOffSet(newStartRegistrationDate, timezoneOffsetMinutes);
+      this.updateDateTimeWithOffSet(newEndRegistrationDate, timezoneOffsetMinutes);
+
 
 
       const newEvent: AppEvent = {
@@ -253,6 +261,15 @@ export class CreateEventComponent implements OnInit {
 
     return newDate;
 
+  }
+
+  /**
+   * Atualiza a data com base no timezoneoffset 
+   * @param date
+   * @param timezoneOffSetMinutets
+   */
+  updateDateTimeWithOffSet(date: Date, timezoneOffSetMinutets : number) {
+    date.setHours(date.getHours() + timezoneOffSetMinutets / 60);
   }
 
 

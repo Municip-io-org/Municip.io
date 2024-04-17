@@ -125,6 +125,9 @@ export class EventPageComponent {
   ngOnInit(): void {
     this.event = this.activatedRoute.snapshot.data['event'];
 
+    console.log(this.event.startDate);
+
+
     this.userAuthService.getUserData().subscribe(
       res => {
         let anyUser: any;
@@ -221,7 +224,7 @@ export class EventPageComponent {
   /**
    * Função para verificar se é possível registrar no evento com base nas datas de inscrição
    */
-  canRegisterForEvent(): boolean {
+  canNotRegisterForEvent(): boolean {
     const currentDate = new Date();
     const startRegistration = new Date(this.event.startRegistration);
     const endRegistration = new Date(this.event.endRegistration);
