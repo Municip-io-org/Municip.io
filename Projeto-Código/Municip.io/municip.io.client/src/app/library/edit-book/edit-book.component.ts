@@ -14,7 +14,7 @@ import { switchMap } from 'rxjs';
   providers: [provideNativeDateAdapter()],
 })
 
-  //documentação do componente
+//documentação do componente
 /**
  * Componente para edição de um livro.
  *
@@ -120,12 +120,12 @@ export class EditBookComponent {
     ]),
     publicationDate: new FormControl({ value: new Date(), disabled: false }, [Validators.required]),
     language: new FormControl({ value: "", disabled: false }, [Validators.required]),
-    copies: new FormControl({ value: "", disabled: false }, [Validators.required]),
+    copies: new FormControl({ value: "", disabled: false }, [Validators.required, this.copiesValidator.bind(this)]),
     genres: new FormArray([], [Validators.required, this.validateGenre.bind(this)]),
     sinopsis: new FormControl({ value: "", disabled: false }, [Validators.required]),
     coverImageUrl: new FormControl({ value: "", disabled: false }, [Validators.required])
   });
-    
+
 
   validateGenre(controls: FormArray): { [key: string]: boolean } | null {
     if (controls.controls.some(control => control.value)) {
@@ -155,7 +155,7 @@ export class EditBookComponent {
    */
   ngOnInit(): void {
     this.book = this.activatedRoute.snapshot.data['book'];
-    
+
     this.editor = new Editor();
 
 
@@ -228,12 +228,26 @@ export class EditBookComponent {
   onSubmit(): void {
     if (this.bookForm.valid) {
 
+      let newAvailableCopies = this.book.availableCopies;
+      // Verifica se o número de cópias foi alterado
+      if (this.book.copies != parseInt(this.copies?.value!)) {
+        if (this.book.copies == this.book.availableCopies) {
+          newAvailableCopies = parseInt(this.copies?.value!);
+        } else if (this.book.copies > this.book.availableCopies) {
+          let difference = parseInt(this.copies?.value!) - this.book.copies
+          newAvailableCopies = this.book.availableCopies + difference;
+        }
+      }
+
+
+
+
       this.book = {
         id: this.book.id,
         isbn: this.iSBN?.value!.toString(),
         title: this.title?.value!,
         author: this.authors?.value!,
-        availableCopies: parseInt(this.copies?.value!),
+        availableCopies: newAvailableCopies,
         copies: parseInt(this.copies?.value!),
         coverImage: this.coverImageUrl?.value!,
         edition: this.edition?.value!,
@@ -453,4 +467,23 @@ export class EditBookComponent {
   get coverImageUrl() {
     return this.bookForm.get('coverImageUrl');
   }
+
+
+  /**
+   * Método para validar o número de cópias
+   * @param control o numero de copias
+   * @returns a validação
+   */
+  copiesValidator(control: FormControl): { [key: string]: boolean } | null {
+
+
+    let minimumCopies = this.book.copies - this.book.availableCopies;
+    if (this.book.copies != this.book.availableCopies && control.value < minimumCopies) {
+      return { 'minimumCopies': true };
+    }
+    return null;
+
+
+  }
+
 }

@@ -342,7 +342,7 @@ export class BookPageComponent {
     let reservedDate = new Date();
 
 
-    if (this.book.copies > 0) {
+    if (this.book.availableCopies > 0) {
       let bookRequest: BookRequest = {
         id: 0,
         book: this.book,

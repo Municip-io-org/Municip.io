@@ -6,7 +6,7 @@
                       [isConfirm]="false"></app-dialog-message>
 </ng-container>
 
-<div class="border-[0.2rem] border-municip-blue rounded-[1rem]">
+<div class="rounded-[1rem] drop-shadow-2xl">
   <div class="relative flex flex-col font-roboto justify-center items-center text-left gap-x-2 max-w-[18rem] h-[28rem] text-[1.063rem] bg-white p-7 rounded-[1rem]">
 
     <div class="absolute -top-3 -left-3 " *ngIf="isMunAdmin">
@@ -24,7 +24,9 @@
                                (click)="canRemoveBook(this)">
       </app-black-btn-icon-text>
     </div>
-    <div class="h-[18rem] w-48 cursor-pointer" (click)="bookClicked()">
+    <div class="w-48 cursor-pointer " (click)="bookClicked()"
+         [ngClass]="isMunAdmin ? 'h-[70%]' : 'h-[85%]'"
+         >
       <img src="{{book.coverImage}}" alt="Foto do Livro" class="object-cover w-full h-full rounded-3xl" />
     </div>
 

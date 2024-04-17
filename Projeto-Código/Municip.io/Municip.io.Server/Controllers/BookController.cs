@@ -152,6 +152,11 @@ namespace Municip.io.Server.Controllers
                         return NotFound(new { message = "Livro não encontrado." });
                     }
 
+
+                    
+
+
+
                     // Atualizar os detalhes do livro existente com os detalhes do livro atualizado
                     existingBook.ISBN = book.ISBN;
                     existingBook.Title = book.Title;
@@ -250,6 +255,9 @@ namespace Municip.io.Server.Controllers
                 var existingRequest = await _context.BookRequests.FirstOrDefaultAsync(r => r.Citizen.Id == citizen.Id && r.Book.Id == book.Id && r.Status != BookRequestStatus.Delivered && r.Status != BookRequestStatus.Denied);
                 if (existingRequest != null) return BadRequest(new { message = "O cidadão já fez um pedido para este livro" });
 
+
+                //if the citizen is not from the same municipality as the book
+                if (citizen.Municipality != book.Municipality) return BadRequest(new { message = "O cidadão não é do mesmo município que o livro" });
 
                 if (book.AvailableCopies == 0) return BadRequest(new { message = "Não há cópias disponíveis deste livro" });
 

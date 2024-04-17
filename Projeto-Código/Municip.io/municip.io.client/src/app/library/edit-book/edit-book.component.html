@@ -1,4 +1,4 @@
-﻿<app-header-loggedin></app-header-loggedin>
+<app-header-loggedin></app-header-loggedin>
 <app-smaller-banner [title]="'Editar Livro'" [image]="municipalityImage"
                     class="font-inter" />
 
@@ -212,8 +212,9 @@
         </div>
 
         <div class="absolute py-2 font-bold text-red-500" *ngIf="copies?.touched && copies?.invalid ">
-          <div *ngIf="copies?.errors?.['required'] ">Contacto Obrigatório</div>
-          <div *ngIf="copies?.errors?.['pattern'] ">Contacto Inválido</div>
+          <div *ngIf="copies?.errors?.['required'] ">Número de Exemplares Obrigatório</div>
+          <div *ngIf="copies?.errors?.['pattern'] ">Número de Exemplares Inválido</div>
+          <div *ngIf="copies?.errors?.['minimumCopies'] ">Deve ser maior que as {{this.book.copies - this.book.availableCopies}} cópias requisitadas</div>
         </div>
       </div>
 
