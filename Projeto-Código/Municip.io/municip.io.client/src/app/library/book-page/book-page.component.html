@@ -58,7 +58,7 @@
 </ng-container>
 
 <div class="py-[4rem] text-municip-normal-black font-inter min-h-[28rem] relative flex flex-col gap-y-20 bg-municip-blank px-32 pt-24">
-  <div *ngIf="isMunAdmin" class="absolute -top-3 flex space-x-20">
+  <div *ngIf="isMunAdmin && book.status != BookStatus().Unavailable" class="absolute -top-3 flex space-x-20">
     <div class="text-[1.063rem] font-roboto flex items-center justify-center">
       <app-black-btn-icon-text altImage="Editar livro"
                                image="/assets/images/icons/pencil-white.png"
@@ -123,6 +123,13 @@
           <span>Cópias Disponíveis: {{book.availableCopies}}</span>
         </div>
       </div>
+
+      <ng-container *ngIf="isMunAdmin &&  book.status == BookStatus().Unavailable">
+        <div class="flex w-fit items-center justify-center space-x-4">
+          <div class="size-10 min-w-10 rounded-full bg-red-600"></div>
+          <p class="font-bold">Livro Indisponível</p>
+        </div>
+      </ng-container>
 
 
       <ng-container *ngIf="!isMunAdmin && !bookRequest">

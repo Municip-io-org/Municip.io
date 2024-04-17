@@ -243,6 +243,8 @@ namespace Municip.io.Server.Controllers
 
                 if (book == null) return BadRequest(new { message = "Não foi encontrado nenhum livro", ModelState });
 
+                if (book.Status == BookStatus.Unavailable) return BadRequest(new { message = "O livro não está disponível" });
+
 
                 //if the citizen already has a request for the same book
                 var existingRequest = await _context.BookRequests.FirstOrDefaultAsync(r => r.Citizen.Id == citizen.Id && r.Book.Id == book.Id && r.Status != BookRequestStatus.Delivered && r.Status != BookRequestStatus.Denied);
