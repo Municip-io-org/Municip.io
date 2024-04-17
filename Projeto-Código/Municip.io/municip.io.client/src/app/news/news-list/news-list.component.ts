@@ -114,6 +114,7 @@ export class NewsListComponent {
             this.newsService.getNews(this.newUser.municipality).subscribe(
               (listOfNews: any) => {
                 this.newsList = listOfNews.map((news: any) => {
+                  this.sortNewsByDate();
                   const [datePart] = news.date.split('T');
                   const date = new Date(datePart);
                   const formattedDate = date.toLocaleDateString('pt-PT');

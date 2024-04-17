@@ -6,6 +6,7 @@ import { EventsService } from '../../../services/events/events.service';
 import { Event } from '../../../services/events/events.service';
 import { Observable, map } from 'rxjs';
 import { UserAuthService } from '../../../services/user-auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class CalendarPageComponent {
    * @param authService - O serviço de autenticação de utilizador.
    *
    */
-  constructor(private eventService: EventsService, private authService: UserAuthService) { }
+  constructor(private eventService: EventsService, private authService: UserAuthService, private router: Router) { }
 
   events$: Observable<CalendarEvent<{ event: Event }>[]> = new Observable<CalendarEvent<{ event: Event }>[]>();
   municipalityImage: string = "";
@@ -90,5 +91,19 @@ export class CalendarPageComponent {
       (error) => {
         console.error(error);
       });
+  }
+
+  /**
+   * Método para navegar para os eventos do município.
+   */
+  goToMunicipalEventsPage() {
+    this.router.navigateByUrl(`events`);
+  }
+
+  /**
+   * Método para navegar para os eventos em que o cidadão está inscrito.
+   */
+  goToMyEventsPage() {
+    this.router.navigateByUrl(`events/myEvents`);
   }
 }

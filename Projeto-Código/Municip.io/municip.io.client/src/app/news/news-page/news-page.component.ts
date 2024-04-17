@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NewsService } from '../../services/news/news.service';
 import { ActivatedRoute } from '@angular/router';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
+import { Municipality } from '../../services/municipal-admin-auth.service';
 
 @Component({
   selector: 'app-news-page',
@@ -17,6 +18,7 @@ import { Roles, UserAuthService } from '../../services/user-auth.service';
  * @param role - A role do utilizador
  * @param user - Utilizador
  * @param newUser - Novo utilizador
+ * @param municipality - Município
  */
 export class NewsPageComponent {
 
@@ -24,7 +26,29 @@ export class NewsPageComponent {
   role: string = "";
   user: any;
   newUser: any;
-
+  municipality: Municipality = {
+    name: '',
+    president: '',
+    contact: '',
+    description: '',
+    areaha: '',
+    codigo: '',
+    codigopostal: '',
+    codigoine: '',
+    descpstal: '',
+    distrito: '',
+    eleitores: '',
+    email: '',
+    fax: '',
+    localidade: '',
+    nif: '',
+    populacao: '',
+    rua: '',
+    sitio: '',
+    telefone: '',
+    emblemPhoto: '',
+    landscapePhoto: '',
+  };
   /**
    * @constructor
    * NewsPageComponent
@@ -65,7 +89,14 @@ export class NewsPageComponent {
               
               this.userAuthService.getInfoByEmail(emailParsed).subscribe(
                 res => {
-                  this.newUser = res;         
+                  this.newUser = res;
+
+                  this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
+                    async (municipalityRes: Municipality) => {
+                      this.municipality = municipalityRes;
+                      console.log(this.municipality)
+                    });
+
                 },
                 error => {
                   console.error(error);

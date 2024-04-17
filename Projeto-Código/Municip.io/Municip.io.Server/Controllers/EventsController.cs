@@ -105,9 +105,9 @@ namespace Municip.io.Server.Controllers
                 var evento = _context.Events.FirstOrDefault(e => e.Id == updatedEvent.Id);
                 if (evento != null)
                 {
-                    if (updatedEvent.Capacity == 0)
+                    if (updatedEvent.Capacity < updatedEvent.NRegistrations)
                     {
-                        updatedEvent.Capacity = 1;
+                        return BadRequest(new { message = "A capacidade no evento é menor que o número de inscritos" });
                     }
 
                     if (updatedEvent.StartRegistration > updatedEvent.StartDate || updatedEvent.EndRegistration > updatedEvent.StartDate)

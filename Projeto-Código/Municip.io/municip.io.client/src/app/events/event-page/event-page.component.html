@@ -14,15 +14,15 @@
 
 <app-smaller-banner title={{event.title}}
                     [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
-<div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
-  <div *ngIf="isMunAdmin" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
+<div class="py-[4rem] text-municip-normal-black font-inter min-h-[28rem] relative flex flex-col gap-y-20 bg-municip-blank px-32 pt-24">
+  <div *ngIf="isMunAdmin" class="text-[1.063rem] font-roboto absolute -top-3 flex items-center justify-center">
     <app-black-btn-icon-text altImage="Editar Evento"
                              image="/assets/images/icons/pencil-white.png"
                              (buttonClick)="goToEditEventPage()">
       Editar evento
     </app-black-btn-icon-text>
   </div>
-  <div *ngIf="isMunAdmin" class="absolute -top-3 left-[20rem] text-[1.063rem] font-roboto flex justify-center items-center">
+  <div *ngIf="isMunAdmin" class="left-[20rem] text-[1.063rem] font-roboto absolute -top-3 flex items-center justify-center">
     <app-black-btn-icon-text altImage="Remover Evento"
                              image="/assets/images/icons/delete-white.png"
                              (buttonClick)="openRemoveEventDialog()">
@@ -30,53 +30,64 @@
     </app-black-btn-icon-text>
   </div>
   <img [src]="event.image ? event.image : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="Imagem do evento"
-       class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center" />
-  <section class="flex -mt-12 text-municip-gray justify-evenly text-[1.063rem] ">
+       class="w-[60rem] h-[30rem] -mt-[3rem] self-center rounded-2xl object-cover" />
+  <section class="text-[1.063rem] -mt-12 flex justify-evenly text-municip-gray">
     <div class="flex justify-center gap-x-2">
       <img src="/assets/images/icons/map.png" class="size-10" />
-      <p class="text-municip-highlight-black font-semibold pt-[0.8rem]">{{event.local}}</p>
+      <p class="text-municip-highlight-black pt-[0.8rem] font-semibold">{{event.local}}</p>
     </div>
     <div class="flex flex-col gap-y-4">
       <div>
-        <p class="font-semibold text-center text-municip-highlight-black">Período de inscrição</p>
+        <p class="text-municip-highlight-black text-center font-semibold">Período de inscrição</p>
         <p>Início das Inscrições: {{ event.startRegistration | date: "dd/MM/yyyy 'às' HH:mm" }}</p>
         <p>Fim das Inscrições: {{ event.endRegistration | date: "dd/MM/yyyy 'às' HH:mm" }}</p>
       </div>
       <div>
-        <p class="font-semibold text-center text-municip-highlight-black">Período do Evento</p>
+        <p class="text-municip-highlight-black text-center font-semibold">Período do Evento</p>
         <p>Começo do Evento: {{ event.startDate | date: "dd/MM/yyyy 'às' HH:mm" }}</p>
         <p>Fim do Evento: {{ event.endDate | date: "dd/MM/yyyy 'às' HH:mm" }}</p>
       </div>
     </div>
-    <div class="flex flex-col space-y-2 font-open-sans font-extrabold text-municip-highlight-black ">
+    <div class="font-open-sans text-municip-highlight-black flex flex-col items-center space-y-2 font-extrabold">
       <p *ngIf="event.nRegistrations >= event.capacity" class="text-red-500">O evento já está lotado</p>
+
       <div class="relative">
-        <div *ngIf="event.nRegistrations >= event.capacity" class="absolute rounded inset-0 bg-gray-700 opacity-50"></div>
+        <div *ngIf="(event.nRegistrations >= event.capacity && !isEnrolled()) || canNotRegisterForEvent() || isMunAdmin"
+             class="absolute rounded w-[10rem] inset-0 bg-gray-700 opacity-50"></div>
+
+
         <ng-container *ngIf="!isEnrolled()">
           <app-btn-municip-blue width="10rem" (click)="enrollInEvent(event.id!, user.email)">
             Inscrever
-            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
+          </app-btn-municip-blue>
+        </ng-container>
+
+
+        <ng-container *ngIf="isEnrolled()">
+          <app-btn-municip-blue width="10rem" (click)="dropOutEvent(event.id!, user.email)">
+            Desinscrever
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
           </app-btn-municip-blue>
         </ng-container>
       </div>
 
-      <ng-container *ngIf="isEnrolled()">
-        <app-btn-municip-blue width="10rem" (click)="dropOutEvent(event.id!, user.email)">
-          Desinscrever
-          <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-        </app-btn-municip-blue>
-      </ng-container>
-      <div class="flex items-center ">
-        <img src="/assets/images/icons/user.png" alt="Número de inscrições" class="size-10 mr-2" />
+
+
+      <div class="flex items-center">
+        <img src="/assets/images/icons/user.png" alt="Número de inscrições" class="mr-2 size-10" />
         {{ event.nRegistrations }}/{{ event.capacity }} inscritos
       </div>
 
-      <button *ngIf="isMunAdmin" (click)="openEnrolledDialog()" class="rounded-lg px-4 py-2 border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-gray-100 duration-300">Ver Inscritos</button>
+      <button *ngIf="isMunAdmin" (click)="openEnrolledDialog()"
+              class="border-2 rounded-lg border-gray-900 px-4 py-2 text-gray-900 duration-300 hover:bg-gray-900 hover:text-gray-100">
+        Ver Inscritos
+      </button>
 
     </div>
   </section>
 
-  <section innerHTML="{{event.description}}" class="text-left text-municip-normal-black text-[1.25rem] px-[3rem] pb-[3rem]">
+  <section innerHTML="{{event.description}}" class="text-municip-normal-black text-[1.25rem] px-[3rem] pb-[3rem] text-left">
     
   </section>
 </div>

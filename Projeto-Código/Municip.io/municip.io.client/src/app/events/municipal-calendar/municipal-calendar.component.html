@@ -1,8 +1,19 @@
-<app-header-loggedin />
-<app-smaller-banner title="Eventos de {{municipalityName}}" [image]="municipalityImage"
+﻿<app-header-loggedin />
+<app-smaller-banner title="Calendário dos Eventos de {{municipalityName}}" [image]="municipalityImage"
                     class="font-inter" />
 
-<div class="mx-10 my-20">
-  <app-calendar [events$]="events$" [activeDayIsOpen]="eventsToday"/>
+<div class="py-[4rem] text-municip-normal-black min-h-[28rem] relative flex flex-col gap-y-20 bg-municip-blank px-10 pt-20">
+
+
+  <div class="left-[7rem] text-[1.063rem] font-roboto absolute -top-3 flex items-center justify-center gap-4">
+    <app-black-btn-icon-text altImage="Ver Calendário"
+                             image="/assets/images/icons/calendar-white.png"
+                             (buttonClick)="goToEventsPage()">
+      Ver Eventos
+    </app-black-btn-icon-text>
+  </div>
+
+
+  <app-calendar [events$]="events$" [activeDayIsOpen]="eventsToday" />
 </div>
 <app-footer />

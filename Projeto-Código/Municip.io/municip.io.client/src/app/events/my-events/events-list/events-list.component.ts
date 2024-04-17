@@ -72,7 +72,7 @@ export class EventsListComponent {
   showEvents: Event[] = [];
   nameSearch: string = '';
   ascendingOrder: boolean = true;
-  orderOptions: any[] = [{ label: 'Brevemente', value: true }, { label: 'Mais Distantes', value: false }];
+  orderOptions: any[] = [{ label: 'Brevemente', value: true }, { label: 'Eventos Futuros', value: false }];
 
   isLoading = false;
   currentPage = 1;
@@ -207,6 +207,20 @@ export class EventsListComponent {
       this.events.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
       this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
     }
+  }
+
+  /**
+   * Método para navegar para os eventos do município.
+   */
+  goToMunicipalEventsPage() {
+    this.router.navigateByUrl(`events`);
+  }
+
+  /**
+   * Método para navegar para o calendário de eventos do cidadão.
+   */
+  goToCalendarPage() {
+    this.router.navigateByUrl(`events/calendar`);
   }
 
 }

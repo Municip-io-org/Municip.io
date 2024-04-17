@@ -1,6 +1,6 @@
-﻿<app-header-loggedin></app-header-loggedin>
+<app-header-loggedin></app-header-loggedin>
 
-<app-smaller-banner image="{{municipality.landscapePhoto}}" title="Biblioteca de {{municipality.name}}"
+<app-smaller-banner [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'" title="Biblioteca de {{municipality.name}}"
                     [text]="'Consulte os livros disponiveis na biblioteca'"/>
 
 

@@ -58,6 +58,14 @@ namespace Municip.io.Server.Controllers
                 return BadRequest(new { message = "Nenhuma funcionalidade para atualizar foi fornecida." });
             }
 
+
+
+            var transportFeature = appFeatures.FirstOrDefault(e => e.AppFeatureCategory == AppFeatureCategory.Transports);
+            if (transportFeature != null && transportFeature.IsEnabled && !AMLMunicipalities.MunicipalitiesOfAML.Contains(transportFeature.Municipality))
+            {
+                return BadRequest(new { message = "O município não possui a funcionalidade de Transportes" });
+            }
+
             foreach (var feature in appFeatures)
             {
                 var existingFeature = _context.AppFeatures.FirstOrDefault(e => e.Id == feature.Id);
@@ -82,5 +90,5 @@ namespace Municip.io.Server.Controllers
                 return StatusCode(500, new { message = "Ocorreu um erro ao salvar as alterações.", error = ex.Message });
             }
         }
-    }   
+    }
 }

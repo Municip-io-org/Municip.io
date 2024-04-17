@@ -125,6 +125,9 @@ export class EventPageComponent {
   ngOnInit(): void {
     this.event = this.activatedRoute.snapshot.data['event'];
 
+    console.log(this.event.startDate);
+
+
     this.userAuthService.getUserData().subscribe(
       res => {
         let anyUser: any;
@@ -170,7 +173,7 @@ export class EventPageComponent {
    */
   closeDialog() {
     this.isDialogOpen = false;
-    window.location.reload();
+    this.isEnrolledDialogOpen = false;
   }
 
   /**
@@ -180,7 +183,7 @@ export class EventPageComponent {
    */
   openEnrolledDialog() {
     this.dialogEnrolledTitle = 'Cidadãos inscritos no evento '+ this.event.title ;
-this.isEnrolledDialogOpen = true;
+    this.isEnrolledDialogOpen = true;
 
     //show enrolled citizens
 
@@ -216,6 +219,40 @@ this.isEnrolledDialogOpen = true;
     this.router.navigateByUrl(`/events/edit/${this.event.id}`);
   }
 
+
+
+  /**
+   * Função para verificar se é possível registrar no evento com base nas datas de inscrição
+   */
+  canNotRegisterForEvent(): boolean {
+    const currentDate = new Date();
+    const startRegistration = new Date(this.event.startRegistration);
+    const endRegistration = new Date(this.event.endRegistration);
+
+    // Verifica se a data atual está fora do intervalo de inscrições
+    if (currentDate < startRegistration || currentDate > endRegistration) {
+      return true; 
+    }
+
+    const currentHour = currentDate.getHours();
+    const currentMinute = currentDate.getMinutes();
+    const startHour = startRegistration.getHours();
+    const startMinute = startRegistration.getMinutes();
+    const endHour = endRegistration.getHours();
+    const endMinute = endRegistration.getMinutes();
+
+    // Verifica se a hora atual está entre as horas e minutos de início e término das inscrições
+    if (
+      (currentHour > startHour || (currentHour === startHour && currentMinute >= startMinute)) &&
+      (currentHour < endHour || (currentHour === endHour && currentMinute <= endMinute))
+    ) {
+      return true;
+    }
+
+    return false; 
+  }
+
+
   /** 
   *
   * Este método é responsável por inscrever um cidadão num evento
@@ -231,7 +268,9 @@ this.isEnrolledDialogOpen = true;
         this.dialogTitle = 'Inscrição bem-sucedida';
         this.dialogMessage = 'Foi inscrito com sucesso no evento ' + this.event.title;
         
-
+        this.isSuccesfullEnroll = true;
+        this.event.nRegistrations++;
+        this.event.citizens?.push(this.user);
         
       },
       error => {
@@ -254,15 +293,21 @@ this.isEnrolledDialogOpen = true;
    *
    */
   dropOutEvent(eventId: string, email: string) {
-
     this.EventsService.dropOutEvent(eventId, email).subscribe(
       response => {
         this.isDialogOpen = true;
         this.dialogTitle = 'Desistência bem-sucedida';
         this.dialogMessage = 'Desistiu com sucesso do evento ' + this.event.title;
-        
+
         this.isSuccesfullEnroll = true;
-        
+
+        this.event.nRegistrations--;
+        if (this.event.citizens && this.user) {
+          const index = this.event.citizens.findIndex(citizen => citizen.email === this.user.email);
+          if (index !== -1) {
+            this.event.citizens.splice(index, 1);
+          }
+        }
       },
       error => {
         this.isDialogOpen = true;
@@ -272,6 +317,7 @@ this.isEnrolledDialogOpen = true;
       }
     );
   }
+
 
   /**
    *

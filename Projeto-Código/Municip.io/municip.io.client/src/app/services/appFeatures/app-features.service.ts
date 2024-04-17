@@ -33,8 +33,8 @@ export class AppFeaturesService {
   * @returns Observable of app features of municipality.
   */
   getAppFeaturesByMunicipality(municipalityName: string): Observable<AppFeature[]> {
-   
-    if (this.appFeatures.length === 0) {
+
+    if (this.appFeatures.length === 0 || this.appFeatures[0].municipality != municipalityName) {
 
       return this.http.get<AppFeature[]>(`api/appFeature/GetAppFeatures?municipalityName=${municipalityName}`).pipe(
         tap((features: AppFeature[]) => {
@@ -43,7 +43,7 @@ export class AppFeaturesService {
         })
       );
     } else {
-      
+
       console.log("BUSCAR FEATURES EM CACHE")
       return of(this.appFeatures);
     }
@@ -128,13 +128,13 @@ export class AppFeaturesService {
 }
 
 export interface AppFeature {
-   id : number,
-   appFeatureCategory : AppFeatureCategory,
-   isEnabled : boolean,
-   municipality : string,
+  id: number,
+  appFeatureCategory: AppFeatureCategory,
+  isEnabled: boolean,
+  municipality: string,
 }
 
- interface AppFeatureToSubmit {
+interface AppFeatureToSubmit {
   id: number,
   appFeatureCategory: number,
   isEnabled: boolean,
@@ -149,3 +149,25 @@ export enum AppFeatureCategory {
   Library = "Library",
   Unknown = "Unknown"
 }
+
+
+export const MunicipalitiesOfAML: string[] = [
+  "Alcochete",
+  "Almada",
+  "Amadora",
+  "Barreiro",
+  "Cascais",
+  "Lisboa",
+  "Loures",
+  "Oeiras",
+  "Odivelas",
+  "Mafra",
+  "Moita",
+  "Montijo",
+  "Palmela",
+  "Seixal",
+  "Sesimbra",
+  "Setúbal",
+  "Sintra",
+  "Vila Franca de Xira"
+]

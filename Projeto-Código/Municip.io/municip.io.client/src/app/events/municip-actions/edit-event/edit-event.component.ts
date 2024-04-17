@@ -180,7 +180,7 @@ export class EditEventComponent implements OnInit {
 
   eventForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    capacity: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1)]),
+    capacity: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1), this.validateCurrentRegistrations.bind(this)]),
     eventDate: new FormGroup({
       startDate: new FormControl(new Date(), [Validators.required]),
       startHour: new FormControl('', [Validators.required]),
@@ -198,6 +198,21 @@ export class EditEventComponent implements OnInit {
     description: new FormControl('', [Validators.required]),
 
   })
+
+  private validateCurrentRegistrations(control: FormControl): { [key: string]: boolean } | null {
+    const capacity = control.value;
+
+    if (this.eventSelected && typeof this.eventSelected.nRegistrations !== 'undefined') {
+      const currentRegistrations = this.eventSelected.nRegistrations;
+
+      if (capacity < currentRegistrations) {
+        return { 'invalidCapacity': true }; // Capacidade inválida
+      }
+    }
+
+    return null; // Capacidade válida ou this.eventSelected não está definido
+  }
+
 
 
   //Getters
@@ -272,7 +287,12 @@ export class EditEventComponent implements OnInit {
       let newStartRegistrationDate = this.createDateTime(new Date(this.startRegistrationDate?.value || ""), this.startRegistrationHour?.value || "");
       let newEndRegistrationDate = this.createDateTime(new Date(this.endRegistrationDate?.value || ""), this.endRegistrationHour?.value || "");
 
+      const timezoneOffsetMinutes = newStartDate.getTimezoneOffset();
 
+      this.updateDateTimeWithOffSet(newStartDate, timezoneOffsetMinutes);
+      this.updateDateTimeWithOffSet(newEndDate, timezoneOffsetMinutes);
+      this.updateDateTimeWithOffSet(newStartRegistrationDate, timezoneOffsetMinutes);
+      this.updateDateTimeWithOffSet(newEndRegistrationDate, timezoneOffsetMinutes);
 
       const newEvent: Event = {
         id: this.eventSelected!.id,
@@ -290,6 +310,8 @@ export class EditEventComponent implements OnInit {
         //this will not clean the citizens array, is just to avoid the error
         citizens: [],
       }
+
+      console.log(newEvent);
 
       this.eventService.updateEvent(newEvent, this.photo).subscribe(
         (event) => {
@@ -326,7 +348,14 @@ export class EditEventComponent implements OnInit {
 
   }
 
-
+  /**
+   * Atualiza a data com base no timezoneoffset 
+   * @param date
+   * @param timezoneOffSetMinutets
+   */
+  updateDateTimeWithOffSet(date: Date, timezoneOffSetMinutets: number) {
+    date.setHours(date.getHours() + timezoneOffSetMinutets / 60);
+  }
 
   /**
    * Evento dispultado aquando do selecionamento de uma imagem
@@ -362,9 +391,7 @@ export class EditEventComponent implements OnInit {
   */
   closeDialog() {
     this.isDialogOpen = false;
-
-    this.getEventSelected();
-    this.photo = undefined;
+    this.router.navigate(['/events']);
   }
 
 

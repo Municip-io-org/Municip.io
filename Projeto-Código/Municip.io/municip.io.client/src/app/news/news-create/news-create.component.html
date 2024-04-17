@@ -1,6 +1,6 @@
 <app-header-loggedin></app-header-loggedin>
 
-<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
+<app-smaller-banner [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"
                     [title]="'Criar Notícia'"
                     [text]="'Criação uma nova notícia'">
 </app-smaller-banner>

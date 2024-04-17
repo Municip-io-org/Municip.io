@@ -4,6 +4,7 @@ import { News, NewsService } from '../../services/news/news.service';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { Editor, Toolbar } from 'ngx-editor';
+import { Municipality } from '../../services/municipal-admin-auth.service';
 
 @Component({
   selector: 'app-news-create',
@@ -27,6 +28,7 @@ import { Editor, Toolbar } from 'ngx-editor';
  * @param subtitleCharacterCount - Contagem de caracteres do subtítulo
  * @param mainTextCharacterCount - Contagem de caracteres do texto principal
  * @param isDialogOpen - Diálogo aberto
+ * @param municipality - Município
  */
 export class NewsCreateComponent {
 
@@ -59,6 +61,29 @@ export class NewsCreateComponent {
   mainTextCharacterCount = 0;
 
   isDialogOpen: boolean = false;
+  municipality: Municipality = {
+    name: '',
+    president: '',
+    contact: '',
+    description: '',
+    areaha: '',
+    codigo: '',
+    codigopostal: '',
+    codigoine: '',
+    descpstal: '',
+    distrito: '',
+    eleitores: '',
+    email: '',
+    fax: '',
+    localidade: '',
+    nif: '',
+    populacao: '',
+    rua: '',
+    sitio: '',
+    telefone: '',
+    emblemPhoto: '',
+    landscapePhoto: '',
+  };
 
   /**
  * @constructor
@@ -88,6 +113,14 @@ export class NewsCreateComponent {
           res => {
             this.newUser = res;
             console.log(this.newUser);
+            this.userAuthService.getInfoMunicipality(this.newUser.municipality).subscribe(
+              (municipalityRes: Municipality) => {
+                this.municipality = municipalityRes;
+
+              },
+              error => {
+                console.error(error);
+              });
           },
           error => {
             console.error(error);
