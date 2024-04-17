@@ -95,6 +95,7 @@ export class EditEventComponent implements OnInit {
     });
 
     this.eventSelected = this.route.snapshot.data['event'];
+    console.log(this.eventSelected);
     this.setForm(this.eventSelected);
 
 
@@ -287,12 +288,11 @@ export class EditEventComponent implements OnInit {
       let newStartRegistrationDate = this.createDateTime(new Date(this.startRegistrationDate?.value || ""), this.startRegistrationHour?.value || "");
       let newEndRegistrationDate = this.createDateTime(new Date(this.endRegistrationDate?.value || ""), this.endRegistrationHour?.value || "");
 
-      const timezoneOffsetMinutes = newStartDate.getTimezoneOffset();
 
-      this.updateDateTimeWithOffSet(newStartDate, timezoneOffsetMinutes);
-      this.updateDateTimeWithOffSet(newEndDate, timezoneOffsetMinutes);
-      this.updateDateTimeWithOffSet(newStartRegistrationDate, timezoneOffsetMinutes);
-      this.updateDateTimeWithOffSet(newEndRegistrationDate, timezoneOffsetMinutes);
+      newStartDate = this.updateDateTimeWithOffSet(newStartDate);
+      newEndDate = this.updateDateTimeWithOffSet(newEndDate);
+      newStartRegistrationDate = this.updateDateTimeWithOffSet(newStartRegistrationDate);
+      newEndRegistrationDate = this.updateDateTimeWithOffSet(newEndRegistrationDate);
 
       const newEvent: Event = {
         id: this.eventSelected!.id,
@@ -352,9 +352,14 @@ export class EditEventComponent implements OnInit {
    * Atualiza a data com base no timezoneoffset 
    * @param date
    * @param timezoneOffSetMinutets
+   * @return
    */
-  updateDateTimeWithOffSet(date: Date, timezoneOffSetMinutets: number) {
-    date.setHours(date.getHours() + timezoneOffSetMinutets / 60);
+  updateDateTimeWithOffSet(date: Date) {
+    const timezoneOffsetMinutes = date.getTimezoneOffset();
+ 
+    date.setHours(date.getHours() - timezoneOffsetMinutes / 60);
+
+    return date;
   }
 
   /**
