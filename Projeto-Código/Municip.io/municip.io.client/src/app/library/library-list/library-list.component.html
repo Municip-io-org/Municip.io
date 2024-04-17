@@ -1,7 +1,7 @@
 <app-header-loggedin></app-header-loggedin>
 
 <app-smaller-banner [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'" title="Biblioteca de {{municipality.name}}"
-                    [text]="'Consulte os livros disponiveis na biblioteca'"/>
+                    [text]="'Consulte os livros disponiveis na biblioteca'" />
 
 
 <div class="py-[4rem] text-municip-normal-black min-h-[28rem] relative flex flex-col gap-y-20 bg-municip-blank px-20 pt-24">
@@ -33,15 +33,26 @@
           </div>
           <div class="col flex w-full">
             <div class="ml-10 w-full">
-              <app-input-title class="text-[2vh] ml-1/4">Data</app-input-title>
-              <div class="dropdown">
-                <select id="dateSearch" [(ngModel)]="dateSearch" class="w-[90%] rounded-2xl border px-4 py-2 pr-3 transition duration-300 hover:border-black"
-                        [class.text-municip-black]="dateSearch != ''" [class.text-gray-400]="dateSearch == ''">
-                  <option value="" [class.text-gray-400]="dateSearch != ''" selected>Procurar por Data</option>
-                  <option *ngFor="let option of dateOptions" [class.text-municip-black]="dateSearch ==''" [value]="option">{{ option }}</option>
-                </select>
+              <div class="flex justify-between w-[90%]">
+                <app-input-title class="text-[2vh] ml-1/4">
+                  Data
+                </app-input-title>
+                <div class="flex items-center font-inter text-[2vh]">
+                  <label class="example-value-label">{{sliderStart.value}}</label>
+                  <p>-</p>
+                  <label class="example-value-label">{{sliderFinal.value}}</label>
+                </div>
+              </div>
+              <div class="dropdown w-[90%] py-2">
+                <mat-slider [min]="minDateFilter" [max]="maxDateFilter" discrete>
+                  <input [value]="startDateFilter" matSliderStartThumb  [(ngModel)]="startDateFilter"
+                         #sliderStart>
+                  <input [value]="endDateFilter" matSliderEndThumb [(ngModel)]="endDateFilter"
+                         #sliderFinal>
+                </mat-slider>
               </div>
             </div>
+
             <div class="ml-10 w-full">
               <app-input-title class="text-[2vh] ml-1/4">Género</app-input-title>
               <div class="dropdown">
@@ -77,7 +88,8 @@
 
   <section class="flex flex-wrap justify-around gap-x-8 gap-y-16">
     <ng-container *ngFor="let book of filteredBooks">
-      <app-library-card [book]="book" (deleteid)="deleteBook($event)" (editid)="editBook($event)" (click)="goToBookPage(book.id)"></app-library-card>
+      <app-library-card [book]="book" (deleteid)="deleteBook($event)" (editid)="editBook($event)"
+                        (bookClick)="goToBookPage(book.id)" [isMunAdmin]="isMunAdmin"></app-library-card>
     </ng-container>
 
 
@@ -96,4 +108,4 @@
 
 
 
-  <app-footer class="flex-shrink-0"></app-footer>
+<app-footer class="flex-shrink-0"></app-footer>

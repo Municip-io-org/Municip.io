@@ -22,7 +22,6 @@ import { Municipality } from '../../services/municipal-admin-auth.service';
  * @param filterWindow - Janela de filtro
  * @param isbnSearch - ISBN do livro a ser pesquisado
  * @param authorSearch - Autor do livro a ser pesquisado
- * @param dateSearch - Data de publicação do livro a ser pesquisado
  * @param genreSearch - Gênero do livro a ser pesquisado
  * @param options - Opções de pesquisa
  * @param dateOptions - Opções de data
@@ -34,7 +33,7 @@ export class LibraryListComponent {
   nameSearch: string = '';
   user: any;
   isMunAdmin: boolean = false;
-  
+
 
   municipality: Municipality = {
     name: '',
@@ -63,12 +62,16 @@ export class LibraryListComponent {
   filterWindow: boolean = false;
   isbnSearch: string = '';
   authorSearch: string = '';
-  dateSearch: string ='';
   genreSearch: string = '';
   options: string[] = [];
   dateOptions: string[] = [];
   genreOptions: string[] = [];
-  
+
+  minDateFilter: number = 2000;
+  maxDateFilter: number = 2024;
+
+  startDateFilter: number = this.minDateFilter;
+  endDateFilter: number = this.maxDateFilter;
 
   /**
    * @constructor
@@ -78,7 +81,7 @@ export class LibraryListComponent {
    * @param libraryService - Serviço da biblioteca
    * @param router - O Router
    */
-  constructor(private userAuthService:UserAuthService, private libraryService: LibraryService,private router :Router) { }
+  constructor(private userAuthService: UserAuthService, private libraryService: LibraryService, private router: Router) { }
 
   /**
    * ngOnInit
@@ -96,7 +99,7 @@ export class LibraryListComponent {
             this.user = res;
             console.log(this.user);
 
-            
+
             const userRole = await this.userAuthService.getUserRole().toPromise();
             if (userRole!.role === Roles.Municipal) {
               this.isMunAdmin = true;
@@ -115,13 +118,13 @@ export class LibraryListComponent {
                   this.loadGenreOptions();
                 });
               });
-            
-            
-           
+
+
+
           }
         )
       });
-    
+
   }
 
   /**
@@ -149,8 +152,14 @@ export class LibraryListComponent {
     if (this.genreSearch !== '') {
       filteredList = filteredList.filter(book => this.filterArray(book.genre, this.genreSearch.toLowerCase()));
     }
-    if (this.dateSearch !== '') {
-      filteredList = filteredList.filter(book => book.publicationDate.toString().split("-")[0] === this.dateSearch);
+
+
+    if (this.startDateFilter !== this.minDateFilter) {
+      filteredList = filteredList.filter(book => new Date(book.publicationDate).getFullYear() >= this.startDateFilter);
+    }
+
+    if (this.endDateFilter !== this.maxDateFilter) {
+      filteredList = filteredList.filter(book => new Date(book.publicationDate).getFullYear() <= this.endDateFilter);
     }
 
     return filteredList;
@@ -189,11 +198,11 @@ export class LibraryListComponent {
    *
    * @param book - Livro a ser apagado
    */
-  deleteBook(book: any) {    
+  deleteBook(book: any) {
     this.libraryService.removeBook(book.book.id).subscribe(
       (res) => {
         console.log("Livro apagado com sucesso", res);
-       this.loadBooks();
+        this.loadBooks();
       },
       (error) => {
         console.log(error);
@@ -228,10 +237,28 @@ export class LibraryListComponent {
    * Limpa os filtros
    */
   loadDateOptions() {
-    
-      this.dateOptions = [...new Set(this.books.map(book => {
-   return book.publicationDate.toString().split("-")[0];}))].sort();
-     
+
+    this.dateOptions = [...new Set(this.books.map(book => {
+      return book.publicationDate.toString().split("-")[0];
+    }))].sort();
+
+    const minDate = Math.min(...this.dateOptions.map(date => parseInt(date)));
+    const maxDate = Math.max(...this.dateOptions.map(date => parseInt(date)));
+    if (minDate < this.minDateFilter) {
+      this.minDateFilter = minDate;
+    }
+
+    if (maxDate > this.maxDateFilter) {
+      this.maxDateFilter = maxDate;
+    }
+
+
+    this.startDateFilter = this.minDateFilter;
+    this.endDateFilter = this.maxDateFilter;
+
+
+
+
   }
 
 
@@ -264,7 +291,7 @@ export class LibraryListComponent {
    *
    * @param book - Livro
    */
-  goToBookPage(book:any) {
-    this.router.navigateByUrl('/library/'+book);
+  goToBookPage(book: any) {
+    this.router.navigateByUrl('/library/' + book);
   }
 }

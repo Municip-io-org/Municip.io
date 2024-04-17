@@ -23,7 +23,10 @@ export class LibraryCardComponent {
     "status": 0,
     "municipality": "London"
   };
-  
+
+  @Input() isMunAdmin: boolean = false;
+
+  @Output() bookClick = new EventEmitter();
   @Output() deleteid = new EventEmitter<number>();
   @Output() editid = new EventEmitter<number>();
   constructor(private bookService: LibraryService) { }
@@ -36,7 +39,7 @@ export class LibraryCardComponent {
     } else {
       return 'bg-[#F4A42C] text-[#9B4F08]';
     }
-    
+
   }
 
   getStatusString(status: BookStatus): string {
@@ -51,5 +54,9 @@ export class LibraryCardComponent {
   editCurrent(book: any) {
     this.editid.emit(book);
     console.log("Editar livro", book);
+  }
+
+  bookClicked() {
+    this.bookClick.emit();
   }
 }
