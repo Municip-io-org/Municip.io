@@ -24,7 +24,7 @@ export class RequestsComponent {
   booksRequested: BookRequest[] = [];
   municipalityImage: string = '';
   nameSearch: string = '';
-  orderOptions: any[] = [{ label: 'Mais antigo', value: true }, { label: 'Mais Recente', value: false }];
+  orderOptions: any[] = [{ label: 'Mais Recente', value: true}, { label: 'Mais antigo', value: false}];
   ascendingOrder: boolean = true;
 
 
@@ -102,9 +102,9 @@ export class RequestsComponent {
 
     this.booksRequested.sort((a, b) => {
       if (this.ascendingOrder) {
-        return a.id - b.id;
-      } else {
         return b.id - a.id;
+      } else {
+        return a.id - b.id;
       }
     });
   }

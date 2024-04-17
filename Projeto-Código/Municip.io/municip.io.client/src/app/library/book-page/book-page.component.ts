@@ -96,7 +96,8 @@ export class BookPageComponent {
 
   citizenEmail: string = '';
 
-
+  hasActiveRequest: boolean = false;
+  isRemoveBookWarningDialogOpen: boolean = false;
 
 
   /// THIS IS FOR THE DETAIL PAGE OF BOOK
@@ -173,6 +174,18 @@ export class BookPageComponent {
                 const userRole = await this.userAuthService.getUserRole().toPromise();
                 if (userRole!.role === Roles.Municipal) {
                   this.isMunAdmin = true;
+
+                  this.libraryService.getRequestsByMunicipality(municipalityRes.name).subscribe(requests => {
+                    requests.forEach((request: BookRequest) => {
+                      if (request.book.id == this.book.id && request.status !== BookRequestStatus.Denied
+                        && request.status !== BookRequestStatus.Delivered) {
+
+                        this.hasActiveRequest = true;
+                      }
+                    });
+                  }
+
+                  )
                 }
 
 
@@ -398,7 +411,7 @@ export class BookPageComponent {
     this.libraryService.removeBook(this.book.id!).subscribe(
       response => {
         if (response && response.body) {
-          
+          this.router.navigateByUrl(`/library/librarylist`);
         } else {
           console.error('Resposta inválida do servidor após a remoção do livro:', response);
 
@@ -420,12 +433,25 @@ export class BookPageComponent {
   }
 
   /**
+   * Método para verificar se pode remover um livro
+   */
+  canRemoveBook() {
+    if (!this.hasActiveRequest) {
+      this.removeBook();
+    } else {
+      this.isRemoveBookDialogOpen = false;
+      this.openRemoveBookWarningDialog();
+    }
+  }
+
+
+
+  /**
    *
    * Método para fechar o dialogo de remoção
-   */ 
+   */
   closeRemoveBookDialog() {
     this.isRemoveBookDialogOpen = false;
-    this.router.navigateByUrl(`/library/librarylist`);
   }
   /**
    *
@@ -434,7 +460,7 @@ export class BookPageComponent {
   closeDialog() {
     this.isDialogOpen = false;
     this.updateRequest();
-    
+
   }
 
 
@@ -446,6 +472,10 @@ export class BookPageComponent {
    */
   BookRequestStatus() {
     return BookRequestStatus;
+  }
+
+  BookStatus() {
+    return BookStatus;
   }
 
 
@@ -500,9 +530,9 @@ export class BookPageComponent {
     return this.libraryService.bookRequestStatusToString(status)
   }
 
- /**
-  * Método para criar um BookRequest
-  */
+  /**
+   * Método para criar um BookRequest
+   */
   borrowBook() {
     let bookRequest: BookRequest = {
       id: 0,
@@ -584,5 +614,21 @@ export class BookPageComponent {
   closeDialogBorrow() {
     this.isDialogOpenBorrow = false;
   }
+
+  /**
+   * Dialogo de remover (abrir)
+   */
+  openRemoveBookWarningDialog() {
+    this.isRemoveBookWarningDialogOpen = true;
+  }
+
+  /**
+   * Dialogo de remover (fechar)
+   */
+  closeRemoveBookWarningDialog() {
+    this.isRemoveBookWarningDialogOpen = false;
+  }
+
+
 
 }
