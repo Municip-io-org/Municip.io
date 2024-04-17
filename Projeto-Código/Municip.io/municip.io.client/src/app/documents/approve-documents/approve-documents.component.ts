@@ -20,9 +20,11 @@ export class ApproveDocumentsComponent {
   documents: RequestDocument[] = [];
   municipalityImage: string = '';
   nameSearch: string = '';
-  orderOptions: any[] = [{ label: 'Pedidos Antigos', value: true }, { label: 'Pedidos Recentes', value: false }];
+  orderOptions: any[] = [{ label: 'Pedidos Recentes', value: true }, { label: 'Pedidos Antigos', value: false }];
   ascendingOrder: boolean = true;
   municipalityName: string = '';
+  isDialogOpen: boolean = false;
+  selectedUser: any;
 
   /**
    * @constructor
@@ -45,7 +47,9 @@ export class ApproveDocumentsComponent {
    *
    **/
   ngOnInit(): void {
-    this.sortEventsByDate();
+
+
+    
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
@@ -55,6 +59,7 @@ export class ApproveDocumentsComponent {
             (res: RequestDocument[]) => {
               this.documents = res;
               console.log("bidsbca cia s", this.documents);
+              this.sortEventsByDate();
             },
             error => {
               console.error(error);
@@ -101,7 +106,7 @@ export class ApproveDocumentsComponent {
   sortEventsByDate() {
     //sort events by date
     this.documents.sort((a, b) => {
-      if (this.ascendingOrder) {
+      if (!this.ascendingOrder) {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
       } else {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -149,5 +154,25 @@ export class ApproveDocumentsComponent {
         console.error(error);
       }
     );
+  }
+
+
+  /**
+   * openDialog
+   *
+   * Abre o diálogo
+   */
+  openDialog(user: any) {
+    this.selectedUser = user;
+    this.isDialogOpen = true;
+  }
+
+  /**
+   * closeDialog
+   *
+   * Fecha o diálogo
+   */
+  closeDialog() {
+    this.isDialogOpen = false;
   }
 }

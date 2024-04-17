@@ -1,16 +1,23 @@
-<app-header-loggedin />
+﻿<app-header-loggedin />
+
+
+<ng-container *ngIf="isDialogOpen">
+  <app-userinfodialog [user]="selectedUser" (close)="closeDialog()"></app-userinfodialog>
+</ng-container>
+
+
 <app-smaller-banner title="Aprovar Documentos" [image]="municipalityImage ? municipalityImage : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
 
 <div class="min-h-80 bg-municip-blank">
-  <div class=" flex items-center justify-between space-x-4 mx-20 pt-10">
-    <div class="relative w-[50rem] ">
+  <div class="mx-20 flex items-center justify-between space-x-4 pt-10">
+    <div class="w-[50rem] relative">
       <label for="nameSearch" class="sr-only">Procurar por Documentos</label>
       <div class="flex items-center">
-        <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+        <i class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
           <span class="fas fa-search"></span>
         </i>
         <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por Documentos"
-               class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300  hover:border-black">
+               class="trasition w-full rounded-2xl border px-4 py-2 pl-10 duration-300 hover:border-black">
       </div>
     </div>
     <p-selectButton [options]="orderOptions" [(ngModel)]="ascendingOrder" optionLabel="label" optionValue="value" [unselectable]="true"
@@ -20,12 +27,11 @@
   </div>
 
   <div *ngIf="filteredDocuments.length === 0"
-       class="flex justify-center items-center text-municip-normal-black text-[3rem]
-       mt-16">
+       class="text-municip-normal-black text-[3rem] mt-16 flex items-center justify-center">
     <p class="font-semibold">Sem Documentos.</p>
   </div>
   <div class="mx-32 py-10" *ngFor="let doc of filteredDocuments">
-    <app-document-approve-card [document]="doc" (deleteDoc)="rejectDocument($event)" (waitPayment)="waitPayment($event)" />
+    <app-document-approve-card [document]="doc" (deleteDoc)="rejectDocument($event)" (waitPayment)="waitPayment($event)" (citizen)="openDialog($event)"/>
   </div>
 
 </div>

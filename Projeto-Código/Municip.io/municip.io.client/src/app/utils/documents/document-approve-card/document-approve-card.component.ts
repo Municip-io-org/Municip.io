@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, output } from '@angular/core';
 import { RequestDocument, StatusDocument, statusToString } from '../../../services/documents/docs.service';
+import { Citizen } from '../../../services/citizen-auth.service';
 
 
 @Component({
@@ -11,6 +12,7 @@ export class DocumentApproveCardComponent {
   @Input() document!: RequestDocument;
   @Output() deleteDoc = new EventEmitter<number>();
   @Output() waitPayment = new EventEmitter<number>();
+  @Output() citizen = new EventEmitter<Citizen>();
   
 
   /**
@@ -47,6 +49,13 @@ export class DocumentApproveCardComponent {
 
   }
 
+  /**
+   * Envia o cidadão selecionado
+   * @param citizen
+   */
+  sendCitizen(citizen: any) {
 
+    this.citizen.emit(citizen);
+  }
   
 }
