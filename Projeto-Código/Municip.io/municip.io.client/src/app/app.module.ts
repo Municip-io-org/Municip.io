@@ -140,6 +140,7 @@ import { EditBookComponent } from './library/edit-book/edit-book.component';
 import { LibraryHomepageComponent } from './library/library-homepage/library-homepage.component';
 import { LibraryMapComponent } from './library/library-map/library-map.component';
 import { MunicipalCalendarComponent } from './events/municipal-calendar/municipal-calendar.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 
@@ -262,6 +263,7 @@ registerLocaleData(localePt, 'pt-PT');
     LibraryHomepageComponent,
     LibraryMapComponent,
     MunicipalCalendarComponent,
+    NotFoundComponent,
 
     
   ],
