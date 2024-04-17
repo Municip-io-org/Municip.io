@@ -286,11 +286,12 @@ localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
   /**
    * Envia um email 
    * @param email email do cidadão
+   * @param userName nome do cidadão
    * @returns retorna a resposta
    */
-  sendEmail(email: string) {
+  sendEmail(user:Citizen) {
     
-    return this.http.post<any>(`/api/accounts/SendNewLogin?email=${email}`, {});
+    return this.http.post<any>(`/api/accounts/SendNewLogin`, user);
     
   }
 
