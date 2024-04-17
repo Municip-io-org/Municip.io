@@ -85,7 +85,7 @@ export class NewsListComponent {
           this.role = res.role;
         
           this.LoadData();
-        
+        this.sortNewsByDate();
       },
       error => {
         console.error(error);
@@ -114,14 +114,13 @@ export class NewsListComponent {
             this.newsService.getNews(this.newUser.municipality).subscribe(
               (listOfNews: any) => {
                 this.newsList = listOfNews.map((news: any) => {
-                  this.sortNewsByDate();
-                  const [datePart] = news.date.split('T');
-                  const date = new Date(datePart);
-                  const formattedDate = date.toLocaleDateString('pt-PT');
-                  this.municipalityuser = this.newUser.municipality;
-                  return { ...news, date: formattedDate };
+                  
+                
+                  return news;
                 });
+                
                 this.sortedNewsList = this.newsList;
+                this.sortNewsByDate();
                 console.log(this.newsList);
                 this.userAuthService.getInfoMunicipality(this.newUser.municipality).subscribe(
                   (municipalityRes: Municipality) => {
@@ -183,6 +182,24 @@ export class NewsListComponent {
 
 
   /**
+   *
+   * formatDate
+   *
+   * Formata a data para que apenas apareca o dia, mês e ano na pagina
+   * 
+   * @param date
+   * @returns a data com dia, mês e ano
+   */
+   formatDate(date: string) {
+    const [datePart] = date.split('T');
+    const date2 = new Date(datePart);
+    const formattedDate = date2.toLocaleDateString('pt-PT');
+    
+    //return { ...news, date: formattedDate };
+    return formattedDate;
+
+  }
+  /**
    * toggleSortOrder
    *
    * Alterna a ordem de ordenação
@@ -200,6 +217,8 @@ export class NewsListComponent {
     const newsListCopy = [...this.newsList];
     newsListCopy.sort((a, b) => {
       if (this.ascendingOrder) {
+        
+        
         return new Date(b.date.split('/').reverse().join('/')).getTime() - new Date(a.date.split('/').reverse().join('/')).getTime();
       } else {
         return new Date(a.date.split('/').reverse().join('/')).getTime() - new Date(b.date.split('/').reverse().join('/')).getTime();
