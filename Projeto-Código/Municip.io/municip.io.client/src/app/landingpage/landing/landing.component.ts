@@ -60,7 +60,7 @@ res => {
   *
   */
 constructor(private titleService: Title, private userAuthService : UserAuthService, private router : Router, private adminStatisticsService : AdminStatisticsService) {
-    this.titleService.setTitle("Municip.io");
+    
   }
 
 }

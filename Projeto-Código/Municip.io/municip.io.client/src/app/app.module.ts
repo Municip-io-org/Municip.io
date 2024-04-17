@@ -141,6 +141,7 @@ import { LibraryHomepageComponent } from './library/library-homepage/library-hom
 import { LibraryMapComponent } from './library/library-map/library-map.component';
 import { MunicipalCalendarComponent } from './events/municipal-calendar/municipal-calendar.component';
 import { MatSliderModule } from '@angular/material/slider';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 
@@ -263,6 +264,7 @@ registerLocaleData(localePt, 'pt-PT');
     LibraryHomepageComponent,
     LibraryMapComponent,
     MunicipalCalendarComponent,
+    NotFoundComponent,
 
     
   ],

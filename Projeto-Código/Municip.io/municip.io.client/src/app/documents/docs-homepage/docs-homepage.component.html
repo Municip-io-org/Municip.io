@@ -1,4 +1,4 @@
-<app-header-loggedin />
+﻿<app-header-loggedin />
 <div class="mb-40">
   <app-big-banner [image]="'/assets/images/documents/wallpaper.jpg'" [title]="'Documentos de ' + municipality"
                   [text]="'Solicite os seus documentos através do portal Municip.io, possibilitando o seu pagamento e disponibilização online.'"
@@ -7,13 +7,14 @@
 
   <div class="overflow-hidden bg-white py-24 sm:py-24">
     <div class="mx-auto max-w-7xl px-2 lg:px-[0rem]">
-      <div class="mx-auto grid max-w-2xl grid-cols-1  gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+      <div class="grid-cols-1 mx-auto grid max-w-2xl gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
         <div class="lg:pr-8 lg:pt-4">
-          <div class="lg:max-w-lg mx-auto mx-0">
-            <h2 class="text-base font-semibold leading-7 text-sky-500">A conveniência do seu lado</h2>
-           <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl inline">Documentos de </p> <p class=" inline mt-2 text-3xl font-bold tracking-tight text-sky-500 sm:text-4xl">{{municipality}} </p>
-            <p class="mt-6 text-lg leading-8 text-gray-600">Solicite os seus documentos, analise os seus pedidos, efetue o pagamento, tudo isto, no conforto do seu lar.</p>
-            <dl class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+          <div class="mx-0 mx-auto lg:max-w-lg">
+            <h2 class="leading-7 text-base font-semibold text-sky-500">A conveniência do seu lado</h2>
+           <p class="mt-2 inline text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Documentos de </p>
+            <p class="from-municip-light-blue mt-2 inline bg-gradient-to-l to-municip-blue bg-clip-text text-3xl font-bold tracking-tight text-transparent sm:text-4xl">{{municipality}} </p>
+            <p class="leading-8 mt-6 text-lg text-gray-600">Solicite os seus documentos, analise os seus pedidos, efetue o pagamento, tudo isto, no conforto do seu lar.</p>
+            <dl class="leading-7 mt-10 max-w-xl space-y-8 text-base text-gray-600 lg:max-w-none">
               <div class="relative pl-9">
                 <dt class="inline font-semibold text-gray-900">
                   <svg class="absolute left-1 top-1 h-5 w-5 text-sky-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -45,21 +46,25 @@
             </dl>
           </div>
         </div>
-        <img src="/assets/images/documents/docspreview.JPG" alt="Preview Municip.io" class=" transition duration-300 ease-in-out hover:scale-110 max-w-[45rem] rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[55rem] md:-ml-4 lg:-ml-0 mt-8" width="2432" height="1442">
+        <img src="/assets/images/documents/docspreview.JPG" alt="Preview Municip.io" class="max-w-[45rem] ring-1 ring-gray-400/10 mt-8 rounded-xl shadow-xl transition duration-300 ease-in-out hover:scale-110 sm:w-[55rem] md:-ml-4 lg:-ml-0" width="2432" height="1442">
       </div>
     </div>
   </div>
 
    
-  <article class="flex justify-around mt-0 px-32 mb-10 pb-10 pt-10 font-roboto bg-gray-100">
-    <a class="hover:bg-blue-100 rounded-2xl transition duration-500 cursor-pointer"
+  <article class="font-roboto mb-10 mt-0 flex justify-around bg-gray-100 px-32 pb-10 pt-10">
+    <a class="cursor-pointer rounded-2xl transition duration-500 hover:bg-blue-100"
        href="/documents/request">
-      <app-vertical-card [cardImage]="'/assets/images/documents/folder.png'" [cardText]="'Efetue o pedido de um documento específico através do nosso portal'" [cardTitle]="'Pedir Documento'" />
+      <app-vertical-card [cardImage]="'/assets/images/documents/folder.png'"
+                         [cardText]="'Efetue o pedido de um documento específico através do nosso portal'"
+                         [cardTitle]="'Pedir Documento'" />
     </a>
     <div class="bg-municip-light-blue w-0.5 rounded-xl"></div>
-    <a class="hover:bg-blue-100 rounded-2xl transition duration-500 cursor-pointer"
+    <a class="cursor-pointer rounded-2xl transition duration-500 hover:bg-blue-100"
        href="/documents/my">
-      <app-vertical-card [cardImage]="'/assets/images/documents/document.png'" [cardText]="'Consulte os diversos documentos pedidos, estados, entre outros.'" [cardTitle]="'Os meus Documentos'" />
+      <app-vertical-card [cardImage]="'/assets/images/documents/document.png'"
+                         [cardText]="'Consulte os diversos documentos pedidos, estados, entre outros.'"
+                         [cardTitle]="'Os meus Documentos'" />
     </a>
   </article>
 

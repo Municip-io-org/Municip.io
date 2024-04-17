@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserAuthService } from '../../services/user-auth.service';
 import { DocsService, RequestDocument } from '../../services/documents/docs.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-documents',
@@ -27,7 +28,7 @@ export class MyDocumentsComponent {
   documents: RequestDocument[] = [];
   municipalityImage: string = '';
   nameSearch: string = '';
-  orderOptions: any[] = [{ label: 'Mais antigo', value: true }, { label: 'Mais Recente', value: false }];
+  orderOptions: any[] = [{ label: 'Mais Recente', value: true }, { label: 'Mais Antigo', value: false }];
   ascendingOrder: boolean = true;
 
   /**
@@ -39,7 +40,7 @@ export class MyDocumentsComponent {
    * @param authService - O serviço de autenticação de utilizadores.
    *
    **/
-  constructor(private service: DocsService, private authService: UserAuthService) {
+  constructor(private service: DocsService, private authService: UserAuthService, private router : Router) {
     
   }
 
@@ -52,7 +53,7 @@ export class MyDocumentsComponent {
    *
    **/
   ngOnInit(): void {
-    this.sortEventsByDate();
+    
     this.authService.getUserData().subscribe((user) => {
       this.authService.getInfoByEmail(user.email).subscribe((account) => {
         this.authService.getInfoMunicipality(account.municipality).subscribe((municipality) => {
@@ -61,7 +62,7 @@ export class MyDocumentsComponent {
           this.service.getRequestsFromCitizen(user.email).subscribe(
             (docRes: any) => {
               this.documents = docRes as RequestDocument[];
-
+              this.sortEventsByDate();
             },
             error => {
               console.error(error);
@@ -102,12 +103,19 @@ export class MyDocumentsComponent {
   sortEventsByDate() {
     //sort events by date
     this.documents.sort((a, b) => {
-      if (this.ascendingOrder) {
+      if (!this.ascendingOrder) {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
       } else {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
       }
     });
+  }
+
+  /**
+   * Redireciona para a página para pedir documentos.
+   */
+  goToRequestDocument() {
+    this.router.navigateByUrl('documents/request');
   }
 
 }

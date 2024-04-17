@@ -37,7 +37,7 @@
             <app-news-card title={{news.title}}
                            subtitle="{{news.subtitle}}"
                            [image]="news.photo ? news.photo : '/assets/images/placeholder/Landscape placeholder.jpg'"
-                           date="{{news.date}}"
+                           date="{{formatDate(news.date)}}"
                            id="{{news.id}}"
                            (deleteid)="deleteNews($event)">
             </app-news-card>

@@ -52,9 +52,10 @@
       <p *ngIf="event.nRegistrations >= event.capacity" class="text-red-500">O evento já está lotado</p>
 
       <div class="relative">
-        <div *ngIf="event.nRegistrations >= event.capacity && !isEnrolled() || isMunAdmin" class="absolute rounded  w-[10rem] inset-0 bg-gray-700 opacity-50"></div>
+        <div *ngIf="(event.nRegistrations >= event.capacity && !isEnrolled()) || canNotRegisterForEvent() || isMunAdmin"
+             class="absolute rounded w-[10rem] inset-0 bg-gray-700 opacity-50"></div>
 
-       
+
         <ng-container *ngIf="!isEnrolled()">
           <app-btn-municip-blue width="10rem" (click)="enrollInEvent(event.id!, user.email)">
             Inscrever
@@ -62,7 +63,7 @@
           </app-btn-municip-blue>
         </ng-container>
 
-       
+
         <ng-container *ngIf="isEnrolled()">
           <app-btn-municip-blue width="10rem" (click)="dropOutEvent(event.id!, user.email)">
             Desinscrever

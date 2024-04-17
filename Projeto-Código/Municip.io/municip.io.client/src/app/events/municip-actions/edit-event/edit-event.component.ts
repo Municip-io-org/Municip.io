@@ -95,6 +95,7 @@ export class EditEventComponent implements OnInit {
     });
 
     this.eventSelected = this.route.snapshot.data['event'];
+    console.log(this.eventSelected);
     this.setForm(this.eventSelected);
 
 
@@ -288,6 +289,10 @@ export class EditEventComponent implements OnInit {
       let newEndRegistrationDate = this.createDateTime(new Date(this.endRegistrationDate?.value || ""), this.endRegistrationHour?.value || "");
 
 
+      newStartDate = this.updateDateTimeWithOffSet(newStartDate);
+      newEndDate = this.updateDateTimeWithOffSet(newEndDate);
+      newStartRegistrationDate = this.updateDateTimeWithOffSet(newStartRegistrationDate);
+      newEndRegistrationDate = this.updateDateTimeWithOffSet(newEndRegistrationDate);
 
       const newEvent: Event = {
         id: this.eventSelected!.id,
@@ -305,6 +310,8 @@ export class EditEventComponent implements OnInit {
         //this will not clean the citizens array, is just to avoid the error
         citizens: [],
       }
+
+      console.log(newEvent);
 
       this.eventService.updateEvent(newEvent, this.photo).subscribe(
         (event) => {
@@ -341,7 +348,19 @@ export class EditEventComponent implements OnInit {
 
   }
 
+  /**
+   * Atualiza a data com base no timezoneoffset 
+   * @param date
+   * @param timezoneOffSetMinutets
+   * @return
+   */
+  updateDateTimeWithOffSet(date: Date) {
+    const timezoneOffsetMinutes = date.getTimezoneOffset();
+ 
+    date.setHours(date.getHours() - timezoneOffsetMinutes / 60);
 
+    return date;
+  }
 
   /**
    * Evento dispultado aquando do selecionamento de uma imagem

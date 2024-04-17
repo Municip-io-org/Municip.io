@@ -660,12 +660,13 @@ namespace Municip.io.Server.Controllers
 
         /// <summary>
         /// Envia email de novo login
-        /// <param name="email"></param>"
+        /// <param name="email"></param>
+        /// <param name="UserName"></param>
         /// <returns>A mensagem de sucesso ou erro da operação</returns>
         [HttpPost("SendNewLogin")]
-        public IActionResult SendNewLogin(string email)
+        public IActionResult SendNewLogin(Citizen user)
         {
-            EmailSender.SendEmailAproveDeny(email, "Novo Login", "", AccountUserEmail.NEWLOGIN.toString(), "wwwroot/html/AproveEmail.html");
+            EmailSender.SendEmailAproveDeny(user.Email, "Novo Login", $"{user.firstName} {user.Surname}", AccountUserEmail.NEWLOGIN.toString(), "wwwroot/html/AproveEmail.html");
             return Ok(new { message = "Success" });
         }
 
