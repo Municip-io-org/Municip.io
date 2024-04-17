@@ -216,6 +216,40 @@ export class EventPageComponent {
     this.router.navigateByUrl(`/events/edit/${this.event.id}`);
   }
 
+
+
+  /**
+   * Função para verificar se é possível registrar no evento com base nas datas de inscrição
+   */
+  canRegisterForEvent(): boolean {
+    const currentDate = new Date();
+    const startRegistration = new Date(this.event.startRegistration);
+    const endRegistration = new Date(this.event.endRegistration);
+
+    // Verifica se a data atual está fora do intervalo de inscrições
+    if (currentDate < startRegistration || currentDate > endRegistration) {
+      return true; 
+    }
+
+    const currentHour = currentDate.getHours();
+    const currentMinute = currentDate.getMinutes();
+    const startHour = startRegistration.getHours();
+    const startMinute = startRegistration.getMinutes();
+    const endHour = endRegistration.getHours();
+    const endMinute = endRegistration.getMinutes();
+
+    // Verifica se a hora atual está entre as horas e minutos de início e término das inscrições
+    if (
+      (currentHour > startHour || (currentHour === startHour && currentMinute >= startMinute)) &&
+      (currentHour < endHour || (currentHour === endHour && currentMinute <= endMinute))
+    ) {
+      return true;
+    }
+
+    return false; 
+  }
+
+
   /** 
   *
   * Este método é responsável por inscrever um cidadão num evento
