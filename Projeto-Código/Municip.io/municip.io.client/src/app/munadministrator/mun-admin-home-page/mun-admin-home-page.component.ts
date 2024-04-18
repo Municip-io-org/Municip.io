@@ -5,6 +5,8 @@ import { MunicipalAdministrator, Municipality } from '../../services/municipal-a
 import { Router } from '@angular/router';
 import { AdminStatisticsDashboardComponent } from '../../admin-statistics-dashboard/admin-statistics-dashboard.component';
 import { AdminStatisticsService } from '../../services/stats/admin-statistics.service';
+import { CitizenStatusService } from '../../services/citizen-status.service';
+import { Citizen } from '../../services/citizen-auth.service';
 
 @Component({
   selector: 'app-mun-admin-home-page',
@@ -32,7 +34,9 @@ export class MunAdminHomePageComponent {
    * @param adminStatisticsService - Serviço de estatísticas do administrador
    * @param cdr - O ChangeDetectorRef
    */
-  constructor(private userAuthService: UserAuthService, private router: Router, private adminStatisticsService: AdminStatisticsService, private cdr: ChangeDetectorRef) { }
+  constructor(private userAuthService: UserAuthService, private router: Router,
+    private adminStatisticsService: AdminStatisticsService, private cdr: ChangeDetectorRef,
+    private citizenStatusService: CitizenStatusService) { }
 
 
   anyUser: any;
@@ -70,9 +74,10 @@ export class MunAdminHomePageComponent {
     landscapePhoto: 'Sem landscape',
   };
 
-  documentsToPay: string = 'empty';
-  documentsToApprove: string = 'empty';
 
+  documentsToApprove: string = '0';
+
+  citizensToApprove: string = '0';
 
 
   /**
@@ -92,25 +97,22 @@ export class MunAdminHomePageComponent {
               res => {
                 this.municipality = res as Municipality;
 
+
+                this.citizenStatusService.getCitizens(this.municipality.name).subscribe((citizens: any[]) => {
+
+                  this.citizensToApprove = citizens.filter(citizen => citizen.status === 'Pending').length.toString();
+                  this.cdr.detectChanges();
+
+
+                });
+
                 this.adminStatisticsService.getPendingRequestsByMunicipality(this.municipality.name).subscribe(
                   res => {
                     this.documentsToApprove = res.toString();
                     console.log("aqui" + this.documentsToApprove);
-                    this.cdr.detectChanges(); 
+                    this.cdr.detectChanges();
 
 
-                    this.adminStatisticsService.getWaitingForPaymentRequestsByMunicipality(this.municipality.name).subscribe(
-                      res => {
-                        this.documentsToPay = res.toString();
-                        console.log("aqui" + this.documentsToPay);
-                        this.cdr.detectChanges();
-                     
-
-                      },
-                      error => {
-                        console.error(error);
-                      }
-                    )
 
 
                   },
@@ -125,10 +127,11 @@ export class MunAdminHomePageComponent {
           }
         );
       },
-error => {
+      error => {
         console.error(error);
-}
+      }
     );
+
   }
 
 
@@ -139,7 +142,7 @@ error => {
    * Abre os cidadãos pendentes
    */
   pendingCitizensClick() {
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/munadmin-dashboard");
   }
 
 
@@ -149,7 +152,7 @@ error => {
    * Aprova os documentos
    */
   approveDocumentsClick() {
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/documents/approve");
   }
 }
 
