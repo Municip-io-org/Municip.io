@@ -118,6 +118,12 @@ export class SignUpMunicipalityComponent {
 
 
  
+  openFilePicker(inputId: string) {
+    const fileInput = document.getElementById(inputId) as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click(); // Abre o seletor de arquivo correspondente
+    }
+  }
 
 
   /**

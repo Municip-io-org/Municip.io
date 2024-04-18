@@ -1,8 +1,8 @@
-<mat-form-field class="inputRange w-full "
+﻿<mat-form-field class="inputRange w-full"
                 [ngClass]="class"
                 >
   <input [id]="name" [formControl]="control" [name]="name"
-         [min]="minDate"
+         [min]="minDate" [max]="maxDate"
          matInput [matDatepicker]="picker">
   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
