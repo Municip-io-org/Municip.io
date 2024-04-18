@@ -19,7 +19,7 @@
 
 
 
-    <form [formGroup]="signUpCitizenForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-y-6">
+    <form [formGroup]="signUpCitizenForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-y-6 max-lg:items-center">
       <div *ngIf="errors" class="space-y-2 text-start text-sm font-bold text-red-500">
         <div *ngFor="let error of errors">
           <p>{{error}}</p>
