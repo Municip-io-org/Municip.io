@@ -20,11 +20,11 @@ namespace Municip.io.Server.Controllers
             _context = context;
         }
 
-      /// <summary>
-      /// Obter informações do livro através da API do Google Books
-      /// </summary>
-      /// <param name="isbn"></param>
-      /// <returns>A informação de um livro</returns>
+        /// <summary>
+        /// Obter informações do livro através da API do Google Books
+        /// </summary>
+        /// <param name="isbn"></param>
+        /// <returns>A informação de um livro</returns>
         [HttpGet("GetBookInfoAPI")]
         public async Task<IActionResult> GetBookInfoAPI(string isbn)
         {
@@ -85,8 +85,8 @@ namespace Municip.io.Server.Controllers
                     if (!string.IsNullOrEmpty(newBook.ISBN))
                     {
                         // Verificar se já existe um livro com o mesmo ISBN, mesmo município e o livro disponível
-                        var existingBook = _context.Books.FirstOrDefault(b => b.ISBN == newBook.ISBN 
-                                                                        && b.Municipality == newBook.Municipality 
+                        var existingBook = _context.Books.FirstOrDefault(b => b.ISBN == newBook.ISBN
+                                                                        && b.Municipality == newBook.Municipality
                                                                         && b.Status == BookStatus.Available);
                         if (existingBook != null)
                         {
@@ -151,6 +151,11 @@ namespace Municip.io.Server.Controllers
                     {
                         return NotFound(new { message = "Livro não encontrado." });
                     }
+
+
+                    
+
+
 
                     // Atualizar os detalhes do livro existente com os detalhes do livro atualizado
                     existingBook.ISBN = book.ISBN;
@@ -243,11 +248,18 @@ namespace Municip.io.Server.Controllers
 
                 if (book == null) return BadRequest(new { message = "Não foi encontrado nenhum livro", ModelState });
 
+                if (book.Status == BookStatus.Unavailable) return BadRequest(new { message = "O livro não está disponível" });
+
+
+                //if the citizen is not from the same municipality as the book
+                if (citizen.Municipality != book.Municipality) return BadRequest(new { message = "O cidadão não é do mesmo município que o livro" });
 
                 //if the citizen already has a request for the same book
                 var existingRequest = await _context.BookRequests.FirstOrDefaultAsync(r => r.Citizen.Id == citizen.Id && r.Book.Id == book.Id && r.Status != BookRequestStatus.Delivered && r.Status != BookRequestStatus.Denied);
                 if (existingRequest != null) return BadRequest(new { message = "O cidadão já fez um pedido para este livro" });
 
+
+                
 
                 if (book.AvailableCopies == 0) return BadRequest(new { message = "Não há cópias disponíveis deste livro" });
 
@@ -320,10 +332,10 @@ namespace Municip.io.Server.Controllers
 
 
 
-       /// <summary>
-       /// Obtém todos os pedidos de requisição de livro
-       /// </summary>
-       /// <returns>Os pedidos realizados</returns>
+        /// <summary>
+        /// Obtém todos os pedidos de requisição de livro
+        /// </summary>
+        /// <returns>Os pedidos realizados</returns>
         [HttpGet("GetRequests")]
         public IActionResult GetRequest()
         {
@@ -344,7 +356,7 @@ namespace Municip.io.Server.Controllers
             return Ok(bookRequests);
         }
 
-        
+
         /// <summary>
         /// Obtém todos os pedidos de requisição de livro de um cidadão
         /// </summary>
@@ -383,7 +395,7 @@ namespace Municip.io.Server.Controllers
 
 
 
-        
+
         /// <summary>
         /// Recusa o pedido de empréstimo
         /// </summary>
@@ -412,7 +424,7 @@ namespace Municip.io.Server.Controllers
             return Ok();
         }
 
-        
+
         /// <summary>
         /// Completa o pedido de empréstimo
         /// </summary>
@@ -487,6 +499,25 @@ namespace Municip.io.Server.Controllers
 
             return Ok();
         }
+
+
+        /// <summary>
+        /// Retorna os pedidos de um livro
+        /// </summary>
+        /// <param name="bookId"></param>
+        /// <returns>A mensagem de resposta</returns>
+        [HttpGet("GetRequestsByBookId")]
+        public IActionResult GetRequestsByBookId(int bookId)
+        {
+            var request = _context.BookRequests.Include(br => br.Citizen)
+                                                     .Include(br => br.Book)
+                                                     .Where(r => r.Book.Id == bookId).ToList();
+
+            if (request == null) return NotFound(new { message = "Pedido não encontrado" });
+
+            return Ok(request);
+        }
+
 
 
 

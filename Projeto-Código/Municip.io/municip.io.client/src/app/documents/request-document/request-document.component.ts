@@ -132,4 +132,11 @@ export class RequestDocumentComponent {
   get filteredDocuments() {
     return this.templates.filter(template => template.name.toLowerCase().includes(this.nameSearch.toLowerCase()) && template.status == DocumentTemplateStatus.active);
   }
+
+  /**
+   * Redireciona para a página para ver os documentos pedidos pelo cidadão.
+   */
+  goToMyDocuments() {
+    this.router.navigateByUrl('documents/my');
+  }
 }

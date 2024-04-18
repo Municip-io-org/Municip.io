@@ -8,9 +8,17 @@
 
 
 <ng-container *ngIf="isRemoveBookDialogOpen">
-  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" [twoButtons]="true" (confirm)="removeBook()" (cancel)="closeRemoveBookDialog()"
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" [twoButtons]="true" (confirm)="canRemoveBook()" (cancel)="closeRemoveBookDialog()"
                       [isConfirm]="isConfirmDialog"></app-dialog-message>
 </ng-container>
+
+<ng-container *ngIf="isRemoveBookWarningDialogOpen">
+  <app-dialog-message title="Atenção!" message="O livro encontra-se com uma requisição ativa. Proceder remoção?"
+                      [twoButtons]="true" (confirm)="removeBook()" (cancel)="closeRemoveBookWarningDialog()"
+                      [isConfirm]="false"></app-dialog-message>
+</ng-container>
+
+
 
 <app-smaller-banner title="Biblioteca de {{municipality.name}}"
                     [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'">
@@ -50,7 +58,7 @@
 </ng-container>
 
 <div class="py-[4rem] text-municip-normal-black font-inter min-h-[28rem] relative flex flex-col gap-y-20 bg-municip-blank px-32 pt-24">
-  <div *ngIf="isMunAdmin" class="absolute -top-3 flex space-x-20">
+  <div *ngIf="isMunAdmin && book.status != BookStatus().Unavailable" class="absolute -top-3 flex space-x-20">
     <div class="text-[1.063rem] font-roboto flex items-center justify-center">
       <app-black-btn-icon-text altImage="Editar livro"
                                image="/assets/images/icons/pencil-white.png"
@@ -116,16 +124,23 @@
         </div>
       </div>
 
+      <ng-container *ngIf="isMunAdmin &&  book.status == BookStatus().Unavailable">
+        <div class="flex w-fit items-center justify-center space-x-4">
+          <div class="size-10 min-w-10 rounded-full bg-red-600"></div>
+          <p class="font-bold">Livro Indisponível</p>
+        </div>
+      </ng-container>
+
 
       <ng-container *ngIf="!isMunAdmin && !bookRequest">
-        <ng-container *ngIf="book.availableCopies > 0">
+        <ng-container *ngIf="book.availableCopies > 0 && book.status != BookStatus().Unavailable">
           <app-btn-municip-blue width="10rem" (click)="reserveBook()">
             Reservar
             <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
           </app-btn-municip-blue>
         </ng-container>
 
-        <ng-container *ngIf="book.availableCopies <= 0">
+        <ng-container *ngIf="book.availableCopies <= 0 || book.status == BookStatus().Unavailable">
           <div class="flex w-fit items-center justify-center space-x-4">
             <div class="size-10 min-w-10 rounded-full bg-red-600"></div>
             <p class="font-bold">Indisponível para reserva</p>

@@ -184,6 +184,7 @@ export class TemplateListComponent {
   private sortNumeric(a: number, b: number): number {
     return (a - b) * (this.sortReverse ? -1 : 1);
   }
+
   /**
    * Redireciona para a página de criação de template.
    */

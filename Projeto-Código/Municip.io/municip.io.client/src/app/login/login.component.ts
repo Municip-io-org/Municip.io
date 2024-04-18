@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { CitizenAuthService } from '../services/citizen-auth.service';
+import { Citizen, CitizenAuthService } from '../services/citizen-auth.service';
 import { Router } from '@angular/router';
 import { Login, UserAuthService } from '../services/user-auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -21,6 +21,9 @@ import { HttpErrorResponse } from '@angular/common/http';
   * @param user - variavel que guarda o email, password, twoFactorCode e twoFactorRecoveryCode
   * @param newUser - variavel que guarda o novo utilizador
   * @param loginForm - Formulario de login
+  * @param error - variavel que guarda o erro
+  * @param browserId - variavel que guarda o browserId
+  * @param userLogged - variavel que guarda o utilizador a logar
   * 
   */
 export class LoginComponent {
@@ -34,6 +37,20 @@ export class LoginComponent {
     twoFactorRecoveryCode: ""
   };
   newUser: any;
+  userLogged: Citizen = {
+    firstName: '',
+    surname: '',
+    email: '',
+    password: '',
+    nif: '',
+    gender: '',
+    municipality: '',
+    address: '',
+    postalCode1: '',
+    postalCode2: '',
+    birthDate: new Date(),
+    photo: '',
+  };
 
   /**
    * @constructor
@@ -80,6 +97,7 @@ export class LoginComponent {
     this.userAuthService.getInfoByEmail(emailParsed).subscribe(
       res => {
         this.newUser = res;
+        this.userLogged = this.newUser;
         console.log("PARA",this.newUser);
         if (this.newUser.status == 'Approved' || this.newUser.status == undefined) {
 
@@ -118,7 +136,7 @@ export class LoginComponent {
 
 
                   if (!found) {
-                    this.userAuthService.sendEmail(email).subscribe(
+                    this.userAuthService.sendEmail(this.userLogged ).subscribe(
                       res => {
 
                         console.log("LA VAI MAIL", res);

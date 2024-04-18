@@ -140,6 +140,7 @@ import { EditBookComponent } from './library/edit-book/edit-book.component';
 import { LibraryHomepageComponent } from './library/library-homepage/library-homepage.component';
 import { LibraryMapComponent } from './library/library-map/library-map.component';
 import { MunicipalCalendarComponent } from './events/municipal-calendar/municipal-calendar.component';
+import { MatSliderModule } from '@angular/material/slider';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 
@@ -281,7 +282,8 @@ registerLocaleData(localePt, 'pt-PT');
     NgxMaterialTimepickerModule.setOpts('pt-PT'),
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     InfiniteScrollModule, SelectButtonModule, RippleModule,
-    CheckboxModule, GoogleChartsModule
+    CheckboxModule, GoogleChartsModule,
+    MatSliderModule
   ],
   providers: [
     MunicipalityGuard,

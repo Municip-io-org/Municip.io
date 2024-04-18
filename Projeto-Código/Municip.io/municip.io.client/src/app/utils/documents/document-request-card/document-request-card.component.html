@@ -1,4 +1,4 @@
-<div class="px-12 py-8 flex justify-between items-center gap-8 bg-white rounded-xl shadow-2xl hover:shadow-xl">
+﻿<div class="flex items-center justify-between gap-8 rounded-xl bg-white px-12 py-8 shadow-xl transition-all duration-300 hover:shadow-2xl">
   <div class="flex flex-col space-y-2">
 
     <div class="flex items-baseline space-x-2">
@@ -11,15 +11,15 @@
       {{ template.description }}
     </h3>
 
-    <h3 class="text-base font-medium text-gray-500">
-      {{ template.price }}
+    <h3 class="text-xl font-bold text-gray-500">
+      {{ template.price }}€
     </h3>
 
   </div>
   <div class="flex items-center">
-    <button (click)="sendRequest()" type="button" class="text-lg text-white bg-blue-500 flex justify-center items-center gap-x-2 rounded-full px-6 py-3 transition duration-300 hover:bg-blue-600 hover:text-gray-100 shadow-md">
+    <button (click)="sendRequest()" type="button" class="flex items-center justify-center gap-x-2 rounded-full bg-blue-500 px-6 py-3 text-lg text-white shadow-md transition duration-300 hover:bg-blue-600 hover:text-gray-100">
       <span>Pedir</span>
-      <img src="assets/images/arrows/right-arrow.png" alt="Pedir documento" class="w-6 h-6" />
+      <img src="assets/images/arrows/right-arrow.png" alt="Pedir documento" class="h-6 w-6" />
     </button>
   </div>
 </div>

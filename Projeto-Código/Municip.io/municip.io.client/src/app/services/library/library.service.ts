@@ -358,6 +358,16 @@ export class LibraryService {
   }
 
   /**
+   * Retorna os request de um livro
+   * @param bookId id do livro
+   * @returns os requests do livro
+   */
+  getRequestsByBookId(bookId: number): Observable<any> {
+    return this.http.get(`api/Book/GetRequestsByBookId?bookId=${bookId}`)
+  }
+
+
+  /**
   * Envio de atrado de entrega de um livro
   * @param requestId o ID do request
   * @returns Emprestimo do Pedido
