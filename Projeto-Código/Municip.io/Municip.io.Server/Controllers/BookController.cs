@@ -251,13 +251,15 @@ namespace Municip.io.Server.Controllers
                 if (book.Status == BookStatus.Unavailable) return BadRequest(new { message = "O livro não está disponível" });
 
 
+                //if the citizen is not from the same municipality as the book
+                if (citizen.Municipality != book.Municipality) return BadRequest(new { message = "O cidadão não é do mesmo município que o livro" });
+
                 //if the citizen already has a request for the same book
                 var existingRequest = await _context.BookRequests.FirstOrDefaultAsync(r => r.Citizen.Id == citizen.Id && r.Book.Id == book.Id && r.Status != BookRequestStatus.Delivered && r.Status != BookRequestStatus.Denied);
                 if (existingRequest != null) return BadRequest(new { message = "O cidadão já fez um pedido para este livro" });
 
 
-                //if the citizen is not from the same municipality as the book
-                if (citizen.Municipality != book.Municipality) return BadRequest(new { message = "O cidadão não é do mesmo município que o livro" });
+                
 
                 if (book.AvailableCopies == 0) return BadRequest(new { message = "Não há cópias disponíveis deste livro" });
 
