@@ -3,23 +3,22 @@
     <img src="/assets/images/icons/event.png" alt="Notícias" class="size-10 mr-5 " />
     PRÓXIMOS EVENTOS EM {{ municipalityName | uppercase }}
   </div>
-  <div class="flex justify-center items-center space-x-7">
-    <button class="flex justify-center items-center bg-black rounded-full size-12" (click)="moveLeft()">
-      <img src="/assets/images/arrows/right-arrow.png" class="size-6 rotate-180" />
-    </button>
-    <div *ngIf="events.length === 0"
-         class="flex text-center justify-center items-center text-municip-normal-black grow text-[1.5rem] ">
-      <p class="font-semibold">Não há eventos.</p>
-    </div>
-    <ul class="flex space-x-7 justify-center">
-      <ng-container *ngFor="let event of events.slice(startIndex, startIndex + 4)">
-        <li *ngIf="event">
-          <app-events-small [eventId]="event.id" [image]="event.image" [title]="event.title" [date]="event.startDate"></app-events-small>
-        </li>
-      </ng-container>
-    </ul>
-    <button class="flex justify-center items-center bg-black rounded-full size-12" (click)="moveRight()">
-      <img src="/assets/images/arrows/right-arrow.png" class="size-6" />
-    </button>
-  </div>
+  <p-carousel [value]="events" [numVisible]="3" [numScroll]="3" [circular]="true" [autoplayInterval]="3000"
+              class="w-full">
+    <ng-template let-event pTemplate="item">
+      <div class="border  rounded-2xl m-2 text-center py-5 px-3 cursor-pointer hover:drop-shadow-2xl
+           transition-all duration-300 ease-in-out "
+           (click)="goToEventPage(event.id)">
+        <div class="mb-3 flex justify-center">
+          <img src="{{event.image}}" [alt]="event.title" class="object-cover w-[60%] h-24 shadow-xl rounded-md" />
+        </div>
+        <div>
+          <h4 class="mb-1">{{ event.title }}</h4>
+          <h6 class="mt-0 mb-3">{{event.startDate | date: "d/MM/yyyy" }}</h6>
+          <div class="mt-5 flex items-center justify-center gap-2">
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
 </section>

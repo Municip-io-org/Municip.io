@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-next-events',
@@ -11,6 +12,8 @@ export class NextEventsComponent {
 
   startIndex: number = 0;
 
+  constructor(private router: Router) { };
+
   moveLeft() {
     if (this.startIndex > 0) {
       this.startIndex--;
@@ -21,5 +24,9 @@ export class NextEventsComponent {
     if (this.startIndex < this.events.length - 4) {
       this.startIndex++;
     }
+  }
+
+  goToEventPage(eventId:number) {
+    this.router.navigateByUrl(`events/${eventId}`);
   }
 }

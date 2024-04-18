@@ -3,7 +3,7 @@
                 text={{municipality.description}}></app-big-banner>
 <div class="flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black px-32 space-y-20">
   <div class="flex flex-row font-inter">
-    <section class="flex flex-col w-[180rem] space-y-12">
+    <section class="flex flex-col w-1/2 space-y-12">
       <app-card-outline-white class="flex flex-col ">
         <div class="p-5 space-y-4">
           <p class="font-semibold text-left">Informação Geral</p>
@@ -28,27 +28,10 @@
         </div>
       </app-card-outline-white>
       <section class="flex flex-col text-left">
-        <p class="text-[1.5rem] font-semibold font-inter text-municip-normal-black ml-2">Descrição</p>
-        <p>
-          Com a presença romana, nos séculos I a IV da nossa era, nasceu Cetóbriga, um importante núcleo urbano e industrial, principalmente ligado à salga de peixe, que se estendeu pelas duas margens do rio Sado, integrando Troia.
-          Durante as invasões bárbaras e a ocupação árabe, a zona habitada foi sendo progressivamente abandonada devido ao avanço das areias.
-          <br /><br />
-          Atalaias como Palmela, portos mais abrigados, como Alcácer do Sal, e vales férteis, como Azeitão, foram os locais escolhidos pelos invasores muçulmanos para se fixarem.
-          Após a conquista de Palmela aos mouros e do estabelecimento da Ordem de Santiago da Espada, Setúbal foi repovoada, primeiro na colina de Santa Maria e, progressivamente, na zona baixa que se estende até ao atual bairro de Troino. Recebeu, em 1249, de D. Paio Peres Correia, mestre da Ordem, a primeira carta foral.
-          <br /><br />
-          Setúbal, com uma extensão territorial relativamente diminuta, teve de afirmar-se, lutando com os concelhos vizinhos de Palmela, Santiago do Cacém e Alcácer do Sal, já então constituídos.
-          Com as dificuldades apresentadas pelos habitantes, no que diz respeito à entrada e venda de produtos trazidos de Sesimbra, Palmela e Alcácer, o mestre de Santiago, D. Garcia Peres, em 1343, deu execução a uma carta de D. Afonso IV, que delimitava o termo de Setúbal, tendo sido construída uma cortina de muralhas.
-          <br /><br />
-          A época dos Descobrimentos trouxe um grande desenvolvimento, tendo D. Afonso V, em 1458, partido do porto de Setúbal à conquista de Alcácer Ceguer.
-          A construção de um aqueduto, em 1487, que conduzia a água à vila, iniciada por D. João II, terminou no reinado de D. Manuel. Este monarca reformou o foral da vila, em 1514, devido ao progresso e aumento demográfico que Setúbal tinha registado ao longo do último século.
-          <br /><br />
-          O título de “notável villa” é concedido, em 1525, por D. João III. Foi este título que proporcionou a criação, em 1553, por carta do arcebispo de Lisboa, D. Fernando, de duas novas freguesias, a de S. Sebastião e a da Anunciada, que se juntaram às já existentes S. Julião e Santa Maria.
-          A cerca de dois quilómetros do centro de Setúbal, o rei D. Filipe II mandou edificar uma fortaleza – de S. Filipe –, cujos trabalhos foram iniciados em 1582.
-          <br /><br />
-          A elevação a cidade deu-se em 1860, por carta régia, após solicitação da Câmara, dois anos antes, ao rei D. Pedro V.
-          Nessa altura, foi inaugurada a via-férrea Barreiro/Setúbal e, em 1863, a iluminação a gás. As obras de aterro sobre o rio iniciaram-se, fazendo nascer a Avenida Luísa Todi.
-          Setúbal foi elevada, em 1926, a sede de distrito e, em 1975, a cabeça de diocese.
-        </p>
+        <p class="text-[1.5rem] font-semibold font-inter text-municip-normal-black">Descrição</p>
+        <div [innerHtml]="municipality.description">
+
+        </div>
       </section>
       <app-next-events [events]="events" [municipalityName]="municipality.name"></app-next-events>
     </section>
