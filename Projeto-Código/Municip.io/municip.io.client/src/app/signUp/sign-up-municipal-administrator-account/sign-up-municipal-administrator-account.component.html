@@ -1,4 +1,4 @@
-﻿<div class="text-municip-black text-[1.2rem] font-poppins flex">
+<div class="text-municip-black text-[1.1rem] font-poppins flex">
 
 
   <div class="from-municip-light-blue sticky top-0 flex h-screen grow items-center justify-center bg-gradient-to-tl to-municip-blue">
@@ -29,27 +29,27 @@
 
       <section class="flex justify-between gap-3 max-lg:flex-col">
 
-        <div>
+        <div class="relative">
           <app-input-title class="text-[1.4rem]">Primeiro Nome</app-input-title>
           <div class="flex items-center">
             <input required placeholder="Introduza o seu primeiro nome" type="text" id="firstName" formControlName="firstName" name="firstName" [(ngModel)]="municipalAdministrator.firstName"
                    class="input w-[21rem]" />
             <app-tooltip [tooltipText]="'De acordo com o Documento de Identificação.'"></app-tooltip>
           </div>
-          <div class="py-2 font-bold text-red-500" *ngIf="firstName?.touched && firstName?.invalid ">
+          <div class="absolute py-2 font-bold text-red-500" *ngIf="firstName?.touched && firstName?.invalid ">
             <div *ngIf="firstName?.errors?.['required'] ">Primeiro Nome Obrigatório</div>
           </div>
         </div>
 
 
-        <div>
+        <div class="relative">
           <app-input-title class="text-[1.4rem]">Apelido</app-input-title>
           <div class="flex items-center">
             <input required placeholder="Introduza o seu apelido" type="text" id="surname" formControlName="surname" name="surname" [(ngModel)]="municipalAdministrator.surname"
                    class="input w-[21rem]" />
             <app-tooltip [tooltipText]="'De acordo com o Documento de Identificação.'"></app-tooltip>
           </div>
-          <div class="py-2 font-bold text-red-500" *ngIf="surname?.touched && surname?.invalid ">
+          <div class="absolute py-2 font-bold text-red-500" *ngIf="surname?.touched && surname?.invalid ">
             <div *ngIf="surname?.errors?.['required'] ">Apelido Obrigatório</div>
           </div>
         </div>
@@ -58,24 +58,24 @@
 
       <section class="flex justify-between gap-3 max-lg:flex-col">
 
-        <div>
+        <div class="relative">
           <app-input-title class="text-[1.4rem]">Email</app-input-title>
           <input required placeholder="Introduza o seu email" type="email" id="email" formControlName="email" name="email" [(ngModel)]="municipalAdministrator.email"
                  class="input w-[21rem]" />
-          <div class="py-2 font-bold text-red-500" *ngIf="email?.touched && email?.invalid ">
+          <div class="absolute py-2 font-bold text-red-500" *ngIf="email?.touched && email?.invalid ">
             <div *ngIf="email?.errors?.['required'] ">Email Obrigatório</div>
             <div *ngIf="email?.errors?.['email'] ">Email Inválido</div>
           </div>
         </div>
 
-        <div>
+        <div class="relative">
           <app-input-title class="text-[1.4rem]">Palavra-Passe</app-input-title>
           <div class="flex items-center">
             <input required placeholder="Introduza a sua palavra-passe" type="password" id="password" formControlName="password" name="password" [(ngModel)]="municipalAdministrator.password"
                    class="input w-[21rem]">
             <app-tooltip [tooltipText]="'A password deverá ter letras maiúsculas, minúsculas, números e símbolos'"></app-tooltip>
           </div>
-          <div class="py-2 font-bold text-red-500" *ngIf="password?.touched && password?.invalid">
+          <div class="absolute py-2 font-bold text-red-500" *ngIf="password?.touched && password?.invalid">
             <div *ngIf="password?.errors?.['required'] ">Palavra-Passe Obrigatório</div>
             <div *ngIf="password?.errors?.['invalidPassword'] ">Palavra-Passe Inválida</div>
           </div>
@@ -87,7 +87,7 @@
 
       <section class="flex justify-between gap-3 max-lg:flex-col">
 
-        <div>
+        <div class="relative">
           <app-input-title class="text-[1.4rem]">Município</app-input-title>
           <div class="flex items-center">
 
@@ -100,7 +100,7 @@
 
             <app-tooltip [tooltipText]="'Selecione o seu município de residência'"></app-tooltip>
           </div>
-          <div class="py-2 font-bold text-red-500" *ngIf="municipality?.touched && municipality?.invalid ">
+          <div class="absolute py-2 font-bold text-red-500" *ngIf="municipality?.touched && municipality?.invalid ">
             <div *ngIf="municipality?.errors?.['required'] ">Município Obrigatório</div>
             <div *ngIf="municipality?.errors?.['invalidMunicipality']">Município Inválido</div>
           </div>

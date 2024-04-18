@@ -1,4 +1,4 @@
-﻿<div class="text-municip-black text-[1.2rem] font-poppins flex">
+﻿<div class="text-municip-black text-[1.1rem] font-poppins flex">
 
 
   <div class="from-municip-light-blue sticky top-0 flex h-screen grow items-center justify-center bg-gradient-to-tl to-municip-blue">
@@ -18,24 +18,24 @@
 
       <form [formGroup]="signUpMunicipalityForm" (ngSubmit)="onSubmit()">
 
-        <div class="py-[2rem] flex flex-col justify-around">
+        <div class="py-[2rem] flex flex-col justify-between gap-y-4">
 
           <div class="mb-4 flex justify-around gap-5 text-left max-lg:flex-col max-lg:items-center">
-            <div class="h-32">
+            <div class="relative">
               <app-input-title class="text-[1.4rem]">Presidente</app-input-title>
               <input required placeholder="Introduza o nome do presidente " type="text" id="president" formControlName="president" name="v" [(ngModel)]="municipality.president"
                      class="input w-[21rem]" />
-              <div class="py-2 font-bold text-red-500" *ngIf="president?.touched && president?.invalid ">
+              <div class="absolute py-2 font-bold text-red-500" *ngIf="president?.touched && president?.invalid ">
                 <div *ngIf="president?.errors?.['required'] ">Presidente Obrigatório</div>
               </div>
             </div>
 
 
-            <div class="h-32">
+            <div class="relative">
               <app-input-title class="text-[1.4rem]">Contacto Telefónico</app-input-title>
               <input required placeholder="Introduza o seu contacto" type="text" id="contact" formControlName="contact" name="contact" [(ngModel)]="municipality.contact"
                      class="input w-[21rem]" />
-              <div class="py-2 font-bold text-red-500" *ngIf="contact?.touched && contact?.invalid ">
+              <div class="absolute py-2 font-bold text-red-500" *ngIf="contact?.touched && contact?.invalid ">
                 <div *ngIf="contact?.errors?.['required'] ">Contacto Obrigatório</div>
                 <div *ngIf="contact?.errors?.['pattern'] ">Contacto Inválido</div>
               </div>
@@ -83,7 +83,7 @@
 
 
 
-          <div class="mb-4 mt-6 flex w-full flex-col max-lg:flex-col">
+          <div class="relative mb-4 mt-6 flex w-full flex-col max-lg:flex-col">
             <app-input-title class="text-[1.4rem] text-left">Texto Informativo</app-input-title>
             <ngx-editor [editor]="editor" formControlName="description" placeholder="Introduza uma descrição da Câmara.">
               <div class="border border-gray-300 bg-gray-100">
@@ -91,7 +91,7 @@
               </div>
             </ngx-editor>
 
-            <div class="py-2 font-bold text-red-500" *ngIf="description?.touched && description?.invalid ">
+            <div class="-bottom-[1.5rem] absolute font-bold text-red-500" *ngIf="description?.touched && description?.invalid ">
               <div *ngIf="description?.errors?.['required'] ">Descrição Obrigatório</div>
             </div>
           </div>
