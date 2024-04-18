@@ -3,19 +3,22 @@
     <img src="/assets/images/icons/event.png" alt="Notícias" class="size-10 mr-5 " />
     PRÓXIMOS EVENTOS EM {{ municipalityName | uppercase }}
   </div>
-  <p-carousel [value]="events" [numVisible]="3" [numScroll]="3" [circular]="true" [autoplayInterval]="3000"
+  <p-carousel [value]="events" [numVisible]="numVisible" [numScroll]="1" [circular]="true" [autoplayInterval]="3000"
+               [orientation]="isVertical ? 'vertical' : 'horizontal'" verticalViewPortHeight="500px"
               class="w-full">
     <ng-template let-event pTemplate="item">
       <div class="border  rounded-2xl m-2 text-center py-5 px-3 cursor-pointer hover:drop-shadow-2xl
-           transition-all duration-300 ease-in-out "
+           transition-all duration-300 ease-in-out
+           {{widthBox}} self-center
+           "
            (click)="goToEventPage(event.id)">
-        <div class="mb-3 flex justify-center">
-          <img src="{{event.image}}" [alt]="event.title" class="object-cover w-[60%] h-24 shadow-xl rounded-md" />
-        </div>
-        <div>
-          <h4 class="mb-1">{{ event.title }}</h4>
-          <h6 class="mt-0 mb-3">{{event.startDate | date: "d/MM/yyyy" }}</h6>
-          <div class="mt-5 flex items-center justify-center gap-2">
+        <div class="">
+          <div class="mb-3 flex justify-center">
+            <img src="{{event.image}}" [alt]="event.title" class="object-cover w-[60%] h-24 shadow-xl rounded-md" />
+          </div>
+          <div>
+            <h4 class="mb-1 truncate">{{ event.title }}</h4>
+            <h6 class="mt-0 mb-3">{{event.startDate | date: "d/MM/yyyy" }}</h6>
           </div>
         </div>
       </div>

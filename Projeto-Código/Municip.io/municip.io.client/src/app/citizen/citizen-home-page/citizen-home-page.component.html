@@ -28,11 +28,12 @@
         NOTÍCIAS DE {{ municipality.name | uppercase }}
       </div>
       <ul class="space-y-7">
-          <app-next-news [newsList]="newsList" [municipalityName]="municipality.name" ></app-next-news>
+        <app-next-news [newsList]="newsList" [municipalityName]="municipality.name"></app-next-news>
       </ul>
     </section>
   </div>
-  <app-next-events [events]="events" [municipalityName]="municipality.name"></app-next-events>
+  <app-next-events [events]="events" [municipalityName]="municipality.name"
+                   widthBox="w-72"></app-next-events>
 </div>
 
 <app-footer></app-footer>
