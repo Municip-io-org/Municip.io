@@ -12,7 +12,7 @@
         </a>
       </li>
 
-      <li *ngIf="role !== Roles.Admin" class="group relative" (click)="setActiveDropdown(Dropdowns.Municipality)">
+      <li *ngIf="role !== Roles.Admin" class="group" (click)="setActiveDropdown(Dropdowns.Municipality)">
         <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
           Município
           <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -20,7 +20,7 @@
           </svg>
         </button>
         <span class="flex h-0.5 max-w-0 self-center bg-sky-600 transition-all duration-500 group-hover:max-w-full"></span>
-        <div *ngIf="showDropdownMunicipality" class="dropdown z-10 absolute left-0 top-full mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
+        <div *ngIf="showDropdownMunicipality" class="dropdown mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
           <ul class="py-2 text-sm text-gray-700">
             <li>
               <a routerLink="/municipal/profile" class="block px-4 py-2 hover:bg-gray-100">Ver Município</a>
@@ -45,7 +45,7 @@
         </div>
       </li>
 
-      <li *ngIf="isEventsFeatureActive() && role !== Roles.Admin" class="group relative" (click)="setActiveDropdown(Dropdowns.Events)">
+      <li *ngIf="isEventsFeatureActive() && role !== Roles.Admin" class="group" (click)="setActiveDropdown(Dropdowns.Events)">
         <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
           Agenda
           <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -53,7 +53,7 @@
           </svg>
         </button>
         <span class="flex h-0.5 max-w-0 self-center bg-sky-600 transition-all duration-500 group-hover:max-w-full"></span>
-        <div *ngIf="showDropdownAgenda" class="dropdown z-10 absolute left-0 top-full mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
+        <div *ngIf="showDropdownAgenda" class="dropdown mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
           <ul class="py-2 text-sm text-gray-700">
             <li>
               <a routerLink="/events/" class="block px-4 py-2 hover:bg-gray-100">Ver Eventos</a>
@@ -86,7 +86,7 @@
 
 
 
-      <li *ngIf="isLibraryFeatureActive() && role !== Roles.Admin" class="group relative" (click)="setActiveDropdown(Dropdowns.Library)">
+      <li *ngIf="isLibraryFeatureActive() && role !== Roles.Admin" class="group" (click)="setActiveDropdown(Dropdowns.Library)">
         <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
           Biblioteca
           <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -95,7 +95,7 @@
         </button>
         <span class="flex h-0.5 max-w-0 self-center bg-sky-600 transition-all duration-500 group-hover:max-w-full"></span>
 
-        <div *ngIf="showDropdownBiblioteca" class="dropdown z-10 absolute left-0 top-full mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
+        <div *ngIf="showDropdownBiblioteca" class="dropdown mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
           <ul class="py-2 text-sm text-gray-700">
             <li>
               <a routerLink="/library" class="block px-4 py-2 hover:bg-gray-100">Página Principal</a>
@@ -120,7 +120,7 @@
         </div>
       </li>
 
-      <li *ngIf="isDocumentsFeatureActive() && role !== Roles.Admin" class="group relative" (click)="setActiveDropdown(Dropdowns.Documents)">
+      <li *ngIf="isDocumentsFeatureActive() && role !== Roles.Admin" class="group" (click)="setActiveDropdown(Dropdowns.Documents)">
         <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
           Documentos
           <span *ngIf="role ===Roles.Municipal && numberOfRequests != 0" class="ml-2 rounded bg-yellow-500 px-2 py-1 text-xs font-bold text-yellow-900">{{numberOfRequests}}</span>
@@ -130,7 +130,7 @@
           </svg>
         </button>
         <span class="flex h-0.5 max-w-0 self-center bg-sky-600 transition-all duration-500 group-hover:max-w-full"></span>
-        <div *ngIf="showDropdownDocumentos" class="dropdown z-10 absolute left-0 top-full mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
+        <div *ngIf="showDropdownDocumentos" class="dropdown mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
           <ul class="py-2 text-sm text-gray-700">
             <li>
               <a routerLink="/documents/" class="block px-4 py-2 hover:bg-gray-100">Página Principal</a>
@@ -162,7 +162,7 @@
         </div>
       </li>
 
-      <li *ngIf="isNewsFeatureActive() && role !== Roles.Admin" class="group relative" (click)="setActiveDropdown(Dropdowns.News)">
+      <li *ngIf="isNewsFeatureActive() && role !== Roles.Admin" class="group" (click)="setActiveDropdown(Dropdowns.News)">
         <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
           Notícias
           <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -171,7 +171,7 @@
         </button>
         <span class="flex h-0.5 max-w-0 self-center bg-sky-600 transition-all duration-500 group-hover:max-w-full"></span>
 
-        <div *ngIf="showDropdownNoticias" class="dropdown z-10 absolute left-0 top-full mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
+        <div *ngIf="showDropdownNoticias" class="dropdown mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
           <ul class="py-2 text-sm text-gray-700">
             <li>
               <a routerLink="/news" class="block px-4 py-2 hover:bg-gray-100">Ver Notícias</a>
@@ -183,7 +183,7 @@
         </div>
       </li>
 
-      <li *ngIf="isTransportsFeatureActive() && role !== Roles.Admin" class="group relative" (click)="setActiveDropdown(Dropdowns.Transports)">
+      <li *ngIf="isTransportsFeatureActive() && role !== Roles.Admin" class="group" (click)="setActiveDropdown(Dropdowns.Transports)">
         <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
           Transportes
           <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -192,7 +192,7 @@
         </button>
         <span class="flex h-0.5 max-w-0 self-center bg-sky-600 transition-all duration-500 group-hover:max-w-full"></span>
 
-        <div *ngIf="showDropdownTransportes" class="dropdown z-10 absolute left-0 top-full mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
+        <div *ngIf="showDropdownTransportes" class="dropdown mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
           <ul class="py-2 text-sm text-gray-700">
             <li>
               <a routerLink="/transports" class="block px-4 py-2 hover:bg-gray-100">Transportes do Município</a>
@@ -241,9 +241,9 @@
           <div *ngIf="showSignOutDropdown" class="dropdown z-10 absolute right-0 mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
             <ul class="py-2 text-sm text-gray-700">
               <li>
-                <button routerLink="/" (click)="signOut()" class="rounded-md px-2 py-1 text-black transition-all duration-500 ease-in-out hover:bg-sky-500">
+                <a routerLink="/" (click)="signOut()" class="block px-4 py-2 hover:bg-gray-100">
                   Terminar Sessão
-                </button>
+                </a>
               </li>
               <li>
                 <a routerLink="/userpage" class="block px-4 py-2 hover:bg-gray-100">O meu Perfil</a>
