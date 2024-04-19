@@ -238,12 +238,14 @@ namespace Municip.io.Server.Controllers
             {
 
                 var citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
-
-
-                if (citizen == null) return BadRequest(new { message = "Não foi encontrado nenhum cidadão", ModelState });
-
-
                 var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == request.Book.Id);
+
+                if (citizen == null) { 
+                    EmailSender.SendEmailAproveDeny(email, "Registe-se Na Plataforma","Cidadão" , $"Ao realizar a reserva reparámos que ainda não tem conta na <span style='font-weight: bold;'>Municip.io</span>, Registe-se já aqui!",
+"wwwroot/html/AproveEmail.html");
+                    return BadRequest(new { message = "Cidadão não registado, Convite enviado" });
+            }
+
 
 
                 if (book == null) return BadRequest(new { message = "Não foi encontrado nenhum livro", ModelState });
