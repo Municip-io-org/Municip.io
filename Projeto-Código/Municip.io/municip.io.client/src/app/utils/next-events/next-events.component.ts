@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 export class NextEventsComponent {
   @Input() events: any[] = [];
   @Input() municipalityName: string = "";
+  @Input() widthBox: string = "100%";
+  @Input() numVisible = 3;
+  @Input() isVertical: boolean = false;
 
   startIndex: number = 0;
 
@@ -26,7 +29,7 @@ export class NextEventsComponent {
     }
   }
 
-  goToEventPage(eventId:number) {
+  goToEventPage(eventId: number) {
     this.router.navigateByUrl(`events/${eventId}`);
   }
 }

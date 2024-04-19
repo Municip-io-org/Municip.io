@@ -33,7 +33,9 @@
 
         </div>
       </section>
-      <app-next-events [events]="events" [municipalityName]="municipality.name"></app-next-events>
+      <app-next-events [events]="events" [municipalityName]="municipality.name"
+                       widthBox="w-[90%]" [isVertical]="true" [numVisible]="2"
+                       ></app-next-events>
     </section>
     <div class="w-1 bg-gradient-to-tl from-municip-light-blue to-municip-blue rounded mx-[5vw] "></div>
     <section class="flex flex-col space-y-10">
