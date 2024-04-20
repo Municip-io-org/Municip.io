@@ -20,7 +20,7 @@ import { Book, BookRequest, LibraryService } from '../services/library/library.s
  **/
 export class AdminStatisticsDashboardComponent {
 
-  citizens: Citizen[] = [];
+  citizens: any[] = [];
   municipalAdmins: MunicipalAdministrator[] = [];
   municipalities: any[] = [];
   documentRequests: RequestDocument[] = [];
@@ -50,6 +50,12 @@ export class AdminStatisticsDashboardComponent {
   books: Book[] = [];
   bookrequests: BookRequest[] = [];
   selectedButton: number = 1;
+
+
+  averageLast6Months: number = 0;
+  thisMonth: number = 0;
+  percentageComparedToAverage: number = 0;
+
   /**
   * @constructor
   *
@@ -140,6 +146,12 @@ this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
    **/
   generateStatistics() {
     this.numberOfCitizens = this.citizens.length;
+
+    this.averageLast6Months = this.citizens.filter(citizen => new Date(citizen.date) >= new Date(new Date().setMonth(new Date().getMonth() - 6))).length / 6;
+    this.thisMonth = this.citizens.filter(citizen => new Date(citizen.date).getMonth() === new Date().getMonth()).length;
+    this.percentageComparedToAverage = ((this.thisMonth - this.averageLast6Months) / this.averageLast6Months) * 100;
+
+
     this.numberOfMunicipalAdmins = this.municipalAdmins.length;
 
     this.activeMunicipalities = this.municipalities.filter(mun => mun.status === 'Approved').length;
