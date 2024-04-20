@@ -229,7 +229,7 @@
       <div class="flex items-center space-x-2">
         <img src="{{ user.photo }}" alt="{{ user.firstName }}" class="h-10 w-10 rounded-full">
 
-        <div class="group relative" (click)="showSignOutDropdown=!showSignOutDropdown">
+        <div class="group" (click)="setActiveDropdown(Dropdowns.SignOut)">
           <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
             Bem-vindo, {{user.firstName}}
             <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -238,7 +238,7 @@
           </button>
           <span class="flex h-0.5 max-w-0 self-center bg-sky-600 transition-all duration-500 group-hover:max-w-full"></span>
 
-          <div *ngIf="showSignOutDropdown" class="dropdown z-10 absolute right-0 mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
+          <div *ngIf="showSignOutDropdown" class="dropdown right-0 mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
             <ul class="py-2 text-sm text-gray-700">
               <li>
                 <a routerLink="/" (click)="signOut()" class="block px-4 py-2 hover:bg-gray-100">
@@ -263,7 +263,7 @@
     <div class="relative flex min-w-fit justify-end space-x-3" *ngIf="isSignedIn && role == Roles.Admin">
       <div class="flex items-center space-x-2">
 
-        <div class="group relative" (click)="showSignOutDropdown=!showSignOutDropdown">
+        <div class="group" (click)="setActiveDropdown(Dropdowns.SignOut)">
           <button class="flex items-center decoration-sky-500 transition-all duration-700 ease-in-out">
             Bem-vindo, Administrador
             <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -272,12 +272,12 @@
           </button>
           <span class="flex h-0.5 max-w-0 self-center bg-sky-600 transition-all duration-500 group-hover:max-w-full"></span>
 
-          <div *ngIf="showSignOutDropdown" class="dropdown z-10 absolute right-0 mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
+          <div *ngIf="showSignOutDropdown" class="dropdown right-0 mt-1 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow">
             <ul class="py-2 text-sm text-gray-700">
               <li>
-                <button routerLink="/" (click)="signOut()" class="rounded-md px-2 py-1 text-black transition-all duration-500 ease-in-out hover:bg-sky-500">
+                <a routerLink="/" (click)="signOut()" class="block px-4 py-2 hover:bg-gray-100">
                   Terminar Sessão
-                </button>
+                </a>
               </li>
               
             </ul>

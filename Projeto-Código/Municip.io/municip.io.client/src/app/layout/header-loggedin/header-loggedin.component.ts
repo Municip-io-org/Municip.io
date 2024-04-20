@@ -190,6 +190,9 @@ export class HeaderLoggedinComponent {
       case Dropdowns.Transports:
         this.showDropdownTransportes = !this.showDropdownTransportes;
         break;
+      case Dropdowns.SignOut:
+        this.showSignOutDropdown = !this.showSignOutDropdown;
+        break;
       case Dropdowns.Municipality:
         this.showDropdownMunicipality = !this.showDropdownMunicipality;
         break;
@@ -225,6 +228,9 @@ export class HeaderLoggedinComponent {
     if (dropdown !== Dropdowns.Transports) {
       this.showDropdownTransportes = false;
     }
+    if (dropdown !== Dropdowns.SignOut) {
+      this.showSignOutDropdown = false;
+    }
     if (dropdown !== Dropdowns.Municipality) {
       this.showDropdownMunicipality = false;
     }
@@ -233,7 +239,23 @@ export class HeaderLoggedinComponent {
     }
   }
 
-
+  /**
+   * closeAllDropdowns
+   *
+   * Método que é chamado para fechar todos os dropdowns.
+   *
+   * @param dropdown: Dropdowns - O dropdown.
+   */
+  closeAllDropdowns() {
+    this.showDropdownAgenda = false;
+    this.showDropdownBiblioteca = false;
+    this.showDropdownDocumentos = false;
+    this.showDropdownNoticias = false;
+    this.showDropdownTransportes = false;
+    this.showSignOutDropdown = false;
+    this.showDropdownMunicipality = false;
+    this.showDropdownAdmin = false;
+  }
 
 
 
@@ -307,6 +329,7 @@ export class HeaderLoggedinComponent {
     if (scrollTop > this.lastScrollTop && scrollTop > this.scroolOffset) {
       // Scrolling down
       this.isVisible = false;
+      this.closeAllDropdowns();
     } else {
       // Scrolling up
       this.isVisible = true;
@@ -327,9 +350,10 @@ export enum Dropdowns {
   Documents = 'documents',
   News = 'news',
   Transports = 'transports',
-  CloseAll = 'closeAll',
+  SignOut = 'signOut',
   Municipality = "Municipality",
-  Admin = "Admin"
+  Admin = "Admin",
+  CloseAll = 'closeAll',
 }
 
 
