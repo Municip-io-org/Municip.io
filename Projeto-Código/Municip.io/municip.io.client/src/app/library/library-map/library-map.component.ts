@@ -45,7 +45,7 @@ export class LibraryMapComponent {
     zoomControl: true,
     scrollwheel: false,
     disableDoubleClickZoom: false,
-    draggable: true,
+    draggable: false,
     restriction: null,
     minZoom: 10,
     fullscreenControl: false,
