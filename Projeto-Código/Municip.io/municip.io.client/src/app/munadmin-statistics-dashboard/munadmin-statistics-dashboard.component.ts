@@ -79,6 +79,10 @@ export class MunadminStatisticsDashboardComponent {
   municipality: string = '';
   bookrequests: BookRequest[] = [];
   books: Book[] = [];
+
+  averageLast6Months: number = 0;
+  thisMonth: number = 0;
+percentageComparedToAverage: number = 0;
   
 
   /**
@@ -161,6 +165,10 @@ export class MunadminStatisticsDashboardComponent {
    */
   generateStatistics() {
     this.numberOfCitizens = this.citizens.length;
+    this.averageLast6Months = this.citizens.filter(citizen => new Date(citizen.date) >= new Date(new Date().setMonth(new Date().getMonth() - 6))).length / 6;
+    this.thisMonth = this.citizens.filter(citizen => new Date(citizen.date).getMonth() === new Date().getMonth()).length;
+    this.percentageComparedToAverage = ((this.thisMonth - this.averageLast6Months) / this.averageLast6Months) * 100;
+
     this.numberOfMunicipalAdmins = this.municipalAdmins.length;
 
     this.activeCitizens = this.citizens.filter(citizen => citizen.status === 'Approved').length;
