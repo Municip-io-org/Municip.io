@@ -74,7 +74,6 @@ export class EventsListComponent {
   ascendingOrder: boolean = true;
   orderOptions: any[] = [{ label: 'Brevemente', value: true }, { label: 'Eventos Futuros', value: false }];
 
-  isLoading = false;
   currentPage = 1;
   itemsPerPage = 6;
 
@@ -115,9 +114,6 @@ export class EventsListComponent {
             this.userAuthService.getInfoMunicipality(this.user.municipality).subscribe(
               (municipalityRes: any) => {
                 this.municipality = municipalityRes as Municipality;
-
-
-
                 this.loadData();
               },
               error => {
@@ -137,30 +133,22 @@ export class EventsListComponent {
   }
 
 
-  /**
-   * Este método é responsável por alternar o estado de carregamento.
-   */
-  toggleLoading() { this.isLoading = !this.isLoading; }
 
   /**
    * Este método é responsável por carregar os dados.
    */
   loadData() {
-    this.toggleLoading();
 
     this.eventsService.getEventByCitizen(this.user.email).subscribe(
       (eventsRes: any) => {
         this.events = eventsRes as Event[];
-        this.events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
-        this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
-        this.toggleLoading();
+        this.sortEventsByDate()
       },
       error => {
         console.error(error);
       }
     );
 
-    this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
 
 
   }
@@ -170,10 +158,8 @@ export class EventsListComponent {
    */
   onScrollDown() {
     if (this.events.length > this.showEvents.length) {
-
       this.currentPage++;
       this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
-      this.toggleLoading();
     }
   }
 
@@ -187,7 +173,7 @@ export class EventsListComponent {
 
 
   /**
-   * Este método é responsável por alternar a ordem de classificação.
+   * Método para alternar a ordem de ordenação.
    */
   toggleSortOrder() {
 
@@ -195,7 +181,7 @@ export class EventsListComponent {
   }
 
   /**
-   * Este método é responsável por ordenar os eventos por data.
+   * Método para ordenar eventos por data.
    */
   sortEventsByDate() {
     this.currentPage = 1;

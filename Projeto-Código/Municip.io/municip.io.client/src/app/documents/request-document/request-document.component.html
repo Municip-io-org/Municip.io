@@ -1,4 +1,4 @@
-﻿<head>
+<head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
 </head>
@@ -47,7 +47,12 @@
   </div>
 
 
-  <div *ngIf="filteredDocuments.length > 0">
+  <div *ngIf="filteredDocuments.length > 0"
+       infiniteScroll
+[infiniteScrollDistance]="3"
+[infiniteScrollThrottle]="500"
+(scrolled)="onScrollDown()"
+[alwaysCallback]="true">
     <section class="bx-20 bt-16 bb-5 flex flex-col justify-around gap-y-16">
 
       <ng-container *ngFor="let document of filteredDocuments">

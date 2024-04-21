@@ -27,6 +27,10 @@ import { DocsService, DocumentTemplate, DocumentTemplateStatus } from '../../ser
 export class RequestDocumentComponent {
 
   templates: DocumentTemplate[] = [];
+  showTemplates: DocumentTemplate[] = [];
+  currentPage = 1;
+  itemsPerPage = 3;
+
 
   user: any;
   isMunAdmin: boolean = false;
@@ -96,7 +100,9 @@ export class RequestDocumentComponent {
                 this.documentsService.getTemplatesFromMunicipality(this.municipality.name).subscribe(
                   (docRes: any) => {
 
-                    this.templates = docRes as DocumentTemplate[];            
+                    this.templates = docRes as DocumentTemplate[];
+                    this.templates = this.templates.filter(t => t.status == 'Active');
+                    this.showTemplates = [...this.showTemplates, ...this.documentsService.getPaginationTemplates(this.currentPage, this.itemsPerPage, this.templates)];
               
                   },
                   error => {
@@ -124,12 +130,23 @@ export class RequestDocumentComponent {
   }
 
   /**
+   * Método para carregar mais templates de documentos.
+   */
+  onScrollDown() {
+    if (this.templates.length > this.showTemplates.length) {
+      this.currentPage++;
+      this.showTemplates = [...this.showTemplates, ...this.documentsService.getPaginationTemplates(this.currentPage, this.itemsPerPage, this.templates)];
+    }
+  } 
+
+  /**
    * Este método é responsável por filtrar os documentos.
    * 
    * @returns A lista de documentos filtrada.
    *
    **/
   get filteredDocuments() {
+    if (this.nameSearch == '') return this.showTemplates;
     return this.templates.filter(template => template.name.toLowerCase().includes(this.nameSearch.toLowerCase()) && template.status == DocumentTemplateStatus.active);
   }
 

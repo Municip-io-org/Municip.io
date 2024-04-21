@@ -1,57 +1,70 @@
-<app-header-loggedin></app-header-loggedin>
+﻿<app-header-loggedin></app-header-loggedin>
 
 <app-smaller-banner [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"
                     title="Notícias de {{municipality.name}}">
 </app-smaller-banner>
 
 
-<div *ngIf="newsList.length === 0"
-     class="flex justify-center items-center text-municip-normal-black grow ">
+<div *ngIf="showNews.length === 0"
+     class="px-[8rem] text-municip-normal-black flex grow items-center justify-center">
   <p class="text-[3rem] font-semibold">Não Há Notícias Disponíveis.</p>
 </div>
 
-<div *ngIf="newsList.length > 0">
-  <div class="bg-municip-blank text-municip-normal-black">
-    <div class="flex justify-center">
-    <div class="flex items-center justify-between space-x-4 pt-[3rem] container w-full">
-      <div class="relative w-[50rem] ">
-        <label for="nameSearch" class="sr-only">Procurar por Notícias</label>
-        <div class="flex items-center">
-          <i class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
-            <span class="fas fa-search"></span>
-          </i>
-          <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por Notícias"
-                 class="pl-10 px-4 py-2 border rounded-2xl w-full trasition duration-300  hover:border-black">
-        </div>
-      </div>
-      <p-selectButton [options]="orderOptions" [(ngModel)]="ascendingOrder" optionLabel="label" optionValue="value" [unselectable]="true"
-                      (onChange)="toggleSortOrder()"
-                      styleClass="orderOptions">
-      </p-selectButton>
-    </div>
-</div>
-    <div class="flex justify-center">
-      <div class="container w-[90%] ">
-        <div class=" flex justify-center items-center flex-wrap self-center space-y-10 pt-10 pb-10">
-          <div *ngFor="let news of filteredNews">
-            <app-news-card title={{news.title}}
-                           subtitle="{{news.subtitle}}"
-                           [image]="news.photo ? news.photo : '/assets/images/placeholder/Landscape placeholder.jpg'"
-                           date="{{formatDate(news.date)}}"
-                           id="{{news.id}}"
-                           (deleteid)="deleteNews($event)">
-            </app-news-card>
 
+
+<div *ngIf="showNews.length > 0"
+     infiniteScroll
+     [infiniteScrollDistance]="3"
+     [infiniteScrollThrottle]="500"
+     (scrolled)="onScrollDown()"
+     [alwaysCallback]="true"
+     class="relative">
+
+  <div *ngIf="role == 'Municipal'" class="text-[1.063rem] font-roboto left-[8rem] absolute -top-3 flex items-center justify-center gap-4">
+    <app-black-btn-icon-text altImage="Criar Notícia"
+                             image="/assets/images/icons/plus-white.png"
+                             (buttonClick)="goToCreateNewsPage()">
+      Criar Notícia
+    </app-black-btn-icon-text>
+  </div>
+
+  <div class="text-municip-normal-black px-[8rem] bg-municip-blank">
+    <div class="flex justify-center">
+      <div class="pt-[3rem] flex w-full items-center justify-between space-x-4">
+        <div class="w-[50rem] relative">
+          <label for="nameSearch" class="sr-only">Procurar por Notícias</label>
+          <div class="flex items-center">
+            <i class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+              <span class="fas fa-search"></span>
+            </i>
+            <input type="text" id="nameSearch" [(ngModel)]="nameSearch" placeholder="Procurar por Notícias"
+                   class="trasition w-full rounded-2xl border px-4 py-2 pl-10 duration-300 hover:border-black">
           </div>
         </div>
-        <div *ngIf="role == 'Municipal'" class="flex justify-end pb-10 ">
-          <button type="button" routerLink="/news/news-create" class="relative h-auto w-[11rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
-            Criar Nova Notícia
-            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
-          </button>
-        </div>
+        <p-selectButton [options]="orderOptions" [(ngModel)]="ascendingOrder" optionLabel="label" optionValue="value" [unselectable]="true"
+                        (onChange)="toggleSortOrder()"
+                        styleClass="orderOptions">
+        </p-selectButton>
       </div>
     </div>
+
+
+
+    <div class="flex flex-col space-y-10 pb-10 pt-10">
+      <div *ngFor="let news of filteredNews" class="flex-grow">
+        <app-news-card title={{news.title}}
+                       subtitle="{{news.subtitle}}"
+                       [image]="news.photo ? news.photo : '/assets/images/placeholder/Landscape placeholder.jpg'"
+                       [date]="news.date"
+                       id="{{news.id}}"
+                       (deleteid)="deleteNews($event)">
+        </app-news-card>
+
+      </div>
+    </div>
+
+
+
   </div>
 </div>
-  <app-footer />
+<app-footer />
