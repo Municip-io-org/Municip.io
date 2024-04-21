@@ -39,11 +39,9 @@ export class HeaderComponent {
 
   //click for change the language
   onChange(value: any) {
-    console.log(value.target.value);
 
     //get the entire url, like domain+path
     let url = window.location.href;
-    console.log(url);
 
   }
 
@@ -58,8 +56,6 @@ export class HeaderComponent {
       // Scrolling up
       this.isVisible = true;
     }
-    console.log('Scroll Top:', scrollTop);
-    console.log('isVisible:', this.isVisible);
 
     this.lastScrollTop = scrollTop;
   }

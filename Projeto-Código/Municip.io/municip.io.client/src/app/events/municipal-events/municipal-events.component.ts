@@ -116,6 +116,7 @@ export class MunicipalEventsComponent {
               (municipalityRes: any) => {
                 this.municipality = municipalityRes as Municipality;
                 this.loadData();
+                
               },
               error => {
                 console.error(error);
@@ -134,23 +135,16 @@ export class MunicipalEventsComponent {
   }
 
 
-  /**
-   * Método para alternar o estado de carregamento.
-   */
-  toggleLoading() { this.isLoading = !this.isLoading; }
 
   /**
    * Método para carregar os dados.
    */
   loadData() {
-    this.toggleLoading();
 
     this.eventsService.getEventByMunicipality(this.municipality.name).subscribe(
       (eventsRes: any) => {
         this.events = eventsRes as Event[];
         this.sortEventsByDate();
-        this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
-        this.toggleLoading();
       },
       error => {
         console.error(error);
@@ -165,11 +159,8 @@ export class MunicipalEventsComponent {
    */
   onScrollDown() { 
     if (this.events.length > this.showEvents.length) {
-      
       this.currentPage++;
       this.showEvents = [...this.showEvents, ...this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events)];
-
-      this.toggleLoading();
     }
   } 
 
@@ -261,7 +252,7 @@ export class MunicipalEventsComponent {
    * Método para filtrar eventos.
    */
   get filteredEvents() {
-    //if (this.nameSearch == '') return this.showEvents;
+    if (this.nameSearch == '') return this.showEvents;
     return this.events.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }
 

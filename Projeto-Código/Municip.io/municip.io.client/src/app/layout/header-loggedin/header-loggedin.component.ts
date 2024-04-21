@@ -334,8 +334,7 @@ export class HeaderLoggedinComponent {
       // Scrolling up
       this.isVisible = true;
     }
-    console.log('Scroll Top:', scrollTop);
-    console.log('isVisible:', this.isVisible);
+   
 
     this.lastScrollTop = scrollTop;
   }
