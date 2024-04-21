@@ -23,10 +23,7 @@
     </section>
     <div class="w-1 bg-gradient-to-tl from-municip-light-blue to-municip-blue rounded mx-[5rem] "></div>
     <section class="flex flex-col grow space-y-7 justify-center items-center min-w-[20rem]">
-      <div class="flex items-center font-open-sans text-[1.5rem] font-extrabold">
-        <img src="/assets/images/icons/newspaper-folded.png" alt="Notícias" class="size-10 mr-5 " />
-        NOTÍCIAS DE {{ municipality.name | uppercase }}
-      </div>
+      
       <ul class="space-y-7">
         <app-next-news [newsList]="newsList" [municipalityName]="municipality.name"></app-next-news>
       </ul>
