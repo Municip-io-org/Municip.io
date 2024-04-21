@@ -70,9 +70,8 @@ export class MunicipalEventsComponent {
   orderOptions: any[] = [{ label: 'Brevemente', value: true }, { label: 'Eventos Futuros', value: false }];
  
 
-  isLoading = false;
   currentPage = 1;
-  itemsPerPage = 3;
+  itemsPerPage = 6;
 
   isDialogOpen: boolean = false;
   isRemoveEventDialogOpen: boolean = false;
