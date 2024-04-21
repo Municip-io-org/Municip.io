@@ -41,6 +41,21 @@ export class DocsService {
     return this.http.get<DocumentTemplate[]>('api/documents/GetTemplatesFromMunicipality', { params: params });
   }
 
+  /**
+   * Paginação da página de evento
+   * 
+   * @param page A pagina
+   * @param itemsPerPage Número de itens por página
+   * @param documentTemplates Os templates de documentos da pagina
+   * @returns Os templates de documentos
+   */
+  getPaginationTemplates(page = 1, itemsPerPage = 10, documentTemplates: DocumentTemplate[]): DocumentTemplate[] {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    console.log(documentTemplates.slice(startIndex, endIndex));
+    return documentTemplates.slice(startIndex, endIndex);
+  }
+
 
   /**
    * Obter o numero de pedidos por aprovar
