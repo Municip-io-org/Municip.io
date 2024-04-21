@@ -149,7 +149,6 @@ export class EventsListComponent {
       }
     );
 
-    this.showEvents = this.eventsService.getPaginationEvent(this.currentPage, this.itemsPerPage, this.events);
 
 
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NewsService } from '../../services/news/news.service';
+import { News, NewsService } from '../../services/news/news.service';
 import { Router } from '@angular/router';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { Municipality } from '../../services/municipal-admin-auth.service';
@@ -39,14 +39,20 @@ export class NewsListComponent {
   constructor(private newsService: NewsService, private router: Router, private userAuthService: UserAuthService) { }
 
 
-  newsList: any[] = [];
+  news: News[] = [];
+  showNews: News[] = [];
+  nameSearch: string = '';
+
+  currentPage = 1;
+  itemsPerPage = 6;
+
   user: any;
   newUser: any;
   role: string = "";
   municipalityuser: string = "Municipio";
   sortedNewsList: any[] = [];
   ascendingOrder: boolean = true;
-  orderOptions: any[] = [{ label: 'Notícia mais Recente', value: true }, { label: 'Notícia mais Antiga', value: false }];
+  orderOptions: any[] = [{ label: 'Notícias mais Recente', value: true }, { label: 'Notícias mais Antigas', value: false }];
    municipality: Municipality = {
     name: '',
     president: '',
@@ -70,7 +76,7 @@ export class NewsListComponent {
     emblemPhoto: '',
     landscapePhoto: '',
   };
-  nameSearch: string = "";
+
  
 
   /**
@@ -80,11 +86,9 @@ export class NewsListComponent {
    */
   ngOnInit() {
     this.userAuthService.getUserRole().subscribe(
-      res => {
-       
-          this.role = res.role;
-        
-          this.LoadData();
+      res => {      
+        this.role = res.role;
+        this.LoadData();
         this.sortNewsByDate();
       },
       error => {
@@ -113,15 +117,13 @@ export class NewsListComponent {
 
             this.newsService.getNews(this.newUser.municipality).subscribe(
               (listOfNews: any) => {
-                this.newsList = listOfNews.map((news: any) => {
+                this.news = listOfNews.map((news: any) => {
                   
                 
                   return news;
                 });
-                
-                this.sortedNewsList = this.newsList;
+                   
                 this.sortNewsByDate();
-                console.log(this.newsList);
                 this.userAuthService.getInfoMunicipality(this.newUser.municipality).subscribe(
                   (municipalityRes: Municipality) => {
                     this.municipality = municipalityRes;
@@ -148,16 +150,6 @@ export class NewsListComponent {
         console.error(error);
       }
     );
-  }
-
-  /**
-   * get filteredNews
-   *
-   * Retorna as notícias filtradas
-   */
-  get filteredNews() {
-    if (this.nameSearch == '') return this.sortedNewsList;
-    return this.sortedNewsList.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
   }
 
   /**
@@ -209,22 +201,46 @@ export class NewsListComponent {
   }
 
   /**
+   * Este método é responsável por carregar mais notícias.
+   */
+  onScrollDown() {
+    if (this.news.length > this.showNews.length) {
+      this.currentPage++;
+      this.showNews = [...this.showNews, ...this.newsService.getPaginationNews(this.currentPage, this.itemsPerPage, this.news)];
+    }
+  }
+
+  /**
+   * Este método é responsável por filtrar os eventos.
+   */
+  get filteredNews() {
+    if (this.nameSearch == '') return this.showNews;
+    return this.news.filter(e => e.title.toLowerCase().includes(this.nameSearch.toLowerCase()));
+  }
+
+  /**
    * sortNewsByDate
    *
    * Ordena as notícias por data
    */
   sortNewsByDate() {
-    const newsListCopy = [...this.newsList];
-    newsListCopy.sort((a, b) => {
-      if (this.ascendingOrder) {
-        
-        
-        return new Date(b.date.split('/').reverse().join('/')).getTime() - new Date(a.date.split('/').reverse().join('/')).getTime();
-      } else {
-        return new Date(a.date.split('/').reverse().join('/')).getTime() - new Date(b.date.split('/').reverse().join('/')).getTime();
-      }
-    });
-    this.sortedNewsList = newsListCopy;
+    this.currentPage = 1;
+    if (this.ascendingOrder) {
+      this.news.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      this.showNews = this.newsService.getPaginationNews(this.currentPage, this.itemsPerPage, this.news);
+
+    } else {
+      this.news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      this.showNews = this.newsService.getPaginationNews(this.currentPage, this.itemsPerPage, this.news);
+    }
+  }
+
+
+  /**
+   * Método para navegar para a página de criação de notícia.
+   */
+  goToCreateNewsPage() {
+    this.router.navigateByUrl(`news/news-create`);
   }
 
 }

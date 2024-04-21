@@ -92,9 +92,25 @@ export class NewsService {
     console.log("ID: ", newsId);
     return this.http.get<News>(`api/news/GetNewsById?newsId=${newsId}`);
   }
+
+  /**
+   * Paginação da página das notícias
+   * 
+   * @param page A pagina
+   * @param itemsPerPage Número de itens por página
+   * @param news Os notícias da pagina
+   * @returns Os notícias da pagina
+   */
+  getPaginationNews(page = 1, itemsPerPage = 10, news: News[]): News[] {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    console.log(news.slice(startIndex, endIndex));
+    return news.slice(startIndex, endIndex);
+  }
  }
 
 export interface News {
+  id: string;
   title: string;
   subtitle: string;
   mainText: string;
