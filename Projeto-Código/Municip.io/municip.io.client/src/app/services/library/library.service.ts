@@ -378,6 +378,16 @@ export class LibraryService {
   }
 
   /**
+   * Email de convite para registo na plataforma
+   * @param email - Email para envio de convite 
+   * @returns Email de convite
+    */
+  sendInviteEmail(email: string) {
+
+    return this.http.post(`api/Book/SendInviteEmail?email=${email}`, null);
+  }
+
+  /**
    * Tradução de estados
    * 
    * @param status O status 

@@ -2,7 +2,7 @@
 
 
 <ng-container *ngIf="isDialogOpen">
-  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" (confirm)="closeDialog()"
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" (confirm)="SendEmail()" [twoButtons]="true" (cancel)="closeDialog()"
                       [isConfirm]="isReserveSuccesfull"></app-dialog-message>
 </ng-container>
 
