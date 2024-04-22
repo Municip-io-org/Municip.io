@@ -70,7 +70,7 @@ export class LibraryService {
 
     const formData = new FormData();
     formData.append('image', image);
-
+    console.log("URL DE IMAGEM", image);
     return this.http.post(imgurl, formData, { headers }).pipe(
       switchMap((response: any) => {
         book.coverImage = response['data']['link'];
