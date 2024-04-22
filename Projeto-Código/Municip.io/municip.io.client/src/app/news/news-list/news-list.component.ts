@@ -225,7 +225,7 @@ export class NewsListComponent {
    */
   sortNewsByDate() {
     this.currentPage = 1;
-    if (this.ascendingOrder) {
+    if (!this.ascendingOrder) {
       this.news.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
       this.showNews = this.newsService.getPaginationNews(this.currentPage, this.itemsPerPage, this.news);
 
