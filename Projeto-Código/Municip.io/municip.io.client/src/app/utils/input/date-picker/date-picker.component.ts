@@ -15,7 +15,7 @@ export class DatePickerComponent {
   @Input() class = "";
 
   @Input() minDate: Date = new Date(1900, 0, 1);
-
+  @Input() maxDate: Date = new Date(2500, 0, 1);
 
   get control() {
     return this.date as FormControl;

@@ -65,6 +65,7 @@ import { EditBookComponent } from './library/edit-book/edit-book.component';
 import { LibraryHomepageComponent } from './library/library-homepage/library-homepage.component';
 import { MunicipalCalendarComponent } from './events/municipal-calendar/municipal-calendar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { IsLibraryFeatureActive } from './utils/guard/isLibraryFeatureActive/is-library-feature-active.guard';
 
 
 const routes: Routes = [
@@ -85,13 +86,13 @@ const routes: Routes = [
   { path: 'admindashboard', component: AdmindashboardComponent, data: {}, canActivate: [AdministratorGuard] },
   { path: 'admindashboard/:municipalName', component: AdminDashboardMunicipalAdminsComponent, data: {}, canActivate: [AdministratorGuard] },
   { path: 'termsconditions', component: TermsconditionsComponent, data: {} },
-  { path: 'transports', component: TransportsMainComponent, data: {}, canActivate: [IsTransportFeatureActive] },
-  { path: 'transports/schedules', component: SchedulesComponent, data: {}, canActivate: [IsTransportFeatureActive] },
+  { path: 'transports', component: TransportsMainComponent, data: {}, canActivate: [IsTransportFeatureActive, CitizenOrMunicipalAdminGuard] },
+  { path: 'transports/schedules', component: SchedulesComponent, data: {}, canActivate: [IsTransportFeatureActive, CitizenOrMunicipalAdminGuard] },
   { path: 'munadmin-dashboard', component: MunAdmindashboardComponent, data: {}, canActivate: [MunicipalAdminGuard] },
-  { path: 'manageAppFeatures', component: ManageAppFeaturesComponent, data: {} },
+  { path: 'manageAppFeatures', component: ManageAppFeaturesComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'municipalitymap', component: MunicipalitymapComponent, data: {} },
-  { path: 'transports/stops', component: StopsPageComponent, data: {}, canActivate: [IsTransportFeatureActive] },
-  { path: 'transports/stops/:selectedStop', component: StopsPageComponent, data: {}, canActivate: [IsTransportFeatureActive] },
+  { path: 'transports/stops', component: StopsPageComponent, data: {}, canActivate: [IsTransportFeatureActive,CitizenOrMunicipalAdminGuard] },
+  { path: 'transports/stops/:selectedStop', component: StopsPageComponent, data: {}, canActivate: [IsTransportFeatureActive,CitizenOrMunicipalAdminGuard] },
   { path: 'municipal/homePage', component: MunAdminHomePageComponent, data: {}, canActivate: [MunicipalAdminGuard] },
   { path: 'municipal/profile', component: MunicipalProfileComponent, data: {}, canActivate: [CitizenOrMunicipalAdminGuard] },
   { path: 'municipal/edit', component: MunicipalEditComponent, data: {}, canActivate: [MunicipalAdminGuard] },
@@ -102,31 +103,31 @@ const routes: Routes = [
   { path: 'events/municipal-calendar', component: MunicipalCalendarComponent, canActivate: [IsEventsFeatureActive, MunicipalAdminGuard] },
   { path: 'events/myEvents', component: EventsListComponent, data: {}, canActivate: [IsEventsFeatureActive, CitizenGuard] },
   { path: 'events', component: MunicipalEventsComponent, data: {}, canActivate: [IsEventsFeatureActive, CitizenOrMunicipalAdminGuard] },
-  { path: 'events/:eventId', component: EventPageComponent, data: {}, canActivate: [IsEventsFeatureActive, UserSameMunicipalityGuard] },
+  { path: 'events/:eventId', component: EventPageComponent, data: {}, canActivate: [IsEventsFeatureActive, UserSameMunicipalityGuard,CitizenOrMunicipalAdminGuard] },
   { path: 'accessDenied', component: AccessDeniedComponent, data: {} },
   { path: 'news', component: NewsListComponent, data: {}, canActivate: [IsNewsFeatureActive, CitizenOrMunicipalAdminGuard] },
   { path: 'news/news-create', component: NewsCreateComponent, data: {}, canActivate: [IsNewsFeatureActive, MunicipalAdminGuard] },
   { path: 'events/calendar', component: CalendarPageComponent, data: {}, canActivate: [IsEventsFeatureActive, CitizenGuard] },
-  { path: 'news/:newsId', component: NewsPageComponent, data: {}, canActivate: [IsNewsFeatureActive, UserSameMunicipalityGuard] },
-  { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [IsNewsFeatureActive, UserSameMunicipalityGuard, MunicipalAdminGuard,] },
-  { path: 'documents', component: DocsHomepageComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
+  { path: 'news/:newsId', component: NewsPageComponent, data: {}, canActivate: [IsNewsFeatureActive, UserSameMunicipalityGuard,CitizenOrMunicipalAdminGuard] },
+  { path: 'news/edit/:newsId', component: NewsEditComponent, data: {}, canActivate: [IsNewsFeatureActive, UserSameMunicipalityGuard, MunicipalAdminGuard] },
+  { path: 'documents', component: DocsHomepageComponent, data: {}, canActivate: [IsDocumentFeatureActive,CitizenOrMunicipalAdminGuard] },
   { path: 'acessBlocked', component: AccessBlockedComponent, data: {} },
-  { path: 'documents/request', component: RequestDocumentComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
+  { path: 'documents/request', component: RequestDocumentComponent, data: {}, canActivate: [IsDocumentFeatureActive,CitizenGuard] },
   { path: 'documents/my', component: MyDocumentsComponent, canActivate: [IsDocumentFeatureActive, CitizenGuard] },
   { path: 'documents/approve', component: ApproveDocumentsComponent, data: {}, canActivate: [IsDocumentFeatureActive, MunicipalAdminGuard] },
   { path: 'documents/createtemplate', component: CreateTemplateComponent, data: {}, canActivate: [IsDocumentFeatureActive, MunicipalAdminGuard] },
   { path: 'documents/edit-template/:templateId', component: EditTemplateComponent, data: {}, canActivate: [UserSameMunicipalityGuard, IsDocumentFeatureActive, MunicipalAdminGuard] },
   { path: 'documents/generate-pdf', component: GeneratepdfComponent, data: {}, canActivate: [IsDocumentFeatureActive] },
   { path: 'documents/template-list', component: TemplateListComponent, canActivate: [IsDocumentFeatureActive, MunicipalAdminGuard] },
-  { path: 'library/create', component: CreateBookComponent, data: {} },
-  { path: 'library/requests', component: RequestsComponent, data: {} },
-  { path: 'library/my', component: MyRequestsComponent, data: {} },
-  { path: 'library/librarylist', component: LibraryListComponent, data: {} },
-  { path: 'library/:bookId', component: BookPageComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
-  { path: 'library/edit/:bookId', component: EditBookComponent, data: {}, canActivate: [UserSameMunicipalityGuard] },
-  { path: 'adminstatistics', component: AdminStatisticsDashboardComponent },
-  { path: 'munadminstatistics', component: MunadminStatisticsDashboardComponent },
-  { path: 'library', component: LibraryHomepageComponent },
+  { path: 'library/create', component: CreateBookComponent, data: {},canActivate:[IsLibraryFeatureActive, MunicipalAdminGuard] },
+  { path: 'library/requests', component: RequestsComponent, data: {}, canActivate: [IsLibraryFeatureActive, MunicipalAdminGuard] },
+  { path: 'library/my', component: MyRequestsComponent, data: {}, canActivate: [IsLibraryFeatureActive, CitizenGuard] },
+  { path: 'library/librarylist', component: LibraryListComponent, data: {}, canActivate: [IsLibraryFeatureActive, CitizenOrMunicipalAdminGuard] },
+  { path: 'library/:bookId', component: BookPageComponent, data: {}, canActivate: [IsLibraryFeatureActive,UserSameMunicipalityGuard,CitizenOrMunicipalAdminGuard] },
+  { path: 'library/edit/:bookId', component: EditBookComponent, data: {}, canActivate: [IsLibraryFeatureActive,UserSameMunicipalityGuard,MunicipalAdminGuard] },
+  { path: 'adminstatistics', component: AdminStatisticsDashboardComponent, canActivate: [AdministratorGuard] },
+  { path: 'munadminstatistics', component: MunadminStatisticsDashboardComponent, canActivate: [MunicipalAdminGuard] },
+  { path: 'library', component: LibraryHomepageComponent, canActivate: [IsLibraryFeatureActive, CitizenOrMunicipalAdminGuard] },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
 
@@ -134,7 +135,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+            RouterModule.forRoot(routes, { scrollPositionRestoration: "enabled" }),],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+
+}

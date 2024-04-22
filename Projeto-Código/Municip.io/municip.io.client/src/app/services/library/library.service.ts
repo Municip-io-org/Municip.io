@@ -24,117 +24,7 @@ export class LibraryService {
 
 
 
-  //create mock data
-  Books: Book[] = [
-    {
-      id: 1,
-      title: 'O Hobbit',
-      author: ['J.R.R. Tolkien', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling', 'J.K. Rowling'],
-      availableCopies: 5,
-      copies: 5,
-      coverImage: 'https://img.freepik.com/fotos-gratis/retrato-abstrato-do-olho-da-elegancia-das-mulheres-jovens-gerada-pela-ia_188544-9712.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1711324800&semt=sph',
-      edition: '1',
-      genre: ['Fantasia'],
-      language: 'Português',
-      publicationDate: new Date('1937-09-21'),
-      publisher: 'HarperCollins',
-      sinopsis: 'Bilbo Bolseiro é um hobbit que leva uma vida confortável e sem ambições. Mas seu contentamento é perturbado quando Gandalf, o mago, e uma companhia de anões batem à sua porta e levam-no para uma expedição. Eles têm um plano para roubar o tesouro guardado por Smaug, o Magnífico, um grande e perigoso dragão. Bilbo reluta muito em participar da aventura, mas acaba surpreendendo até a si mesmo com sua esperteza e sua habilidade como ladrão!',
-      status: BookStatus.Available,
-      municipality: 'Londres',
-    }, {
-      id: 2,
-      title: 'O Hobbit',
-      author: ['J.R.R. Tolkien'],
-      availableCopies: 5,
-      copies: 5,
-      coverImage: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1563042852i/49628.jpg',
-      edition: '1',
-      genre: ['Fantasia'],
-      language: 'Português',
-      publicationDate: new Date('1937-09-21'),
-      publisher: 'HarperCollins',
-      sinopsis: 'Bilbo Bolseiro é um hobbit que leva uma vida confortável e sem ambições. Mas seu contentamento é perturbado quando Gandalf, o mago, e uma companhia de anões batem à sua porta e levam-no para uma expedição. Eles têm um plano para roubar o tesouro guardado por Smaug, o Magnífico, um grande e perigoso dragão. Bilbo reluta muito em participar da aventura, mas acaba surpreendendo até a si mesmo com sua esperteza e sua habilidade como ladrão!',
-      status: BookStatus.Available,
-      municipality: 'Londres',
-    },];
-
-
-  BooksRequested: BookRequest[] = [
-    {
-      id: 1,
-      citizen: {
-        address: 'Rua dos Alfeneiros, nº 4',
-        birthDate: new Date('1990-01-01'),
-        email: '',
-        firstName: 'Harry',
-        gender: 'M',
-        municipality: 'Londres',
-        nif: '123456789',
-        password: '',
-        postalCode1: '1234',
-        postalCode2: '123',
-        surname: 'Potter',
-        browsers: [],
-        events: [],
-        photo: 'https://img.freepik.com/fotos-gratis/retrato-abstrato-do-olho-da-elegancia-das-mulheres-jovens-gerada-pela-ia_188544-9712.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1711324800&semt=sph'
-      },
-      book: this.Books[0],
-      reservedDate: new Date(2024, 2, 26, 14, 7),
-      returnDate: new Date('2021-10-21'),
-      deliveredDate: new Date('2021-09-21'),
-      municipality: 'Londres',
-      status: BookRequestStatus.Reserved
-    }, {
-      id: 2,
-      citizen: {
-        address: 'Rua dos Alfeneiros, nº 4',
-        birthDate: new Date('1990-01-01'),
-        email: '',
-        firstName: 'Harry',
-        gender: 'M',
-        municipality: 'Londres',
-        nif: '123456789',
-        password: '',
-        postalCode1: '1234',
-        postalCode2: '123',
-        surname: 'Potter',
-        browsers: [],
-        events: [],
-        photo: 'https://img.freepik.com/fotos-gratis/retrato-abstrato-do-olho-da-elegancia-das-mulheres-jovens-gerada-pela-ia_188544-9712.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1711324800&semt=sph'
-      },
-      book: this.Books[1],
-      reservedDate: new Date('2021-09-21'),
-      returnDate: new Date('2021-10-21'),
-      deliveredDate: new Date('2021-09-21'),
-      municipality: 'Londres',
-      status: BookRequestStatus.Delayed
-    }, {
-      id: 3,
-      citizen: {
-        address: 'Rua dos Alfeneiros, nº 4',
-        birthDate: new Date('1990-01-01'),
-        email: '',
-        firstName: 'Harry',
-        gender: 'M',
-        municipality: 'Londres',
-        nif: '123456789',
-        password: '',
-        postalCode1: '1234',
-        postalCode2: '123',
-        surname: 'Potter',
-        browsers: [],
-        events: [],
-        photo: 'https://img.freepik.com/fotos-gratis/retrato-abstrato-do-olho-da-elegancia-das-mulheres-jovens-gerada-pela-ia_188544-9712.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1711324800&semt=sph'
-      },
-      book: this.Books[1],
-      reservedDate: new Date('2021-09-21'),
-      returnDate: new Date('2021-10-21'),
-      deliveredDate: new Date('2021-09-21'),
-      municipality: 'Londres',
-      status: BookRequestStatus.Borrowed
-    },
-  ];
-
+  
   /**
    * Criar um livro
    * 
@@ -202,6 +92,21 @@ export class LibraryService {
   }
 
   /**
+   * Paginação da página de livros
+   * 
+   * @param page A pagina
+   * @param itemsPerPage Número de itens por página
+   * @param books Os livros da pagina
+   * @returns Os livros por página
+   */
+  getPaginationBooks(page = 1, itemsPerPage = 10, books: Book[]): Book[] {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    console.log(books.slice(startIndex, endIndex));
+    return books.slice(startIndex, endIndex);
+  }
+
+  /**
    * Obtem um livro
    * @param bookId O ID do livro
    * @returns O Livro
@@ -257,14 +162,6 @@ export class LibraryService {
    */
   removeBook(bookId: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`api/Book/DeleteBookById?bookId=${bookId}`, { observe: 'response' });
-  }
-
-  /**
-   * Obtem os livros requested
-   * @returns
-   */
-  getRequestedBooks() {
-    return this.BooksRequested;
   }
 
   /**
@@ -375,6 +272,16 @@ export class LibraryService {
   sendDelayedEmail(email: string, name: string, bookImage: string, bookName: string, bookAuthor: string, returnDate: string) {
     return this.http.post(`api/Book/SendDelayedEmail?email=${email}&name=${name}&bookImage=${bookImage}&bookName=${bookName}&bookAuthor=${bookAuthor}&returnDate=${returnDate}`, null);
 
+  }
+
+  /**
+   * Email de convite para registo na plataforma
+   * @param email - Email para envio de convite 
+   * @returns Email de convite
+    */
+  sendInviteEmail(email: string) {
+
+    return this.http.post(`api/Book/SendInviteEmail?email=${email}`, null);
   }
 
   /**

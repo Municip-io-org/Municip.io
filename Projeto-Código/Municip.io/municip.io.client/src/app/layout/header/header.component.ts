@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 
@@ -14,6 +14,10 @@ import { UserAuthService } from '../../services/user-auth.service';
  *
  */
 export class HeaderComponent {
+
+  @HostBinding('class.visible') isVisible = true;
+  private lastScrollTop = 50;
+  private scroolOffset = 50;
 
   /**
    *
@@ -35,16 +39,25 @@ export class HeaderComponent {
 
   //click for change the language
   onChange(value: any) {
-    console.log(value.target.value);
 
     //get the entire url, like domain+path
     let url = window.location.href;
-    console.log(url);
 
+  }
 
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
+    if (scrollTop > this.lastScrollTop && scrollTop > this.scroolOffset) {
+      // Scrolling down
+      this.isVisible = false;
+    } else {
+      // Scrolling up
+      this.isVisible = true;
+    }
 
-
+    this.lastScrollTop = scrollTop;
   }
 
 

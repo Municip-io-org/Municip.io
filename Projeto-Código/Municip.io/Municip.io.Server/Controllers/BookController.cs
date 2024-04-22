@@ -238,14 +238,10 @@ namespace Municip.io.Server.Controllers
             {
 
                 var citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
-
-
-                if (citizen == null) return BadRequest(new { message = "Não foi encontrado nenhum cidadão", ModelState });
-
-
                 var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == request.Book.Id);
 
-
+                if (citizen == null) return BadRequest(new { message = "Cidadão não registado, Enviar convite?" });
+          
                 if (book == null) return BadRequest(new { message = "Não foi encontrado nenhum livro", ModelState });
 
                 if (book.Status == BookStatus.Unavailable) return BadRequest(new { message = "O livro não está disponível" });
@@ -523,19 +519,30 @@ namespace Municip.io.Server.Controllers
 
         /// <summary>
         /// Envia email de atraso do livro
-        /// </summary>
         /// <param name="email"></param>
         /// <param name="name"></param>
         /// <param name="bookImage"></param>
         /// <param name="bookName"></param>
         /// <param name="bookAuthor"></param>
         /// <param name="returnDate"></param>
-        /// <returns></returns>
+        /// <returns>Email</returns>
         [HttpPost("SendDelayedEmail")]
         public IActionResult SendDelayedEmail(string email, string name, string bookImage, string bookName, string bookAuthor, string returnDate)
         {
             EmailSender.SendBookEmail(email, "Entrega de livro", name, $"Por favor, entregue o livro <span style='font-weight: bold;'>{bookName} de {bookAuthor}</span>. Uma vez que a data de entrega ({returnDate}) foi ultrapassada.",
                 "wwwroot/html/BookEmail.html", bookImage);
+            return Ok();
+        }
+
+        /// <summary>
+        /// Envia email de convite
+        /// <paramref name="email"/>
+        /// <returns>Email</returns>
+        [HttpPost("SendInviteEmail")]
+        public IActionResult SendInviteEmail(string email) 
+        {
+            EmailSender.SendEmailAproveDeny(email, "Registe-se Na Plataforma", "Cidadão", $"Ao realizar a reserva reparámos que ainda não tem conta na <span style='font-weight: bold;'>Municip.io</span>, Registe-se já aqui!",
+"wwwroot/html/AproveEmail.html");
             return Ok();
         }
 

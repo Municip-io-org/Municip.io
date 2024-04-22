@@ -1,18 +1,18 @@
+﻿
 
-
-<div class="flex text-[16px] font-poppins">
-  <div class="h-screen grow bg-gradient-to-tl from-municip-light-blue to-municip-blue flex items-center justify-center">
-    <div class=" flex justify-center text-white">
-      <img alt="logo" src="/assets/images/logos/logo-white-right.png" class="size-8/12 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] animate-myBounceAnim" />
+<div class="text-[16px] font-poppins flex">
+  <div class="from-municip-light-blue flex h-screen grow items-center justify-center bg-gradient-to-tl to-municip-blue">
+    <div class="flex justify-center text-white">
+      <img alt="logo" src="/assets/images/logos/logo-white-right.png" class="drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] animate-myBounceAnim size-8/12" />
     </div>
   </div>
-  <div class="h-screen w-[79rem] flex items-center justify-center">
+  <div class="w-[79rem] flex h-screen items-center justify-center">
     <div class="flex flex-col px-16">
-      <h1 class="font-black text-[30px] text-black  my-2">Login</h1>
-      <h2 class="font-medium text-xl text-municip-normal-black mb-2">Insira os seus dados</h2>
+      <h1 class="font-black text-[30px] my-2 text-black">Login</h1>
+      <h2 class="text-municip-normal-black mb-2 text-xl font-medium">Insira os seus dados</h2>
       <div class="py-[1rem]">
-        <form class="flex flex-col space-y-4 items-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div class=" text-red-500 text-sm font-bold space-y-2 text-start">
+        <form class="flex flex-col items-center space-y-4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="space-y-2 text-start text-sm font-bold text-red-500">
               <p>{{error}}</p>
           </div>
           <input placeholder="Email" type="email" id="email" formControlName="email" name="email"
@@ -23,17 +23,14 @@
                    formControlName="password" name="password" [(ngModel)]="user.password"
                    class="input w-[20rem]" />
           </div>
-          <button type="submit" class="flex h-auto w-[20rem] text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-3 px-8
-               focus:outline-none rounded text-lg justify-center items-center
-               bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%]  
-               transition-all duration-300">
+          <button type="submit" class="w-[20rem] from-municip-light-blue border-0 flex h-auto items-center justify-center rounded bg-gradient-to-tl to-municip-blue px-8 py-3 text-lg text-municip-blank transition-all duration-300 focus:outline-none bg-[position:_0%_0%] bg-[size:_200%] hover:bg-[position:_100%_100%]">
             Entrar
-            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+            <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
           </button>
         </form>
       </div>
-      <hr class="rounded-3xl border-t-[#ECECF0] my-4" />
-      <div class="text-right font-medium text-municip-normal-black ">Não tem conta? <a routerLink="/signUp-SelectAccountType" class="cursor-pointer font-bold text-black ml-2 hover:underline">Registe-se</a></div>
+      <hr class="border-t-[#ECECF0] my-4 rounded-3xl" />
+      <div class="text-municip-normal-black text-right font-medium">Não tem conta? <a routerLink="/signUp-SelectAccountType" class="ml-2 cursor-pointer font-bold text-black hover:underline">Registe-se</a></div>
     </div>
   </div>
 </div>

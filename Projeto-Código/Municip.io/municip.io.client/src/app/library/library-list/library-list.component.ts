@@ -30,6 +30,10 @@ import { Municipality } from '../../services/municipal-admin-auth.service';
 export class LibraryListComponent {
 
   books: Book[] = [];
+  showBooks: Book[] = [];
+  currentPage = 1;
+  itemsPerPage = 8;
+
   nameSearch: string = '';
   user: any;
   isMunAdmin: boolean = false;
@@ -58,7 +62,9 @@ export class LibraryListComponent {
     emblemPhoto: '',
     landscapePhoto: '',
   };
-  filteredBookList: Book[] = [];
+
+
+
   filterWindow: boolean = false;
   isbnSearch: string = '';
   authorSearch: string = '';
@@ -114,6 +120,8 @@ export class LibraryListComponent {
                   this.books = data;
                   this.books = this.books.filter(b => b.status != BookStatus.Unavailable);
 
+                  this.showBooks = this.libraryService.getPaginationBooks(this.currentPage, this.itemsPerPage, this.books);
+
                   this.loadDateOptions();
                   this.loadGenreOptions();
                 });
@@ -135,6 +143,14 @@ export class LibraryListComponent {
    * @returns Lista de livros filtrados
    */
   get filteredBooks() {
+
+    if (this.nameSearch === '' &&
+      this.isbnSearch === '' &&
+      this.authorSearch === '' &&
+      this.genreSearch === '' &&
+      (this.startDateFilter === this.minDateFilter) &&
+      (this.endDateFilter === this.maxDateFilter)) return this.showBooks;
+
     let filteredList = this.books;
 
     if (this.nameSearch !== '') {
@@ -221,6 +237,16 @@ export class LibraryListComponent {
       this.books = this.books.filter(b => b.status != BookStatus.Unavailable)
     });
   }
+
+  /**
+   * Método para carregar mais eventos.
+   */
+  onScrollDown() {
+    if (this.books.length > this.showBooks.length) {
+      this.currentPage++;
+      this.showBooks = [...this.showBooks, ...this.libraryService.getPaginationBooks(this.currentPage, this.itemsPerPage, this.books)];
+    }
+  } 
 
   /**
    * openFilterWindow

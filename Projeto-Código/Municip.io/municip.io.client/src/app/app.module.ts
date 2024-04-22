@@ -142,7 +142,7 @@ import { LibraryMapComponent } from './library/library-map/library-map.component
 import { MunicipalCalendarComponent } from './events/municipal-calendar/municipal-calendar.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { NotFoundComponent } from './not-found/not-found.component';
-
+import { CarouselModule } from 'primeng/carousel';
 
 
 registerLocaleData(localePt, 'pt-PT');
@@ -283,7 +283,7 @@ registerLocaleData(localePt, 'pt-PT');
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     InfiniteScrollModule, SelectButtonModule, RippleModule,
     CheckboxModule, GoogleChartsModule,
-    MatSliderModule
+    MatSliderModule, CarouselModule
   ],
   providers: [
     MunicipalityGuard,

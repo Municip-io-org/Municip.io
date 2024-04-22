@@ -629,6 +629,28 @@ export class BookPageComponent {
     this.isRemoveBookWarningDialogOpen = false;
   }
 
+  /**
+   * Método para enviar um email quando o utilizador não está registado
+   */
+  SendEmail() {
+    console.log("OLAOLA");
+    this.libraryService.sendInviteEmail(this.citizenEmailControl.value).subscribe(
+      (data) => {
+        console.log(data);
+        this.dialogTitle = 'Email enviado com sucesso';
+        this.dialogMessage = 'Foi enviado um email para o cidadão';
+        this.isDialogOpen = true;
+        this.closeDialog();
+      },
+      (error) => {
+        console.error(error);
+        this.dialogTitle = 'Erro ao enviar o email';
+        this.dialogMessage = error.error.message;
+        this.isDialogOpen = true;
+      }
+    );
+    
+  }
 
 
 }

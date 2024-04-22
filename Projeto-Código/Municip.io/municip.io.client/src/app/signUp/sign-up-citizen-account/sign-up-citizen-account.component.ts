@@ -63,6 +63,8 @@ export class SignUpCitizenAccountComponent {
     birthDate: new FormControl(new Date(), [Validators.required, this.adultAgeValidator.bind(this)]),
   });
 
+  maxBirthDate: Date = new Date();
+
   image!: File;
   imageUrl: string | null = null;
   files: any[] = [];
@@ -108,6 +110,9 @@ export class SignUpCitizenAccountComponent {
     if (age > 120) {
       return { 'over120': true };
     }
+    if (today <= birthDate) {
+      return { 'invalid': true }
+    }
 
     return null;
   };
@@ -133,6 +138,8 @@ export class SignUpCitizenAccountComponent {
    * Inicialização do componente
    */
   ngOnInit(): void {
+    this.maxBirthDate.setDate(new Date().getDate());
+
     this.municipalityService.getApprovedMunicipalities().subscribe(
       (res: any) => {
         this.municipalities = res as Municipality[];

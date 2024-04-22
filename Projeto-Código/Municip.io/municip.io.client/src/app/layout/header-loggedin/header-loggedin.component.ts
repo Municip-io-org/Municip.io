@@ -2,7 +2,7 @@ import { Roles, UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router';
 import { AppFeature, AppFeaturesService } from '../../services/appFeatures/app-features.service';
 import { DocsService } from '../../services/documents/docs.service';
-import { Component } from '@angular/core';
+import { Component, HostBinding, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-header-loggedin',
@@ -51,9 +51,11 @@ export class HeaderLoggedinComponent {
   showDropdownMunicipality: boolean = false;
   showDropdownAdmin: boolean = false;
 
-numberOfRequests: number = 0;
+  numberOfRequests: number = 0;
 
-
+  @HostBinding('class.visible') isVisible = true;
+  private lastScrollTop = 50;
+  private scroolOffset = 50;
 
   /**
    *
@@ -188,6 +190,9 @@ numberOfRequests: number = 0;
       case Dropdowns.Transports:
         this.showDropdownTransportes = !this.showDropdownTransportes;
         break;
+      case Dropdowns.SignOut:
+        this.showSignOutDropdown = !this.showSignOutDropdown;
+        break;
       case Dropdowns.Municipality:
         this.showDropdownMunicipality = !this.showDropdownMunicipality;
         break;
@@ -223,6 +228,9 @@ numberOfRequests: number = 0;
     if (dropdown !== Dropdowns.Transports) {
       this.showDropdownTransportes = false;
     }
+    if (dropdown !== Dropdowns.SignOut) {
+      this.showSignOutDropdown = false;
+    }
     if (dropdown !== Dropdowns.Municipality) {
       this.showDropdownMunicipality = false;
     }
@@ -231,7 +239,23 @@ numberOfRequests: number = 0;
     }
   }
 
-
+  /**
+   * closeAllDropdowns
+   *
+   * Método que é chamado para fechar todos os dropdowns.
+   *
+   * @param dropdown: Dropdowns - O dropdown.
+   */
+  closeAllDropdowns() {
+    this.showDropdownAgenda = false;
+    this.showDropdownBiblioteca = false;
+    this.showDropdownDocumentos = false;
+    this.showDropdownNoticias = false;
+    this.showDropdownTransportes = false;
+    this.showSignOutDropdown = false;
+    this.showDropdownMunicipality = false;
+    this.showDropdownAdmin = false;
+  }
 
 
 
@@ -296,12 +320,25 @@ numberOfRequests: number = 0;
   isLibraryFeatureActive() {
     return this.appFeatures.find(a => a.appFeatureCategory == "Library")?.isEnabled;
   }
+
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > this.lastScrollTop && scrollTop > this.scroolOffset) {
+      // Scrolling down
+      this.isVisible = false;
+      this.closeAllDropdowns();
+    } else {
+      // Scrolling up
+      this.isVisible = true;
+    }
+   
+
+    this.lastScrollTop = scrollTop;
+  }
 }
-
-
-
-
-//create a ennum for the name of the dropdowns
 
 
 
@@ -312,9 +349,10 @@ export enum Dropdowns {
   Documents = 'documents',
   News = 'news',
   Transports = 'transports',
-  CloseAll = 'closeAll',
+  SignOut = 'signOut',
   Municipality = "Municipality",
-  Admin = "Admin"
+  Admin = "Admin",
+  CloseAll = 'closeAll',
 }
 
 

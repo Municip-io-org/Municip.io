@@ -1,22 +1,27 @@
-<div class="w-[90rem] h-90 flex flex-row flex-wrap border-solid border-municip-blue border-2 rounded-[0.8rem] space-y-5 px-2 relative">
-  <img [src]="image ? image : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="newsing" class="object-cover h-[15rem] flex self-center rounded-[0.5rem] w-[30rem] left-0 m-6" />
-  <div class="flex flex-col items-start w-[50rem] text-left">
-    <div>
-      <h1 class="text-municip-normal-black font-bold text-4xl ml-6">{{title}}</h1>
-      <p class="pt-3 pl-11 break-all">{{subtitle}}</p>
-    </div>
-    <div class="absolute top-0 right-0 mr-5 mt-5">
-      <p class="text-sm text-gray-500">{{date}}</p>
+﻿<div class="h-90 border-2 rounded-[0.8rem] space-5 relative flex flex-grow flex-row justify-between border-solid border-municip-blue px-2 py-4">
+  <img [src]="image ? image : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="newsing"
+       class="h-[15rem] rounded-[0.5rem] min-w-[30rem] w-[30rem] left-0 m-6 flex self-center object-cover" />
+  <div class="flex flex-grow flex-col justify-between">
+    <div class="flex flex-col">
+      <div class="flex flex-col">
+        <h1 class="text-municip-normal-black line-clamp-2 mr-8 break-all text-4xl font-bold">{{title}}</h1>
+        <p class="break-all pt-3">{{subtitle}}</p>
+      </div>
+      <div class="absolute -top-3 right-0 mr-5 mt-5">
+        <p class="text-sm text-gray-500">{{date | date: "d/MM/yyyy"}}</p>
+      </div>
     </div>
 
-    <div class="flex absolute bottom-4 right-0 mr-8 mb-1">
-      <button type="button" *ngIf="role == 'Municipal'" (click)="deleteCurrent(this)" class="relative h-10 w-[2.5rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl bg-red-500 border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-red-800 rounded text-lg transition duration-700 ease-in-out mr-2">
-        <img alt="delete" src="/assets/images/icons/delete.png" class="size-3.5 " />
+    <div class="mb-1 mr-5 flex justify-end">
+      <button type="button" *ngIf="role == 'Municipal'" (click)="deleteCurrent(this)"
+              class="w-[2.5rem] border-0 relative mr-2 flex h-10 items-center justify-center rounded bg-red-200 bg-gradient-to-tl py-4 text-lg font-semibold text-municip-blank transition duration-700 ease-in-out hover:cursor-pointer hover:bg-red-300 focus:outline-none">
+        <img alt="delete" src="/assets/images/icons/delete.png" class="size-3.5" />
       </button>
     
-      <button type="button" routerLink="/news/{{id}}" class="relative h-10 w-[7rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+      <button type="button" routerLink="/news/{{id}}"
+              class="w-[7rem] from-municip-light-blue border-0 relative flex h-10 items-center justify-center rounded bg-gradient-to-tl to-municip-blue py-4 font-normal text-municip-blank transition duration-700 ease-in-out hover:cursor-pointer hover:bg-indigo-600 focus:outline-none">
         Ler Mais
-        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+        <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
       </button>
     </div>
   </div>

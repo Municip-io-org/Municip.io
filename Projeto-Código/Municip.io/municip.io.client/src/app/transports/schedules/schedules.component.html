@@ -28,7 +28,6 @@ transition-all duration-700 ease-in-out  decoration-sky-500
 
 
       <div *ngIf="routes.length > 1" class="flex justify-center">
-        <!--<app-input-title class="text-[2.4vh]">Rotas</app-input-title>-->
         <div class="flex flex-col text-start space-y-2 py-3 px-2 bg-blue-50
               rounded-b-lg w-80">
           <div *ngFor="let route of routes" class="space-x-2">
@@ -82,21 +81,48 @@ transition-all duration-700 ease-in-out  decoration-sky-500
     <div class="flex flex-wrap justify-around gap-4">
 
 
-      <div class="flex flex-col  justify-center">
-        <div class="flex flex-col items-center mb-10 ">
-          <app-input-title class="text-[2.4vh]">Horário de partida</app-input-title>
-          <div class="flex items-center">
-            <select required id="trip" formControlName="trip" name="trip"
-                    class="input w-52
+      <div class="flex flex-col  justify-center w-full space-y-10">
+
+        <div class="flex justify-around">
+          <div class="flex flex-col items-center mb-10 ">
+            <app-input-title class="text-[2.4vh]">Horário de partida</app-input-title>
+            <div class="flex items-center">
+              <select required id="trip" formControlName="trip" name="trip"
+                      class="input w-52
   focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset
   transition-all duration-700 ease-in-out  decoration-sky-500
               font-inter">
-              <option [value]="value.id" *ngFor="let value of trips ">{{ formatTime(value.schedule[0].arrival_time) }}</option>
-            </select>
-            <app-tooltip [tooltipText]="'Selecione o horário de começo de circulação'"></app-tooltip>
+                <option [value]="value.id" *ngFor="let value of trips ">{{ formatTime(value.schedule[0].arrival_time) }}</option>
+              </select>
+              <app-tooltip [tooltipText]="'Selecione o horário de começo de circulação'"></app-tooltip>
+            </div>
+          </div>
+
+
+
+          <div class="flex flex-col gap-2 w-[50%] justify-center items-center">
+            <span class="text-municip-gray">Horários previstos de passagem na paragem selecionada - <span class="text-municip-highlight-black font-bold">{{getNameStopById(selectedStopId)}}</span></span>
+            <div class="flex flex-row flex-wrap">
+              <ul class="flex flex-col">
+                <li class="bg-municip-highlight-black text-municip-blank-gray font-medium px-3 rounded-l-2xl">Hora</li>
+                <li class="px-3">Min.</li>
+              </ul>
+              <ng-container *ngFor="let arrivalTime of tableArrivalTimes; let last = last">
+                <ul class="flex flex-col">
+                  <li class="bg-municip-highlight-black text-municip-blank-gray font-medium px-3"
+                      [ngClass]="{ 'rounded-r-2xl': last }">
+                    {{ arrivalTime.hour | number:'2.0-0' }}
+                  </li>
+                  <ng-container *ngFor="let minuteGroup of arrivalTime.minuteGroups">
+                    <li class="px-3">{{ minuteGroup.minute | number:'2.0-0' }}</li>
+                  </ng-container>
+                </ul>
+              </ng-container>
+
+            </div>
           </div>
         </div>
-        <div class="space-y-4 h-96 overflow-auto py-4 w-[40rem]">
+        <div class="space-y-4 h-96 overflow-auto py-4 ">
           <div *ngFor="let value of schedule">
             <app-show-stop [stopName]="getNameStopById(value.stop_id)"
                            [stopTime]="formatTime(value.arrival_time)"
@@ -112,28 +138,6 @@ transition-all duration-700 ease-in-out  decoration-sky-500
       </div>
 
 
-
-      <div class="flex flex-col gap-2 w-[50%] justify-center items-center">
-        <span class="text-municip-gray">Horários previstos de passagem na paragem selecionada - <span class="text-municip-highlight-black font-bold">{{getNameStopById(selectedStopId)}}</span></span>
-        <div class="flex flex-row flex-wrap">
-          <ul class="flex flex-col">
-            <li class="bg-municip-highlight-black text-municip-blank-gray font-medium px-3 rounded-l-2xl">Hora</li>
-            <li class="px-3">Min.</li>
-          </ul>
-          <ng-container *ngFor="let arrivalTime of tableArrivalTimes; let last = last">
-            <ul class="flex flex-col">
-              <li class="bg-municip-highlight-black text-municip-blank-gray font-medium px-3"
-                  [ngClass]="{ 'rounded-r-2xl': last }">
-                {{ arrivalTime.hour | number:'2.0-0' }}
-              </li>
-              <ng-container *ngFor="let minuteGroup of arrivalTime.minuteGroups">
-                <li class="px-3">{{ minuteGroup.minute | number:'2.0-0' }}</li>
-              </ng-container>
-            </ul>
-          </ng-container>
-
-        </div>
-      </div>
     </div>
 
   </div>
