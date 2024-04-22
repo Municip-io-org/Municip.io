@@ -6,6 +6,27 @@
                       [isConfirm]="isConfirm"></app-dialog-message>
 </ng-container>
 
+<ng-container *ngIf="confirmPassDialog">
+  <app-dialog-content title="Confirmação de Password"
+                      message="Insira a sua Password Atual"
+                      confirmButtonClass="disabled:cursor-not-allowed"
+                      [confirmButtonDisabled]="!passConfirmForm.valid"
+                      (cancel)="closeConfirmPassDialog()"
+                      (confirm)="OnSubmit()">
+    <form [formGroup]="passConfirmForm" class="mt-5">
+      <div class="h-28">
+        <app-input-title>Confirme a password</app-input-title>
+        <input required placeholder="Introduza a sua password atual" type="password" id="passConfirm" formControlName="passConfirm" name="passConfirm" 
+               class="input h-12 w-72" />
+        <div class="py-2 font-bold text-red-500" *ngIf="passConfirm?.touched && passConfirm?.invalid ">
+          <div *ngIf="passConfirm?.errors?.['required'] ">Password Obrigatório</div>
+          <div *ngIf="passConfirm?.errors?.['passConfirm']">Password Inválido</div>
+        </div>
+      </div>
+    </form>
+  </app-dialog-content>
+</ng-container>
+
 <div *ngIf="newUser">
   <app-profile-banner [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"
                       [title]="'Dados de ' + (originalName || 'Utilizador')"
@@ -15,7 +36,7 @@
 
   <div class="flex justify-center items-center pt-11 ">
     <div class="container w-[60%]">
-      <form [formGroup]="profileEdit" (ngSubmit)="OnSubmit()">
+      <form [formGroup]="profileEdit" (ngSubmit)="OnSubmit()" class="pt-8" >
         <div *ngIf="errors" class=" text-red-500 text-sm font-bold space-y-2 text-start">
           <div *ngFor="let error of errors">
             <p>{{error}}</p>
@@ -66,11 +87,14 @@
               </div>
 
               <div class="w-full lg:w-5/12 mb-8 ml-1/3 relative">
+                <div class="flex row items-center">
                 <app-input-title class="text-[2.6vh]">Password</app-input-title>
+                <app-tooltip [tooltipText]="'A password deverá ter letras maiúsculas, minúsculas, números e símbolos'"></app-tooltip>
+              </div>
                 <div class="flex items-center">
                   <input required placeholder="Introduza nova password" type="password" id="password" formControlName="password" name="password" [(ngModel)]="newUser.password"
                          class="input w-full h-12 lg:h-14" />
-                  <app-tooltip [tooltipText]="'A password deverá ter letras maiúsculas, minúsculas, números e símbolos'"></app-tooltip>
+
                   <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-6 top-15" />
                 </div>
 
@@ -96,14 +120,14 @@
                 </div>
               </div>
 
-              <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4 relative">
+              <div class="w-full lg:w-5/12 mb-8 ml-1/3 relative">
                 <app-input-title class="text-[2.6vh]">Código Postal</app-input-title>
                 <div class="flex gap-x-2 items-center">
                   <input required placeholder="{{newUser.postalCode1}}" type="text" id="postalCode1" formControlName="postalCode1" name="postalCode1" [(ngModel)]="newUser.postalCode1"
-                         class="input w-[10rem] text-center" />
+                         class="input w-full h-12 lg:h-14 text-center" />
                   <div class="text-[2rem] font-semibold">-</div>
                   <input required placeholder="{{newUser.postalCode2}}" type="text" id="postalCode2" formControlName="postalCode2" name="postalCode2" [(ngModel)]="newUser.postalCode2"
-                         class="input w-[8rem] text-center" />
+                         class="input w-full h-12 lg:h-14 text-center" />
                   <img *ngIf="editMode" src="/assets/images/icons/pencil.png" alt="editar" class="absolute size-5 right-3 top-14" />
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="(postalCode1?.touched && postalCode1?.invalid) || (postalCode2?.touched && postalCode2?.invalid) ">
@@ -131,11 +155,11 @@
                 </div>
               </div>
 
-              <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4 relative">
+              <div class="w-full lg:w-5/12 mb-8 ml-1/3 relative">
                 <app-input-title class="text-[2.6vh]">Data de Nascimento</app-input-title>
                 <div class="flex items-center">
                   <input required placeholder="{{newUser.birthDate}}" type="date" id="birthDate" formControlName="birthDate" name="birthDate" [(ngModel)]="newUser.birthDate"
-                         class="input w-full h-12 lg:h-14" />
+                         class="input w-full h-12 lg:h-14 " />
                   
                 </div>
                 <div class="text-red-500 font-bold py-2" *ngIf="birthDate?.touched && birthDate?.invalid">
@@ -149,7 +173,7 @@
             <div class="flex flex-wrap items-start justify-between mb-8">
 
 
-              <div class="w-full lg:w-5/12 mb-8 ml-1/3 pl-4 relative">
+              <div class="w-full mb-8 ml-1/3 relative">
                 <app-input-title class="text-[1.4rem]">Foto</app-input-title>
                 <div class="h-20 table w-full bg-[#F5F5F7] rounded-[0.375rem] border-2 border-dotted border-[#bbbabc]" (dragover)="onDragOver($event)"
                      (drop)="onDrop($event)" (click)="filePicker.click()" >
@@ -176,21 +200,11 @@
 
 
 
-              <div class="w-full lg:w-5/12 mb-8 ml-1/3 ">
-                <app-input-title class="text-[2.6vh]">Confirme a Password</app-input-title>
-                <div class="flex items-center">
-                  <input required placeholder="Introduza a sua password" type="password" id="passwordConfirmation" formControlName="passwordConfirmation" name="passwordConfirmation" [(ngModel)]="newUser.passwordConfirmation"
-                         class="input w-full h-12 lg:h-14" />
-                  <app-tooltip [tooltipText]="'A password deverá ter letras maiúsculas, minúsculas, números e símbolos'"></app-tooltip>
-                </div>
-                <div class="text-red-500 font-bold py-2" *ngIf="passwordConfirmation?.touched && passwordConfirmation?.invalid && passwordConfirmation?.errors?.['required']">
-                  <div *ngIf="passwordConfirmation?.errors?.['required'] ">Palavra-Passe Obrigatória</div>
-                </div>
-              </div>
+             
             </div>
 
             <div class="flex justify-end">
-              <button *ngIf="editMode" type="submit" [disabled]="!editMode || passwordConfirmation?.invalid" class="relative h-auto w-[10rem] flex justify-center items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out disabled:cursor-not-allowed" [attr.title]="passwordConfirmation?.invalid ? 'Confirme a sua password' : ''">
+              <button *ngIf="editMode" type="button" (click)="openConfirmPassDialog()" [disabled]="!editMode" class="relative h-auto w-[10rem] flex justify-center items-center text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out disabled:cursor-not-allowed" >
                 Atualizar Dados
                 <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
               </button>
