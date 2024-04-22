@@ -1,4 +1,4 @@
-﻿<app-header-loggedin></app-header-loggedin>
+<app-header-loggedin></app-header-loggedin>
 <app-profile-banner title="Dados do Munícipio"
                     [image]="currentLandscapePhoto"
                     [profileimg]="currentEmblemPhoto"></app-profile-banner>
@@ -93,7 +93,7 @@
 
 
   <div *ngIf="!editMode" class="top-[15.3rem] right-[25rem] text-[1.063rem] absolute">
-    <app-black-btn-icon-text altImage="editar munícipio"
+    <app-black-btn-icon-text altImage="ícone de editar munícipio"
                              image="/assets/images/icons/pencil-white.png"
                              (buttonClick)="toggleEditMode()">
       Editar Munícipio

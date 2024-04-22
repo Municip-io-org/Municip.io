@@ -37,7 +37,7 @@
               <textarea required placeholder="Subtitulo (Maximo 300 caracteres)" id="subtitle" formControlName="subtitle" name="subtitle" [(ngModel)]="news.subtitle" maxlength="300"
                         class="input text-left resize-none w-full h-[auto] lg:h-[10rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500"
                         (input)="updateCharacterCount($event)"></textarea>
-              <span class="absolute bottom-2 right-2 text-gray-500">{{ subtitleCharacterCount }}/300</span>
+              <span class="absolute bottom-2 right-2 text-gray-700">{{ subtitleCharacterCount }}/300</span>
             </div>
 
             <div class="text-red-500 font-bold py-2" *ngIf="subtitle?.touched && subtitle?.invalid ">
