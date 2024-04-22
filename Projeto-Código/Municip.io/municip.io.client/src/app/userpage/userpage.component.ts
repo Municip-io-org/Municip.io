@@ -2,9 +2,25 @@ import { Component } from '@angular/core';
 import { UserAuthService } from '../services/user-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Country } from '../services/citizen-auth.service';
+import { Municipality } from '../services/municipal-admin-auth.service';
 
 /**
  * Componente para a página de perfil do utilizador.
+ *
+ * @param isDialogOpen - Estado do diálogo
+ * @param isRemoveEventDialogOpen - Estado do diálogo de remoção de evento
+ * @param dialogTitle - Título do diálogo
+ * @param dialogMessage - Mensagem do diálogo
+ * @param isConfirm - Estado de confirmação
+ * @param editMode - Modo de edição
+ * @param newUser - Novo utilizador
+ * @param errors - Erros
+ * @param originalName - Nome original
+ * @param image - Imagem
+ * @param imageUrl - URL da imagem
+ * @param files - Ficheiros
+ * @param municipality - Município
+ * 
  */
 @Component({
   selector: 'app-userpage',
@@ -25,6 +41,29 @@ export class UserpageComponent {
   image!: File;
   imageUrl: string | null = null;
   files: any[] = [];
+  municipality: Municipality = {
+    name: '',
+    president: '',
+    contact: '',
+    description: '',
+    areaha: '',
+    codigo: '',
+    codigopostal: '',
+    codigoine: '',
+    descpstal: '',
+    distrito: '',
+    eleitores: '',
+    email: '',
+    fax: '',
+    localidade: '',
+    nif: '',
+    populacao: '',
+    rua: '',
+    sitio: '',
+    telefone: '',
+    emblemPhoto: '',
+    landscapePhoto: '',
+  };
 
   /**
    * Método construtor para instanciar o componente.
@@ -58,6 +97,11 @@ export class UserpageComponent {
                   this.country.setValue({ alpha2Code: this.newUser.nif.slice(0, 2) });
                   this.nif.setValue(this.newUser.nif.slice(2));
                 }
+                this.userAuthService.getInfoMunicipality(this.newUser.municipality).subscribe(
+                  async (municipalityRes: Municipality) => {
+                    this.municipality = municipalityRes;
+                    console.log(this.municipality)
+                  });
                 this.initForm();
               },
               error => {
@@ -162,7 +206,7 @@ export class UserpageComponent {
 
 
     if (this.role == 'Citizen') {
-      this.userAuthService.updateUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
+      this.userAuthService.updateUser(this.newUser, this.image, passConfirm).subscribe(
         res => {
 
 
@@ -232,6 +276,7 @@ export class UserpageComponent {
     if (this.editMode) {
       this.profileEdit.enable();
       this.profileEdit.controls['email'].disable();
+      this.profileEdit.controls['nif'].disable();
     } else {
       this.profileEdit.disable();
     }
@@ -277,7 +322,6 @@ export class UserpageComponent {
     if (fileList && fileList.length > 0) {
       this.image = fileList[0];
       this.imageUrl = URL.createObjectURL(this.image);
-
       console.log("ON FILE CHANGE");
     } else {
       console.error('Nenhuma imagem selecionada');
