@@ -28,6 +28,8 @@ namespace Municip.io.Server.Data
 
         public DbSet<BookRequest> BookRequests { get; set; }
 
+        public DbSet<Browser> Browsers { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
                 base(options)
@@ -35,6 +37,29 @@ namespace Municip.io.Server.Data
 
         public DbSet<News> News { get; set; } = default!;
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Citizen>()
+                .HasMany(c => c.DocumentRequests)
+                .WithOne(dr => dr.Citizen)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Citizen>()
+                .HasMany(c => c.BookRequests)
+                .WithOne(br => br.Citizen)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Citizen>()
+                .HasMany(c => c.Browsers)
+                .WithOne(b => b.Citizen)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+
+
+        }
     }
 
 

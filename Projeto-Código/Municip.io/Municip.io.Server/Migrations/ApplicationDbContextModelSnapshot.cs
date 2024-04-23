@@ -393,7 +393,7 @@ namespace Municip.io.Server.Migrations
 
                     b.HasIndex("CitizenId");
 
-                    b.ToTable("Browser");
+                    b.ToTable("Browsers");
                 });
 
             modelBuilder.Entity("Municip.io.Server.Models.Citizen", b =>
@@ -805,7 +805,7 @@ namespace Municip.io.Server.Migrations
                         .IsRequired();
 
                     b.HasOne("Municip.io.Server.Models.Citizen", "Citizen")
-                        .WithMany()
+                        .WithMany("BookRequests")
                         .HasForeignKey("CitizenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -817,16 +817,20 @@ namespace Municip.io.Server.Migrations
 
             modelBuilder.Entity("Municip.io.Server.Models.Browser", b =>
                 {
-                    b.HasOne("Municip.io.Server.Models.Citizen", null)
+                    b.HasOne("Municip.io.Server.Models.Citizen", "Citizen")
                         .WithMany("Browsers")
-                        .HasForeignKey("CitizenId");
+                        .HasForeignKey("CitizenId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Citizen");
                 });
 
             modelBuilder.Entity("Municip.io.Server.Models.DocumentRequest", b =>
                 {
                     b.HasOne("Municip.io.Server.Models.Citizen", "Citizen")
-                        .WithMany()
-                        .HasForeignKey("CitizenId");
+                        .WithMany("DocumentRequests")
+                        .HasForeignKey("CitizenId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Municip.io.Server.Models.DocumentTemplate", "DocumentTemplate")
                         .WithMany()
@@ -839,7 +843,11 @@ namespace Municip.io.Server.Migrations
 
             modelBuilder.Entity("Municip.io.Server.Models.Citizen", b =>
                 {
+                    b.Navigation("BookRequests");
+
                     b.Navigation("Browsers");
+
+                    b.Navigation("DocumentRequests");
                 });
 #pragma warning restore 612, 618
         }
