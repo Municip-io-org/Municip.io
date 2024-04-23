@@ -6,6 +6,11 @@
                       [isConfirm]="isReserveSuccesfull"></app-dialog-message>
 </ng-container>
 
+<ng-container *ngIf="isDialogOpen && !isMunAdmin">
+  <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" (confirm)="closeDialog()" [twoButtons]="false" 
+                      [isConfirm]="isReserveSuccesfull"></app-dialog-message>
+</ng-container>
+
 
 <ng-container *ngIf="isRemoveBookDialogOpen">
   <app-dialog-message [title]="dialogTitle" [message]="dialogMessage" [twoButtons]="true" (confirm)="canRemoveBook()" (cancel)="closeRemoveBookDialog()"
