@@ -77,14 +77,11 @@ export class LibraryCardComponent {
   }
 
   deleteCurrent(book: any) {
-
     this.deleteid.emit(book);
-    console.log("Apagar livro", book);
   }
 
   editCurrent(book: any) {
     this.editid.emit(book);
-    console.log("Editar livro", book);
   }
 
   bookClicked() {
