@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MunicipalityStatusService } from '../../services/municipality-status.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserAuthService } from '../../services/user-auth.service';
+import { Municipality } from '../../services/municipal-admin-auth.service';
 
 
 
@@ -34,7 +36,8 @@ export class AdminDashboardMunicipalAdminsComponent {
   municipalName = 'Inicial';
   isDialogOpen: boolean = false;
   selectedUser: any;
-
+  isMunicipalityApproved: boolean = false;
+  municipalityStatus = '';
   /**
    * @constructor
    *
@@ -45,7 +48,7 @@ export class AdminDashboardMunicipalAdminsComponent {
    * @param route - O ActivatedRoute.
    *
    **/
-  constructor(private municipalityStatusService: MunicipalityStatusService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private userAuthService: UserAuthService, private municipalityStatusService: MunicipalityStatusService, private router: Router, private route: ActivatedRoute) { }
 
   /**
    * Este método é responsável por obter a lista de administradores municipais de um município.
@@ -58,6 +61,13 @@ export class AdminDashboardMunicipalAdminsComponent {
     this.municipalityStatusService.getMunicipalAdmins(this.municipalName).subscribe((admins: any) => {
       this.admins = admins;
     });
+
+    this.userAuthService.getInfoMunicipality(this.municipalName).subscribe(
+      (municipality: any) => {
+        this.isMunicipalityApproved = municipality.status === 'Approved';
+        this.municipalityStatus = municipality.status;
+      }
+    );
   }
 
   /**
@@ -165,5 +175,22 @@ export class AdminDashboardMunicipalAdminsComponent {
    */
   goBack() {
     this.router.navigate(['/admindashboard']);
+  }
+
+  /**
+   * Converte o estado do município para uma string legível.
+   */
+  municipalityStatusToString(status: string): string {
+    switch (status) {
+      case 'Approved':
+        return 'Aprovado';
+      case 'Pending':
+        return 'Pendente';
+      case 'Blocked':
+        return 'Bloqueado';
+      default:
+        return '';
+    }
+
   }
 }
