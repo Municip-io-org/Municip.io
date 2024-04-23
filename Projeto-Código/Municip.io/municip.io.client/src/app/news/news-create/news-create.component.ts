@@ -101,7 +101,6 @@ export class NewsCreateComponent {
    * Inicializa o componente
    *
    */
-  
   ngOnInit() {
     this.editor = new Editor();
     this.userAuthService.getUserData().subscribe(
@@ -131,7 +130,7 @@ export class NewsCreateComponent {
         console.error(error);
       }
     );
-    }
+   }
 
     
   newsCreateForm = new FormGroup({

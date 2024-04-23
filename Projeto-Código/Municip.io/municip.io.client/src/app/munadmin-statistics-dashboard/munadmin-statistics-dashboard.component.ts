@@ -12,39 +12,39 @@ import { Book, BookRequest, LibraryService } from '../services/library/library.s
   styleUrl: './munadmin-statistics-dashboard.component.css'
 })
 
- /**
- * Municipal Administrator Statistics Dashboard Component
- *
- * Este componente representa o dashboard de estatísticas do administrador municipal
- *
- * @param selectedButton - Botão selecionado
- * @param orderOptions - Opções de ordenação
- * @param citizens - Cidadãos
- * @param municipalAdmins - Administradores municipais
- * @param municipalities - Municípios
- * @param documentRequests - Pedidos de documentos
- * @param numberOfCitizens - Número de cidadãos
- * @param activeCitizens - Cidadãos ativos
- * @param numberOfMunicipalAdmins - Número de administradores municipais
- * @param blockedCitizens - Cidadãos bloqueados
- * @param blockedCitizensPercentage - Percentagem de cidadãos bloqueados
- * @param news - Notícias
- * @param events - Eventos
- * @param newsPublished - Notícias publicadas
- * @param newsPublishedToday - Notícias publicadas hoje
- * @param eventsRegistered - Eventos registados
- * @param eventsToday - Eventos de hoje
- * @param documentsRequested - Documentos pedidos
- * @param documentsApproved - Documentos aprovados
- * @param totalEarnings - Total de ganhos
- * @param numberOfBooks - Número de livros
- * @param Authors - Autores
- * @param mostPopularGenre - Género mais popular
- * @param user - Utilizador
- * @param municipality - Município
- * @param bookrequests - Pedidos de livros
- * @param books - Livros
- */
+/**
+* Municipal Administrator Statistics Dashboard Component
+*
+* Este componente representa o dashboard de estatísticas do administrador municipal
+*
+* @param selectedButton - Botão selecionado
+* @param orderOptions - Opções de ordenação
+* @param citizens - Cidadãos
+* @param municipalAdmins - Administradores municipais
+* @param municipalities - Municípios
+* @param documentRequests - Pedidos de documentos
+* @param numberOfCitizens - Número de cidadãos
+* @param activeCitizens - Cidadãos ativos
+* @param numberOfMunicipalAdmins - Número de administradores municipais
+* @param blockedCitizens - Cidadãos bloqueados
+* @param blockedCitizensPercentage - Percentagem de cidadãos bloqueados
+* @param news - Notícias
+* @param events - Eventos
+* @param newsPublished - Notícias publicadas
+* @param newsPublishedToday - Notícias publicadas hoje
+* @param eventsRegistered - Eventos registados
+* @param eventsToday - Eventos de hoje
+* @param documentsRequested - Documentos pedidos
+* @param documentsApproved - Documentos aprovados
+* @param totalEarnings - Total de ganhos
+* @param numberOfBooks - Número de livros
+* @param Authors - Autores
+* @param mostPopularGenre - Género mais popular
+* @param user - Utilizador
+* @param municipality - Município
+* @param bookrequests - Pedidos de livros
+* @param books - Livros
+*/
 export class MunadminStatisticsDashboardComponent {
   selectedButton: number = 1;
   orderOptions: any[] = [{ label: '1', value: true }, { label: '2', value: false }];
@@ -74,7 +74,7 @@ export class MunadminStatisticsDashboardComponent {
 
   numberOfBooks: number = 0;
   Authors: number = 0;
-  mostPopularGenre: string ="";
+  mostPopularGenre: string = "";
   user: any;
   municipality: string = '';
   bookrequests: BookRequest[] = [];
@@ -82,8 +82,8 @@ export class MunadminStatisticsDashboardComponent {
 
   averageLast6Months: number = 0;
   thisMonth: number = 0;
-percentageComparedToAverage: number = 0;
-  
+  percentageComparedToAverage: number = 0;
+
 
   /**
    * @constructor
@@ -94,7 +94,7 @@ percentageComparedToAverage: number = 0;
    * @param libraryService - Serviço da biblioteca
    *
    */
-  constructor(private adminStatisticsService: AdminStatisticsService, private userAuthService : UserAuthService,private libraryService : LibraryService) { }
+  constructor(private adminStatisticsService: AdminStatisticsService, private userAuthService: UserAuthService, private libraryService: LibraryService) { }
 
   /**
    * ngOnInit
@@ -113,45 +113,46 @@ percentageComparedToAverage: number = 0;
             this.municipality = this.user.municipality;
 
             this.adminStatisticsService.getRequestsByMunicipality(this.municipality).subscribe((data: BookRequest[]) => {
-                this.bookrequests = data;
-            });
-
-            this.libraryService.getBooks(this.municipality).subscribe((data: Book[]) => {
-              this.books = data;
-              console.log(this.books);
-            });
-
-    this.adminStatisticsService.getAllCitizens().subscribe((data: Citizen[]) => {
-      this.citizens = data.filter(citizen => citizen.municipality === this.municipality);
-      this.adminStatisticsService.getAllMunicipalAdmins().subscribe((datamunadmin: MunicipalAdministrator[]) => {
-        this.municipalAdmins = datamunadmin.filter(admin => admin.municipality === this.municipality);
-
-        
-
-          this.adminStatisticsService.getAllNews().subscribe((datanews: any) => {
-            this.news = datanews.filter((news: { municipality: string; }) => news.municipality === this.municipality);
-
-            this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
-              this.events = dataevents.filter((event: { municipality: string; }) => event.municipality === this.municipality);
-              this.adminStatisticsService.getAllDocumentRequests().subscribe((datadoc: any) => {
+              this.bookrequests = data;
 
 
-                this.documentRequests = datadoc.filter((doc: { municipality: string; }) => doc.municipality === this.municipality);
-                this.generateStatistics();
+              this.libraryService.getBooks(this.municipality).subscribe((data: Book[]) => {
+                this.books = data;
+                console.log(this.books);
+
+
+                this.adminStatisticsService.getAllCitizens().subscribe((data: Citizen[]) => {
+                  this.citizens = data.filter(citizen => citizen.municipality === this.municipality);
+                  this.adminStatisticsService.getAllMunicipalAdmins().subscribe((datamunadmin: MunicipalAdministrator[]) => {
+                    this.municipalAdmins = datamunadmin.filter(admin => admin.municipality === this.municipality);
+
+
+
+                    this.adminStatisticsService.getAllNews().subscribe((datanews: any) => {
+                      this.news = datanews.filter((news: { municipality: string; }) => news.municipality === this.municipality);
+
+                      this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
+                        this.events = dataevents.filter((event: { municipality: string; }) => event.municipality === this.municipality);
+                        this.adminStatisticsService.getAllDocumentRequests().subscribe((datadoc: any) => {
+
+
+                          this.documentRequests = datadoc.filter((doc: { municipality: string; }) => doc.municipality === this.municipality);
+                          this.generateStatistics();
+                        });
+
+
+                      }
+                      );
+                    }
+                    );
+                  }
+                  );
+                }
+                );
               });
+            });
 
-           
-          }
-          );
-        }
-        );
-      }
-      );
-    }
-            );
-            
 
-            
           }
         );
       }
