@@ -218,12 +218,24 @@ export class LibraryListComponent {
     this.libraryService.removeBook(book.book.id).subscribe(
       (res) => {
         console.log("Livro apagado com sucesso", res);
-        this.loadBooks();
+        this.removeBookById(book.book.id);
+
+        this.loadDateOptions();
+        this.loadGenreOptions();
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  /**
+   * Remove o livro pelo seu id
+   * @param idToRemove
+   */
+  removeBookById(idToRemove: number): void {
+    this.books = this.books.filter(book => book.id !== idToRemove);
+    this.showBooks = this.showBooks.filter(book => book.id !== idToRemove);
   }
 
   /**

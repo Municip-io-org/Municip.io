@@ -231,7 +231,7 @@ export class MunicipalEventsComponent {
     this.eventsService.removeEvent(this.eventIdToRemove).subscribe(
       response => {
         if (response.status === 200) {
-          window.location.reload();
+          this.removeEventById(this.eventIdToRemove);
         } else {
           this.isDialogOpen = true;
           this.dialogTitle = 'Erro na remoção do evento';
@@ -245,6 +245,15 @@ export class MunicipalEventsComponent {
         this.dialogMessage = 'Ocorreu um erro ao remover o evento';
       }
     );
+  }
+
+  /**
+   * Remove o evento pelo seu id
+   * @param idToRemove
+   */
+  removeEventById(idToRemove: string): void {
+    this.events = this.events.filter(event => event.id != idToRemove);
+    this.showEvents = this.showEvents.filter(event => event.id != idToRemove);
   }
 
   /**
