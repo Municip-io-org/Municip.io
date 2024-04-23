@@ -369,7 +369,7 @@ namespace Municip.io.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Browser",
+                name: "Browsers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -381,12 +381,13 @@ namespace Municip.io.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Browser", x => x.Id);
+                    table.PrimaryKey("PK_Browsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Browser_Citizens_CitizenId",
+                        name: "FK_Browsers_Citizens_CitizenId",
                         column: x => x.CitizenId,
                         principalTable: "Citizens",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -410,7 +411,8 @@ namespace Municip.io.Server.Migrations
                         name: "FK_DocumentRequests_Citizens_CitizenId",
                         column: x => x.CitizenId,
                         principalTable: "Citizens",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_DocumentRequests_DocumentTemplates_DocumentTemplateId",
                         column: x => x.DocumentTemplateId,
@@ -492,8 +494,8 @@ namespace Municip.io.Server.Migrations
                 column: "CitizenId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Browser_CitizenId",
-                table: "Browser",
+                name: "IX_Browsers_CitizenId",
+                table: "Browsers",
                 column: "CitizenId");
 
             migrationBuilder.CreateIndex(
@@ -537,7 +539,7 @@ namespace Municip.io.Server.Migrations
                 name: "BookRequests");
 
             migrationBuilder.DropTable(
-                name: "Browser");
+                name: "Browsers");
 
             migrationBuilder.DropTable(
                 name: "CitizenEvent");

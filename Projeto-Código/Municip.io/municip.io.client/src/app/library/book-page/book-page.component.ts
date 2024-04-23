@@ -633,7 +633,7 @@ export class BookPageComponent {
    * Método para enviar um email quando o utilizador não está registado
    */
   SendEmail() {
-    console.log("OLAOLA");
+    
     this.libraryService.sendInviteEmail(this.citizenEmailControl.value).subscribe(
       (data) => {
         console.log(data);

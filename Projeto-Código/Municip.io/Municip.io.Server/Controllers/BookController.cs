@@ -238,10 +238,11 @@ namespace Municip.io.Server.Controllers
             {
 
                 var citizen = await _context.Citizens.FirstOrDefaultAsync(c => c.Email == email);
-                var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == request.Book.Id);
 
                 if (citizen == null) return BadRequest(new { message = "Cidadão não registado, Enviar convite?" });
-          
+
+                var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == request.Book.Id);
+
                 if (book == null) return BadRequest(new { message = "Não foi encontrado nenhum livro", ModelState });
 
                 if (book.Status == BookStatus.Unavailable) return BadRequest(new { message = "O livro não está disponível" });
@@ -541,9 +542,17 @@ namespace Municip.io.Server.Controllers
         [HttpPost("SendInviteEmail")]
         public IActionResult SendInviteEmail(string email) 
         {
-            EmailSender.SendEmailAproveDeny(email, "Registe-se Na Plataforma", "Cidadão", $"Ao realizar a reserva reparámos que ainda não tem conta na <span style='font-weight: bold;'>Municip.io</span>, Registe-se já aqui!",
-"wwwroot/html/AproveEmail.html");
-            return Ok();
+            //email nao está na yabela cidadão
+            var emailExists = _context.Citizens.Any(c => c.Email == email);
+            if (emailExists) {
+                return Ok();
+            }
+            else {
+                EmailSender.SendEmailAproveDeny(email, "Registe-se Na Plataforma", "Cidadão", $"Ao realizar a reserva reparámos que ainda não tem conta na <span style='font-weight: bold;'>Municip.io</span>, Registe-se já aqui!",
+    "wwwroot/html/AproveEmail.html");
+                return Ok();
+            }
+            
         }
 
 

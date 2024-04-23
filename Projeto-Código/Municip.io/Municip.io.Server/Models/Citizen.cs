@@ -3,23 +3,23 @@ using System.Text.Json.Serialization;
 
 namespace Municip.io.Server.Models
 {
- 
+
     /// <summary>
     /// Classe que representa o cidadão
     /// </summary>
     public class Citizen
     {
-        
+
         public Guid Id { get; set; }
 
-        public string ?firstName { get; set; }
+        public string? firstName { get; set; }
         public string? Surname { get; set; }
 
         public string? Email { get; set; }
 
         [NotMapped]
         public string? Password { get; set; }
-       
+
         public string? Nif { get; set; }
         public string? Gender { get; set; }
         public string? Municipality { get; set; }
@@ -42,6 +42,10 @@ namespace Municip.io.Server.Models
         public List<Event>? Events { get; set; }
 
         public ICollection<Browser> Browsers { get; set; } = new List<Browser>();
+
+        public List<DocumentRequest>? DocumentRequests { get; set; }
+
+        public List<BookRequest>? BookRequests { get; set; }
 
 
         public override bool Equals(object obj)

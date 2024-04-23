@@ -32,7 +32,7 @@ namespace Municip.io.Server.Controllers
         {
             _context.Municipalities.ToList();
             return Json(_context.Municipalities);
-            
+
         }
 
         /// <summary>
@@ -52,11 +52,11 @@ namespace Municip.io.Server.Controllers
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpPost("approveMunicipality")]
-        public async Task<IActionResult> approveMunicipality( string? name)
+        public async Task<IActionResult> approveMunicipality(string? name)
         {
             Console.WriteLine(name);
-            var  municipality = await _context.Municipalities.FirstOrDefaultAsync(m => m.name == name);
-            if ( municipality != null)
+            var municipality = await _context.Municipalities.FirstOrDefaultAsync(m => m.name == name);
+            if (municipality != null)
             {
                 municipality.status = MunicipalityStatus.Approved;
                 await _context.SaveChangesAsync();
@@ -79,14 +79,16 @@ namespace Municip.io.Server.Controllers
             {
                 _context.Municipalities.Remove(municipality);
                 await _context.SaveChangesAsync();
-                
-                if(municipality.status == MunicipalityStatus.Approved)
+
+                if (municipality.status == MunicipalityStatus.Approved)
                 {
                     await sendEmailToMunicipalAdmins(municipality.name, SendRemove);
+                    await sendEmailToCitizens(municipality.name, SendRemove);
                 }
                 else
                 {
                     await sendEmailToMunicipalAdmins(municipality.name, SendDeny);
+                    await sendEmailToCitizens(municipality.name, SendDeny);
                 }
                 await deleteAllAccountsByMunicipality(municipality.name);
                 return Json(_context.Municipalities.ToList());
@@ -124,8 +126,14 @@ namespace Municip.io.Server.Controllers
             var accounts = await _context.MunicipalAdministrators.Where(a => a.municipality == municipality).ToListAsync();
             if (accounts != null)
             {
+
+
                 _context.MunicipalAdministrators.RemoveRange(accounts);
-                await _context.SaveChangesAsync();
+
+
+                var citizens = await _context.Citizens.Where(c => c.Municipality == municipality).ToListAsync();
+                _context.Citizens.RemoveRange(citizens);
+
 
 
                 foreach (var account in accounts)
@@ -136,6 +144,20 @@ namespace Municip.io.Server.Controllers
                         await _userManager.DeleteAsync(user);
                     }
                 }
+
+
+                foreach (var citizen in citizens)
+                {
+                    var user = await _userManager.FindByEmailAsync(citizen.Email);
+                    if (user != null)
+                    {
+                        await _userManager.DeleteAsync(user);
+                    }
+
+                }
+                await _context.SaveChangesAsync();
+
+
 
                 return Ok();
             }
@@ -150,7 +172,7 @@ namespace Municip.io.Server.Controllers
         /// <param name="sendEmail"></param>
         /// <returns></returns>
         [NonAction]
-        public async Task<IActionResult> sendEmailToMunicipalAdmins(string municipality, Func<string, string,string , IActionResult> sendEmail)
+        public async Task<IActionResult> sendEmailToMunicipalAdmins(string municipality, Func<string, string, string, IActionResult> sendEmail)
         {
             var admins = await _context.MunicipalAdministrators.Where(a => a.municipality == municipality).ToListAsync();
             if (admins != null)
@@ -163,6 +185,28 @@ namespace Municip.io.Server.Controllers
             }
             return NotFound();
         }
+
+        /// <summary>
+        ///  esta função envia um email para todos os cidadãos de um município. Recebe como parâmetro o nome do município e uma função que envia o email. Não é uma ação passível de ser chamada via API
+        /// </summary>
+        /// <param name="municipality"></param>
+        /// <param name="sendEmail"></param>
+        /// <returns></returns>
+        [NonAction]
+        public async Task<IActionResult> sendEmailToCitizens(string municipality, Func<string, string, string, IActionResult> sendEmail)
+        {
+            var citizens = await _context.Citizens.Where(c => c.Municipality == municipality).ToListAsync();
+            if (citizens != null)
+            {
+                foreach (var c in citizens)
+                {
+                    sendEmail(c.Email, c.firstName, c.Municipality);
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+
 
 
 

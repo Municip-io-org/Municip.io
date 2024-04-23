@@ -60,7 +60,7 @@ namespace Municip.io.Server.Controllers
                 citizen.status = CitizenStatus.Approved;
                 await _context.SaveChangesAsync();
 
-                return Json(_context.Citizens.ToList());
+                return Json(_context.Citizens.Where(c => c.Municipality == citizen.Municipality).ToList());
             }
             return NotFound();
         }
@@ -95,7 +95,7 @@ namespace Municip.io.Server.Controllers
                 {
                     SendRemove(citizen.Email, citizen.firstName);
                 }
-                return Json(_context.Citizens.ToList());
+                return Json(_context.Citizens.Where(c => c.Municipality == citizen.Municipality).ToList());
             }
             return NotFound();
         }
@@ -114,7 +114,7 @@ namespace Municip.io.Server.Controllers
                 citizen.status = CitizenStatus.Blocked;
                 await _context.SaveChangesAsync();
                 SendBlock(citizen.Email, citizen.firstName);
-                return Json(_context.Citizens.ToList());
+                return Json(_context.Citizens.Where(c => c.Municipality == citizen.Municipality).ToList());
             }
             return NotFound();
         }

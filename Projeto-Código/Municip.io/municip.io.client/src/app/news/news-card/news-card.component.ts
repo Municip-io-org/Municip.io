@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { News, NewsService } from '../../services/news/news.service';
 import { Roles, UserAuthService } from '../../services/user-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-news-card',
@@ -37,7 +38,7 @@ export class NewsCardComponent {
    * @param userAuthService - Serviço de autenticação do cidadão
   
    */
-  constructor(private newsService: NewsService, private userAuthService: UserAuthService) { }
+  constructor(private newsService: NewsService, private userAuthService: UserAuthService, private router: Router) { }
 
   role : string = "";
 
@@ -71,5 +72,9 @@ export class NewsCardComponent {
   deleteCurrent(news: any) {
     this.deleteid.emit(news.id);
     
+  }
+
+  goToEditNewsPage() {
+    this.router.navigateByUrl(`/news/edit/${this.id}`);
   }
 }
