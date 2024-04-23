@@ -3,7 +3,7 @@ import { AdminStatisticsService } from '../services/stats/admin-statistics.servi
 import { Citizen } from '../services/citizen-auth.service';
 import { MunicipalAdministrator, Municipality } from '../services/municipal-admin-auth.service';
 import { RequestDocument } from '../services/documents/docs.service';
-import { Book, BookRequest, LibraryService } from '../services/library/library.service';
+import { Book, BookRequest, BookStatus, LibraryService } from '../services/library/library.service';
 
 @Component({
   selector: 'app-admin-statistics-dashboard',
@@ -29,7 +29,7 @@ export class AdminStatisticsDashboardComponent {
   numberOfMunicipalAdmins: number = 0;
   blockedMunicipalities: number = 0;
   percentageOfBlockedMunicipalities: number = 0;
-  sortingOrder: string = 'desc'; 
+  sortingOrder: string = 'desc';
 
   news: any[] = [];
   events: any[] = [];
@@ -64,7 +64,7 @@ export class AdminStatisticsDashboardComponent {
   * @param adminStatisticsService - O serviço de estatísticas do administrador.
   *
   **/
-  constructor(private adminStatisticsService: AdminStatisticsService,private libraryService: LibraryService) { }
+  constructor(private adminStatisticsService: AdminStatisticsService, private libraryService: LibraryService) { }
 
   /**
    * Este método é responsável por obter as estatísticas.
@@ -79,44 +79,46 @@ export class AdminStatisticsDashboardComponent {
         this.municipalAdmins = datamunadmin;
 
         this.adminStatisticsService.getAllMunicipalities().subscribe((datamun: any) => {
-        this.municipalities = datamun;
+          this.municipalities = datamun;
           this.sortMunicipalities();
           this.libraryService.getRequests().subscribe((data: BookRequest[]) => {
             this.bookrequests = data;
-          });
-          this.adminStatisticsService.getAllBooks().subscribe((data: Book[]) => {
-            this.books = data;
 
-          });
-          this.adminStatisticsService.getAllNews().subscribe((datanews: any) => {
-            this.news = datanews;
+            this.adminStatisticsService.getAllBooks().subscribe((data: Book[]) => {
+              this.books = data;
+              this.books = this.books.filter(book => book.status === BookStatus.Available);
 
-this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
-              this.events = dataevents;
-  this.adminStatisticsService.getAllDocumentRequests().subscribe((datadoc: any) => {
+              this.adminStatisticsService.getAllNews().subscribe((datanews: any) => {
+                this.news = datanews;
+
+                this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
+                  this.events = dataevents;
+                  this.adminStatisticsService.getAllDocumentRequests().subscribe((datadoc: any) => {
 
 
-    this.documentRequests = datadoc;
-                this.generateStatistics();
-              });
-}
+                    this.documentRequests = datadoc;
+                    this.generateStatistics();
+                  });
+                }
+                );
+              }
+              );
+            }
             );
-          }
-          );
-        }
-        );
+          });
+        });
       }
       );
     }
     );
   }
 
-/**
-   * Este método é responsável por inverter a ordem de ordenação.
-   * 
-   * @returns A lista de municípios ordenada.
-   *
-   **/
+  /**
+     * Este método é responsável por inverter a ordem de ordenação.
+     * 
+     * @returns A lista de municípios ordenada.
+     *
+     **/
   toggleSorting() {
     this.sortingOrder = this.sortingOrder === 'asc' ? 'desc' : 'asc';
     this.sortMunicipalities();
@@ -158,7 +160,7 @@ this.adminStatisticsService.getAllEvents().subscribe((dataevents: any) => {
 
     this.blockedMunicipalities = this.municipalities.filter(mun => mun.status === 'Blocked').length;
 
-this.percentageOfBlockedMunicipalities = (this.blockedMunicipalities / this.municipalities.length) * 100;
+    this.percentageOfBlockedMunicipalities = (this.blockedMunicipalities / this.municipalities.length) * 100;
 
     this.newsPublished = this.news.length;
 
@@ -173,9 +175,9 @@ this.percentageOfBlockedMunicipalities = (this.blockedMunicipalities / this.muni
     this.documentsRequested = this.documentRequests.length;
     this.documentsApproved = this.documentRequests.filter(doc => doc.status === 'Approved').length;
 
-this.documentRequests.forEach(doc => {
+    this.documentRequests.forEach(doc => {
       this.totalEarnings += doc.documentTemplate.price;
-});
+    });
     this.numberOfBooks = this.books.length;
     this.Authors = this.books.map(book => book.author).length;
     const genreCounts: { [genre: string]: number } = {};
@@ -190,15 +192,15 @@ this.documentRequests.forEach(doc => {
     this.mostPopularGenre = Object.entries(genreCounts).reduce((prev, curr) => curr[1] > prev[1] ? curr : prev)[0];
 
   }
-  
-/**
-   * selectButton
-   *
-   * Seleciona o botão
-   *
-   * @param buttonNumber - Número do botão
-   */
-selectButton(buttonNumber: number): void {
-  this.selectedButton = buttonNumber;
-}
+
+  /**
+     * selectButton
+     *
+     * Seleciona o botão
+     *
+     * @param buttonNumber - Número do botão
+     */
+  selectButton(buttonNumber: number): void {
+    this.selectedButton = buttonNumber;
+  }
 }
