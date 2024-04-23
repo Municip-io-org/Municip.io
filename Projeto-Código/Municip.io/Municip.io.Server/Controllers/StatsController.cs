@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Municip.io.Server.Data;
 
 namespace Municip.io.Server.Controllers
@@ -52,7 +53,7 @@ namespace Municip.io.Server.Controllers
         [HttpGet("getAllDocumentRequests")]
         public IActionResult getAllDocuments()
         {
-            return Ok(_context.DocumentRequests);
+            return Ok(_context.DocumentRequests.Include(r => r.DocumentTemplate));
         }
         /// <summary>
         /// Obtem todas as notícias
