@@ -1,25 +1,27 @@
-
+﻿
 <app-header-loggedin></app-header-loggedin>
 <app-smaller-banner title={{news.title}}
                     [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"
                     text={{news.subtitle}}></app-smaller-banner>
-<div class="relative flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black font-inter pt-24 px-32 gap-y-20 min-h-[28rem]">
-  <div *ngIf="role == 'Municipal'" class="absolute -top-3 text-[1.063rem] font-roboto flex justify-center items-center">
+<div>
+  <div class="py-[4rem] text-municip-normal-black font-inter min-h-[28rem] relative flex flex-col gap-y-20 bg-municip-blank px-32 pt-24">
+    <div *ngIf="role == 'Municipal'" class="text-[1.063rem] font-roboto absolute -top-3 flex items-center justify-center">
 
-    <app-black-btn-icon-text altImage="Editar Notícia"
-                             image="/assets/images/icons/pencil-white.png"
-                             routerLink="/news/edit/{{news.id}}">
-      Editar Notícia
-    </app-black-btn-icon-text>
+      <app-black-btn-icon-text altImage="Editar Notícia"
+                               image="/assets/images/icons/pencil-white.png"
+                               routerLink="/news/edit/{{news.id}}">
+        Editar Notícia
+      </app-black-btn-icon-text>
+    </div>
+    <img [src]="news.photo ? news.photo : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="Imagem da Notícia"
+         class="w-[60rem] h-[30rem] -mt-[3rem] self-center rounded-2xl object-cover" />
   </div>
-  <img [src]="news.photo ? news.photo : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="Imagem da Notícia"
-       class="object-cover w-[60rem] h-[30rem] -mt-[3rem] rounded-2xl self-center" />
-</div>
 
-<div class="bg-municip-blank">
-  <div class="container mx-auto pb-5 w-[70%]">
-    <p class="text-s text-gray-500 pb-5">{{news.date}}</p>
-    <p innerHTML="{{news.mainText}}" class="text-center text-justify break-words text-municip-normal-black text-[1.2rem] whitespace-pre-line"></p>
+  <div class="pb-[8rem] bg-municip-blank">
+    <div class="w-[70%] container mx-auto pb-5">
+      <p class="text-s pb-5 text-gray-500">{{news.date}}</p>
+      <p innerHTML="{{news.mainText}}" class="text-municip-normal-black text-[1.2rem] whitespace-pre-line break-words text-center text-justify"></p>
+    </div>
   </div>
 </div>
 

@@ -1,10 +1,11 @@
-﻿<div class="h-90 border-2 rounded-[0.8rem] space-5 relative flex flex-grow flex-row justify-between border-solid border-municip-blue px-2 py-4">
+﻿<div class="h-90 border-2 rounded-[0.8rem] space-5 relative flex flex-grow flex-row justify-between border-solid border-municip-blue px-2 py-4 shadow-xl transition-all duration-300 hover:shadow-2xl">
   <img [src]="image ? image : '/assets/images/placeholder/Landscape placeholder.jpg'" alt="newsing"
-       class="h-[15rem] rounded-[0.5rem] min-w-[30rem] w-[30rem] left-0 m-6 flex self-center object-cover" />
+       routerLink="/news/{{id}}"
+       class="h-[15rem] rounded-[0.5rem] min-w-[30rem] w-[30rem] left-0 m-6 flex self-center object-cover hover:cursor-pointer" />
   <div class="flex flex-grow flex-col justify-between">
     <div class="flex flex-col">
       <div class="flex flex-col">
-        <h1 class="text-municip-normal-black line-clamp-2 mr-8 break-all text-4xl font-bold">{{title}}</h1>
+        <h1 routerLink="/news/{{id}}" class="text-municip-normal-black line-clamp-2 mr-8 w-fit break-all text-4xl font-bold hover:cursor-pointer">{{title}}</h1>
         <p class="break-all pt-3">{{subtitle}}</p>
       </div>
       <div class="absolute -top-3 right-0 mr-5 mt-5">
@@ -12,17 +13,25 @@
       </div>
     </div>
 
+    <div *ngIf="role == 'Municipal'" class="absolute -left-2 -top-3 flex gap-4">
+      <app-black-btn-icon-text [justImage]="true"
+                               altImage="Remover Notícia"
+                               image="/assets/images/icons/delete-white.png"
+                               (buttonClick)="deleteCurrent(this)">
+      </app-black-btn-icon-text>
+
+      <app-black-btn-icon-text altImage="Editar Notícia"
+                               image="/assets/images/icons/pencil-white.png"
+                               (buttonClick)="goToEditNewsPage()">
+        Editar
+      </app-black-btn-icon-text>
+    </div>
+
     <div class="mb-1 mr-5 flex justify-end">
-      <button type="button" *ngIf="role == 'Municipal'" (click)="deleteCurrent(this)"
-              class="w-[2.5rem] border-0 relative mr-2 flex h-10 items-center justify-center rounded bg-red-200 bg-gradient-to-tl py-4 text-lg font-semibold text-municip-blank transition duration-700 ease-in-out hover:cursor-pointer hover:bg-red-300 focus:outline-none">
-        <img alt="delete" src="/assets/images/icons/delete.png" class="size-3.5" />
-      </button>
-    
-      <button type="button" routerLink="/news/{{id}}"
-              class="w-[7rem] from-municip-light-blue border-0 relative flex h-10 items-center justify-center rounded bg-gradient-to-tl to-municip-blue py-4 font-normal text-municip-blank transition duration-700 ease-in-out hover:cursor-pointer hover:bg-indigo-600 focus:outline-none">
+      <app-btn-municip-blue width="10rem" routerLink="/news/{{id}}">
         Ler Mais
         <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
-      </button>
+      </app-btn-municip-blue>
     </div>
   </div>
 </div>

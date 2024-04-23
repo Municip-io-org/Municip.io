@@ -1,13 +1,13 @@
-<app-header-loggedin></app-header-loggedin>
+﻿<app-header-loggedin></app-header-loggedin>
 <app-big-banner [image]="municipality.landscapePhoto!" title="Município de {{municipality.name}}"
                 text={{municipality.description}}></app-big-banner>
-<div class="flex flex-col bg-municip-blank py-[4rem] text-municip-normal-black px-32 space-y-20">
-  <div class="flex flex-row font-inter">
-    <section class="flex flex-col w-1/2 space-y-12">
-      <app-card-outline-white class="flex flex-col ">
-        <div class="p-5 space-y-4">
-          <p class="font-semibold text-left">Informação Geral</p>
-          <section class="grid grid-cols-2 gap-x-2 gap-y-5 items-center">
+<div class="py-[4rem] text-municip-normal-black flex flex-col space-y-20 bg-municip-blank px-32">
+  <div class="font-inter flex flex-row justify-between">
+    <section class="flex w-1/2 flex-col space-y-12">
+      <app-card-outline-white class="flex flex-col">
+        <div class="space-y-4 p-5">
+          <p class="text-left font-semibold">Informação Geral</p>
+          <section class="grid-cols-2 grid items-center gap-x-2 gap-y-5">
             <app-general-info [iconSrc]="'/assets/images/icons/users-2-blue.png'"
                               iconAlt="Munícipes"
                               title={{municipality.populacao}}
@@ -28,7 +28,7 @@
         </div>
       </app-card-outline-white>
       <section class="flex flex-col text-left">
-        <p class="text-[1.5rem] font-semibold font-inter text-municip-normal-black">Descrição</p>
+        <p class="text-[1.5rem] font-inter text-municip-normal-black font-semibold">Descrição</p>
         <div [innerHtml]="municipality.description">
 
         </div>
@@ -37,13 +37,13 @@
                        widthBox="w-[90%]" [isVertical]="true" [numVisible]="2"
                        ></app-next-events>
     </section>
-    <div class="w-1 bg-gradient-to-tl from-municip-light-blue to-municip-blue rounded mx-[5vw] "></div>
+    <div class="from-municip-light-blue w-1 rounded bg-gradient-to-tl to-municip-blue"></div>
     <section class="flex flex-col space-y-10">
       <app-card-outline-white>
-        <div class="flex flex-col p-5 space-y-4">
+        <div class="flex flex-col space-y-4 p-5">
           <img [src]="municipality.emblemPhoto ? municipality.emblemPhoto : '/assets/images/placeholder/placeholderpersons.jpg'"
-               alt="Brasão do Município" class="object-cover w-[20rem] mb-4 rounded-2xl self-center" />
-          <ul class="flex flex-col space-y-4 text-left font-inter">
+               alt="Brasão do Município" class="w-[20rem] mb-4 self-center rounded-2xl object-cover" />
+          <ul class="font-inter flex flex-col space-y-4 text-left">
             <li>
               <div>
                 <p class="font-bold">Localização:</p>
@@ -77,12 +77,12 @@
           </ul>
         </div>
       </app-card-outline-white>
-      <section class="flex flex-col space-y-6">
+      <section class="flex flex-col items-center space-y-6">
         <app-next-news [newsList]="newsList" [municipalityName]="municipality.name"></app-next-news>
         <app-btn-municip-blue *ngIf="newsList.length != 0" width="15rem"
                               (buttonClick)="seeMoreNewsClick()">
           Ver mais notícias
-          <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+          <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
         </app-btn-municip-blue>
       </section>
 
@@ -90,8 +90,8 @@
   </div>
 
   <section class="flex flex-col space-y-6">
-    <div class="flex items-center font-open-sans text-[1.5rem] pl-[5.7rem] font-extrabold">
-      <img src="/assets/images/icons/map.png" alt="Notícias" class="size-10 mr-5 " />
+    <div class="font-open-sans text-[1.5rem] pl-[5.7rem] flex items-center font-extrabold">
+      <img src="/assets/images/icons/map.png" alt="Notícias" class="mr-5 size-10" />
       MAPA DE {{ municipality.name | uppercase }}
     </div>
     <app-municipalitymap [municipalityName]=municipality.name> </app-municipalitymap>
