@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class NotFoundComponent {
 
+  //create a function to redirect to previous page
+  goBack() {
+    window.history.back();
+  }
+
 }
