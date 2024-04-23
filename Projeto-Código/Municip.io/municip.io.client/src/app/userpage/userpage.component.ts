@@ -2,9 +2,28 @@ import { Component } from '@angular/core';
 import { UserAuthService } from '../services/user-auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Country } from '../services/citizen-auth.service';
+import { Municipality } from '../services/municipal-admin-auth.service';
 
 /**
  * Componente para a página de perfil do utilizador.
+ *
+ * @param isDialogOpen - Estado do diálogo
+ * @param isRemoveEventDialogOpen - Estado do diálogo de remoção de evento
+ * @param dialogTitle - Título do diálogo
+ * @param dialogMessage - Mensagem do diálogo
+ * @param dialogTitleConfirm - Título do diálogo de confirmação
+ * @param dialogMessageConfirm - Mensagem do diálogo de confirmação
+ * @param isConfirm - Estado de confirmação
+ * @param editMode - Modo de edição
+ * @param newUser - Novo utilizador
+ * @param errors - Erros
+ * @param originalName - Nome original
+ * @param image - Imagem
+ * @param imageUrl - URL da imagem
+ * @param files - Ficheiros
+ * @param municipality - Município
+ * @param confirmPassDialog - Confirmação da password
+ * 
  */
 @Component({
   selector: 'app-userpage',
@@ -17,6 +36,8 @@ export class UserpageComponent {
   isRemoveEventDialogOpen: boolean = false;
   dialogTitle = '';
   dialogMessage = '';
+  dialogTitleConfirm = '';
+  dialogMessageConfirm = '';
   isConfirm: boolean = false;
   editMode: boolean = false;
   newUser: any; 
@@ -25,6 +46,32 @@ export class UserpageComponent {
   image!: File;
   imageUrl: string | null = null;
   files: any[] = [];
+  municipality: Municipality = {
+    name: '',
+    president: '',
+    contact: '',
+    description: '',
+    areaha: '',
+    codigo: '',
+    codigopostal: '',
+    codigoine: '',
+    descpstal: '',
+    distrito: '',
+    eleitores: '',
+    email: '',
+    fax: '',
+    localidade: '',
+    nif: '',
+    populacao: '',
+    rua: '',
+    sitio: '',
+    telefone: '',
+    emblemPhoto: '',
+    landscapePhoto: '',
+  };
+  confirmPassDialog:boolean = false;
+
+
 
   /**
    * Método construtor para instanciar o componente.
@@ -58,6 +105,11 @@ export class UserpageComponent {
                   this.country.setValue({ alpha2Code: this.newUser.nif.slice(0, 2) });
                   this.nif.setValue(this.newUser.nif.slice(2));
                 }
+                this.userAuthService.getInfoMunicipality(this.newUser.municipality).subscribe(
+                  async (municipalityRes: Municipality) => {
+                    this.municipality = municipalityRes;
+                    console.log(this.municipality)
+                  });
                 this.initForm();
               },
               error => {
@@ -93,6 +145,10 @@ export class UserpageComponent {
     ]),
     passwordConfirmation: new FormControl("", [Validators.required]),
   });
+   
+  passConfirmForm = new FormGroup({
+    passConfirm: new FormControl("", [Validators.required])
+    });
 
   get firstName() {
     return this.profileEdit.get('firstName');
@@ -134,8 +190,8 @@ export class UserpageComponent {
     return this.profileEdit.get('birthDate');
   }
 
-  get passwordConfirmation() {
-    return this.profileEdit.get('passwordConfirmation');
+  get passConfirm() {
+    return this.profileEdit.get('passConfirm');
   }
   /**
    * Método de submissão
@@ -144,20 +200,22 @@ export class UserpageComponent {
 
     this.toggleEditMode();
     const formValues = this.profileEdit.value;
+    const formPassValues = this.passConfirmForm.value;
     this.newUser.firstName = formValues.firstName || this.newUser.firstName;
     this.newUser.surname = formValues.surname || this.newUser.surname;
     this.newUser.email = formValues.email || this.newUser.email;
     this.newUser.birthDate = formValues.birthDate || this.newUser.birthDate;
     this.newUser.address = formValues.address || this.newUser.address;
     this.newUser.country = formValues.country || this.newUser.country;
-    this.newUser.photo = this.imageUrl!; 
+    this.newUser.photo = this.image || this.imageUrl!; 
     this.newUser.nif = formValues.nif || this.newUser.nif;
 
     this.newUser.postalCode1 = formValues.postalCode1 || this.newUser.postalCode1;
     this.newUser.postalCode2 = formValues.postalCode2 || this.newUser.postalCode2;
     this.newUser.password = formValues.password ? formValues.password : "";
-    var passConfirm = formValues.passwordConfirmation || "";
+    var passConfirm = formPassValues.passConfirm || "";
     this.newUser.events = [];
+    console.log("A IMG", this.image);
 
 
 
@@ -168,12 +226,14 @@ export class UserpageComponent {
 
           this.originalName = this.newUser.firstName;
           this.imageUrl = this.newUser.photo;
+
           this.initForm();
 
           this.isDialogOpen = true;
           this.dialogTitle = 'Atualização bem-sucedida';
           this.dialogMessage = 'Os seus dados foram atualizados com sucesso';
           this.isConfirm = true;
+          this.closeConfirmPassDialog();
         },
         (error) => {
           console.log("erro " + error.error.errors)
@@ -188,11 +248,12 @@ export class UserpageComponent {
       );
     }
     else {
-      this.userAuthService.updateMunicipAdminUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
+      this.userAuthService.updateMunicipAdminUser(this.newUser, this.image, passConfirm).subscribe(
         res => {
           this.originalName = this.newUser.firstName;
           this.imageUrl = this.newUser.photo;
           this.initForm();
+          this.closeConfirmPassDialog()
         },
         (error) => {
           console.log("erro " + error.error.errors)
@@ -232,6 +293,7 @@ export class UserpageComponent {
     if (this.editMode) {
       this.profileEdit.enable();
       this.profileEdit.controls['email'].disable();
+      this.profileEdit.controls['nif'].disable();
     } else {
       this.profileEdit.disable();
     }
@@ -266,6 +328,12 @@ export class UserpageComponent {
     this.imageUrl = this.newUser.photo; 
   }
 
+  initPassConfirmForm() {
+    this.passConfirmForm.patchValue({
+      passConfirm: ''
+    });
+  }
+
   /**
    * Evento resposável pela alteração do ficheiro
    * @param event evento HTML
@@ -277,7 +345,6 @@ export class UserpageComponent {
     if (fileList && fileList.length > 0) {
       this.image = fileList[0];
       this.imageUrl = URL.createObjectURL(this.image);
-
       console.log("ON FILE CHANGE");
     } else {
       console.error('Nenhuma imagem selecionada');
@@ -329,5 +396,20 @@ export class UserpageComponent {
   closeDialog() {
     this.isDialogOpen = false;
     window.location.reload();
+  }
+
+  /**
+   * Confirmar a Password
+   */
+  openConfirmPassDialog() {
+    this.confirmPassDialog = true;
+
+  }
+
+  /**
+   * Fechar o diálogo de confirmação
+   */
+  closeConfirmPassDialog() {
+    this.confirmPassDialog = false;
   }
 }

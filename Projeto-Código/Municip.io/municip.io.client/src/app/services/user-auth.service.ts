@@ -249,6 +249,7 @@ localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
     const headers = new HttpHeaders({ 'authorization': 'Client-ID a9e7323ad868dd2' });
     const imgurl = "https://api.imgur.com/3/image";
     const formData = new FormData();
+    console.log("URL DE IMAGEM",image);
     formData.append('image', image);
     return this.http.post(imgurl, formData, { headers }).pipe(
       switchMap((response: any) => {
@@ -259,8 +260,15 @@ localStorage.setItem(this.INFO_STORAGE_KEY, encryptedData);
         console.log(user);
 
         user.photo = photoUrl;
-        return this.http.put(`/api/accounts/UpdateUserInfo?passwordConfirmation=${passConfirm}`, user );
-      })
+        return this.http.put(`/api/accounts/UpdateUserInfo?passwordConfirmation=${passConfirm}`, user);
+        
+      },
+        error => {
+        console.error(error);
+        return throwError(error);
+      }
+
+      )
     );
   }
 

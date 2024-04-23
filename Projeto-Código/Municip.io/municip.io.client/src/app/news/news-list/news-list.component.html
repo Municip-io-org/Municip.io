@@ -1,4 +1,4 @@
-﻿<app-header-loggedin></app-header-loggedin>
+<app-header-loggedin></app-header-loggedin>
 
 <app-smaller-banner [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"
                     title="Notícias de {{municipality.name}}">
@@ -21,7 +21,7 @@
      class="relative">
 
   <div *ngIf="role == 'Municipal'" class="text-[1.063rem] font-roboto left-[8rem] absolute -top-3 flex items-center justify-center gap-4">
-    <app-black-btn-icon-text altImage="Criar Notícia"
+    <app-black-btn-icon-text altImage="Ícone de Criar Notícia"
                              image="/assets/images/icons/plus-white.png"
                              (buttonClick)="goToCreateNewsPage()">
       Criar Notícia

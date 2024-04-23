@@ -8,7 +8,7 @@
                     [image]="municipalityImage ? municipalityImage : '/assets/images/placeholder/Landscape placeholder.jpg'"></app-smaller-banner>
 <div class="container relative mx-auto mb-40 px-4 sm:px-8">
  
-    <app-black-btn-icon-text altImage="Criar Documento"
+    <app-black-btn-icon-text altImage="Ícone de Criar Documento"
                              image="/assets/images/icons/plus-white.png"
                              (buttonClick)="goCreateTemplate()"
                              class="absolute -top-3">
@@ -71,16 +71,26 @@
               </td>
 
               <td class="space-x-2 px-5 py-5">
-                <button (click)="editDocument(d); $event.stopPropagation()" class="rounded-md bg-municip-blue px-3 py-1 text-white">
+                <button (click)="editDocument(d); $event.stopPropagation()" class="rounded-md bg-municip-blue px-3 py-1 text-white"
+                        aria-label="Edit Document Button"
+                        >
                   <i class="fas fa-edit"></i>
                 </button>
-                <button *ngIf="d.status === DocumentTemplateStatus().inactive" (click)="activeDocument(d); $event.stopPropagation()" class="rounded-md bg-green-500 px-3 py-1 text-white">
+                <button *ngIf="d.status === DocumentTemplateStatus().inactive" (click)="activeDocument(d); $event.stopPropagation()"
+                        class="rounded-md bg-green-500 px-3 py-1 text-white"
+                        aria-label="Activate Document Button"
+                        >
                   <i class="fas fa-check"></i>
                 </button>
-                <button *ngIf="d.status === DocumentTemplateStatus().active" (click)="desactiveDocument(d); $event.stopPropagation()" class="rounded-md bg-yellow-500 px-3 py-1 text-white">
+                <button *ngIf="d.status === DocumentTemplateStatus().active" (click)="desactiveDocument(d); $event.stopPropagation()"
+                        class="rounded-md bg-yellow-500 px-3 py-1 text-white"
+                        aria-label="Desactivate Document Button"
+                        >
                   <i class="fas fa-lock"></i>
                 </button>
-                <button (click)="deleteDocument(d); $event.stopPropagation()" class="rounded-md bg-red-500 px-3 py-1 text-white">
+                <button (click)="deleteDocument(d); $event.stopPropagation()" class="rounded-md bg-red-500 px-3 py-1 text-white"
+                        aria-label="Delete Document Button"
+                        >
                   <i class="fas fa-trash-alt"></i>
                 </button>
 
