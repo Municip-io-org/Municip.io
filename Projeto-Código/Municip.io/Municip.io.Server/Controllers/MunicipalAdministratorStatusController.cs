@@ -43,7 +43,7 @@ namespace Municip.io.Server.Controllers
         public async Task<IActionResult> approveMunicipalAdministrator(string? email)
         {
             var ma = await _context.MunicipalAdministrators.FirstOrDefaultAsync(m => m.Email == email);
-            if (ma!= null)
+            if (ma != null)
             {
 
                 if (ma.status == MunicipalAdministratorStatus.Blocked)
@@ -58,7 +58,7 @@ namespace Municip.io.Server.Controllers
                 ma.status = MunicipalAdministratorStatus.Approved;
                 await _context.SaveChangesAsync();
 
-                return Json(_context.MunicipalAdministrators.ToList());
+                return Json(_context.MunicipalAdministrators.Where(ad => ad.municipality == ma.municipality).ToList());
             }
             return NotFound();
         }
@@ -73,7 +73,7 @@ namespace Municip.io.Server.Controllers
         public async Task<IActionResult> deleteMunicipalAdministrator(string? email)
         {
             var ma = await _context.MunicipalAdministrators.FirstOrDefaultAsync(c => c.Email == email);
-            if (ma!= null)
+            if (ma != null)
             {
                 _context.MunicipalAdministrators.Remove(ma);
                 await _context.SaveChangesAsync();
@@ -93,7 +93,7 @@ namespace Municip.io.Server.Controllers
                 {
                     SendRemove(ma.Email, ma.firstName);
                 }
-                return Json(_context.MunicipalAdministrators.ToList());
+                return Json(_context.MunicipalAdministrators.Where(ad => ad.municipality == ma.municipality).ToList());
             }
             return NotFound();
         }
@@ -107,12 +107,12 @@ namespace Municip.io.Server.Controllers
         public async Task<IActionResult> blockMunicipalAdministrator(string? email)
         {
             var ma = await _context.MunicipalAdministrators.FirstOrDefaultAsync(m => m.Email == email);
-            if (ma!= null)
+            if (ma != null)
             {
                 ma.status = MunicipalAdministratorStatus.Blocked;
                 await _context.SaveChangesAsync();
                 SendBlock(ma.Email, ma.firstName);
-                return Json(_context.MunicipalAdministrators.ToList());
+                return Json(_context.MunicipalAdministrators.Where(ad => ad.municipality == ma.municipality).ToList());
             }
             return NotFound();
         }

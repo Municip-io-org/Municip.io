@@ -12,7 +12,7 @@ using Municip.io.Server.Data;
 namespace Municip.io.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240423113945_rui")]
+    [Migration("20240423142110_rui")]
     partial class rui
     {
         /// <inheritdoc />
