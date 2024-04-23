@@ -1,8 +1,7 @@
-<app-header-loggedin></app-header-loggedin>
+﻿<app-header-loggedin></app-header-loggedin>
 
-<app-smaller-banner [image]="'/assets/images/admin/banner.jpg'"
-                    [title]="'Editar Notícia'"
-                    [text]="'Edição de uma notícia'">
+<app-smaller-banner [image]="municipality.landscapePhoto ? municipality.landscapePhoto : '/assets/images/placeholder/Landscape placeholder.jpg'"
+                    [title]="'Editar Notícia'">
 </app-smaller-banner>
 
 <ng-container *ngIf="isDialogOpen">
@@ -10,79 +9,82 @@
                       [isConfirm]=true></app-dialog-message>
 </ng-container>
 
-<div class="flex justify-center items-center pt-11 ">
-  <div class="container w-[60%]">
+<div class="flex items-center justify-center pt-11">
+  <div class="w-[60%] container">
     <form [formGroup]="newsEditForm" (ngSubmit)="OnSubmit()" class="w-full">
-      <div *ngIf="errors" class=" text-red-500 text-sm font-bold space-y-2 text-start">
+      <div *ngIf="errors" class="space-y-2 text-start text-sm font-bold text-red-500">
         <div *ngFor="let error of errors">
           <p>{{error}}</p>
         </div>
       </div>
-      <div class="p-0 w-full">
-        <section class="flex flex-col text-left space-y-7">
-          <div class="w-full mb-4">
+      <div class="w-full p-0">
+        <section class="flex flex-col space-y-7 text-left">
+          <div class="mb-4 w-full">
             <app-input-title class="text-[2.6vh] ml-1/4">Título</app-input-title>
             <div class="flex items-center">
               <input required placeholder="Título" type="text" id="title" formControlName="title" name="title" [(ngModel)]="news.title"
-                     class="input w-full h-12 lg:h-14 focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500" />
+                     class="input h-12 w-full decoration-sky-500 transition-all duration-700 ease-in-out focus:ring-inset focus-visible:ring-municip-blue focus-visible:ring-[1.5px] lg:h-14" />
             </div>
-            <div class="text-red-500 font-bold py-2" *ngIf="title?.touched && title?.invalid ">
+            <div class="py-2 font-bold text-red-500" *ngIf="title?.touched && title?.invalid ">
               <div *ngIf="title?.errors?.['required'] ">Título Obrigatório</div>
             </div>
           </div>
 
-          <div class="w-full mb-4">
+          <div class="mb-4 w-full">
             <app-input-title class="text-[2.6vh] ml-1/4">Subtitulo</app-input-title>
             <div class="relative w-full">
               <textarea required placeholder="Subtitulo (Maximo 300 caracteres)" id="subtitle" formControlName="subtitle" name="subtitle" [(ngModel)]="news.subtitle" maxlength="300"
-                        class="input text-left resize-none w-full h-[auto] lg:h-[10rem] focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500"
+                        class="input h-[auto] w-full resize-none text-left decoration-sky-500 transition-all duration-700 ease-in-out focus:ring-inset focus-visible:ring-municip-blue focus-visible:ring-[1.5px] lg:h-[10rem]"
                         (input)="updateCharacterCount($event)"></textarea>
               <span class="absolute bottom-2 right-2 text-gray-500">{{ subtitleCharacterCount }}/300</span>
             </div>
 
-            <div class="text-red-500 font-bold py-2" *ngIf="subtitle?.touched && subtitle?.invalid ">
+            <div class="py-2 font-bold text-red-500" *ngIf="subtitle?.touched && subtitle?.invalid ">
               <div *ngIf="subtitle?.errors?.['required'] ">Subtítulo Obrigatório</div>
             </div>
 
           </div>
 
-          <app-input-title class="text-[2.6vh]">Imagem da Capa</app-input-title>
-          <div class="flex items-center w-[40%]">
-            <input type="file" #filePicker id="photo" formControlName="photo" name="photo" (change)="onImagePicked($event)" class="input w-full focus-visible:ring-municip-blue focus-visible:ring-[1.5px] focus:ring-inset transition-all duration-700 ease-in-out decoration-sky-500">
-            <app-tooltip [tooltipText]="'Utilize o seletor para escolher a imagem'"></app-tooltip>
+          <div>
+            <app-input-title class="text-[2.6vh]">Imagem da Capa</app-input-title>
+            <div class="bg-[#F5F5F7] rounded-[0.375rem] border-2 border-[#bbbabc] table h-20 w-full border-dotted" (dragover)="onDragOver($event)"
+                 (drop)="onDrop($event)" (click)="filePicker.click()">
+
+              <div class="table-cell align-middle">
+                <div class="text-center">
+                  <input type="file" #filePicker (change)="onFileChange($event)" accept="image/*" capture class="hidden">
+
+                  <label for="file" class="flex items-center justify-center p-5 hover:cursor-pointer">Seleciona uma imagem ou arrasta-a para aqui!</label>
+
+                  <div class="flex items-center justify-center pb-2">
+                    <img [src]="imageUrl" alt="Imagem carregada" class="w-[15rem] h-[10rem] object-cover">
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="w-full mb-4">
+          <div class="mb-4 w-full">
             <app-input-title class="text-[2.6vh] ml-1/4">Corpo da Notícia</app-input-title>
             <ngx-editor [editor]="editor" formControlName="mainText" >
-              <div class="bg-gray-100 border border-gray-300">
+              <div class="border border-gray-300 bg-gray-100">
                 <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
               </div>
             </ngx-editor>
-            <div class="text-red-500 font-bold py-2" *ngIf="mainText?.touched && mainText?.invalid">
+            <div class="py-2 font-bold text-red-500" *ngIf="mainText?.touched && mainText?.invalid">
               <div *ngIf="mainText?.errors?.['required']">Corpo da Notícia Obrigatório</div>
             </div>
           </div>
 
 
 
-          <div class="flex justify-between pb-10">
-            <button class="border-municip-gray border-2 rounded-md
-        hover:bg-municip-blank
-        hover:border-municip-blue text-municip-highlight-black
-        inline-flex py-3 px-8
-        focus:outline-none text-lg
-        transition duration-700 ease-in-out justify-center items-center
-        "
-                    routerLink="/news">
-              Voltar
-            </button>
-            <button type="submit" class="relative h-auto w-[10rem] flex justify-center items-center font-semibold text-municip-blank bg-gradient-to-tl from-municip-light-blue to-municip-blue border-0 py-4 hover:cursor-pointer focus:outline-none hover:bg-indigo-600 rounded text-lg transition duration-700 ease-in-out">
+          <div class="flex justify-end pb-10">
+            <button type="submit"
+                    class="w-[10rem] from-municip-light-blue border-0 relative flex h-auto items-center justify-center rounded bg-gradient-to-tl to-municip-blue px-8 py-3 text-lg text-municip-blank transition-all duration-300 focus:outline-none disabled:cursor-not-allowed bg-[position:_0%_0%] bg-[size:_200%] hover:bg-[position:_100%_100%]">
               Editar Notícia
-              <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="size-3.5 ml-1" />
+              <img alt="arrow" src="/assets/images/arrows/right-arrow.png" class="ml-1 size-3.5" />
             </button>
-
-
           </div>
 
 
