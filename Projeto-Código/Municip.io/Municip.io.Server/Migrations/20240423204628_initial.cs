@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Municip.io.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class prod : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,6 +63,32 @@ namespace Municip.io.Server.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Publisher = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ISBN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sinopsis = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CoverImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Edition = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PublicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Copies = table.Column<int>(type: "int", nullable: false),
+                    AvailableCopies = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -174,6 +200,7 @@ namespace Municip.io.Server.Migrations
                     codigoine = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     distrito = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    libraryAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     date = table.Column<DateOnly>(type: "date", nullable: true),
                     numberOfUsers = table.Column<int>(type: "int", nullable: true),
                     status = table.Column<int>(type: "int", nullable: false),
@@ -309,7 +336,40 @@ namespace Municip.io.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Browser",
+                name: "BookRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CitizenId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    ReservedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ReservationLimitDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BorrowedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeliveredDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BookRequests_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookRequests_Citizens_CitizenId",
+                        column: x => x.CitizenId,
+                        principalTable: "Citizens",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Browsers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -321,12 +381,13 @@ namespace Municip.io.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Browser", x => x.Id);
+                    table.PrimaryKey("PK_Browsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Browser_Citizens_CitizenId",
+                        name: "FK_Browsers_Citizens_CitizenId",
                         column: x => x.CitizenId,
                         principalTable: "Citizens",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -350,7 +411,8 @@ namespace Municip.io.Server.Migrations
                         name: "FK_DocumentRequests_Citizens_CitizenId",
                         column: x => x.CitizenId,
                         principalTable: "Citizens",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_DocumentRequests_DocumentTemplates_DocumentTemplateId",
                         column: x => x.DocumentTemplateId,
@@ -422,8 +484,18 @@ namespace Municip.io.Server.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Browser_CitizenId",
-                table: "Browser",
+                name: "IX_BookRequests_BookId",
+                table: "BookRequests",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookRequests_CitizenId",
+                table: "BookRequests",
+                column: "CitizenId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Browsers_CitizenId",
+                table: "Browsers",
                 column: "CitizenId");
 
             migrationBuilder.CreateIndex(
@@ -464,7 +536,10 @@ namespace Municip.io.Server.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Browser");
+                name: "BookRequests");
+
+            migrationBuilder.DropTable(
+                name: "Browsers");
 
             migrationBuilder.DropTable(
                 name: "CitizenEvent");
@@ -486,6 +561,9 @@ namespace Municip.io.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Books");
 
             migrationBuilder.DropTable(
                 name: "Events");

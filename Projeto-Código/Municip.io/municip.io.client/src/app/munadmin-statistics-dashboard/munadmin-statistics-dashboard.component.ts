@@ -118,7 +118,6 @@ export class MunadminStatisticsDashboardComponent {
 
               this.libraryService.getBooks(this.municipality).subscribe((data: Book[]) => {
                 this.books = data;
-                console.log(this.books);
 
 
                 this.adminStatisticsService.getAllCitizens().subscribe((data: Citizen[]) => {

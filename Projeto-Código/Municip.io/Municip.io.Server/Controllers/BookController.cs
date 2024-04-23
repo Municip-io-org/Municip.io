@@ -55,10 +55,7 @@ namespace Municip.io.Server.Controllers
 
             var books = _context.Books.Where(b => b.Municipality == municipality).ToList();
 
-            if (books == null || !books.Any())
-            {
-                return NotFound("Não foram encontrados nenhuns livros neste Município");
-            }
+            
 
             return new JsonResult(books);
         }

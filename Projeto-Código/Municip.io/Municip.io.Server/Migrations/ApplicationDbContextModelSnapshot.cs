@@ -258,6 +258,115 @@ namespace Municip.io.Server.Migrations
                     b.ToTable("AppFeatures");
                 });
 
+            modelBuilder.Entity("Municip.io.Server.Models.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AvailableCopies")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Copies")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CoverImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Edition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Genre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ISBN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Municipality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PublicationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Publisher")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sinopsis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("Municip.io.Server.Models.BookRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("BorrowedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CitizenId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeliveredDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Municipality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReservationLimitDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ReservedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("CitizenId");
+
+                    b.ToTable("BookRequests");
+                });
+
             modelBuilder.Entity("Municip.io.Server.Models.Browser", b =>
                 {
                     b.Property<int>("Id")
@@ -284,7 +393,7 @@ namespace Municip.io.Server.Migrations
 
                     b.HasIndex("CitizenId");
 
-                    b.ToTable("Browser");
+                    b.ToTable("Browsers");
                 });
 
             modelBuilder.Entity("Municip.io.Server.Models.Citizen", b =>
@@ -687,18 +796,41 @@ namespace Municip.io.Server.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Municip.io.Server.Models.BookRequest", b =>
+                {
+                    b.HasOne("Municip.io.Server.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Municip.io.Server.Models.Citizen", "Citizen")
+                        .WithMany("BookRequests")
+                        .HasForeignKey("CitizenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Citizen");
+                });
+
             modelBuilder.Entity("Municip.io.Server.Models.Browser", b =>
                 {
-                    b.HasOne("Municip.io.Server.Models.Citizen", null)
+                    b.HasOne("Municip.io.Server.Models.Citizen", "Citizen")
                         .WithMany("Browsers")
-                        .HasForeignKey("CitizenId");
+                        .HasForeignKey("CitizenId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Citizen");
                 });
 
             modelBuilder.Entity("Municip.io.Server.Models.DocumentRequest", b =>
                 {
                     b.HasOne("Municip.io.Server.Models.Citizen", "Citizen")
-                        .WithMany()
-                        .HasForeignKey("CitizenId");
+                        .WithMany("DocumentRequests")
+                        .HasForeignKey("CitizenId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Municip.io.Server.Models.DocumentTemplate", "DocumentTemplate")
                         .WithMany()
@@ -711,7 +843,11 @@ namespace Municip.io.Server.Migrations
 
             modelBuilder.Entity("Municip.io.Server.Models.Citizen", b =>
                 {
+                    b.Navigation("BookRequests");
+
                     b.Navigation("Browsers");
+
+                    b.Navigation("DocumentRequests");
                 });
 #pragma warning restore 612, 618
         }
