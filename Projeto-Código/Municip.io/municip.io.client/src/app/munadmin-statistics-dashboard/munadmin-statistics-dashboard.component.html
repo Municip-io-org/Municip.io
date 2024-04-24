@@ -29,7 +29,7 @@
               {{thisMonth}} este mês
               (
               <span class="{{percentageComparedToAverage > 0 ? 'text-green-500' : 'text-red-500'}}">
-                {{percentageComparedToAverage}}%
+                {{percentageComparedToAverage | number : '1.2-2'}}%
                 <i class="{{percentageComparedToAverage > 0 ? 'fas fa-arrow-up text-green-500' : 'fas fa-arrow-down text-red-500'}}"></i>
               </span>
               comparado aos últimos 6 meses)
@@ -54,7 +54,7 @@
           </div>
           <div>
             <span class="inline-block text-2xl font-bold"></span>
-            <span class="inline-block text-xl text-gray-500 font-semibold ml-1">{{blockedCitizens}} ({{blockedCitizensPercentage}}%)</span>
+            <span class="inline-block text-xl text-gray-500 font-semibold ml-1">{{blockedCitizens}} ({{blockedCitizensPercentage | number : '1.2-2'}}%)</span>
             <span class="block text-gray-500">Cidadãos Bloqueados</span>
           </div>
         </div>

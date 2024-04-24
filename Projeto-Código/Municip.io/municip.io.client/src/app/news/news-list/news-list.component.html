@@ -5,15 +5,9 @@
 </app-smaller-banner>
 
 
-<div *ngIf="showNews.length === 0"
-     class="px-[8rem] py-[12rem] text-municip-normal-black flex grow items-center justify-center">
-  <p class="text-[3rem] font-semibold">Não Há Notícias Disponíveis.</p>
-</div>
 
 
-
-<div *ngIf="showNews.length > 0"
-     infiniteScroll
+<div infiniteScroll
      [infiniteScrollDistance]="3"
      [infiniteScrollThrottle]="500"
      (scrolled)="onScrollDown()"
@@ -28,7 +22,7 @@
     </app-black-btn-icon-text>
   </div>
 
-  <div class="text-municip-normal-black px-[8rem] bg-municip-blank">
+  <div class="text-municip-normal-black px-[8rem] bg-municip-blank min-h-[28rem]">
     <div class="flex justify-center">
       <div class="pt-[3rem] flex w-full items-center justify-between space-x-4">
         <div class="w-[50rem] relative">
@@ -63,8 +57,10 @@
       </div>
     </div>
 
-
-
+    <div *ngIf="showNews.length === 0"
+         class="px-[8rem] text-municip-normal-black flex grow items-center justify-center">
+      <p class="text-[3rem] font-semibold">Não Há Notícias Disponíveis.</p>
+    </div>
   </div>
 </div>
 <app-footer />

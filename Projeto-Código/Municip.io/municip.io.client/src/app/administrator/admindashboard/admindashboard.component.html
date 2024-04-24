@@ -10,7 +10,9 @@
 <app-smaller-banner [image]="'/assets/images/admin/banner.jpg'" [title]="'Gestão de Municípios e Administradores'"
                     [text]="'Efetue a gestão dos municípios e administradores municipais da plataforma, gerindo a presença dos mesmos na nossa aplicação'" />
 
-<div class="container mx-auto px-4 sm:px-8">
+<div class="container mx-auto px-4 sm:px-8
+     min-h-[30rem] bg-municip-blank
+     ">
   <div class="py-8">
     <p class=" text-center   italic text-municip-black">Utilize a tabela abaixo para gerir os municípios e administradores municipais da plataforma.<br /> Pode aprovar ou eliminar municípios, e gerir os administradores municipais associados a cada município carregando no mesmo.</p>
     <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -90,3 +92,4 @@
     </div>
   </div>
 </div>
+<app-footer/>

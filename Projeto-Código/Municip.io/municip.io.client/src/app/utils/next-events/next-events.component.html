@@ -3,7 +3,12 @@
     <img src="/assets/images/icons/event.png" alt="Notícias" class="size-10 mr-5 " />
     PRÓXIMOS EVENTOS EM {{ municipalityName | uppercase }}
   </div>
-  <p-carousel [value]="events" [numVisible]="numVisible" [numScroll]="1" [circular]="true" [autoplayInterval]="3000"
+<div *ngIf="events.length === 0"
+       class="flex text-center justify-center items-center text-municip-normal-black grow text-[1.5rem] ">
+    <p class="font-semibold">Não há eventos.</p>
+</div>
+  <p-carousel *ngIf="events.length > 0"
+              [value]="events" [numVisible]="numVisible" [numScroll]="1" [circular]="true" [autoplayInterval]="3000"
                [orientation]="isVertical ? 'vertical' : 'horizontal'" verticalViewPortHeight="500px"
               class="w-full">
     <ng-template let-event pTemplate="item">
