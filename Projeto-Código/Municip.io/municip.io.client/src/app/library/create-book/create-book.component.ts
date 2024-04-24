@@ -288,7 +288,7 @@ export class CreateBookComponent {
    */
   addGenre(newGenre: string) {
     this.categories.push(newGenre);
-    this.genres.push(new FormControl({ value: false, disabled: false }))
+    this.genres.push(new FormControl({ value: true, disabled: false }))
   }
 
   /**

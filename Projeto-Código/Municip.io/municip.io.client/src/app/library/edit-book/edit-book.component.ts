@@ -368,7 +368,7 @@ export class EditBookComponent {
    */
   addGenre(newGenre: string) {
     this.categories.push(newGenre);
-    this.genres.push(new FormControl({ value: false, disabled: false }))
+    this.genres.push(new FormControl({ value: true, disabled: false }))
   }
   /**
    * Método de remoção de género de livro
@@ -400,6 +400,7 @@ export class EditBookComponent {
    */
   closeDialog() {
     this.isDialogOpen = false;
+    this.router.navigateByUrl('/library/librarylist');
   }
 
   /**
