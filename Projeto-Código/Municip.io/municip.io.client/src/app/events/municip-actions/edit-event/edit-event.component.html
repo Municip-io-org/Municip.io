@@ -1,4 +1,4 @@
-﻿
+
 <app-header-loggedin></app-header-loggedin>
 <app-smaller-banner [title]="'Editar Evento'" [image]="municipalityImage"
                     class="font-inter" />
@@ -9,7 +9,7 @@
                       [isConfirm]=true></app-dialog-message>
 </ng-container>
 
-<form [formGroup]="eventForm" (ngSubmit)="OnSubmit()" class="mb-32 mt-10 px-32">
+<form [formGroup]="eventForm" (ngSubmit)="OnSubmit()" class="pb-32 pt-10 px-32 bg-municip-blank">
   <div *ngIf="error" class="mb-5 space-y-2 text-start text-xl font-bold text-red-500">
     <p>{{error}}</p>
   </div>

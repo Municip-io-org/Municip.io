@@ -288,7 +288,7 @@ export class NewsEditComponent {
    */
   closeDialog() {
     this.isDialogOpen = false;
-
+    this.router.navigateByUrl('/news');
   }
 
   /**

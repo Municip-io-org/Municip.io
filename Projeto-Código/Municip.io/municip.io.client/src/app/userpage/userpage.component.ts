@@ -248,7 +248,7 @@ export class UserpageComponent {
       );
     }
     else {
-      this.userAuthService.updateMunicipAdminUser(this.newUser, this.image, passConfirm).subscribe(
+      this.userAuthService.updateMunicipAdminUser(this.newUser, this.newUser.photo, passConfirm).subscribe(
         res => {
           this.originalName = this.newUser.firstName;
           this.imageUrl = this.newUser.photo;

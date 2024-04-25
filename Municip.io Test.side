@@ -2,7 +2,7 @@
   "id": "8b864d39-9231-4e16-8a7c-fecaeef7ee09",
   "version": "2.0",
   "name": "Municip.io Test",
-  "url": "https://municip.io:4200/",
+  "url": "https://municipio-server.azurewebsites.net/transports/stops",
   "tests": [{
     "id": "13345bfd-82bd-45c0-852b-404ee0d246ae",
     "name": "Create municipality",
@@ -4404,6 +4404,38 @@
       "targets": [],
       "value": "label=Inglês"
     }]
+  }, {
+    "id": "e769e408-db3f-4c77-8a68-f095ae82f748",
+    "name": "Stops Transportes",
+    "commands": [{
+      "id": "0d58b667-d257-43a7-b0e6-ec85c1351269",
+      "comment": "",
+      "command": "open",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "65cd617d-1de5-4fc9-9b30-70411ef45d8f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.gm-style > div > div:nth-child(2)",
+      "targets": [
+        ["css=.gm-style > div > div:nth-child(2)", "css:finder"],
+        ["xpath=//div[3]/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "623aa65a-4ae5-45b4-9f9d-514604820357",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.group:nth-child(7) > .items-center",
+      "targets": [
+        ["css=.group:nth-child(7) > .items-center", "css:finder"],
+        ["xpath=//li[7]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Transportes')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "51064974-307f-4f9a-8a52-00b506e4355c",
@@ -4413,6 +4445,6 @@
     "timeout": 300,
     "tests": ["13345bfd-82bd-45c0-852b-404ee0d246ae"]
   }],
-  "urls": ["https://municip.io:4200/", "https://municipio:4200/", "https://municipio:4200/admindashboard", "https://municipio:4200/munadmin-dashboard", "https://municip.io:4200/admindashboard", "https://municip.io:4200/userpage", "https://municip.io:4200/munadmin-dashboard", "https://municip.io:4200/transports/stops", "https://municip.io:4200/documents/my", "https://municip.io:4200/library/create", "https://municip.io:4200/library/librarylist", "https://municip.io:4200/library/requests", "https://municip.io:4200/signUp-SelectAccountType"],
+  "urls": ["https://municip.io:4200/", "https://municipio:4200/", "https://municipio:4200/admindashboard", "https://municipio:4200/munadmin-dashboard", "https://municip.io:4200/admindashboard", "https://municip.io:4200/userpage", "https://municip.io:4200/munadmin-dashboard", "https://municip.io:4200/transports/stops", "https://municip.io:4200/documents/my", "https://municip.io:4200/library/create", "https://municip.io:4200/library/librarylist", "https://municip.io:4200/library/requests", "https://municip.io:4200/signUp-SelectAccountType", "https://municipio-server.azurewebsites.net/transports/stops"],
   "plugins": []
 }
