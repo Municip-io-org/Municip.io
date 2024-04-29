@@ -1,7 +1,7 @@
-﻿<header class="bg-white" [ngClass]="{ 'visible': isVisible }">
+<header class="bg-white" [ngClass]="{ 'visible': isVisible }">
   <div class="py-[0.7rem] font-poppins flex w-full items-center justify-between px-3 shadow-md">
 
-    <img class="w-56" alt="logo" src="/assets/images/logos/logo-black-right.png" />
+    <img routerLink="/" class="w-56 hover:cursor-pointer" alt="logo" src="/assets/images/logos/logo-black-right.png" />
 
     <ul class="flex flex-grow justify-center space-x-20">
       <li class="decoration-sky-500 transition-all duration-700 ease-in-out hover:text-lg hover:underline hover:underline-offset-8"> <a routerLink="/">Home</a> </li>

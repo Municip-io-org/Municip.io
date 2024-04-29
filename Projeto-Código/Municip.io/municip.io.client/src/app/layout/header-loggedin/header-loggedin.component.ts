@@ -276,6 +276,9 @@ export class HeaderLoggedinComponent {
     if (this.role === 'Municipal') {
       this.router.navigateByUrl(`/municipal/homePage`)
     }
+    if (this.role === 'Admin') {
+      this.router.navigateByUrl(`/admindashboard`)
+    }
   }
 
   /**
