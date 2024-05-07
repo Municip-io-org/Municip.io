@@ -41,8 +41,8 @@ steps:
 
   - task: AzureRmWebAppDeployment@4
     inputs:
-      ConnectionType: "AzureRM"
-      azureSubscription: "Azure for Students(5ccee601-c20b-4ece-b46c-90247839a4ac)"
-      appType: "webApp"
-      WebAppName: "Municipio-Server"
-      packageForLinux: "$(Build.ArtifactStagingDirectory)/**/*.zip"
+      ConnectionType: 'AzureRM'
+      azureSubscription: 'Azure subscription 1(b6643449-26ef-4a6c-9834-204727b2fc4a)'
+      appType: 'webApp'
+      WebAppName: 'Municipio-Server'
+      packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
